@@ -14,7 +14,39 @@
   "portfolio_id": "portfolio_northstar_demo",
   "report_id": "arangur_demo_report",
   "report_title": "Northstar Family Office Synthetic Portfolio Review",
+  "run_id": "run_native_demo_quarterly_review_2026_06_30",
+  "run_metadata": {
+    "generated_at": "2026-06-30T00:00:00+00:00",
+    "json_outputs": {
+      "canonical_snapshot": "reports/demo/canonical_portfolio_snapshot.json",
+      "exposure_overlap_result": "reports/demo/exposure_overlap_result.json",
+      "report_package": "reports/demo/report_package.json",
+      "scenario_result": "reports/demo/scenario_result.json",
+      "valuation_result": "reports/demo/valuation_result.json"
+    },
+    "output_directory": "reports/demo",
+    "report_links": {
+      "html": "reports/demo/arangur_demo_report.html",
+      "markdown": "reports/demo/arangur_demo_report.md"
+    },
+    "run_id": "run_native_demo_quarterly_review_2026_06_30",
+    "source_adapter": "demo_json",
+    "source_name": "native_demo",
+    "synthetic_data": true,
+    "valuation_date": "2026-06-30",
+    "workflow_label": "Quarterly Review",
+    "workflow_options": [
+      "quarterly_review",
+      "manager_overlap_review",
+      "scenario_risk_review",
+      "intake_review"
+    ],
+    "workflow_type": "quarterly_review"
+  },
   "schema_version": "report_package.v1",
   "snapshot_id": "snap_demo_family_office_v1_2026_06_30",
-  "valuation_date": "2026-06-30"
+  "source_adapter": "demo_json",
+  "source_name": "native_demo",
+  "valuation_date": "2026-06-30",
+  "workflow_type": "quarterly_review"
 }

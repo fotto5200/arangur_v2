@@ -147,6 +147,6 @@ Illustrative shock to AI and semiconductor leadership with a mild broad equity d
 
 ## Next Planned Upgrades
 
-- Add a Plaid-shaped mock ingestion adapter that emits the same canonical snapshot contract.
+- Add workflow simulation templates for quarterly, overlap, scenario-risk, and intake reviews.
 - Add stronger validation edge cases and report-quality tests around malformed local fixtures.
-- Consider a lightweight local report index or viewer after the report package stabilizes.
+- Design the future Plaid Sandbox boundary without committing credentials or using real client data.

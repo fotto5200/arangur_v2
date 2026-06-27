@@ -34,8 +34,24 @@ The Plaid-shaped mock path generates the same artifact names under `reports/demo
 
 Open the Markdown report in an editor or preview pane, or open the HTML report directly in a browser.
 
+## Local Report Index
+
+Both demo runner commands refresh a shared static report index:
+
+- `reports/demo/index.html`
+
+To rebuild the index from existing report packages without rerunning analytics:
+
+```powershell
+python src\arangur\demo_pipeline.py --build-index
+```
+
+Open `reports/demo/index.html` in a browser to browse the native demo and Plaid-shaped mock report runs. The index is local-only and synthetic; it is not an interactive app, does not use live Plaid, and does not use real client data.
+
 Focused checks:
 
 ```powershell
 python -m unittest tests.test_demo_pipeline
+python -m unittest tests.test_plaid_mock_pipeline
+python -m unittest tests.test_report_index
 ```

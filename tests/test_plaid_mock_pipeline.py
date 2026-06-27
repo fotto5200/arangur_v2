@@ -61,7 +61,10 @@ class PlaidMockPipelineTests(unittest.TestCase):
         self.assertTrue(self.outputs["html_report"].exists())
 
     def test_plaid_outputs_are_in_distinct_folder(self) -> None:
-        for path in self.outputs.values():
+        for key, path in self.outputs.items():
+            if key == "report_index":
+                self.assertEqual(path, ROOT / "reports" / "demo" / "index.html")
+                continue
             self.assertIn("plaid_mock", path.parts)
 
     def _load_output(self, key: str) -> dict:

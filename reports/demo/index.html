@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Arangur Demo Report Index</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.45; margin: 32px; color: #1f2933; }
+    h1, h2, h3 { color: #102a43; }
+    a { color: #0b63ce; }
+    section { border-top: 1px solid #d9e2ec; padding-top: 20px; margin-top: 24px; }
+    .caveat { background: #fff7ed; border-left: 4px solid #f97316; padding: 12px; }
+    .run-meta { display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; }
+    .run-meta dt { font-weight: bold; }
+    ul { padding-left: 22px; }
+  </style>
+</head>
+<body>
+<h1>Arangur Demo Report Index</h1>
+<p class="caveat">Demo only: these report runs use synthetic local data. They are not client statements, investment advice, production valuations, or evidence of live Plaid integration.</p>
+<section>
+<h2>What This Demo Proves</h2>
+<ul>
+<li>Arangur v2 can generate advisor-readable reports from local synthetic fixtures.</li>
+<li>The same analytics and report components can run from multiple source adapters.</li>
+<li>Report packages now carry simple workflow-run metadata for local browsing.</li>
+</ul>
+</section>
+<section>
+<h2>What This Demo Does Not Yet Prove</h2>
+<ul>
+<li>It does not prove live Plaid ingestion, external market data, or production reconciliation.</li>
+<li>It does not use real client data, credentials, or legacy MATLAB outputs.</li>
+<li>It does not implement a production dashboard or advisor assistant workflow.</li>
+</ul>
+</section>
+<section>
+<h2>Available Report Runs</h2>
+<section>
+<h3>Northstar Family Office Synthetic Portfolio Review</h3>
+<dl class="run-meta">
+<dt>Run ID</dt><dd>run_native_demo_quarterly_review_2026_06_30</dd>
+<dt>Source</dt><dd>native_demo</dd>
+<dt>Source adapter</dt><dd>demo_json</dd>
+<dt>Workflow</dt><dd>Quarterly Review (quarterly_review)</dd>
+<dt>Valuation date</dt><dd>2026-06-30</dd>
+<dt>Generated at</dt><dd>2026-06-30T00:00:00+00:00</dd>
+<dt>Output directory</dt><dd>reports/demo</dd>
+<dt>Synthetic data</dt><dd>True</dd>
+</dl>
+<h4>Reports</h4>
+<ul><li><a href="arangur_demo_report.md">Markdown report</a></li><li><a href="arangur_demo_report.html">HTML report</a></li></ul>
+<h4>JSON Outputs</h4>
+<ul><li><a href="canonical_portfolio_snapshot.json">Canonical snapshot JSON</a></li><li><a href="valuation_result.json">Valuation result JSON</a></li><li><a href="exposure_overlap_result.json">Exposure overlap result JSON</a></li><li><a href="scenario_result.json">Scenario result JSON</a></li><li><a href="report_package.json">Report package JSON</a></li></ul>
+</section>
+<section>
+<h3>Northstar Plaid-Shaped Mock Portfolio Review</h3>
+<dl class="run-meta">
+<dt>Run ID</dt><dd>run_plaid_mock_quarterly_review_2026_06_30</dd>
+<dt>Source</dt><dd>plaid_mock</dd>
+<dt>Source adapter</dt><dd>plaid_mock</dd>
+<dt>Workflow</dt><dd>Quarterly Review (quarterly_review)</dd>
+<dt>Valuation date</dt><dd>2026-06-30</dd>
+<dt>Generated at</dt><dd>2026-06-30T00:00:00+00:00</dd>
+<dt>Output directory</dt><dd>reports/demo/plaid_mock</dd>
+<dt>Synthetic data</dt><dd>True</dd>
+</dl>
+<h4>Reports</h4>
+<ul><li><a href="plaid_mock/arangur_demo_report.md">Markdown report</a></li><li><a href="plaid_mock/arangur_demo_report.html">HTML report</a></li></ul>
+<h4>JSON Outputs</h4>
+<ul><li><a href="plaid_mock/canonical_portfolio_snapshot.json">Canonical snapshot JSON</a></li><li><a href="plaid_mock/valuation_result.json">Valuation result JSON</a></li><li><a href="plaid_mock/exposure_overlap_result.json">Exposure overlap result JSON</a></li><li><a href="plaid_mock/scenario_result.json">Scenario result JSON</a></li><li><a href="plaid_mock/report_package.json">Report package JSON</a></li></ul>
+</section>
+</section>
+</body>
+</html>

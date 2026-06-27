@@ -7,6 +7,7 @@ __all__ = [
     "exposure_overlap",
     "market_data",
     "plaid_mock_adapter",
+    "report_index",
     "report_generator",
     "scenarios",
     "valuation",

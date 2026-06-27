@@ -42,7 +42,7 @@
 - Mode: Implementation or design spike.
 - Allowed scope: `src/`, `reports/demo/`, `docs/demo/`, `tests/`, and `docs/restart/`.
 - Non-goals: No production dashboard, no live APIs, no credentials, no real client data.
-- Acceptance criteria: A colleague can find and open generated Markdown/HTML/JSON outputs from a simple local entry point.
+- Acceptance criteria: Implemented baseline: a colleague can find and open generated Markdown/HTML/JSON outputs from a simple local entry point.
 - Stop conditions: UI scope becomes broad, dependencies become necessary, or product direction is unclear.
 
 ## Batch 7: Harden Analytics And Validation
@@ -62,3 +62,12 @@
 - Non-goals: No live Plaid production access, no private credentials committed, no real client ingestion.
 - Acceptance criteria: Sandbox flow, secrets policy, adapter contract, and test strategy are documented, building on the existing Plaid-shaped mock adapter.
 - Stop conditions: Credentials or account setup are required, strategy needs Frank, or implementation scope exceeds the design batch.
+
+## Batch 9: Workflow Simulation Templates
+
+- Goal: Add lightweight workflow simulation templates for quarterly review, manager overlap review, scenario risk review, and intake review.
+- Mode: Implementation batch.
+- Allowed scope: `src/`, `tests/`, `reports/demo/`, `docs/demo/`, `docs/restart/`, and small synthetic metadata fixtures under `data/demo/` if useful.
+- Non-goals: No advisor assistant, no interactive app, no live APIs, no credentials, no real client data.
+- Acceptance criteria: Each workflow type has a simple local template or metadata shape, report packages identify the selected workflow clearly, and tests verify workflow-specific output metadata.
+- Stop conditions: Workflow design requires Frank's product judgment, UI scope expands, or real advisor/client data appears necessary.
