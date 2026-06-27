@@ -102,10 +102,10 @@
 ## Batch 13: FastAPI App Shell And Health Endpoint
 
 - Goal: Add the first deployable app shell using FastAPI and `uvicorn`, with a health endpoint and private-demo settings boundary.
-- Mode: Implementation batch.
+- Mode: Implemented baseline.
 - Allowed scope: `src/`, `tests/`, `docs/`, and lightweight README updates.
 - Non-goals: No Docker yet, no Postgres schema yet, no browser UI beyond a placeholder if needed, no live Plaid, no real data.
-- Acceptance criteria: App can start locally, `GET /api/health` returns a minimal status payload, settings include `APP_ENV=private_demo` concepts without committing secrets, and tests cover health/settings behavior.
+- Acceptance criteria: Implemented baseline: app can be imported and started with `uvicorn`, `GET /api/health` returns a minimal status payload, settings include `APP_ENV=private_demo` concepts without committing secrets, a static placeholder console is served, and tests cover health/settings/page behavior.
 - Stop conditions: Dependencies, app layout, or environment handling requires product/ops decisions beyond the Education-stack pattern.
 
 ## Batch 14: API Endpoints Wrapping Existing Pipeline Runs

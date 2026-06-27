@@ -62,6 +62,19 @@ python src\arangur\demo_pipeline.py --build-index
 
 Open `reports/demo/index.html` in a browser to browse the native demo and Plaid-shaped mock report runs. The index is local-only and synthetic; it is not an interactive app, does not use live Plaid, and does not use real client data.
 
+## Run The FastAPI App Shell
+
+The first deployable-app shell exposes `/api/health` and a static placeholder demo console. It does not run workflow APIs, Postgres, Docker, live Plaid, or production authentication yet.
+
+```powershell
+python -m uvicorn arangur.app.main:app --reload --app-dir src
+```
+
+Then open:
+
+- `http://127.0.0.1:8000/api/health`
+- `http://127.0.0.1:8000/`
+
 ## Design Roadmaps
 
 Future scenario, data-coverage, and deployable private-demo work is captured in:
@@ -83,4 +96,5 @@ python -m unittest tests.test_plaid_mock_pipeline
 python -m unittest tests.test_report_index
 python -m unittest tests.test_workflow_templates
 python -m unittest tests.test_data_coverage
+python -m unittest tests.test_app_health
 ```

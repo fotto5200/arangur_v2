@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Arangur v2 Demo Console</title>
+  <style>
+    body {
+      color: #1f2933;
+      font-family: Arial, sans-serif;
+      line-height: 1.45;
+      margin: 32px;
+      max-width: 920px;
+    }
+    h1, h2 {
+      color: #102a43;
+    }
+    code {
+      background: #f0f4f8;
+      border-radius: 4px;
+      padding: 2px 4px;
+    }
+    .caveat {
+      background: #fff7ed;
+      border-left: 4px solid #f97316;
+      padding: 12px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Arangur v2 Demo Console</h1>
+  <p class="caveat">Synthetic/local demo only. This shell does not use live Plaid, external APIs, market-data vendors, credentials, or real client data.</p>
+
+  <h2>Current available local pipeline commands</h2>
+  <ul>
+    <li><code>python src\arangur\demo_pipeline.py</code></li>
+    <li><code>python src\arangur\demo_pipeline.py --source plaid_mock</code></li>
+    <li><code>python src\arangur\demo_pipeline.py --workflow data_coverage_review</code></li>
+    <li><code>python src\arangur\demo_pipeline.py --build-index</code></li>
+  </ul>
+
+  <h2>Future UI</h2>
+  <p>Future UI will allow source/workflow selection and report browsing from this browser surface.</p>
+</body>
+</html>

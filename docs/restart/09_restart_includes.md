@@ -112,7 +112,10 @@ Use these file sets when starting different kinds of sessions.
 - `docs/decisions/0002_copy_education_private_demo_stack.md`.
 - `docs/architecture/persistence_model_plan.md`.
 - `docs/demo/report_workflow_implications.md`.
+- `requirements.txt`.
+- `src/arangur/app/`.
 - Existing pipeline modules under `src/arangur/`.
+- `tests/test_app_health.py`.
 - Existing generated report package examples under `reports/demo/`.
 - Do not include real client data, live Plaid, external APIs, credentials, or legacy MATLAB.
 
@@ -133,5 +136,7 @@ Use these file sets when starting different kinds of sessions.
 - `docs/deployment/private_demo_stack_plan.md`.
 - `docs/architecture/deployable_demo_app_architecture.md`.
 - `docs/decisions/0002_copy_education_private_demo_stack.md`.
+- `requirements.txt`.
+- `src/arangur/app/`.
 - Future Docker and env example files once implemented.
 - Do not include `.env.private-demo`, real host credentials, Cloudflare tokens, private keys, or actual production secrets.
