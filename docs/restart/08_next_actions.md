@@ -6,34 +6,34 @@
 - Mode: Documentation and schema-design batch.
 - Allowed scope: `docs/architecture/`, `docs/contracts/`, `docs/demo/`, `docs/restart/`, and lightweight README pointers.
 - Non-goals: No Plaid, no MATLAB audit, no real client data, no production UI.
-- Acceptance criteria: Thin-demo components have clear inputs, outputs, invariants, and fixture expectations.
+- Acceptance criteria: Thin-demo components have clear inputs, outputs, invariants, fixture expectations, demo storyline, and dataset plan.
 - Stop conditions: Existing substantial docs would be overwritten, secrets/client data appear necessary, or MATLAB inspection appears required.
 
-## Batch 3: Demo Data Loader And Canonical Snapshot
+## Batch 3: Local Demo Vertical Slice
 
-- Goal: Implement simple local demo data loading and the first canonical portfolio snapshot.
+- Goal: Implement local demo data loader -> canonical snapshot -> valuation/exposure/scenario outputs -> generated Markdown report.
 - Mode: Implementation batch.
-- Allowed scope: `data/demo/`, `src/`, `tests/`, `docs/contracts/`, `docs/demo/`, and `docs/restart/`.
-- Non-goals: No Plaid, no live APIs, no deep valuation, no generated advisor report yet.
-- Acceptance criteria: Synthetic fixtures load deterministically, canonical snapshot is produced, and focused tests pass.
-- Stop conditions: Real data is encountered, schemas require unresolved product judgment, or implementation needs new dependencies without clear justification.
+- Allowed scope: `data/demo/`, `reports/demo/`, `src/`, `tests/`, `docs/contracts/`, `docs/demo/`, and `docs/restart/`.
+- Non-goals: No Plaid, no live APIs, no deep valuation, no MATLAB audit, no production UI.
+- Acceptance criteria: Synthetic JSON fixtures load deterministically; a canonical snapshot is produced; market data prices every held non-cash security; valuation, exposure/overlap, and scenario outputs reconcile; a Markdown report is generated under `reports/demo/`; focused tests or deterministic checks pass.
+- Stop conditions: Real data is encountered, schemas require unresolved product judgment, external APIs or credentials appear necessary, or implementation needs new dependencies without clear justification.
 
-## Batch 4: Simple Valuation, Exposure, And Scenario Outputs
+## Batch 4: Harden Analytics And Validation
 
-- Goal: Implement deterministic valuation, exposure/overlap summaries, and simple scenario shocks.
+- Goal: Harden deterministic valuation, exposure/overlap summaries, scenario shocks, validations, and edge-case handling after the first vertical slice exists.
 - Mode: Implementation batch.
 - Allowed scope: `src/`, `tests/`, `data/demo/`, `docs/contracts/`, `docs/demo/`, and `docs/restart/`.
-- Non-goals: No vendor data, no full accounting, no advanced risk model.
-- Acceptance criteria: Demo snapshot produces valuation, exposure, overlap, and scenario result artifacts with tests.
-- Stop conditions: Missing canonical contract, unresolved scenario methodology decision, or unsafe source data.
+- Non-goals: No vendor data, no full accounting, no advanced risk model, no Plaid.
+- Acceptance criteria: Calculations have stronger validation, clearer errors, and tests for missing prices, duplicated IDs, cash, and scenario rule precedence.
+- Stop conditions: Missing vertical slice, unresolved scenario methodology decision, or unsafe source data.
 
-## Batch 5: First Advisor-Readable Demo Report
+## Batch 5: Improve Advisor-Readable Demo Report
 
-- Goal: Generate the first static advisor-readable report or viewer package from demo outputs.
+- Goal: Improve the static advisor-readable report or viewer package after the first Markdown report exists.
 - Mode: Implementation and documentation batch.
 - Allowed scope: `src/`, `tests/`, `reports/demo/`, `docs/demo/`, and `docs/restart/`.
 - Non-goals: No production report engine, no advisor assistant, no live client output.
-- Acceptance criteria: A synthetic report is generated under `reports/demo/` and can be regenerated from local demo data.
+- Acceptance criteria: The synthetic report is clearer, consistently formatted, regenerated from local demo data, and aligned with report package caveats.
 - Stop conditions: Report claims could be confused with real advice, generated outputs require client data, or layout tooling becomes a dependency decision.
 
 ## Batch 6: Plaid-Shaped Mock Ingestion Adapter
