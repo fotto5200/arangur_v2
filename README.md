@@ -48,6 +48,14 @@ python src\arangur\demo_pipeline.py --build-index
 
 Open `reports/demo/index.html` in a browser to browse the native demo and Plaid-shaped mock report runs. The index is local-only and synthetic; it is not an interactive app, does not use live Plaid, and does not use real client data.
 
+## Design Roadmaps
+
+Future scenario and data-coverage work is captured in:
+
+- `docs/architecture/scenario_engine_roadmap.md`
+- `docs/architecture/data_availability_workstream.md`
+- `docs/demo/report_workflow_implications.md`
+
 Focused checks:
 
 ```powershell

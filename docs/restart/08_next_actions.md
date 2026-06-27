@@ -69,5 +69,32 @@
 - Mode: Implementation batch.
 - Allowed scope: `src/`, `tests/`, `reports/demo/`, `docs/demo/`, `docs/restart/`, and small synthetic metadata fixtures under `data/demo/` if useful.
 - Non-goals: No advisor assistant, no interactive app, no live APIs, no credentials, no real client data.
-- Acceptance criteria: Each workflow type has a simple local template or metadata shape, report packages identify the selected workflow clearly, and tests verify workflow-specific output metadata.
+- Acceptance criteria: Each workflow type has a simple local template or metadata shape, report packages identify the selected workflow clearly, and tests verify workflow-specific output metadata. Use `docs/demo/report_workflow_implications.md` as design input.
 - Stop conditions: Workflow design requires Frank's product judgment, UI scope expands, or real advisor/client data appears necessary.
+
+## Batch 10: Data Coverage / Valuation Confidence Report Prototype
+
+- Goal: Prototype a synthetic Data Coverage / Valuation Confidence report family that explains source coverage, missing data, stale values, valuation method, and human-review needs.
+- Mode: Implementation batch after design confirmation.
+- Allowed scope: `data/demo/`, `src/`, `tests/`, `reports/demo/`, `docs/demo/`, `docs/contracts/`, and `docs/restart/`.
+- Non-goals: No real client data, no vendor ingestion, no document extraction, no automated private asset valuation, no forecasting.
+- Acceptance criteria: Synthetic fixtures include coverage/confidence metadata, the report package exposes coverage summaries, generated reports include clear confidence caveats, and focused tests verify deterministic output.
+- Stop conditions: Real data appears necessary, vendor selection is required, confidence scoring needs Frank's product decision, or implementation drifts into market-data ingestion.
+
+## Batch 11: Scenario Library / Source Model Design
+
+- Goal: Design a source-normalized scenario library layer that can represent hand-authored scenarios, advisor templates, firm assumptions, and future external scenario sources.
+- Mode: Design batch.
+- Allowed scope: `docs/architecture/`, `docs/contracts/`, `docs/demo/`, `docs/restart/`, and `docs/decisions/`.
+- Non-goals: No stochastic simulation, no live external data sources, no licensed scenario-source integration, no UI.
+- Acceptance criteria: Scenario source metadata, scenario versioning, narrative-to-assumption mapping, and report caveats are documented.
+- Stop conditions: External research or vendor choice is required, licensing questions need Frank, or implementation is requested before the contract is clear.
+
+## Batch 12: Later Stochastic Scenario Prototype
+
+- Goal: Prototype reproducible covariance/random-number-driven scenario ranges after deterministic scenario outputs and scenario source modeling are stable.
+- Mode: Future implementation spike only after authorization.
+- Allowed scope: To be defined later; likely `src/`, `tests/`, `data/demo/`, `docs/contracts/`, and `reports/demo/` with synthetic fixtures only.
+- Non-goals: No production risk model, no market prediction claims, no live market-data ingestion, no external APIs, no real client data.
+- Acceptance criteria: A synthetic covariance/driver fixture produces reproducible seeded impact ranges with clear caveats and no forecasting language.
+- Stop conditions: Methodology is not approved, covariance data source is unclear, external data is required, or report language risks implying forecasts.
