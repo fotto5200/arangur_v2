@@ -12,7 +12,15 @@ The first synthetic vertical slice runs entirely from local JSON fixtures. It do
 python src\arangur\demo_pipeline.py
 ```
 
-It generates:
+To run the Plaid-shaped mock ingestion path:
+
+```powershell
+python src\arangur\demo_pipeline.py --source plaid_mock
+```
+
+The Plaid-shaped path uses only `data/demo/plaid_mock_investments.json`. It does not use live Plaid, Plaid Sandbox, Plaid Link, access tokens, credentials, or real account data.
+
+The default demo generates:
 
 - `reports/demo/canonical_portfolio_snapshot.json`
 - `reports/demo/valuation_result.json`
@@ -21,6 +29,8 @@ It generates:
 - `reports/demo/report_package.json`
 - `reports/demo/arangur_demo_report.md`
 - `reports/demo/arangur_demo_report.html`
+
+The Plaid-shaped mock path generates the same artifact names under `reports/demo/plaid_mock/`.
 
 Open the Markdown report in an editor or preview pane, or open the HTML report directly in a browser.
 

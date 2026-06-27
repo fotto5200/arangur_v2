@@ -1,0 +1,383 @@
+{
+  "schema_version": "plaid_mock_investments.v1",
+  "metadata": {
+    "dataset_id": "plaid_mock_family_office_v1",
+    "dataset_label": "Northstar Plaid-Shaped Mock Portfolio",
+    "is_synthetic": true,
+    "valuation_date": "2026-06-30",
+    "reporting_currency": "USD",
+    "portfolio_owner_label": "Northstar Family",
+    "advisor_label": "Arangur Demo Advisory Team",
+    "source_adapter": "plaid_mock",
+    "source_caveat": "Synthetic Plaid-shaped fixture only. No Plaid APIs, credentials, access tokens, item IDs, or real account data are used."
+  },
+  "item": {
+    "mock_item_id": "mock_item_northstar_investments",
+    "institution_name": "Demo Brokerage Aggregator",
+    "products": ["investments"],
+    "source_system": "plaid_mock",
+    "is_synthetic": true
+  },
+  "accounts": [
+    {
+      "account_id": "plaid_acct_taxable_core",
+      "name": "Taxable Core Account",
+      "official_name": "Northstar Taxable Core - Synthetic",
+      "type": "investment",
+      "subtype": "brokerage",
+      "mask": "0001",
+      "balances": {
+        "current": 439875.0,
+        "available": 42500.0,
+        "iso_currency_code": "USD"
+      },
+      "arangur_mapping": {
+        "canonical_account_id": "acct_plaid_taxable_core",
+        "manager_id": "mgr_core_growth",
+        "manager_name": "Atlas Core Growth",
+        "manager_type": "advisor",
+        "strategy_label": "Core Growth",
+        "account_type": "taxable",
+        "tags": ["core", "growth"]
+      }
+    },
+    {
+      "account_id": "plaid_acct_trust_value",
+      "name": "Trust Value Account",
+      "official_name": "Northstar Trust Value - Synthetic",
+      "type": "investment",
+      "subtype": "trust",
+      "mask": "0002",
+      "balances": {
+        "current": 340800.0,
+        "available": 35000.0,
+        "iso_currency_code": "USD"
+      },
+      "arangur_mapping": {
+        "canonical_account_id": "acct_plaid_trust_value",
+        "manager_id": "mgr_value",
+        "manager_name": "Harbor Value Partners",
+        "manager_type": "satellite_manager",
+        "strategy_label": "Value Sleeve",
+        "account_type": "trust",
+        "tags": ["value", "income"]
+      }
+    },
+    {
+      "account_id": "plaid_acct_foundation_etf",
+      "name": "Foundation ETF Account",
+      "official_name": "Northstar Foundation ETF - Synthetic",
+      "type": "investment",
+      "subtype": "brokerage",
+      "mask": "0003",
+      "balances": {
+        "current": 399200.0,
+        "available": 25000.0,
+        "iso_currency_code": "USD"
+      },
+      "arangur_mapping": {
+        "canonical_account_id": "acct_plaid_foundation_etf",
+        "manager_id": "mgr_index",
+        "manager_name": "Meridian Index Solutions",
+        "manager_type": "index_manager",
+        "strategy_label": "Foundation ETF",
+        "account_type": "foundation",
+        "tags": ["broad_market", "defensive"]
+      }
+    },
+    {
+      "account_id": "plaid_acct_growth_satellite",
+      "name": "Growth Satellite Account",
+      "official_name": "Northstar Growth Satellite - Synthetic",
+      "type": "investment",
+      "subtype": "brokerage",
+      "mask": "0004",
+      "balances": {
+        "current": 234250.0,
+        "available": 18000.0,
+        "iso_currency_code": "USD"
+      },
+      "arangur_mapping": {
+        "canonical_account_id": "acct_plaid_growth_satellite",
+        "manager_id": "mgr_ai_satellite",
+        "manager_name": "Signal AI Opportunities",
+        "manager_type": "satellite_manager",
+        "strategy_label": "AI Growth Satellite",
+        "account_type": "taxable",
+        "tags": ["ai", "chips", "growth"]
+      }
+    },
+    {
+      "account_id": "plaid_acct_cash_reserve",
+      "name": "Cash Reserve Account",
+      "official_name": "Northstar Cash Reserve - Synthetic",
+      "type": "investment",
+      "subtype": "brokerage",
+      "mask": "0005",
+      "balances": {
+        "current": 294000.0,
+        "available": 110000.0,
+        "iso_currency_code": "USD"
+      },
+      "arangur_mapping": {
+        "canonical_account_id": "acct_plaid_cash_reserve",
+        "manager_id": "mgr_treasury",
+        "manager_name": "Northstar Treasury Desk",
+        "manager_type": "cash_provider",
+        "strategy_label": "Treasury Reserve",
+        "account_type": "cash",
+        "tags": ["cash_buffer", "defensive"]
+      }
+    }
+  ],
+  "securities": [
+    {
+      "security_id": "plaid_sec_msft",
+      "canonical_security_id": "sec_msft",
+      "ticker_symbol": "MSFT",
+      "name": "Microsoft Corp.",
+      "type": "equity",
+      "iso_currency_code": "USD",
+      "close_price": 415.0,
+      "arangur_classification": {
+        "asset_class": "equity",
+        "sector": "technology",
+        "themes": ["ai", "growth", "quality"],
+        "scenario_tags": ["ai"]
+      }
+    },
+    {
+      "security_id": "plaid_sec_nvda",
+      "canonical_security_id": "sec_nvda",
+      "ticker_symbol": "NVDA",
+      "name": "NVIDIA Corp.",
+      "type": "equity",
+      "iso_currency_code": "USD",
+      "close_price": 142.5,
+      "arangur_classification": {
+        "asset_class": "equity",
+        "sector": "technology",
+        "themes": ["ai", "chips", "growth"],
+        "scenario_tags": ["ai", "chips"]
+      }
+    },
+    {
+      "security_id": "plaid_sec_aapl",
+      "canonical_security_id": "sec_aapl",
+      "ticker_symbol": "AAPL",
+      "name": "Apple Inc.",
+      "type": "equity",
+      "iso_currency_code": "USD",
+      "close_price": 210.0,
+      "arangur_classification": {
+        "asset_class": "equity",
+        "sector": "technology",
+        "themes": ["growth", "quality"],
+        "scenario_tags": ["growth"]
+      }
+    },
+    {
+      "security_id": "plaid_sec_googl",
+      "canonical_security_id": "sec_googl",
+      "ticker_symbol": "GOOGL",
+      "name": "Alphabet Inc.",
+      "type": "equity",
+      "iso_currency_code": "USD",
+      "close_price": 175.0,
+      "arangur_classification": {
+        "asset_class": "equity",
+        "sector": "communication_services",
+        "themes": ["ai", "growth"],
+        "scenario_tags": ["ai"]
+      }
+    },
+    {
+      "security_id": "plaid_sec_xom",
+      "canonical_security_id": "sec_xom",
+      "ticker_symbol": "XOM",
+      "name": "Exxon Mobil Corp.",
+      "type": "equity",
+      "iso_currency_code": "USD",
+      "close_price": 118.0,
+      "arangur_classification": {
+        "asset_class": "equity",
+        "sector": "energy",
+        "themes": ["energy", "value"],
+        "scenario_tags": ["energy", "value"]
+      }
+    },
+    {
+      "security_id": "plaid_sec_cvx",
+      "canonical_security_id": "sec_cvx",
+      "ticker_symbol": "CVX",
+      "name": "Chevron Corp.",
+      "type": "equity",
+      "iso_currency_code": "USD",
+      "close_price": 155.0,
+      "arangur_classification": {
+        "asset_class": "equity",
+        "sector": "energy",
+        "themes": ["energy", "value"],
+        "scenario_tags": ["energy", "value"]
+      }
+    },
+    {
+      "security_id": "plaid_sec_jpm",
+      "canonical_security_id": "sec_jpm",
+      "ticker_symbol": "JPM",
+      "name": "JPMorgan Chase & Co.",
+      "type": "equity",
+      "iso_currency_code": "USD",
+      "close_price": 205.0,
+      "arangur_classification": {
+        "asset_class": "equity",
+        "sector": "financials",
+        "themes": ["financials", "value"],
+        "scenario_tags": ["value"]
+      }
+    },
+    {
+      "security_id": "plaid_sec_brk_b",
+      "canonical_security_id": "sec_brk_b",
+      "ticker_symbol": "BRK.B",
+      "name": "Berkshire Hathaway Class B",
+      "type": "equity",
+      "iso_currency_code": "USD",
+      "close_price": 430.0,
+      "arangur_classification": {
+        "asset_class": "equity",
+        "sector": "financials",
+        "themes": ["value", "quality"],
+        "scenario_tags": ["value", "quality"]
+      }
+    },
+    {
+      "security_id": "plaid_sec_vti",
+      "canonical_security_id": "sec_vti",
+      "ticker_symbol": "VTI",
+      "name": "Vanguard Total Stock Market ETF",
+      "type": "etf",
+      "iso_currency_code": "USD",
+      "close_price": 275.0,
+      "arangur_classification": {
+        "asset_class": "equity",
+        "sector": "multi_sector",
+        "themes": ["broad_market", "growth", "value"],
+        "scenario_tags": ["broad_market"]
+      }
+    },
+    {
+      "security_id": "plaid_sec_agg",
+      "canonical_security_id": "sec_agg",
+      "ticker_symbol": "AGG",
+      "name": "iShares Core U.S. Aggregate Bond ETF",
+      "type": "etf",
+      "iso_currency_code": "USD",
+      "close_price": 98.0,
+      "arangur_classification": {
+        "asset_class": "fixed_income",
+        "sector": "fixed_income",
+        "themes": ["fixed_income", "defensive"],
+        "scenario_tags": ["fixed_income", "defensive"]
+      }
+    },
+    {
+      "security_id": "plaid_sec_sgov",
+      "canonical_security_id": "sec_sgov",
+      "ticker_symbol": "SGOV",
+      "name": "iShares 0-3 Month Treasury Bond ETF",
+      "type": "etf",
+      "iso_currency_code": "USD",
+      "close_price": 100.5,
+      "arangur_classification": {
+        "asset_class": "fixed_income",
+        "sector": "treasury",
+        "themes": ["cash_buffer", "defensive"],
+        "scenario_tags": ["cash_buffer", "defensive"]
+      }
+    },
+    {
+      "security_id": "plaid_sec_unh",
+      "canonical_security_id": "sec_unh",
+      "ticker_symbol": "UNH",
+      "name": "UnitedHealth Group Inc.",
+      "type": "equity",
+      "iso_currency_code": "USD",
+      "close_price": 510.0,
+      "arangur_classification": {
+        "asset_class": "equity",
+        "sector": "healthcare",
+        "themes": ["defensive", "quality"],
+        "scenario_tags": ["defensive", "quality"]
+      }
+    },
+    {
+      "security_id": "plaid_sec_nee",
+      "canonical_security_id": "sec_nee",
+      "ticker_symbol": "NEE",
+      "name": "NextEra Energy Inc.",
+      "type": "equity",
+      "iso_currency_code": "USD",
+      "close_price": 72.0,
+      "arangur_classification": {
+        "asset_class": "equity",
+        "sector": "utilities",
+        "themes": ["energy", "quality", "defensive"],
+        "scenario_tags": ["energy", "defensive"]
+      }
+    }
+  ],
+  "holdings": [
+    {"account_id": "plaid_acct_taxable_core", "security_id": "plaid_sec_msft", "quantity": 260, "cost_basis": 78000},
+    {"account_id": "plaid_acct_taxable_core", "security_id": "plaid_sec_nvda", "quantity": 450, "cost_basis": 47250},
+    {"account_id": "plaid_acct_taxable_core", "security_id": "plaid_sec_aapl", "quantity": 300, "cost_basis": 49500},
+    {"account_id": "plaid_acct_taxable_core", "security_id": "plaid_sec_googl", "quantity": 240, "cost_basis": 34800},
+    {"account_id": "plaid_acct_taxable_core", "security_id": "plaid_sec_brk_b", "quantity": 120, "cost_basis": 39000},
+    {"account_id": "plaid_acct_taxable_core", "security_id": "plaid_sec_vti", "quantity": 250, "cost_basis": 57500},
+    {"account_id": "plaid_acct_trust_value", "security_id": "plaid_sec_xom", "quantity": 550, "cost_basis": 50000},
+    {"account_id": "plaid_acct_trust_value", "security_id": "plaid_sec_cvx", "quantity": 300, "cost_basis": 40500},
+    {"account_id": "plaid_acct_trust_value", "security_id": "plaid_sec_jpm", "quantity": 360, "cost_basis": 61200},
+    {"account_id": "plaid_acct_trust_value", "security_id": "plaid_sec_brk_b", "quantity": 150, "cost_basis": 52500},
+    {"account_id": "plaid_acct_trust_value", "security_id": "plaid_sec_unh", "quantity": 110, "cost_basis": 53000},
+    {"account_id": "plaid_acct_foundation_etf", "security_id": "plaid_sec_vti", "quantity": 700, "cost_basis": 154000},
+    {"account_id": "plaid_acct_foundation_etf", "security_id": "plaid_sec_agg", "quantity": 900, "cost_basis": 88200},
+    {"account_id": "plaid_acct_foundation_etf", "security_id": "plaid_sec_sgov", "quantity": 600, "cost_basis": 60000},
+    {"account_id": "plaid_acct_foundation_etf", "security_id": "plaid_sec_msft", "quantity": 80, "cost_basis": 24800},
+    {"account_id": "plaid_acct_growth_satellite", "security_id": "plaid_sec_nvda", "quantity": 620, "cost_basis": 58900},
+    {"account_id": "plaid_acct_growth_satellite", "security_id": "plaid_sec_msft", "quantity": 180, "cost_basis": 61200},
+    {"account_id": "plaid_acct_growth_satellite", "security_id": "plaid_sec_googl", "quantity": 160, "cost_basis": 23800},
+    {"account_id": "plaid_acct_growth_satellite", "security_id": "plaid_sec_aapl", "quantity": 120, "cost_basis": 19800},
+    {"account_id": "plaid_acct_cash_reserve", "security_id": "plaid_sec_sgov", "quantity": 1200, "cost_basis": 120000},
+    {"account_id": "plaid_acct_cash_reserve", "security_id": "plaid_sec_agg", "quantity": 500, "cost_basis": 49000},
+    {"account_id": "plaid_acct_cash_reserve", "security_id": "plaid_sec_nee", "quantity": 200, "cost_basis": 13200}
+  ],
+  "cash_balances": [
+    {"cash_id": "plaid_cash_taxable_core", "account_id": "plaid_acct_taxable_core", "currency": "USD", "amount": 42500, "cash_type": "brokerage_cash"},
+    {"cash_id": "plaid_cash_trust_value", "account_id": "plaid_acct_trust_value", "currency": "USD", "amount": 35000, "cash_type": "brokerage_cash"},
+    {"cash_id": "plaid_cash_foundation", "account_id": "plaid_acct_foundation_etf", "currency": "USD", "amount": 25000, "cash_type": "operating_cash"},
+    {"cash_id": "plaid_cash_growth_satellite", "account_id": "plaid_acct_growth_satellite", "currency": "USD", "amount": 18000, "cash_type": "brokerage_cash"},
+    {"cash_id": "plaid_cash_reserve", "account_id": "plaid_acct_cash_reserve", "currency": "USD", "amount": 110000, "cash_type": "brokerage_cash"}
+  ],
+  "investment_transactions": [
+    {
+      "investment_transaction_id": "plaid_txn_mock_nvda_buy",
+      "account_id": "plaid_acct_growth_satellite",
+      "security_id": "plaid_sec_nvda",
+      "date": "2026-05-15",
+      "type": "buy",
+      "subtype": "buy",
+      "quantity": 40,
+      "amount": -5400,
+      "iso_currency_code": "USD"
+    },
+    {
+      "investment_transaction_id": "plaid_txn_mock_cash_deposit",
+      "account_id": "plaid_acct_cash_reserve",
+      "date": "2026-06-01",
+      "type": "cash",
+      "subtype": "deposit",
+      "amount": 25000,
+      "iso_currency_code": "USD"
+    }
+  ]
+}

@@ -60,5 +60,5 @@
 - Mode: Design batch, possibly followed by implementation only if authorized.
 - Allowed scope: `docs/architecture/`, `docs/contracts/`, `docs/decisions/`, `docs/restart/`, and possibly `src/` stubs if explicitly authorized.
 - Non-goals: No live Plaid production access, no private credentials committed, no real client ingestion.
-- Acceptance criteria: Sandbox flow, secrets policy, adapter contract, and test strategy are documented.
+- Acceptance criteria: Sandbox flow, secrets policy, adapter contract, and test strategy are documented, building on the existing Plaid-shaped mock adapter.
 - Stop conditions: Credentials or account setup are required, strategy needs Frank, or implementation scope exceeds the design batch.

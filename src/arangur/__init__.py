@@ -6,6 +6,7 @@ __all__ = [
     "demo_pipeline",
     "exposure_overlap",
     "market_data",
+    "plaid_mock_adapter",
     "report_generator",
     "scenarios",
     "valuation",

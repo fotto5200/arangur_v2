@@ -38,9 +38,12 @@ Use these file sets when starting different kinds of sessions.
 ## Plaid Integration Restart
 
 - All Codex implementation restart files.
-- Future Plaid contract docs under `docs/contracts/`.
+- `docs/contracts/plaid_mock_ingestion_contract.md`.
 - Future Plaid architecture notes under `docs/architecture/`.
-- Future Plaid-shaped synthetic fixtures under `data/demo/`.
+- `data/demo/plaid_mock_investments.json`.
+- `src/arangur/plaid_mock_adapter.py`.
+- `src/arangur/demo_pipeline.py`.
+- `tests/test_plaid_mock_pipeline.py`.
 - Do not include real credentials, `.env` files, auth tokens, or client data.
 
 ## MATLAB Audit Restart
