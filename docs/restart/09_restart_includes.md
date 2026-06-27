@@ -126,8 +126,11 @@ Use these file sets when starting different kinds of sessions.
 - `docs/architecture/persistence_model_plan.md`.
 - `docs/architecture/deployable_demo_app_architecture.md`.
 - `docs/deployment/private_demo_stack_plan.md`.
+- `docs/contracts/workflow_run_persistence_contract.md`.
 - `docs/contracts/report_package_contract.md`.
 - `docs/contracts/data_coverage_result_contract.md`.
+- `src/arangur/app/persistence.py`.
+- `tests/test_app_persistence.py`.
 - Current JSON artifact examples under `reports/demo/`.
 - Do not model real client accounts, persist credentials, or decompose full holdings/tax lots unless specifically authorized.
 

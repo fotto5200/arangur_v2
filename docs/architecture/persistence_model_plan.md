@@ -6,7 +6,9 @@ The first deployable Arangur demo needs enough Postgres persistence to track wor
 
 The current JSON artifacts remain the canonical evidence for detailed outputs. Postgres should initially store durable run history, search/list metadata, artifact references, and selected summaries needed by the browser UI.
 
-This is a design plan only. It does not define migrations or implement database code.
+Current implementation baseline: `src/arangur/app/persistence.py` defines optional Postgres persistence for `workflow_run`, `report_artifact`, and `run_event`. The default `DB_ENGINE=none` mode remains file-backed and requires no database. When `DB_ENGINE=postgres` and `DATABASE_URL` are set, the app can initialize the minimal tables and persist run metadata after local report generation.
+
+This is still not a full migration system or production data model.
 
 ## Design Principles
 

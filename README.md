@@ -109,12 +109,34 @@ curl.exe -X POST http://127.0.0.1:8000/api/runs -H "Content-Type: application/js
 
 Generated report artifacts are served only from `reports/demo/` under matching URLs such as `/reports/demo/workflows/manager_overlap_review/arangur_demo_report.html`.
 
+## Persistence Settings
+
+Local development defaults to file-backed mode:
+
+```cmd
+set DB_ENGINE=none
+python -m uvicorn arangur.app.main:app --reload --app-dir src
+```
+
+With `DB_ENGINE=none`, no database is required. Workflow runs still generate local artifacts and `/api/runs` scans `reports/demo/**/report_package.json`.
+
+The first private-demo persistence skeleton can use Postgres when a later Docker/private-demo batch provides the database:
+
+```cmd
+set DB_ENGINE=postgres
+set DATABASE_URL=postgresql://arangur_demo:password@postgres:5432/arangur_private_demo
+python -m uvicorn arangur.app.main:app --reload --app-dir src
+```
+
+When `DB_ENGINE=postgres` and `DATABASE_URL` are set, the app creates minimal `workflow_run`, `report_artifact`, and `run_event` tables if missing and persists run metadata plus artifact links after local report generation. Postgres is not required for ordinary local tests.
+
 ## Design Roadmaps
 
 Future scenario, data-coverage, and deployable private-demo work is captured in:
 
 - `docs/architecture/deployable_demo_app_architecture.md`
 - `docs/architecture/persistence_model_plan.md`
+- `docs/contracts/workflow_run_persistence_contract.md`
 - `docs/deployment/private_demo_stack_plan.md`
 - `docs/decisions/0002_copy_education_private_demo_stack.md`
 - `docs/architecture/scenario_engine_roadmap.md`
@@ -132,4 +154,5 @@ python -m unittest tests.test_workflow_templates
 python -m unittest tests.test_data_coverage
 python -m unittest tests.test_app_health
 python -m unittest tests.test_app_runs_api
+python -m unittest tests.test_app_persistence
 ```

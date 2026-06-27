@@ -120,11 +120,11 @@
 ## Batch 15: Postgres Persistence Skeleton
 
 - Goal: Implement the first Postgres-backed persistence skeleton for workflow runs, artifact records, data coverage summaries, and optional run events.
-- Mode: Implementation batch.
+- Mode: Implemented baseline.
 - Allowed scope: `src/`, `tests/`, `docs/`, and migration/schema files if the project adds a migration folder.
 - Non-goals: No real client data model, no full portfolio relational decomposition, no production auth, no managed database service.
-- Acceptance criteria: Schema or repository layer reflects `docs/architecture/persistence_model_plan.md`, tests cover create/list/read for workflow-run metadata, and JSON artifacts remain the source of detailed output.
-- Stop conditions: Migration tool choice requires a dependency decision not already authorized, or persistence design expands into production account/holding modeling.
+- Acceptance criteria: Implemented baseline: `src/arangur/app/persistence.py` defines optional Postgres schema initialization for `workflow_run`, `report_artifact`, and `run_event`, maps current run summaries into persistence records, leaves `DB_ENGINE=none` as the no-database local default, and keeps JSON artifacts as the source of detailed output.
+- Stop conditions: Migration tool choice requires a dependency decision not already authorized, tests require live Postgres outside a Docker smoke batch, or persistence design expands into production account/holding modeling.
 
 ## Batch 16: Browser UI Shell
 

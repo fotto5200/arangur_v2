@@ -9,6 +9,15 @@ from typing import Any
 from arangur.demo_pipeline import PipelineError, project_root, run_pipeline
 from arangur.workflow_templates import WorkflowTemplateError, get_workflow_template, list_workflow_types
 
+from .persistence import (
+    PersistenceError,
+    get_workflow_run as get_persisted_workflow_run,
+    list_workflow_runs as list_persisted_workflow_runs,
+    persist_workflow_run_summary,
+    persistence_enabled,
+)
+from .settings import AppSettings
+
 
 API_SOURCES = {
     "native_demo": {
@@ -63,7 +72,12 @@ def list_workflows() -> list[dict[str, Any]]:
     return workflows
 
 
-def create_workflow_run(source: str, workflow: str, root: Path | None = None) -> dict[str, Any]:
+def create_workflow_run(
+    source: str,
+    workflow: str,
+    root: Path | None = None,
+    settings: AppSettings | None = None,
+) -> dict[str, Any]:
     resolved_root = root or project_root()
     source_config = _validate_source(source)
     _validate_workflow(workflow)
@@ -82,11 +96,16 @@ def create_workflow_run(source: str, workflow: str, root: Path | None = None) ->
     summary = _run_summary_from_package(resolved_root, package_path, package)
     summary["status"] = "succeeded"
     summary["created_by"] = "file_backed_pipeline"
+    _persist_run_summary(settings, summary)
     return summary
 
 
-def list_runs(root: Path | None = None) -> list[dict[str, Any]]:
+def list_runs(root: Path | None = None, settings: AppSettings | None = None) -> list[dict[str, Any]]:
     resolved_root = root or project_root()
+    if persistence_enabled(settings):
+        persisted_runs = _list_persisted_runs(settings)
+        if persisted_runs:
+            return persisted_runs
     reports_dir = resolved_root / REPORTS_DEMO_PATH
     runs = []
     for package_path in sorted(reports_dir.rglob("report_package.json")):
@@ -95,8 +114,12 @@ def list_runs(root: Path | None = None) -> list[dict[str, Any]]:
     return sorted(runs, key=lambda run: (run.get("generated_at") or "", run["run_id"]), reverse=True)
 
 
-def get_run(run_id: str, root: Path | None = None) -> dict[str, Any]:
-    for run in list_runs(root):
+def get_run(run_id: str, root: Path | None = None, settings: AppSettings | None = None) -> dict[str, Any]:
+    if persistence_enabled(settings):
+        persisted_run = _get_persisted_run(settings, run_id)
+        if persisted_run:
+            return persisted_run
+    for run in list_runs(root, settings=None):
         if run["run_id"] == run_id:
             return run
     raise RunServiceError("run_not_found", f"Workflow run not found: {run_id}")
@@ -178,6 +201,27 @@ def _load_json(path: Path) -> dict[str, Any]:
     if not isinstance(data, dict):
         raise RunServiceError("invalid_artifact", f"Expected JSON object in {path.name}")
     return data
+
+
+def _persist_run_summary(settings: AppSettings | None, summary: dict[str, Any]) -> None:
+    try:
+        persist_workflow_run_summary(settings, summary)
+    except PersistenceError as exc:
+        raise RunServiceError("persistence_failed", str(exc)) from exc
+
+
+def _list_persisted_runs(settings: AppSettings | None) -> list[dict[str, Any]]:
+    try:
+        return list_persisted_workflow_runs(settings)
+    except PersistenceError as exc:
+        raise RunServiceError("persistence_failed", str(exc)) from exc
+
+
+def _get_persisted_run(settings: AppSettings | None, run_id: str) -> dict[str, Any] | None:
+    try:
+        return get_persisted_workflow_run(settings, run_id)
+    except PersistenceError as exc:
+        raise RunServiceError("persistence_failed", str(exc)) from exc
 
 
 def _count_report_packages(root: Path) -> int:
