@@ -7,7 +7,10 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 
+from .routes import router as api_router
+from .run_service import reports_demo_dir
 from .settings import APP_NAME, AppSettings, load_settings
 
 
@@ -32,6 +35,13 @@ def create_app(settings: AppSettings | None = None) -> FastAPI:
             allow_methods=["GET", "POST", "OPTIONS"],
             allow_headers=["Authorization", "Content-Type"],
         )
+
+    app.include_router(api_router)
+    app.mount(
+        "/reports/demo",
+        StaticFiles(directory=reports_demo_dir(), html=True, check_dir=False),
+        name="reports_demo",
+    )
 
     @app.get("/api/health")
     def health() -> dict[str, object]:

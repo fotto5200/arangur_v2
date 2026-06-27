@@ -110,12 +110,12 @@
 
 ## Batch 14: API Endpoints Wrapping Existing Pipeline Runs
 
-- Goal: Add protected API endpoints that expose supported sources/workflows and run the existing synthetic pipeline through service wrappers.
-- Mode: Implementation batch.
+- Goal: Add API endpoints that expose supported sources/workflows and run the existing synthetic pipeline through service wrappers.
+- Mode: Implemented baseline.
 - Allowed scope: `src/`, `tests/`, `docs/`, and generated local demo artifacts only if endpoint tests intentionally regenerate them.
 - Non-goals: No database persistence yet unless Batch 15 is already complete, no live Plaid, no external APIs, no real data.
-- Acceptance criteria: API lists sources/workflows, validates run requests, calls existing pipeline modules without duplicating analytics, and returns run/artifact summaries with synthetic-data caveats.
-- Stop conditions: Background job infrastructure becomes necessary, endpoint protection strategy is unresolved, or code changes would bypass current pipeline contracts.
+- Acceptance criteria: Implemented baseline: `/api/sources`, `/api/workflows`, `/api/runs`, `/api/runs/{run_id}`, `/api/reports/index`, and `/reports/demo/...` static artifact serving are file-backed, validate source/workflow choices, call the existing pipeline modules without duplicating analytics, and return run/artifact summaries with synthetic-data flags.
+- Stop conditions: Background job infrastructure becomes necessary, endpoint protection strategy is required before the next private-demo step, or code changes would bypass current pipeline contracts.
 
 ## Batch 15: Postgres Persistence Skeleton
 

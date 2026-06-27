@@ -116,6 +116,7 @@ Use these file sets when starting different kinds of sessions.
 - `src/arangur/app/`.
 - Existing pipeline modules under `src/arangur/`.
 - `tests/test_app_health.py`.
+- `tests/test_app_runs_api.py`.
 - Existing generated report package examples under `reports/demo/`.
 - Do not include real client data, live Plaid, external APIs, credentials, or legacy MATLAB.
 

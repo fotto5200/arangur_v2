@@ -108,6 +108,8 @@ The UI should keep caveats visible near run controls and reports:
 
 ## Proposed API Endpoints
 
+Current file-backed baseline: the app now exposes `/api/sources`, `/api/workflows`, `/api/runs`, `/api/runs/{run_id}`, `/api/reports/index`, and static report artifacts under `/reports/demo/...`. This baseline intentionally uses the existing local pipeline and report packages instead of Postgres; the more durable `/api/workflow-runs` naming and protected/persisted routes below remain the target private-demo shape.
+
 | Endpoint | Method | Purpose | Notes |
 | --- | --- | --- | --- |
 | `/api/health` | `GET` | Health check for container/proxy smoke tests. | Unauthenticated or minimally exposed. |

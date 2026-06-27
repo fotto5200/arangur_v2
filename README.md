@@ -62,9 +62,9 @@ python src\arangur\demo_pipeline.py --build-index
 
 Open `reports/demo/index.html` in a browser to browse the native demo and Plaid-shaped mock report runs. The index is local-only and synthetic; it is not an interactive app, does not use live Plaid, and does not use real client data.
 
-## Run The FastAPI App Shell
+## Run The FastAPI App
 
-The first deployable-app shell exposes `/api/health` and a static placeholder demo console. It does not run workflow APIs, Postgres, Docker, live Plaid, or production authentication yet.
+The first deployable-app shell exposes health, source/workflow discovery, synchronous local workflow runs, local run browsing, and static generated report artifacts. It remains file-backed and synthetic-only; it does not use Postgres, Docker, live Plaid, external APIs, real client data, or production authentication yet.
 
 ```powershell
 python -m uvicorn arangur.app.main:app --reload --app-dir src
@@ -73,7 +73,25 @@ python -m uvicorn arangur.app.main:app --reload --app-dir src
 Then open:
 
 - `http://127.0.0.1:8000/api/health`
+- `http://127.0.0.1:8000/api/sources`
+- `http://127.0.0.1:8000/api/workflows`
+- `http://127.0.0.1:8000/api/runs`
+- `http://127.0.0.1:8000/reports/demo/index.html`
 - `http://127.0.0.1:8000/`
+
+Create a native demo manager-overlap workflow run:
+
+```cmd
+curl.exe -X POST http://127.0.0.1:8000/api/runs -H "Content-Type: application/json" -d "{\"source\":\"native_demo\",\"workflow\":\"manager_overlap_review\"}"
+```
+
+Create a Plaid-shaped mock intake workflow run:
+
+```cmd
+curl.exe -X POST http://127.0.0.1:8000/api/runs -H "Content-Type: application/json" -d "{\"source\":\"plaid_mock\",\"workflow\":\"intake_review\"}"
+```
+
+Generated report artifacts are served only from `reports/demo/` under matching URLs such as `/reports/demo/workflows/manager_overlap_review/arangur_demo_report.html`.
 
 ## Design Roadmaps
 
@@ -97,4 +115,5 @@ python -m unittest tests.test_report_index
 python -m unittest tests.test_workflow_templates
 python -m unittest tests.test_data_coverage
 python -m unittest tests.test_app_health
+python -m unittest tests.test_app_runs_api
 ```
