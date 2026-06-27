@@ -152,6 +152,7 @@ def _run_summary_from_package(root: Path, package_path: Path, package: dict[str,
             for key, value in sorted(json_outputs.items())
         },
         "data_confidence": valuation_summary.get("overall_confidence") or "not_available",
+        "data_confidence_summary": data_coverage.get("summary") or "",
         "human_review_item_count": data_coverage.get("human_review_item_count"),
     }
 

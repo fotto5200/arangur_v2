@@ -129,11 +129,11 @@
 ## Batch 16: Browser UI Shell
 
 - Goal: Add a simple browser UI served by the backend for source/workflow selection, run workflow, run history, report links, and data confidence summary.
-- Mode: Implementation batch.
+- Mode: Implemented baseline.
 - Allowed scope: `src/`, `tests/`, `docs/`, and simple static assets if used.
 - Non-goals: No separate frontend framework unless explicitly authorized, no production dashboard, no client data upload, no rich charting.
-- Acceptance criteria: UI includes source selector, workflow selector, run button, run history/list, report viewer/link panel, data coverage summary, and synthetic-data caveat.
-- Stop conditions: UI scope expands into advisor assistant, production dashboard, or design-system work that needs product review.
+- Acceptance criteria: Implemented baseline: `/`, `/app/`, and `/app/index.html` serve a dependency-free static console with source selector, workflow selector, run button, latest run summary, run history/list, report links, data confidence summary, and synthetic-data caveat. The page calls the existing file-backed API and does not introduce a frontend framework.
+- Stop conditions: UI scope expands into advisor assistant, production dashboard, production authentication, or design-system work that needs product review.
 
 ## Batch 17: Docker Compose Local Private Demo
 

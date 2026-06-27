@@ -70,6 +70,8 @@ Suggested internal modules when implementation is authorized:
 
 The first browser UI should be a utilitarian private-demo control panel, not a marketing site or production dashboard.
 
+Current file-backed baseline: `/`, `/app/`, and `/app/index.html` now serve a dependency-free HTML/CSS/JavaScript demo console that lists sources/workflows from the API, starts synchronous local runs, refreshes run history, and opens report artifacts returned by the API.
+
 Required first UI controls:
 
 - Source selector: `native_demo` / `plaid_mock`.

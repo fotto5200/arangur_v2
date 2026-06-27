@@ -75,6 +75,10 @@ class AppRunsApiTests(unittest.TestCase):
             self.native_run["html_report"]["url"],
         )
         self.assertEqual("/reports/demo/index.html", self.native_run["index"]["url"])
+        self.assertIn("data_confidence", self.native_run)
+        self.assertIn("data_confidence_summary", self.native_run)
+        self.assertIn("human_review_item_count", self.native_run)
+        self.assertIn("data_coverage_result", self.native_run["json_outputs"])
 
     def test_create_plaid_intake_run_returns_report_links(self) -> None:
         self.assertEqual("succeeded", self.plaid_run["status"])

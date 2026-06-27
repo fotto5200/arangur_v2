@@ -5,49 +5,688 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Arangur v2 Demo Console</title>
   <style>
+    :root {
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --ink: #1f2933;
+      --muted: #5f6f82;
+      --border: #d8e0ea;
+      --blue: #0b63ce;
+      --blue-dark: #084a9b;
+      --green: #0f766e;
+      --red: #b42318;
+      --amber-bg: #fff7ed;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      color: #1f2933;
+      background: var(--bg);
+      color: var(--ink);
       font-family: Arial, sans-serif;
       line-height: 1.45;
-      margin: 32px;
-      max-width: 920px;
+      margin: 0;
     }
-    h1, h2 {
+
+    a {
+      color: var(--blue);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:focus {
+      color: var(--blue-dark);
+      text-decoration: underline;
+    }
+
+    button,
+    select {
+      font: inherit;
+    }
+
+    .page {
+      margin: 0 auto;
+      max-width: 1180px;
+      padding: 28px 22px 36px;
+    }
+
+    .page-header {
+      margin-bottom: 20px;
+    }
+
+    .eyebrow {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: #102a43;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 32px;
+      line-height: 1.15;
+    }
+
+    h2 {
+      font-size: 20px;
+      line-height: 1.25;
+    }
+
+    h3 {
+      font-size: 16px;
+      line-height: 1.25;
+    }
+
+    .caveat {
+      background: var(--amber-bg);
+      border-left: 4px solid #f97316;
+      color: #7c2d12;
+      margin: 16px 0 0;
+      padding: 12px 14px;
+    }
+
+    .console-grid {
+      align-items: stretch;
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+      margin-top: 22px;
+    }
+
+    .tool-panel,
+    .summary-panel,
+    .history-panel,
+    .notes-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .tool-panel,
+    .summary-panel,
+    .notes-panel {
+      padding: 18px;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    label {
+      color: #334e68;
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    select {
+      appearance: none;
+      background: #ffffff;
+      border: 1px solid #bcccdc;
+      border-radius: 6px;
+      color: var(--ink);
+      min-height: 42px;
+      padding: 8px 36px 8px 10px;
+      width: 100%;
+    }
+
+    .select-wrap {
+      position: relative;
+    }
+
+    .select-wrap::after {
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid #52606d;
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      right: 14px;
+      top: 18px;
+    }
+
+    .run-button,
+    .ghost-button {
+      align-items: center;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      font-weight: 700;
+      gap: 9px;
+      justify-content: center;
+      min-height: 42px;
+      padding: 8px 14px;
+    }
+
+    .run-button {
+      background: var(--blue);
+      border: 1px solid var(--blue);
+      color: #ffffff;
+      width: 100%;
+    }
+
+    .run-button:hover,
+    .run-button:focus {
+      background: var(--blue-dark);
+      border-color: var(--blue-dark);
+    }
+
+    .run-button:disabled,
+    .ghost-button:disabled {
+      cursor: not-allowed;
+      opacity: 0.62;
+    }
+
+    .button-icon {
+      border-bottom: 6px solid transparent;
+      border-left: 9px solid currentColor;
+      border-top: 6px solid transparent;
+      height: 0;
+      width: 0;
+    }
+
+    .ghost-button {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      color: var(--blue);
+    }
+
+    .status {
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: 14px;
+      min-height: 40px;
+      padding: 10px 12px;
+    }
+
+    .status.loading {
+      background: #e0f2fe;
+      color: #075985;
+    }
+
+    .status.success {
+      background: #ecfdf3;
+      color: var(--green);
+    }
+
+    .status.error {
+      background: #fef3f2;
+      color: var(--red);
+    }
+
+    .content-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+      margin-top: 18px;
+    }
+
+    .section-header {
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      padding: 16px 18px;
+    }
+
+    .run-list {
+      display: grid;
+      gap: 12px;
+      padding: 16px 18px 18px;
+    }
+
+    .run-item {
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--blue);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .run-item h3 {
+      margin-bottom: 4px;
+    }
+
+    .meta-grid {
+      display: grid;
+      gap: 8px 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 12px;
+    }
+
+    .meta {
+      min-width: 0;
+    }
+
+    .meta dt {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .meta dd {
+      margin: 2px 0 0;
+      overflow-wrap: anywhere;
+    }
+
+    .artifact-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      list-style: none;
+      margin: 14px 0 0;
+      padding: 0;
+    }
+
+    .artifact-list a {
+      background: #f0f4f8;
+      border: 1px solid #d9e2ec;
+      border-radius: 6px;
+      display: inline-block;
+      padding: 7px 9px;
+    }
+
+    .empty-state {
+      color: var(--muted);
+      padding: 12px 0;
+    }
+
+    .confidence {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-top: 14px;
+      padding: 12px;
+    }
+
+    .confidence strong {
       color: #102a43;
     }
-    code {
-      background: #f0f4f8;
-      border-radius: 4px;
-      padding: 2px 4px;
+
+    .notes-panel ul {
+      margin: 10px 0 18px;
+      padding-left: 20px;
     }
-    .caveat {
-      background: #fff7ed;
-      border-left: 4px solid #f97316;
-      padding: 12px;
+
+    .notes-panel li {
+      margin: 6px 0;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .index-link {
+      border-top: 1px solid var(--border);
+      margin-top: 14px;
+      padding-top: 12px;
+    }
+
+    @media (max-width: 840px) {
+      .page {
+        padding: 22px 14px 28px;
+      }
+
+      .console-grid,
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .meta-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Arangur v2 Demo Console</h1>
-  <p class="caveat">Synthetic/local demo only. This shell does not use live Plaid, external APIs, market-data vendors, credentials, or real client data.</p>
+  <div class="page">
+    <header class="page-header">
+      <div class="eyebrow">File-backed local workflow demo</div>
+      <h1>Arangur v2 Demo Console</h1>
+      <p class="caveat">Synthetic/local demo only. This console does not use live Plaid, external APIs, market-data vendors, credentials, production authentication, or real client data.</p>
+    </header>
 
-  <h2>Current available local pipeline commands</h2>
-  <ul>
-    <li><code>python src\arangur\demo_pipeline.py</code></li>
-    <li><code>python src\arangur\demo_pipeline.py --source plaid_mock</code></li>
-    <li><code>python src\arangur\demo_pipeline.py --workflow data_coverage_review</code></li>
-    <li><code>python src\arangur\demo_pipeline.py --build-index</code></li>
-  </ul>
+    <main>
+      <section class="console-grid" aria-label="Workflow run console">
+        <form id="run-form" class="tool-panel">
+          <h2>Run Workflow</h2>
+          <div class="form-grid">
+            <div>
+              <label for="source-select">Source</label>
+              <div class="select-wrap">
+                <select id="source-select" name="source" disabled>
+                  <option>Loading sources</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label for="workflow-select">Workflow</label>
+              <div class="select-wrap">
+                <select id="workflow-select" name="workflow" disabled>
+                  <option>Loading workflows</option>
+                </select>
+              </div>
+            </div>
+            <button id="run-button" class="run-button" type="submit" disabled>
+              <span class="button-icon" aria-hidden="true"></span>
+              <span>Run workflow</span>
+            </button>
+            <div id="status" class="status loading" role="status">Loading sources and workflows...</div>
+          </div>
+        </form>
 
-  <h2>Future UI</h2>
-  <p>Future UI will allow source/workflow selection and report browsing from this browser surface.</p>
+        <section id="latest-run" class="summary-panel" aria-labelledby="latest-title">
+          <h2 id="latest-title">Latest Run</h2>
+          <div id="latest-run-content" class="empty-state">Loading run history...</div>
+        </section>
+      </section>
 
-  <h2>Current API Links</h2>
-  <ul>
-    <li><a href="/api/health">Health JSON</a></li>
-    <li><a href="/api/sources">Sources JSON</a></li>
-    <li><a href="/api/workflows">Workflows JSON</a></li>
-    <li><a href="/reports/demo/index.html">Local report index</a></li>
-  </ul>
+      <section class="content-grid">
+        <section class="history-panel" aria-labelledby="history-title">
+          <div class="section-header">
+            <h2 id="history-title">Run History</h2>
+            <button id="refresh-runs" class="ghost-button" type="button">Refresh</button>
+          </div>
+          <div id="run-history" class="run-list">
+            <div class="empty-state">Loading runs...</div>
+          </div>
+        </section>
+
+        <aside class="notes-panel" aria-labelledby="proof-title">
+          <h2 id="proof-title">What This Demo Proves</h2>
+          <ul>
+            <li>The browser can start the same local synthetic workflow pipeline exposed by the API.</li>
+            <li>Native demo and Plaid-shaped mock sources produce browseable report artifacts.</li>
+            <li>Report packages expose workflow metadata, artifact links, and data confidence context.</li>
+          </ul>
+          <h2>What This Demo Does Not Prove</h2>
+          <ul>
+            <li>No live Plaid, external market data, or production reconciliation is involved.</li>
+            <li>No real client data, credentials, or private documents are used.</li>
+            <li>No Postgres persistence, production authentication, or advisor assistant is implemented yet.</li>
+          </ul>
+          <div id="index-link" class="index-link small">Loading local report index...</div>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const api = Object.freeze({
+      sources: "/api/sources",
+      workflows: "/api/workflows",
+      runs: "/api/runs",
+      reportIndex: "/api/reports/index"
+    });
+
+    const state = {
+      sources: [],
+      workflows: [],
+      runs: [],
+      index: null,
+      running: false
+    };
+
+    const els = {
+      form: document.getElementById("run-form"),
+      source: document.getElementById("source-select"),
+      workflow: document.getElementById("workflow-select"),
+      runButton: document.getElementById("run-button"),
+      status: document.getElementById("status"),
+      latest: document.getElementById("latest-run-content"),
+      history: document.getElementById("run-history"),
+      refresh: document.getElementById("refresh-runs"),
+      indexLink: document.getElementById("index-link")
+    };
+
+    async function apiJson(url, options = {}) {
+      const response = await fetch(url, {
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        ...options
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        const detail = payload.detail || {};
+        const message = detail.message || payload.message || response.statusText || "Request failed";
+        throw new Error(message);
+      }
+      return payload;
+    }
+
+    function setStatus(kind, message) {
+      els.status.className = `status ${kind}`;
+      els.status.textContent = message;
+    }
+
+    function setControlsEnabled(enabled) {
+      els.source.disabled = !enabled;
+      els.workflow.disabled = !enabled;
+      els.runButton.disabled = !enabled || state.running;
+      els.refresh.disabled = state.running;
+    }
+
+    function optionLabel(row, valueKey) {
+      const value = row[valueKey];
+      const display = row.display_name || value;
+      return display === value ? value : `${display} (${value})`;
+    }
+
+    function renderSelectors() {
+      renderOptions(els.source, state.sources, "source");
+      renderOptions(els.workflow, state.workflows, "workflow");
+      setControlsEnabled(state.sources.length > 0 && state.workflows.length > 0);
+    }
+
+    function renderOptions(select, rows, valueKey) {
+      select.innerHTML = "";
+      rows.forEach((row) => {
+        const option = document.createElement("option");
+        option.value = row[valueKey];
+        option.textContent = optionLabel(row, valueKey);
+        select.appendChild(option);
+      });
+    }
+
+    function safeReportUrl(record) {
+      const url = record && record.url;
+      if (typeof url === "string" && url.startsWith("/reports/demo/")) {
+        return url;
+      }
+      return "";
+    }
+
+    function artifactLinks(run) {
+      const artifacts = [
+        ["HTML report", run.html_report],
+        ["Markdown report", run.markdown_report],
+        ["Report package JSON", run.report_package],
+        ["Data coverage JSON", run.json_outputs && run.json_outputs.data_coverage_result],
+        ["Local report index", run.index]
+      ];
+      const links = artifacts
+        .map(([label, record]) => {
+          const url = safeReportUrl(record);
+          return url ? `<li><a href="${escapeAttr(url)}" target="_blank" rel="noopener">${escapeHtml(label)}</a></li>` : "";
+        })
+        .filter(Boolean)
+        .join("");
+      return links ? `<ul class="artifact-list">${links}</ul>` : "<p class=\"empty-state\">No report artifact links are available.</p>";
+    }
+
+    function confidenceBlock(run) {
+      const confidence = run.data_confidence || "not_available";
+      const reviewCount = run.human_review_item_count == null ? "Not available" : run.human_review_item_count;
+      const summary = run.data_confidence_summary ? `<p>${escapeHtml(run.data_confidence_summary)}</p>` : "";
+      return `
+        <div class="confidence">
+          <strong>Data confidence:</strong> ${escapeHtml(labelize(confidence))}
+          <br>
+          <strong>Human review items:</strong> ${escapeHtml(String(reviewCount))}
+          ${summary}
+        </div>
+      `;
+    }
+
+    function runMeta(run) {
+      return `
+        <dl class="meta-grid">
+          <div class="meta"><dt>Run ID</dt><dd>${escapeHtml(run.run_id || "Unknown")}</dd></div>
+          <div class="meta"><dt>Status</dt><dd>${escapeHtml(labelize(run.status || "unknown"))}</dd></div>
+          <div class="meta"><dt>Source</dt><dd>${escapeHtml(run.source || "Unknown")}</dd></div>
+          <div class="meta"><dt>Workflow</dt><dd>${escapeHtml(run.workflow_display_name || labelize(run.workflow || "Unknown"))}</dd></div>
+          <div class="meta"><dt>Valuation date</dt><dd>${escapeHtml(run.valuation_date || "Not available")}</dd></div>
+          <div class="meta"><dt>Generated at</dt><dd>${escapeHtml(run.generated_at || "Not available")}</dd></div>
+        </dl>
+      `;
+    }
+
+    function runTitle(run) {
+      const workflow = run.workflow_display_name || labelize(run.workflow || "Workflow");
+      const source = labelize(run.source || "source");
+      return `${workflow} - ${source}`;
+    }
+
+    function renderLatest(run) {
+      if (!run) {
+        els.latest.innerHTML = "<div class=\"empty-state\">No local workflow runs found yet.</div>";
+        return;
+      }
+      els.latest.innerHTML = `
+        <h3>${escapeHtml(runTitle(run))}</h3>
+        ${runMeta(run)}
+        ${confidenceBlock(run)}
+        ${artifactLinks(run)}
+      `;
+    }
+
+    function renderHistory() {
+      if (!state.runs.length) {
+        els.history.innerHTML = "<div class=\"empty-state\">No local workflow runs found yet.</div>";
+        return;
+      }
+      els.history.innerHTML = state.runs.map((run) => `
+        <article class="run-item">
+          <h3>${escapeHtml(runTitle(run))}</h3>
+          <div class="small">${escapeHtml(run.run_id || "Unknown run")} - ${escapeHtml(run.generated_at || "Generated time unavailable")}</div>
+          ${runMeta(run)}
+          ${confidenceBlock(run)}
+          ${artifactLinks(run)}
+        </article>
+      `).join("");
+    }
+
+    function renderIndexLink() {
+      const url = safeReportUrl(state.index);
+      if (!url) {
+        els.indexLink.textContent = "Local report index is not available yet.";
+        return;
+      }
+      const runCount = state.index.run_count == null ? "" : ` (${state.index.run_count} report packages)`;
+      els.indexLink.innerHTML = `<a href="${escapeAttr(url)}" target="_blank" rel="noopener">Open local report index</a>${escapeHtml(runCount)}`;
+    }
+
+    async function loadRuns() {
+      const [runsPayload, indexPayload] = await Promise.all([
+        apiJson(api.runs),
+        apiJson(api.reportIndex)
+      ]);
+      state.runs = runsPayload.runs || [];
+      state.index = indexPayload;
+      renderLatest(state.runs[0]);
+      renderHistory();
+      renderIndexLink();
+    }
+
+    async function initialize() {
+      setStatus("loading", "Loading sources, workflows, and local runs...");
+      try {
+        const [sourcesPayload, workflowsPayload] = await Promise.all([
+          apiJson(api.sources),
+          apiJson(api.workflows)
+        ]);
+        state.sources = sourcesPayload.sources || [];
+        state.workflows = workflowsPayload.workflows || [];
+        renderSelectors();
+        await loadRuns();
+        setStatus("success", "Ready. Workflow runs will use local synthetic artifacts only.");
+      } catch (error) {
+        setControlsEnabled(false);
+        setStatus("error", error.message);
+      }
+    }
+
+    async function runWorkflow(event) {
+      event.preventDefault();
+      state.running = true;
+      setControlsEnabled(false);
+      setStatus("loading", "Running local workflow and refreshing report index...");
+      try {
+        const payload = await apiJson(api.runs, {
+          method: "POST",
+          body: JSON.stringify({
+            source: els.source.value,
+            workflow: els.workflow.value
+          })
+        });
+        await loadRuns();
+        renderLatest(payload);
+        setStatus("success", `Run succeeded: ${payload.run_id}`);
+      } catch (error) {
+        setStatus("error", error.message);
+      } finally {
+        state.running = false;
+        setControlsEnabled(state.sources.length > 0 && state.workflows.length > 0);
+      }
+    }
+
+    function labelize(value) {
+      return String(value).replaceAll("_", " ").replace(/\b\w/g, (match) => match.toUpperCase());
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll("\"", "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function escapeAttr(value) {
+      return escapeHtml(value);
+    }
+
+    els.form.addEventListener("submit", runWorkflow);
+    els.refresh.addEventListener("click", async () => {
+      setStatus("loading", "Refreshing local run history...");
+      try {
+        await loadRuns();
+        setStatus("success", "Run history refreshed.");
+      } catch (error) {
+        setStatus("error", error.message);
+      }
+    });
+
+    initialize();
+  </script>
 </body>
 </html>

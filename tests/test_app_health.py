@@ -55,7 +55,7 @@ class AppHealthTests(unittest.TestCase):
         self.assertEqual("private_demo", payload["runtime_mode"])
         self.assertFalse(payload["demo_admin_token_configured"])
 
-    def test_root_page_returns_placeholder_console(self) -> None:
+    def test_root_page_returns_browser_demo_console(self) -> None:
         client = TestClient(create_app(settings=AppSettings()))
         for path in ("/", "/app/", "/app/index.html"):
             with self.subTest(path=path):
@@ -64,7 +64,27 @@ class AppHealthTests(unittest.TestCase):
                 self.assertIn("text/html", response.headers["content-type"])
                 self.assertIn("Arangur v2 Demo Console", response.text)
                 self.assertIn("Synthetic/local demo only", response.text)
-                self.assertIn("Future UI will allow source/workflow selection and report browsing", response.text)
+                self.assertIn('id="source-select"', response.text)
+                self.assertIn('id="workflow-select"', response.text)
+                self.assertIn('id="run-button"', response.text)
+                self.assertIn('id="latest-run"', response.text)
+                self.assertIn('id="run-history"', response.text)
+                self.assertIn("What This Demo Proves", response.text)
+                self.assertIn("What This Demo Does Not Prove", response.text)
+
+    def test_browser_demo_console_references_expected_api_endpoints(self) -> None:
+        client = TestClient(create_app(settings=AppSettings()))
+        response = client.get("/app/")
+        self.assertEqual(200, response.status_code)
+        for endpoint in (
+            "/api/sources",
+            "/api/workflows",
+            "/api/runs",
+            "/api/reports/index",
+            "/reports/demo/",
+        ):
+            with self.subTest(endpoint=endpoint):
+                self.assertIn(endpoint, response.text)
 
 
 if __name__ == "__main__":

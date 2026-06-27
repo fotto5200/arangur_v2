@@ -79,6 +79,22 @@ Then open:
 - `http://127.0.0.1:8000/reports/demo/index.html`
 - `http://127.0.0.1:8000/`
 
+## Run The Browser Demo Console
+
+For a fresh checkout, install the current lightweight Python requirements:
+
+```cmd
+python -m pip install -r requirements.txt
+```
+
+Start the FastAPI app:
+
+```cmd
+python -m uvicorn arangur.app.main:app --reload --app-dir src
+```
+
+Open `http://127.0.0.1:8000/app/`, choose a source and workflow, run the workflow, and open the generated report links from the latest run or run history. The browser console uses the same file-backed API and serves generated artifacts only from `/reports/demo/...`.
+
 Create a native demo manager-overlap workflow run:
 
 ```cmd
