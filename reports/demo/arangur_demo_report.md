@@ -4,6 +4,25 @@
 
 Demo only: this report uses synthetic data and local fixture prices. It is intended to demonstrate Arangur v2 product behavior and is not investment advice, a client statement, or a production valuation.
 
+## Workflow Focus
+
+- Workflow: Quarterly Review (quarterly_review)
+- Audience: Advisor preparing a recurring portfolio review meeting.
+- Meeting goal: Summarize portfolio value, manager allocation, major exposures, direct overlap, and the current deterministic scenario result for a routine review.
+
+### Primary Questions
+
+- What changed enough to discuss in the quarterly review?
+- Where are the largest manager, account, sector, theme, and cash exposures?
+- Which scenario result should be used as the meeting's risk prompt?
+
+### Emphasized Report Sections
+
+- Executive Summary
+- Portfolio Value Summary
+- Manager/Account Summary
+- Scenario Shock Summary
+
 ## Executive Summary
 
 - The synthetic Northstar portfolio totals $1,708,125.00 across 5 managers and 5 accounts.
@@ -128,10 +147,22 @@ Illustrative shock to AI and semiconductor leadership with a mild broad equity d
 
 ## Advisor Talking Points
 
-- The consolidated view surfaces manager-level concentration and overlap that would be easy to miss account by account.
-- Microsoft and NVIDIA are deliberately duplicated across managers, giving the advisor a concrete overlap discussion.
-- The AI/chips scenario links theme exposure to a simple downside story while preserving clear caveats.
-- Cash and fixed income soften the scenario impact but do not erase concentration in growth-oriented holdings.
+- Use the quarterly review to anchor the conversation in total value, cash, manager mix, and the most visible concentration themes.
+- Confirm whether the Microsoft and NVIDIA overlap is intentional before treating it as a problem.
+- Use the deterministic AI/chips scenario as a discussion prompt rather than a prediction.
+- Frame cash and fixed income as ballast that reduces, but does not erase, growth-theme concentration.
+
+## Suggested Follow-Up Actions
+
+- Ask whether the current AI/chips concentration remains intentional.
+- Decide whether duplicated direct holdings should be reviewed with each manager.
+- Flag any account or manager naming that should be cleaned up before a real client workflow.
+
+## Workflow Caveats
+
+- Quarterly review framing is synthetic and local-only.
+- Scenario shocks are deterministic assumptions, not forecasts.
+- The report does not prove production reconciliation or advisor suitability.
 
 ## What This Demo Proves
 
@@ -147,6 +178,6 @@ Illustrative shock to AI and semiconductor leadership with a mild broad equity d
 
 ## Next Planned Upgrades
 
-- Add workflow simulation templates for quarterly, overlap, scenario-risk, and intake reviews.
+- Add workflow-specific summary cards and period-over-period changes once historical synthetic fixtures exist.
 - Add stronger validation edge cases and report-quality tests around malformed local fixtures.
 - Design the future Plaid Sandbox boundary without committing credentials or using real client data.

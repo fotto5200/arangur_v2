@@ -1,0 +1,142 @@
+{
+  "audience": "advisor_colleague_demo",
+  "is_synthetic": true,
+  "outputs": [
+    {
+      "format": "markdown",
+      "path": "reports/demo/plaid_mock/workflows/intake_review/arangur_demo_report.md"
+    },
+    {
+      "format": "html",
+      "path": "reports/demo/plaid_mock/workflows/intake_review/arangur_demo_report.html"
+    }
+  ],
+  "portfolio_id": "portfolio_northstar_plaid_mock",
+  "report_id": "arangur_demo_report",
+  "report_title": "Northstar Plaid-Shaped Mock Portfolio Review",
+  "run_id": "run_plaid_mock_intake_review_2026_06_30",
+  "run_metadata": {
+    "generated_at": "2026-06-30T00:00:00+00:00",
+    "json_outputs": {
+      "canonical_snapshot": "reports/demo/plaid_mock/workflows/intake_review/canonical_portfolio_snapshot.json",
+      "exposure_overlap_result": "reports/demo/plaid_mock/workflows/intake_review/exposure_overlap_result.json",
+      "report_package": "reports/demo/plaid_mock/workflows/intake_review/report_package.json",
+      "scenario_result": "reports/demo/plaid_mock/workflows/intake_review/scenario_result.json",
+      "valuation_result": "reports/demo/plaid_mock/workflows/intake_review/valuation_result.json"
+    },
+    "output_directory": "reports/demo/plaid_mock/workflows/intake_review",
+    "report_links": {
+      "html": "reports/demo/plaid_mock/workflows/intake_review/arangur_demo_report.html",
+      "markdown": "reports/demo/plaid_mock/workflows/intake_review/arangur_demo_report.md"
+    },
+    "run_id": "run_plaid_mock_intake_review_2026_06_30",
+    "source_adapter": "plaid_mock",
+    "source_name": "plaid_mock",
+    "synthetic_data": true,
+    "valuation_date": "2026-06-30",
+    "workflow_display_name": "Intake Review",
+    "workflow_label": "Intake Review",
+    "workflow_options": [
+      "quarterly_review",
+      "manager_overlap_review",
+      "scenario_risk_review",
+      "intake_review",
+      "data_coverage_review"
+    ],
+    "workflow_template": {
+      "advisor_talking_points": [
+        "Use the intake review to confirm that the source maps cleanly into the canonical snapshot before over-interpreting analytics.",
+        "For the Plaid-shaped mock path, focus on account, security, holding, and cash mapping rather than live Plaid behavior.",
+        "The downstream analytics working from the canonical snapshot is the main product proof in this workflow.",
+        "Any missing identifiers, stale values, or manual classification gaps should become follow-up tasks."
+      ],
+      "caveats": [
+        "This intake review uses synthetic local data only.",
+        "Plaid-shaped mock input is not live Plaid, Plaid Sandbox, Plaid Link, or real account data.",
+        "The workflow does not prove production reconciliation or data completeness."
+      ],
+      "de_emphasized_sections": [
+        "Advanced scenario interpretation",
+        "Production data confidence scoring"
+      ],
+      "display_name": "Intake Review",
+      "emphasized_report_sections": [
+        "Portfolio Value Summary",
+        "Manager/Account Summary",
+        "What This Demo Proves",
+        "What This Demo Does Not Yet Prove"
+      ],
+      "intended_audience": "Advisor or operations reviewer checking whether a new source can feed the Arangur workflow.",
+      "meeting_goal": "Check source shape, canonical mapping, basic valuation readiness, and obvious follow-up items before deeper analysis.",
+      "next_upgrade_path": "Add adapter-specific validation summaries and source coverage checks before live ingestion design.",
+      "primary_questions": [
+        "Did the source adapter produce a valid canonical snapshot?",
+        "Are accounts, managers, holdings, cash, and securities mapped clearly enough for review?",
+        "What needs human cleanup before the portfolio can become a stronger workflow example?"
+      ],
+      "required_inputs": [
+        "CanonicalPortfolioSnapshot",
+        "ValuationResult",
+        "ReportPackage",
+        "Source provenance metadata"
+      ],
+      "suggested_follow_up_actions": [
+        "Review source provenance and mapping fields before expanding the adapter.",
+        "Record any account, security, or manager labels that should be normalized.",
+        "Decide which source-specific validations should be added next."
+      ],
+      "workflow_type": "intake_review"
+    },
+    "workflow_type": "intake_review"
+  },
+  "schema_version": "report_package.v1",
+  "snapshot_id": "snap_plaid_mock_family_office_v1_2026_06_30",
+  "source_adapter": "plaid_mock",
+  "source_name": "plaid_mock",
+  "valuation_date": "2026-06-30",
+  "workflow_template": {
+    "advisor_talking_points": [
+      "Use the intake review to confirm that the source maps cleanly into the canonical snapshot before over-interpreting analytics.",
+      "For the Plaid-shaped mock path, focus on account, security, holding, and cash mapping rather than live Plaid behavior.",
+      "The downstream analytics working from the canonical snapshot is the main product proof in this workflow.",
+      "Any missing identifiers, stale values, or manual classification gaps should become follow-up tasks."
+    ],
+    "caveats": [
+      "This intake review uses synthetic local data only.",
+      "Plaid-shaped mock input is not live Plaid, Plaid Sandbox, Plaid Link, or real account data.",
+      "The workflow does not prove production reconciliation or data completeness."
+    ],
+    "de_emphasized_sections": [
+      "Advanced scenario interpretation",
+      "Production data confidence scoring"
+    ],
+    "display_name": "Intake Review",
+    "emphasized_report_sections": [
+      "Portfolio Value Summary",
+      "Manager/Account Summary",
+      "What This Demo Proves",
+      "What This Demo Does Not Yet Prove"
+    ],
+    "intended_audience": "Advisor or operations reviewer checking whether a new source can feed the Arangur workflow.",
+    "meeting_goal": "Check source shape, canonical mapping, basic valuation readiness, and obvious follow-up items before deeper analysis.",
+    "next_upgrade_path": "Add adapter-specific validation summaries and source coverage checks before live ingestion design.",
+    "primary_questions": [
+      "Did the source adapter produce a valid canonical snapshot?",
+      "Are accounts, managers, holdings, cash, and securities mapped clearly enough for review?",
+      "What needs human cleanup before the portfolio can become a stronger workflow example?"
+    ],
+    "required_inputs": [
+      "CanonicalPortfolioSnapshot",
+      "ValuationResult",
+      "ReportPackage",
+      "Source provenance metadata"
+    ],
+    "suggested_follow_up_actions": [
+      "Review source provenance and mapping fields before expanding the adapter.",
+      "Record any account, security, or manager labels that should be normalized.",
+      "Decide which source-specific validations should be added next."
+    ],
+    "workflow_type": "intake_review"
+  },
+  "workflow_type": "intake_review"
+}

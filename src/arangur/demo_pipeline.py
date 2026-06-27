@@ -19,13 +19,10 @@ from arangur.report_index import build_report_index
 from arangur.report_generator import generate_markdown_report
 from arangur.scenarios import calculate_scenario_results
 from arangur.valuation import calculate_valuation
-
-
-WORKFLOW_TYPES = (
-    "quarterly_review",
-    "manager_overlap_review",
-    "scenario_risk_review",
-    "intake_review",
+from arangur.workflow_templates import (
+    SUPPORTED_WORKFLOW_TYPES,
+    WorkflowTemplateError,
+    get_workflow_template,
 )
 
 SOURCE_NAMES = {
@@ -51,8 +48,8 @@ def run_pipeline(
     root = root or project_root()
     data_dir = root / "data" / "demo"
     _ensure_supported_source(source)
-    _ensure_supported_workflow_type(workflow_type)
-    output_dir = _output_dir(root, source)
+    workflow_template = get_workflow_template(workflow_type)
+    output_dir = _output_dir(root, source, workflow_type)
     output_dir.mkdir(parents=True, exist_ok=True)
 
     snapshot, market_data, scenario_definitions = _load_snapshot_and_common_inputs(data_dir, source)
@@ -74,7 +71,14 @@ def run_pipeline(
     _write_json(scenario_path, scenario_results)
 
     report_path = output_dir / "arangur_demo_report.md"
-    report_package = generate_markdown_report(snapshot, valuation, exposure_overlap, scenario_results, report_path)
+    report_package = generate_markdown_report(
+        snapshot,
+        valuation,
+        exposure_overlap,
+        scenario_results,
+        report_path,
+        workflow_template=workflow_template,
+    )
     html_report_path = report_path.with_suffix(".html")
     report_package_path = output_dir / "report_package.json"
     output_paths = {
@@ -86,11 +90,12 @@ def run_pipeline(
         "markdown_report": report_path,
         "html_report": html_report_path,
     }
-    run_metadata = _build_run_metadata(snapshot, source, workflow_type, output_dir, output_paths)
+    run_metadata = _build_run_metadata(snapshot, source, workflow_template, output_dir, output_paths)
     report_package["run_id"] = run_metadata["run_id"]
     report_package["workflow_type"] = workflow_type
     report_package["source_name"] = run_metadata["source_name"]
     report_package["source_adapter"] = run_metadata["source_adapter"]
+    report_package["workflow_template"] = _package_workflow_template(workflow_template)
     report_package["run_metadata"] = run_metadata
     _write_json(report_package_path, report_package)
 
@@ -108,10 +113,19 @@ def main(argv: list[str] | None = None) -> int:
         help="Input adapter to run. Default: demo_json.",
     )
     parser.add_argument(
+        "--workflow",
+        dest="workflow_type",
+        default=None,
+        help=(
+            "Advisor workflow template to render. "
+            f"Supported: {', '.join(SUPPORTED_WORKFLOW_TYPES)}. Default: quarterly_review."
+        ),
+    )
+    parser.add_argument(
         "--workflow-type",
-        choices=WORKFLOW_TYPES,
-        default="quarterly_review",
-        help="Workflow metadata label for this local run. Default: quarterly_review.",
+        dest="workflow_type",
+        default=None,
+        help="Deprecated alias for --workflow.",
     )
     parser.add_argument(
         "--build-index",
@@ -126,7 +140,12 @@ def main(argv: list[str] | None = None) -> int:
         print(f"- report_index: {index_path}")
         return 0
 
-    outputs = run_pipeline(source=args.source, workflow_type=args.workflow_type)
+    workflow_type = args.workflow_type or "quarterly_review"
+    try:
+        outputs = run_pipeline(source=args.source, workflow_type=workflow_type)
+    except (PipelineError, WorkflowTemplateError) as exc:
+        print(f"Error: {exc}", file=sys.stderr)
+        return 1
     print("Generated Arangur v2 demo outputs:")
     for name, path in outputs.items():
         print(f"- {name}: {path}")
@@ -140,7 +159,7 @@ def _write_json(path: Path, data: dict[str, Any]) -> None:
 def _build_run_metadata(
     snapshot: dict[str, Any],
     source: str,
-    workflow_type: str,
+    workflow_template: dict[str, Any],
     output_dir: Path,
     output_paths: dict[str, Path],
 ) -> dict[str, Any]:
@@ -148,6 +167,7 @@ def _build_run_metadata(
     source_adapter = snapshot["source"].get("source_adapter") or snapshot["source"].get("adapter") or source
     generated_at = snapshot.get("created_at") or snapshot["source"].get("imported_at") or snapshot["as_of_date"]
     valuation_date = snapshot["as_of_date"]
+    workflow_type = workflow_template["workflow_type"]
     run_id = f"run_{source_name}_{workflow_type}_{valuation_date.replace('-', '_')}"
     return {
         "run_id": run_id,
@@ -156,8 +176,10 @@ def _build_run_metadata(
         "generated_at": generated_at,
         "valuation_date": valuation_date,
         "workflow_type": workflow_type,
-        "workflow_label": _workflow_label(workflow_type),
-        "workflow_options": list(WORKFLOW_TYPES),
+        "workflow_display_name": workflow_template["display_name"],
+        "workflow_label": workflow_template["display_name"],
+        "workflow_options": list(SUPPORTED_WORKFLOW_TYPES),
+        "workflow_template": _package_workflow_template(workflow_template),
         "output_directory": _stable_output_path(output_dir),
         "report_links": {
             "markdown": _stable_output_path(output_paths["markdown_report"]),
@@ -171,6 +193,26 @@ def _build_run_metadata(
             "report_package": _stable_output_path(output_paths["report_package"]),
         },
         "synthetic_data": bool(snapshot["portfolio"]["is_synthetic"]),
+    }
+
+
+def _package_workflow_template(workflow_template: dict[str, Any]) -> dict[str, Any]:
+    return {
+        key: workflow_template[key]
+        for key in (
+            "workflow_type",
+            "display_name",
+            "intended_audience",
+            "meeting_goal",
+            "primary_questions",
+            "emphasized_report_sections",
+            "de_emphasized_sections",
+            "required_inputs",
+            "advisor_talking_points",
+            "caveats",
+            "suggested_follow_up_actions",
+            "next_upgrade_path",
+        )
     }
 
 
@@ -202,23 +244,23 @@ def _load_snapshot_and_common_inputs(data_dir: Path, source: str) -> tuple[dict[
     raise PipelineError(f"Unsupported source adapter: {source}")
 
 
-def _output_dir(root: Path, source: str) -> Path:
+def _output_dir(root: Path, source: str, workflow_type: str) -> Path:
     base = root / "reports" / "demo"
     if source == "demo_json":
-        return base
+        if workflow_type == "quarterly_review":
+            return base
+        return base / "workflows" / workflow_type
     if source == "plaid_mock":
-        return base / "plaid_mock"
+        source_base = base / "plaid_mock"
+        if workflow_type == "quarterly_review":
+            return source_base
+        return source_base / "workflows" / workflow_type
     raise PipelineError(f"Unsupported source adapter: {source}")
 
 
 def _ensure_supported_source(source: str) -> None:
     if source not in SOURCE_NAMES:
         raise PipelineError(f"Unsupported source adapter: {source}")
-
-
-def _ensure_supported_workflow_type(workflow_type: str) -> None:
-    if workflow_type not in WORKFLOW_TYPES:
-        raise PipelineError(f"Unsupported workflow_type: {workflow_type}")
 
 
 def _ensure_valid(validation: dict[str, Any], stage: str) -> None:
@@ -228,10 +270,6 @@ def _ensure_valid(validation: dict[str, Any], stage: str) -> None:
     for error in validation.get("errors", []):
         messages.append(f"- {error.get('code')}: {error.get('record_id')} - {error.get('message')}")
     raise PipelineError("\n".join(messages))
-
-
-def _workflow_label(workflow_type: str) -> str:
-    return workflow_type.replace("_", " ").title()
 
 
 def _stable_output_path(path: Path) -> str:

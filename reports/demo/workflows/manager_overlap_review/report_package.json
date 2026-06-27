@@ -1,0 +1,140 @@
+{
+  "audience": "advisor_colleague_demo",
+  "is_synthetic": true,
+  "outputs": [
+    {
+      "format": "markdown",
+      "path": "reports/demo/workflows/manager_overlap_review/arangur_demo_report.md"
+    },
+    {
+      "format": "html",
+      "path": "reports/demo/workflows/manager_overlap_review/arangur_demo_report.html"
+    }
+  ],
+  "portfolio_id": "portfolio_northstar_demo",
+  "report_id": "arangur_demo_report",
+  "report_title": "Northstar Family Office Synthetic Portfolio Review",
+  "run_id": "run_native_demo_manager_overlap_review_2026_06_30",
+  "run_metadata": {
+    "generated_at": "2026-06-30T00:00:00+00:00",
+    "json_outputs": {
+      "canonical_snapshot": "reports/demo/workflows/manager_overlap_review/canonical_portfolio_snapshot.json",
+      "exposure_overlap_result": "reports/demo/workflows/manager_overlap_review/exposure_overlap_result.json",
+      "report_package": "reports/demo/workflows/manager_overlap_review/report_package.json",
+      "scenario_result": "reports/demo/workflows/manager_overlap_review/scenario_result.json",
+      "valuation_result": "reports/demo/workflows/manager_overlap_review/valuation_result.json"
+    },
+    "output_directory": "reports/demo/workflows/manager_overlap_review",
+    "report_links": {
+      "html": "reports/demo/workflows/manager_overlap_review/arangur_demo_report.html",
+      "markdown": "reports/demo/workflows/manager_overlap_review/arangur_demo_report.md"
+    },
+    "run_id": "run_native_demo_manager_overlap_review_2026_06_30",
+    "source_adapter": "demo_json",
+    "source_name": "native_demo",
+    "synthetic_data": true,
+    "valuation_date": "2026-06-30",
+    "workflow_display_name": "Manager Overlap Review",
+    "workflow_label": "Manager Overlap Review",
+    "workflow_options": [
+      "quarterly_review",
+      "manager_overlap_review",
+      "scenario_risk_review",
+      "intake_review",
+      "data_coverage_review"
+    ],
+    "workflow_template": {
+      "advisor_talking_points": [
+        "The overlap review should start with duplicated direct holdings, especially Microsoft and NVIDIA across core and satellite managers.",
+        "Separate intentional thesis reinforcement from accidental duplication before recommending any action.",
+        "Use manager-level totals to decide which manager conversations matter most.",
+        "Theme exposure can exceed 100% in aggregate, so use direct overlap rows for concrete duplication discussions."
+      ],
+      "caveats": [
+        "Current overlap analysis is direct-holding overlap only.",
+        "The workflow does not include ETF or fund look-through.",
+        "Classifications come from synthetic local fixtures and are not production data."
+      ],
+      "de_emphasized_sections": [
+        "Broad quarterly summary",
+        "Data coverage diagnostics"
+      ],
+      "display_name": "Manager Overlap Review",
+      "emphasized_report_sections": [
+        "Manager Overlap / Duplication Findings",
+        "Top Holdings",
+        "Theme Exposure",
+        "Manager/Account Summary"
+      ],
+      "intended_audience": "Advisor or investment lead reviewing duplicated exposures across managers and accounts.",
+      "meeting_goal": "Focus the meeting on direct holding duplication, concentration, and whether overlap across managers is intentional.",
+      "next_upgrade_path": "Add threshold-based overlap severity labels and optional fund look-through when licensed data exists.",
+      "primary_questions": [
+        "Which holdings are duplicated across accounts or managers?",
+        "Do duplicated positions reinforce a deliberate thesis or create accidental concentration?",
+        "Which manager conversations should happen before changing allocations?"
+      ],
+      "required_inputs": [
+        "CanonicalPortfolioSnapshot",
+        "ValuationResult",
+        "ExposureOverlapResult"
+      ],
+      "suggested_follow_up_actions": [
+        "Review duplicated direct holdings with each manager.",
+        "Document whether the overlap is intentional, acceptable, or needs further research.",
+        "Identify any fund look-through data that would be needed for a stronger overlap review."
+      ],
+      "workflow_type": "manager_overlap_review"
+    },
+    "workflow_type": "manager_overlap_review"
+  },
+  "schema_version": "report_package.v1",
+  "snapshot_id": "snap_demo_family_office_v1_2026_06_30",
+  "source_adapter": "demo_json",
+  "source_name": "native_demo",
+  "valuation_date": "2026-06-30",
+  "workflow_template": {
+    "advisor_talking_points": [
+      "The overlap review should start with duplicated direct holdings, especially Microsoft and NVIDIA across core and satellite managers.",
+      "Separate intentional thesis reinforcement from accidental duplication before recommending any action.",
+      "Use manager-level totals to decide which manager conversations matter most.",
+      "Theme exposure can exceed 100% in aggregate, so use direct overlap rows for concrete duplication discussions."
+    ],
+    "caveats": [
+      "Current overlap analysis is direct-holding overlap only.",
+      "The workflow does not include ETF or fund look-through.",
+      "Classifications come from synthetic local fixtures and are not production data."
+    ],
+    "de_emphasized_sections": [
+      "Broad quarterly summary",
+      "Data coverage diagnostics"
+    ],
+    "display_name": "Manager Overlap Review",
+    "emphasized_report_sections": [
+      "Manager Overlap / Duplication Findings",
+      "Top Holdings",
+      "Theme Exposure",
+      "Manager/Account Summary"
+    ],
+    "intended_audience": "Advisor or investment lead reviewing duplicated exposures across managers and accounts.",
+    "meeting_goal": "Focus the meeting on direct holding duplication, concentration, and whether overlap across managers is intentional.",
+    "next_upgrade_path": "Add threshold-based overlap severity labels and optional fund look-through when licensed data exists.",
+    "primary_questions": [
+      "Which holdings are duplicated across accounts or managers?",
+      "Do duplicated positions reinforce a deliberate thesis or create accidental concentration?",
+      "Which manager conversations should happen before changing allocations?"
+    ],
+    "required_inputs": [
+      "CanonicalPortfolioSnapshot",
+      "ValuationResult",
+      "ExposureOverlapResult"
+    ],
+    "suggested_follow_up_actions": [
+      "Review duplicated direct holdings with each manager.",
+      "Document whether the overlap is intentional, acceptable, or needs further research.",
+      "Identify any fund look-through data that would be needed for a stronger overlap review."
+    ],
+    "workflow_type": "manager_overlap_review"
+  },
+  "workflow_type": "manager_overlap_review"
+}

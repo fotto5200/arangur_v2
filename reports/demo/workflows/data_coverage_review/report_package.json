@@ -1,0 +1,142 @@
+{
+  "audience": "advisor_colleague_demo",
+  "is_synthetic": true,
+  "outputs": [
+    {
+      "format": "markdown",
+      "path": "reports/demo/workflows/data_coverage_review/arangur_demo_report.md"
+    },
+    {
+      "format": "html",
+      "path": "reports/demo/workflows/data_coverage_review/arangur_demo_report.html"
+    }
+  ],
+  "portfolio_id": "portfolio_northstar_demo",
+  "report_id": "arangur_demo_report",
+  "report_title": "Northstar Family Office Synthetic Portfolio Review",
+  "run_id": "run_native_demo_data_coverage_review_2026_06_30",
+  "run_metadata": {
+    "generated_at": "2026-06-30T00:00:00+00:00",
+    "json_outputs": {
+      "canonical_snapshot": "reports/demo/workflows/data_coverage_review/canonical_portfolio_snapshot.json",
+      "exposure_overlap_result": "reports/demo/workflows/data_coverage_review/exposure_overlap_result.json",
+      "report_package": "reports/demo/workflows/data_coverage_review/report_package.json",
+      "scenario_result": "reports/demo/workflows/data_coverage_review/scenario_result.json",
+      "valuation_result": "reports/demo/workflows/data_coverage_review/valuation_result.json"
+    },
+    "output_directory": "reports/demo/workflows/data_coverage_review",
+    "report_links": {
+      "html": "reports/demo/workflows/data_coverage_review/arangur_demo_report.html",
+      "markdown": "reports/demo/workflows/data_coverage_review/arangur_demo_report.md"
+    },
+    "run_id": "run_native_demo_data_coverage_review_2026_06_30",
+    "source_adapter": "demo_json",
+    "source_name": "native_demo",
+    "synthetic_data": true,
+    "valuation_date": "2026-06-30",
+    "workflow_display_name": "Data Coverage Review",
+    "workflow_label": "Data Coverage Review",
+    "workflow_options": [
+      "quarterly_review",
+      "manager_overlap_review",
+      "scenario_risk_review",
+      "intake_review",
+      "data_coverage_review"
+    ],
+    "workflow_template": {
+      "advisor_talking_points": [
+        "This data coverage review introduces valuation confidence as a future report dimension, not as a completed scoring model.",
+        "The current public-security synthetic data is clean by design; real private assets, opaque managers, and statements would need coverage checks.",
+        "Valuation confidence should distinguish source quality and freshness from investment forecasting.",
+        "Human review requirements should be visible before a portfolio is treated as report-ready."
+      ],
+      "caveats": [
+        "No formal valuation-confidence scoring is implemented yet.",
+        "No market-data vendor, statement extraction, or real custodian data is used.",
+        "Data coverage describes source readiness and does not forecast investment performance."
+      ],
+      "de_emphasized_sections": [
+        "Client-ready recommendations",
+        "Forecasting or performance prediction"
+      ],
+      "display_name": "Data Coverage Review",
+      "emphasized_report_sections": [
+        "Synthetic-Data Caveat",
+        "What This Demo Does Not Yet Prove",
+        "Portfolio Value Summary",
+        "Next Planned Upgrades"
+      ],
+      "intended_audience": "Advisor, analyst, or operations reviewer assessing valuation confidence and data readiness.",
+      "meeting_goal": "Frame what the current demo can and cannot say about data coverage, valuation confidence, and human-review needs.",
+      "next_upgrade_path": "Create a synthetic data coverage fixture and report section that labels source coverage, stale values, and human-review needs.",
+      "primary_questions": [
+        "Which data fields are cleanly available in the current synthetic fixtures?",
+        "Which valuation-confidence concepts are not implemented yet?",
+        "Where would real portfolios need source inventory, reconciliation, or human review?"
+      ],
+      "required_inputs": [
+        "CanonicalPortfolioSnapshot",
+        "ValuationResult",
+        "ReportPackage",
+        "Future data coverage metadata"
+      ],
+      "suggested_follow_up_actions": [
+        "Prototype synthetic coverage metadata for each holding, account, and source file.",
+        "Define a simple high/medium/low valuation-confidence rubric.",
+        "Add a Data Coverage / Valuation Confidence report prototype as the next implementation batch."
+      ],
+      "workflow_type": "data_coverage_review"
+    },
+    "workflow_type": "data_coverage_review"
+  },
+  "schema_version": "report_package.v1",
+  "snapshot_id": "snap_demo_family_office_v1_2026_06_30",
+  "source_adapter": "demo_json",
+  "source_name": "native_demo",
+  "valuation_date": "2026-06-30",
+  "workflow_template": {
+    "advisor_talking_points": [
+      "This data coverage review introduces valuation confidence as a future report dimension, not as a completed scoring model.",
+      "The current public-security synthetic data is clean by design; real private assets, opaque managers, and statements would need coverage checks.",
+      "Valuation confidence should distinguish source quality and freshness from investment forecasting.",
+      "Human review requirements should be visible before a portfolio is treated as report-ready."
+    ],
+    "caveats": [
+      "No formal valuation-confidence scoring is implemented yet.",
+      "No market-data vendor, statement extraction, or real custodian data is used.",
+      "Data coverage describes source readiness and does not forecast investment performance."
+    ],
+    "de_emphasized_sections": [
+      "Client-ready recommendations",
+      "Forecasting or performance prediction"
+    ],
+    "display_name": "Data Coverage Review",
+    "emphasized_report_sections": [
+      "Synthetic-Data Caveat",
+      "What This Demo Does Not Yet Prove",
+      "Portfolio Value Summary",
+      "Next Planned Upgrades"
+    ],
+    "intended_audience": "Advisor, analyst, or operations reviewer assessing valuation confidence and data readiness.",
+    "meeting_goal": "Frame what the current demo can and cannot say about data coverage, valuation confidence, and human-review needs.",
+    "next_upgrade_path": "Create a synthetic data coverage fixture and report section that labels source coverage, stale values, and human-review needs.",
+    "primary_questions": [
+      "Which data fields are cleanly available in the current synthetic fixtures?",
+      "Which valuation-confidence concepts are not implemented yet?",
+      "Where would real portfolios need source inventory, reconciliation, or human review?"
+    ],
+    "required_inputs": [
+      "CanonicalPortfolioSnapshot",
+      "ValuationResult",
+      "ReportPackage",
+      "Future data coverage metadata"
+    ],
+    "suggested_follow_up_actions": [
+      "Prototype synthetic coverage metadata for each holding, account, and source file.",
+      "Define a simple high/medium/low valuation-confidence rubric.",
+      "Add a Data Coverage / Valuation Confidence report prototype as the next implementation batch."
+    ],
+    "workflow_type": "data_coverage_review"
+  },
+  "workflow_type": "data_coverage_review"
+}

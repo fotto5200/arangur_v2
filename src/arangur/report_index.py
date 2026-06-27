@@ -98,6 +98,7 @@ def render_report_index_html(runs: list[dict[str, Any]]) -> str:
 def _run_from_package(reports_dir: Path, package_path: Path, package: dict[str, Any]) -> dict[str, Any]:
     package_dir = package_path.parent
     metadata = package.get("run_metadata", {})
+    workflow_template = package.get("workflow_template") or metadata.get("workflow_template") or {}
     source_name = metadata.get("source_name") or package.get("source_name") or "unknown_source"
     workflow_type = metadata.get("workflow_type") or package.get("workflow_type") or "unknown_workflow"
     return {
@@ -105,7 +106,8 @@ def _run_from_package(reports_dir: Path, package_path: Path, package: dict[str, 
         "source_name": source_name,
         "source_adapter": metadata.get("source_adapter") or package.get("source_adapter") or source_name,
         "workflow_type": workflow_type,
-        "workflow_label": metadata.get("workflow_label") or _label(workflow_type),
+        "workflow_label": metadata.get("workflow_display_name") or metadata.get("workflow_label") or workflow_template.get("display_name") or _label(workflow_type),
+        "meeting_goal": workflow_template.get("meeting_goal") or metadata.get("meeting_goal") or "",
         "generated_at": metadata.get("generated_at") or "",
         "valuation_date": metadata.get("valuation_date") or package.get("valuation_date") or "",
         "synthetic_data": metadata.get("synthetic_data", package.get("is_synthetic")),
@@ -128,6 +130,7 @@ def _render_run_section(run: dict[str, Any]) -> str:
             f"<dt>Source</dt><dd>{escape(run['source_name'])}</dd>",
             f"<dt>Source adapter</dt><dd>{escape(run['source_adapter'])}</dd>",
             f"<dt>Workflow</dt><dd>{escape(run['workflow_label'])} ({escape(run['workflow_type'])})</dd>",
+            f"<dt>Meeting goal</dt><dd>{escape(run['meeting_goal'])}</dd>",
             f"<dt>Valuation date</dt><dd>{escape(run['valuation_date'])}</dd>",
             f"<dt>Generated at</dt><dd>{escape(run['generated_at'])}</dd>",
             f"<dt>Output directory</dt><dd>{escape(run['output_directory'])}</dd>",

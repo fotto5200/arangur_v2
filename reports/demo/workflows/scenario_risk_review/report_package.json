@@ -1,0 +1,142 @@
+{
+  "audience": "advisor_colleague_demo",
+  "is_synthetic": true,
+  "outputs": [
+    {
+      "format": "markdown",
+      "path": "reports/demo/workflows/scenario_risk_review/arangur_demo_report.md"
+    },
+    {
+      "format": "html",
+      "path": "reports/demo/workflows/scenario_risk_review/arangur_demo_report.html"
+    }
+  ],
+  "portfolio_id": "portfolio_northstar_demo",
+  "report_id": "arangur_demo_report",
+  "report_title": "Northstar Family Office Synthetic Portfolio Review",
+  "run_id": "run_native_demo_scenario_risk_review_2026_06_30",
+  "run_metadata": {
+    "generated_at": "2026-06-30T00:00:00+00:00",
+    "json_outputs": {
+      "canonical_snapshot": "reports/demo/workflows/scenario_risk_review/canonical_portfolio_snapshot.json",
+      "exposure_overlap_result": "reports/demo/workflows/scenario_risk_review/exposure_overlap_result.json",
+      "report_package": "reports/demo/workflows/scenario_risk_review/report_package.json",
+      "scenario_result": "reports/demo/workflows/scenario_risk_review/scenario_result.json",
+      "valuation_result": "reports/demo/workflows/scenario_risk_review/valuation_result.json"
+    },
+    "output_directory": "reports/demo/workflows/scenario_risk_review",
+    "report_links": {
+      "html": "reports/demo/workflows/scenario_risk_review/arangur_demo_report.html",
+      "markdown": "reports/demo/workflows/scenario_risk_review/arangur_demo_report.md"
+    },
+    "run_id": "run_native_demo_scenario_risk_review_2026_06_30",
+    "source_adapter": "demo_json",
+    "source_name": "native_demo",
+    "synthetic_data": true,
+    "valuation_date": "2026-06-30",
+    "workflow_display_name": "Scenario Risk Review",
+    "workflow_label": "Scenario Risk Review",
+    "workflow_options": [
+      "quarterly_review",
+      "manager_overlap_review",
+      "scenario_risk_review",
+      "intake_review",
+      "data_coverage_review"
+    ],
+    "workflow_template": {
+      "advisor_talking_points": [
+        "This scenario risk review is about portfolio impact under stated assumptions, not market forecasting.",
+        "The AI/chips scenario shows where theme concentration could matter if leadership reverses.",
+        "Review the largest negative position impacts before deciding whether to refine the scenario assumptions.",
+        "Cash and fixed income are visible offsets, but the scenario still concentrates downside in growth-oriented holdings."
+      ],
+      "caveats": [
+        "Scenario results are deterministic demo approximations and are not forecasts.",
+        "No stochastic, covariance, probability, or path-dependent simulation is implemented in this workflow.",
+        "Scenario assumptions come from synthetic local fixtures."
+      ],
+      "de_emphasized_sections": [
+        "Routine quarterly meeting flow",
+        "Data coverage diagnostics"
+      ],
+      "display_name": "Scenario Risk Review",
+      "emphasized_report_sections": [
+        "Scenario Shock Summary",
+        "Theme Exposure",
+        "Top Holdings",
+        "What This Demo Does Not Yet Prove"
+      ],
+      "intended_audience": "Advisor or investment committee support user discussing portfolio impact under stated assumptions.",
+      "meeting_goal": "Lead with deterministic scenario impact, matched assumptions, and risk caveats while avoiding forecast language.",
+      "next_upgrade_path": "Design a scenario library/source model before adding seeded stochastic simulation.",
+      "primary_questions": [
+        "What is the portfolio impact under the current deterministic AI/chips shock?",
+        "Which positions and managers drive the largest downside in the scenario?",
+        "Which assumptions should be reviewed before the scenario is used in a meeting?"
+      ],
+      "required_inputs": [
+        "CanonicalPortfolioSnapshot",
+        "ValuationResult",
+        "ScenarioDefinition",
+        "ScenarioResult"
+      ],
+      "suggested_follow_up_actions": [
+        "Confirm the scenario narrative and shock assumptions with the advisory team.",
+        "Identify whether a second scenario should be added before a client-style review.",
+        "Capture which driver assumptions should feed a future scenario library design."
+      ],
+      "workflow_type": "scenario_risk_review"
+    },
+    "workflow_type": "scenario_risk_review"
+  },
+  "schema_version": "report_package.v1",
+  "snapshot_id": "snap_demo_family_office_v1_2026_06_30",
+  "source_adapter": "demo_json",
+  "source_name": "native_demo",
+  "valuation_date": "2026-06-30",
+  "workflow_template": {
+    "advisor_talking_points": [
+      "This scenario risk review is about portfolio impact under stated assumptions, not market forecasting.",
+      "The AI/chips scenario shows where theme concentration could matter if leadership reverses.",
+      "Review the largest negative position impacts before deciding whether to refine the scenario assumptions.",
+      "Cash and fixed income are visible offsets, but the scenario still concentrates downside in growth-oriented holdings."
+    ],
+    "caveats": [
+      "Scenario results are deterministic demo approximations and are not forecasts.",
+      "No stochastic, covariance, probability, or path-dependent simulation is implemented in this workflow.",
+      "Scenario assumptions come from synthetic local fixtures."
+    ],
+    "de_emphasized_sections": [
+      "Routine quarterly meeting flow",
+      "Data coverage diagnostics"
+    ],
+    "display_name": "Scenario Risk Review",
+    "emphasized_report_sections": [
+      "Scenario Shock Summary",
+      "Theme Exposure",
+      "Top Holdings",
+      "What This Demo Does Not Yet Prove"
+    ],
+    "intended_audience": "Advisor or investment committee support user discussing portfolio impact under stated assumptions.",
+    "meeting_goal": "Lead with deterministic scenario impact, matched assumptions, and risk caveats while avoiding forecast language.",
+    "next_upgrade_path": "Design a scenario library/source model before adding seeded stochastic simulation.",
+    "primary_questions": [
+      "What is the portfolio impact under the current deterministic AI/chips shock?",
+      "Which positions and managers drive the largest downside in the scenario?",
+      "Which assumptions should be reviewed before the scenario is used in a meeting?"
+    ],
+    "required_inputs": [
+      "CanonicalPortfolioSnapshot",
+      "ValuationResult",
+      "ScenarioDefinition",
+      "ScenarioResult"
+    ],
+    "suggested_follow_up_actions": [
+      "Confirm the scenario narrative and shock assumptions with the advisory team.",
+      "Identify whether a second scenario should be added before a client-style review.",
+      "Capture which driver assumptions should feed a future scenario library design."
+    ],
+    "workflow_type": "scenario_risk_review"
+  },
+  "workflow_type": "scenario_risk_review"
+}

@@ -91,6 +91,9 @@ Use these file sets when starting different kinds of sessions.
 - `docs/demo/report_workflow_implications.md`.
 - `docs/architecture/scenario_engine_roadmap.md`.
 - `docs/architecture/data_availability_workstream.md`.
+- `src/arangur/workflow_templates.py`.
+- `src/arangur/demo_pipeline.py`.
+- `src/arangur/report_generator.py`.
 - `src/arangur/report_index.py`.
 - Existing generated report package examples under `reports/demo/`.
 - Do not include production UI work, real client data, live Plaid, or external APIs.

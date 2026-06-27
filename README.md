@@ -18,6 +18,15 @@ To run the Plaid-shaped mock ingestion path:
 python src\arangur\demo_pipeline.py --source plaid_mock
 ```
 
+To render a workflow-specific report:
+
+```powershell
+python src\arangur\demo_pipeline.py --workflow manager_overlap_review
+python src\arangur\demo_pipeline.py --workflow scenario_risk_review
+python src\arangur\demo_pipeline.py --workflow data_coverage_review
+python src\arangur\demo_pipeline.py --source plaid_mock --workflow intake_review
+```
+
 The Plaid-shaped path uses only `data/demo/plaid_mock_investments.json`. It does not use live Plaid, Plaid Sandbox, Plaid Link, access tokens, credentials, or real account data.
 
 The default demo generates:
@@ -31,6 +40,8 @@ The default demo generates:
 - `reports/demo/arangur_demo_report.html`
 
 The Plaid-shaped mock path generates the same artifact names under `reports/demo/plaid_mock/`.
+
+Non-default native workflows generate under `reports/demo/workflows/<workflow>/`. Non-default Plaid-shaped workflows generate under `reports/demo/plaid_mock/workflows/<workflow>/`.
 
 Open the Markdown report in an editor or preview pane, or open the HTML report directly in a browser.
 
@@ -62,4 +73,5 @@ Focused checks:
 python -m unittest tests.test_demo_pipeline
 python -m unittest tests.test_plaid_mock_pipeline
 python -m unittest tests.test_report_index
+python -m unittest tests.test_workflow_templates
 ```

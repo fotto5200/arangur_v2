@@ -17,6 +17,12 @@
 | `snapshot_id` | Yes | string | Links to canonical snapshot. |
 | `is_synthetic` | Yes | boolean | Must be `true` for demo reports. |
 | `audience` | Yes | string | Example: `advisor_colleague_demo`. |
+| `run_id` | Optional | string | Stable local workflow run identifier. |
+| `source_name` | Optional | string | Example: `native_demo` or `plaid_mock`. |
+| `source_adapter` | Optional | string | Adapter that produced the canonical snapshot. |
+| `workflow_type` | Optional | string | Selected advisor workflow, such as `quarterly_review`. |
+| `workflow_template` | Optional | object | Snapshot of selected workflow template fields. |
+| `run_metadata` | Optional | object | Local run metadata, output links, workflow metadata, and synthetic-data flag. |
 
 ## Intended Audience
 
@@ -47,6 +53,7 @@ The v1 report is for an advisor or internal colleague evaluating the Arangur v2 
 Optional sections:
 
 - Data validation warnings.
+- Workflow focus / meeting purpose.
 - Appendix tables.
 - Suggested advisor follow-up questions.
 
@@ -118,6 +125,15 @@ The report should include `is_synthetic: true` in metadata and visible caveat te
   "snapshot_id": "snap_demo_family_office_2026_06_30",
   "is_synthetic": true,
   "audience": "advisor_colleague_demo",
+  "run_id": "run_native_demo_quarterly_review_2026_06_30",
+  "source_name": "native_demo",
+  "source_adapter": "demo_json",
+  "workflow_type": "quarterly_review",
+  "workflow_template": {
+    "workflow_type": "quarterly_review",
+    "display_name": "Quarterly Review",
+    "meeting_goal": "Summarize portfolio value, manager allocation, major exposures, direct overlap, and scenario result for a routine review."
+  },
   "outputs": [
     {
       "format": "markdown",

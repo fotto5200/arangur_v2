@@ -1,4 +1,4 @@
-# Northstar Plaid-Shaped Mock Portfolio Review
+# Northstar Family Office Synthetic Portfolio Review
 
 ## Synthetic-Data Caveat
 
@@ -6,22 +6,22 @@ Demo only: this report uses synthetic data and local fixture prices. It is inten
 
 ## Workflow Focus
 
-- Workflow: Quarterly Review (quarterly_review)
-- Audience: Advisor preparing a recurring portfolio review meeting.
-- Meeting goal: Summarize portfolio value, manager allocation, major exposures, direct overlap, and the current deterministic scenario result for a routine review.
+- Workflow: Manager Overlap Review (manager_overlap_review)
+- Audience: Advisor or investment lead reviewing duplicated exposures across managers and accounts.
+- Meeting goal: Focus the meeting on direct holding duplication, concentration, and whether overlap across managers is intentional.
 
 ### Primary Questions
 
-- What changed enough to discuss in the quarterly review?
-- Where are the largest manager, account, sector, theme, and cash exposures?
-- Which scenario result should be used as the meeting's risk prompt?
+- Which holdings are duplicated across accounts or managers?
+- Do duplicated positions reinforce a deliberate thesis or create accidental concentration?
+- Which manager conversations should happen before changing allocations?
 
 ### Emphasized Report Sections
 
-- Executive Summary
-- Portfolio Value Summary
+- Manager Overlap / Duplication Findings
+- Top Holdings
+- Theme Exposure
 - Manager/Account Summary
-- Scenario Shock Summary
 
 ## Executive Summary
 
@@ -147,22 +147,22 @@ Illustrative shock to AI and semiconductor leadership with a mild broad equity d
 
 ## Advisor Talking Points
 
-- Use the quarterly review to anchor the conversation in total value, cash, manager mix, and the most visible concentration themes.
-- Confirm whether the Microsoft and NVIDIA overlap is intentional before treating it as a problem.
-- Use the deterministic AI/chips scenario as a discussion prompt rather than a prediction.
-- Frame cash and fixed income as ballast that reduces, but does not erase, growth-theme concentration.
+- The overlap review should start with duplicated direct holdings, especially Microsoft and NVIDIA across core and satellite managers.
+- Separate intentional thesis reinforcement from accidental duplication before recommending any action.
+- Use manager-level totals to decide which manager conversations matter most.
+- Theme exposure can exceed 100% in aggregate, so use direct overlap rows for concrete duplication discussions.
 
 ## Suggested Follow-Up Actions
 
-- Ask whether the current AI/chips concentration remains intentional.
-- Decide whether duplicated direct holdings should be reviewed with each manager.
-- Flag any account or manager naming that should be cleaned up before a real client workflow.
+- Review duplicated direct holdings with each manager.
+- Document whether the overlap is intentional, acceptable, or needs further research.
+- Identify any fund look-through data that would be needed for a stronger overlap review.
 
 ## Workflow Caveats
 
-- Quarterly review framing is synthetic and local-only.
-- Scenario shocks are deterministic assumptions, not forecasts.
-- The report does not prove production reconciliation or advisor suitability.
+- Current overlap analysis is direct-holding overlap only.
+- The workflow does not include ETF or fund look-through.
+- Classifications come from synthetic local fixtures and are not production data.
 
 ## What This Demo Proves
 
@@ -178,6 +178,6 @@ Illustrative shock to AI and semiconductor leadership with a mild broad equity d
 
 ## Next Planned Upgrades
 
-- Add workflow-specific summary cards and period-over-period changes once historical synthetic fixtures exist.
+- Add threshold-based overlap severity labels and optional fund look-through when licensed data exists.
 - Add stronger validation edge cases and report-quality tests around malformed local fixtures.
 - Design the future Plaid Sandbox boundary without committing credentials or using real client data.

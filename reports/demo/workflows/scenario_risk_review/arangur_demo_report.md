@@ -1,4 +1,4 @@
-# Northstar Plaid-Shaped Mock Portfolio Review
+# Northstar Family Office Synthetic Portfolio Review
 
 ## Synthetic-Data Caveat
 
@@ -6,22 +6,22 @@ Demo only: this report uses synthetic data and local fixture prices. It is inten
 
 ## Workflow Focus
 
-- Workflow: Quarterly Review (quarterly_review)
-- Audience: Advisor preparing a recurring portfolio review meeting.
-- Meeting goal: Summarize portfolio value, manager allocation, major exposures, direct overlap, and the current deterministic scenario result for a routine review.
+- Workflow: Scenario Risk Review (scenario_risk_review)
+- Audience: Advisor or investment committee support user discussing portfolio impact under stated assumptions.
+- Meeting goal: Lead with deterministic scenario impact, matched assumptions, and risk caveats while avoiding forecast language.
 
 ### Primary Questions
 
-- What changed enough to discuss in the quarterly review?
-- Where are the largest manager, account, sector, theme, and cash exposures?
-- Which scenario result should be used as the meeting's risk prompt?
+- What is the portfolio impact under the current deterministic AI/chips shock?
+- Which positions and managers drive the largest downside in the scenario?
+- Which assumptions should be reviewed before the scenario is used in a meeting?
 
 ### Emphasized Report Sections
 
-- Executive Summary
-- Portfolio Value Summary
-- Manager/Account Summary
 - Scenario Shock Summary
+- Theme Exposure
+- Top Holdings
+- What This Demo Does Not Yet Prove
 
 ## Executive Summary
 
@@ -147,22 +147,22 @@ Illustrative shock to AI and semiconductor leadership with a mild broad equity d
 
 ## Advisor Talking Points
 
-- Use the quarterly review to anchor the conversation in total value, cash, manager mix, and the most visible concentration themes.
-- Confirm whether the Microsoft and NVIDIA overlap is intentional before treating it as a problem.
-- Use the deterministic AI/chips scenario as a discussion prompt rather than a prediction.
-- Frame cash and fixed income as ballast that reduces, but does not erase, growth-theme concentration.
+- This scenario risk review is about portfolio impact under stated assumptions, not market forecasting.
+- The AI/chips scenario shows where theme concentration could matter if leadership reverses.
+- Review the largest negative position impacts before deciding whether to refine the scenario assumptions.
+- Cash and fixed income are visible offsets, but the scenario still concentrates downside in growth-oriented holdings.
 
 ## Suggested Follow-Up Actions
 
-- Ask whether the current AI/chips concentration remains intentional.
-- Decide whether duplicated direct holdings should be reviewed with each manager.
-- Flag any account or manager naming that should be cleaned up before a real client workflow.
+- Confirm the scenario narrative and shock assumptions with the advisory team.
+- Identify whether a second scenario should be added before a client-style review.
+- Capture which driver assumptions should feed a future scenario library design.
 
 ## Workflow Caveats
 
-- Quarterly review framing is synthetic and local-only.
-- Scenario shocks are deterministic assumptions, not forecasts.
-- The report does not prove production reconciliation or advisor suitability.
+- Scenario results are deterministic demo approximations and are not forecasts.
+- No stochastic, covariance, probability, or path-dependent simulation is implemented in this workflow.
+- Scenario assumptions come from synthetic local fixtures.
 
 ## What This Demo Proves
 
@@ -178,6 +178,6 @@ Illustrative shock to AI and semiconductor leadership with a mild broad equity d
 
 ## Next Planned Upgrades
 
-- Add workflow-specific summary cards and period-over-period changes once historical synthetic fixtures exist.
+- Design a scenario library/source model before adding seeded stochastic simulation.
 - Add stronger validation edge cases and report-quality tests around malformed local fixtures.
 - Design the future Plaid Sandbox boundary without committing credentials or using real client data.

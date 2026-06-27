@@ -4,7 +4,7 @@
 
 This note explains how the scenario roadmap and data availability workstream should shape future Arangur report families.
 
-The current demo supports a single advisor-readable report with deterministic valuation, exposure, overlap, and scenario sections. Future workflow templates should make those sections more intentional without turning the demo into a production UI or advisor assistant.
+The current demo supports advisor-readable reports with deterministic valuation, exposure, overlap, and scenario sections. Local workflow templates now make those sections more intentional without turning the demo into a production UI or advisor assistant.
 
 ## Current Reporting Baseline
 
@@ -18,7 +18,7 @@ Current support:
 - Deterministic scenario shocks.
 - Markdown and HTML advisor reports.
 - Static local report index.
-- Workflow-run metadata with labels such as `quarterly_review`, `manager_overlap_review`, `scenario_risk_review`, and `intake_review`.
+- Workflow-run metadata and templates with labels such as `quarterly_review`, `manager_overlap_review`, `scenario_risk_review`, `intake_review`, and `data_coverage_review`.
 
 ## First-Round Report Families
 
@@ -54,7 +54,7 @@ Current support:
 - Purpose: Explain what data is available, what is missing or stale, how each asset was valued, and where human review is required.
 - Likely audience: Advisor, operations reviewer, analyst, or implementation team assessing whether a portfolio can be reported responsibly.
 - Required inputs: Source inventory, valuation results, data freshness fields, identifier quality, reconciliation status, licensing/provenance metadata, and human-review flags.
-- Current demo support level: Early design only. The current synthetic fixtures assume clean data and do not yet score coverage or confidence.
+- Current demo support level: Workflow framing exists through `data_coverage_review`, but the current synthetic fixtures assume clean data and do not yet score coverage or confidence.
 - Future upgrades: Add coverage summaries by asset class, missing-field tables, valuation-confidence labels, stale-data warnings, and domain-specific review requirements.
 - Caveats: Data confidence is not investment forecasting. A high-confidence valuation only means the source and method are clearer, not that the asset will perform well.
 
@@ -113,11 +113,12 @@ This can make reports more trustworthy, especially for family-office portfolios 
 
 ## Workflow Template Implications
 
-Future workflow templates should use the report families as building blocks:
+Workflow templates use the report families as building blocks:
 
 - `quarterly_review`: portfolio overview plus selected exposure and scenario highlights.
 - `manager_overlap_review`: exposure / overlap report first, with supporting valuation tables.
 - `scenario_risk_review`: scenario risk report first, with deterministic assumptions and caveats.
-- `intake_review`: data coverage / valuation confidence report first, with missing-field and human-review flags.
+- `intake_review`: source mapping and readiness first, with follow-up questions for validation gaps.
+- `data_coverage_review`: valuation-confidence and data-coverage framing first, with explicit caveats that scoring is not implemented yet.
 
-The next implementation batch can add workflow templates without changing the analytics engine.
+The next implementation batch can add actual synthetic data coverage metadata and confidence scoring without changing the analytics engine.

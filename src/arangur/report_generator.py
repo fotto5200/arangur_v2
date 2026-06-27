@@ -20,12 +20,13 @@ def generate_markdown_report(
     exposure_overlap: dict[str, Any],
     scenario_result_set: dict[str, Any],
     output_path: Path,
+    workflow_template: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Generate the demo Markdown report plus a simple HTML companion."""
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     html_path = output_path.with_suffix(".html")
-    context = _build_report_context(snapshot, valuation, exposure_overlap, scenario_result_set)
+    context = _build_report_context(snapshot, valuation, exposure_overlap, scenario_result_set, workflow_template)
 
     output_path.write_text(_render_markdown(context), encoding="utf-8")
     html_path.write_text(_render_html(context), encoding="utf-8")
@@ -51,6 +52,7 @@ def _build_report_context(
     valuation: dict[str, Any],
     exposure_overlap: dict[str, Any],
     scenario_result_set: dict[str, Any],
+    workflow_template: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     total_value = valuation["portfolio_total"]["market_value"]
     cash_value = valuation["portfolio_total"]["cash_value"]
@@ -58,6 +60,7 @@ def _build_report_context(
     top_theme = exposure_overlap["exposures"]["by_theme"][0]
     top_sector = exposure_overlap["exposures"]["by_sector"][0]
     largest_overlap = exposure_overlap["overlaps"][0] if exposure_overlap["overlaps"] else None
+    workflow = workflow_template or _default_workflow_template()
 
     return {
         "title": f"{snapshot['portfolio']['portfolio_name']} Review",
@@ -116,6 +119,20 @@ def _build_report_context(
             _overlap_summary(largest_overlap),
             f"The primary scenario, {primary_scenario['scenario_name']}, shows an illustrative {_currency(primary_scenario['portfolio_impact_value'])} impact ({_percent_value(primary_scenario['portfolio_impact_percent'])}).",
         ],
+        "workflow": workflow,
+        "workflow_focus": [
+            f"Workflow: {workflow['display_name']} ({workflow['workflow_type']})",
+            f"Audience: {workflow['intended_audience']}",
+            f"Meeting goal: {workflow['meeting_goal']}",
+        ],
+        "workflow_primary_questions": workflow["primary_questions"],
+        "workflow_emphasized_sections": workflow["emphasized_report_sections"],
+        "workflow_de_emphasized_sections": workflow.get("de_emphasized_sections", []),
+        "workflow_required_inputs": workflow["required_inputs"],
+        "workflow_talking_points": workflow["advisor_talking_points"],
+        "workflow_caveats": workflow["caveats"],
+        "workflow_follow_up_actions": workflow["suggested_follow_up_actions"],
+        "workflow_next_upgrade_path": workflow["next_upgrade_path"],
     }
 
 
@@ -127,6 +144,18 @@ def _render_markdown(context: dict[str, Any]) -> str:
         "## Synthetic-Data Caveat",
         "",
         DEMO_CAVEAT,
+        "",
+        "## Workflow Focus",
+        "",
+        *_bullets(context["workflow_focus"]),
+        "",
+        "### Primary Questions",
+        "",
+        *_bullets(context["workflow_primary_questions"]),
+        "",
+        "### Emphasized Report Sections",
+        "",
+        *_bullets(context["workflow_emphasized_sections"]),
         "",
         "## Executive Summary",
         "",
@@ -186,14 +215,15 @@ def _render_markdown(context: dict[str, Any]) -> str:
         "",
         "## Advisor Talking Points",
         "",
-        *_bullets(
-            [
-                "The consolidated view surfaces manager-level concentration and overlap that would be easy to miss account by account.",
-                "Microsoft and NVIDIA are deliberately duplicated across managers, giving the advisor a concrete overlap discussion.",
-                "The AI/chips scenario links theme exposure to a simple downside story while preserving clear caveats.",
-                "Cash and fixed income soften the scenario impact but do not erase concentration in growth-oriented holdings.",
-            ]
-        ),
+        *_bullets(context["workflow_talking_points"]),
+        "",
+        "## Suggested Follow-Up Actions",
+        "",
+        *_bullets(context["workflow_follow_up_actions"]),
+        "",
+        "## Workflow Caveats",
+        "",
+        *_bullets(context["workflow_caveats"]),
         "",
         "## What This Demo Proves",
         "",
@@ -219,7 +249,7 @@ def _render_markdown(context: dict[str, Any]) -> str:
         "",
         *_bullets(
             [
-                "Add workflow simulation templates for quarterly, overlap, scenario-risk, and intake reviews.",
+                context["workflow_next_upgrade_path"],
                 "Add stronger validation edge cases and report-quality tests around malformed local fixtures.",
                 "Design the future Plaid Sandbox boundary without committing credentials or using real client data.",
             ]
@@ -233,6 +263,14 @@ def _render_html(context: dict[str, Any]) -> str:
     primary = context["primary_scenario"]
     sections = [
         _html_section("Synthetic-Data Caveat", f"<p class=\"caveat\">{escape(DEMO_CAVEAT)}</p>"),
+        _html_section(
+            "Workflow Focus",
+            _html_list(context["workflow_focus"])
+            + "<h3>Primary Questions</h3>"
+            + _html_list(context["workflow_primary_questions"])
+            + "<h3>Emphasized Report Sections</h3>"
+            + _html_list(context["workflow_emphasized_sections"]),
+        ),
         _html_section("Executive Summary", _html_list(context["executive_summary"])),
         _html_section(
             "Portfolio Value Summary",
@@ -276,14 +314,15 @@ def _render_html(context: dict[str, Any]) -> str:
         ),
         _html_section(
             "Advisor Talking Points",
-            _html_list(
-                [
-                    "The consolidated view surfaces manager-level concentration and overlap that would be easy to miss account by account.",
-                    "Microsoft and NVIDIA are deliberately duplicated across managers, giving the advisor a concrete overlap discussion.",
-                    "The AI/chips scenario links theme exposure to a simple downside story while preserving clear caveats.",
-                    "Cash and fixed income soften the scenario impact but do not erase concentration in growth-oriented holdings.",
-                ]
-            ),
+            _html_list(context["workflow_talking_points"]),
+        ),
+        _html_section(
+            "Suggested Follow-Up Actions",
+            _html_list(context["workflow_follow_up_actions"]),
+        ),
+        _html_section(
+            "Workflow Caveats",
+            _html_list(context["workflow_caveats"]),
         ),
         _html_section(
             "What This Demo Proves",
@@ -309,7 +348,7 @@ def _render_html(context: dict[str, Any]) -> str:
             "Next Planned Upgrades",
             _html_list(
                 [
-                    "Add workflow simulation templates for quarterly, overlap, scenario-risk, and intake reviews.",
+                    context["workflow_next_upgrade_path"],
                     "Add stronger validation edge cases and report-quality tests around malformed local fixtures.",
                     "Design the future Plaid Sandbox boundary without committing credentials or using real client data.",
                 ]
@@ -395,6 +434,45 @@ def _html_table(headers: list[str], rows: list[list[str]]) -> str:
 
 def _html_list(items: list[str]) -> str:
     return "<ul>" + "".join(f"<li>{escape(item)}</li>" for item in items) + "</ul>"
+
+
+def _default_workflow_template() -> dict[str, Any]:
+    return {
+        "workflow_type": "general_review",
+        "display_name": "General Review",
+        "intended_audience": "Advisor colleague reviewing the local demo.",
+        "meeting_goal": "Review the synthetic portfolio analysis in a general advisor-readable format.",
+        "primary_questions": [
+            "What does the local demo show?",
+            "Which exposures, overlaps, and scenarios are visible?",
+        ],
+        "emphasized_report_sections": [
+            "Executive Summary",
+            "Portfolio Value Summary",
+            "Scenario Shock Summary",
+        ],
+        "de_emphasized_sections": [],
+        "required_inputs": [
+            "CanonicalPortfolioSnapshot",
+            "ValuationResult",
+            "ExposureOverlapResult",
+            "ScenarioResult",
+        ],
+        "advisor_talking_points": [
+            "The consolidated view surfaces manager-level concentration and overlap that would be easy to miss account by account.",
+            "Microsoft and NVIDIA are deliberately duplicated across managers, giving the advisor a concrete overlap discussion.",
+            "The AI/chips scenario links theme exposure to a simple downside story while preserving clear caveats.",
+            "Cash and fixed income soften the scenario impact but do not erase concentration in growth-oriented holdings.",
+        ],
+        "caveats": [
+            "This is a synthetic local demo and is not investment advice.",
+            "Scenario shocks are deterministic assumptions, not forecasts.",
+        ],
+        "suggested_follow_up_actions": [
+            "Review whether the workflow should be specialized before a colleague walkthrough.",
+        ],
+        "next_upgrade_path": "Select a workflow-specific template for advisor meeting preparation.",
+    }
 
 
 def _bullets(items: list[str]) -> list[str]:

@@ -65,11 +65,11 @@
 
 ## Batch 9: Workflow Simulation Templates
 
-- Goal: Add lightweight workflow simulation templates for quarterly review, manager overlap review, scenario risk review, and intake review.
+- Goal: Add lightweight workflow simulation templates for quarterly review, manager overlap review, scenario risk review, intake review, and data coverage review.
 - Mode: Implementation batch.
 - Allowed scope: `src/`, `tests/`, `reports/demo/`, `docs/demo/`, `docs/restart/`, and small synthetic metadata fixtures under `data/demo/` if useful.
 - Non-goals: No advisor assistant, no interactive app, no live APIs, no credentials, no real client data.
-- Acceptance criteria: Each workflow type has a simple local template or metadata shape, report packages identify the selected workflow clearly, and tests verify workflow-specific output metadata. Use `docs/demo/report_workflow_implications.md` as design input.
+- Acceptance criteria: Implemented baseline: each workflow type has a simple local template, report packages identify the selected workflow clearly, generated Markdown/HTML reports include workflow-specific framing, and tests verify workflow-specific output metadata. Use `docs/demo/report_workflow_implications.md` as design input for future refinement.
 - Stop conditions: Workflow design requires Frank's product judgment, UI scope expands, or real advisor/client data appears necessary.
 
 ## Batch 10: Data Coverage / Valuation Confidence Report Prototype

@@ -34,13 +34,59 @@
     "source_name": "native_demo",
     "synthetic_data": true,
     "valuation_date": "2026-06-30",
+    "workflow_display_name": "Quarterly Review",
     "workflow_label": "Quarterly Review",
     "workflow_options": [
       "quarterly_review",
       "manager_overlap_review",
       "scenario_risk_review",
-      "intake_review"
+      "intake_review",
+      "data_coverage_review"
     ],
+    "workflow_template": {
+      "advisor_talking_points": [
+        "Use the quarterly review to anchor the conversation in total value, cash, manager mix, and the most visible concentration themes.",
+        "Confirm whether the Microsoft and NVIDIA overlap is intentional before treating it as a problem.",
+        "Use the deterministic AI/chips scenario as a discussion prompt rather than a prediction.",
+        "Frame cash and fixed income as ballast that reduces, but does not erase, growth-theme concentration."
+      ],
+      "caveats": [
+        "Quarterly review framing is synthetic and local-only.",
+        "Scenario shocks are deterministic assumptions, not forecasts.",
+        "The report does not prove production reconciliation or advisor suitability."
+      ],
+      "de_emphasized_sections": [
+        "Deep data coverage diagnostics",
+        "Implementation roadmap"
+      ],
+      "display_name": "Quarterly Review",
+      "emphasized_report_sections": [
+        "Executive Summary",
+        "Portfolio Value Summary",
+        "Manager/Account Summary",
+        "Scenario Shock Summary"
+      ],
+      "intended_audience": "Advisor preparing a recurring portfolio review meeting.",
+      "meeting_goal": "Summarize portfolio value, manager allocation, major exposures, direct overlap, and the current deterministic scenario result for a routine review.",
+      "next_upgrade_path": "Add workflow-specific summary cards and period-over-period changes once historical synthetic fixtures exist.",
+      "primary_questions": [
+        "What changed enough to discuss in the quarterly review?",
+        "Where are the largest manager, account, sector, theme, and cash exposures?",
+        "Which scenario result should be used as the meeting's risk prompt?"
+      ],
+      "required_inputs": [
+        "CanonicalPortfolioSnapshot",
+        "ValuationResult",
+        "ExposureOverlapResult",
+        "ScenarioResult"
+      ],
+      "suggested_follow_up_actions": [
+        "Ask whether the current AI/chips concentration remains intentional.",
+        "Decide whether duplicated direct holdings should be reviewed with each manager.",
+        "Flag any account or manager naming that should be cleaned up before a real client workflow."
+      ],
+      "workflow_type": "quarterly_review"
+    },
     "workflow_type": "quarterly_review"
   },
   "schema_version": "report_package.v1",
@@ -48,5 +94,49 @@
   "source_adapter": "demo_json",
   "source_name": "native_demo",
   "valuation_date": "2026-06-30",
+  "workflow_template": {
+    "advisor_talking_points": [
+      "Use the quarterly review to anchor the conversation in total value, cash, manager mix, and the most visible concentration themes.",
+      "Confirm whether the Microsoft and NVIDIA overlap is intentional before treating it as a problem.",
+      "Use the deterministic AI/chips scenario as a discussion prompt rather than a prediction.",
+      "Frame cash and fixed income as ballast that reduces, but does not erase, growth-theme concentration."
+    ],
+    "caveats": [
+      "Quarterly review framing is synthetic and local-only.",
+      "Scenario shocks are deterministic assumptions, not forecasts.",
+      "The report does not prove production reconciliation or advisor suitability."
+    ],
+    "de_emphasized_sections": [
+      "Deep data coverage diagnostics",
+      "Implementation roadmap"
+    ],
+    "display_name": "Quarterly Review",
+    "emphasized_report_sections": [
+      "Executive Summary",
+      "Portfolio Value Summary",
+      "Manager/Account Summary",
+      "Scenario Shock Summary"
+    ],
+    "intended_audience": "Advisor preparing a recurring portfolio review meeting.",
+    "meeting_goal": "Summarize portfolio value, manager allocation, major exposures, direct overlap, and the current deterministic scenario result for a routine review.",
+    "next_upgrade_path": "Add workflow-specific summary cards and period-over-period changes once historical synthetic fixtures exist.",
+    "primary_questions": [
+      "What changed enough to discuss in the quarterly review?",
+      "Where are the largest manager, account, sector, theme, and cash exposures?",
+      "Which scenario result should be used as the meeting's risk prompt?"
+    ],
+    "required_inputs": [
+      "CanonicalPortfolioSnapshot",
+      "ValuationResult",
+      "ExposureOverlapResult",
+      "ScenarioResult"
+    ],
+    "suggested_follow_up_actions": [
+      "Ask whether the current AI/chips concentration remains intentional.",
+      "Decide whether duplicated direct holdings should be reviewed with each manager.",
+      "Flag any account or manager naming that should be cleaned up before a real client workflow."
+    ],
+    "workflow_type": "quarterly_review"
+  },
   "workflow_type": "quarterly_review"
 }

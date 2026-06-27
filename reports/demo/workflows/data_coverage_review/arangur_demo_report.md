@@ -1,4 +1,4 @@
-# Northstar Plaid-Shaped Mock Portfolio Review
+# Northstar Family Office Synthetic Portfolio Review
 
 ## Synthetic-Data Caveat
 
@@ -6,22 +6,22 @@ Demo only: this report uses synthetic data and local fixture prices. It is inten
 
 ## Workflow Focus
 
-- Workflow: Quarterly Review (quarterly_review)
-- Audience: Advisor preparing a recurring portfolio review meeting.
-- Meeting goal: Summarize portfolio value, manager allocation, major exposures, direct overlap, and the current deterministic scenario result for a routine review.
+- Workflow: Data Coverage Review (data_coverage_review)
+- Audience: Advisor, analyst, or operations reviewer assessing valuation confidence and data readiness.
+- Meeting goal: Frame what the current demo can and cannot say about data coverage, valuation confidence, and human-review needs.
 
 ### Primary Questions
 
-- What changed enough to discuss in the quarterly review?
-- Where are the largest manager, account, sector, theme, and cash exposures?
-- Which scenario result should be used as the meeting's risk prompt?
+- Which data fields are cleanly available in the current synthetic fixtures?
+- Which valuation-confidence concepts are not implemented yet?
+- Where would real portfolios need source inventory, reconciliation, or human review?
 
 ### Emphasized Report Sections
 
-- Executive Summary
+- Synthetic-Data Caveat
+- What This Demo Does Not Yet Prove
 - Portfolio Value Summary
-- Manager/Account Summary
-- Scenario Shock Summary
+- Next Planned Upgrades
 
 ## Executive Summary
 
@@ -147,22 +147,22 @@ Illustrative shock to AI and semiconductor leadership with a mild broad equity d
 
 ## Advisor Talking Points
 
-- Use the quarterly review to anchor the conversation in total value, cash, manager mix, and the most visible concentration themes.
-- Confirm whether the Microsoft and NVIDIA overlap is intentional before treating it as a problem.
-- Use the deterministic AI/chips scenario as a discussion prompt rather than a prediction.
-- Frame cash and fixed income as ballast that reduces, but does not erase, growth-theme concentration.
+- This data coverage review introduces valuation confidence as a future report dimension, not as a completed scoring model.
+- The current public-security synthetic data is clean by design; real private assets, opaque managers, and statements would need coverage checks.
+- Valuation confidence should distinguish source quality and freshness from investment forecasting.
+- Human review requirements should be visible before a portfolio is treated as report-ready.
 
 ## Suggested Follow-Up Actions
 
-- Ask whether the current AI/chips concentration remains intentional.
-- Decide whether duplicated direct holdings should be reviewed with each manager.
-- Flag any account or manager naming that should be cleaned up before a real client workflow.
+- Prototype synthetic coverage metadata for each holding, account, and source file.
+- Define a simple high/medium/low valuation-confidence rubric.
+- Add a Data Coverage / Valuation Confidence report prototype as the next implementation batch.
 
 ## Workflow Caveats
 
-- Quarterly review framing is synthetic and local-only.
-- Scenario shocks are deterministic assumptions, not forecasts.
-- The report does not prove production reconciliation or advisor suitability.
+- No formal valuation-confidence scoring is implemented yet.
+- No market-data vendor, statement extraction, or real custodian data is used.
+- Data coverage describes source readiness and does not forecast investment performance.
 
 ## What This Demo Proves
 
@@ -178,6 +178,6 @@ Illustrative shock to AI and semiconductor leadership with a mild broad equity d
 
 ## Next Planned Upgrades
 
-- Add workflow-specific summary cards and period-over-period changes once historical synthetic fixtures exist.
+- Create a synthetic data coverage fixture and report section that labels source coverage, stale values, and human-review needs.
 - Add stronger validation edge cases and report-quality tests around malformed local fixtures.
 - Design the future Plaid Sandbox boundary without committing credentials or using real client data.

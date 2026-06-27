@@ -6,22 +6,22 @@ Demo only: this report uses synthetic data and local fixture prices. It is inten
 
 ## Workflow Focus
 
-- Workflow: Quarterly Review (quarterly_review)
-- Audience: Advisor preparing a recurring portfolio review meeting.
-- Meeting goal: Summarize portfolio value, manager allocation, major exposures, direct overlap, and the current deterministic scenario result for a routine review.
+- Workflow: Intake Review (intake_review)
+- Audience: Advisor or operations reviewer checking whether a new source can feed the Arangur workflow.
+- Meeting goal: Check source shape, canonical mapping, basic valuation readiness, and obvious follow-up items before deeper analysis.
 
 ### Primary Questions
 
-- What changed enough to discuss in the quarterly review?
-- Where are the largest manager, account, sector, theme, and cash exposures?
-- Which scenario result should be used as the meeting's risk prompt?
+- Did the source adapter produce a valid canonical snapshot?
+- Are accounts, managers, holdings, cash, and securities mapped clearly enough for review?
+- What needs human cleanup before the portfolio can become a stronger workflow example?
 
 ### Emphasized Report Sections
 
-- Executive Summary
 - Portfolio Value Summary
 - Manager/Account Summary
-- Scenario Shock Summary
+- What This Demo Proves
+- What This Demo Does Not Yet Prove
 
 ## Executive Summary
 
@@ -147,22 +147,22 @@ Illustrative shock to AI and semiconductor leadership with a mild broad equity d
 
 ## Advisor Talking Points
 
-- Use the quarterly review to anchor the conversation in total value, cash, manager mix, and the most visible concentration themes.
-- Confirm whether the Microsoft and NVIDIA overlap is intentional before treating it as a problem.
-- Use the deterministic AI/chips scenario as a discussion prompt rather than a prediction.
-- Frame cash and fixed income as ballast that reduces, but does not erase, growth-theme concentration.
+- Use the intake review to confirm that the source maps cleanly into the canonical snapshot before over-interpreting analytics.
+- For the Plaid-shaped mock path, focus on account, security, holding, and cash mapping rather than live Plaid behavior.
+- The downstream analytics working from the canonical snapshot is the main product proof in this workflow.
+- Any missing identifiers, stale values, or manual classification gaps should become follow-up tasks.
 
 ## Suggested Follow-Up Actions
 
-- Ask whether the current AI/chips concentration remains intentional.
-- Decide whether duplicated direct holdings should be reviewed with each manager.
-- Flag any account or manager naming that should be cleaned up before a real client workflow.
+- Review source provenance and mapping fields before expanding the adapter.
+- Record any account, security, or manager labels that should be normalized.
+- Decide which source-specific validations should be added next.
 
 ## Workflow Caveats
 
-- Quarterly review framing is synthetic and local-only.
-- Scenario shocks are deterministic assumptions, not forecasts.
-- The report does not prove production reconciliation or advisor suitability.
+- This intake review uses synthetic local data only.
+- Plaid-shaped mock input is not live Plaid, Plaid Sandbox, Plaid Link, or real account data.
+- The workflow does not prove production reconciliation or data completeness.
 
 ## What This Demo Proves
 
@@ -178,6 +178,6 @@ Illustrative shock to AI and semiconductor leadership with a mild broad equity d
 
 ## Next Planned Upgrades
 
-- Add workflow-specific summary cards and period-over-period changes once historical synthetic fixtures exist.
+- Add adapter-specific validation summaries and source coverage checks before live ingestion design.
 - Add stronger validation edge cases and report-quality tests around malformed local fixtures.
 - Design the future Plaid Sandbox boundary without committing credentials or using real client data.

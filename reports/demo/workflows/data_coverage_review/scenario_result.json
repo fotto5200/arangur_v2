@@ -1,0 +1,1326 @@
+{
+  "scenario_results": [
+    {
+      "account_impacts": [
+        {
+          "account_id": "acct_taxable_core",
+          "account_name": "Taxable Core Account",
+          "after_value": 392700.0,
+          "before_value": 439875.0,
+          "impact_percent": -0.107246,
+          "impact_value": -47175.0
+        },
+        {
+          "account_id": "acct_growth_satellite",
+          "account_name": "Growth Satellite Account",
+          "after_value": 197845.0,
+          "before_value": 234250.0,
+          "impact_percent": -0.155411,
+          "impact_value": -36405.0
+        },
+        {
+          "account_id": "acct_trust_value",
+          "account_name": "Trust Value Account",
+          "after_value": 330504.0,
+          "before_value": 340800.0,
+          "impact_percent": -0.030211,
+          "impact_value": -10296.0
+        },
+        {
+          "account_id": "acct_foundation_etf",
+          "account_name": "Foundation ETF Account",
+          "after_value": 388934.0,
+          "before_value": 399200.0,
+          "impact_percent": -0.025716,
+          "impact_value": -10266.0
+        },
+        {
+          "account_id": "acct_cash_reserve",
+          "account_name": "Cash Reserve Account",
+          "after_value": 295264.0,
+          "before_value": 294000.0,
+          "impact_percent": 0.004299,
+          "impact_value": 1264.0
+        }
+      ],
+      "cash_impacts": [
+        {
+          "account_id": "acct_taxable_core",
+          "after_value": 42500.0,
+          "before_value": 42500.0,
+          "cash_id": "cash_taxable_core_usd",
+          "impact_value": 0.0,
+          "manager_id": "mgr_core_growth",
+          "matched_rule": "cash:cash",
+          "shock_percent": 0
+        },
+        {
+          "account_id": "acct_trust_value",
+          "after_value": 35000.0,
+          "before_value": 35000.0,
+          "cash_id": "cash_trust_value_usd",
+          "impact_value": 0.0,
+          "manager_id": "mgr_value",
+          "matched_rule": "cash:cash",
+          "shock_percent": 0
+        },
+        {
+          "account_id": "acct_foundation_etf",
+          "after_value": 25000.0,
+          "before_value": 25000.0,
+          "cash_id": "cash_foundation_usd",
+          "impact_value": 0.0,
+          "manager_id": "mgr_index",
+          "matched_rule": "cash:cash",
+          "shock_percent": 0
+        },
+        {
+          "account_id": "acct_growth_satellite",
+          "after_value": 18000.0,
+          "before_value": 18000.0,
+          "cash_id": "cash_growth_satellite_usd",
+          "impact_value": 0.0,
+          "manager_id": "mgr_ai_satellite",
+          "matched_rule": "cash:cash",
+          "shock_percent": 0
+        },
+        {
+          "account_id": "acct_cash_reserve",
+          "after_value": 110000.0,
+          "before_value": 110000.0,
+          "cash_id": "cash_reserve_usd",
+          "impact_value": 0.0,
+          "manager_id": "mgr_treasury",
+          "matched_rule": "cash:cash",
+          "shock_percent": 0
+        }
+      ],
+      "caveat": "Scenario shocks are deterministic demo approximations, not forecasts or investment advice.",
+      "description": "Illustrative shock to AI and semiconductor leadership with a mild broad equity drag.",
+      "exposure_impacts": [
+        {
+          "bucket_id": "equity",
+          "bucket_label": "Equity",
+          "impact_value": -106059.0
+        },
+        {
+          "bucket_id": "growth",
+          "bucket_label": "Growth",
+          "impact_value": -93783.0
+        },
+        {
+          "bucket_id": "ai",
+          "bucket_label": "Ai",
+          "impact_value": -78889.5
+        },
+        {
+          "bucket_id": "technology",
+          "bucket_label": "Technology",
+          "impact_value": -73345.5
+        },
+        {
+          "bucket_id": "quality",
+          "bucket_label": "Quality",
+          "impact_value": -52620.0
+        },
+        {
+          "bucket_id": "chips",
+          "bucket_label": "Chips",
+          "impact_value": -27445.5
+        },
+        {
+          "bucket_id": "value",
+          "bucket_label": "Value",
+          "impact_value": -16876.5
+        },
+        {
+          "bucket_id": "communication_services",
+          "bucket_label": "Communication Services",
+          "impact_value": -12600.0
+        },
+        {
+          "bucket_id": "financials",
+          "bucket_label": "Financials",
+          "impact_value": -7911.0
+        },
+        {
+          "bucket_id": "multi_sector",
+          "bucket_label": "Multi Sector",
+          "impact_value": -7837.5
+        },
+        {
+          "bucket_id": "broad_market",
+          "bucket_label": "Broad Market",
+          "impact_value": -7837.5
+        },
+        {
+          "bucket_id": "energy",
+          "bucket_label": "Energy",
+          "impact_value": -7116.0
+        },
+        {
+          "bucket_id": "fixed_income",
+          "bucket_label": "Fixed Income",
+          "impact_value": 5925.0
+        },
+        {
+          "bucket_id": "healthcare",
+          "bucket_label": "Healthcare",
+          "impact_value": -2805.0
+        },
+        {
+          "bucket_id": "treasury",
+          "bucket_label": "Treasury",
+          "impact_value": 1809.0
+        },
+        {
+          "bucket_id": "cash_buffer",
+          "bucket_label": "Cash Buffer",
+          "impact_value": 1809.0
+        },
+        {
+          "bucket_id": "utilities",
+          "bucket_label": "Utilities",
+          "impact_value": -432.0
+        },
+        {
+          "bucket_id": "defensive",
+          "bucket_label": "Defensive",
+          "impact_value": -56.0
+        },
+        {
+          "bucket_id": "cash",
+          "bucket_label": "Cash",
+          "impact_value": 0.0
+        }
+      ],
+      "manager_impacts": [
+        {
+          "after_value": 392700.0,
+          "before_value": 439875.0,
+          "impact_percent": -0.107246,
+          "impact_value": -47175.0,
+          "manager_id": "mgr_core_growth",
+          "manager_name": "Atlas Core Growth"
+        },
+        {
+          "after_value": 197845.0,
+          "before_value": 234250.0,
+          "impact_percent": -0.155411,
+          "impact_value": -36405.0,
+          "manager_id": "mgr_ai_satellite",
+          "manager_name": "Signal AI Opportunities"
+        },
+        {
+          "after_value": 330504.0,
+          "before_value": 340800.0,
+          "impact_percent": -0.030211,
+          "impact_value": -10296.0,
+          "manager_id": "mgr_value",
+          "manager_name": "Harbor Value Partners"
+        },
+        {
+          "after_value": 388934.0,
+          "before_value": 399200.0,
+          "impact_percent": -0.025716,
+          "impact_value": -10266.0,
+          "manager_id": "mgr_index",
+          "manager_name": "Meridian Index Solutions"
+        },
+        {
+          "after_value": 295264.0,
+          "before_value": 294000.0,
+          "impact_percent": 0.004299,
+          "impact_value": 1264.0,
+          "manager_id": "mgr_treasury",
+          "manager_name": "Northstar Treasury Desk"
+        }
+      ],
+      "portfolio_after_value": 1605247.0,
+      "portfolio_before_value": 1708125.0,
+      "portfolio_impact_percent": -0.060229,
+      "portfolio_impact_value": -102878.0,
+      "position_impacts": [
+        {
+          "account_id": "acct_taxable_core",
+          "after_value": 88478.0,
+          "before_value": 107900.0,
+          "display_name": "Microsoft Corp.",
+          "holding_id": "hold_core_msft",
+          "impact_value": -19422.0,
+          "manager_id": "mgr_core_growth",
+          "matched_rule": "theme:ai",
+          "sector": "technology",
+          "security_id": "sec_msft",
+          "shock_percent": -0.18,
+          "themes": [
+            "ai",
+            "growth",
+            "quality"
+          ],
+          "ticker": "MSFT"
+        },
+        {
+          "account_id": "acct_taxable_core",
+          "after_value": 52582.5,
+          "before_value": 64125.0,
+          "display_name": "NVIDIA Corp.",
+          "holding_id": "hold_core_nvda",
+          "impact_value": -11542.5,
+          "manager_id": "mgr_core_growth",
+          "matched_rule": "theme:ai",
+          "sector": "technology",
+          "security_id": "sec_nvda",
+          "shock_percent": -0.18,
+          "themes": [
+            "ai",
+            "chips",
+            "growth"
+          ],
+          "ticker": "NVDA"
+        },
+        {
+          "account_id": "acct_taxable_core",
+          "after_value": 57960.0,
+          "before_value": 63000.0,
+          "display_name": "Apple Inc.",
+          "holding_id": "hold_core_aapl",
+          "impact_value": -5040.0,
+          "manager_id": "mgr_core_growth",
+          "matched_rule": "sector:technology",
+          "sector": "technology",
+          "security_id": "sec_aapl",
+          "shock_percent": -0.08,
+          "themes": [
+            "growth",
+            "quality"
+          ],
+          "ticker": "AAPL"
+        },
+        {
+          "account_id": "acct_taxable_core",
+          "after_value": 34440.0,
+          "before_value": 42000.0,
+          "display_name": "Alphabet Inc.",
+          "holding_id": "hold_core_googl",
+          "impact_value": -7560.0,
+          "manager_id": "mgr_core_growth",
+          "matched_rule": "theme:ai",
+          "sector": "communication_services",
+          "security_id": "sec_googl",
+          "shock_percent": -0.18,
+          "themes": [
+            "ai",
+            "growth"
+          ],
+          "ticker": "GOOGL"
+        },
+        {
+          "account_id": "acct_taxable_core",
+          "after_value": 50052.0,
+          "before_value": 51600.0,
+          "display_name": "Berkshire Hathaway Class B",
+          "holding_id": "hold_core_brk",
+          "impact_value": -1548.0,
+          "manager_id": "mgr_core_growth",
+          "matched_rule": "theme:value",
+          "sector": "financials",
+          "security_id": "sec_brk_b",
+          "shock_percent": -0.03,
+          "themes": [
+            "value",
+            "quality"
+          ],
+          "ticker": "BRK.B"
+        },
+        {
+          "account_id": "acct_taxable_core",
+          "after_value": 66687.5,
+          "before_value": 68750.0,
+          "display_name": "Vanguard Total Stock Market ETF",
+          "holding_id": "hold_core_vti",
+          "impact_value": -2062.5,
+          "manager_id": "mgr_core_growth",
+          "matched_rule": "theme:value",
+          "sector": "multi_sector",
+          "security_id": "sec_vti",
+          "shock_percent": -0.03,
+          "themes": [
+            "broad_market",
+            "growth",
+            "value"
+          ],
+          "ticker": "VTI"
+        },
+        {
+          "account_id": "acct_trust_value",
+          "after_value": 62953.0,
+          "before_value": 64900.0,
+          "display_name": "Exxon Mobil Corp.",
+          "holding_id": "hold_value_xom",
+          "impact_value": -1947.0,
+          "manager_id": "mgr_value",
+          "matched_rule": "theme:energy",
+          "sector": "energy",
+          "security_id": "sec_xom",
+          "shock_percent": -0.03,
+          "themes": [
+            "energy",
+            "value"
+          ],
+          "ticker": "XOM"
+        },
+        {
+          "account_id": "acct_trust_value",
+          "after_value": 45105.0,
+          "before_value": 46500.0,
+          "display_name": "Chevron Corp.",
+          "holding_id": "hold_value_cvx",
+          "impact_value": -1395.0,
+          "manager_id": "mgr_value",
+          "matched_rule": "theme:energy",
+          "sector": "energy",
+          "security_id": "sec_cvx",
+          "shock_percent": -0.03,
+          "themes": [
+            "energy",
+            "value"
+          ],
+          "ticker": "CVX"
+        },
+        {
+          "account_id": "acct_trust_value",
+          "after_value": 71586.0,
+          "before_value": 73800.0,
+          "display_name": "JPMorgan Chase & Co.",
+          "holding_id": "hold_value_jpm",
+          "impact_value": -2214.0,
+          "manager_id": "mgr_value",
+          "matched_rule": "theme:value",
+          "sector": "financials",
+          "security_id": "sec_jpm",
+          "shock_percent": -0.03,
+          "themes": [
+            "financials",
+            "value"
+          ],
+          "ticker": "JPM"
+        },
+        {
+          "account_id": "acct_trust_value",
+          "after_value": 62565.0,
+          "before_value": 64500.0,
+          "display_name": "Berkshire Hathaway Class B",
+          "holding_id": "hold_value_brk",
+          "impact_value": -1935.0,
+          "manager_id": "mgr_value",
+          "matched_rule": "theme:value",
+          "sector": "financials",
+          "security_id": "sec_brk_b",
+          "shock_percent": -0.03,
+          "themes": [
+            "value",
+            "quality"
+          ],
+          "ticker": "BRK.B"
+        },
+        {
+          "account_id": "acct_trust_value",
+          "after_value": 53295.0,
+          "before_value": 56100.0,
+          "display_name": "UnitedHealth Group Inc.",
+          "holding_id": "hold_value_unh",
+          "impact_value": -2805.0,
+          "manager_id": "mgr_value",
+          "matched_rule": "asset_class:equity",
+          "sector": "healthcare",
+          "security_id": "sec_unh",
+          "shock_percent": -0.05,
+          "themes": [
+            "defensive",
+            "quality"
+          ],
+          "ticker": "UNH"
+        },
+        {
+          "account_id": "acct_foundation_etf",
+          "after_value": 186725.0,
+          "before_value": 192500.0,
+          "display_name": "Vanguard Total Stock Market ETF",
+          "holding_id": "hold_index_vti",
+          "impact_value": -5775.0,
+          "manager_id": "mgr_index",
+          "matched_rule": "theme:value",
+          "sector": "multi_sector",
+          "security_id": "sec_vti",
+          "shock_percent": -0.03,
+          "themes": [
+            "broad_market",
+            "growth",
+            "value"
+          ],
+          "ticker": "VTI"
+        },
+        {
+          "account_id": "acct_foundation_etf",
+          "after_value": 89082.0,
+          "before_value": 88200.0,
+          "display_name": "iShares Core U.S. Aggregate Bond ETF",
+          "holding_id": "hold_index_agg",
+          "impact_value": 882.0,
+          "manager_id": "mgr_index",
+          "matched_rule": "asset_class:fixed_income",
+          "sector": "fixed_income",
+          "security_id": "sec_agg",
+          "shock_percent": 0.01,
+          "themes": [
+            "fixed_income",
+            "defensive"
+          ],
+          "ticker": "AGG"
+        },
+        {
+          "account_id": "acct_foundation_etf",
+          "after_value": 60903.0,
+          "before_value": 60300.0,
+          "display_name": "iShares 0-3 Month Treasury Bond ETF",
+          "holding_id": "hold_index_sgov",
+          "impact_value": 603.0,
+          "manager_id": "mgr_index",
+          "matched_rule": "asset_class:fixed_income",
+          "sector": "treasury",
+          "security_id": "sec_sgov",
+          "shock_percent": 0.01,
+          "themes": [
+            "cash_buffer",
+            "defensive"
+          ],
+          "ticker": "SGOV"
+        },
+        {
+          "account_id": "acct_foundation_etf",
+          "after_value": 27224.0,
+          "before_value": 33200.0,
+          "display_name": "Microsoft Corp.",
+          "holding_id": "hold_index_msft",
+          "impact_value": -5976.0,
+          "manager_id": "mgr_index",
+          "matched_rule": "theme:ai",
+          "sector": "technology",
+          "security_id": "sec_msft",
+          "shock_percent": -0.18,
+          "themes": [
+            "ai",
+            "growth",
+            "quality"
+          ],
+          "ticker": "MSFT"
+        },
+        {
+          "account_id": "acct_growth_satellite",
+          "after_value": 72447.0,
+          "before_value": 88350.0,
+          "display_name": "NVIDIA Corp.",
+          "holding_id": "hold_ai_nvda",
+          "impact_value": -15903.0,
+          "manager_id": "mgr_ai_satellite",
+          "matched_rule": "theme:ai",
+          "sector": "technology",
+          "security_id": "sec_nvda",
+          "shock_percent": -0.18,
+          "themes": [
+            "ai",
+            "chips",
+            "growth"
+          ],
+          "ticker": "NVDA"
+        },
+        {
+          "account_id": "acct_growth_satellite",
+          "after_value": 61254.0,
+          "before_value": 74700.0,
+          "display_name": "Microsoft Corp.",
+          "holding_id": "hold_ai_msft",
+          "impact_value": -13446.0,
+          "manager_id": "mgr_ai_satellite",
+          "matched_rule": "theme:ai",
+          "sector": "technology",
+          "security_id": "sec_msft",
+          "shock_percent": -0.18,
+          "themes": [
+            "ai",
+            "growth",
+            "quality"
+          ],
+          "ticker": "MSFT"
+        },
+        {
+          "account_id": "acct_growth_satellite",
+          "after_value": 22960.0,
+          "before_value": 28000.0,
+          "display_name": "Alphabet Inc.",
+          "holding_id": "hold_ai_googl",
+          "impact_value": -5040.0,
+          "manager_id": "mgr_ai_satellite",
+          "matched_rule": "theme:ai",
+          "sector": "communication_services",
+          "security_id": "sec_googl",
+          "shock_percent": -0.18,
+          "themes": [
+            "ai",
+            "growth"
+          ],
+          "ticker": "GOOGL"
+        },
+        {
+          "account_id": "acct_growth_satellite",
+          "after_value": 23184.0,
+          "before_value": 25200.0,
+          "display_name": "Apple Inc.",
+          "holding_id": "hold_ai_aapl",
+          "impact_value": -2016.0,
+          "manager_id": "mgr_ai_satellite",
+          "matched_rule": "sector:technology",
+          "sector": "technology",
+          "security_id": "sec_aapl",
+          "shock_percent": -0.08,
+          "themes": [
+            "growth",
+            "quality"
+          ],
+          "ticker": "AAPL"
+        },
+        {
+          "account_id": "acct_cash_reserve",
+          "after_value": 121806.0,
+          "before_value": 120600.0,
+          "display_name": "iShares 0-3 Month Treasury Bond ETF",
+          "holding_id": "hold_treasury_sgov",
+          "impact_value": 1206.0,
+          "manager_id": "mgr_treasury",
+          "matched_rule": "asset_class:fixed_income",
+          "sector": "treasury",
+          "security_id": "sec_sgov",
+          "shock_percent": 0.01,
+          "themes": [
+            "cash_buffer",
+            "defensive"
+          ],
+          "ticker": "SGOV"
+        },
+        {
+          "account_id": "acct_cash_reserve",
+          "after_value": 49490.0,
+          "before_value": 49000.0,
+          "display_name": "iShares Core U.S. Aggregate Bond ETF",
+          "holding_id": "hold_treasury_agg",
+          "impact_value": 490.0,
+          "manager_id": "mgr_treasury",
+          "matched_rule": "asset_class:fixed_income",
+          "sector": "fixed_income",
+          "security_id": "sec_agg",
+          "shock_percent": 0.01,
+          "themes": [
+            "fixed_income",
+            "defensive"
+          ],
+          "ticker": "AGG"
+        },
+        {
+          "account_id": "acct_cash_reserve",
+          "after_value": 13968.0,
+          "before_value": 14400.0,
+          "display_name": "NextEra Energy Inc.",
+          "holding_id": "hold_treasury_nee",
+          "impact_value": -432.0,
+          "manager_id": "mgr_treasury",
+          "matched_rule": "theme:energy",
+          "sector": "utilities",
+          "security_id": "sec_nee",
+          "shock_percent": -0.03,
+          "themes": [
+            "energy",
+            "quality",
+            "defensive"
+          ],
+          "ticker": "NEE"
+        }
+      ],
+      "scenario_id": "scenario_ai_chips_selloff",
+      "scenario_name": "AI and chip leadership selloff",
+      "schema_version": "scenario_result.v1",
+      "snapshot_id": "snap_demo_family_office_v1_2026_06_30",
+      "validation": {
+        "errors": [],
+        "status": "valid",
+        "warnings": []
+      },
+      "valuation_date": "2026-06-30"
+    },
+    {
+      "account_impacts": [
+        {
+          "account_id": "acct_trust_value",
+          "account_name": "Trust Value Account",
+          "after_value": 358056.0,
+          "before_value": 340800.0,
+          "impact_percent": 0.050634,
+          "impact_value": 17256.0
+        },
+        {
+          "account_id": "acct_taxable_core",
+          "account_name": "Taxable Core Account",
+          "after_value": 447822.5,
+          "before_value": 439875.0,
+          "impact_percent": 0.018068,
+          "impact_value": 7947.5
+        },
+        {
+          "account_id": "acct_growth_satellite",
+          "account_name": "Growth Satellite Account",
+          "after_value": 238575.0,
+          "before_value": 234250.0,
+          "impact_percent": 0.018463,
+          "impact_value": 4325.0
+        },
+        {
+          "account_id": "acct_foundation_etf",
+          "account_name": "Foundation ETF Account",
+          "after_value": 402229.0,
+          "before_value": 399200.0,
+          "impact_percent": 0.007588,
+          "impact_value": 3029.0
+        },
+        {
+          "account_id": "acct_cash_reserve",
+          "account_name": "Cash Reserve Account",
+          "after_value": 294032.0,
+          "before_value": 294000.0,
+          "impact_percent": 0.000109,
+          "impact_value": 32.0
+        }
+      ],
+      "cash_impacts": [
+        {
+          "account_id": "acct_taxable_core",
+          "after_value": 42500.0,
+          "before_value": 42500.0,
+          "cash_id": "cash_taxable_core_usd",
+          "impact_value": 0.0,
+          "manager_id": "mgr_core_growth",
+          "matched_rule": "cash:cash",
+          "shock_percent": 0
+        },
+        {
+          "account_id": "acct_trust_value",
+          "after_value": 35000.0,
+          "before_value": 35000.0,
+          "cash_id": "cash_trust_value_usd",
+          "impact_value": 0.0,
+          "manager_id": "mgr_value",
+          "matched_rule": "cash:cash",
+          "shock_percent": 0
+        },
+        {
+          "account_id": "acct_foundation_etf",
+          "after_value": 25000.0,
+          "before_value": 25000.0,
+          "cash_id": "cash_foundation_usd",
+          "impact_value": 0.0,
+          "manager_id": "mgr_index",
+          "matched_rule": "cash:cash",
+          "shock_percent": 0
+        },
+        {
+          "account_id": "acct_growth_satellite",
+          "after_value": 18000.0,
+          "before_value": 18000.0,
+          "cash_id": "cash_growth_satellite_usd",
+          "impact_value": 0.0,
+          "manager_id": "mgr_ai_satellite",
+          "matched_rule": "cash:cash",
+          "shock_percent": 0
+        },
+        {
+          "account_id": "acct_cash_reserve",
+          "after_value": 110000.0,
+          "before_value": 110000.0,
+          "cash_id": "cash_reserve_usd",
+          "impact_value": 0.0,
+          "manager_id": "mgr_treasury",
+          "matched_rule": "cash:cash",
+          "shock_percent": 0
+        }
+      ],
+      "caveat": "Scenario shocks are deterministic demo approximations, not forecasts or investment advice.",
+      "description": "Illustrative shock where energy holdings rise while fixed income slips modestly.",
+      "exposure_impacts": [
+        {
+          "bucket_id": "equity",
+          "bucket_label": "Equity",
+          "impact_value": 35770.5
+        },
+        {
+          "bucket_id": "energy",
+          "bucket_label": "Energy",
+          "impact_value": 28464.0
+        },
+        {
+          "bucket_id": "value",
+          "bucket_label": "Value",
+          "impact_value": 22391.0
+        },
+        {
+          "bucket_id": "growth",
+          "bucket_label": "Growth",
+          "impact_value": 15754.5
+        },
+        {
+          "bucket_id": "quality",
+          "bucket_label": "Quality",
+          "impact_value": 11252.0
+        },
+        {
+          "bucket_id": "technology",
+          "bucket_label": "Technology",
+          "impact_value": 9129.5
+        },
+        {
+          "bucket_id": "ai",
+          "bucket_label": "Ai",
+          "impact_value": 8765.5
+        },
+        {
+          "bucket_id": "fixed_income",
+          "bucket_label": "Fixed Income",
+          "impact_value": -5925.0
+        },
+        {
+          "bucket_id": "financials",
+          "bucket_label": "Financials",
+          "impact_value": 5274.0
+        },
+        {
+          "bucket_id": "multi_sector",
+          "bucket_label": "Multi Sector",
+          "impact_value": 5225.0
+        },
+        {
+          "bucket_id": "broad_market",
+          "bucket_label": "Broad Market",
+          "impact_value": 5225.0
+        },
+        {
+          "bucket_id": "chips",
+          "bucket_label": "Chips",
+          "impact_value": 3049.5
+        },
+        {
+          "bucket_id": "treasury",
+          "bucket_label": "Treasury",
+          "impact_value": -1809.0
+        },
+        {
+          "bucket_id": "cash_buffer",
+          "bucket_label": "Cash Buffer",
+          "impact_value": -1809.0
+        },
+        {
+          "bucket_id": "utilities",
+          "bucket_label": "Utilities",
+          "impact_value": 1728.0
+        },
+        {
+          "bucket_id": "communication_services",
+          "bucket_label": "Communication Services",
+          "impact_value": 1400.0
+        },
+        {
+          "bucket_id": "healthcare",
+          "bucket_label": "Healthcare",
+          "impact_value": 1122.0
+        },
+        {
+          "bucket_id": "defensive",
+          "bucket_label": "Defensive",
+          "impact_value": -331.0
+        },
+        {
+          "bucket_id": "cash",
+          "bucket_label": "Cash",
+          "impact_value": 0.0
+        }
+      ],
+      "manager_impacts": [
+        {
+          "after_value": 358056.0,
+          "before_value": 340800.0,
+          "impact_percent": 0.050634,
+          "impact_value": 17256.0,
+          "manager_id": "mgr_value",
+          "manager_name": "Harbor Value Partners"
+        },
+        {
+          "after_value": 447822.5,
+          "before_value": 439875.0,
+          "impact_percent": 0.018068,
+          "impact_value": 7947.5,
+          "manager_id": "mgr_core_growth",
+          "manager_name": "Atlas Core Growth"
+        },
+        {
+          "after_value": 238575.0,
+          "before_value": 234250.0,
+          "impact_percent": 0.018463,
+          "impact_value": 4325.0,
+          "manager_id": "mgr_ai_satellite",
+          "manager_name": "Signal AI Opportunities"
+        },
+        {
+          "after_value": 402229.0,
+          "before_value": 399200.0,
+          "impact_percent": 0.007588,
+          "impact_value": 3029.0,
+          "manager_id": "mgr_index",
+          "manager_name": "Meridian Index Solutions"
+        },
+        {
+          "after_value": 294032.0,
+          "before_value": 294000.0,
+          "impact_percent": 0.000109,
+          "impact_value": 32.0,
+          "manager_id": "mgr_treasury",
+          "manager_name": "Northstar Treasury Desk"
+        }
+      ],
+      "portfolio_after_value": 1740714.5,
+      "portfolio_before_value": 1708125.0,
+      "portfolio_impact_percent": 0.019079,
+      "portfolio_impact_value": 32589.5,
+      "position_impacts": [
+        {
+          "account_id": "acct_taxable_core",
+          "after_value": 110058.0,
+          "before_value": 107900.0,
+          "display_name": "Microsoft Corp.",
+          "holding_id": "hold_core_msft",
+          "impact_value": 2158.0,
+          "manager_id": "mgr_core_growth",
+          "matched_rule": "asset_class:equity",
+          "sector": "technology",
+          "security_id": "sec_msft",
+          "shock_percent": 0.02,
+          "themes": [
+            "ai",
+            "growth",
+            "quality"
+          ],
+          "ticker": "MSFT"
+        },
+        {
+          "account_id": "acct_taxable_core",
+          "after_value": 65407.5,
+          "before_value": 64125.0,
+          "display_name": "NVIDIA Corp.",
+          "holding_id": "hold_core_nvda",
+          "impact_value": 1282.5,
+          "manager_id": "mgr_core_growth",
+          "matched_rule": "asset_class:equity",
+          "sector": "technology",
+          "security_id": "sec_nvda",
+          "shock_percent": 0.02,
+          "themes": [
+            "ai",
+            "chips",
+            "growth"
+          ],
+          "ticker": "NVDA"
+        },
+        {
+          "account_id": "acct_taxable_core",
+          "after_value": 64260.0,
+          "before_value": 63000.0,
+          "display_name": "Apple Inc.",
+          "holding_id": "hold_core_aapl",
+          "impact_value": 1260.0,
+          "manager_id": "mgr_core_growth",
+          "matched_rule": "asset_class:equity",
+          "sector": "technology",
+          "security_id": "sec_aapl",
+          "shock_percent": 0.02,
+          "themes": [
+            "growth",
+            "quality"
+          ],
+          "ticker": "AAPL"
+        },
+        {
+          "account_id": "acct_taxable_core",
+          "after_value": 42840.0,
+          "before_value": 42000.0,
+          "display_name": "Alphabet Inc.",
+          "holding_id": "hold_core_googl",
+          "impact_value": 840.0,
+          "manager_id": "mgr_core_growth",
+          "matched_rule": "asset_class:equity",
+          "sector": "communication_services",
+          "security_id": "sec_googl",
+          "shock_percent": 0.02,
+          "themes": [
+            "ai",
+            "growth"
+          ],
+          "ticker": "GOOGL"
+        },
+        {
+          "account_id": "acct_taxable_core",
+          "after_value": 52632.0,
+          "before_value": 51600.0,
+          "display_name": "Berkshire Hathaway Class B",
+          "holding_id": "hold_core_brk",
+          "impact_value": 1032.0,
+          "manager_id": "mgr_core_growth",
+          "matched_rule": "asset_class:equity",
+          "sector": "financials",
+          "security_id": "sec_brk_b",
+          "shock_percent": 0.02,
+          "themes": [
+            "value",
+            "quality"
+          ],
+          "ticker": "BRK.B"
+        },
+        {
+          "account_id": "acct_taxable_core",
+          "after_value": 70125.0,
+          "before_value": 68750.0,
+          "display_name": "Vanguard Total Stock Market ETF",
+          "holding_id": "hold_core_vti",
+          "impact_value": 1375.0,
+          "manager_id": "mgr_core_growth",
+          "matched_rule": "asset_class:equity",
+          "sector": "multi_sector",
+          "security_id": "sec_vti",
+          "shock_percent": 0.02,
+          "themes": [
+            "broad_market",
+            "growth",
+            "value"
+          ],
+          "ticker": "VTI"
+        },
+        {
+          "account_id": "acct_trust_value",
+          "after_value": 72688.0,
+          "before_value": 64900.0,
+          "display_name": "Exxon Mobil Corp.",
+          "holding_id": "hold_value_xom",
+          "impact_value": 7788.0,
+          "manager_id": "mgr_value",
+          "matched_rule": "theme:energy",
+          "sector": "energy",
+          "security_id": "sec_xom",
+          "shock_percent": 0.12,
+          "themes": [
+            "energy",
+            "value"
+          ],
+          "ticker": "XOM"
+        },
+        {
+          "account_id": "acct_trust_value",
+          "after_value": 52080.0,
+          "before_value": 46500.0,
+          "display_name": "Chevron Corp.",
+          "holding_id": "hold_value_cvx",
+          "impact_value": 5580.0,
+          "manager_id": "mgr_value",
+          "matched_rule": "theme:energy",
+          "sector": "energy",
+          "security_id": "sec_cvx",
+          "shock_percent": 0.12,
+          "themes": [
+            "energy",
+            "value"
+          ],
+          "ticker": "CVX"
+        },
+        {
+          "account_id": "acct_trust_value",
+          "after_value": 75276.0,
+          "before_value": 73800.0,
+          "display_name": "JPMorgan Chase & Co.",
+          "holding_id": "hold_value_jpm",
+          "impact_value": 1476.0,
+          "manager_id": "mgr_value",
+          "matched_rule": "asset_class:equity",
+          "sector": "financials",
+          "security_id": "sec_jpm",
+          "shock_percent": 0.02,
+          "themes": [
+            "financials",
+            "value"
+          ],
+          "ticker": "JPM"
+        },
+        {
+          "account_id": "acct_trust_value",
+          "after_value": 65790.0,
+          "before_value": 64500.0,
+          "display_name": "Berkshire Hathaway Class B",
+          "holding_id": "hold_value_brk",
+          "impact_value": 1290.0,
+          "manager_id": "mgr_value",
+          "matched_rule": "asset_class:equity",
+          "sector": "financials",
+          "security_id": "sec_brk_b",
+          "shock_percent": 0.02,
+          "themes": [
+            "value",
+            "quality"
+          ],
+          "ticker": "BRK.B"
+        },
+        {
+          "account_id": "acct_trust_value",
+          "after_value": 57222.0,
+          "before_value": 56100.0,
+          "display_name": "UnitedHealth Group Inc.",
+          "holding_id": "hold_value_unh",
+          "impact_value": 1122.0,
+          "manager_id": "mgr_value",
+          "matched_rule": "asset_class:equity",
+          "sector": "healthcare",
+          "security_id": "sec_unh",
+          "shock_percent": 0.02,
+          "themes": [
+            "defensive",
+            "quality"
+          ],
+          "ticker": "UNH"
+        },
+        {
+          "account_id": "acct_foundation_etf",
+          "after_value": 196350.0,
+          "before_value": 192500.0,
+          "display_name": "Vanguard Total Stock Market ETF",
+          "holding_id": "hold_index_vti",
+          "impact_value": 3850.0,
+          "manager_id": "mgr_index",
+          "matched_rule": "asset_class:equity",
+          "sector": "multi_sector",
+          "security_id": "sec_vti",
+          "shock_percent": 0.02,
+          "themes": [
+            "broad_market",
+            "growth",
+            "value"
+          ],
+          "ticker": "VTI"
+        },
+        {
+          "account_id": "acct_foundation_etf",
+          "after_value": 87318.0,
+          "before_value": 88200.0,
+          "display_name": "iShares Core U.S. Aggregate Bond ETF",
+          "holding_id": "hold_index_agg",
+          "impact_value": -882.0,
+          "manager_id": "mgr_index",
+          "matched_rule": "asset_class:fixed_income",
+          "sector": "fixed_income",
+          "security_id": "sec_agg",
+          "shock_percent": -0.01,
+          "themes": [
+            "fixed_income",
+            "defensive"
+          ],
+          "ticker": "AGG"
+        },
+        {
+          "account_id": "acct_foundation_etf",
+          "after_value": 59697.0,
+          "before_value": 60300.0,
+          "display_name": "iShares 0-3 Month Treasury Bond ETF",
+          "holding_id": "hold_index_sgov",
+          "impact_value": -603.0,
+          "manager_id": "mgr_index",
+          "matched_rule": "asset_class:fixed_income",
+          "sector": "treasury",
+          "security_id": "sec_sgov",
+          "shock_percent": -0.01,
+          "themes": [
+            "cash_buffer",
+            "defensive"
+          ],
+          "ticker": "SGOV"
+        },
+        {
+          "account_id": "acct_foundation_etf",
+          "after_value": 33864.0,
+          "before_value": 33200.0,
+          "display_name": "Microsoft Corp.",
+          "holding_id": "hold_index_msft",
+          "impact_value": 664.0,
+          "manager_id": "mgr_index",
+          "matched_rule": "asset_class:equity",
+          "sector": "technology",
+          "security_id": "sec_msft",
+          "shock_percent": 0.02,
+          "themes": [
+            "ai",
+            "growth",
+            "quality"
+          ],
+          "ticker": "MSFT"
+        },
+        {
+          "account_id": "acct_growth_satellite",
+          "after_value": 90117.0,
+          "before_value": 88350.0,
+          "display_name": "NVIDIA Corp.",
+          "holding_id": "hold_ai_nvda",
+          "impact_value": 1767.0,
+          "manager_id": "mgr_ai_satellite",
+          "matched_rule": "asset_class:equity",
+          "sector": "technology",
+          "security_id": "sec_nvda",
+          "shock_percent": 0.02,
+          "themes": [
+            "ai",
+            "chips",
+            "growth"
+          ],
+          "ticker": "NVDA"
+        },
+        {
+          "account_id": "acct_growth_satellite",
+          "after_value": 76194.0,
+          "before_value": 74700.0,
+          "display_name": "Microsoft Corp.",
+          "holding_id": "hold_ai_msft",
+          "impact_value": 1494.0,
+          "manager_id": "mgr_ai_satellite",
+          "matched_rule": "asset_class:equity",
+          "sector": "technology",
+          "security_id": "sec_msft",
+          "shock_percent": 0.02,
+          "themes": [
+            "ai",
+            "growth",
+            "quality"
+          ],
+          "ticker": "MSFT"
+        },
+        {
+          "account_id": "acct_growth_satellite",
+          "after_value": 28560.0,
+          "before_value": 28000.0,
+          "display_name": "Alphabet Inc.",
+          "holding_id": "hold_ai_googl",
+          "impact_value": 560.0,
+          "manager_id": "mgr_ai_satellite",
+          "matched_rule": "asset_class:equity",
+          "sector": "communication_services",
+          "security_id": "sec_googl",
+          "shock_percent": 0.02,
+          "themes": [
+            "ai",
+            "growth"
+          ],
+          "ticker": "GOOGL"
+        },
+        {
+          "account_id": "acct_growth_satellite",
+          "after_value": 25704.0,
+          "before_value": 25200.0,
+          "display_name": "Apple Inc.",
+          "holding_id": "hold_ai_aapl",
+          "impact_value": 504.0,
+          "manager_id": "mgr_ai_satellite",
+          "matched_rule": "asset_class:equity",
+          "sector": "technology",
+          "security_id": "sec_aapl",
+          "shock_percent": 0.02,
+          "themes": [
+            "growth",
+            "quality"
+          ],
+          "ticker": "AAPL"
+        },
+        {
+          "account_id": "acct_cash_reserve",
+          "after_value": 119394.0,
+          "before_value": 120600.0,
+          "display_name": "iShares 0-3 Month Treasury Bond ETF",
+          "holding_id": "hold_treasury_sgov",
+          "impact_value": -1206.0,
+          "manager_id": "mgr_treasury",
+          "matched_rule": "asset_class:fixed_income",
+          "sector": "treasury",
+          "security_id": "sec_sgov",
+          "shock_percent": -0.01,
+          "themes": [
+            "cash_buffer",
+            "defensive"
+          ],
+          "ticker": "SGOV"
+        },
+        {
+          "account_id": "acct_cash_reserve",
+          "after_value": 48510.0,
+          "before_value": 49000.0,
+          "display_name": "iShares Core U.S. Aggregate Bond ETF",
+          "holding_id": "hold_treasury_agg",
+          "impact_value": -490.0,
+          "manager_id": "mgr_treasury",
+          "matched_rule": "asset_class:fixed_income",
+          "sector": "fixed_income",
+          "security_id": "sec_agg",
+          "shock_percent": -0.01,
+          "themes": [
+            "fixed_income",
+            "defensive"
+          ],
+          "ticker": "AGG"
+        },
+        {
+          "account_id": "acct_cash_reserve",
+          "after_value": 16128.0,
+          "before_value": 14400.0,
+          "display_name": "NextEra Energy Inc.",
+          "holding_id": "hold_treasury_nee",
+          "impact_value": 1728.0,
+          "manager_id": "mgr_treasury",
+          "matched_rule": "theme:energy",
+          "sector": "utilities",
+          "security_id": "sec_nee",
+          "shock_percent": 0.12,
+          "themes": [
+            "energy",
+            "quality",
+            "defensive"
+          ],
+          "ticker": "NEE"
+        }
+      ],
+      "scenario_id": "scenario_energy_rally",
+      "scenario_name": "Energy rally with rate pressure",
+      "schema_version": "scenario_result.v1",
+      "snapshot_id": "snap_demo_family_office_v1_2026_06_30",
+      "validation": {
+        "errors": [],
+        "status": "valid",
+        "warnings": []
+      },
+      "valuation_date": "2026-06-30"
+    }
+  ],
+  "schema_version": "scenario_result_set.v1",
+  "snapshot_id": "snap_demo_family_office_v1_2026_06_30",
+  "validation": {
+    "errors": [],
+    "status": "valid",
+    "warnings": []
+  },
+  "valuation_date": "2026-06-30"
+}
