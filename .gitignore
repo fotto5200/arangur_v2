@@ -1,0 +1,13 @@
+.dispatcher_tmp/
+.test_work_root/
+.codex_work/
+.env
+.env.*
+secrets/
+credentials/
+client_data/
+confidential/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
