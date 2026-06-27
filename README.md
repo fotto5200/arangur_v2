@@ -64,8 +64,12 @@ Open `reports/demo/index.html` in a browser to browse the native demo and Plaid-
 
 ## Design Roadmaps
 
-Future scenario and data-coverage work is captured in:
+Future scenario, data-coverage, and deployable private-demo work is captured in:
 
+- `docs/architecture/deployable_demo_app_architecture.md`
+- `docs/architecture/persistence_model_plan.md`
+- `docs/deployment/private_demo_stack_plan.md`
+- `docs/decisions/0002_copy_education_private_demo_stack.md`
 - `docs/architecture/scenario_engine_roadmap.md`
 - `docs/architecture/data_availability_workstream.md`
 - `docs/contracts/data_coverage_result_contract.md`

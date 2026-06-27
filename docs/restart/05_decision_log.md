@@ -55,3 +55,10 @@
 - Decision: Data-availability or practicum-style work should focus on source coverage, available fields, identifiers, cleansing, reconciliation, and valuation feasibility rather than predictions.
 - Reason: This research can directly inform MVP feasibility and report confidence without crossing into investment forecasting.
 - Consequences: Analyst outputs should be domain briefs, source inventories, field dictionaries, feasibility ratings, and synthetic examples for future fixtures.
+
+## Decision 0009: Copy The Education Private-Demo Stack For Arangur's First Deployable Demo
+
+- Date: 2026-06-27.
+- Decision: Arangur v2 should reuse the Education private-demo stack shape for the first deployable app.
+- Reason: The Education app already has a working FastAPI, Docker Compose, Postgres, Lightsail, Caddy, and Cloudflare private-demo pattern.
+- Consequences: Arangur should design its first deployable demo around a FastAPI backend, backend-served browser UI, internal Postgres, protected admin/report surfaces, demo seed path, and Lightsail/Caddy/Cloudflare deployment. See `docs/decisions/0002_copy_education_private_demo_stack.md`.

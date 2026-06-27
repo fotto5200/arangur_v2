@@ -98,3 +98,66 @@
 - Non-goals: No production risk model, no market prediction claims, no live market-data ingestion, no external APIs, no real client data.
 - Acceptance criteria: A synthetic covariance/driver fixture produces reproducible seeded impact ranges with clear caveats and no forecasting language.
 - Stop conditions: Methodology is not approved, covariance data source is unclear, external data is required, or report language risks implying forecasts.
+
+## Batch 13: FastAPI App Shell And Health Endpoint
+
+- Goal: Add the first deployable app shell using FastAPI and `uvicorn`, with a health endpoint and private-demo settings boundary.
+- Mode: Implementation batch.
+- Allowed scope: `src/`, `tests/`, `docs/`, and lightweight README updates.
+- Non-goals: No Docker yet, no Postgres schema yet, no browser UI beyond a placeholder if needed, no live Plaid, no real data.
+- Acceptance criteria: App can start locally, `GET /api/health` returns a minimal status payload, settings include `APP_ENV=private_demo` concepts without committing secrets, and tests cover health/settings behavior.
+- Stop conditions: Dependencies, app layout, or environment handling requires product/ops decisions beyond the Education-stack pattern.
+
+## Batch 14: API Endpoints Wrapping Existing Pipeline Runs
+
+- Goal: Add protected API endpoints that expose supported sources/workflows and run the existing synthetic pipeline through service wrappers.
+- Mode: Implementation batch.
+- Allowed scope: `src/`, `tests/`, `docs/`, and generated local demo artifacts only if endpoint tests intentionally regenerate them.
+- Non-goals: No database persistence yet unless Batch 15 is already complete, no live Plaid, no external APIs, no real data.
+- Acceptance criteria: API lists sources/workflows, validates run requests, calls existing pipeline modules without duplicating analytics, and returns run/artifact summaries with synthetic-data caveats.
+- Stop conditions: Background job infrastructure becomes necessary, endpoint protection strategy is unresolved, or code changes would bypass current pipeline contracts.
+
+## Batch 15: Postgres Persistence Skeleton
+
+- Goal: Implement the first Postgres-backed persistence skeleton for workflow runs, artifact records, data coverage summaries, and optional run events.
+- Mode: Implementation batch.
+- Allowed scope: `src/`, `tests/`, `docs/`, and migration/schema files if the project adds a migration folder.
+- Non-goals: No real client data model, no full portfolio relational decomposition, no production auth, no managed database service.
+- Acceptance criteria: Schema or repository layer reflects `docs/architecture/persistence_model_plan.md`, tests cover create/list/read for workflow-run metadata, and JSON artifacts remain the source of detailed output.
+- Stop conditions: Migration tool choice requires a dependency decision not already authorized, or persistence design expands into production account/holding modeling.
+
+## Batch 16: Browser UI Shell
+
+- Goal: Add a simple browser UI served by the backend for source/workflow selection, run workflow, run history, report links, and data confidence summary.
+- Mode: Implementation batch.
+- Allowed scope: `src/`, `tests/`, `docs/`, and simple static assets if used.
+- Non-goals: No separate frontend framework unless explicitly authorized, no production dashboard, no client data upload, no rich charting.
+- Acceptance criteria: UI includes source selector, workflow selector, run button, run history/list, report viewer/link panel, data coverage summary, and synthetic-data caveat.
+- Stop conditions: UI scope expands into advisor assistant, production dashboard, or design-system work that needs product review.
+
+## Batch 17: Docker Compose Local Private Demo
+
+- Goal: Add the local Docker private-demo stack using the Education pattern.
+- Mode: Implementation batch.
+- Allowed scope: `Dockerfile`, Docker Compose files, `.env.private-demo.example`, `docs/deployment/`, app settings/tests, and README.
+- Non-goals: No real `.env.private-demo`, no committed secrets, no AWS managed services, no production hardening claims.
+- Acceptance criteria: Compose config defines app and internal Postgres services, app uses `DATABASE_URL` to reach `postgres`, `/api/health` works in Compose, and docs explain local smoke checks.
+- Stop conditions: Secrets, actual hostnames, or infrastructure choices beyond Lightsail/Caddy/Cloudflare become required.
+
+## Batch 18: Demo Seed And Preflight Scripts
+
+- Goal: Add seed/preflight commands that exercise real app/service paths and create deterministic private-demo workflow runs.
+- Mode: Implementation batch.
+- Allowed scope: `src/`, `tests/`, `docs/deployment/`, README, and scripts if the repo adopts a scripts folder.
+- Non-goals: No fake DB-only seed rows, no external APIs, no live Plaid, no real data.
+- Acceptance criteria: Seed creates native quarterly, native data coverage, and Plaid-shaped intake runs; preflight verifies settings, database connectivity, health, and protected endpoint behavior without printing secrets.
+- Stop conditions: Seed data needs real credentials, real source data, or deployment-specific hostnames.
+
+## Batch 19: Lightsail Deployment Docs
+
+- Goal: Document the first Lightsail Ubuntu, Caddy, Cloudflare, and Docker Compose deployment process for the private demo.
+- Mode: Documentation batch.
+- Allowed scope: `docs/deployment/`, `docs/decisions/`, `docs/restart/`, and README pointers.
+- Non-goals: No actual server provisioning from Codex, no secrets, no live DNS mutation, no AWS managed RDS/ECS.
+- Acceptance criteria: Docs cover host prep, env file creation, Compose startup, Caddy reverse proxy, Cloudflare DNS, health/smoke checks, rollback/restart basics, and production-security non-claims.
+- Stop conditions: Actual public subdomain choice, credentials, or cloud account actions are required.

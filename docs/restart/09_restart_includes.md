@@ -103,3 +103,35 @@ Use these file sets when starting different kinds of sessions.
 - `src/arangur/report_index.py`.
 - Existing generated report package examples under `reports/demo/`.
 - Do not include production UI work, real client data, live Plaid, or external APIs.
+
+## Deployable Demo App Restart
+
+- All Codex implementation restart files.
+- `docs/architecture/deployable_demo_app_architecture.md`.
+- `docs/deployment/private_demo_stack_plan.md`.
+- `docs/decisions/0002_copy_education_private_demo_stack.md`.
+- `docs/architecture/persistence_model_plan.md`.
+- `docs/demo/report_workflow_implications.md`.
+- Existing pipeline modules under `src/arangur/`.
+- Existing generated report package examples under `reports/demo/`.
+- Do not include real client data, live Plaid, external APIs, credentials, or legacy MATLAB.
+
+## Persistence Implementation Restart
+
+- All Codex implementation restart files.
+- `docs/architecture/persistence_model_plan.md`.
+- `docs/architecture/deployable_demo_app_architecture.md`.
+- `docs/deployment/private_demo_stack_plan.md`.
+- `docs/contracts/report_package_contract.md`.
+- `docs/contracts/data_coverage_result_contract.md`.
+- Current JSON artifact examples under `reports/demo/`.
+- Do not model real client accounts, persist credentials, or decompose full holdings/tax lots unless specifically authorized.
+
+## Docker / Private-Demo Restart
+
+- All Codex implementation restart files.
+- `docs/deployment/private_demo_stack_plan.md`.
+- `docs/architecture/deployable_demo_app_architecture.md`.
+- `docs/decisions/0002_copy_education_private_demo_stack.md`.
+- Future Docker and env example files once implemented.
+- Do not include `.env.private-demo`, real host credentials, Cloudflare tokens, private keys, or actual production secrets.
