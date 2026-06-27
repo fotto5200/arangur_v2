@@ -205,11 +205,12 @@ WORKFLOW_TEMPLATES: dict[str, dict[str, Any]] = {
         "meeting_goal": "Frame what the current demo can and cannot say about data coverage, valuation confidence, and human-review needs.",
         "primary_questions": [
             "Which data fields are cleanly available in the current synthetic fixtures?",
-            "Which valuation-confidence concepts are not implemented yet?",
+            "Which valuation-confidence dimensions are high, medium, low, or unknown under the local rules?",
             "Where would real portfolios need source inventory, reconciliation, or human review?",
         ],
         "emphasized_report_sections": [
             "Synthetic-Data Caveat",
+            "Data Coverage and Valuation Confidence",
             "What This Demo Does Not Yet Prove",
             "Portfolio Value Summary",
             "Next Planned Upgrades",
@@ -221,26 +222,26 @@ WORKFLOW_TEMPLATES: dict[str, dict[str, Any]] = {
         "required_inputs": [
             "CanonicalPortfolioSnapshot",
             "ValuationResult",
+            "DataCoverageResult",
             "ReportPackage",
-            "Future data coverage metadata",
         ],
         "advisor_talking_points": [
-            "This data coverage review introduces valuation confidence as a future report dimension, not as a completed scoring model.",
-            "The current public-security synthetic data is clean by design; real private assets, opaque managers, and statements would need coverage checks.",
+            "This data coverage review uses a first local valuation confidence rubric; it is transparent, deterministic, and deliberately limited.",
+            "The current public-security synthetic data is mostly clean by design; the private placeholder and Plaid mock path show where human review becomes visible.",
             "Valuation confidence should distinguish source quality and freshness from investment forecasting.",
             "Human review requirements should be visible before a portfolio is treated as report-ready.",
         ],
         "caveats": [
-            "No formal valuation-confidence scoring is implemented yet.",
+            "The valuation-confidence prototype is local-only and rule-based.",
             "No market-data vendor, statement extraction, or real custodian data is used.",
             "Data coverage describes source readiness and does not forecast investment performance.",
         ],
         "suggested_follow_up_actions": [
-            "Prototype synthetic coverage metadata for each holding, account, and source file.",
-            "Define a simple high/medium/low valuation-confidence rubric.",
-            "Add a Data Coverage / Valuation Confidence report prototype as the next implementation batch.",
+            "Review the data_coverage_result.json artifact alongside the report package.",
+            "Decide which human-review items should become workflow tasks.",
+            "Extend the rubric only after source inventory and reconciliation boundaries are clearer.",
         ],
-        "next_upgrade_path": "Create a synthetic data coverage fixture and report section that labels source coverage, stale values, and human-review needs.",
+        "next_upgrade_path": "Add stale-value, source-inventory, and reconciliation-specific checks without introducing live data or vendor dependencies.",
     },
 }
 

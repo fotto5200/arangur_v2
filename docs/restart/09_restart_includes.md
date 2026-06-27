@@ -81,8 +81,14 @@ Use these file sets when starting different kinds of sessions.
 - All Codex implementation restart files.
 - `docs/architecture/data_availability_workstream.md`.
 - `docs/demo/report_workflow_implications.md`.
+- `docs/contracts/data_coverage_result_contract.md`.
 - `docs/contracts/report_package_contract.md`.
-- Future synthetic data coverage fixtures under `data/demo/` if implementation is authorized.
+- `src/arangur/data_coverage.py`.
+- `src/arangur/demo_pipeline.py`.
+- `src/arangur/report_generator.py`.
+- `src/arangur/report_index.py`.
+- `tests/test_data_coverage.py`.
+- Current synthetic data coverage fixtures under `data/demo/`.
 - Do not include real client statements, credentials, manager portal access, private keys, or restricted vendor data.
 
 ## Workflow Report Simulation Restart

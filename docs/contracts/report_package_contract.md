@@ -23,6 +23,7 @@
 | `workflow_type` | Optional | string | Selected advisor workflow, such as `quarterly_review`. |
 | `workflow_template` | Optional | object | Snapshot of selected workflow template fields. |
 | `run_metadata` | Optional | object | Local run metadata, output links, workflow metadata, and synthetic-data flag. |
+| `data_coverage_result` | Optional | object | Link and summary for the generated `DataCoverageResult`. |
 
 ## Intended Audience
 
@@ -36,24 +37,26 @@ The v1 report is for an advisor or internal colleague evaluating the Arangur v2 
 - `ExposureOverlapResult`
 - At least one `ScenarioDefinition`
 - At least one `ScenarioResult`
+- `DataCoverageResult` for current local demo runs
 
 ## Required Report Sections
 
 1. Title and synthetic-data caveat.
-2. Portfolio snapshot summary.
-3. Account and manager summary.
-4. Top holdings.
-5. Cash summary.
-6. Sector and theme exposure.
-7. Direct overlap observations.
-8. Scenario shock result.
-9. Advisor narrative.
-10. Methodology and limitations.
+2. Workflow focus / meeting purpose.
+3. Data coverage and valuation confidence.
+4. Portfolio snapshot summary.
+5. Account and manager summary.
+6. Top holdings.
+7. Cash summary.
+8. Sector and theme exposure.
+9. Direct overlap observations.
+10. Scenario shock result.
+11. Advisor narrative.
+12. Methodology and limitations.
 
 Optional sections:
 
 - Data validation warnings.
-- Workflow focus / meeting purpose.
 - Appendix tables.
 - Suggested advisor follow-up questions.
 
@@ -133,6 +136,15 @@ The report should include `is_synthetic: true` in metadata and visible caveat te
     "workflow_type": "quarterly_review",
     "display_name": "Quarterly Review",
     "meeting_goal": "Summarize portfolio value, manager allocation, major exposures, direct overlap, and scenario result for a routine review."
+  },
+  "data_coverage_result": {
+    "path": "reports/demo/data_coverage_result.json",
+    "valuation_summary": {
+      "valuation_date": "2026-06-30",
+      "overall_confidence": "mixed"
+    },
+    "human_review_item_count": 1,
+    "workflow_emphasis": "Concise data confidence context supports the advisor report without changing analytics outputs."
   },
   "outputs": [
     {

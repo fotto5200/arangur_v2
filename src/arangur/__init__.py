@@ -2,6 +2,7 @@
 
 __all__ = [
     "canonical_snapshot",
+    "data_coverage",
     "demo_data_loader",
     "demo_pipeline",
     "exposure_overlap",

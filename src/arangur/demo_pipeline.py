@@ -12,6 +12,7 @@ if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from arangur.canonical_snapshot import build_canonical_snapshot
+from arangur.data_coverage import calculate_data_coverage
 from arangur.demo_data_loader import load_demo_inputs, load_market_data_fixture, load_scenario_definitions
 from arangur.exposure_overlap import calculate_exposure_overlap
 from arangur.plaid_mock_adapter import build_canonical_snapshot_from_plaid_mock, load_plaid_mock_fixture
@@ -71,6 +72,29 @@ def run_pipeline(
     _write_json(scenario_path, scenario_results)
 
     report_path = output_dir / "arangur_demo_report.md"
+    html_report_path = report_path.with_suffix(".html")
+    report_package_path = output_dir / "report_package.json"
+    data_coverage_path = output_dir / "data_coverage_result.json"
+    output_paths = {
+        "canonical_snapshot": snapshot_path,
+        "valuation_result": valuation_path,
+        "exposure_overlap_result": exposure_path,
+        "scenario_result": scenario_path,
+        "data_coverage_result": data_coverage_path,
+        "report_package": report_package_path,
+        "markdown_report": report_path,
+        "html_report": html_report_path,
+    }
+    run_metadata = _build_run_metadata(snapshot, source, workflow_template, output_dir, output_paths)
+    data_coverage_result = calculate_data_coverage(
+        snapshot,
+        valuation,
+        market_data,
+        scenario_results,
+        run_metadata=run_metadata,
+    )
+    _write_json(data_coverage_path, data_coverage_result)
+
     report_package = generate_markdown_report(
         snapshot,
         valuation,
@@ -78,25 +102,20 @@ def run_pipeline(
         scenario_results,
         report_path,
         workflow_template=workflow_template,
+        data_coverage_result=data_coverage_result,
     )
-    html_report_path = report_path.with_suffix(".html")
-    report_package_path = output_dir / "report_package.json"
-    output_paths = {
-        "canonical_snapshot": snapshot_path,
-        "valuation_result": valuation_path,
-        "exposure_overlap_result": exposure_path,
-        "scenario_result": scenario_path,
-        "report_package": report_package_path,
-        "markdown_report": report_path,
-        "html_report": html_report_path,
-    }
-    run_metadata = _build_run_metadata(snapshot, source, workflow_template, output_dir, output_paths)
     report_package["run_id"] = run_metadata["run_id"]
     report_package["workflow_type"] = workflow_type
     report_package["source_name"] = run_metadata["source_name"]
     report_package["source_adapter"] = run_metadata["source_adapter"]
     report_package["workflow_template"] = _package_workflow_template(workflow_template)
     report_package["run_metadata"] = run_metadata
+    report_package["data_coverage_result"] = _package_data_coverage(
+        data_coverage_result,
+        data_coverage_path,
+        valuation,
+        workflow_template,
+    )
     _write_json(report_package_path, report_package)
 
     if refresh_index:
@@ -190,10 +209,45 @@ def _build_run_metadata(
             "valuation_result": _stable_output_path(output_paths["valuation_result"]),
             "exposure_overlap_result": _stable_output_path(output_paths["exposure_overlap_result"]),
             "scenario_result": _stable_output_path(output_paths["scenario_result"]),
+            "data_coverage_result": _stable_output_path(output_paths["data_coverage_result"]),
             "report_package": _stable_output_path(output_paths["report_package"]),
         },
         "synthetic_data": bool(snapshot["portfolio"]["is_synthetic"]),
     }
+
+
+def _package_data_coverage(
+    data_coverage_result: dict[str, Any],
+    data_coverage_path: Path,
+    valuation: dict[str, Any],
+    workflow_template: dict[str, Any],
+) -> dict[str, Any]:
+    confidence = data_coverage_result["valuation_confidence_summary"]
+    portfolio_summary = data_coverage_result["portfolio_coverage_summary"]
+    flags = data_coverage_result["data_quality_flags"]
+    return {
+        "path": _stable_output_path(data_coverage_path),
+        "valuation_summary": {
+            "valuation_date": data_coverage_result["valuation_date"],
+            "portfolio_market_value": valuation["portfolio_total"]["market_value"],
+            "portfolio_cash_value": valuation["portfolio_total"]["cash_value"],
+            "overall_confidence": confidence["overall_confidence"],
+            "dimension_confidence": confidence["dimension_confidence"],
+        },
+        "summary": portfolio_summary["summary"],
+        "key_flags": flags[:5],
+        "human_review_item_count": portfolio_summary["human_review_item_count"],
+        "workflow_emphasis": _data_coverage_workflow_emphasis(workflow_template),
+    }
+
+
+def _data_coverage_workflow_emphasis(workflow_template: dict[str, Any]) -> str:
+    workflow_type = workflow_template["workflow_type"]
+    if workflow_type == "data_coverage_review":
+        return "Detailed data coverage and valuation-confidence review is the primary workflow focus."
+    if workflow_type == "intake_review":
+        return "Source transparency and mapping readiness should be reviewed before interpreting analytics."
+    return "Concise data confidence context supports the advisor report without changing analytics outputs."
 
 
 def _package_workflow_template(workflow_template: dict[str, Any]) -> dict[str, Any]:

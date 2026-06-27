@@ -35,6 +35,7 @@ The default demo generates:
 - `reports/demo/valuation_result.json`
 - `reports/demo/exposure_overlap_result.json`
 - `reports/demo/scenario_result.json`
+- `reports/demo/data_coverage_result.json`
 - `reports/demo/report_package.json`
 - `reports/demo/arangur_demo_report.md`
 - `reports/demo/arangur_demo_report.html`
@@ -42,6 +43,8 @@ The default demo generates:
 The Plaid-shaped mock path generates the same artifact names under `reports/demo/plaid_mock/`.
 
 Non-default native workflows generate under `reports/demo/workflows/<workflow>/`. Non-default Plaid-shaped workflows generate under `reports/demo/plaid_mock/workflows/<workflow>/`.
+
+`data_coverage_result.json` is a local-only valuation confidence prototype. It labels identifier, price, classification, source transparency, valuation method, and scenario mapping coverage as high, medium, low, or unknown, and surfaces human-review items. It does not use live market data, live Plaid, vendor data, or real client data.
 
 Open the Markdown report in an editor or preview pane, or open the HTML report directly in a browser.
 
@@ -65,6 +68,7 @@ Future scenario and data-coverage work is captured in:
 
 - `docs/architecture/scenario_engine_roadmap.md`
 - `docs/architecture/data_availability_workstream.md`
+- `docs/contracts/data_coverage_result_contract.md`
 - `docs/demo/report_workflow_implications.md`
 
 Focused checks:
@@ -74,4 +78,5 @@ python -m unittest tests.test_demo_pipeline
 python -m unittest tests.test_plaid_mock_pipeline
 python -m unittest tests.test_report_index
 python -m unittest tests.test_workflow_templates
+python -m unittest tests.test_data_coverage
 ```

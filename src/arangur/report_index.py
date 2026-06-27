@@ -19,6 +19,7 @@ JSON_OUTPUT_FILES = [
     ("Valuation result JSON", "valuation_result.json"),
     ("Exposure overlap result JSON", "exposure_overlap_result.json"),
     ("Scenario result JSON", "scenario_result.json"),
+    ("Data coverage result JSON", "data_coverage_result.json"),
     ("Report package JSON", "report_package.json"),
 ]
 
@@ -99,6 +100,8 @@ def _run_from_package(reports_dir: Path, package_path: Path, package: dict[str, 
     package_dir = package_path.parent
     metadata = package.get("run_metadata", {})
     workflow_template = package.get("workflow_template") or metadata.get("workflow_template") or {}
+    data_coverage = package.get("data_coverage_result", {})
+    valuation_summary = data_coverage.get("valuation_summary", {})
     source_name = metadata.get("source_name") or package.get("source_name") or "unknown_source"
     workflow_type = metadata.get("workflow_type") or package.get("workflow_type") or "unknown_workflow"
     return {
@@ -113,6 +116,9 @@ def _run_from_package(reports_dir: Path, package_path: Path, package: dict[str, 
         "synthetic_data": metadata.get("synthetic_data", package.get("is_synthetic")),
         "output_directory": metadata.get("output_directory") or _relative_display(reports_dir, package_dir),
         "report_title": package.get("report_title", "Untitled Report"),
+        "data_confidence": valuation_summary.get("overall_confidence") or "not_available",
+        "data_confidence_summary": data_coverage.get("summary") or "",
+        "human_review_item_count": data_coverage.get("human_review_item_count"),
         "report_links": _report_links(reports_dir, package_dir, package),
         "json_links": _json_links(reports_dir, package_dir),
     }
@@ -135,6 +141,9 @@ def _render_run_section(run: dict[str, Any]) -> str:
             f"<dt>Generated at</dt><dd>{escape(run['generated_at'])}</dd>",
             f"<dt>Output directory</dt><dd>{escape(run['output_directory'])}</dd>",
             f"<dt>Synthetic data</dt><dd>{escape(str(run['synthetic_data']))}</dd>",
+            f"<dt>Data confidence</dt><dd>{escape(_label(str(run['data_confidence'])))}"
+            f"{_summary_suffix(run['data_confidence_summary'])}</dd>",
+            f"<dt>Human review items</dt><dd>{escape(_count_label(run['human_review_item_count']))}</dd>",
             "</dl>",
             "<h4>Reports</h4>",
             report_links,
@@ -167,6 +176,18 @@ def _json_links(reports_dir: Path, package_dir: Path) -> list[dict[str, str]]:
         if path.exists():
             links.append({"label": label, "href": _href(reports_dir, path)})
     return links
+
+
+def _summary_suffix(summary: str) -> str:
+    if not summary:
+        return ""
+    return f"<br><small>{escape(summary)}</small>"
+
+
+def _count_label(value: Any) -> str:
+    if value is None:
+        return "Not available"
+    return str(value)
 
 
 def _link_list(links: list[dict[str, str]]) -> str:

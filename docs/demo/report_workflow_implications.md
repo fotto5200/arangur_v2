@@ -16,6 +16,7 @@ Current support:
 - Simple valuation.
 - Exposure and direct overlap analytics.
 - Deterministic scenario shocks.
+- Data coverage / valuation-confidence result JSON.
 - Markdown and HTML advisor reports.
 - Static local report index.
 - Workflow-run metadata and templates with labels such as `quarterly_review`, `manager_overlap_review`, `scenario_risk_review`, `intake_review`, and `data_coverage_review`.
@@ -53,9 +54,9 @@ Current support:
 
 - Purpose: Explain what data is available, what is missing or stale, how each asset was valued, and where human review is required.
 - Likely audience: Advisor, operations reviewer, analyst, or implementation team assessing whether a portfolio can be reported responsibly.
-- Required inputs: Source inventory, valuation results, data freshness fields, identifier quality, reconciliation status, licensing/provenance metadata, and human-review flags.
-- Current demo support level: Workflow framing exists through `data_coverage_review`, but the current synthetic fixtures assume clean data and do not yet score coverage or confidence.
-- Future upgrades: Add coverage summaries by asset class, missing-field tables, valuation-confidence labels, stale-data warnings, and domain-specific review requirements.
+- Required inputs: Canonical snapshot, valuation result, market data fixture, scenario result set, source/run metadata, and human-review flags.
+- Current demo support level: First local prototype is implemented. Each pipeline run writes `data_coverage_result.json`; reports include a Data Coverage and Valuation Confidence section; report packages and the static index expose confidence summary and human-review counts.
+- Future upgrades: Add coverage summaries by asset class, source-inventory tables, stale-data warnings, reconciliation status, and domain-specific review requirements.
 - Caveats: Data confidence is not investment forecasting. A high-confidence valuation only means the source and method are clearer, not that the asset will perform well.
 
 ## Deterministic Scenario Reporting Now
@@ -119,6 +120,6 @@ Workflow templates use the report families as building blocks:
 - `manager_overlap_review`: exposure / overlap report first, with supporting valuation tables.
 - `scenario_risk_review`: scenario risk report first, with deterministic assumptions and caveats.
 - `intake_review`: source mapping and readiness first, with follow-up questions for validation gaps.
-- `data_coverage_review`: valuation-confidence and data-coverage framing first, with explicit caveats that scoring is not implemented yet.
+- `data_coverage_review`: valuation-confidence and data-coverage framing first, with expanded confidence dimensions, flags, caveats, and human-review items from the local prototype.
 
-The next implementation batch can add actual synthetic data coverage metadata and confidence scoring without changing the analytics engine.
+The next implementation batch can deepen source inventory, stale-value checks, and reconciliation status without changing the core analytics engine or adding live data dependencies.

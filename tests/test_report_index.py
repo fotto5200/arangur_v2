@@ -32,6 +32,8 @@ class ReportIndexTests(unittest.TestCase):
         self.assertIn("manager_overlap_review", metadata["workflow_options"])
         self.assertEqual(metadata["output_directory"], "reports/demo")
         self.assertEqual(metadata["report_links"]["html"], "reports/demo/arangur_demo_report.html")
+        self.assertEqual(metadata["json_outputs"]["data_coverage_result"], "reports/demo/data_coverage_result.json")
+        self.assertEqual(package["data_coverage_result"]["path"], "reports/demo/data_coverage_result.json")
         self.assertTrue(metadata["synthetic_data"])
 
     def test_plaid_report_package_contains_run_metadata(self) -> None:
@@ -57,6 +59,7 @@ class ReportIndexTests(unittest.TestCase):
         self.assertIn("native_demo", html)
         self.assertIn("plaid_mock", html)
         self.assertIn("quarterly_review", html)
+        self.assertIn("Data confidence", html)
 
     def test_report_index_links_to_both_report_runs(self) -> None:
         html = self.index_path.read_text(encoding="utf-8")
@@ -64,6 +67,7 @@ class ReportIndexTests(unittest.TestCase):
         self.assertIn("href=\"plaid_mock/arangur_demo_report.html\"", html)
         self.assertIn("href=\"canonical_portfolio_snapshot.json\"", html)
         self.assertIn("href=\"plaid_mock/canonical_portfolio_snapshot.json\"", html)
+        self.assertIn("href=\"data_coverage_result.json\"", html)
 
     def _load_json(self, path: Path) -> dict:
         with path.open("r", encoding="utf-8") as handle:

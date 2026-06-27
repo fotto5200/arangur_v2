@@ -13,15 +13,55 @@ Demo only: this report uses synthetic data and local fixture prices. It is inten
 ### Primary Questions
 
 - Which data fields are cleanly available in the current synthetic fixtures?
-- Which valuation-confidence concepts are not implemented yet?
+- Which valuation-confidence dimensions are high, medium, low, or unknown under the local rules?
 - Where would real portfolios need source inventory, reconciliation, or human review?
 
 ### Emphasized Report Sections
 
 - Synthetic-Data Caveat
+- Data Coverage and Valuation Confidence
 - What This Demo Does Not Yet Prove
 - Portfolio Value Summary
 - Next Planned Upgrades
+
+## Data Coverage and Valuation Confidence
+
+- Valuation confidence: Mixed. Coverage is mixed: 22 of 22 held positions have local fixture prices, 22 holdings have complete sector/theme classifications, and 1 item(s) need human review before production use.
+- Human review items: 1.
+- Data coverage result: data_coverage_result.json.
+
+### Confidence Dimensions
+
+| Dimension | Confidence |
+| --- | --- |
+| Identifier Coverage | Medium |
+| Price Coverage | Low |
+| Classification Coverage | Low |
+| Source Transparency | High |
+| Valuation Method Confidence | Low |
+| Scenario Mapping Confidence | Low |
+
+### Key Data Quality Flags
+
+- Synthetic Private Fund Placeholder is an opaque/private placeholder and needs a human valuation policy.
+
+### Human Review Items
+
+- Define source documents and valuation method before including Synthetic Private Fund Placeholder in production reporting.
+
+### Coverage Caveats
+
+- Data coverage uses local deterministic rules and synthetic fixtures only.
+- Valuation confidence describes source/readiness quality; it is not investment advice or a forecast.
+- Local fixture prices are not market-data vendor evidence, custodian statements, or reconciliation proof.
+- All generated coverage labels are demo labels over synthetic data, not client data.
+
+### Next Data Work Items
+
+- Define source inventory fields for statements, custodians, market-data vendors, and manual overrides.
+- Add stale-price and reconciliation checks once historical synthetic fixtures exist.
+- Create a private/opaque asset valuation rubric before adding real private holdings.
+- Link human-review items to future workflow tasks or report-package review status.
 
 ## Executive Summary
 
@@ -147,20 +187,20 @@ Illustrative shock to AI and semiconductor leadership with a mild broad equity d
 
 ## Advisor Talking Points
 
-- This data coverage review introduces valuation confidence as a future report dimension, not as a completed scoring model.
-- The current public-security synthetic data is clean by design; real private assets, opaque managers, and statements would need coverage checks.
+- This data coverage review uses a first local valuation confidence rubric; it is transparent, deterministic, and deliberately limited.
+- The current public-security synthetic data is mostly clean by design; the private placeholder and Plaid mock path show where human review becomes visible.
 - Valuation confidence should distinguish source quality and freshness from investment forecasting.
 - Human review requirements should be visible before a portfolio is treated as report-ready.
 
 ## Suggested Follow-Up Actions
 
-- Prototype synthetic coverage metadata for each holding, account, and source file.
-- Define a simple high/medium/low valuation-confidence rubric.
-- Add a Data Coverage / Valuation Confidence report prototype as the next implementation batch.
+- Review the data_coverage_result.json artifact alongside the report package.
+- Decide which human-review items should become workflow tasks.
+- Extend the rubric only after source inventory and reconciliation boundaries are clearer.
 
 ## Workflow Caveats
 
-- No formal valuation-confidence scoring is implemented yet.
+- The valuation-confidence prototype is local-only and rule-based.
 - No market-data vendor, statement extraction, or real custodian data is used.
 - Data coverage describes source readiness and does not forecast investment performance.
 
@@ -178,6 +218,6 @@ Illustrative shock to AI and semiconductor leadership with a mild broad equity d
 
 ## Next Planned Upgrades
 
-- Create a synthetic data coverage fixture and report section that labels source coverage, stale values, and human-review needs.
+- Add stale-value, source-inventory, and reconciliation-specific checks without introducing live data or vendor dependencies.
 - Add stronger validation edge cases and report-quality tests around malformed local fixtures.
 - Design the future Plaid Sandbox boundary without committing credentials or using real client data.

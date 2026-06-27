@@ -863,6 +863,24 @@
         "defensive"
       ],
       "ticker": "NEE"
+    },
+    {
+      "asset_class": "private_equity",
+      "currency": "USD",
+      "display_name": "Synthetic Private Fund Placeholder",
+      "scenario_tags": [],
+      "sector": null,
+      "security_id": "sec_private_placeholder",
+      "security_type": "private_fund",
+      "source_ref": {
+        "source_id": "sec_private_placeholder",
+        "source_section": "security",
+        "source_system": "demo_json"
+      },
+      "themes": [
+        "private_markets"
+      ],
+      "ticker": null
     }
   ],
   "snapshot_id": "snap_demo_family_office_v1_2026_06_30",

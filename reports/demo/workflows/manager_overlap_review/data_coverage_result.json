@@ -1,0 +1,1059 @@
+{
+  "account_coverage": [
+    {
+      "account_id": "acct_taxable_core",
+      "account_name": "Taxable Core Account",
+      "account_type": "taxable",
+      "cash_balance_count": 1,
+      "cash_coverage": "high",
+      "holding_count": 6,
+      "low_confidence_holding_count": 0,
+      "manager_id": "mgr_core_growth",
+      "manager_name": "Atlas Core Growth",
+      "medium_confidence_holding_count": 1,
+      "missing_price_holding_count": 0,
+      "overall_confidence": "medium"
+    },
+    {
+      "account_id": "acct_trust_value",
+      "account_name": "Trust Value Account",
+      "account_type": "trust",
+      "cash_balance_count": 1,
+      "cash_coverage": "high",
+      "holding_count": 5,
+      "low_confidence_holding_count": 0,
+      "manager_id": "mgr_value",
+      "manager_name": "Harbor Value Partners",
+      "medium_confidence_holding_count": 0,
+      "missing_price_holding_count": 0,
+      "overall_confidence": "high"
+    },
+    {
+      "account_id": "acct_foundation_etf",
+      "account_name": "Foundation ETF Account",
+      "account_type": "foundation",
+      "cash_balance_count": 1,
+      "cash_coverage": "high",
+      "holding_count": 4,
+      "low_confidence_holding_count": 0,
+      "manager_id": "mgr_index",
+      "manager_name": "Meridian Index Solutions",
+      "medium_confidence_holding_count": 3,
+      "missing_price_holding_count": 0,
+      "overall_confidence": "medium"
+    },
+    {
+      "account_id": "acct_growth_satellite",
+      "account_name": "Growth Satellite Account",
+      "account_type": "taxable",
+      "cash_balance_count": 1,
+      "cash_coverage": "high",
+      "holding_count": 4,
+      "low_confidence_holding_count": 0,
+      "manager_id": "mgr_ai_satellite",
+      "manager_name": "Signal AI Opportunities",
+      "medium_confidence_holding_count": 0,
+      "missing_price_holding_count": 0,
+      "overall_confidence": "high"
+    },
+    {
+      "account_id": "acct_cash_reserve",
+      "account_name": "Cash Reserve Account",
+      "account_type": "cash",
+      "cash_balance_count": 1,
+      "cash_coverage": "high",
+      "holding_count": 3,
+      "low_confidence_holding_count": 0,
+      "manager_id": "mgr_treasury",
+      "manager_name": "Northstar Treasury Desk",
+      "medium_confidence_holding_count": 2,
+      "missing_price_holding_count": 0,
+      "overall_confidence": "medium"
+    }
+  ],
+  "caveats": [
+    "Data coverage uses local deterministic rules and synthetic fixtures only.",
+    "Valuation confidence describes source/readiness quality; it is not investment advice or a forecast.",
+    "Local fixture prices are not market-data vendor evidence, custodian statements, or reconciliation proof.",
+    "All generated coverage labels are demo labels over synthetic data, not client data."
+  ],
+  "data_quality_flags": [
+    {
+      "code": "OPAQUE_PRIVATE_PLACEHOLDER",
+      "message": "Synthetic Private Fund Placeholder is an opaque/private placeholder and needs a human valuation policy.",
+      "record_id": "sec_private_placeholder",
+      "scope": "security",
+      "severity": "high"
+    }
+  ],
+  "holding_coverage": [
+    {
+      "account_id": "acct_taxable_core",
+      "account_name": "Taxable Core Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Held public security has identifier, price, classification, and scenario mapping coverage."
+      ],
+      "display_name": "Microsoft Corp.",
+      "holding_id": "hold_core_msft",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_core_growth",
+      "manager_name": "Atlas Core Growth",
+      "market_value": 107900.0,
+      "overall_confidence": "high",
+      "price": 415.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 260,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_msft",
+      "source_transparency": "high",
+      "ticker": "MSFT",
+      "valuation_method": "local_fixture_price_times_quantity_public_security",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "account_id": "acct_taxable_core",
+      "account_name": "Taxable Core Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Held public security has identifier, price, classification, and scenario mapping coverage."
+      ],
+      "display_name": "NVIDIA Corp.",
+      "holding_id": "hold_core_nvda",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_core_growth",
+      "manager_name": "Atlas Core Growth",
+      "market_value": 64125.0,
+      "overall_confidence": "high",
+      "price": 142.5,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 450,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_nvda",
+      "source_transparency": "high",
+      "ticker": "NVDA",
+      "valuation_method": "local_fixture_price_times_quantity_public_security",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "account_id": "acct_taxable_core",
+      "account_name": "Taxable Core Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Held public security has identifier, price, classification, and scenario mapping coverage."
+      ],
+      "display_name": "Apple Inc.",
+      "holding_id": "hold_core_aapl",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_core_growth",
+      "manager_name": "Atlas Core Growth",
+      "market_value": 63000.0,
+      "overall_confidence": "high",
+      "price": 210.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 300,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_aapl",
+      "source_transparency": "high",
+      "ticker": "AAPL",
+      "valuation_method": "local_fixture_price_times_quantity_public_security",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "account_id": "acct_taxable_core",
+      "account_name": "Taxable Core Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Held public security has identifier, price, classification, and scenario mapping coverage."
+      ],
+      "display_name": "Alphabet Inc.",
+      "holding_id": "hold_core_googl",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_core_growth",
+      "manager_name": "Atlas Core Growth",
+      "market_value": 42000.0,
+      "overall_confidence": "high",
+      "price": 175.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 240,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_googl",
+      "source_transparency": "high",
+      "ticker": "GOOGL",
+      "valuation_method": "local_fixture_price_times_quantity_public_security",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "account_id": "acct_taxable_core",
+      "account_name": "Taxable Core Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Held public security has identifier, price, classification, and scenario mapping coverage."
+      ],
+      "display_name": "Berkshire Hathaway Class B",
+      "holding_id": "hold_core_brk",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_core_growth",
+      "manager_name": "Atlas Core Growth",
+      "market_value": 51600.0,
+      "overall_confidence": "high",
+      "price": 430.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 120,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_brk_b",
+      "source_transparency": "high",
+      "ticker": "BRK.B",
+      "valuation_method": "local_fixture_price_times_quantity_public_security",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "account_id": "acct_taxable_core",
+      "account_name": "Taxable Core Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "ETF price is available, but look-through exposure and vendor proof are not implemented."
+      ],
+      "display_name": "Vanguard Total Stock Market ETF",
+      "holding_id": "hold_core_vti",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_core_growth",
+      "manager_name": "Atlas Core Growth",
+      "market_value": 68750.0,
+      "overall_confidence": "medium",
+      "price": 275.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 250,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_vti",
+      "source_transparency": "high",
+      "ticker": "VTI",
+      "valuation_method": "local_fixture_price_times_quantity_etf",
+      "valuation_method_confidence": "medium"
+    },
+    {
+      "account_id": "acct_trust_value",
+      "account_name": "Trust Value Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Held public security has identifier, price, classification, and scenario mapping coverage."
+      ],
+      "display_name": "Exxon Mobil Corp.",
+      "holding_id": "hold_value_xom",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_value",
+      "manager_name": "Harbor Value Partners",
+      "market_value": 64900.0,
+      "overall_confidence": "high",
+      "price": 118.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 550,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_xom",
+      "source_transparency": "high",
+      "ticker": "XOM",
+      "valuation_method": "local_fixture_price_times_quantity_public_security",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "account_id": "acct_trust_value",
+      "account_name": "Trust Value Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Held public security has identifier, price, classification, and scenario mapping coverage."
+      ],
+      "display_name": "Chevron Corp.",
+      "holding_id": "hold_value_cvx",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_value",
+      "manager_name": "Harbor Value Partners",
+      "market_value": 46500.0,
+      "overall_confidence": "high",
+      "price": 155.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 300,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_cvx",
+      "source_transparency": "high",
+      "ticker": "CVX",
+      "valuation_method": "local_fixture_price_times_quantity_public_security",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "account_id": "acct_trust_value",
+      "account_name": "Trust Value Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Held public security has identifier, price, classification, and scenario mapping coverage."
+      ],
+      "display_name": "JPMorgan Chase & Co.",
+      "holding_id": "hold_value_jpm",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_value",
+      "manager_name": "Harbor Value Partners",
+      "market_value": 73800.0,
+      "overall_confidence": "high",
+      "price": 205.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 360,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_jpm",
+      "source_transparency": "high",
+      "ticker": "JPM",
+      "valuation_method": "local_fixture_price_times_quantity_public_security",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "account_id": "acct_trust_value",
+      "account_name": "Trust Value Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Held public security has identifier, price, classification, and scenario mapping coverage."
+      ],
+      "display_name": "Berkshire Hathaway Class B",
+      "holding_id": "hold_value_brk",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_value",
+      "manager_name": "Harbor Value Partners",
+      "market_value": 64500.0,
+      "overall_confidence": "high",
+      "price": 430.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 150,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_brk_b",
+      "source_transparency": "high",
+      "ticker": "BRK.B",
+      "valuation_method": "local_fixture_price_times_quantity_public_security",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "account_id": "acct_trust_value",
+      "account_name": "Trust Value Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Held public security has identifier, price, classification, and scenario mapping coverage."
+      ],
+      "display_name": "UnitedHealth Group Inc.",
+      "holding_id": "hold_value_unh",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_value",
+      "manager_name": "Harbor Value Partners",
+      "market_value": 56100.0,
+      "overall_confidence": "high",
+      "price": 510.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 110,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_unh",
+      "source_transparency": "high",
+      "ticker": "UNH",
+      "valuation_method": "local_fixture_price_times_quantity_public_security",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "account_id": "acct_foundation_etf",
+      "account_name": "Foundation ETF Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "ETF price is available, but look-through exposure and vendor proof are not implemented."
+      ],
+      "display_name": "Vanguard Total Stock Market ETF",
+      "holding_id": "hold_index_vti",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_index",
+      "manager_name": "Meridian Index Solutions",
+      "market_value": 192500.0,
+      "overall_confidence": "medium",
+      "price": 275.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 700,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_vti",
+      "source_transparency": "high",
+      "ticker": "VTI",
+      "valuation_method": "local_fixture_price_times_quantity_etf",
+      "valuation_method_confidence": "medium"
+    },
+    {
+      "account_id": "acct_foundation_etf",
+      "account_name": "Foundation ETF Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "ETF price is available, but look-through exposure and vendor proof are not implemented."
+      ],
+      "display_name": "iShares Core U.S. Aggregate Bond ETF",
+      "holding_id": "hold_index_agg",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_index",
+      "manager_name": "Meridian Index Solutions",
+      "market_value": 88200.0,
+      "overall_confidence": "medium",
+      "price": 98.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 900,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_agg",
+      "source_transparency": "high",
+      "ticker": "AGG",
+      "valuation_method": "local_fixture_price_times_quantity_etf",
+      "valuation_method_confidence": "medium"
+    },
+    {
+      "account_id": "acct_foundation_etf",
+      "account_name": "Foundation ETF Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "ETF price is available, but look-through exposure and vendor proof are not implemented."
+      ],
+      "display_name": "iShares 0-3 Month Treasury Bond ETF",
+      "holding_id": "hold_index_sgov",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_index",
+      "manager_name": "Meridian Index Solutions",
+      "market_value": 60300.0,
+      "overall_confidence": "medium",
+      "price": 100.5,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 600,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_sgov",
+      "source_transparency": "high",
+      "ticker": "SGOV",
+      "valuation_method": "local_fixture_price_times_quantity_etf",
+      "valuation_method_confidence": "medium"
+    },
+    {
+      "account_id": "acct_foundation_etf",
+      "account_name": "Foundation ETF Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Held public security has identifier, price, classification, and scenario mapping coverage."
+      ],
+      "display_name": "Microsoft Corp.",
+      "holding_id": "hold_index_msft",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_index",
+      "manager_name": "Meridian Index Solutions",
+      "market_value": 33200.0,
+      "overall_confidence": "high",
+      "price": 415.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 80,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_msft",
+      "source_transparency": "high",
+      "ticker": "MSFT",
+      "valuation_method": "local_fixture_price_times_quantity_public_security",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "account_id": "acct_growth_satellite",
+      "account_name": "Growth Satellite Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Held public security has identifier, price, classification, and scenario mapping coverage."
+      ],
+      "display_name": "NVIDIA Corp.",
+      "holding_id": "hold_ai_nvda",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_ai_satellite",
+      "manager_name": "Signal AI Opportunities",
+      "market_value": 88350.0,
+      "overall_confidence": "high",
+      "price": 142.5,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 620,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_nvda",
+      "source_transparency": "high",
+      "ticker": "NVDA",
+      "valuation_method": "local_fixture_price_times_quantity_public_security",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "account_id": "acct_growth_satellite",
+      "account_name": "Growth Satellite Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Held public security has identifier, price, classification, and scenario mapping coverage."
+      ],
+      "display_name": "Microsoft Corp.",
+      "holding_id": "hold_ai_msft",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_ai_satellite",
+      "manager_name": "Signal AI Opportunities",
+      "market_value": 74700.0,
+      "overall_confidence": "high",
+      "price": 415.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 180,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_msft",
+      "source_transparency": "high",
+      "ticker": "MSFT",
+      "valuation_method": "local_fixture_price_times_quantity_public_security",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "account_id": "acct_growth_satellite",
+      "account_name": "Growth Satellite Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Held public security has identifier, price, classification, and scenario mapping coverage."
+      ],
+      "display_name": "Alphabet Inc.",
+      "holding_id": "hold_ai_googl",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_ai_satellite",
+      "manager_name": "Signal AI Opportunities",
+      "market_value": 28000.0,
+      "overall_confidence": "high",
+      "price": 175.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 160,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_googl",
+      "source_transparency": "high",
+      "ticker": "GOOGL",
+      "valuation_method": "local_fixture_price_times_quantity_public_security",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "account_id": "acct_growth_satellite",
+      "account_name": "Growth Satellite Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Held public security has identifier, price, classification, and scenario mapping coverage."
+      ],
+      "display_name": "Apple Inc.",
+      "holding_id": "hold_ai_aapl",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_ai_satellite",
+      "manager_name": "Signal AI Opportunities",
+      "market_value": 25200.0,
+      "overall_confidence": "high",
+      "price": 210.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 120,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_aapl",
+      "source_transparency": "high",
+      "ticker": "AAPL",
+      "valuation_method": "local_fixture_price_times_quantity_public_security",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "account_id": "acct_cash_reserve",
+      "account_name": "Cash Reserve Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "ETF price is available, but look-through exposure and vendor proof are not implemented."
+      ],
+      "display_name": "iShares 0-3 Month Treasury Bond ETF",
+      "holding_id": "hold_treasury_sgov",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_treasury",
+      "manager_name": "Northstar Treasury Desk",
+      "market_value": 120600.0,
+      "overall_confidence": "medium",
+      "price": 100.5,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 1200,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_sgov",
+      "source_transparency": "high",
+      "ticker": "SGOV",
+      "valuation_method": "local_fixture_price_times_quantity_etf",
+      "valuation_method_confidence": "medium"
+    },
+    {
+      "account_id": "acct_cash_reserve",
+      "account_name": "Cash Reserve Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "ETF price is available, but look-through exposure and vendor proof are not implemented."
+      ],
+      "display_name": "iShares Core U.S. Aggregate Bond ETF",
+      "holding_id": "hold_treasury_agg",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_treasury",
+      "manager_name": "Northstar Treasury Desk",
+      "market_value": 49000.0,
+      "overall_confidence": "medium",
+      "price": 98.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 500,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_agg",
+      "source_transparency": "high",
+      "ticker": "AGG",
+      "valuation_method": "local_fixture_price_times_quantity_etf",
+      "valuation_method_confidence": "medium"
+    },
+    {
+      "account_id": "acct_cash_reserve",
+      "account_name": "Cash Reserve Account",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Held public security has identifier, price, classification, and scenario mapping coverage."
+      ],
+      "display_name": "NextEra Energy Inc.",
+      "holding_id": "hold_treasury_nee",
+      "identifier_coverage": "high",
+      "manager_id": "mgr_treasury",
+      "manager_name": "Northstar Treasury Desk",
+      "market_value": 14400.0,
+      "overall_confidence": "high",
+      "price": 72.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "quantity": 200,
+      "scenario_mapping_confidence": "high",
+      "security_id": "sec_nee",
+      "source_transparency": "high",
+      "ticker": "NEE",
+      "valuation_method": "local_fixture_price_times_quantity_public_security",
+      "valuation_method_confidence": "high"
+    }
+  ],
+  "human_review_items": [
+    {
+      "code": "OPAQUE_PRIVATE_PLACEHOLDER",
+      "message": "Define source documents and valuation method before including Synthetic Private Fund Placeholder in production reporting.",
+      "priority": "high",
+      "record_id": "sec_private_placeholder",
+      "scope": "security"
+    }
+  ],
+  "next_data_work_items": [
+    "Define source inventory fields for statements, custodians, market-data vendors, and manual overrides.",
+    "Add stale-price and reconciliation checks once historical synthetic fixtures exist.",
+    "Create a private/opaque asset valuation rubric before adding real private holdings.",
+    "Link human-review items to future workflow tasks or report-package review status."
+  ],
+  "portfolio_coverage_summary": {
+    "accounts_total": 5,
+    "cash_balances_total": 5,
+    "classification_complete_holdings": 22,
+    "holdings_total": 22,
+    "human_review_item_count": 1,
+    "missing_price_holdings": 0,
+    "overall_confidence": "mixed",
+    "portfolio_cash_value": 230500.0,
+    "portfolio_market_value": 1708125.0,
+    "priced_holdings": 22,
+    "securities_total": 14,
+    "summary": "Coverage is mixed: 22 of 22 held positions have local fixture prices, 22 holdings have complete sector/theme classifications, and 1 item(s) need human review before production use.",
+    "unheld_low_confidence_securities": 1
+  },
+  "run_id": "run_native_demo_manager_overlap_review_2026_06_30",
+  "schema_version": "data_coverage_result.v1",
+  "security_coverage": [
+    {
+      "asset_class": "equity",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Coverage is complete for the current local prototype rules."
+      ],
+      "display_name": "Alphabet Inc.",
+      "holding_count": 2,
+      "identifier_coverage": "high",
+      "overall_confidence": "high",
+      "price": 175.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "scenario_mapping_confidence": "high",
+      "sector": "communication_services",
+      "security_id": "sec_googl",
+      "security_type": "equity",
+      "source_transparency": "high",
+      "themes": [
+        "ai",
+        "growth"
+      ],
+      "ticker": "GOOGL",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "asset_class": "equity",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Coverage is complete for the current local prototype rules."
+      ],
+      "display_name": "Apple Inc.",
+      "holding_count": 2,
+      "identifier_coverage": "high",
+      "overall_confidence": "high",
+      "price": 210.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "scenario_mapping_confidence": "high",
+      "sector": "technology",
+      "security_id": "sec_aapl",
+      "security_type": "equity",
+      "source_transparency": "high",
+      "themes": [
+        "growth",
+        "quality"
+      ],
+      "ticker": "AAPL",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "asset_class": "equity",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Coverage is complete for the current local prototype rules."
+      ],
+      "display_name": "Berkshire Hathaway Class B",
+      "holding_count": 2,
+      "identifier_coverage": "high",
+      "overall_confidence": "high",
+      "price": 430.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "scenario_mapping_confidence": "high",
+      "sector": "financials",
+      "security_id": "sec_brk_b",
+      "security_type": "equity",
+      "source_transparency": "high",
+      "themes": [
+        "value",
+        "quality"
+      ],
+      "ticker": "BRK.B",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "asset_class": "equity",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Coverage is complete for the current local prototype rules."
+      ],
+      "display_name": "Chevron Corp.",
+      "holding_count": 1,
+      "identifier_coverage": "high",
+      "overall_confidence": "high",
+      "price": 155.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "scenario_mapping_confidence": "high",
+      "sector": "energy",
+      "security_id": "sec_cvx",
+      "security_type": "equity",
+      "source_transparency": "high",
+      "themes": [
+        "energy",
+        "value"
+      ],
+      "ticker": "CVX",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "asset_class": "equity",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Coverage is complete for the current local prototype rules."
+      ],
+      "display_name": "Exxon Mobil Corp.",
+      "holding_count": 1,
+      "identifier_coverage": "high",
+      "overall_confidence": "high",
+      "price": 118.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "scenario_mapping_confidence": "high",
+      "sector": "energy",
+      "security_id": "sec_xom",
+      "security_type": "equity",
+      "source_transparency": "high",
+      "themes": [
+        "energy",
+        "value"
+      ],
+      "ticker": "XOM",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "asset_class": "equity",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Coverage is complete for the current local prototype rules."
+      ],
+      "display_name": "JPMorgan Chase & Co.",
+      "holding_count": 1,
+      "identifier_coverage": "high",
+      "overall_confidence": "high",
+      "price": 205.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "scenario_mapping_confidence": "high",
+      "sector": "financials",
+      "security_id": "sec_jpm",
+      "security_type": "equity",
+      "source_transparency": "high",
+      "themes": [
+        "financials",
+        "value"
+      ],
+      "ticker": "JPM",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "asset_class": "equity",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Coverage is complete for the current local prototype rules."
+      ],
+      "display_name": "Microsoft Corp.",
+      "holding_count": 3,
+      "identifier_coverage": "high",
+      "overall_confidence": "high",
+      "price": 415.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "scenario_mapping_confidence": "high",
+      "sector": "technology",
+      "security_id": "sec_msft",
+      "security_type": "equity",
+      "source_transparency": "high",
+      "themes": [
+        "ai",
+        "growth",
+        "quality"
+      ],
+      "ticker": "MSFT",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "asset_class": "equity",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Coverage is complete for the current local prototype rules."
+      ],
+      "display_name": "NVIDIA Corp.",
+      "holding_count": 2,
+      "identifier_coverage": "high",
+      "overall_confidence": "high",
+      "price": 142.5,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "scenario_mapping_confidence": "high",
+      "sector": "technology",
+      "security_id": "sec_nvda",
+      "security_type": "equity",
+      "source_transparency": "high",
+      "themes": [
+        "ai",
+        "chips",
+        "growth"
+      ],
+      "ticker": "NVDA",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "asset_class": "equity",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Coverage is complete for the current local prototype rules."
+      ],
+      "display_name": "NextEra Energy Inc.",
+      "holding_count": 1,
+      "identifier_coverage": "high",
+      "overall_confidence": "high",
+      "price": 72.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "scenario_mapping_confidence": "high",
+      "sector": "utilities",
+      "security_id": "sec_nee",
+      "security_type": "equity",
+      "source_transparency": "high",
+      "themes": [
+        "energy",
+        "quality",
+        "defensive"
+      ],
+      "ticker": "NEE",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "asset_class": "equity",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "Coverage is complete for the current local prototype rules."
+      ],
+      "display_name": "UnitedHealth Group Inc.",
+      "holding_count": 1,
+      "identifier_coverage": "high",
+      "overall_confidence": "high",
+      "price": 510.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "scenario_mapping_confidence": "high",
+      "sector": "healthcare",
+      "security_id": "sec_unh",
+      "security_type": "equity",
+      "source_transparency": "high",
+      "themes": [
+        "defensive",
+        "quality"
+      ],
+      "ticker": "UNH",
+      "valuation_method_confidence": "high"
+    },
+    {
+      "asset_class": "equity",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "ETF is valued from a local fixture price; no fund look-through is implemented."
+      ],
+      "display_name": "Vanguard Total Stock Market ETF",
+      "holding_count": 2,
+      "identifier_coverage": "high",
+      "overall_confidence": "medium",
+      "price": 275.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "scenario_mapping_confidence": "high",
+      "sector": "multi_sector",
+      "security_id": "sec_vti",
+      "security_type": "etf",
+      "source_transparency": "high",
+      "themes": [
+        "broad_market",
+        "growth",
+        "value"
+      ],
+      "ticker": "VTI",
+      "valuation_method_confidence": "medium"
+    },
+    {
+      "asset_class": "fixed_income",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "ETF is valued from a local fixture price; no fund look-through is implemented."
+      ],
+      "display_name": "iShares 0-3 Month Treasury Bond ETF",
+      "holding_count": 2,
+      "identifier_coverage": "high",
+      "overall_confidence": "medium",
+      "price": 100.5,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "scenario_mapping_confidence": "high",
+      "sector": "treasury",
+      "security_id": "sec_sgov",
+      "security_type": "etf",
+      "source_transparency": "high",
+      "themes": [
+        "cash_buffer",
+        "defensive"
+      ],
+      "ticker": "SGOV",
+      "valuation_method_confidence": "medium"
+    },
+    {
+      "asset_class": "fixed_income",
+      "classification_coverage": "high",
+      "coverage_notes": [
+        "ETF is valued from a local fixture price; no fund look-through is implemented."
+      ],
+      "display_name": "iShares Core U.S. Aggregate Bond ETF",
+      "holding_count": 2,
+      "identifier_coverage": "high",
+      "overall_confidence": "medium",
+      "price": 98.0,
+      "price_coverage": "high",
+      "price_date": "2026-06-30",
+      "scenario_mapping_confidence": "high",
+      "sector": "fixed_income",
+      "security_id": "sec_agg",
+      "security_type": "etf",
+      "source_transparency": "high",
+      "themes": [
+        "fixed_income",
+        "defensive"
+      ],
+      "ticker": "AGG",
+      "valuation_method_confidence": "medium"
+    },
+    {
+      "asset_class": "private_equity",
+      "classification_coverage": "low",
+      "coverage_notes": [
+        "Opaque/private placeholder requires human valuation policy before production use.",
+        "No local fixture price is attached; security is not held in the current snapshot."
+      ],
+      "display_name": "Synthetic Private Fund Placeholder",
+      "holding_count": 0,
+      "identifier_coverage": "medium",
+      "overall_confidence": "low",
+      "price": null,
+      "price_coverage": "low",
+      "price_date": null,
+      "scenario_mapping_confidence": "low",
+      "sector": null,
+      "security_id": "sec_private_placeholder",
+      "security_type": "private_fund",
+      "source_transparency": "high",
+      "themes": [
+        "private_markets"
+      ],
+      "ticker": null,
+      "valuation_method_confidence": "low"
+    }
+  ],
+  "source_adapter": "demo_json",
+  "source_name": "native_demo",
+  "synthetic_data": true,
+  "valuation_confidence_summary": {
+    "confidence_counts": {
+      "high": 29,
+      "low": 5,
+      "medium": 13,
+      "unknown": 0
+    },
+    "dimension_confidence": {
+      "classification_coverage": "low",
+      "identifier_coverage": "medium",
+      "price_coverage": "low",
+      "scenario_mapping_confidence": "low",
+      "source_transparency": "high",
+      "valuation_method_confidence": "low"
+    },
+    "dimension_notes": [
+      "Identifier coverage checks ticker/security identifiers for public securities.",
+      "Price coverage checks local fixture prices and valuation-date alignment.",
+      "Classification coverage checks sector and theme fields used by exposure reporting.",
+      "Source transparency reflects whether the adapter is a native synthetic fixture or Plaid-shaped mock.",
+      "Valuation method confidence is high for priced public securities/cash, medium for ETFs, and low for private or missing-price placeholders.",
+      "Scenario mapping confidence is high only when ticker, sector, or theme mapping is available."
+    ],
+    "overall_confidence": "mixed"
+  },
+  "valuation_date": "2026-06-30",
+  "workflow_type": "manager_overlap_review"
+}

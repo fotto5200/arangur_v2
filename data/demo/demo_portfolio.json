@@ -242,6 +242,16 @@
       "sector": "utilities",
       "themes": ["energy", "quality", "defensive"],
       "scenario_tags": ["energy", "defensive"]
+    },
+    {
+      "security_id": "sec_private_placeholder",
+      "name": "Synthetic Private Fund Placeholder",
+      "security_type": "private_fund",
+      "currency": "USD",
+      "asset_class": "private_equity",
+      "sector": null,
+      "themes": ["private_markets"],
+      "scenario_tags": []
     }
   ],
   "holdings": [

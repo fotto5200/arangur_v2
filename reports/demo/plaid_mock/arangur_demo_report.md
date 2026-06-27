@@ -23,6 +23,16 @@ Demo only: this report uses synthetic data and local fixture prices. It is inten
 - Manager/Account Summary
 - Scenario Shock Summary
 
+## Data Coverage and Valuation Confidence
+
+- Valuation confidence: Mixed. Coverage is mixed: 22 of 22 held positions have local fixture prices, 22 holdings have complete sector/theme classifications, and 1 item(s) need human review before production use.
+- Human review items: 1.
+- Data coverage result: data_coverage_result.json.
+
+### Key Data Quality Flags
+
+- Plaid-shaped mock intake proves canonical mapping shape, not live Plaid valuation proof.
+
 ## Executive Summary
 
 - The synthetic Northstar portfolio totals $1,708,125.00 across 5 managers and 5 accounts.

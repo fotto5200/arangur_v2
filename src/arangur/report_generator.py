@@ -21,12 +21,20 @@ def generate_markdown_report(
     scenario_result_set: dict[str, Any],
     output_path: Path,
     workflow_template: dict[str, Any] | None = None,
+    data_coverage_result: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Generate the demo Markdown report plus a simple HTML companion."""
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     html_path = output_path.with_suffix(".html")
-    context = _build_report_context(snapshot, valuation, exposure_overlap, scenario_result_set, workflow_template)
+    context = _build_report_context(
+        snapshot,
+        valuation,
+        exposure_overlap,
+        scenario_result_set,
+        workflow_template,
+        data_coverage_result,
+    )
 
     output_path.write_text(_render_markdown(context), encoding="utf-8")
     html_path.write_text(_render_html(context), encoding="utf-8")
@@ -53,6 +61,7 @@ def _build_report_context(
     exposure_overlap: dict[str, Any],
     scenario_result_set: dict[str, Any],
     workflow_template: dict[str, Any] | None = None,
+    data_coverage_result: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     total_value = valuation["portfolio_total"]["market_value"]
     cash_value = valuation["portfolio_total"]["cash_value"]
@@ -133,6 +142,7 @@ def _build_report_context(
         "workflow_caveats": workflow["caveats"],
         "workflow_follow_up_actions": workflow["suggested_follow_up_actions"],
         "workflow_next_upgrade_path": workflow["next_upgrade_path"],
+        "data_coverage": _data_coverage_context(data_coverage_result, workflow),
     }
 
 
@@ -156,6 +166,8 @@ def _render_markdown(context: dict[str, Any]) -> str:
         "### Emphasized Report Sections",
         "",
         *_bullets(context["workflow_emphasized_sections"]),
+        "",
+        *_markdown_data_coverage_section(context["data_coverage"]),
         "",
         "## Executive Summary",
         "",
@@ -271,6 +283,7 @@ def _render_html(context: dict[str, Any]) -> str:
             + "<h3>Emphasized Report Sections</h3>"
             + _html_list(context["workflow_emphasized_sections"]),
         ),
+        _html_data_coverage_section(context["data_coverage"]),
         _html_section("Executive Summary", _html_list(context["executive_summary"])),
         _html_section(
             "Portfolio Value Summary",
@@ -378,6 +391,123 @@ def _render_html(context: dict[str, Any]) -> str:
             "</html>",
         ]
     )
+
+
+def _data_coverage_context(
+    data_coverage_result: dict[str, Any] | None,
+    workflow: dict[str, Any],
+) -> dict[str, Any]:
+    if not data_coverage_result:
+        return {
+            "available": False,
+            "detailed": False,
+            "summary_lines": ["No data coverage result was supplied for this report run."],
+            "dimension_rows": [],
+            "key_flags": ["No data coverage flags are available."],
+            "human_review_lines": ["No data coverage human-review list is available."],
+            "caveats": [],
+            "next_items": [],
+        }
+
+    portfolio_summary = data_coverage_result["portfolio_coverage_summary"]
+    confidence = data_coverage_result["valuation_confidence_summary"]
+    human_count = portfolio_summary["human_review_item_count"]
+    flags = data_coverage_result["data_quality_flags"]
+    human_review_items = data_coverage_result["human_review_items"]
+    dimension_rows = [
+        [_dimension_label(dimension), _confidence_label(value)]
+        for dimension, value in confidence["dimension_confidence"].items()
+    ]
+    key_flags = [flag["message"] for flag in flags[:5]]
+    if not key_flags:
+        key_flags = ["No high-priority data quality flags were produced by the current prototype rules."]
+    human_review_lines = [item["message"] for item in human_review_items[:6]]
+    if not human_review_lines:
+        human_review_lines = ["No human-review items were produced by the current prototype rules."]
+    return {
+        "available": True,
+        "detailed": workflow["workflow_type"] == "data_coverage_review",
+        "summary_lines": [
+            f"Valuation confidence: {_confidence_label(confidence['overall_confidence'])}. {portfolio_summary['summary']}",
+            f"Human review items: {human_count}.",
+            "Data coverage result: data_coverage_result.json.",
+        ],
+        "dimension_rows": dimension_rows,
+        "key_flags": key_flags,
+        "human_review_lines": human_review_lines,
+        "caveats": data_coverage_result["caveats"],
+        "next_items": data_coverage_result["next_data_work_items"],
+    }
+
+
+def _markdown_data_coverage_section(data_coverage: dict[str, Any]) -> list[str]:
+    lines = [
+        "## Data Coverage and Valuation Confidence",
+        "",
+        *_bullets(data_coverage["summary_lines"]),
+    ]
+    if data_coverage["detailed"]:
+        lines.extend(
+            [
+                "",
+                "### Confidence Dimensions",
+                "",
+                _markdown_table(["Dimension", "Confidence"], data_coverage["dimension_rows"]),
+                "",
+                "### Key Data Quality Flags",
+                "",
+                *_bullets(data_coverage["key_flags"]),
+                "",
+                "### Human Review Items",
+                "",
+                *_bullets(data_coverage["human_review_lines"]),
+                "",
+                "### Coverage Caveats",
+                "",
+                *_bullets(data_coverage["caveats"]),
+                "",
+                "### Next Data Work Items",
+                "",
+                *_bullets(data_coverage["next_items"]),
+            ]
+        )
+    else:
+        lines.extend(
+            [
+                "",
+                "### Key Data Quality Flags",
+                "",
+                *_bullets(data_coverage["key_flags"][:3]),
+            ]
+        )
+    return lines
+
+
+def _html_data_coverage_section(data_coverage: dict[str, Any]) -> str:
+    body = _html_list(data_coverage["summary_lines"])
+    if data_coverage["detailed"]:
+        body += "<h3>Confidence Dimensions</h3>"
+        body += _html_table(["Dimension", "Confidence"], data_coverage["dimension_rows"])
+        body += "<h3>Key Data Quality Flags</h3>"
+        body += _html_list(data_coverage["key_flags"])
+        body += "<h3>Human Review Items</h3>"
+        body += _html_list(data_coverage["human_review_lines"])
+        body += "<h3>Coverage Caveats</h3>"
+        body += _html_list(data_coverage["caveats"])
+        body += "<h3>Next Data Work Items</h3>"
+        body += _html_list(data_coverage["next_items"])
+    else:
+        body += "<h3>Key Data Quality Flags</h3>"
+        body += _html_list(data_coverage["key_flags"][:3])
+    return _html_section("Data Coverage and Valuation Confidence", body)
+
+
+def _dimension_label(value: str) -> str:
+    return value.replace("_", " ").title()
+
+
+def _confidence_label(value: str) -> str:
+    return value.replace("_", " ").title()
 
 
 def _exposure_rows(rows: list[dict[str, Any]]) -> list[list[str]]:

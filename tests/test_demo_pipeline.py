@@ -84,6 +84,7 @@ class DemoPipelineTests(unittest.TestCase):
         report = self.outputs["markdown_report"].read_text(encoding="utf-8")
         required_sections = [
             "## Synthetic-Data Caveat",
+            "## Data Coverage and Valuation Confidence",
             "## Executive Summary",
             "## Portfolio Value Summary",
             "## Manager/Account Summary",

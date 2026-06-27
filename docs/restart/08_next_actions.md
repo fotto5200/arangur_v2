@@ -75,10 +75,10 @@
 ## Batch 10: Data Coverage / Valuation Confidence Report Prototype
 
 - Goal: Prototype a synthetic Data Coverage / Valuation Confidence report family that explains source coverage, missing data, stale values, valuation method, and human-review needs.
-- Mode: Implementation batch after design confirmation.
+- Mode: Implemented baseline; future batches can deepen source inventory and reconciliation.
 - Allowed scope: `data/demo/`, `src/`, `tests/`, `reports/demo/`, `docs/demo/`, `docs/contracts/`, and `docs/restart/`.
 - Non-goals: No real client data, no vendor ingestion, no document extraction, no automated private asset valuation, no forecasting.
-- Acceptance criteria: Synthetic fixtures include coverage/confidence metadata, the report package exposes coverage summaries, generated reports include clear confidence caveats, and focused tests verify deterministic output.
+- Acceptance criteria: Implemented baseline: each pipeline run writes `data_coverage_result.json`, report packages expose coverage summaries and human-review counts, generated reports include a Data Coverage and Valuation Confidence section, the static index shows data confidence information, and focused tests verify deterministic output.
 - Stop conditions: Real data appears necessary, vendor selection is required, confidence scoring needs Frank's product decision, or implementation drifts into market-data ingestion.
 
 ## Batch 11: Scenario Library / Source Model Design
