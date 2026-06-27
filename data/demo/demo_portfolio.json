@@ -1,0 +1,445 @@
+{
+  "schema_version": "demo_portfolio.v1",
+  "metadata": {
+    "dataset_id": "demo_family_office_v1",
+    "dataset_label": "Northstar Family Office Synthetic Portfolio",
+    "is_synthetic": true,
+    "valuation_date": "2026-06-30",
+    "reporting_currency": "USD",
+    "portfolio_owner_label": "Northstar Family",
+    "advisor_label": "Arangur Demo Advisory Team",
+    "notes": "Synthetic family-office portfolio for the first Arangur v2 local demo vertical slice."
+  },
+  "managers": [
+    {
+      "manager_id": "mgr_core_growth",
+      "manager_name": "Atlas Core Growth",
+      "manager_type": "advisor",
+      "strategy_label": "Core Growth",
+      "notes": "Large-cap growth and quality compounders."
+    },
+    {
+      "manager_id": "mgr_value",
+      "manager_name": "Harbor Value Partners",
+      "manager_type": "satellite_manager",
+      "strategy_label": "Value Sleeve",
+      "notes": "Value and dividend-oriented equities."
+    },
+    {
+      "manager_id": "mgr_index",
+      "manager_name": "Meridian Index Solutions",
+      "manager_type": "index_manager",
+      "strategy_label": "Foundation ETF",
+      "notes": "Broad ETF exposure."
+    },
+    {
+      "manager_id": "mgr_ai_satellite",
+      "manager_name": "Signal AI Opportunities",
+      "manager_type": "satellite_manager",
+      "strategy_label": "AI Growth Satellite",
+      "notes": "Concentrated AI and semiconductor theme."
+    },
+    {
+      "manager_id": "mgr_treasury",
+      "manager_name": "Northstar Treasury Desk",
+      "manager_type": "cash_provider",
+      "strategy_label": "Treasury Reserve",
+      "notes": "Liquidity and defensive reserves."
+    }
+  ],
+  "accounts": [
+    {
+      "account_id": "acct_taxable_core",
+      "account_name": "Taxable Core Account",
+      "manager_id": "mgr_core_growth",
+      "account_type": "taxable",
+      "currency": "USD",
+      "custodian_label": "Demo Custody",
+      "household_member": "Northstar Family",
+      "tags": ["core", "growth"]
+    },
+    {
+      "account_id": "acct_trust_value",
+      "account_name": "Trust Value Account",
+      "manager_id": "mgr_value",
+      "account_type": "trust",
+      "currency": "USD",
+      "custodian_label": "Demo Custody",
+      "household_member": "Northstar Trust",
+      "tags": ["value", "income"]
+    },
+    {
+      "account_id": "acct_foundation_etf",
+      "account_name": "Foundation ETF Account",
+      "manager_id": "mgr_index",
+      "account_type": "foundation",
+      "currency": "USD",
+      "custodian_label": "Demo Custody",
+      "household_member": "Northstar Foundation",
+      "tags": ["broad_market", "defensive"]
+    },
+    {
+      "account_id": "acct_growth_satellite",
+      "account_name": "Growth Satellite Account",
+      "manager_id": "mgr_ai_satellite",
+      "account_type": "taxable",
+      "currency": "USD",
+      "custodian_label": "Demo Custody",
+      "household_member": "Northstar Family",
+      "tags": ["ai", "chips", "growth"]
+    },
+    {
+      "account_id": "acct_cash_reserve",
+      "account_name": "Cash Reserve Account",
+      "manager_id": "mgr_treasury",
+      "account_type": "cash",
+      "currency": "USD",
+      "custodian_label": "Demo Treasury",
+      "household_member": "Northstar Family",
+      "tags": ["cash_buffer", "defensive"]
+    }
+  ],
+  "securities": [
+    {
+      "security_id": "sec_msft",
+      "ticker": "MSFT",
+      "name": "Microsoft Corp.",
+      "security_type": "equity",
+      "currency": "USD",
+      "asset_class": "equity",
+      "sector": "technology",
+      "themes": ["ai", "growth", "quality"],
+      "scenario_tags": ["ai"]
+    },
+    {
+      "security_id": "sec_nvda",
+      "ticker": "NVDA",
+      "name": "NVIDIA Corp.",
+      "security_type": "equity",
+      "currency": "USD",
+      "asset_class": "equity",
+      "sector": "technology",
+      "themes": ["ai", "chips", "growth"],
+      "scenario_tags": ["ai", "chips"]
+    },
+    {
+      "security_id": "sec_aapl",
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "security_type": "equity",
+      "currency": "USD",
+      "asset_class": "equity",
+      "sector": "technology",
+      "themes": ["growth", "quality"],
+      "scenario_tags": ["growth"]
+    },
+    {
+      "security_id": "sec_googl",
+      "ticker": "GOOGL",
+      "name": "Alphabet Inc.",
+      "security_type": "equity",
+      "currency": "USD",
+      "asset_class": "equity",
+      "sector": "communication_services",
+      "themes": ["ai", "growth"],
+      "scenario_tags": ["ai"]
+    },
+    {
+      "security_id": "sec_xom",
+      "ticker": "XOM",
+      "name": "Exxon Mobil Corp.",
+      "security_type": "equity",
+      "currency": "USD",
+      "asset_class": "equity",
+      "sector": "energy",
+      "themes": ["energy", "value"],
+      "scenario_tags": ["energy", "value"]
+    },
+    {
+      "security_id": "sec_cvx",
+      "ticker": "CVX",
+      "name": "Chevron Corp.",
+      "security_type": "equity",
+      "currency": "USD",
+      "asset_class": "equity",
+      "sector": "energy",
+      "themes": ["energy", "value"],
+      "scenario_tags": ["energy", "value"]
+    },
+    {
+      "security_id": "sec_jpm",
+      "ticker": "JPM",
+      "name": "JPMorgan Chase & Co.",
+      "security_type": "equity",
+      "currency": "USD",
+      "asset_class": "equity",
+      "sector": "financials",
+      "themes": ["financials", "value"],
+      "scenario_tags": ["value"]
+    },
+    {
+      "security_id": "sec_brk_b",
+      "ticker": "BRK.B",
+      "name": "Berkshire Hathaway Class B",
+      "security_type": "equity",
+      "currency": "USD",
+      "asset_class": "equity",
+      "sector": "financials",
+      "themes": ["value", "quality"],
+      "scenario_tags": ["value", "quality"]
+    },
+    {
+      "security_id": "sec_vti",
+      "ticker": "VTI",
+      "name": "Vanguard Total Stock Market ETF",
+      "security_type": "etf",
+      "currency": "USD",
+      "asset_class": "equity",
+      "sector": "multi_sector",
+      "themes": ["broad_market", "growth", "value"],
+      "scenario_tags": ["broad_market"]
+    },
+    {
+      "security_id": "sec_agg",
+      "ticker": "AGG",
+      "name": "iShares Core U.S. Aggregate Bond ETF",
+      "security_type": "etf",
+      "currency": "USD",
+      "asset_class": "fixed_income",
+      "sector": "fixed_income",
+      "themes": ["fixed_income", "defensive"],
+      "scenario_tags": ["fixed_income", "defensive"]
+    },
+    {
+      "security_id": "sec_sgov",
+      "ticker": "SGOV",
+      "name": "iShares 0-3 Month Treasury Bond ETF",
+      "security_type": "etf",
+      "currency": "USD",
+      "asset_class": "fixed_income",
+      "sector": "treasury",
+      "themes": ["cash_buffer", "defensive"],
+      "scenario_tags": ["cash_buffer", "defensive"]
+    },
+    {
+      "security_id": "sec_unh",
+      "ticker": "UNH",
+      "name": "UnitedHealth Group Inc.",
+      "security_type": "equity",
+      "currency": "USD",
+      "asset_class": "equity",
+      "sector": "healthcare",
+      "themes": ["defensive", "quality"],
+      "scenario_tags": ["defensive", "quality"]
+    },
+    {
+      "security_id": "sec_nee",
+      "ticker": "NEE",
+      "name": "NextEra Energy Inc.",
+      "security_type": "equity",
+      "currency": "USD",
+      "asset_class": "equity",
+      "sector": "utilities",
+      "themes": ["energy", "quality", "defensive"],
+      "scenario_tags": ["energy", "defensive"]
+    }
+  ],
+  "holdings": [
+    {
+      "holding_id": "hold_core_msft",
+      "account_id": "acct_taxable_core",
+      "security_id": "sec_msft",
+      "quantity": 260,
+      "cost_basis": 78000,
+      "manager_note": "Core growth allocation also appears in the AI satellite."
+    },
+    {
+      "holding_id": "hold_core_nvda",
+      "account_id": "acct_taxable_core",
+      "security_id": "sec_nvda",
+      "quantity": 450,
+      "cost_basis": 47250,
+      "manager_note": "AI/chips exposure duplicated with the satellite manager."
+    },
+    {
+      "holding_id": "hold_core_aapl",
+      "account_id": "acct_taxable_core",
+      "security_id": "sec_aapl",
+      "quantity": 300,
+      "cost_basis": 49500
+    },
+    {
+      "holding_id": "hold_core_googl",
+      "account_id": "acct_taxable_core",
+      "security_id": "sec_googl",
+      "quantity": 240,
+      "cost_basis": 34800
+    },
+    {
+      "holding_id": "hold_core_brk",
+      "account_id": "acct_taxable_core",
+      "security_id": "sec_brk_b",
+      "quantity": 120,
+      "cost_basis": 39000
+    },
+    {
+      "holding_id": "hold_core_vti",
+      "account_id": "acct_taxable_core",
+      "security_id": "sec_vti",
+      "quantity": 250,
+      "cost_basis": 57500
+    },
+    {
+      "holding_id": "hold_value_xom",
+      "account_id": "acct_trust_value",
+      "security_id": "sec_xom",
+      "quantity": 550,
+      "cost_basis": 50000
+    },
+    {
+      "holding_id": "hold_value_cvx",
+      "account_id": "acct_trust_value",
+      "security_id": "sec_cvx",
+      "quantity": 300,
+      "cost_basis": 40500
+    },
+    {
+      "holding_id": "hold_value_jpm",
+      "account_id": "acct_trust_value",
+      "security_id": "sec_jpm",
+      "quantity": 360,
+      "cost_basis": 61200
+    },
+    {
+      "holding_id": "hold_value_brk",
+      "account_id": "acct_trust_value",
+      "security_id": "sec_brk_b",
+      "quantity": 150,
+      "cost_basis": 52500
+    },
+    {
+      "holding_id": "hold_value_unh",
+      "account_id": "acct_trust_value",
+      "security_id": "sec_unh",
+      "quantity": 110,
+      "cost_basis": 53000
+    },
+    {
+      "holding_id": "hold_index_vti",
+      "account_id": "acct_foundation_etf",
+      "security_id": "sec_vti",
+      "quantity": 700,
+      "cost_basis": 154000
+    },
+    {
+      "holding_id": "hold_index_agg",
+      "account_id": "acct_foundation_etf",
+      "security_id": "sec_agg",
+      "quantity": 900,
+      "cost_basis": 88200
+    },
+    {
+      "holding_id": "hold_index_sgov",
+      "account_id": "acct_foundation_etf",
+      "security_id": "sec_sgov",
+      "quantity": 600,
+      "cost_basis": 60000
+    },
+    {
+      "holding_id": "hold_index_msft",
+      "account_id": "acct_foundation_etf",
+      "security_id": "sec_msft",
+      "quantity": 80,
+      "cost_basis": 24800,
+      "manager_note": "Small direct position alongside broad ETF exposure."
+    },
+    {
+      "holding_id": "hold_ai_nvda",
+      "account_id": "acct_growth_satellite",
+      "security_id": "sec_nvda",
+      "quantity": 620,
+      "cost_basis": 58900,
+      "manager_note": "Satellite manager's concentrated AI/chips position."
+    },
+    {
+      "holding_id": "hold_ai_msft",
+      "account_id": "acct_growth_satellite",
+      "security_id": "sec_msft",
+      "quantity": 180,
+      "cost_basis": 61200
+    },
+    {
+      "holding_id": "hold_ai_googl",
+      "account_id": "acct_growth_satellite",
+      "security_id": "sec_googl",
+      "quantity": 160,
+      "cost_basis": 23800
+    },
+    {
+      "holding_id": "hold_ai_aapl",
+      "account_id": "acct_growth_satellite",
+      "security_id": "sec_aapl",
+      "quantity": 120,
+      "cost_basis": 19800
+    },
+    {
+      "holding_id": "hold_treasury_sgov",
+      "account_id": "acct_cash_reserve",
+      "security_id": "sec_sgov",
+      "quantity": 1200,
+      "cost_basis": 120000
+    },
+    {
+      "holding_id": "hold_treasury_agg",
+      "account_id": "acct_cash_reserve",
+      "security_id": "sec_agg",
+      "quantity": 500,
+      "cost_basis": 49000
+    },
+    {
+      "holding_id": "hold_treasury_nee",
+      "account_id": "acct_cash_reserve",
+      "security_id": "sec_nee",
+      "quantity": 200,
+      "cost_basis": 13200
+    }
+  ],
+  "cash_balances": [
+    {
+      "cash_id": "cash_taxable_core_usd",
+      "account_id": "acct_taxable_core",
+      "currency": "USD",
+      "amount": 42500,
+      "cash_type": "sweep"
+    },
+    {
+      "cash_id": "cash_trust_value_usd",
+      "account_id": "acct_trust_value",
+      "currency": "USD",
+      "amount": 35000,
+      "cash_type": "sweep"
+    },
+    {
+      "cash_id": "cash_foundation_usd",
+      "account_id": "acct_foundation_etf",
+      "currency": "USD",
+      "amount": 25000,
+      "cash_type": "operating_cash"
+    },
+    {
+      "cash_id": "cash_growth_satellite_usd",
+      "account_id": "acct_growth_satellite",
+      "currency": "USD",
+      "amount": 18000,
+      "cash_type": "sweep"
+    },
+    {
+      "cash_id": "cash_reserve_usd",
+      "account_id": "acct_cash_reserve",
+      "currency": "USD",
+      "amount": 110000,
+      "cash_type": "operating_cash"
+    }
+  ],
+  "transactions": []
+}

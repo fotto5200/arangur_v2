@@ -1,0 +1,833 @@
+{
+  "concentration_notes": [
+    {
+      "bucket": "Growth",
+      "code": "LARGE_THEME_EXPOSURE",
+      "message": "Growth theme exposure is above 20% of portfolio value."
+    },
+    {
+      "bucket": "Value",
+      "code": "LARGE_THEME_EXPOSURE",
+      "message": "Value theme exposure is above 20% of portfolio value."
+    },
+    {
+      "bucket": "Quality",
+      "code": "LARGE_THEME_EXPOSURE",
+      "message": "Quality theme exposure is above 20% of portfolio value."
+    },
+    {
+      "bucket": "Ai",
+      "code": "LARGE_THEME_EXPOSURE",
+      "message": "Ai theme exposure is above 20% of portfolio value."
+    },
+    {
+      "bucket": "Cash Buffer",
+      "code": "LARGE_THEME_EXPOSURE",
+      "message": "Cash Buffer theme exposure is above 20% of portfolio value."
+    },
+    {
+      "bucket": "Defensive",
+      "code": "LARGE_THEME_EXPOSURE",
+      "message": "Defensive theme exposure is above 20% of portfolio value."
+    }
+  ],
+  "exposures": {
+    "by_account": [
+      {
+        "bucket_id": "acct_taxable_core",
+        "bucket_label": "Taxable Core Account",
+        "market_value": 439875.0,
+        "portfolio_percent": 0.257519
+      },
+      {
+        "bucket_id": "acct_foundation_etf",
+        "bucket_label": "Foundation ETF Account",
+        "market_value": 399200.0,
+        "portfolio_percent": 0.233707
+      },
+      {
+        "bucket_id": "acct_trust_value",
+        "bucket_label": "Trust Value Account",
+        "market_value": 340800.0,
+        "portfolio_percent": 0.199517
+      },
+      {
+        "bucket_id": "acct_cash_reserve",
+        "bucket_label": "Cash Reserve Account",
+        "market_value": 294000.0,
+        "portfolio_percent": 0.172119
+      },
+      {
+        "bucket_id": "acct_growth_satellite",
+        "bucket_label": "Growth Satellite Account",
+        "market_value": 234250.0,
+        "portfolio_percent": 0.137139
+      }
+    ],
+    "by_asset_class": [
+      {
+        "bucket_id": "equity",
+        "bucket_label": "Equity",
+        "market_value": 1159525.0,
+        "portfolio_percent": 0.678829
+      },
+      {
+        "bucket_id": "fixed_income",
+        "bucket_label": "Fixed Income",
+        "market_value": 318100.0,
+        "portfolio_percent": 0.186228
+      },
+      {
+        "bucket_id": "cash",
+        "bucket_label": "Cash",
+        "market_value": 230500.0,
+        "portfolio_percent": 0.134943
+      }
+    ],
+    "by_manager": [
+      {
+        "bucket_id": "mgr_core_growth",
+        "bucket_label": "Atlas Core Growth",
+        "market_value": 439875.0,
+        "portfolio_percent": 0.257519
+      },
+      {
+        "bucket_id": "mgr_index",
+        "bucket_label": "Meridian Index Solutions",
+        "market_value": 399200.0,
+        "portfolio_percent": 0.233707
+      },
+      {
+        "bucket_id": "mgr_value",
+        "bucket_label": "Harbor Value Partners",
+        "market_value": 340800.0,
+        "portfolio_percent": 0.199517
+      },
+      {
+        "bucket_id": "mgr_treasury",
+        "bucket_label": "Northstar Treasury Desk",
+        "market_value": 294000.0,
+        "portfolio_percent": 0.172119
+      },
+      {
+        "bucket_id": "mgr_ai_satellite",
+        "bucket_label": "Signal AI Opportunities",
+        "market_value": 234250.0,
+        "portfolio_percent": 0.137139
+      }
+    ],
+    "by_sector": [
+      {
+        "bucket_id": "technology",
+        "bucket_label": "Technology",
+        "market_value": 456475.0,
+        "portfolio_percent": 0.267237
+      },
+      {
+        "bucket_id": "multi_sector",
+        "bucket_label": "Multi Sector",
+        "market_value": 261250.0,
+        "portfolio_percent": 0.152945
+      },
+      {
+        "bucket_id": "financials",
+        "bucket_label": "Financials",
+        "market_value": 189900.0,
+        "portfolio_percent": 0.111175
+      },
+      {
+        "bucket_id": "treasury",
+        "bucket_label": "Treasury",
+        "market_value": 180900.0,
+        "portfolio_percent": 0.105906
+      },
+      {
+        "bucket_id": "fixed_income",
+        "bucket_label": "Fixed Income",
+        "market_value": 137200.0,
+        "portfolio_percent": 0.080322
+      },
+      {
+        "bucket_id": "energy",
+        "bucket_label": "Energy",
+        "market_value": 111400.0,
+        "portfolio_percent": 0.065218
+      },
+      {
+        "bucket_id": "communication_services",
+        "bucket_label": "Communication Services",
+        "market_value": 70000.0,
+        "portfolio_percent": 0.040981
+      },
+      {
+        "bucket_id": "healthcare",
+        "bucket_label": "Healthcare",
+        "market_value": 56100.0,
+        "portfolio_percent": 0.032843
+      },
+      {
+        "bucket_id": "utilities",
+        "bucket_label": "Utilities",
+        "market_value": 14400.0,
+        "portfolio_percent": 0.00843
+      }
+    ],
+    "by_theme": [
+      {
+        "bucket_id": "growth",
+        "bucket_label": "Growth",
+        "market_value": 787725.0,
+        "portfolio_percent": 0.461164
+      },
+      {
+        "bucket_id": "value",
+        "bucket_label": "Value",
+        "market_value": 562550.0,
+        "portfolio_percent": 0.329338
+      },
+      {
+        "bucket_id": "quality",
+        "bucket_label": "Quality",
+        "market_value": 490600.0,
+        "portfolio_percent": 0.287216
+      },
+      {
+        "bucket_id": "ai",
+        "bucket_label": "Ai",
+        "market_value": 438275.0,
+        "portfolio_percent": 0.256583
+      },
+      {
+        "bucket_id": "cash_buffer",
+        "bucket_label": "Cash Buffer",
+        "market_value": 411400.0,
+        "portfolio_percent": 0.240849
+      },
+      {
+        "bucket_id": "defensive",
+        "bucket_label": "Defensive",
+        "market_value": 388600.0,
+        "portfolio_percent": 0.227501
+      },
+      {
+        "bucket_id": "broad_market",
+        "bucket_label": "Broad Market",
+        "market_value": 261250.0,
+        "portfolio_percent": 0.152945
+      },
+      {
+        "bucket_id": "chips",
+        "bucket_label": "Chips",
+        "market_value": 152475.0,
+        "portfolio_percent": 0.089265
+      },
+      {
+        "bucket_id": "fixed_income",
+        "bucket_label": "Fixed Income",
+        "market_value": 137200.0,
+        "portfolio_percent": 0.080322
+      },
+      {
+        "bucket_id": "energy",
+        "bucket_label": "Energy",
+        "market_value": 125800.0,
+        "portfolio_percent": 0.073648
+      },
+      {
+        "bucket_id": "financials",
+        "bucket_label": "Financials",
+        "market_value": 73800.0,
+        "portfolio_percent": 0.043205
+      }
+    ],
+    "cash": [
+      {
+        "bucket_id": "cash",
+        "bucket_label": "Cash",
+        "market_value": 230500.0,
+        "portfolio_percent": 0.134943
+      }
+    ]
+  },
+  "largest_duplicated_holdings": [
+    {
+      "account_names": [
+        "Foundation ETF Account",
+        "Taxable Core Account"
+      ],
+      "accounts": [
+        "acct_foundation_etf",
+        "acct_taxable_core"
+      ],
+      "display_name": "Vanguard Total Stock Market ETF",
+      "manager_names": [
+        "Atlas Core Growth",
+        "Meridian Index Solutions"
+      ],
+      "managers": [
+        "mgr_core_growth",
+        "mgr_index"
+      ],
+      "narrative_note": "Direct holding appears across multiple accounts or managers.",
+      "portfolio_percent": 0.152945,
+      "sector": "multi_sector",
+      "security_id": "sec_vti",
+      "themes": [
+        "broad_market",
+        "growth",
+        "value"
+      ],
+      "ticker": "VTI",
+      "total_market_value": 261250.0
+    },
+    {
+      "account_names": [
+        "Foundation ETF Account",
+        "Growth Satellite Account",
+        "Taxable Core Account"
+      ],
+      "accounts": [
+        "acct_foundation_etf",
+        "acct_growth_satellite",
+        "acct_taxable_core"
+      ],
+      "display_name": "Microsoft Corp.",
+      "manager_names": [
+        "Signal AI Opportunities",
+        "Atlas Core Growth",
+        "Meridian Index Solutions"
+      ],
+      "managers": [
+        "mgr_ai_satellite",
+        "mgr_core_growth",
+        "mgr_index"
+      ],
+      "narrative_note": "Direct holding appears across multiple accounts or managers.",
+      "portfolio_percent": 0.126337,
+      "sector": "technology",
+      "security_id": "sec_msft",
+      "themes": [
+        "ai",
+        "growth",
+        "quality"
+      ],
+      "ticker": "MSFT",
+      "total_market_value": 215800.0
+    },
+    {
+      "account_names": [
+        "Cash Reserve Account",
+        "Foundation ETF Account"
+      ],
+      "accounts": [
+        "acct_cash_reserve",
+        "acct_foundation_etf"
+      ],
+      "display_name": "iShares 0-3 Month Treasury Bond ETF",
+      "manager_names": [
+        "Meridian Index Solutions",
+        "Northstar Treasury Desk"
+      ],
+      "managers": [
+        "mgr_index",
+        "mgr_treasury"
+      ],
+      "narrative_note": "Direct holding appears across multiple accounts or managers.",
+      "portfolio_percent": 0.105906,
+      "sector": "treasury",
+      "security_id": "sec_sgov",
+      "themes": [
+        "cash_buffer",
+        "defensive"
+      ],
+      "ticker": "SGOV",
+      "total_market_value": 180900.0
+    },
+    {
+      "account_names": [
+        "Growth Satellite Account",
+        "Taxable Core Account"
+      ],
+      "accounts": [
+        "acct_growth_satellite",
+        "acct_taxable_core"
+      ],
+      "display_name": "NVIDIA Corp.",
+      "manager_names": [
+        "Signal AI Opportunities",
+        "Atlas Core Growth"
+      ],
+      "managers": [
+        "mgr_ai_satellite",
+        "mgr_core_growth"
+      ],
+      "narrative_note": "Direct holding appears across multiple accounts or managers.",
+      "portfolio_percent": 0.089265,
+      "sector": "technology",
+      "security_id": "sec_nvda",
+      "themes": [
+        "ai",
+        "chips",
+        "growth"
+      ],
+      "ticker": "NVDA",
+      "total_market_value": 152475.0
+    },
+    {
+      "account_names": [
+        "Cash Reserve Account",
+        "Foundation ETF Account"
+      ],
+      "accounts": [
+        "acct_cash_reserve",
+        "acct_foundation_etf"
+      ],
+      "display_name": "iShares Core U.S. Aggregate Bond ETF",
+      "manager_names": [
+        "Meridian Index Solutions",
+        "Northstar Treasury Desk"
+      ],
+      "managers": [
+        "mgr_index",
+        "mgr_treasury"
+      ],
+      "narrative_note": "Direct holding appears across multiple accounts or managers.",
+      "portfolio_percent": 0.080322,
+      "sector": "fixed_income",
+      "security_id": "sec_agg",
+      "themes": [
+        "fixed_income",
+        "defensive"
+      ],
+      "ticker": "AGG",
+      "total_market_value": 137200.0
+    }
+  ],
+  "overlaps": [
+    {
+      "account_names": [
+        "Foundation ETF Account",
+        "Taxable Core Account"
+      ],
+      "accounts": [
+        "acct_foundation_etf",
+        "acct_taxable_core"
+      ],
+      "display_name": "Vanguard Total Stock Market ETF",
+      "manager_names": [
+        "Atlas Core Growth",
+        "Meridian Index Solutions"
+      ],
+      "managers": [
+        "mgr_core_growth",
+        "mgr_index"
+      ],
+      "narrative_note": "Direct holding appears across multiple accounts or managers.",
+      "portfolio_percent": 0.152945,
+      "sector": "multi_sector",
+      "security_id": "sec_vti",
+      "themes": [
+        "broad_market",
+        "growth",
+        "value"
+      ],
+      "ticker": "VTI",
+      "total_market_value": 261250.0
+    },
+    {
+      "account_names": [
+        "Foundation ETF Account",
+        "Growth Satellite Account",
+        "Taxable Core Account"
+      ],
+      "accounts": [
+        "acct_foundation_etf",
+        "acct_growth_satellite",
+        "acct_taxable_core"
+      ],
+      "display_name": "Microsoft Corp.",
+      "manager_names": [
+        "Signal AI Opportunities",
+        "Atlas Core Growth",
+        "Meridian Index Solutions"
+      ],
+      "managers": [
+        "mgr_ai_satellite",
+        "mgr_core_growth",
+        "mgr_index"
+      ],
+      "narrative_note": "Direct holding appears across multiple accounts or managers.",
+      "portfolio_percent": 0.126337,
+      "sector": "technology",
+      "security_id": "sec_msft",
+      "themes": [
+        "ai",
+        "growth",
+        "quality"
+      ],
+      "ticker": "MSFT",
+      "total_market_value": 215800.0
+    },
+    {
+      "account_names": [
+        "Cash Reserve Account",
+        "Foundation ETF Account"
+      ],
+      "accounts": [
+        "acct_cash_reserve",
+        "acct_foundation_etf"
+      ],
+      "display_name": "iShares 0-3 Month Treasury Bond ETF",
+      "manager_names": [
+        "Meridian Index Solutions",
+        "Northstar Treasury Desk"
+      ],
+      "managers": [
+        "mgr_index",
+        "mgr_treasury"
+      ],
+      "narrative_note": "Direct holding appears across multiple accounts or managers.",
+      "portfolio_percent": 0.105906,
+      "sector": "treasury",
+      "security_id": "sec_sgov",
+      "themes": [
+        "cash_buffer",
+        "defensive"
+      ],
+      "ticker": "SGOV",
+      "total_market_value": 180900.0
+    },
+    {
+      "account_names": [
+        "Growth Satellite Account",
+        "Taxable Core Account"
+      ],
+      "accounts": [
+        "acct_growth_satellite",
+        "acct_taxable_core"
+      ],
+      "display_name": "NVIDIA Corp.",
+      "manager_names": [
+        "Signal AI Opportunities",
+        "Atlas Core Growth"
+      ],
+      "managers": [
+        "mgr_ai_satellite",
+        "mgr_core_growth"
+      ],
+      "narrative_note": "Direct holding appears across multiple accounts or managers.",
+      "portfolio_percent": 0.089265,
+      "sector": "technology",
+      "security_id": "sec_nvda",
+      "themes": [
+        "ai",
+        "chips",
+        "growth"
+      ],
+      "ticker": "NVDA",
+      "total_market_value": 152475.0
+    },
+    {
+      "account_names": [
+        "Cash Reserve Account",
+        "Foundation ETF Account"
+      ],
+      "accounts": [
+        "acct_cash_reserve",
+        "acct_foundation_etf"
+      ],
+      "display_name": "iShares Core U.S. Aggregate Bond ETF",
+      "manager_names": [
+        "Meridian Index Solutions",
+        "Northstar Treasury Desk"
+      ],
+      "managers": [
+        "mgr_index",
+        "mgr_treasury"
+      ],
+      "narrative_note": "Direct holding appears across multiple accounts or managers.",
+      "portfolio_percent": 0.080322,
+      "sector": "fixed_income",
+      "security_id": "sec_agg",
+      "themes": [
+        "fixed_income",
+        "defensive"
+      ],
+      "ticker": "AGG",
+      "total_market_value": 137200.0
+    },
+    {
+      "account_names": [
+        "Taxable Core Account",
+        "Trust Value Account"
+      ],
+      "accounts": [
+        "acct_taxable_core",
+        "acct_trust_value"
+      ],
+      "display_name": "Berkshire Hathaway Class B",
+      "manager_names": [
+        "Atlas Core Growth",
+        "Harbor Value Partners"
+      ],
+      "managers": [
+        "mgr_core_growth",
+        "mgr_value"
+      ],
+      "narrative_note": "Direct holding appears across multiple accounts or managers.",
+      "portfolio_percent": 0.067969,
+      "sector": "financials",
+      "security_id": "sec_brk_b",
+      "themes": [
+        "value",
+        "quality"
+      ],
+      "ticker": "BRK.B",
+      "total_market_value": 116100.0
+    },
+    {
+      "account_names": [
+        "Growth Satellite Account",
+        "Taxable Core Account"
+      ],
+      "accounts": [
+        "acct_growth_satellite",
+        "acct_taxable_core"
+      ],
+      "display_name": "Apple Inc.",
+      "manager_names": [
+        "Signal AI Opportunities",
+        "Atlas Core Growth"
+      ],
+      "managers": [
+        "mgr_ai_satellite",
+        "mgr_core_growth"
+      ],
+      "narrative_note": "Direct holding appears across multiple accounts or managers.",
+      "portfolio_percent": 0.051636,
+      "sector": "technology",
+      "security_id": "sec_aapl",
+      "themes": [
+        "growth",
+        "quality"
+      ],
+      "ticker": "AAPL",
+      "total_market_value": 88200.0
+    },
+    {
+      "account_names": [
+        "Growth Satellite Account",
+        "Taxable Core Account"
+      ],
+      "accounts": [
+        "acct_growth_satellite",
+        "acct_taxable_core"
+      ],
+      "display_name": "Alphabet Inc.",
+      "manager_names": [
+        "Signal AI Opportunities",
+        "Atlas Core Growth"
+      ],
+      "managers": [
+        "mgr_ai_satellite",
+        "mgr_core_growth"
+      ],
+      "narrative_note": "Direct holding appears across multiple accounts or managers.",
+      "portfolio_percent": 0.040981,
+      "sector": "communication_services",
+      "security_id": "sec_googl",
+      "themes": [
+        "ai",
+        "growth"
+      ],
+      "ticker": "GOOGL",
+      "total_market_value": 70000.0
+    }
+  ],
+  "portfolio_market_value": 1708125.0,
+  "schema_version": "exposure_overlap_result.v1",
+  "snapshot_id": "snap_demo_family_office_v1_2026_06_30",
+  "top_holdings": [
+    {
+      "account_id": "acct_foundation_etf",
+      "account_name": "Foundation ETF Account",
+      "display_name": "Vanguard Total Stock Market ETF",
+      "holding_id": "hold_index_vti",
+      "manager_id": "mgr_index",
+      "manager_name": "Meridian Index Solutions",
+      "market_value": 192500.0,
+      "portfolio_percent": 0.112697,
+      "sector": "multi_sector",
+      "security_id": "sec_vti",
+      "themes": [
+        "broad_market",
+        "growth",
+        "value"
+      ],
+      "ticker": "VTI"
+    },
+    {
+      "account_id": "acct_cash_reserve",
+      "account_name": "Cash Reserve Account",
+      "display_name": "iShares 0-3 Month Treasury Bond ETF",
+      "holding_id": "hold_treasury_sgov",
+      "manager_id": "mgr_treasury",
+      "manager_name": "Northstar Treasury Desk",
+      "market_value": 120600.0,
+      "portfolio_percent": 0.070604,
+      "sector": "treasury",
+      "security_id": "sec_sgov",
+      "themes": [
+        "cash_buffer",
+        "defensive"
+      ],
+      "ticker": "SGOV"
+    },
+    {
+      "account_id": "acct_taxable_core",
+      "account_name": "Taxable Core Account",
+      "display_name": "Microsoft Corp.",
+      "holding_id": "hold_core_msft",
+      "manager_id": "mgr_core_growth",
+      "manager_name": "Atlas Core Growth",
+      "market_value": 107900.0,
+      "portfolio_percent": 0.063169,
+      "sector": "technology",
+      "security_id": "sec_msft",
+      "themes": [
+        "ai",
+        "growth",
+        "quality"
+      ],
+      "ticker": "MSFT"
+    },
+    {
+      "account_id": "acct_growth_satellite",
+      "account_name": "Growth Satellite Account",
+      "display_name": "NVIDIA Corp.",
+      "holding_id": "hold_ai_nvda",
+      "manager_id": "mgr_ai_satellite",
+      "manager_name": "Signal AI Opportunities",
+      "market_value": 88350.0,
+      "portfolio_percent": 0.051723,
+      "sector": "technology",
+      "security_id": "sec_nvda",
+      "themes": [
+        "ai",
+        "chips",
+        "growth"
+      ],
+      "ticker": "NVDA"
+    },
+    {
+      "account_id": "acct_foundation_etf",
+      "account_name": "Foundation ETF Account",
+      "display_name": "iShares Core U.S. Aggregate Bond ETF",
+      "holding_id": "hold_index_agg",
+      "manager_id": "mgr_index",
+      "manager_name": "Meridian Index Solutions",
+      "market_value": 88200.0,
+      "portfolio_percent": 0.051636,
+      "sector": "fixed_income",
+      "security_id": "sec_agg",
+      "themes": [
+        "fixed_income",
+        "defensive"
+      ],
+      "ticker": "AGG"
+    },
+    {
+      "account_id": "acct_growth_satellite",
+      "account_name": "Growth Satellite Account",
+      "display_name": "Microsoft Corp.",
+      "holding_id": "hold_ai_msft",
+      "manager_id": "mgr_ai_satellite",
+      "manager_name": "Signal AI Opportunities",
+      "market_value": 74700.0,
+      "portfolio_percent": 0.043732,
+      "sector": "technology",
+      "security_id": "sec_msft",
+      "themes": [
+        "ai",
+        "growth",
+        "quality"
+      ],
+      "ticker": "MSFT"
+    },
+    {
+      "account_id": "acct_trust_value",
+      "account_name": "Trust Value Account",
+      "display_name": "JPMorgan Chase & Co.",
+      "holding_id": "hold_value_jpm",
+      "manager_id": "mgr_value",
+      "manager_name": "Harbor Value Partners",
+      "market_value": 73800.0,
+      "portfolio_percent": 0.043205,
+      "sector": "financials",
+      "security_id": "sec_jpm",
+      "themes": [
+        "financials",
+        "value"
+      ],
+      "ticker": "JPM"
+    },
+    {
+      "account_id": "acct_taxable_core",
+      "account_name": "Taxable Core Account",
+      "display_name": "Vanguard Total Stock Market ETF",
+      "holding_id": "hold_core_vti",
+      "manager_id": "mgr_core_growth",
+      "manager_name": "Atlas Core Growth",
+      "market_value": 68750.0,
+      "portfolio_percent": 0.040249,
+      "sector": "multi_sector",
+      "security_id": "sec_vti",
+      "themes": [
+        "broad_market",
+        "growth",
+        "value"
+      ],
+      "ticker": "VTI"
+    },
+    {
+      "account_id": "acct_trust_value",
+      "account_name": "Trust Value Account",
+      "display_name": "Exxon Mobil Corp.",
+      "holding_id": "hold_value_xom",
+      "manager_id": "mgr_value",
+      "manager_name": "Harbor Value Partners",
+      "market_value": 64900.0,
+      "portfolio_percent": 0.037995,
+      "sector": "energy",
+      "security_id": "sec_xom",
+      "themes": [
+        "energy",
+        "value"
+      ],
+      "ticker": "XOM"
+    },
+    {
+      "account_id": "acct_trust_value",
+      "account_name": "Trust Value Account",
+      "display_name": "Berkshire Hathaway Class B",
+      "holding_id": "hold_value_brk",
+      "manager_id": "mgr_value",
+      "manager_name": "Harbor Value Partners",
+      "market_value": 64500.0,
+      "portfolio_percent": 0.037761,
+      "sector": "financials",
+      "security_id": "sec_brk_b",
+      "themes": [
+        "value",
+        "quality"
+      ],
+      "ticker": "BRK.B"
+    }
+  ],
+  "validation": {
+    "errors": [],
+    "status": "valid",
+    "warnings": []
+  },
+  "valuation_date": "2026-06-30"
+}

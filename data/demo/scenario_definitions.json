@@ -1,0 +1,93 @@
+{
+  "schema_version": "scenario_definitions.v1",
+  "fixture_id": "demo_scenarios_2026_06_30",
+  "valuation_date": "2026-06-30",
+  "is_synthetic": true,
+  "scenarios": [
+    {
+      "scenario_id": "scenario_ai_chips_selloff",
+      "scenario_name": "AI and chip leadership selloff",
+      "scenario_date": "2026-06-30",
+      "description": "Illustrative shock to AI and semiconductor leadership with a mild broad equity drag.",
+      "default_shock": 0,
+      "is_synthetic": true,
+      "shock_rules": [
+        {
+          "match_type": "theme",
+          "match_value": "ai",
+          "shock_percent": -0.18
+        },
+        {
+          "match_type": "theme",
+          "match_value": "chips",
+          "shock_percent": -0.18
+        },
+        {
+          "match_type": "sector",
+          "match_value": "technology",
+          "shock_percent": -0.08
+        },
+        {
+          "match_type": "theme",
+          "match_value": "energy",
+          "shock_percent": -0.03
+        },
+        {
+          "match_type": "theme",
+          "match_value": "value",
+          "shock_percent": -0.03
+        },
+        {
+          "match_type": "asset_class",
+          "match_value": "equity",
+          "shock_percent": -0.05
+        },
+        {
+          "match_type": "asset_class",
+          "match_value": "fixed_income",
+          "shock_percent": 0.01
+        },
+        {
+          "match_type": "cash",
+          "match_value": "cash",
+          "shock_percent": 0
+        }
+      ]
+    },
+    {
+      "scenario_id": "scenario_energy_rally",
+      "scenario_name": "Energy rally with rate pressure",
+      "scenario_date": "2026-06-30",
+      "description": "Illustrative shock where energy holdings rise while fixed income slips modestly.",
+      "default_shock": 0,
+      "is_synthetic": true,
+      "shock_rules": [
+        {
+          "match_type": "theme",
+          "match_value": "energy",
+          "shock_percent": 0.12
+        },
+        {
+          "match_type": "sector",
+          "match_value": "energy",
+          "shock_percent": 0.12
+        },
+        {
+          "match_type": "asset_class",
+          "match_value": "fixed_income",
+          "shock_percent": -0.01
+        },
+        {
+          "match_type": "asset_class",
+          "match_value": "equity",
+          "shock_percent": 0.02
+        },
+        {
+          "match_type": "cash",
+          "match_value": "cash",
+          "shock_percent": 0
+        }
+      ]
+    }
+  ]
+}
