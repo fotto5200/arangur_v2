@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import sys
 import unittest
+from copy import deepcopy
 from pathlib import Path
 
 
@@ -11,8 +12,10 @@ SRC = ROOT / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
-from arangur.demo_data_loader import load_demo_inputs
+from arangur.canonical_snapshot import build_canonical_snapshot
+from arangur.demo_data_loader import load_demo_inputs, validate_demo_portfolio
 from arangur.demo_pipeline import run_pipeline
+from arangur.valuation import calculate_valuation
 
 
 class DemoPipelineTests(unittest.TestCase):
@@ -76,6 +79,54 @@ class DemoPipelineTests(unittest.TestCase):
         self.assertIn("Scenario Shock Summary", report)
         self.assertIn("Microsoft", report)
         self.assertIn("NVIDIA", report)
+
+    def test_markdown_report_contains_major_sections(self) -> None:
+        report = self.outputs["markdown_report"].read_text(encoding="utf-8")
+        required_sections = [
+            "## Synthetic-Data Caveat",
+            "## Executive Summary",
+            "## Portfolio Value Summary",
+            "## Manager/Account Summary",
+            "## Top Holdings",
+            "## Sector Exposure",
+            "## Theme Exposure",
+            "## Manager Overlap / Duplication Findings",
+            "## Scenario Shock Summary",
+            "## Advisor Talking Points",
+            "## What This Demo Proves",
+            "## What This Demo Does Not Yet Prove",
+            "## Next Planned Upgrades",
+        ]
+        for section in required_sections:
+            with self.subTest(section=section):
+                self.assertIn(section, report)
+
+    def test_html_report_is_generated(self) -> None:
+        report_path = self.outputs["html_report"]
+        self.assertTrue(report_path.exists())
+        report = report_path.read_text(encoding="utf-8")
+        self.assertIn("<!doctype html>", report)
+        self.assertIn("Synthetic-Data Caveat", report)
+        self.assertIn("Scenario Shock Summary", report)
+
+    def test_missing_required_portfolio_field_has_clear_error(self) -> None:
+        portfolio, _, _ = load_demo_inputs(ROOT / "data" / "demo")
+        broken = deepcopy(portfolio)
+        del broken["metadata"]["valuation_date"]
+        errors = validate_demo_portfolio(broken)
+        self.assertIn("metadata missing required field: valuation_date", errors)
+
+    def test_missing_market_price_is_reported(self) -> None:
+        portfolio, market_data, _ = load_demo_inputs(ROOT / "data" / "demo")
+        snapshot = build_canonical_snapshot(portfolio)
+        broken_market_data = deepcopy(market_data)
+        broken_market_data["prices"] = [
+            price for price in broken_market_data["prices"] if price["security_id"] != "sec_msft"
+        ]
+        valuation = calculate_valuation(snapshot, broken_market_data)
+        self.assertEqual(valuation["validation"]["status"], "invalid")
+        self.assertTrue(valuation["missing_prices"])
+        self.assertEqual(valuation["missing_prices"][0]["code"], "MISSING_PRICE")
 
     def _load_output(self, key: str) -> dict:
         with self.outputs[key].open("r", encoding="utf-8") as handle:

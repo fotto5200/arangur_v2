@@ -60,6 +60,7 @@ def run_pipeline(root: Path | None = None) -> dict[str, Path]:
 
     report_path = output_dir / "arangur_demo_report.md"
     report_package = generate_markdown_report(snapshot, valuation, exposure_overlap, scenario_results, report_path)
+    html_report_path = report_path.with_suffix(".html")
     report_package_path = output_dir / "report_package.json"
     _write_json(report_package_path, report_package)
 
@@ -70,6 +71,7 @@ def run_pipeline(root: Path | None = None) -> dict[str, Path]:
         "scenario_result": scenario_path,
         "report_package": report_package_path,
         "markdown_report": report_path,
+        "html_report": html_report_path,
     }
 
 

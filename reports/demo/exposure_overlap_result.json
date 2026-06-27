@@ -16,9 +16,9 @@
       "message": "Quality theme exposure is above 20% of portfolio value."
     },
     {
-      "bucket": "Ai",
+      "bucket": "AI",
       "code": "LARGE_THEME_EXPOSURE",
-      "message": "Ai theme exposure is above 20% of portfolio value."
+      "message": "AI theme exposure is above 20% of portfolio value."
     },
     {
       "bucket": "Cash Buffer",
@@ -193,7 +193,7 @@
       },
       {
         "bucket_id": "ai",
-        "bucket_label": "Ai",
+        "bucket_label": "AI",
         "market_value": 438275.0,
         "portfolio_percent": 0.256583
       },

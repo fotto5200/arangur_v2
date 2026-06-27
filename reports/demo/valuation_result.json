@@ -155,6 +155,7 @@
       "positions_market_value": 216250.0
     }
   ],
+  "missing_prices": [],
   "portfolio_total": {
     "cash_value": 230500.0,
     "currency": "USD",
@@ -682,6 +683,7 @@
   "snapshot_id": "snap_demo_family_office_v1_2026_06_30",
   "validation": {
     "errors": [],
+    "missing_prices": [],
     "status": "valid",
     "warnings": []
   },

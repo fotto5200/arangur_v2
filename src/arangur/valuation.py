@@ -119,6 +119,7 @@ def calculate_valuation(snapshot: dict[str, Any], market_data: dict[str, Any]) -
             "cash_value": cash_value,
             "currency": snapshot["reporting_currency"],
         },
+        "missing_prices": validation.get("missing_prices", []),
         "validation": validation,
     }
 

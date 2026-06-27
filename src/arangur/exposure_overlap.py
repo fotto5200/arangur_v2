@@ -156,4 +156,6 @@ def _percent(value: float, total_value: float) -> float:
 
 
 def _label(value: str) -> str:
+    if value.lower() == "ai":
+        return "AI"
     return value.replace("_", " ").title()

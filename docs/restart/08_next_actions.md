@@ -24,10 +24,28 @@
 - Mode: Implementation and documentation batch.
 - Allowed scope: `src/`, `tests/`, `reports/demo/`, `docs/demo/`, `docs/contracts/`, and `docs/restart/`.
 - Non-goals: No production UI, no Plaid, no live APIs, no real client data, no advisor assistant.
-- Acceptance criteria: Report sections are clearer, tables are consistently formatted, generated outputs remain deterministic, caveats remain prominent, and focused tests cover report generation.
+- Acceptance criteria: Report sections are clearer, tables are consistently formatted, Markdown and simple HTML outputs are generated, caveats remain prominent, validation errors are clearer, and focused tests cover report generation and malformed local fixtures.
 - Stop conditions: Report claims could be confused with real advice, generated outputs require client data, or layout tooling becomes a dependency decision.
 
-## Batch 5: Harden Analytics And Validation
+## Batch 5: Plaid-Shaped Mock Ingestion Adapter
+
+- Goal: Add a mock adapter that looks like Plaid ingestion but uses local synthetic Plaid-shaped fixtures.
+- Mode: Implementation batch.
+- Allowed scope: `data/demo/`, `src/`, `tests/`, `docs/contracts/`, `docs/demo/`, and `docs/restart/`.
+- Non-goals: No Plaid Sandbox, no live Plaid credentials, no external API calls.
+- Acceptance criteria: Mock Plaid-shaped input produces the same canonical snapshot type as the demo data loader and existing analytics/report outputs can run from that snapshot.
+- Stop conditions: Live credentials appear necessary, external API access is required, or canonical snapshot gaps need product-owner decisions.
+
+## Batch 6: Lightweight Local Report Index / Viewer
+
+- Goal: Add a simple local report index or non-interactive viewer entry point for generated demo outputs.
+- Mode: Implementation or design spike.
+- Allowed scope: `src/`, `reports/demo/`, `docs/demo/`, `tests/`, and `docs/restart/`.
+- Non-goals: No production dashboard, no live APIs, no credentials, no real client data.
+- Acceptance criteria: A colleague can find and open generated Markdown/HTML/JSON outputs from a simple local entry point.
+- Stop conditions: UI scope becomes broad, dependencies become necessary, or product direction is unclear.
+
+## Batch 7: Harden Analytics And Validation
 
 - Goal: Harden deterministic valuation, exposure/overlap summaries, scenario shocks, validations, and edge-case handling after the first vertical slice exists.
 - Mode: Implementation batch.
@@ -35,24 +53,6 @@
 - Non-goals: No vendor data, no full accounting, no advanced risk model, no Plaid.
 - Acceptance criteria: Calculations have stronger validation, clearer errors, and tests for missing prices, duplicated IDs, cash, and scenario rule precedence.
 - Stop conditions: Missing vertical slice, unresolved scenario methodology decision, or unsafe source data.
-
-## Batch 6: Plaid-Shaped Mock Ingestion Adapter
-
-- Goal: Add a mock adapter that looks like Plaid ingestion but uses local synthetic Plaid-shaped fixtures.
-- Mode: Implementation batch.
-- Allowed scope: `data/demo/`, `src/`, `tests/`, `docs/contracts/`, `docs/demo/`, and `docs/restart/`.
-- Non-goals: No Plaid Sandbox, no live Plaid credentials, no external API calls.
-- Acceptance criteria: Mock Plaid-shaped input produces the same canonical snapshot type as the demo data loader.
-- Stop conditions: Live credentials appear necessary, external API access is required, or canonical snapshot gaps need product-owner decisions.
-
-## Batch 7: Local Portfolio Viewer Spike
-
-- Goal: Explore a simple local viewer for the generated demo outputs if Frank wants a visible product surface before Plaid-shaped ingestion.
-- Mode: Design or implementation spike, depending on authorization.
-- Allowed scope: `src/`, `reports/demo/`, `docs/demo/`, and `docs/restart/`.
-- Non-goals: No production dashboard, no live APIs, no credentials, no real client data.
-- Acceptance criteria: A simple local-only viewing path exists or a clear viewer design is documented.
-- Stop conditions: UI scope becomes broad, dependencies become necessary, or product direction is unclear.
 
 ## Batch 8: Plaid Sandbox Integration Design
 

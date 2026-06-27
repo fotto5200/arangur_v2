@@ -15,6 +15,7 @@ def validate_market_data_for_snapshot(
 ) -> dict[str, Any]:
     errors: list[dict[str, str]] = []
     warnings: list[dict[str, str]] = []
+    missing_prices: list[dict[str, str]] = []
 
     if market_data["valuation_date"] != snapshot["as_of_date"]:
         _add_issue(
@@ -43,7 +44,14 @@ def validate_market_data_for_snapshot(
             continue
         price = price_index.get(security_id)
         if price is None:
-            _add_issue(errors, "MISSING_PRICE", security_id, f"Missing price for holding {holding['holding_id']}")
+            issue = {
+                "code": "MISSING_PRICE",
+                "record_id": security_id,
+                "holding_id": holding["holding_id"],
+                "message": f"Missing price for holding {holding['holding_id']}",
+            }
+            errors.append(issue)
+            missing_prices.append(issue)
             continue
         if price["currency"] != security["currency"]:
             _add_issue(errors, "PRICE_CURRENCY_MISMATCH", security_id, "Price currency must match security currency")
@@ -54,6 +62,7 @@ def validate_market_data_for_snapshot(
         "status": "invalid" if errors else "valid",
         "errors": errors,
         "warnings": warnings,
+        "missing_prices": missing_prices,
     }
 
 

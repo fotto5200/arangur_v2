@@ -5,6 +5,10 @@
     {
       "format": "markdown",
       "path": "reports/demo/arangur_demo_report.md"
+    },
+    {
+      "format": "html",
+      "path": "reports/demo/arangur_demo_report.html"
     }
   ],
   "portfolio_id": "portfolio_northstar_demo",

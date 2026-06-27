@@ -1,8 +1,18 @@
 # Northstar Family Office Synthetic Portfolio Review
 
-**Demo only:** this report uses synthetic data and local fixture prices. It is intended to demonstrate Arangur v2 product behavior and is not investment advice, a client statement, or a production valuation.
+## Synthetic-Data Caveat
 
-## Portfolio Summary
+Demo only: this report uses synthetic data and local fixture prices. It is intended to demonstrate Arangur v2 product behavior and is not investment advice, a client statement, or a production valuation.
+
+## Executive Summary
+
+- The synthetic Northstar portfolio totals $1,708,125.00 across 5 managers and 5 accounts.
+- Cash and cash-like reserves are $230,500.00, or 13.5% of the portfolio.
+- The largest supplied theme exposure is Growth at 46.1%; the largest sector exposure is Technology at 26.7%.
+- The largest direct overlap is Vanguard Total Stock Market ETF across Atlas Core Growth, Meridian Index Solutions, totaling $261,250.00.
+- The primary scenario, AI and chip leadership selloff, shows an illustrative -$102,878.00 impact (-6.0%).
+
+## Portfolio Value Summary
 
 - Portfolio: Northstar Family
 - Advisor label: Arangur Demo Advisory Team
@@ -10,7 +20,9 @@
 - Total value: $1,708,125.00
 - Cash: $230,500.00 (13.5%)
 
-## Manager Summary
+## Manager/Account Summary
+
+### Manager Summary
 
 | Manager | Market Value | Portfolio % |
 | --- | --- | --- |
@@ -20,7 +32,7 @@
 | Northstar Treasury Desk | $294,000.00 | 17.2% |
 | Signal AI Opportunities | $234,250.00 | 13.7% |
 
-## Account Summary
+### Account Summary
 
 | Account | Manager | Market Value | Cash |
 | --- | --- | --- | --- |
@@ -42,10 +54,12 @@
 | Microsoft Corp. | MSFT | Signal AI Opportunities | $74,700.00 | 4.4% |
 | JPMorgan Chase & Co. | JPM | Harbor Value Partners | $73,800.00 | 4.3% |
 | Vanguard Total Stock Market ETF | VTI | Atlas Core Growth | $68,750.00 | 4.0% |
+| Exxon Mobil Corp. | XOM | Harbor Value Partners | $64,900.00 | 3.8% |
+| Berkshire Hathaway Class B | BRK.B | Harbor Value Partners | $64,500.00 | 3.8% |
 
 ## Sector Exposure
 
-| Bucket | Market Value | Portfolio % |
+| Sector | Market Value | Portfolio % |
 | --- | --- | --- |
 | Technology | $456,475.00 | 26.7% |
 | Multi Sector | $261,250.00 | 15.3% |
@@ -55,25 +69,27 @@
 | Energy | $111,400.00 | 6.5% |
 | Communication Services | $70,000.00 | 4.1% |
 | Healthcare | $56,100.00 | 3.3% |
+| Utilities | $14,400.00 | 0.8% |
 
 ## Theme Exposure
 
 Theme exposure can exceed 100% in aggregate because a security can carry multiple theme tags.
 
-| Bucket | Market Value | Portfolio % |
+| Theme | Market Value | Portfolio % |
 | --- | --- | --- |
 | Growth | $787,725.00 | 46.1% |
 | Value | $562,550.00 | 32.9% |
 | Quality | $490,600.00 | 28.7% |
-| Ai | $438,275.00 | 25.7% |
+| AI | $438,275.00 | 25.7% |
 | Cash Buffer | $411,400.00 | 24.1% |
 | Defensive | $388,600.00 | 22.8% |
 | Broad Market | $261,250.00 | 15.3% |
 | Chips | $152,475.00 | 8.9% |
 | Fixed Income | $137,200.00 | 8.0% |
 | Energy | $125,800.00 | 7.4% |
+| Financials | $73,800.00 | 4.3% |
 
-## Overlap And Duplication Findings
+## Manager Overlap / Duplication Findings
 
 | Security | Ticker | Managers | Market Value | Portfolio % |
 | --- | --- | --- | --- | --- |
@@ -88,39 +104,49 @@ Theme exposure can exceed 100% in aggregate because a security can carry multipl
 
 ## Scenario Shock Summary
 
-Primary scenario: **AI and chip leadership selloff**
+Scenario shocks are deterministic demo approximations, not forecasts.
+
+| Scenario | Before | After | Impact | Impact % |
+| --- | --- | --- | --- | --- |
+| AI and chip leadership selloff | $1,708,125.00 | $1,605,247.00 | -$102,878.00 | -6.0% |
+| Energy rally with rate pressure | $1,708,125.00 | $1,740,714.50 | $32,589.50 | 1.9% |
+
+Primary scenario detail: **AI and chip leadership selloff**
 
 Illustrative shock to AI and semiconductor leadership with a mild broad equity drag.
 
-| Before | After | Impact | Impact % |
-| --- | --- | --- | --- |
-| $1,708,125.00 | $1,605,247.00 | $-102,878.00 | -6.0% |
-
-Largest position impacts:
-
-| Holding | Ticker | Rule | Impact |
-| --- | --- | --- | --- |
-| Microsoft Corp. | MSFT | theme:ai | $-19,422.00 |
-| NVIDIA Corp. | NVDA | theme:ai | $-15,903.00 |
-| Microsoft Corp. | MSFT | theme:ai | $-13,446.00 |
-| NVIDIA Corp. | NVDA | theme:ai | $-11,542.50 |
-| Alphabet Inc. | GOOGL | theme:ai | $-7,560.00 |
-| Microsoft Corp. | MSFT | theme:ai | $-5,976.00 |
-| Vanguard Total Stock Market ETF | VTI | theme:value | $-5,775.00 |
-| Apple Inc. | AAPL | sector:technology | $-5,040.00 |
+| Holding | Ticker | Matched Rule | Before | Impact |
+| --- | --- | --- | --- | --- |
+| Microsoft Corp. | MSFT | theme:ai | $107,900.00 | -$19,422.00 |
+| NVIDIA Corp. | NVDA | theme:ai | $88,350.00 | -$15,903.00 |
+| Microsoft Corp. | MSFT | theme:ai | $74,700.00 | -$13,446.00 |
+| NVIDIA Corp. | NVDA | theme:ai | $64,125.00 | -$11,542.50 |
+| Alphabet Inc. | GOOGL | theme:ai | $42,000.00 | -$7,560.00 |
+| Microsoft Corp. | MSFT | theme:ai | $33,200.00 | -$5,976.00 |
+| Vanguard Total Stock Market ETF | VTI | theme:value | $192,500.00 | -$5,775.00 |
+| Apple Inc. | AAPL | sector:technology | $63,000.00 | -$5,040.00 |
 
 ## Advisor Talking Points
 
-- The consolidated view shows that AI/chips exposure is larger than any single account suggests.
-- Microsoft and NVIDIA appear across multiple managers, making the overlap intentionality worth discussing.
-- Cash and fixed income reduce total scenario impact, but the growth sleeve still drives visible downside in the AI/chips shock.
-- The first demo is useful for discussing concentration, overlap, and scenario storytelling before adding live ingestion.
+- The consolidated view surfaces manager-level concentration and overlap that would be easy to miss account by account.
+- Microsoft and NVIDIA are deliberately duplicated across managers, giving the advisor a concrete overlap discussion.
+- The AI/chips scenario links theme exposure to a simple downside story while preserving clear caveats.
+- Cash and fixed income soften the scenario impact but do not erase concentration in growth-oriented holdings.
 
-## Limitations And Caveats
+## What This Demo Proves
 
-- Data is synthetic and hand-authored for product demonstration.
-- Prices, sectors, themes, and scenario rules come from local fixtures.
-- Scenario shocks are deterministic approximations, not forecasts.
-- The report is not investment advice and should not be treated as a client statement.
-- V1 uses long-only holdings, cash at face value, one reporting currency, direct holdings, and simple aggregation.
-- Plaid, custodian ingestion, market data vendors, deeper valuation, accounting, and MATLAB-informed upgrades are future adapters or upgrades.
+- Arangur v2 can run a complete local portfolio-analysis loop from synthetic fixtures.
+- The canonical snapshot can feed valuation, exposure, overlap, scenario, and report generation without source-specific coupling.
+- The report can explain holdings, overlap, and scenario impact in advisor-readable language.
+
+## What This Demo Does Not Yet Prove
+
+- It does not prove live ingestion, Plaid integration, custodian reconciliation, market-data vendor integration, or production data quality.
+- It does not implement tax lots, FX, shorts, derivatives, fees, corporate actions, performance attribution, or advanced accounting.
+- It does not use or validate legacy MATLAB logic.
+
+## Next Planned Upgrades
+
+- Add a Plaid-shaped mock ingestion adapter that emits the same canonical snapshot contract.
+- Add stronger validation edge cases and report-quality tests around malformed local fixtures.
+- Consider a lightweight local report index or viewer after the report package stabilizes.

@@ -86,10 +86,18 @@ def validate_demo_portfolio(data: dict[str, Any]) -> list[str]:
     _validate_required_array(data, "holdings", errors)
     _validate_required_array(data, "cash_balances", errors)
 
+    manager_ids = _collect_ids(data.get("managers", []), "manager_id", "managers", errors)
+    account_ids = _collect_ids(data.get("accounts", []), "account_id", "accounts", errors)
+    security_ids = _collect_ids(data.get("securities", []), "security_id", "securities", errors)
+    _collect_ids(data.get("holdings", []), "holding_id", "holdings", errors)
+    _collect_ids(data.get("cash_balances", []), "cash_id", "cash_balances", errors)
+
     for index, manager in enumerate(data.get("managers", [])):
         _require_fields(manager, ["manager_id", "manager_name"], f"managers[{index}]", errors)
     for index, account in enumerate(data.get("accounts", [])):
         _require_fields(account, ["account_id", "account_name", "manager_id", "account_type", "currency"], f"accounts[{index}]", errors)
+        if isinstance(account, dict) and account.get("manager_id") not in manager_ids:
+            errors.append(f"accounts[{index}].manager_id references unknown manager: {account.get('manager_id')}")
     for index, security in enumerate(data.get("securities", [])):
         _require_fields(
             security,
@@ -99,12 +107,20 @@ def validate_demo_portfolio(data: dict[str, Any]) -> list[str]:
         )
     for index, holding in enumerate(data.get("holdings", [])):
         _require_fields(holding, ["holding_id", "account_id", "security_id", "quantity"], f"holdings[{index}]", errors)
-        if isinstance(holding, dict) and holding.get("quantity", 0) < 0:
-            errors.append(f"holdings[{index}].quantity must be non-negative")
+        if isinstance(holding, dict):
+            if holding.get("account_id") not in account_ids:
+                errors.append(f"holdings[{index}].account_id references unknown account: {holding.get('account_id')}")
+            if holding.get("security_id") not in security_ids:
+                errors.append(f"holdings[{index}].security_id references unknown security: {holding.get('security_id')}")
+            if holding.get("quantity", 0) < 0:
+                errors.append(f"holdings[{index}].quantity must be non-negative")
     for index, cash in enumerate(data.get("cash_balances", [])):
         _require_fields(cash, ["cash_id", "account_id", "currency", "amount"], f"cash_balances[{index}]", errors)
-        if isinstance(cash, dict) and cash.get("amount", 0) < 0:
-            errors.append(f"cash_balances[{index}].amount must be non-negative")
+        if isinstance(cash, dict):
+            if cash.get("account_id") not in account_ids:
+                errors.append(f"cash_balances[{index}].account_id references unknown account: {cash.get('account_id')}")
+            if cash.get("amount", 0) < 0:
+                errors.append(f"cash_balances[{index}].amount must be non-negative")
 
     return errors
 
@@ -115,6 +131,7 @@ def validate_market_data_fixture(data: dict[str, Any]) -> list[str]:
     if data.get("is_synthetic") is not True:
         errors.append("is_synthetic must be true")
     _validate_required_array(data, "prices", errors)
+    _collect_ids(data.get("prices", []), "security_id", "prices", errors)
     for index, price in enumerate(data.get("prices", [])):
         _require_fields(price, ["security_id", "price", "currency", "price_date"], f"prices[{index}]", errors)
         if isinstance(price, dict) and price.get("price", 0) < 0:
@@ -146,6 +163,8 @@ def validate_scenario_definitions(data: dict[str, Any]) -> list[str]:
                     f"scenarios[{index}].shock_rules[{rule_index}]",
                     errors,
                 )
+                if isinstance(rule, dict) and rule.get("match_type") not in {"security_id", "ticker", "asset_class", "sector", "theme", "cash"}:
+                    errors.append(f"scenarios[{index}].shock_rules[{rule_index}].match_type is unsupported: {rule.get('match_type')}")
     return errors
 
 
@@ -171,6 +190,20 @@ def _validate_required_array(data: dict[str, Any], field: str, errors: list[str]
         errors.append(f"{owner} must be an array")
     elif not value and field not in {"transactions"}:
         errors.append(f"{owner} must not be empty")
+
+
+def _collect_ids(records: Any, id_field: str, section: str, errors: list[str]) -> set[str]:
+    if not isinstance(records, list):
+        return set()
+    seen: set[str] = set()
+    for index, record in enumerate(records):
+        if not isinstance(record, dict) or id_field not in record:
+            continue
+        record_id = record[id_field]
+        if record_id in seen:
+            errors.append(f"{section}[{index}].{id_field} duplicates identifier: {record_id}")
+        seen.add(record_id)
+    return seen
 
 
 def _format_errors(filename: str, errors: list[str]) -> str:
