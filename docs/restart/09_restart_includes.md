@@ -154,11 +154,44 @@ Use these file sets when starting different kinds of sessions.
 - `docs/ui_reporting/audience_depth_modes_v1.md`.
 - `docs/ui_reporting/first_demo_briefing_paths_v1.md`.
 - `docs/ui_reporting/demo_console_redesign_brief_v1.md`.
+- `docs/ui_reporting/guided_briefing_builder_correction_v1.md`.
+- `docs/ui_reporting/client_briefing_page_model_v1.md`.
 - `docs/ui_reporting/manager_role_review_v1.md`.
 - `docs/demo/report_workflow_implications.md`.
 - `docs/architecture/deployable_demo_app_architecture.md`.
 - `src/arangur/app/static/index.html` when UI implementation is authorized.
 - Do not implement real client personalization, live Plaid, external APIs, or investment advice language without a specific authorized batch.
+
+## Guided Builder Implementation Restart
+
+- All UI Reporting / Briefing restart files.
+- `docs/ui_reporting/guided_briefing_builder_correction_v1.md`.
+- `docs/ui_reporting/client_briefing_page_model_v1.md`.
+- `src/arangur/app/static/index.html`.
+- `src/arangur/app/routes.py`.
+- `src/arangur/app/run_service.py`.
+- `tests/test_app_health.py`.
+- `tests/test_app_runs_api.py`.
+- Do not show raw report links, JSON links, recent run history, or technical panels on the first screen.
+
+## Client Briefing Page Implementation Restart
+
+- All Guided Builder Implementation restart files.
+- `docs/ui_reporting/client_briefing_page_model_v1.md`.
+- `docs/ui_reporting/briefing_story_model_v1.md`.
+- `docs/ui_reporting/audience_depth_modes_v1.md`.
+- Current generated synthetic report package examples under `reports/demo/` if implementation is authorized.
+- Do not expose workflow IDs, JSON links, report package links, raw artifact lists, or technical appendix material on the client briefing page by default.
+
+## Technical/Admin Appendix Restart
+
+- All Deployable Demo App restart files.
+- `docs/ui_reporting/guided_briefing_builder_correction_v1.md`.
+- `docs/ui_reporting/client_briefing_page_model_v1.md`.
+- `docs/architecture/deployable_demo_app_architecture.md`.
+- `src/arangur/app/`.
+- Existing generated report package examples under `reports/demo/`.
+- Keep technical/admin artifact browsing separate from the main advisor guided builder and client briefing page.
 
 ## Briefing Story Implementation Restart
 

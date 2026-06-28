@@ -2,11 +2,11 @@
 
 ## Immediate Product/UI Batches
 
-- Browser demo console redesign around `Client question`, audience depth, and briefing preparation is implemented as the current static UI baseline.
-- Add backend/client-question metadata support so API responses and persisted summaries can retain selected question and audience depth.
-- Add audience depth handling to report package metadata and report generation.
-- Add first manager-role review prototype, including `Why do we own Manager 5?`.
-- Resume Docker/Postgres private-demo path and protected/admin surfaces with the updated briefing-room product metaphor.
+- Replace the dense browser briefing console with a sparse guided briefing builder.
+- Add a separate client briefing page surface.
+- Add an advisor draft review step before opening the client briefing.
+- Move technical links, JSON/report package links, run history, and report-browser behavior into a technical/admin appendix.
+- Then resume backend/client-question metadata support or the Docker/Postgres private-demo path with the guided-builder product metaphor.
 
 ## Batch 2: Architecture And Contracts For Thin Demo
 
@@ -149,13 +149,58 @@
 - Mode: Implemented baseline.
 - Allowed scope: `src/arangur/app/`, `tests/`, `docs/restart/`, `docs/ui_reporting/`, and README pointers.
 - Non-goals: No frontend framework, no production dashboard, no real client data, no live Plaid, no production authentication.
-- Acceptance criteria: Implemented baseline: first screen starts with `Client question`; audience depth defaults to `Standard Family Office Meeting`; source is secondary; workflow mapping is internal; prepared briefing shows plain-English "what to look at" guidance, key evidence, data confidence/caveats, report links, drill-down artifacts, technical details, and recent briefings.
+- Acceptance criteria: Implemented transitional baseline: first screen starts with `Client question`; audience depth defaults to `Standard Family Office Meeting`; source is secondary; workflow mapping is internal; prepared briefing shows plain-English "what to look at" guidance, key evidence, data confidence/caveats, report links, drill-down artifacts, technical details, and recent briefings.
 - Stop conditions: UI scope expands into production client portal, advisor autonomy/AI claims need product review, or report language risks investment advice.
+
+## Batch 16A-1: Guided Briefing Builder Correction
+
+- Goal: Capture the correction that the target UI is a sparse guided briefing builder, not a dense briefing console.
+- Mode: Implemented documentation baseline.
+- Allowed scope: `docs/ui_reporting/`, `docs/architecture/`, `docs/restart/`, `docs/decisions/`, `docs/demo/`, and README pointers.
+- Non-goals: No code changes, no generated reports, no tests, no frontend framework.
+- Acceptance criteria: Implemented baseline: `docs/ui_reporting/guided_briefing_builder_correction_v1.md` and `docs/ui_reporting/client_briefing_page_model_v1.md` define the guided-builder sequence, client briefing page, layer model, first-screen exclusions, and technical/admin appendix boundary.
+- Stop conditions: Product direction conflicts require Frank or ChatGPT strategic review.
+
+## Batch 16A-2: Sparse Guided Briefing Builder Implementation
+
+- Goal: Replace the dense one-page briefing console with a stepwise builder that shows one clear choice at a time.
+- Mode: Recommended implementation batch.
+- Allowed scope: `src/arangur/app/`, `tests/`, `docs/restart/`, `docs/ui_reporting/`, and README pointers.
+- Non-goals: No frontend framework, no production client portal, no real client data, no live Plaid, no backend persistence refactor unless a tiny compatibility field is necessary.
+- Acceptance criteria: First screen shows only purpose, compact synthetic/local caveat, `Client question`, and continue action; audience depth, source context, briefing bundle, advisor draft, and client briefing open in later steps; prior choices collapse into a compact summary; raw report links, JSON links, run history, and technical panels are absent from the first screen.
+- Stop conditions: Implementation requires a frontend framework, production auth, real data, or major backend/report-generator changes.
+
+## Batch 16A-3: Client Briefing Page Surface
+
+- Goal: Add a separate answer-first client briefing page generated from the guided builder selection.
+- Mode: Recommended implementation/design batch.
+- Allowed scope: `src/arangur/app/`, `src/arangur/` only for small report metadata helpers if needed, `tests/`, `docs/ui_reporting/`, and README pointers.
+- Non-goals: No production client portal, no real client data, no investment recommendation engine, no full PDF/export workflow.
+- Acceptance criteria: Client briefing page shows title/family name or demo title, client question, plain-English answer, three to five cards, compact confidence note, and optional evidence/appendix controls; workflow IDs, JSON links, report package links, raw artifact lists, and technical/admin details are hidden by default.
+- Stop conditions: Client-facing language requires product/legal review beyond existing demo caveats.
+
+## Batch 16A-4: Advisor Draft Step
+
+- Goal: Add an advisor review step between suggested briefing bundle and client briefing.
+- Mode: Recommended implementation/design batch.
+- Allowed scope: `docs/ui_reporting/`, `src/arangur/app/`, `tests/`, and small report metadata helpers if needed.
+- Non-goals: No AI advisor chat, no autonomous investment advice, no real client personalization.
+- Acceptance criteria: Advisor can review suggested talking points, caveat emphasis, follow-up questions, and unsupported conclusions before opening the client briefing.
+- Stop conditions: Drafting behavior requires LLM integration, real client history, or compliance/product decisions.
+
+## Batch 16A-5: Technical/Admin Appendix
+
+- Goal: Move technical links, report package JSON, local report index, run history, source adapters, workflow IDs, and artifact paths out of the main guided path into a clearly labeled technical/admin appendix.
+- Mode: Recommended implementation batch.
+- Allowed scope: `src/arangur/app/`, `tests/`, docs, and existing static app assets.
+- Non-goals: No production admin console, no new auth system unless part of a later private-demo protection batch.
+- Acceptance criteria: Main builder and client briefing are free of raw technical artifacts by default; technical/admin appendix preserves validation and report-browser access for developers/advisors.
+- Stop conditions: Protected admin/report surface policy requires Frank decision before implementation.
 
 ## Batch 16B: Briefing Story Mapping Layer
 
 - Goal: Add a small mapping layer from canonical client questions to internal workflow types and briefing metadata.
-- Mode: Recommended implementation/design batch.
+- Mode: Recommended implementation/design batch after sparse guided builder baseline, unless backend metadata is needed first.
 - Allowed scope: `src/`, `tests/`, `docs/ui_reporting/`, `docs/contracts/`, and generated synthetic demo artifacts if intentionally refreshed.
 - Non-goals: No LLM integration, no production personalization, no real client history.
 - Acceptance criteria: Supported client questions map to internal workflows, audience modes, report section defaults, and evidence requirements; tests verify mappings.

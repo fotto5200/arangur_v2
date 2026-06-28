@@ -95,6 +95,8 @@ python -m uvicorn arangur.app.main:app --reload --app-dir src
 
 Open `http://127.0.0.1:8000/app/`, choose a client question, choose an audience depth, choose a portfolio source, prepare the briefing, and open the generated report links from the prepared briefing or recent briefings list. The browser console keeps workflow/source mechanics behind the briefing setup and uses the same file-backed API to serve generated artifacts only from `/reports/demo/...`.
 
+Product direction note: the current browser console is functional but transitional. The target UI is a sparse guided briefing builder with a separate client briefing page; see the UI reporting docs below.
+
 Create a native demo manager-overlap workflow run:
 
 ```cmd
@@ -137,6 +139,8 @@ Future scenario, data-coverage, and deployable private-demo work is captured in:
 - `docs/ui_reporting/ui_reporting_philosophy_v1.md`
 - `docs/ui_reporting/briefing_story_model_v1.md`
 - `docs/ui_reporting/demo_console_redesign_brief_v1.md`
+- `docs/ui_reporting/guided_briefing_builder_correction_v1.md`
+- `docs/ui_reporting/client_briefing_page_model_v1.md`
 - `docs/ui_reporting/manager_role_review_v1.md`
 - `docs/architecture/deployable_demo_app_architecture.md`
 - `docs/architecture/persistence_model_plan.md`

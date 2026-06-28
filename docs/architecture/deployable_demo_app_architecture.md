@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The first deployable Arangur demo app should make the existing synthetic workflow/report loop usable from a browser in a private demo environment. It should let a reviewer choose a synthetic source, choose an advisor workflow, run the existing analysis path, browse prior runs, and inspect reports plus data coverage confidence summaries.
+The first deployable Arangur demo app should make the existing synthetic workflow/report loop usable from a browser in a private demo environment. It should let a reviewer prepare a guided client briefing, inspect supporting evidence, and reach technical report artifacts when needed.
 
 This app is not a production client portal. It is a deployable wrapper around the current local demo pipeline so Arangur can be shown privately on a small VM without inventing a separate stack.
 
@@ -17,7 +17,7 @@ data/demo fixtures -> canonical snapshot -> valuation -> exposure/overlap -> sce
 The deployable app should wrap that same product loop:
 
 ```text
-browser UI -> FastAPI workflow-run endpoint -> existing pipeline/service modules -> persisted run metadata -> report browser
+guided builder -> FastAPI workflow-run endpoint -> existing pipeline/service modules -> persisted run metadata -> client briefing / appendices
 ```
 
 The local pipeline remains useful for deterministic development and artifact regeneration. The deployable app adds:
@@ -68,37 +68,36 @@ Suggested internal modules when implementation is authorized:
 
 ## Proposed Browser UI Structure
 
-The first browser UI should be a utilitarian private-demo control panel, not a marketing site or production dashboard.
+The first browser UI should be a guided briefing builder, not a marketing site, production dashboard, or dense report console.
 
-Current file-backed baseline: `/`, `/app/`, and `/app/index.html` now serve a dependency-free HTML/CSS/JavaScript demo console that lists sources/workflows from the API, starts synchronous local runs, refreshes run history, and opens report artifacts returned by the API.
+Current file-backed baseline: `/`, `/app/`, and `/app/index.html` now serve a dependency-free HTML/CSS/JavaScript briefing console that maps client questions to internal workflow runs and opens report artifacts returned by the API.
 
-Product direction update: the browser console should evolve from `source + workflow + run` toward `client question + audience depth + briefing preparation`. Workflow APIs remain useful internal execution machinery, but the outward-facing UI should start with the client conversation. The first visible UI label should be `Client question`, and the default audience mode should be `Standard Family Office Meeting`. See `docs/ui_reporting/`.
+Product direction correction: that browser console is functional but too dense. The target UI should evolve into a sparse guided builder that shows one clear choice at a time: client question, audience depth, portfolio/source context, suggested briefing bundle, advisor draft, and then client briefing. Workflow APIs remain useful internal execution machinery, but the outward-facing UI should start with the client conversation. The first visible UI label should be `Client question`, and the default audience mode should be `Standard Family Office Meeting`. See `docs/ui_reporting/guided_briefing_builder_correction_v1.md`.
 
-Required first UI controls:
+The deployable app should distinguish four surfaces:
 
-- Source selector: `native_demo` / `plaid_mock`.
-- Workflow selector: `quarterly_review` / `manager_overlap_review` / `scenario_risk_review` / `intake_review` / `data_coverage_review`.
-- Run workflow button.
-- Run history/list.
-- Report viewer/link panel.
-- Data coverage/confidence summary.
-- Synthetic-data caveat.
+- Advisor guided builder: stepwise composition of the client briefing.
+- Client briefing page: answer-first, client-ready presentation.
+- Evidence appendix: valuation, exposure, scenario, manager, and data-confidence evidence supporting selected cards.
+- Technical/admin report browser: workflow IDs, run IDs, artifact paths, HTML/Markdown/JSON links, report package links, local report index, and recent run history.
 
 Recommended first pages:
 
-- `/`: demo run console with selectors and latest run summary.
-- `/runs`: run history with filters by source and workflow.
-- `/runs/{run_id}`: run detail with links to Markdown, HTML, JSON artifacts, and confidence summary.
-- `/reports/{run_id}`: report viewer or redirect to generated HTML artifact.
+- `/`: advisor guided builder, starting with one sparse `Client question` step.
+- `/briefings/{briefing_id}`: client briefing page or generated briefing view.
+- `/briefings/{briefing_id}/evidence`: evidence appendix.
+- `/admin/reports`: technical/admin report browser with run history and raw artifact links.
 - `/admin`: protected operational view for seed/preflight status, if needed.
 
-The UI should keep caveats visible near run controls and reports:
+The UI should keep caveats visible but compact in the main guided path:
 
 - Synthetic data only.
 - No live Plaid.
 - No real client data.
 - No external market data.
 - Not investment advice.
+
+Full caveat blocks, run history, raw report links, JSON links, and report package links should move to later evidence or technical/admin layers rather than appearing on the first screen.
 
 ## Proposed App Routes And Pages
 
@@ -199,6 +198,8 @@ First report browser behavior:
 
 The static `reports/demo/index.html` remains useful for local file review, but the deployable app should eventually produce a database-backed run index.
 
+Product surface note: the report artifact browser is technical/admin support, not the main product experience. It should help validate and operate the demo, while the advisor path should remain the guided builder and the client path should remain the separate answer-first briefing page.
+
 ## Demo Data Seeding
 
 The first seed path should exercise real app/service paths, not insert fake database rows that bypass the workflow.
@@ -257,7 +258,8 @@ Recommended sequence:
 3. Workflow-run service wrapper around existing pipeline modules.
 4. Postgres persistence skeleton for run metadata and artifacts.
 5. Browser UI shell with selectors and run list.
-6. Briefing-room redesign around client questions and audience depth.
-7. Docker Compose private-demo local stack.
-8. Demo seed/preflight script.
-9. Lightsail/Caddy/Cloudflare deployment docs.
+6. Sparse guided briefing builder around client questions, audience depth, and curated briefing cards.
+7. Separate client briefing page and evidence/technical appendices.
+8. Docker Compose private-demo local stack.
+9. Demo seed/preflight script.
+10. Lightsail/Caddy/Cloudflare deployment docs.

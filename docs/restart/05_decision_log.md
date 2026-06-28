@@ -97,3 +97,38 @@
 - Decision: Manager-role review should compare manager exposures against agreed client/advisor categories, themes, macro concerns, or mandates and flag duplicated or shadowed roles for advisor review.
 - Reason: If one manager closely shadows another across the categories that matter, the advisor needs to ask whether the duplication is intentional or accidental.
 - Consequences: Arangur should not automatically recommend removing a manager. It should raise a mandate/role question and provide evidence for advisor-approved interpretation.
+
+## Decision 0015: Target UI Is A Guided Briefing Builder
+
+- Date: 2026-06-28.
+- Decision: The target Arangur UI is a guided briefing builder, not a briefing console.
+- Reason: A console can expose capabilities, but Arangur's product job is to guide an advisor through composing the right client conversation.
+- Consequences: Future UI work should introduce one clear choice at a time, preserve prior choices in a compact summary, and reveal evidence only after the briefing frame is formed.
+
+## Decision 0016: First Screen Shows One Clear Decision
+
+- Date: 2026-06-28.
+- Decision: The first screen should show one clear decision, beginning with `Client question`, not every available report, control, artifact, caveat, or history item.
+- Reason: Showing every requirement at once makes the product feel like a reporting console or brokerage dashboard instead of a guided briefing builder.
+- Consequences: Audience depth, source context, evidence bundle, report links, recent run history, and technical details should appear only in later steps or appendices.
+
+## Decision 0017: Client Briefing And Advisor Builder Are Separate Surfaces
+
+- Date: 2026-06-28.
+- Decision: The advisor guided builder and client briefing page should be separate surfaces.
+- Reason: Advisors need preparation, draft, caveat, and evidence controls; clients need an answer-first briefing with minimal supporting cards and responsible confidence language.
+- Consequences: The builder should compose and approve the briefing. The client page should show title/family name, client question, plain-English answer, three to five cards, compact confidence note, and optional appendix buttons.
+
+## Decision 0018: Technical Artifacts Belong In Technical/Admin Appendix
+
+- Date: 2026-06-28.
+- Decision: Technical artifacts and JSON/report links should be hidden in a technical/admin appendix, not the main advisor or client path.
+- Reason: Workflow IDs, run IDs, artifact paths, JSON links, report package links, and local report indexes are useful for validation and administration but distract from briefing composition.
+- Consequences: The main guided path should avoid raw report links, JSON links, report packages, implementation roadmaps, and full technical details. A protected or clearly labeled admin/report browser can retain them.
+
+## Decision 0019: Dense Briefing Console Is Transitional
+
+- Date: 2026-06-28.
+- Decision: The current dense browser briefing console is transitional and should be redesigned.
+- Reason: It proves that client-question mapping and report artifacts can work in the browser, but it presents too much at once and should not define the long-term product interaction.
+- Consequences: The next UI implementation batch should replace the dense console with a sparse guided builder before adding deeper UI polish, backend metadata, or client-facing briefing surfaces.
