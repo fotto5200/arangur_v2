@@ -74,16 +74,19 @@ Current file-backed baseline: `/`, `/app/`, and `/app/index.html` now serve a de
 
 Product direction correction: that browser console is functional but too dense. The target UI should evolve into a sparse guided builder that shows one clear choice at a time: client question, audience depth, portfolio/source context, suggested briefing bundle, advisor draft, and then client briefing. Workflow APIs remain useful internal execution machinery, but the outward-facing UI should start with the client conversation. The first visible UI label should be `Client question`, and the default audience mode should be `Standard Family Office Meeting`. See `docs/ui_reporting/guided_briefing_builder_correction_v1.md`.
 
+Latest product direction: the deployable app should support a Briefing Set Builder. The main advisor surface should define shared briefing context once, generate an ordered report view list, allow compact report-row edits, render a client preview mode from the selected views, keep technical/admin material in an appendix, and eventually persist saved briefing sets. See `docs/ui_reporting/briefing_set_builder_model_v1.md`.
+
 The deployable app should distinguish four surfaces:
 
 - Advisor guided builder: stepwise composition of the client briefing.
+- Briefing set builder: shared context, ordered report views, and client preview composition.
 - Client briefing page: answer-first, client-ready presentation.
 - Evidence appendix: valuation, exposure, scenario, manager, and data-confidence evidence supporting selected cards.
 - Technical/admin report browser: workflow IDs, run IDs, artifact paths, HTML/Markdown/JSON links, report package links, local report index, and recent run history.
 
 Recommended first pages:
 
-- `/`: advisor guided builder, starting with one sparse `Client question` step.
+- `/`: advisor briefing set builder, starting with shared context and generating an ordered report view list.
 - `/briefings/{briefing_id}`: client briefing page or generated briefing view.
 - `/briefings/{briefing_id}/evidence`: evidence appendix.
 - `/admin/reports`: technical/admin report browser with run history and raw artifact links.
@@ -259,7 +262,9 @@ Recommended sequence:
 4. Postgres persistence skeleton for run metadata and artifacts.
 5. Browser UI shell with selectors and run list.
 6. Sparse guided briefing builder around client questions, audience depth, and curated briefing cards.
-7. Separate client briefing page and evidence/technical appendices.
-8. Docker Compose private-demo local stack.
-9. Demo seed/preflight script.
-10. Lightsail/Caddy/Cloudflare deployment docs.
+7. Briefing Set Builder with shared context, ordered report view list, and client preview mode.
+8. Separate client briefing page and evidence/technical appendices.
+9. Saved briefing set skeleton.
+10. Docker Compose private-demo local stack.
+11. Demo seed/preflight script.
+12. Lightsail/Caddy/Cloudflare deployment docs.

@@ -2,11 +2,11 @@
 
 ## Immediate Product/UI Batches
 
-- Add backend/client-question and audience-depth metadata support.
-- Refine client briefing page and report generation so the answer-first briefing can be persisted/exported more cleanly.
-- Add first manager-role review prototype, including `Why do we own Manager 5?`.
-- Move toward Docker Compose private-demo files with the guided-builder product metaphor.
-- Add protected/admin surfaces when private-demo access policy is ready.
+- Implement the Briefing Set Builder UI by transforming the current sparse guided builder into shared context, compact ordered report views, Builder Mode, and Client Preview Mode.
+- Add briefing set metadata to backend/report packages.
+- Add client preview sequence rendering from the selected ordered report views.
+- Add a save/load briefing set skeleton.
+- Then resume backend/client-question and audience-depth metadata refinement or the Docker/Postgres private-demo path.
 
 ## Batch 2: Architecture And Contracts For Thin Demo
 
@@ -196,6 +196,51 @@
 - Non-goals: No production admin console, no new auth system unless part of a later private-demo protection batch.
 - Acceptance criteria: Static baseline implemented in the browser app: main builder and client briefing are free of raw technical artifacts by default; technical/admin appendix preserves validation and report-browser access for developers/advisors after interaction.
 - Stop conditions: Protected admin/report surface policy requires Frank decision before implementation.
+
+## Batch 16A-6: Briefing Set Builder Model
+
+- Goal: Capture the correction that the target UI is a Briefing Set Builder, not a one-report guided wizard.
+- Mode: Implemented documentation baseline.
+- Allowed scope: `docs/ui_reporting/`, `docs/architecture/`, `docs/restart/`, `docs/decisions/`, `docs/demo/`, and README pointers.
+- Non-goals: No code changes, no generated reports, no tests, no dependencies, no Docker/Postgres changes.
+- Acceptance criteria: Implemented baseline: briefing set model, report view model, client preview model, and next UI implementation brief define shared context, ordered report views, client preview, technical/admin appendix boundaries, and acceptance criteria for the next UI batch.
+- Stop conditions: Product direction conflicts require Frank or ChatGPT strategic review.
+
+## Batch 16A-7: Briefing Set Builder UI
+
+- Goal: Transform the current sparse guided builder into a Briefing Set Builder.
+- Mode: Recommended implementation batch.
+- Allowed scope: `src/arangur/app/`, tests, `docs/ui_reporting/`, restart docs, and README pointers.
+- Non-goals: No frontend framework unless explicitly authorized, no real client data, no live Plaid, no production client portal, no autonomous investment advice.
+- Acceptance criteria: UI defines shared context once, generates a compact ordered report view list, supports duplicate/change lens/change metric/reorder/remove, switches between Builder Mode and Client Preview Mode, hides technical/admin artifacts from the main path, and reduces headings/repeated explanatory text.
+- Stop conditions: Implementation requires production auth, real client personalization, external APIs, or major backend schema decisions beyond the UI batch.
+
+## Batch 16A-8: Briefing Set Metadata
+
+- Goal: Add briefing set metadata to backend/report packages.
+- Mode: Recommended implementation/design batch after the UI model is stable.
+- Allowed scope: `src/`, `tests/`, `docs/contracts/`, `docs/ui_reporting/`, and generated synthetic report artifacts if intentionally refreshed.
+- Non-goals: No production persistence model for real clients, no full portfolio database redesign, no live data.
+- Acceptance criteria: Report packages can represent shared briefing context, report view sequence, visibility status, audience depth, and client preview metadata while preserving existing workflow-run compatibility.
+- Stop conditions: Schema changes threaten current API compatibility or require unresolved product decisions.
+
+## Batch 16A-9: Client Preview Sequence Rendering
+
+- Goal: Render client preview from the selected ordered report views instead of from a static generic briefing page.
+- Mode: Recommended implementation batch.
+- Allowed scope: `src/arangur/app/`, `src/arangur/` for small metadata helpers if needed, tests, docs, and synthetic generated artifacts if intentionally refreshed.
+- Non-goals: No PDF/export workflow, no production client portal, no recommendation engine.
+- Acceptance criteria: Client preview shows selected client-facing report views in order, uses concrete portfolio-derived findings where available, hides advisor-only views and technical/admin artifacts, and updates when the builder list is reordered or edited.
+- Stop conditions: Client-facing language requires product/legal review beyond existing demo caveats.
+
+## Batch 16A-10: Save/Load Briefing Set Skeleton
+
+- Goal: Add a first skeleton for saving and reopening synthetic/demo briefing sets.
+- Mode: Future implementation batch after report view and preview behavior are stable.
+- Allowed scope: To be defined later, likely `src/arangur/app/`, tests, docs, and optional file-backed/demo persistence.
+- Non-goals: No production client data, no multi-tenant entitlement model, no real document export.
+- Acceptance criteria: A demo briefing set can be saved with shared context and ordered report views, reopened, and previewed without exposing technical/admin artifacts in the main path.
+- Stop conditions: Persistence choices require production account modeling or real client data.
 
 ## Batch 16B: Briefing Story Mapping Layer
 

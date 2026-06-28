@@ -132,3 +132,45 @@
 - Decision: The current dense browser briefing console is transitional and should be redesigned.
 - Reason: It proves that client-question mapping and report artifacts can work in the browser, but it presents too much at once and should not define the long-term product interaction.
 - Consequences: The next UI implementation batch should replace the dense console with a sparse guided builder before adding deeper UI polish, backend metadata, or client-facing briefing surfaces.
+
+## Decision 0020: Target UI Is A Briefing Set Builder
+
+- Date: 2026-06-28.
+- Decision: The target UI is now a Briefing Set Builder, not a one-report guided wizard.
+- Reason: The sparse guided builder fixes density, but advisor meetings require a composed sequence of views rather than a single generated report.
+- Consequences: Future UI work should transform the current guided builder into shared context plus an ordered report view list and client preview mode.
+
+## Decision 0021: Briefing Set Composition
+
+- Date: 2026-06-28.
+- Decision: A briefing set consists of shared context, ordered report views, client preview, and a saved presentation set.
+- Reason: Shared setup prevents repeated assumptions, ordered views support client conversation, preview supports advisor review, and saved sets provide the future persistence boundary.
+- Consequences: Backend/report metadata should eventually represent briefing-set context and view sequence separately from raw workflow runs.
+
+## Decision 0022: Report Views Are Compact Rows Or Cards
+
+- Date: 2026-06-28.
+- Decision: Report views should be compact rows/cards and should not show full contents by default.
+- Reason: The builder should support scanning, ordering, and small edits without turning back into a reporting console.
+- Consequences: Full report detail belongs behind an open action, client preview, evidence appendix, or technical/admin surface.
+
+## Decision 0023: Client Preview Renders Selected Views In Order
+
+- Date: 2026-06-28.
+- Decision: Client preview should render selected report views in order.
+- Reason: The preview should reflect the advisor-composed conversation sequence, not a generic static briefing page.
+- Consequences: Reordering, removing, or hiding report views in Builder Mode must change the client-facing preview.
+
+## Decision 0024: Technical/Admin Artifacts Remain Outside The Main Path
+
+- Date: 2026-06-28.
+- Decision: Technical/admin artifacts remain outside the main path.
+- Reason: Workflow IDs, JSON links, artifact paths, run history, and debug controls help validation but distract from advisor-guided composition and client preview.
+- Consequences: These materials should stay in a technical/admin appendix or protected report browser.
+
+## Decision 0025: Reduce Heading And Explanation Noise
+
+- Date: 2026-06-28.
+- Decision: UI should reduce headings and repeated explanatory text.
+- Reason: The builder should feel lightweight, elegant, and advisor-guided rather than like documentation embedded in the product surface.
+- Consequences: Future UI implementation should prefer concise labels, compact controls, stable rows/cards, and fewer repeated section headings.

@@ -95,6 +95,8 @@ python -m uvicorn arangur.app.main:app --reload --app-dir src
 
 Open `http://127.0.0.1:8000/app/` to use the sparse guided briefing builder. Choose a client question, choose audience depth, choose portfolio context, review the suggested briefing bundle, review the advisor draft, and open the client briefing. Technical report links and local artifact details are kept behind the technical/admin appendix instead of appearing on the first screen.
 
+Current product direction: this sparse builder is a transitional baseline. The next UI target is a Briefing Set Builder with shared context, an ordered report view list, Client Preview Mode, and eventually saved briefing sets.
+
 Create a native demo manager-overlap workflow run:
 
 ```cmd
@@ -138,6 +140,10 @@ Future scenario, data-coverage, and deployable private-demo work is captured in:
 - `docs/ui_reporting/briefing_story_model_v1.md`
 - `docs/ui_reporting/demo_console_redesign_brief_v1.md`
 - `docs/ui_reporting/guided_briefing_builder_correction_v1.md`
+- `docs/ui_reporting/briefing_set_builder_model_v1.md`
+- `docs/ui_reporting/briefing_set_report_view_model_v1.md`
+- `docs/ui_reporting/briefing_set_client_preview_model_v1.md`
+- `docs/ui_reporting/briefing_set_builder_implementation_brief_v1.md`
 - `docs/ui_reporting/client_briefing_page_model_v1.md`
 - `docs/ui_reporting/manager_role_review_v1.md`
 - `docs/architecture/deployable_demo_app_architecture.md`

@@ -155,6 +155,10 @@ Use these file sets when starting different kinds of sessions.
 - `docs/ui_reporting/first_demo_briefing_paths_v1.md`.
 - `docs/ui_reporting/demo_console_redesign_brief_v1.md`.
 - `docs/ui_reporting/guided_briefing_builder_correction_v1.md`.
+- `docs/ui_reporting/briefing_set_builder_model_v1.md`.
+- `docs/ui_reporting/briefing_set_report_view_model_v1.md`.
+- `docs/ui_reporting/briefing_set_client_preview_model_v1.md`.
+- `docs/ui_reporting/briefing_set_builder_implementation_brief_v1.md`.
 - `docs/ui_reporting/client_briefing_page_model_v1.md`.
 - `docs/ui_reporting/manager_role_review_v1.md`.
 - `docs/demo/report_workflow_implications.md`.
@@ -166,6 +170,8 @@ Use these file sets when starting different kinds of sessions.
 
 - All UI Reporting / Briefing restart files.
 - `docs/ui_reporting/guided_briefing_builder_correction_v1.md`.
+- `docs/ui_reporting/briefing_set_builder_model_v1.md`.
+- `docs/ui_reporting/briefing_set_builder_implementation_brief_v1.md`.
 - `docs/ui_reporting/client_briefing_page_model_v1.md`.
 - `src/arangur/app/static/index.html`.
 - `src/arangur/app/routes.py`.
@@ -173,6 +179,40 @@ Use these file sets when starting different kinds of sessions.
 - `tests/test_app_health.py`.
 - `tests/test_app_runs_api.py`.
 - Do not show raw report links, JSON links, recent run history, or technical panels on the first screen.
+
+## Briefing Set Builder Implementation Restart
+
+- All UI Reporting / Briefing restart files.
+- `docs/ui_reporting/briefing_set_builder_model_v1.md`.
+- `docs/ui_reporting/briefing_set_report_view_model_v1.md`.
+- `docs/ui_reporting/briefing_set_client_preview_model_v1.md`.
+- `docs/ui_reporting/briefing_set_builder_implementation_brief_v1.md`.
+- `docs/ui_reporting/guided_briefing_builder_correction_v1.md`.
+- `src/arangur/app/static/index.html`.
+- `src/arangur/app/routes.py`.
+- `src/arangur/app/run_service.py`.
+- `tests/test_app_health.py`.
+- `tests/test_app_runs_api.py`.
+- Keep the main path focused on shared context, ordered report views, and client preview; keep raw artifacts in the technical/admin appendix.
+
+## Report View Model Restart
+
+- All UI Reporting / Briefing restart files.
+- `docs/ui_reporting/briefing_set_report_view_model_v1.md`.
+- `docs/contracts/report_package_contract.md`.
+- `src/arangur/workflow_templates.py` when implementation is authorized.
+- `src/arangur/report_generator.py` when implementation is authorized.
+- Current synthetic report package examples under `reports/demo/` if implementation is authorized.
+- Do not turn every report view into a separate top-level workflow unless a later contract batch requires it.
+
+## Client Preview Implementation Restart
+
+- All Briefing Set Builder Implementation restart files.
+- `docs/ui_reporting/briefing_set_client_preview_model_v1.md`.
+- `docs/ui_reporting/client_briefing_page_model_v1.md`.
+- `docs/ui_reporting/audience_depth_modes_v1.md`.
+- Current generated synthetic report package examples under `reports/demo/` if implementation is authorized.
+- Do not expose workflow IDs, JSON links, report package links, raw artifact lists, or technical appendix material on the client preview by default.
 
 ## Client Briefing Page Implementation Restart
 

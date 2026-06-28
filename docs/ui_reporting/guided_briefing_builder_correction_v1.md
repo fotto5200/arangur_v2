@@ -8,6 +8,8 @@ The current browser console includes the right concepts: client questions, audie
 
 The target UI is not a briefing console. The target UI is a guided briefing builder.
 
+Later product correction: this sparsity and progressive-disclosure correction remains valid, but the current target has evolved from a one-report guided builder to a Briefing Set Builder. See `docs/ui_reporting/briefing_set_builder_model_v1.md`.
+
 ## Core Correction
 
 Arangur should not feel like an encyclopedia of reports, a brokerage dashboard, or an operations console. It should feel like a guided process for composing the right client conversation.
@@ -192,3 +194,15 @@ A sparse guided builder implementation is acceptable when:
 - Technical/admin details are reachable but secondary.
 - The synthetic/local caveat remains visible in compact form.
 - The implementation still uses synthetic/local data and existing API behavior unless a later backend metadata batch explicitly changes it.
+
+## Briefing Set Evolution
+
+The guided builder correction should now be read as the interaction discipline for the Briefing Set Builder: sparse setup, progressive disclosure, compact summaries, and technical/admin material outside the main path.
+
+The previous one-report sequence remains useful as a transitional baseline, but the current product target is broader:
+
+```text
+shared briefing context -> ordered report views -> client preview -> saved presentation set
+```
+
+Future UI work should transform the sparse guided builder into a briefing-set builder rather than polishing it as a one-question / one-report wizard.

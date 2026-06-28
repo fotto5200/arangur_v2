@@ -8,6 +8,8 @@ The current console is technically useful but transitional. It proved that the w
 
 Correction: the target UI is a guided briefing builder, not a fuller briefing console. See `docs/ui_reporting/guided_briefing_builder_correction_v1.md` and `docs/ui_reporting/client_briefing_page_model_v1.md`.
 
+Latest product direction: the browser UI should now evolve toward a Briefing Set Builder, not merely a guided one-report flow. See `docs/ui_reporting/briefing_set_builder_model_v1.md`, `docs/ui_reporting/briefing_set_report_view_model_v1.md`, and `docs/ui_reporting/briefing_set_client_preview_model_v1.md`.
+
 ## First Screen Layout
 
 Original transitional console concept:
@@ -200,3 +202,13 @@ The current baseline keeps the existing API behavior and maps visible client que
 This baseline is functional but too dense. It should be treated as a transitional console and replaced by a sparse guided builder before deeper UI polish.
 
 Sparse guided builder replacement implemented 2026-06-28. The current static browser app now steps through client question, audience depth, portfolio context, suggested briefing bundle, advisor draft, and client briefing, with evidence/advisor/technical appendices hidden until requested.
+
+## Briefing Set Direction
+
+The current sparse builder is a useful transitional baseline. The next UI batch should reshape it into a briefing-set builder:
+
+- Shared context is defined once.
+- A compact ordered list of report views becomes the main workspace.
+- The advisor can duplicate, reorder, remove, and vary one lens or metric at a time.
+- Client preview renders selected report views in order.
+- Technical/admin artifacts remain outside the main path.
