@@ -2,11 +2,11 @@
 
 ## Immediate Product/UI Batches
 
-- Redesign browser demo console around `Client question`, audience depth, and briefing preparation.
-- Add a briefing story mapping layer that maps client questions to internal workflow types.
+- Browser demo console redesign around `Client question`, audience depth, and briefing preparation is implemented as the current static UI baseline.
+- Add backend/client-question metadata support so API responses and persisted summaries can retain selected question and audience depth.
 - Add audience depth handling to report package metadata and report generation.
 - Add first manager-role review prototype, including `Why do we own Manager 5?`.
-- Then resume Docker/Postgres private-demo path with the updated briefing-room product metaphor.
+- Resume Docker/Postgres private-demo path and protected/admin surfaces with the updated briefing-room product metaphor.
 
 ## Batch 2: Architecture And Contracts For Thin Demo
 
@@ -146,10 +146,10 @@
 ## Batch 16A: Client-Question Briefing Console Redesign
 
 - Goal: Redesign the browser demo console around client question, audience depth, and briefing preparation while keeping existing workflow APIs behind the scenes.
-- Mode: Recommended implementation batch.
+- Mode: Implemented baseline.
 - Allowed scope: `src/arangur/app/`, `tests/`, `docs/restart/`, `docs/ui_reporting/`, and README pointers.
 - Non-goals: No frontend framework, no production dashboard, no real client data, no live Plaid, no production authentication.
-- Acceptance criteria: First screen starts with `Client question`; audience depth defaults to `Standard Family Office Meeting`; source is secondary; workflow mapping is internal; briefing preview shows plain-English answer, key evidence, confidence/caveats, and report links.
+- Acceptance criteria: Implemented baseline: first screen starts with `Client question`; audience depth defaults to `Standard Family Office Meeting`; source is secondary; workflow mapping is internal; prepared briefing shows plain-English "what to look at" guidance, key evidence, data confidence/caveats, report links, drill-down artifacts, technical details, and recent briefings.
 - Stop conditions: UI scope expands into production client portal, advisor autonomy/AI claims need product review, or report language risks investment advice.
 
 ## Batch 16B: Briefing Story Mapping Layer

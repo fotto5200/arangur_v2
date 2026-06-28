@@ -126,3 +126,9 @@ Phase 4:
 
 - Add audience-depth-aware report generation and report package metadata.
 - Separate client briefing export from advisor/internal appendix.
+
+## Implementation Baseline
+
+Implemented 2026-06-28 as a dependency-free static browser console served from `/`, `/app/`, and `/app/index.html`.
+
+The current baseline keeps the existing API behavior and maps visible client questions to internal workflow types in frontend JavaScript. Audience depth is displayed in the prepared briefing and recent briefing context when captured by the browser, but backend report packages do not yet persist client question or audience-depth metadata.

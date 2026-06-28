@@ -55,22 +55,32 @@ class AppHealthTests(unittest.TestCase):
         self.assertEqual("private_demo", payload["runtime_mode"])
         self.assertFalse(payload["demo_admin_token_configured"])
 
-    def test_root_page_returns_browser_demo_console(self) -> None:
+    def test_root_page_returns_browser_briefing_console(self) -> None:
         client = TestClient(create_app(settings=AppSettings()))
         for path in ("/", "/app/", "/app/index.html"):
             with self.subTest(path=path):
                 response = client.get(path)
                 self.assertEqual(200, response.status_code)
                 self.assertIn("text/html", response.headers["content-type"])
-                self.assertIn("Arangur v2 Demo Console", response.text)
+                self.assertIn("Arangur v2 Briefing Console", response.text)
+                self.assertIn("Prepare a client briefing from portfolio evidence.", response.text)
                 self.assertIn("Synthetic/local demo only", response.text)
+                self.assertIn("Client question", response.text)
+                self.assertIn("Audience depth", response.text)
+                self.assertIn("Standard Family Office Meeting", response.text)
+                self.assertIn("Prepare briefing", response.text)
+                self.assertIn("Are we on track?", response.text)
+                self.assertIn("Where are we too concentrated?", response.text)
+                self.assertIn("What could hurt us?", response.text)
+                self.assertIn("Why do we own Manager 5?", response.text)
+                self.assertIn("What needs verification?", response.text)
+                self.assertIn('id="client-question-select"', response.text)
+                self.assertIn('id="audience-depth-select"', response.text)
                 self.assertIn('id="source-select"', response.text)
-                self.assertIn('id="workflow-select"', response.text)
-                self.assertIn('id="run-button"', response.text)
-                self.assertIn('id="latest-run"', response.text)
-                self.assertIn('id="run-history"', response.text)
-                self.assertIn("What This Demo Proves", response.text)
-                self.assertIn("What This Demo Does Not Prove", response.text)
+                self.assertIn('id="prepare-briefing-button"', response.text)
+                self.assertIn('id="prepared-briefing"', response.text)
+                self.assertIn('id="briefing-history"', response.text)
+                self.assertNotIn("Run workflow", response.text)
 
     def test_browser_demo_console_references_expected_api_endpoints(self) -> None:
         client = TestClient(create_app(settings=AppSettings()))

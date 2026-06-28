@@ -3,19 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Arangur v2 Demo Console</title>
+  <title>Arangur v2 Briefing Console</title>
   <style>
     :root {
-      --bg: #f6f8fb;
+      --bg: #f4f7f9;
       --surface: #ffffff;
       --ink: #1f2933;
       --muted: #5f6f82;
-      --border: #d8e0ea;
+      --border: #d7e0ea;
+      --strong: #102a43;
       --blue: #0b63ce;
       --blue-dark: #084a9b;
       --green: #0f766e;
-      --red: #b42318;
       --amber-bg: #fff7ed;
+      --amber-border: #f97316;
+      --soft-blue: #eef6ff;
+      --soft-green: #edfdf8;
+      --soft-gray: #f8fafc;
     }
 
     * {
@@ -50,25 +54,27 @@
     .page {
       margin: 0 auto;
       max-width: 1180px;
-      padding: 28px 22px 36px;
+      padding: 28px 22px 38px;
     }
 
     .page-header {
-      margin-bottom: 20px;
+      display: grid;
+      gap: 14px;
+      margin-bottom: 22px;
     }
 
     .eyebrow {
-      color: var(--muted);
+      color: var(--green);
       font-size: 13px;
       font-weight: 700;
-      margin-bottom: 6px;
+      margin: 0 0 6px;
       text-transform: uppercase;
     }
 
     h1,
     h2,
     h3 {
-      color: #102a43;
+      color: var(--strong);
       margin: 0;
     }
 
@@ -87,20 +93,52 @@
       line-height: 1.25;
     }
 
+    p {
+      margin: 0;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 19px;
+    }
+
+    li + li {
+      margin-top: 5px;
+    }
+
+    .lede {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 760px;
+    }
+
     .caveat {
       background: var(--amber-bg);
-      border-left: 4px solid #f97316;
+      border-left: 4px solid var(--amber-border);
       color: #7c2d12;
-      margin: 16px 0 0;
+      max-width: 920px;
       padding: 12px 14px;
     }
 
+    .briefing-flow {
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 13px;
+      font-weight: 700;
+      gap: 7px;
+      text-transform: uppercase;
+    }
+
+    .briefing-flow span {
+      color: var(--strong);
+    }
+
     .console-grid {
-      align-items: stretch;
+      align-items: start;
       display: grid;
       gap: 18px;
-      grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
-      margin-top: 22px;
+      grid-template-columns: minmax(290px, 370px) minmax(0, 1fr);
     }
 
     .tool-panel,
@@ -118,10 +156,14 @@
       padding: 18px;
     }
 
+    .tool-panel {
+      display: grid;
+      gap: 16px;
+    }
+
     .form-grid {
       display: grid;
       gap: 14px;
-      margin-top: 14px;
     }
 
     label {
@@ -158,7 +200,7 @@
       top: 18px;
     }
 
-    .run-button,
+    .prepare-button,
     .ghost-button {
       align-items: center;
       border-radius: 6px;
@@ -171,20 +213,20 @@
       padding: 8px 14px;
     }
 
-    .run-button {
-      background: var(--blue);
-      border: 1px solid var(--blue);
+    .prepare-button {
+      background: var(--green);
+      border: 1px solid var(--green);
       color: #ffffff;
       width: 100%;
     }
 
-    .run-button:hover,
-    .run-button:focus {
-      background: var(--blue-dark);
-      border-color: var(--blue-dark);
+    .prepare-button:hover,
+    .prepare-button:focus {
+      background: #0b5f59;
+      border-color: #0b5f59;
     }
 
-    .run-button:disabled,
+    .prepare-button:disabled,
     .ghost-button:disabled {
       cursor: not-allowed;
       opacity: 0.62;
@@ -204,6 +246,25 @@
       color: var(--blue);
     }
 
+    .question-setup {
+      background: var(--soft-blue);
+      border: 1px solid #cfe8ff;
+      border-radius: 8px;
+      color: #1e3a5f;
+      display: grid;
+      gap: 9px;
+      padding: 13px;
+    }
+
+    .question-setup strong {
+      color: var(--strong);
+    }
+
+    .setup-list {
+      display: grid;
+      gap: 7px;
+    }
+
     .status {
       border-radius: 6px;
       color: var(--muted);
@@ -218,20 +279,13 @@
     }
 
     .status.success {
-      background: #ecfdf3;
-      color: var(--green);
+      background: var(--soft-green);
+      color: #0f5132;
     }
 
     .status.error {
-      background: #fef3f2;
-      color: var(--red);
-    }
-
-    .content-grid {
-      display: grid;
-      gap: 18px;
-      grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
-      margin-top: 18px;
+      background: #fee2e2;
+      color: #991b1b;
     }
 
     .section-header {
@@ -243,88 +297,114 @@
       padding: 16px 18px;
     }
 
-    .run-list {
+    .summary-panel {
       display: grid;
-      gap: 12px;
-      padding: 16px 18px 18px;
+      gap: 16px;
+      padding: 18px;
     }
 
-    .run-item {
+    .briefing-body {
+      display: grid;
+      gap: 16px;
+    }
+
+    .briefing-meta,
+    .detail-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .meta-item {
+      background: var(--soft-gray);
       border: 1px solid var(--border);
-      border-left: 4px solid var(--blue);
-      border-radius: 8px;
-      padding: 14px;
+      border-radius: 7px;
+      padding: 11px;
     }
 
-    .run-item h3 {
-      margin-bottom: 4px;
-    }
-
-    .meta-grid {
-      display: grid;
-      gap: 8px 14px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      margin-top: 12px;
-    }
-
-    .meta {
-      min-width: 0;
-    }
-
-    .meta dt {
+    .meta-label {
       color: var(--muted);
+      display: block;
       font-size: 12px;
       font-weight: 700;
-      margin: 0;
+      margin-bottom: 3px;
       text-transform: uppercase;
     }
 
-    .meta dd {
-      margin: 2px 0 0;
-      overflow-wrap: anywhere;
+    .answer-block {
+      background: var(--soft-green);
+      border: 1px solid #c5eadf;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      padding: 14px;
     }
 
-    .artifact-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+    .answer-block h3,
+    .evidence-section h3,
+    .links-section h3,
+    .confidence h3,
+    .technical-details h3 {
+      margin-bottom: 8px;
+    }
+
+    .evidence-list {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       list-style: none;
-      margin: 14px 0 0;
       padding: 0;
     }
 
-    .artifact-list a {
-      background: #f0f4f8;
-      border: 1px solid #d9e2ec;
-      border-radius: 6px;
-      display: inline-block;
-      padding: 7px 9px;
-    }
-
-    .empty-state {
-      color: var(--muted);
-      padding: 12px 0;
-    }
-
-    .confidence {
-      background: #f8fafc;
+    .evidence-list li {
+      background: #ffffff;
       border: 1px solid var(--border);
-      border-radius: 6px;
-      margin-top: 14px;
+      border-radius: 7px;
+      margin: 0;
       padding: 12px;
     }
 
-    .confidence strong {
-      color: #102a43;
+    .artifact-grid {
+      display: grid;
+      gap: 9px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      list-style: none;
+      padding: 0;
     }
 
-    .notes-panel ul {
-      margin: 10px 0 18px;
-      padding-left: 20px;
+    .artifact-grid li {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      margin: 0;
+      padding: 11px;
     }
 
-    .notes-panel li {
-      margin: 6px 0;
+    .confidence {
+      background: #fefce8;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      color: #713f12;
+      padding: 13px;
+    }
+
+    .technical-details {
+      background: var(--soft-gray);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 13px;
+    }
+
+    .technical-details summary {
+      color: var(--strong);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .technical-details .detail-content {
+      display: grid;
+      gap: 11px;
+      margin-top: 12px;
     }
 
     .small {
@@ -332,100 +412,194 @@
       font-size: 13px;
     }
 
-    .index-link {
-      border-top: 1px solid var(--border);
-      margin-top: 14px;
-      padding-top: 12px;
+    .history-panel {
+      overflow: hidden;
     }
 
-    @media (max-width: 840px) {
-      .page {
-        padding: 22px 14px 28px;
-      }
+    .run-list {
+      display: grid;
+      gap: 0;
+    }
 
+    .briefing-item {
+      border-top: 1px solid var(--border);
+      display: grid;
+      gap: 10px;
+      padding: 16px 18px;
+    }
+
+    .briefing-item:first-child {
+      border-top: 0;
+    }
+
+    .briefing-item-header {
+      align-items: start;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+    }
+
+    .history-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .empty-state {
+      background: var(--soft-gray);
+      border: 1px dashed #bcccdc;
+      border-radius: 8px;
+      color: var(--muted);
+      padding: 18px;
+    }
+
+    .content-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+      margin-top: 18px;
+    }
+
+    .notes-panel {
+      display: grid;
+      gap: 13px;
+    }
+
+    .notes-panel h2 + p,
+    .notes-panel h3 + p {
+      color: var(--muted);
+    }
+
+    @media (max-width: 880px) {
       .console-grid,
       .content-grid {
         grid-template-columns: 1fr;
       }
 
-      .meta-grid {
+      .briefing-meta,
+      .detail-grid,
+      .evidence-list,
+      .artifact-grid {
         grid-template-columns: 1fr;
+      }
+
+      .page {
+        padding: 22px 14px 30px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="page">
+  <main class="page">
     <header class="page-header">
-      <div class="eyebrow">File-backed local workflow demo</div>
-      <h1>Arangur v2 Demo Console</h1>
-      <p class="caveat">Synthetic/local demo only. This console does not use live Plaid, external APIs, market-data vendors, credentials, production authentication, or real client data.</p>
+      <div>
+        <p class="eyebrow">Portfolio briefing room</p>
+        <h1>Arangur v2 Briefing Console</h1>
+      </div>
+      <p class="lede">Prepare a client briefing from portfolio evidence.</p>
+      <p class="caveat">
+        Synthetic/local demo only. This page uses local demo fixtures and generated artifacts; it does not use live Plaid, external APIs, credentials, or real client data.
+      </p>
+      <div class="briefing-flow" aria-label="Briefing flow">
+        <span>Client question</span> -> <span>Audience depth</span> -> <span>Prepare briefing</span> -> <span>Review answer and evidence</span>
+      </div>
     </header>
 
-    <main>
-      <section class="console-grid" aria-label="Workflow run console">
-        <form id="run-form" class="tool-panel">
-          <h2>Run Workflow</h2>
-          <div class="form-grid">
-            <div>
-              <label for="source-select">Source</label>
-              <div class="select-wrap">
-                <select id="source-select" name="source" disabled>
-                  <option>Loading sources</option>
-                </select>
-              </div>
+    <section class="console-grid" aria-label="Briefing controls and prepared briefing">
+      <aside class="tool-panel" aria-labelledby="briefing-controls-title">
+        <div>
+          <h2 id="briefing-controls-title">Briefing setup</h2>
+          <p class="small">The visible question maps to the local analytics already exposed by the app.</p>
+        </div>
+
+        <form id="briefing-form" class="form-grid">
+          <div>
+            <label for="client-question-select">Client question</label>
+            <div class="select-wrap">
+              <select id="client-question-select" name="client_question">
+                <option value="are_we_on_track">Are we on track?</option>
+                <option value="where_are_we_too_concentrated">Where are we too concentrated?</option>
+                <option value="what_could_hurt_us">What could hurt us?</option>
+                <option value="why_do_we_own_manager_5">Why do we own Manager 5?</option>
+                <option value="what_needs_verification">What needs verification?</option>
+              </select>
             </div>
-            <div>
-              <label for="workflow-select">Workflow</label>
-              <div class="select-wrap">
-                <select id="workflow-select" name="workflow" disabled>
-                  <option>Loading workflows</option>
-                </select>
-              </div>
-            </div>
-            <button id="run-button" class="run-button" type="submit" disabled>
-              <span class="button-icon" aria-hidden="true"></span>
-              <span>Run workflow</span>
-            </button>
-            <div id="status" class="status loading" role="status">Loading sources and workflows...</div>
           </div>
+
+          <div>
+            <label for="audience-depth-select">Audience depth</label>
+            <div class="select-wrap">
+              <select id="audience-depth-select" name="audience_depth">
+                <option value="executive_10_minute">Executive / 10-Minute</option>
+                <option value="standard_family_office_meeting" selected>Standard Family Office Meeting</option>
+                <option value="analytical_stakeholder">Analytical Stakeholder</option>
+                <option value="advisor_internal">Advisor/Internal</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="source-select">Portfolio source</label>
+            <div class="select-wrap">
+              <select id="source-select" name="source" disabled>
+                <option value="native_demo">Demo portfolio</option>
+                <option value="plaid_mock">Plaid-shaped mock intake</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="prepare-briefing-button" class="prepare-button" type="submit" disabled>
+            <span class="button-icon" aria-hidden="true"></span>
+            <span>Prepare briefing</span>
+          </button>
         </form>
 
-        <section id="latest-run" class="summary-panel" aria-labelledby="latest-title">
-          <h2 id="latest-title">Latest Run</h2>
-          <div id="latest-run-content" class="empty-state">Loading run history...</div>
-        </section>
+        <div id="question-setup" class="question-setup" aria-live="polite"></div>
+        <div id="status" class="status" role="status" aria-live="polite">Loading briefing sources...</div>
+      </aside>
+
+      <section id="prepared-briefing" class="summary-panel" aria-labelledby="prepared-briefing-title">
+        <h2 id="prepared-briefing-title">Prepared briefing</h2>
+        <div id="prepared-briefing-content" class="empty-state">
+          Select a client question and prepare a briefing to review the answer, evidence, confidence, and report links.
+        </div>
+      </section>
+    </section>
+
+    <section class="content-grid">
+      <section class="history-panel" aria-labelledby="history-title">
+        <div class="section-header">
+          <div>
+            <h2 id="history-title">Recent briefings</h2>
+            <p class="small">Prior local reports are mapped back to client questions when possible.</p>
+          </div>
+          <button id="refresh-briefings" class="ghost-button" type="button">Refresh</button>
+        </div>
+        <div id="briefing-history" class="run-list">
+          <div class="empty-state">Loading recent briefings...</div>
+        </div>
       </section>
 
-      <section class="content-grid">
-        <section class="history-panel" aria-labelledby="history-title">
-          <div class="section-header">
-            <h2 id="history-title">Run History</h2>
-            <button id="refresh-runs" class="ghost-button" type="button">Refresh</button>
-          </div>
-          <div id="run-history" class="run-list">
-            <div class="empty-state">Loading runs...</div>
-          </div>
-        </section>
-
-        <aside class="notes-panel" aria-labelledby="proof-title">
-          <h2 id="proof-title">What This Demo Proves</h2>
-          <ul>
-            <li>The browser can start the same local synthetic workflow pipeline exposed by the API.</li>
-            <li>Native demo and Plaid-shaped mock sources produce browseable report artifacts.</li>
-            <li>Report packages expose workflow metadata, artifact links, and data confidence context.</li>
-          </ul>
-          <h2>What This Demo Does Not Prove</h2>
-          <ul>
-            <li>No live Plaid, external market data, or production reconciliation is involved.</li>
-            <li>No real client data, credentials, or private documents are used.</li>
-            <li>No Postgres persistence, production authentication, or advisor assistant is implemented yet.</li>
-          </ul>
-          <div id="index-link" class="index-link small">Loading local report index...</div>
-        </aside>
-      </section>
-    </main>
-  </div>
+      <aside class="notes-panel" aria-labelledby="boundaries-title">
+        <h2 id="boundaries-title">Briefing boundaries</h2>
+        <p>
+          Arangur organizes deterministic portfolio evidence around advisor-led client questions. The advisor still approves interpretation and client-facing language.
+        </p>
+        <h3>Current demo support</h3>
+        <ul>
+          <li>Portfolio value, cash, manager allocation, exposure, scenario, and data coverage evidence.</li>
+          <li>HTML, Markdown, report package JSON, and local report index links.</li>
+          <li>Source and internal workflow details in secondary technical sections.</li>
+        </ul>
+        <h3>Current demo limits</h3>
+        <ul>
+          <li>No goal plan, IPS, production reconciliation, live Plaid, market data feed, or real client information.</li>
+          <li>Manager-role evidence is an initial overlap/shadowing frame, not a complete skill or mandate evaluation.</li>
+        </ul>
+        <p id="index-link" class="small">Local report index is loading...</p>
+      </aside>
+    </section>
+  </main>
 
   <script>
     const api = Object.freeze({
@@ -435,23 +609,137 @@
       reportIndex: "/api/reports/index"
     });
 
+    const sourceLabels = Object.freeze({
+      native_demo: "Demo portfolio",
+      plaid_mock: "Plaid-shaped mock intake",
+      demo_json: "Demo portfolio"
+    });
+
+    const audienceDepths = Object.freeze({
+      executive_10_minute: {
+        label: "Executive / 10-Minute",
+        summary: "Concise answer, top evidence, essential caveats."
+      },
+      standard_family_office_meeting: {
+        label: "Standard Family Office Meeting",
+        summary: "Moderate detail with evidence and caveats visible for a normal review conversation."
+      },
+      analytical_stakeholder: {
+        label: "Analytical Stakeholder",
+        summary: "More methodology context, drill-down links, and evidence density."
+      },
+      advisor_internal: {
+        label: "Advisor/Internal",
+        summary: "Full advisor workspace detail, including technical mechanics and raw artifacts."
+      }
+    });
+
+    const clientQuestions = Object.freeze({
+      are_we_on_track: {
+        id: "are_we_on_track",
+        label: "Are we on track?",
+        workflow: "quarterly_review",
+        recommendedSource: "native_demo",
+        advisorSetup: "Use this to anchor a review in portfolio value, cash, manager allocation, major exposures, and data confidence.",
+        whatToLookAt: "Start with value, cash, manager allocation, and the confidence signal before turning the discussion into goal or IPS language.",
+        evidence: [
+          "Portfolio value and cash position",
+          "Manager and account allocation",
+          "Top holdings and major exposures",
+          "Data confidence and human-review items"
+        ],
+        caveat: "The current demo answers portfolio evidence questions only; it does not prove full planning readiness, suitability, spending coverage, or IPS compliance."
+      },
+      where_are_we_too_concentrated: {
+        id: "where_are_we_too_concentrated",
+        label: "Where are we too concentrated?",
+        workflow: "manager_overlap_review",
+        recommendedSource: "native_demo",
+        advisorSetup: "Use this when the client is asking whether managers, holdings, sectors, or themes are repeating the same bets.",
+        whatToLookAt: "Look first at concentration and duplicated exposure, then decide whether it is intentional thesis reinforcement or a mandate question.",
+        evidence: [
+          "Top holdings by market value",
+          "Sector and theme exposure",
+          "Direct overlap rows",
+          "Manager and account exposure context"
+        ],
+        caveat: "Concentration or duplication is not automatically bad. The briefing should separate intentional exposure from accidental overlap."
+      },
+      what_could_hurt_us: {
+        id: "what_could_hurt_us",
+        label: "What could hurt us?",
+        workflow: "scenario_risk_review",
+        recommendedSource: "native_demo",
+        advisorSetup: "Use this for a scenario-risk conversation under stated assumptions.",
+        whatToLookAt: "Use the scenario result as an illustrative stress frame, then inspect the largest negative contributors and related concentration evidence.",
+        evidence: [
+          "Scenario summary and assumptions",
+          "Largest negative contributors",
+          "Affected managers and accounts",
+          "Concentration and data-confidence context"
+        ],
+        caveat: "Scenario results are deterministic illustrative impacts under assumptions, not forecasts."
+      },
+      why_do_we_own_manager_5: {
+        id: "why_do_we_own_manager_5",
+        label: "Why do we own Manager 5?",
+        workflow: "manager_overlap_review",
+        recommendedSource: "native_demo",
+        advisorSetup: "Use this to frame Manager 5 as a role, mandate, diversification, and shadowing review.",
+        whatToLookAt: "Use manager/category overlap and shadowing as the first manager-role evidence, then ask whether Manager 5 is doing a distinct role.",
+        evidence: [
+          "Manager 5 allocation",
+          "Category, sector, and theme exposure comparison",
+          "Direct overlap and shadowing flags",
+          "Scenario usefulness and data confidence"
+        ],
+        caveat: "This first version uses manager/category overlap and shadowing as the initial manager-role evidence. It does not fully evaluate manager skill or mandate fulfillment."
+      },
+      what_needs_verification: {
+        id: "what_needs_verification",
+        label: "What needs verification?",
+        workflow: "data_coverage_review",
+        recommendedSource: "native_demo",
+        advisorSetup: "Use this before relying on a report for client-facing discussion or when source readiness matters.",
+        whatToLookAt: "Start with the data confidence label, human-review item count, and data coverage artifact before overinterpreting portfolio conclusions.",
+        evidence: [
+          "Data confidence summary",
+          "Human-review item count",
+          "Missing, stale, opaque, or low-confidence fields",
+          "Data coverage JSON and report package"
+        ],
+        caveat: "Data confidence is about source readiness and valuation support, not investment quality or future returns."
+      }
+    });
+
+    const workflowFallbackQuestions = Object.freeze({
+      quarterly_review: "are_we_on_track",
+      manager_overlap_review: "where_are_we_too_concentrated",
+      scenario_risk_review: "what_could_hurt_us",
+      data_coverage_review: "what_needs_verification"
+    });
+
+    const contextStorageKey = "arangur.briefingContexts.v1";
+
     const state = {
       sources: [],
       workflows: [],
       runs: [],
-      index: null,
-      running: false
+      reportIndex: null,
+      contexts: loadStoredContexts()
     };
 
     const els = {
-      form: document.getElementById("run-form"),
+      form: document.getElementById("briefing-form"),
+      question: document.getElementById("client-question-select"),
+      audience: document.getElementById("audience-depth-select"),
       source: document.getElementById("source-select"),
-      workflow: document.getElementById("workflow-select"),
-      runButton: document.getElementById("run-button"),
+      prepareButton: document.getElementById("prepare-briefing-button"),
+      setup: document.getElementById("question-setup"),
       status: document.getElementById("status"),
-      latest: document.getElementById("latest-run-content"),
-      history: document.getElementById("run-history"),
-      refresh: document.getElementById("refresh-runs"),
+      prepared: document.getElementById("prepared-briefing-content"),
+      history: document.getElementById("briefing-history"),
+      refresh: document.getElementById("refresh-briefings"),
       indexLink: document.getElementById("index-link")
     };
 
@@ -466,158 +754,161 @@
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) {
         const detail = payload.detail || {};
-        const message = detail.message || payload.message || response.statusText || "Request failed";
+        const message = detail.message || response.statusText || "Request failed";
         throw new Error(message);
       }
       return payload;
     }
 
-    function setStatus(kind, message) {
-      els.status.className = `status ${kind}`;
+    function setStatus(message, kind = "") {
       els.status.textContent = message;
+      els.status.className = kind ? `status ${kind}` : "status";
     }
 
     function setControlsEnabled(enabled) {
+      els.question.disabled = !enabled;
+      els.audience.disabled = !enabled;
       els.source.disabled = !enabled;
-      els.workflow.disabled = !enabled;
-      els.runButton.disabled = !enabled || state.running;
-      els.refresh.disabled = state.running;
+      els.prepareButton.disabled = !enabled;
     }
 
-    function optionLabel(row, valueKey) {
-      const value = row[valueKey];
-      const display = row.display_name || value;
-      return display === value ? value : `${display} (${value})`;
+    function selectedQuestion() {
+      return clientQuestions[els.question.value] || clientQuestions.are_we_on_track;
     }
 
-    function renderSelectors() {
-      renderOptions(els.source, state.sources, "source");
-      renderOptions(els.workflow, state.workflows, "workflow");
-      setControlsEnabled(state.sources.length > 0 && state.workflows.length > 0);
+    function selectedAudience() {
+      return audienceDepths[els.audience.value] || audienceDepths.standard_family_office_meeting;
     }
 
-    function renderOptions(select, rows, valueKey) {
-      select.innerHTML = "";
-      rows.forEach((row) => {
-        const option = document.createElement("option");
-        option.value = row[valueKey];
-        option.textContent = optionLabel(row, valueKey);
-        select.appendChild(option);
-      });
+    function selectedSourceLabel() {
+      return sourceLabel(els.source.value);
     }
 
-    function safeReportUrl(record) {
-      const url = record && record.url;
-      if (typeof url === "string" && url.startsWith("/reports/demo/")) {
-        return url;
+    function sourceLabel(value) {
+      return sourceLabels[value] || labelize(value || "unknown_source");
+    }
+
+    function renderSources() {
+      if (!state.sources.length) {
+        return;
       }
-      return "";
+      const current = els.source.value || "native_demo";
+      els.source.innerHTML = "";
+      state.sources.forEach((source) => {
+        const option = document.createElement("option");
+        option.value = source.source;
+        option.textContent = sourceLabel(source.source);
+        if (source.source === current) {
+          option.selected = true;
+        }
+        els.source.appendChild(option);
+      });
+      const question = selectedQuestion();
+      if (question.recommendedSource && state.sources.some((source) => source.source === question.recommendedSource)) {
+        els.source.value = question.recommendedSource;
+      }
     }
 
-    function artifactLinks(run) {
-      const artifacts = [
-        ["HTML report", run.html_report],
-        ["Markdown report", run.markdown_report],
-        ["Report package JSON", run.report_package],
-        ["Data coverage JSON", run.json_outputs && run.json_outputs.data_coverage_result],
-        ["Local report index", run.index]
-      ];
-      const links = artifacts
-        .map(([label, record]) => {
-          const url = safeReportUrl(record);
-          return url ? `<li><a href="${escapeAttr(url)}" target="_blank" rel="noopener">${escapeHtml(label)}</a></li>` : "";
-        })
-        .filter(Boolean)
-        .join("");
-      return links ? `<ul class="artifact-list">${links}</ul>` : "<p class=\"empty-state\">No report artifact links are available.</p>";
-    }
-
-    function confidenceBlock(run) {
-      const confidence = run.data_confidence || "not_available";
-      const reviewCount = run.human_review_item_count == null ? "Not available" : run.human_review_item_count;
-      const summary = run.data_confidence_summary ? `<p>${escapeHtml(run.data_confidence_summary)}</p>` : "";
-      return `
-        <div class="confidence">
-          <strong>Data confidence:</strong> ${escapeHtml(labelize(confidence))}
-          <br>
-          <strong>Human review items:</strong> ${escapeHtml(String(reviewCount))}
-          ${summary}
+    function renderQuestionSetup() {
+      const question = selectedQuestion();
+      const audience = selectedAudience();
+      const source = selectedSourceLabel();
+      els.setup.innerHTML = `
+        <div><strong>${escapeHtml(question.label)}</strong></div>
+        <div class="setup-list">
+          <div>${escapeHtml(question.advisorSetup)}</div>
+          <div><strong>Audience depth:</strong> ${escapeHtml(audience.label)} - ${escapeHtml(audience.summary)}</div>
+          <div><strong>Portfolio source:</strong> ${escapeHtml(source)}</div>
+          <div><strong>Expected evidence:</strong> ${escapeHtml(question.evidence.join("; "))}</div>
+          <div><strong>Caveat emphasis:</strong> ${escapeHtml(question.caveat)}</div>
         </div>
       `;
     }
 
-    function runMeta(run) {
-      return `
-        <dl class="meta-grid">
-          <div class="meta"><dt>Run ID</dt><dd>${escapeHtml(run.run_id || "Unknown")}</dd></div>
-          <div class="meta"><dt>Status</dt><dd>${escapeHtml(labelize(run.status || "unknown"))}</dd></div>
-          <div class="meta"><dt>Source</dt><dd>${escapeHtml(run.source || "Unknown")}</dd></div>
-          <div class="meta"><dt>Workflow</dt><dd>${escapeHtml(run.workflow_display_name || labelize(run.workflow || "Unknown"))}</dd></div>
-          <div class="meta"><dt>Valuation date</dt><dd>${escapeHtml(run.valuation_date || "Not available")}</dd></div>
-          <div class="meta"><dt>Generated at</dt><dd>${escapeHtml(run.generated_at || "Not available")}</dd></div>
-        </dl>
-      `;
+    function workflowIsAvailable(workflow) {
+      if (!state.workflows.length) {
+        return true;
+      }
+      return state.workflows.some((row) => row.workflow === workflow);
     }
 
-    function runTitle(run) {
-      const workflow = run.workflow_display_name || labelize(run.workflow || "Workflow");
-      const source = labelize(run.source || "source");
-      return `${workflow} - ${source}`;
+    function contextFromSelection(runId) {
+      const question = selectedQuestion();
+      const audience = selectedAudience();
+      return {
+        runId,
+        clientQuestionId: question.id,
+        clientQuestionLabel: question.label,
+        audienceDepthId: els.audience.value,
+        audienceDepthLabel: audience.label,
+        portfolioSource: els.source.value,
+        portfolioSourceLabel: selectedSourceLabel(),
+        workflow: question.workflow,
+        whatToLookAt: question.whatToLookAt,
+        evidence: question.evidence,
+        caveat: question.caveat,
+        advisorSetup: question.advisorSetup,
+        capturedAt: new Date().toISOString()
+      };
     }
 
-    function renderLatest(run) {
-      if (!run) {
-        els.latest.innerHTML = "<div class=\"empty-state\">No local workflow runs found yet.</div>";
+    function contextForRun(run) {
+      if (run && run.run_id && state.contexts[run.run_id]) {
+        return state.contexts[run.run_id];
+      }
+      const fallbackQuestionId = workflowFallbackQuestions[run && run.workflow] || null;
+      const question = fallbackQuestionId ? clientQuestions[fallbackQuestionId] : null;
+      const audience = audienceDepths.standard_family_office_meeting;
+      return {
+        runId: run && run.run_id,
+        clientQuestionId: question ? question.id : null,
+        clientQuestionLabel: question ? question.label : (run && run.workflow_display_name) || labelize((run && run.workflow) || "Briefing"),
+        audienceDepthId: "standard_family_office_meeting",
+        audienceDepthLabel: "Not captured for earlier briefing",
+        portfolioSource: run && run.source,
+        portfolioSourceLabel: sourceLabel(run && run.source),
+        workflow: run && run.workflow,
+        whatToLookAt: question ? question.whatToLookAt : "Review the generated report and data confidence before presenting conclusions.",
+        evidence: question ? question.evidence : ["Generated report package", "Data confidence summary", "Report index"],
+        caveat: question ? question.caveat : "This earlier briefing does not include client-question metadata, so the UI maps it from the internal workflow label.",
+        advisorSetup: question ? question.advisorSetup : "Mapped from an existing local report.",
+        inferred: true
+      };
+    }
+
+    async function prepareBriefing(event) {
+      event.preventDefault();
+      const question = selectedQuestion();
+      if (!workflowIsAvailable(question.workflow)) {
+        setStatus(`Internal workflow is not available for ${question.label}.`, "error");
         return;
       }
-      els.latest.innerHTML = `
-        <h3>${escapeHtml(runTitle(run))}</h3>
-        ${runMeta(run)}
-        ${confidenceBlock(run)}
-        ${artifactLinks(run)}
-      `;
-    }
-
-    function renderHistory() {
-      if (!state.runs.length) {
-        els.history.innerHTML = "<div class=\"empty-state\">No local workflow runs found yet.</div>";
-        return;
+      setControlsEnabled(false);
+      setStatus(`Preparing briefing for "${question.label}"...`, "loading");
+      try {
+        const run = await apiJson(api.runs, {
+          method: "POST",
+          body: JSON.stringify({
+            source: els.source.value,
+            workflow: question.workflow
+          })
+        });
+        const context = contextFromSelection(run.run_id);
+        state.contexts[run.run_id] = context;
+        storeContexts(state.contexts);
+        renderPreparedBriefing(run, context);
+        setStatus("Briefing prepared. Review the answer, evidence, confidence, and report links.", "success");
+        await loadRuns();
+      } catch (error) {
+        setStatus(error.message || "Briefing preparation failed.", "error");
+      } finally {
+        setControlsEnabled(true);
+        renderQuestionSetup();
       }
-      els.history.innerHTML = state.runs.map((run) => `
-        <article class="run-item">
-          <h3>${escapeHtml(runTitle(run))}</h3>
-          <div class="small">${escapeHtml(run.run_id || "Unknown run")} - ${escapeHtml(run.generated_at || "Generated time unavailable")}</div>
-          ${runMeta(run)}
-          ${confidenceBlock(run)}
-          ${artifactLinks(run)}
-        </article>
-      `).join("");
     }
 
-    function renderIndexLink() {
-      const url = safeReportUrl(state.index);
-      if (!url) {
-        els.indexLink.textContent = "Local report index is not available yet.";
-        return;
-      }
-      const runCount = state.index.run_count == null ? "" : ` (${state.index.run_count} report packages)`;
-      els.indexLink.innerHTML = `<a href="${escapeAttr(url)}" target="_blank" rel="noopener">Open local report index</a>${escapeHtml(runCount)}`;
-    }
-
-    async function loadRuns() {
-      const [runsPayload, indexPayload] = await Promise.all([
-        apiJson(api.runs),
-        apiJson(api.reportIndex)
-      ]);
-      state.runs = runsPayload.runs || [];
-      state.index = indexPayload;
-      renderLatest(state.runs[0]);
-      renderHistory();
-      renderIndexLink();
-    }
-
-    async function initialize() {
-      setStatus("loading", "Loading sources, workflows, and local runs...");
+    async function loadSourcesAndWorkflows() {
+      setStatus("Loading briefing sources...", "loading");
       try {
         const [sourcesPayload, workflowsPayload] = await Promise.all([
           apiJson(api.sources),
@@ -625,68 +916,280 @@
         ]);
         state.sources = sourcesPayload.sources || [];
         state.workflows = workflowsPayload.workflows || [];
-        renderSelectors();
-        await loadRuns();
-        setStatus("success", "Ready. Workflow runs will use local synthetic artifacts only.");
+        renderSources();
+        setControlsEnabled(state.sources.length > 0);
+        setStatus("Ready to prepare a briefing.", "success");
       } catch (error) {
         setControlsEnabled(false);
-        setStatus("error", error.message);
+        setStatus(error.message || "Could not load briefing sources.", "error");
+      }
+      renderQuestionSetup();
+    }
+
+    async function loadRuns() {
+      try {
+        const payload = await apiJson(api.runs);
+        state.runs = payload.runs || [];
+        renderHistory();
+        if (!document.querySelector("#prepared-briefing-content .briefing-body")) {
+          renderLatestExistingBriefing();
+        }
+      } catch (error) {
+        els.history.innerHTML = `<div class="empty-state">${escapeHtml(error.message || "Could not load recent briefings.")}</div>`;
       }
     }
 
-    async function runWorkflow(event) {
-      event.preventDefault();
-      state.running = true;
-      setControlsEnabled(false);
-      setStatus("loading", "Running local workflow and refreshing report index...");
+    async function loadReportIndex() {
       try {
-        const payload = await apiJson(api.runs, {
-          method: "POST",
-          body: JSON.stringify({
-            source: els.source.value,
-            workflow: els.workflow.value
-          })
-        });
-        await loadRuns();
-        renderLatest(payload);
-        setStatus("success", `Run succeeded: ${payload.run_id}`);
+        state.reportIndex = await apiJson(api.reportIndex);
+        renderIndexLink();
       } catch (error) {
-        setStatus("error", error.message);
-      } finally {
-        state.running = false;
-        setControlsEnabled(state.sources.length > 0 && state.workflows.length > 0);
+        els.indexLink.textContent = "Local report index is not available yet.";
+      }
+    }
+
+    function renderLatestExistingBriefing() {
+      if (!state.runs.length) {
+        els.prepared.innerHTML = `
+          <div class="empty-state">
+            No prepared briefings found yet. The next prepared briefing will appear here with answer, evidence, confidence, and report links.
+          </div>
+        `;
+        return;
+      }
+      const latest = state.runs[0];
+      renderPreparedBriefing(latest, contextForRun(latest));
+    }
+
+    function renderPreparedBriefing(run, context) {
+      const htmlReport = safeReportUrl(run.html_report);
+      const contextNote = context.inferred ? "<p class=\"small\">Mapped from internal workflow because this earlier briefing did not store client-question metadata.</p>" : "";
+      els.prepared.innerHTML = `
+        <div class="briefing-body">
+          <div>
+            <h3>${escapeHtml(context.clientQuestionLabel)}</h3>
+            ${contextNote}
+          </div>
+          <div class="briefing-meta">
+            ${metaItem("Client question", context.clientQuestionLabel)}
+            ${metaItem("Audience depth", context.audienceDepthLabel)}
+            ${metaItem("Portfolio source", context.portfolioSourceLabel || sourceLabel(run.source))}
+          </div>
+          <section class="answer-block" aria-label="What to look at">
+            <h3>What to look at</h3>
+            <p>${escapeHtml(context.whatToLookAt)}</p>
+            ${htmlReport ? `<p><a href="${escapeAttr(htmlReport)}" target="_blank" rel="noopener">Open briefing report</a></p>` : ""}
+          </section>
+          <section class="evidence-section">
+            <h3>Key evidence</h3>
+            <ul class="evidence-list">
+              ${context.evidence.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+            </ul>
+          </section>
+          ${confidenceBlock(run)}
+          <section class="links-section">
+            <h3>Report links</h3>
+            ${artifactLinks(run)}
+          </section>
+          <section class="links-section">
+            <h3>Evidence and drill-down links</h3>
+            ${drilldownLinks(run)}
+          </section>
+          <section class="answer-block">
+            <h3>Confidence and caveats</h3>
+            <p>${escapeHtml(context.caveat)}</p>
+          </section>
+          ${technicalDetails(run, context)}
+        </div>
+      `;
+    }
+
+    function metaItem(label, value) {
+      return `
+        <div class="meta-item">
+          <span class="meta-label">${escapeHtml(label)}</span>
+          <strong>${escapeHtml(value || "Not available")}</strong>
+        </div>
+      `;
+    }
+
+    function confidenceBlock(run) {
+      const confidence = run.data_confidence || "not_available";
+      const reviewCount = run.human_review_item_count == null ? "Not available" : run.human_review_item_count;
+      const summary = run.data_confidence_summary ? `<p>${escapeHtml(run.data_confidence_summary)}</p>` : "";
+      return `
+        <section class="confidence">
+          <h3>Data confidence summary</h3>
+          <p><strong>Confidence:</strong> ${escapeHtml(labelize(confidence))}</p>
+          <p><strong>Human-review items:</strong> ${escapeHtml(String(reviewCount))}</p>
+          ${summary}
+        </section>
+      `;
+    }
+
+    function artifactLinks(run) {
+      const records = [
+        ["HTML report", run.html_report],
+        ["Markdown report", run.markdown_report],
+        ["Report package JSON", run.report_package],
+        ["Report index", run.index]
+      ];
+      return linkGrid(records, "Report links are not available yet.");
+    }
+
+    function drilldownLinks(run) {
+      const outputs = run.json_outputs || {};
+      const records = [
+        ["Data coverage JSON", outputs.data_coverage_result],
+        ["Valuation JSON", outputs.valuation_result],
+        ["Exposure and overlap JSON", outputs.exposure_overlap_result],
+        ["Scenario JSON", outputs.scenario_result]
+      ];
+      return linkGrid(records, "No drill-down artifacts are listed for this briefing.");
+    }
+
+    function linkGrid(records, emptyMessage) {
+      const links = records
+        .map(([label, record]) => {
+          const url = safeReportUrl(record);
+          return url ? `<li><a href="${escapeAttr(url)}" target="_blank" rel="noopener">${escapeHtml(label)}</a></li>` : "";
+        })
+        .filter(Boolean);
+      if (!links.length) {
+        return `<div class="empty-state">${escapeHtml(emptyMessage)}</div>`;
+      }
+      return `<ul class="artifact-grid">${links.join("")}</ul>`;
+    }
+
+    function technicalDetails(run, context) {
+      return `
+        <details class="technical-details">
+          <summary>Technical details</summary>
+          <div class="detail-content">
+            <div class="detail-grid">
+              ${metaItem("Internal workflow", run.workflow || context.workflow)}
+              ${metaItem("Source adapter", run.source_adapter || run.source)}
+              ${metaItem("Run ID", run.run_id)}
+            </div>
+            <p class="small"><strong>Output directory:</strong> ${escapeHtml(run.output_dir || "Not available")}</p>
+            <p class="small"><strong>Generated time:</strong> ${escapeHtml(run.generated_at || "Not available")}</p>
+          </div>
+        </details>
+      `;
+    }
+
+    function renderHistory() {
+      if (!state.runs.length) {
+        els.history.innerHTML = "<div class=\"empty-state\">No recent briefings found yet.</div>";
+        return;
+      }
+      els.history.innerHTML = state.runs.map((run) => {
+        const context = contextForRun(run);
+        return `
+          <article class="briefing-item">
+            <div class="briefing-item-header">
+              <div>
+                <h3>${escapeHtml(context.clientQuestionLabel)}</h3>
+                <p class="small">${escapeHtml(run.generated_at || "Generated time unavailable")}</p>
+              </div>
+              <div class="small">${escapeHtml(labelize(run.data_confidence || "not_available"))}</div>
+            </div>
+            <div class="briefing-meta">
+              ${metaItem("Audience depth", context.audienceDepthLabel)}
+              ${metaItem("Portfolio source", context.portfolioSourceLabel || sourceLabel(run.source))}
+              ${metaItem("Internal workflow", run.workflow || context.workflow)}
+            </div>
+            <p class="small">${escapeHtml(context.inferred ? "Mapped from internal workflow." : "Client-question context captured in this browser.")}</p>
+            <div class="history-links">
+              ${historyLink("HTML report", run.html_report)}
+              ${historyLink("Markdown report", run.markdown_report)}
+              ${historyLink("Report package JSON", run.report_package)}
+              ${historyLink("Report index", run.index)}
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function historyLink(label, record) {
+      const url = safeReportUrl(record);
+      return url ? `<a href="${escapeAttr(url)}" target="_blank" rel="noopener">${escapeHtml(label)}</a>` : "";
+    }
+
+    function renderIndexLink() {
+      const url = safeReportUrl(state.reportIndex);
+      if (!url) {
+        els.indexLink.textContent = "Local report index is not available yet.";
+        return;
+      }
+      const count = state.reportIndex.run_count == null ? "" : ` (${state.reportIndex.run_count} report packages)`;
+      els.indexLink.innerHTML = `<a href="${escapeAttr(url)}" target="_blank" rel="noopener">Open local report index</a>${escapeHtml(count)}`;
+    }
+
+    function safeReportUrl(record) {
+      if (!record) {
+        return null;
+      }
+      const url = typeof record === "string" ? record : record.url;
+      if (!url || typeof url !== "string") {
+        return null;
+      }
+      return url.startsWith("/reports/demo/") ? url : null;
+    }
+
+    function loadStoredContexts() {
+      try {
+        const raw = window.localStorage.getItem(contextStorageKey);
+        const parsed = raw ? JSON.parse(raw) : {};
+        return parsed && typeof parsed === "object" ? parsed : {};
+      } catch (error) {
+        return {};
+      }
+    }
+
+    function storeContexts(contexts) {
+      try {
+        window.localStorage.setItem(contextStorageKey, JSON.stringify(contexts));
+      } catch (error) {
+        // Browser storage is helpful but not required for the local demo.
       }
     }
 
     function labelize(value) {
-      return String(value).replaceAll("_", " ").replace(/\b\w/g, (match) => match.toUpperCase());
+      return String(value || "")
+        .replace(/_/g, " ")
+        .replace(/\b\w/g, (char) => char.toUpperCase());
     }
 
     function escapeHtml(value) {
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll("\"", "&quot;")
-        .replaceAll("'", "&#039;");
+      return String(value == null ? "" : value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
     }
 
     function escapeAttr(value) {
       return escapeHtml(value);
     }
 
-    els.form.addEventListener("submit", runWorkflow);
-    els.refresh.addEventListener("click", async () => {
-      setStatus("loading", "Refreshing local run history...");
-      try {
-        await loadRuns();
-        setStatus("success", "Run history refreshed.");
-      } catch (error) {
-        setStatus("error", error.message);
+    els.form.addEventListener("submit", prepareBriefing);
+    els.question.addEventListener("change", () => {
+      const question = selectedQuestion();
+      if (question.recommendedSource && state.sources.some((source) => source.source === question.recommendedSource)) {
+        els.source.value = question.recommendedSource;
       }
+      renderQuestionSetup();
     });
+    els.audience.addEventListener("change", renderQuestionSetup);
+    els.source.addEventListener("change", renderQuestionSetup);
+    els.refresh.addEventListener("click", loadRuns);
 
-    initialize();
+    renderQuestionSetup();
+    loadSourcesAndWorkflows();
+    loadRuns();
+    loadReportIndex();
   </script>
 </body>
 </html>

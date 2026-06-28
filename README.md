@@ -93,7 +93,7 @@ Start the FastAPI app:
 python -m uvicorn arangur.app.main:app --reload --app-dir src
 ```
 
-Open `http://127.0.0.1:8000/app/`, choose a source and workflow, run the workflow, and open the generated report links from the latest run or run history. The browser console uses the same file-backed API and serves generated artifacts only from `/reports/demo/...`.
+Open `http://127.0.0.1:8000/app/`, choose a client question, choose an audience depth, choose a portfolio source, prepare the briefing, and open the generated report links from the prepared briefing or recent briefings list. The browser console keeps workflow/source mechanics behind the briefing setup and uses the same file-backed API to serve generated artifacts only from `/reports/demo/...`.
 
 Create a native demo manager-overlap workflow run:
 
