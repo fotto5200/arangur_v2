@@ -79,7 +79,7 @@ Then open:
 - `http://127.0.0.1:8000/reports/demo/index.html`
 - `http://127.0.0.1:8000/`
 
-## Run The Single Report Spec Composer
+## Run The Report Element Spec Composer
 
 For a fresh checkout, install the current lightweight Python requirements:
 
@@ -93,9 +93,9 @@ Start the FastAPI app:
 python -m uvicorn arangur.app.main:app --reload --app-dir src
 ```
 
-Open `http://127.0.0.1:8000/app/` to use the Single Report Spec Composer prototype. It asks one question at a time, accumulates the report spec on the side, and stops when the spec is complete.
+Open `http://127.0.0.1:8000/app/` to use the Report Element Spec Composer prototype. It starts with a static client/portfolio context strip, asks for one report element at a time, and adds completed specs to either the Client Briefing Set or the Advisor Review Set.
 
-This UI does not generate a report yet. It does not call the workflow API, show report links, or render a client preview. The next UI batch should decide what happens after `Add this report to briefing set`.
+This UI does not generate reports, charts, or client preview output yet. It does not call the workflow API or show report links. The next UI batch should decide how completed element specs become durable report package metadata.
 
 Create a native demo manager-overlap workflow run:
 

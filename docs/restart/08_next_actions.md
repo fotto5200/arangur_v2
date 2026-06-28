@@ -2,9 +2,9 @@
 
 ## Immediate Product/UI Batches
 
-- Define what happens after `Add this report to briefing set`.
-- Decide how a completed single-report spec becomes part of a briefing set without showing a monolithic console.
-- Add client-question, audience-depth, lens, metric, and scenario metadata to report packages after the interaction model is stable.
+- Define how completed report element specs become durable report package metadata.
+- Decide how Client Briefing Set and Advisor Review Set rows are edited, duplicated, reordered, removed, and promoted without showing a monolithic console.
+- Add branch, placement, internal purpose, intent, element type, scope, lens, metric, scenario, display form, and coverage metadata to report packages after the interaction model is stable.
 - Later add backend briefing-set metadata/persistence.
 - Then resume Docker Compose private-demo files and protected/admin surfaces when private-demo access policy is ready.
 
@@ -218,11 +218,20 @@
 ## Batch 16A-7a: Single Report Spec Composer
 
 - Goal: Replace the too-dense local briefing-set UI with a sparse one-question-at-a-time composer for a single report spec.
-- Mode: Implemented local UI baseline.
+- Mode: Superseded local UI baseline.
 - Allowed scope: `src/arangur/app/static/index.html`, tests, restart docs, and README pointers.
 - Non-goals: No report generation, no `/api/runs` call from the UI, no report links, no JSON links, no client preview, no technical/admin appendix, no multiple report view rows, no backend changes.
 - Acceptance criteria: Implemented baseline: page shows `Arangur`, one current question on the left, completed report-spec lines on the right, empty state `No answers yet.`, Back and Start over behavior, six scripted questions, `Report spec complete`, and a placeholder `Add this report to briefing set` action.
 - Stop conditions: Next behavior after adding the report spec requires product direction before implementation.
+
+## Batch 16A-7b: Report Element Spec Composer v3.1
+
+- Goal: Model one report element at a time across two separate branches: Client Briefing Set and Advisor Review Set.
+- Mode: Implemented local UI baseline.
+- Allowed scope: `src/arangur/app/static/index.html`, tests, restart docs, and README pointers.
+- Non-goals: No report generation, no charts, no workflow API call from the UI, no report links, no client preview, no technical/admin artifact browser, no backend changes.
+- Acceptance criteria: Implemented baseline: client/portfolio context appears first; branch is required; Client Briefing elements use client package placement; Advisor Review elements use advisor review placement plus internal purpose; intent is separate from element type; scope, lens, metric, scenario, and display are separate axes; plain `Manager` is not a lens option; scenario and lens completeness are acknowledged with demo/static badges; compact specs are added to the correct separate set list; Advisor Review rows include a promote placeholder.
+- Stop conditions: Durable metadata, report generation, or persistence requires a follow-up contract batch.
 
 ## Batch 16A-8: Briefing Set Metadata
 

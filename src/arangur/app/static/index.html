@@ -3,17 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Arangur Single Report Spec Composer</title>
+  <title>Arangur Report Element Spec Composer</title>
   <style>
     :root {
       --bg: #f6f8f7;
       --surface: #ffffff;
+      --surface-soft: #f8fbfa;
       --ink: #1f2933;
       --muted: #62717d;
       --line: #d8e0df;
       --strong: #102a43;
       --accent: #0f766e;
       --accent-soft: #edfdf8;
+      --amber-soft: #fff8e6;
+      --amber-line: #f2d083;
       --shadow: 0 20px 50px rgba(16, 42, 67, 0.08);
     }
 
@@ -42,11 +45,11 @@
 
     .page {
       display: grid;
-      gap: 28px;
+      gap: 18px;
       margin: 0 auto;
-      max-width: 1040px;
+      max-width: 1120px;
       min-height: 100vh;
-      padding: 38px 20px 48px;
+      padding: 32px 18px 42px;
     }
 
     .brand {
@@ -56,32 +59,53 @@
       letter-spacing: 0;
     }
 
-    .composer {
-      display: grid;
-      gap: 18px;
-      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.85fr);
-    }
-
-    .question-panel,
-    .spec-panel {
+    .context-strip,
+    .panel,
+    .set-panel {
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: 8px;
       box-shadow: var(--shadow);
-      display: grid;
-      align-content: start;
-      gap: 18px;
-      padding: 24px;
     }
 
-    .question-panel {
+    .context-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .chip {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 6px 10px;
+    }
+
+    .chip strong {
+      color: var(--strong);
+    }
+
+    .composer {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    }
+
+    .panel {
+      align-content: start;
+      display: grid;
+      gap: 18px;
       min-height: 430px;
+      padding: 24px;
     }
 
     .question-copy {
       display: grid;
       gap: 8px;
-      max-width: 620px;
+      max-width: 680px;
     }
 
     h1 {
@@ -92,8 +116,14 @@
 
     h2 {
       color: var(--strong);
-      font-size: 22px;
+      font-size: 21px;
       line-height: 1.2;
+    }
+
+    h3 {
+      color: var(--strong);
+      font-size: 16px;
+      line-height: 1.25;
     }
 
     .helper,
@@ -115,8 +145,10 @@
       border-radius: 8px;
       color: var(--ink);
       cursor: pointer;
+      display: grid;
+      gap: 4px;
       min-height: 58px;
-      padding: 15px 16px;
+      padding: 14px 16px;
       text-align: left;
       width: 100%;
     }
@@ -128,6 +160,11 @@
       outline: 2px solid rgba(15, 118, 110, 0.16);
     }
 
+    .answer-card span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
     .button-row {
       display: flex;
       flex-wrap: wrap;
@@ -135,21 +172,29 @@
     }
 
     .secondary-button,
-    .placeholder-button {
+    .primary-button,
+    .tiny-button {
       align-items: center;
       border-radius: 7px;
       cursor: pointer;
       display: inline-flex;
       font-weight: 700;
       justify-content: center;
-      min-height: 40px;
+      min-height: 38px;
       padding: 8px 13px;
     }
 
-    .secondary-button {
+    .secondary-button,
+    .tiny-button {
       background: #ffffff;
       border: 1px solid var(--line);
       color: var(--strong);
+    }
+
+    .primary-button {
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      color: #ffffff;
     }
 
     .secondary-button:disabled {
@@ -157,15 +202,10 @@
       opacity: 0.48;
     }
 
-    .placeholder-button {
-      background: var(--accent);
-      border: 1px solid var(--accent);
-      color: #ffffff;
-    }
-
-    .placeholder-button:disabled {
-      cursor: default;
-      opacity: 0.82;
+    .tiny-button {
+      font-size: 12px;
+      min-height: 30px;
+      padding: 5px 8px;
     }
 
     .spec-list {
@@ -186,7 +226,7 @@
       color: var(--strong);
     }
 
-    .complete-box {
+    .review-box {
       background: var(--accent-soft);
       border: 1px solid #99f6e4;
       border-radius: 8px;
@@ -195,16 +235,64 @@
       padding: 16px;
     }
 
+    .badge-box {
+      background: var(--amber-soft);
+      border: 1px solid var(--amber-line);
+      border-radius: 8px;
+      color: #713f12;
+      display: grid;
+      font-size: 14px;
+      gap: 6px;
+      padding: 12px;
+    }
+
+    .sets-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .set-panel {
+      display: grid;
+      gap: 12px;
+      padding: 18px;
+    }
+
+    .set-list {
+      display: grid;
+      gap: 10px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .set-row {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .set-row p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .row-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
     .hidden {
       display: none !important;
     }
 
-    @media (max-width: 760px) {
-      .page {
-        padding: 24px 14px 34px;
-      }
-
-      .composer {
+    @media (max-width: 820px) {
+      .composer,
+      .sets-grid {
         grid-template-columns: 1fr;
       }
 
@@ -219,114 +307,187 @@
     <!-- first-screen-start -->
     <p class="brand">Arangur</p>
 
+    <section class="context-strip" aria-label="Client and portfolio context">
+      <span class="chip"><strong>Client:</strong> Northstar Family Office</span>
+      <span class="chip"><strong>Portfolio:</strong> Demo portfolio</span>
+      <span class="chip"><strong>Data status:</strong> Loaded</span>
+      <span class="chip"><strong>Valuation confidence:</strong> Mixed</span>
+      <span class="chip"><strong>Human-review items:</strong> 1</span>
+      <span class="chip"><strong>Last updated:</strong> Demo fixture</span>
+    </section>
+
     <section class="composer" aria-live="polite">
-      <section class="question-panel" aria-labelledby="question-title">
-        <div id="question-area" class="question-copy">
-          <p class="helper" id="progress-label">Question 1 of 6</p>
-          <h1 id="question-title">What should this report answer?</h1>
-          <p class="helper" id="question-helper">Choose one answer. The spec grows on the right.</p>
+      <section class="panel" aria-labelledby="question-title">
+        <div class="question-copy">
+          <p class="helper" id="progress-label">Element step</p>
+          <h1 id="question-title">Which report branch is this element for?</h1>
+          <p class="helper" id="question-helper">Choose whether this element belongs in the client package or the advisor's internal review set.</p>
+          <p class="helper">No report generation in this composer.</p>
         </div>
         <div id="answer-options" class="answer-grid">
-          <button class="answer-card" type="button" data-answer="Are we on track?">Are we on track?</button>
-          <button class="answer-card" type="button" data-answer="Where are we too concentrated?">Where are we too concentrated?</button>
-          <button class="answer-card" type="button" data-answer="What could hurt us?">What could hurt us?</button>
-          <button class="answer-card" type="button" data-answer="What needs verification?">What needs verification?</button>
+          <button class="answer-card" type="button" data-answer="Client Briefing">Client Briefing<span>Client presentation, speaker notes, client backup, or support material.</span></button>
+          <button class="answer-card" type="button" data-answer="Advisor Review">Advisor Review<span>Internal diagnostics, monitoring, manager review, mandate audit, or data readiness.</span></button>
+        </div>
+        <div id="coverage-badges" class="badge-box hidden"></div>
+        <div id="review-actions" class="review-box hidden">
+          <h2>Report element spec complete</h2>
+          <p class="note">Review the compact spec on the right, then add it to the selected set.</p>
+          <button id="add-spec-button" class="primary-button" type="button">Add element to selected set</button>
         </div>
         <div class="button-row">
           <button id="back-button" class="secondary-button" type="button" disabled>Back</button>
-          <button id="start-over-button" class="secondary-button" type="button">Start over</button>
+          <button id="start-over-button" class="secondary-button" type="button">Start over element</button>
         </div>
-        <div id="complete-actions" class="complete-box hidden">
-          <h2>Report spec complete</h2>
-          <p class="note">Next batch will decide what happens after a report spec is complete.</p>
-          <button id="add-report-button" class="placeholder-button" type="button">Add this report to briefing set</button>
-          <p id="placeholder-status" class="status"></p>
-        </div>
+        <p id="composer-status" class="status"></p>
       </section>
 
-      <aside class="spec-panel" aria-labelledby="spec-title">
-        <h2 id="spec-title">Current report spec</h2>
-        <p id="empty-spec" class="empty">No answers yet.</p>
+      <aside class="panel" aria-labelledby="spec-title">
+        <h2 id="spec-title">Current element spec</h2>
+        <p id="empty-spec" class="empty">No element choices yet.</p>
         <ul id="spec-list" class="spec-list"></ul>
       </aside>
+    </section>
+    <section class="sets-grid" aria-label="Report set lists">
+      <section class="set-panel" aria-labelledby="client-set-title">
+        <h2 id="client-set-title">Client Briefing Set</h2>
+        <p id="client-empty" class="empty">No client briefing elements yet.</p>
+        <ul id="client-set-list" class="set-list"></ul>
+      </section>
+
+      <section class="set-panel" aria-labelledby="advisor-set-title">
+        <h2 id="advisor-set-title">Advisor Review Set</h2>
+        <p id="advisor-empty" class="empty">No advisor review elements yet.</p>
+        <ul id="advisor-set-list" class="set-list"></ul>
+      </section>
     </section>
     <!-- first-screen-end -->
   </main>
 
   <script>
-    const scenarioImpactLabel = ["Scenario", "impact"].join(" ");
-
-    const questions = [
-      {
-        field: "Client question",
-        prompt: "What should this report answer?",
-        helper: "Choose the client question this single report should answer.",
-        options: [
-          "Are we on track?",
-          "Where are we too concentrated?",
-          "What could hurt us?",
-          "What needs verification?"
-        ]
-      },
-      {
-        field: "Audience",
-        prompt: "Who is this for?",
-        helper: "Pick the audience depth for this report.",
-        options: [
-          "Executive / 10-minute",
-          "Standard family meeting",
-          "Analytical stakeholder",
-          "Advisor/internal"
-        ]
-      },
-      {
-        field: "Portfolio context",
-        prompt: "What portfolio context should we use?",
-        helper: "Choose the synthetic context for this prototype.",
-        options: [
-          "Demo portfolio",
-          "Plaid-shaped mock intake"
-        ]
-      },
-      {
-        field: "Lens",
-        prompt: "What lens should this report use?",
-        helper: "Choose the main grouping lens.",
-        options: [
-          "Manager",
-          "Theme",
-          "Sector / industry",
-          "Holding",
-          "Data issue"
-        ]
-      },
-      {
-        field: "Metric",
-        prompt: "What should this report focus on?",
-        helper: "Choose the primary metric.",
-        options: [
-          "Value",
-          "Cash",
-          "Exposure",
-          scenarioImpactLabel,
-          "Confidence"
-        ]
-      },
-      {
-        field: "Scenario",
-        prompt: "Should this report include a scenario?",
-        helper: "Choose a scenario frame or leave the report unstressed.",
-        options: [
-          "No scenario",
-          "AI/chip selloff",
-          "Rate shock",
-          "Energy shock"
-        ]
-      }
+    const clientIntentOptions = [
+      "Are we on track?",
+      "What changed?",
+      "Are we generating the cash we need?",
+      "Where are we too concentrated?",
+      "What could hurt us?",
+      "Why do we own each manager?",
+      "What needs verification?"
     ];
 
+    const advisorIntentOptions = [
+      "Mandate audit",
+      "Manager review",
+      "Scenario/theme alignment",
+      "Exposure drift check",
+      "Data readiness check",
+      "Client-prep review"
+    ];
+
+    const clientPlacementOptions = [
+      "Main client presentation",
+      "Speaker notes",
+      "Client analytical appendix",
+      "Technical/support appendix"
+    ];
+
+    const advisorPlacementOptions = [
+      "Main advisor review",
+      "Advisor working notes",
+      "Advisor analytical appendix",
+      "Technical/support appendix"
+    ];
+
+    const internalPurposeOptions = [
+      "Diagnostic",
+      "Monitoring",
+      "Data readiness",
+      "Manager review",
+      "Thesis/mandate audit",
+      "Client-prep candidate"
+    ];
+
+    const elementTypeOptions = [
+      "Portfolio Status",
+      "Concentration",
+      "Scenario Impact",
+      "Cash Generation",
+      "Manager Comparison",
+      "Data Confidence"
+    ];
+
+    const scopeOptions = [
+      "Whole portfolio",
+      "All managers compared",
+      "Selected manager",
+      "Selected account",
+      "Selected sleeve / mandate"
+    ];
+
+    const lensOptions = [
+      "Industry",
+      "Sector",
+      "Theme",
+      "Asset class",
+      "Geography",
+      "Currency",
+      "Liquidity bucket",
+      "Value/growth",
+      "Cash-generation role",
+      "Data issue",
+      "Instrument type",
+      "Manager role / mandate"
+    ];
+
+    const metricOptions = [
+      "Market value",
+      "Portfolio %",
+      "P&L",
+      "Cash generated",
+      "Exposure",
+      "Scenario impact",
+      "Attribution contribution",
+      "Data confidence",
+      "Liquidity",
+      "Human-review count"
+    ];
+
+    const scenarioOptions = [
+      "None",
+      "AI/chip selloff",
+      "Rate shock",
+      "Energy shock",
+      "Taiwan disruption",
+      "Private-market liquidity freeze"
+    ];
+
+    const displayOptions = [
+      "Summary card",
+      "Table",
+      "Bar chart",
+      "Grid",
+      "Narrative note",
+      "Appendix item"
+    ];
+
+    const elementScenarioMode = {
+      "Portfolio Status": "irrelevant",
+      "Concentration": "optional",
+      "Scenario Impact": "required",
+      "Cash Generation": "optional",
+      "Manager Comparison": "irrelevant",
+      "Data Confidence": "irrelevant"
+    };
+
+    const branchLabels = {
+      client: "Client Briefing",
+      advisor: "Advisor Review"
+    };
+
     const state = {
-      answers: []
+      answers: {},
+      history: [],
+      clientSet: [],
+      advisorSet: []
     };
 
     const els = {
@@ -334,68 +495,359 @@
       title: document.getElementById("question-title"),
       helper: document.getElementById("question-helper"),
       options: document.getElementById("answer-options"),
+      badges: document.getElementById("coverage-badges"),
+      review: document.getElementById("review-actions"),
+      addSpec: document.getElementById("add-spec-button"),
       back: document.getElementById("back-button"),
       startOver: document.getElementById("start-over-button"),
-      completeActions: document.getElementById("complete-actions"),
-      addReport: document.getElementById("add-report-button"),
-      placeholderStatus: document.getElementById("placeholder-status"),
+      status: document.getElementById("composer-status"),
       emptySpec: document.getElementById("empty-spec"),
-      specList: document.getElementById("spec-list")
+      specList: document.getElementById("spec-list"),
+      clientEmpty: document.getElementById("client-empty"),
+      clientList: document.getElementById("client-set-list"),
+      advisorEmpty: document.getElementById("advisor-empty"),
+      advisorList: document.getElementById("advisor-set-list")
     };
 
-    function currentQuestion() {
-      return questions[state.answers.length] || null;
+    function currentStep() {
+      const branch = state.answers.branch;
+      const type = state.answers.elementType;
+      if (!branch) {
+        return {
+          key: "branch",
+          label: "Branch",
+          prompt: "Which report branch is this element for?",
+          helper: "Client Briefing and Advisor Review are separate authored sets.",
+          options: ["Client Briefing", "Advisor Review"]
+        };
+      }
+      if (!state.answers.intent) {
+        return {
+          key: "intent",
+          label: branch === "Client Briefing" ? "Client intent" : "Review intent",
+          prompt: branch === "Client Briefing" ? "What client intent should this support?" : "What advisor-review intent should this support?",
+          helper: "Intent narrows the element choices; it is not the full spec.",
+          options: branch === "Client Briefing" ? clientIntentOptions : advisorIntentOptions
+        };
+      }
+      if (branch === "Client Briefing" && !state.answers.audience) {
+        return {
+          key: "audience",
+          label: "Audience",
+          prompt: "Who is the client-facing package for?",
+          helper: "Audience depth is intent context, not the entire report spec.",
+          options: ["10-minute principal briefing", "Standard family meeting", "Analytical stakeholder", "Advisor/internal prep"]
+        };
+      }
+      if (branch === "Client Briefing" && !state.answers.placement) {
+        return {
+          key: "placement",
+          label: "Client package placement",
+          prompt: "Where should this element live in the client package?",
+          helper: "Presentation, speaker notes, backup, and support material are distinct placements.",
+          options: clientPlacementOptions
+        };
+      }
+      if (branch === "Advisor Review" && !state.answers.placement) {
+        return {
+          key: "placement",
+          label: "Advisor review placement",
+          prompt: "Where should this element live in the advisor review set?",
+          helper: "Advisor analytical appendix is for internal tie-outs and verification detail.",
+          options: advisorPlacementOptions
+        };
+      }
+      if (branch === "Advisor Review" && !state.answers.internalPurpose) {
+        return {
+          key: "internalPurpose",
+          label: "Internal purpose",
+          prompt: "What internal purpose should this element serve?",
+          helper: "Advisor Review elements can support diagnostics, monitoring, manager review, mandate audit, or data readiness.",
+          options: internalPurposeOptions
+        };
+      }
+      if (!type) {
+        return {
+          key: "elementType",
+          label: "Element type",
+          prompt: "What kind of report element are you adding?",
+          helper: "Choose one building block. Full report generation comes later.",
+          options: elementTypeOptions
+        };
+      }
+      if (!state.answers.scope) {
+        return {
+          key: "scope",
+          label: "Scope",
+          prompt: "Whose portfolio slice are we looking at?",
+          helper: "Manager belongs here as a scope/entity axis, not as a plain lens.",
+          options: suggestedScopeOptions(type)
+        };
+      }
+      if (!state.answers.lens) {
+        return {
+          key: "lens",
+          label: "Lens",
+          prompt: "How should positions be classified or grouped?",
+          helper: "Lens is a classification scheme. Plain Manager is not a lens value.",
+          options: suggestedLensOptions(type)
+        };
+      }
+      if (!state.answers.metric) {
+        return {
+          key: "metric",
+          label: "Metric",
+          prompt: "What are we measuring?",
+          helper: "Metric is separate from scope, lens, and scenario.",
+          options: suggestedMetricOptions(type)
+        };
+      }
+      if (needsScenarioStep(type) && !state.answers.scenario) {
+        return {
+          key: "scenario",
+          label: "Scenario",
+          prompt: type === "Scenario Impact" ? "Which complete scenario should this use?" : "Should this element include a scenario?",
+          helper: "Scenario is required only when the report element depends on a pricing environment.",
+          options: type === "Scenario Impact" ? scenarioOptions.filter((option) => option !== "None") : scenarioOptions
+        };
+      }
+      if (!state.answers.display) {
+        return {
+          key: "display",
+          label: "Display",
+          prompt: "How should this element appear later?",
+          helper: "No chart or report is generated yet. This stores the intended display form.",
+          options: suggestedDisplayOptions(type)
+        };
+      }
+      return null;
+    }
+
+    function suggestedScopeOptions(type) {
+      if (type === "Manager Comparison") {
+        return ["All managers compared", "Selected manager"];
+      }
+      if (type === "Cash Generation") {
+        return ["Whole portfolio", "All managers compared", "Selected manager", "Selected sleeve / mandate"];
+      }
+      return scopeOptions;
+    }
+
+    function suggestedLensOptions(type) {
+      if (type === "Data Confidence") {
+        return ["Data issue", "Instrument type", "Asset class", "Liquidity bucket"];
+      }
+      if (type === "Manager Comparison") {
+        return ["Manager role / mandate", "Theme", "Asset class", "Cash-generation role", "Liquidity bucket"];
+      }
+      return lensOptions;
+    }
+
+    function suggestedMetricOptions(type) {
+      if (type === "Cash Generation") {
+        return ["Cash generated", "Liquidity", "Market value", "Portfolio %"];
+      }
+      if (type === "Scenario Impact") {
+        return ["Scenario impact", "P&L", "Exposure"];
+      }
+      if (type === "Data Confidence") {
+        return ["Data confidence", "Human-review count"];
+      }
+      return metricOptions;
+    }
+
+    function suggestedDisplayOptions(type) {
+      if (type === "Data Confidence") {
+        return ["Table", "Summary card", "Appendix item"];
+      }
+      if (type === "Manager Comparison") {
+        return ["Grid", "Table", "Bar chart"];
+      }
+      return displayOptions;
+    }
+
+    function needsScenarioStep(type) {
+      return elementScenarioMode[type] === "required" || elementScenarioMode[type] === "optional";
     }
 
     function selectAnswer(answer) {
-      const question = currentQuestion();
-      if (!question) {
+      const step = currentStep();
+      if (!step) {
         return;
       }
-      state.answers.push({
-        field: question.field,
-        answer
-      });
+      state.history.push({ key: step.key, previous: state.answers[step.key] });
+      state.answers[step.key] = answer;
+      if (step.key === "elementType" && elementScenarioMode[answer] === "irrelevant") {
+        state.answers.scenario = "None";
+      }
+      els.status.textContent = "";
       render();
     }
 
     function goBack() {
-      state.answers.pop();
-      els.placeholderStatus.textContent = "";
+      const last = state.history.pop();
+      if (!last) {
+        return;
+      }
+      delete state.answers[last.key];
+      if (last.key === "elementType") {
+        delete state.answers.scope;
+        delete state.answers.lens;
+        delete state.answers.metric;
+        delete state.answers.scenario;
+        delete state.answers.display;
+      }
+      if (last.key === "branch") {
+        state.answers = {};
+        state.history = [];
+      }
+      els.status.textContent = "";
       render();
     }
 
-    function startOver() {
-      state.answers = [];
-      els.placeholderStatus.textContent = "";
+    function startOverElement() {
+      state.answers = {};
+      state.history = [];
+      els.status.textContent = "";
       render();
+    }
+
+    function addSpecToSet() {
+      const spec = buildSpec();
+      if (!spec) {
+        return;
+      }
+      if (spec.branch === "Client Briefing") {
+        state.clientSet.push(spec);
+      } else {
+        state.advisorSet.push(spec);
+      }
+      els.status.textContent = `Added ${spec.elementType} to ${spec.branch} Set.`;
+      state.answers = { branch: spec.branch };
+      state.history = [{ key: "branch", previous: undefined }];
+      render();
+    }
+
+    function buildSpec() {
+      const answers = state.answers;
+      if (currentStep()) {
+        return null;
+      }
+      return {
+        id: `${Date.now()}_${Math.random().toString(16).slice(2)}`,
+        branch: answers.branch,
+        intent: answers.intent,
+        audience: answers.audience || null,
+        placement: answers.placement,
+        internalPurpose: answers.internalPurpose || null,
+        elementType: answers.elementType,
+        scope: answers.scope,
+        lens: answers.lens,
+        metric: answers.metric,
+        scenario: answers.scenario || "None",
+        display: answers.display,
+        lensCoverage: "Coverage: 100% assigned - 82% direct - 14% proxy - 4% human review",
+        scenarioCoverage: scenarioCoverageText(answers.scenario),
+        confidence: "mixed confidence"
+      };
+    }
+
+    function scenarioCoverageText(scenario) {
+      if (!scenario || scenario === "None") {
+        return "Scenario: none";
+      }
+      return "Complete treatment: yes - Direct repricing: demo 62% - Proxy/remainder: demo 34% - Human review: demo 1 - Horizon: demo 3 months";
     }
 
     function render() {
-      const question = currentQuestion();
-      const complete = !question;
-      els.back.disabled = state.answers.length === 0;
-      els.emptySpec.classList.toggle("hidden", state.answers.length > 0);
-      els.specList.innerHTML = state.answers
-        .map((item) => `<li><strong>${escapeHtml(item.field)}:</strong> ${escapeHtml(item.answer)}</li>`)
-        .join("");
-
-      if (complete) {
-        els.progress.textContent = "Complete";
-        els.title.textContent = "Report spec complete";
-        els.helper.textContent = "Review the completed spec on the right.";
+      const step = currentStep();
+      els.back.disabled = state.history.length === 0;
+      renderSpec();
+      renderSets();
+      renderBadges();
+      if (!step) {
+        els.progress.textContent = "Review";
+        els.title.textContent = "Report element spec complete";
+        els.helper.textContent = "Add this compact element spec to the correct report set.";
         els.options.innerHTML = "";
-        els.completeActions.classList.remove("hidden");
+        els.review.classList.remove("hidden");
         return;
       }
+      els.progress.textContent = step.label;
+      els.title.textContent = step.prompt;
+      els.helper.textContent = step.helper;
+      els.review.classList.add("hidden");
+      els.options.innerHTML = step.options.map(renderOption).join("");
+    }
 
-      els.progress.textContent = `Question ${state.answers.length + 1} of ${questions.length}`;
-      els.title.textContent = question.prompt;
-      els.helper.textContent = question.helper;
-      els.completeActions.classList.add("hidden");
-      els.options.innerHTML = question.options
-        .map((option) => `<button class="answer-card" type="button" data-answer="${escapeAttr(option)}">${escapeHtml(option)}</button>`)
+    function renderOption(option) {
+      return `<button class="answer-card" type="button" data-answer="${escapeAttr(option)}">${escapeHtml(option)}</button>`;
+    }
+
+    function renderSpec() {
+      const entries = specEntries();
+      els.emptySpec.classList.toggle("hidden", entries.length > 0);
+      els.specList.innerHTML = entries
+        .map(([label, value]) => `<li><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</li>`)
         .join("");
+    }
+
+    function specEntries() {
+      const answers = state.answers;
+      const entries = [];
+      if (answers.branch) entries.push(["Branch", answers.branch]);
+      if (answers.intent) entries.push([answers.branch === "Client Briefing" ? "Client intent" : "Review intent", answers.intent]);
+      if (answers.audience) entries.push(["Audience", answers.audience]);
+      if (answers.placement) entries.push([answers.branch === "Client Briefing" ? "Client package placement" : "Advisor review placement", answers.placement]);
+      if (answers.internalPurpose) entries.push(["Internal purpose", answers.internalPurpose]);
+      if (answers.elementType) entries.push(["Element type", answers.elementType]);
+      if (answers.scope) entries.push(["Scope", answers.scope]);
+      if (answers.lens) entries.push(["Lens", answers.lens]);
+      if (answers.metric) entries.push(["Metric", answers.metric]);
+      if (answers.scenario) entries.push(["Scenario", answers.scenario]);
+      if (answers.display) entries.push(["Display", answers.display]);
+      return entries;
+    }
+
+    function renderBadges() {
+      const answers = state.answers;
+      const badges = [];
+      if (answers.lens) {
+        badges.push("Lens completeness: Coverage: 100% assigned - 82% direct - 14% proxy - 4% human review");
+      }
+      if (answers.scenario && answers.scenario !== "None") {
+        badges.push(`Scenario completeness: ${scenarioCoverageText(answers.scenario)}`);
+      }
+      els.badges.classList.toggle("hidden", badges.length === 0);
+      els.badges.innerHTML = badges.map((badge) => `<p>${escapeHtml(badge)}</p>`).join("");
+    }
+
+    function renderSets() {
+      els.clientEmpty.classList.toggle("hidden", state.clientSet.length > 0);
+      els.advisorEmpty.classList.toggle("hidden", state.advisorSet.length > 0);
+      els.clientList.innerHTML = state.clientSet.map((spec, index) => renderSetRow(spec, index, "client")).join("");
+      els.advisorList.innerHTML = state.advisorSet.map((spec, index) => renderSetRow(spec, index, "advisor")).join("");
+    }
+
+    function renderSetRow(spec, index, kind) {
+      const placementLabel = kind === "client" ? spec.placement : `${spec.placement} - ${spec.internalPurpose}`;
+      const promoteButton = kind === "advisor" ? '<button class="tiny-button" type="button">Promote placeholder</button>' : "";
+      return `
+        <li class="set-row">
+          <h3>${escapeHtml(index + 1)}. ${escapeHtml(spec.elementType)}</h3>
+          <p>${escapeHtml(placementLabel)}</p>
+          <p>${escapeHtml(spec.scope)} | ${escapeHtml(spec.lens)} | ${escapeHtml(spec.metric)}${spec.scenario !== "None" ? ` | ${escapeHtml(spec.scenario)}` : ""}</p>
+          <p>${escapeHtml(spec.lensCoverage)} - ${escapeHtml(spec.confidence)}</p>
+          <div class="row-actions">
+            <button class="tiny-button" type="button">Open/edit</button>
+            <button class="tiny-button" type="button">Duplicate</button>
+            <button class="tiny-button" type="button">Move up</button>
+            <button class="tiny-button" type="button">Move down</button>
+            <button class="tiny-button" type="button">Remove</button>
+            ${promoteButton}
+          </div>
+        </li>
+      `;
     }
 
     function handleOptionClick(event) {
@@ -404,10 +856,6 @@
         return;
       }
       selectAnswer(button.dataset.answer);
-    }
-
-    function showPlaceholderMessage() {
-      els.placeholderStatus.textContent = "Placeholder only. Nothing is saved or generated in this prototype.";
     }
 
     function escapeHtml(value) {
@@ -425,8 +873,8 @@
 
     els.options.addEventListener("click", handleOptionClick);
     els.back.addEventListener("click", goBack);
-    els.startOver.addEventListener("click", startOver);
-    els.addReport.addEventListener("click", showPlaceholderMessage);
+    els.startOver.addEventListener("click", startOverElement);
+    els.addSpec.addEventListener("click", addSpecToSet);
     render();
   </script>
 </body>
