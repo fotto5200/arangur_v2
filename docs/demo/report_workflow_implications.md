@@ -123,3 +123,11 @@ Workflow templates use the report families as building blocks:
 - `data_coverage_review`: valuation-confidence and data-coverage framing first, with expanded confidence dimensions, flags, caveats, and human-review items from the local prototype.
 
 The next implementation batch can deepen source inventory, stale-value checks, and reconciliation status without changing the core analytics engine or adding live data dependencies.
+
+## Client Questions Versus Internal Workflows
+
+Workflow types are now best understood as internal execution concepts. They remain useful for the pipeline, tests, report package metadata, and API calls, but they should not be the primary outward-facing UI metaphor.
+
+The product UI should be organized around client questions and briefing stories. A user should start with a question such as `Are we on track?`, `What could hurt us?`, or `Why do we own Manager 5?` The application can map that question to internal workflows such as `quarterly_review`, `scenario_risk_review`, `manager_overlap_review`, or `data_coverage_review`.
+
+This preserves the technical workflow layer while aligning the advisor experience with Arangur's portfolio communication thesis.

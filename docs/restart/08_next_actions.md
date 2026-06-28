@@ -1,5 +1,13 @@
 # Next Actions
 
+## Immediate Product/UI Batches
+
+- Redesign browser demo console around `Client question`, audience depth, and briefing preparation.
+- Add a briefing story mapping layer that maps client questions to internal workflow types.
+- Add audience depth handling to report package metadata and report generation.
+- Add first manager-role review prototype, including `Why do we own Manager 5?`.
+- Then resume Docker/Postgres private-demo path with the updated briefing-room product metaphor.
+
 ## Batch 2: Architecture And Contracts For Thin Demo
 
 - Goal: Expand architecture and contract docs enough to guide implementation.
@@ -134,6 +142,42 @@
 - Non-goals: No separate frontend framework unless explicitly authorized, no production dashboard, no client data upload, no rich charting.
 - Acceptance criteria: Implemented baseline: `/`, `/app/`, and `/app/index.html` serve a dependency-free static console with source selector, workflow selector, run button, latest run summary, run history/list, report links, data confidence summary, and synthetic-data caveat. The page calls the existing file-backed API and does not introduce a frontend framework.
 - Stop conditions: UI scope expands into advisor assistant, production dashboard, production authentication, or design-system work that needs product review.
+
+## Batch 16A: Client-Question Briefing Console Redesign
+
+- Goal: Redesign the browser demo console around client question, audience depth, and briefing preparation while keeping existing workflow APIs behind the scenes.
+- Mode: Recommended implementation batch.
+- Allowed scope: `src/arangur/app/`, `tests/`, `docs/restart/`, `docs/ui_reporting/`, and README pointers.
+- Non-goals: No frontend framework, no production dashboard, no real client data, no live Plaid, no production authentication.
+- Acceptance criteria: First screen starts with `Client question`; audience depth defaults to `Standard Family Office Meeting`; source is secondary; workflow mapping is internal; briefing preview shows plain-English answer, key evidence, confidence/caveats, and report links.
+- Stop conditions: UI scope expands into production client portal, advisor autonomy/AI claims need product review, or report language risks investment advice.
+
+## Batch 16B: Briefing Story Mapping Layer
+
+- Goal: Add a small mapping layer from canonical client questions to internal workflow types and briefing metadata.
+- Mode: Recommended implementation/design batch.
+- Allowed scope: `src/`, `tests/`, `docs/ui_reporting/`, `docs/contracts/`, and generated synthetic demo artifacts if intentionally refreshed.
+- Non-goals: No LLM integration, no production personalization, no real client history.
+- Acceptance criteria: Supported client questions map to internal workflows, audience modes, report section defaults, and evidence requirements; tests verify mappings.
+- Stop conditions: Mapping requires real client conversation data or unresolved product decisions.
+
+## Batch 16C: Audience-Depth Report Handling
+
+- Goal: Add audience depth metadata and rendering behavior to report packages and generated reports.
+- Mode: Recommended implementation batch.
+- Allowed scope: `src/`, `tests/`, `docs/contracts/`, `docs/ui_reporting/`, and `reports/demo/` generated outputs.
+- Non-goals: No full client portal, no real data, no production compliance workflow.
+- Acceptance criteria: Report packages record audience depth; generated reports can distinguish Standard Family Office Meeting, Executive, Analytical Stakeholder, and Advisor/Internal levels at least in section detail and caveat depth.
+- Stop conditions: Client-facing language requires product/legal review beyond demo caveats.
+
+## Batch 16D: Manager-Role Review Prototype
+
+- Goal: Prototype the first `Why do we own Manager 5?` briefing path using current manager allocation, exposure, overlap, scenario, and data confidence outputs.
+- Mode: Recommended implementation batch.
+- Allowed scope: `src/`, `tests/`, `docs/ui_reporting/`, `docs/demo/`, and generated synthetic reports.
+- Non-goals: No manager recommendations, no real manager due diligence, no fund look-through unless synthetic only.
+- Acceptance criteria: The path compares Manager 5 against other managers across available categories/themes/scenario behavior, flags possible shadowing as a mandate question, and avoids automatic action recommendations.
+- Stop conditions: Real manager data, real mandates, or investment recommendation language appears necessary.
 
 ## Batch 17: Docker Compose Local Private Demo
 

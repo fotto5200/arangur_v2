@@ -72,6 +72,8 @@ The first browser UI should be a utilitarian private-demo control panel, not a m
 
 Current file-backed baseline: `/`, `/app/`, and `/app/index.html` now serve a dependency-free HTML/CSS/JavaScript demo console that lists sources/workflows from the API, starts synchronous local runs, refreshes run history, and opens report artifacts returned by the API.
 
+Product direction update: the browser console should evolve from `source + workflow + run` toward `client question + audience depth + briefing preparation`. Workflow APIs remain useful internal execution machinery, but the outward-facing UI should start with the client conversation. The first visible UI label should be `Client question`, and the default audience mode should be `Standard Family Office Meeting`. See `docs/ui_reporting/`.
+
 Required first UI controls:
 
 - Source selector: `native_demo` / `plaid_mock`.
@@ -255,6 +257,7 @@ Recommended sequence:
 3. Workflow-run service wrapper around existing pipeline modules.
 4. Postgres persistence skeleton for run metadata and artifacts.
 5. Browser UI shell with selectors and run list.
-6. Docker Compose private-demo local stack.
-7. Demo seed/preflight script.
-8. Lightsail/Caddy/Cloudflare deployment docs.
+6. Briefing-room redesign around client questions and audience depth.
+7. Docker Compose private-demo local stack.
+8. Demo seed/preflight script.
+9. Lightsail/Caddy/Cloudflare deployment docs.

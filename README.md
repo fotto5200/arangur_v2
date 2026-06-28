@@ -134,6 +134,10 @@ When `DB_ENGINE=postgres` and `DATABASE_URL` are set, the app creates minimal `w
 
 Future scenario, data-coverage, and deployable private-demo work is captured in:
 
+- `docs/ui_reporting/ui_reporting_philosophy_v1.md`
+- `docs/ui_reporting/briefing_story_model_v1.md`
+- `docs/ui_reporting/demo_console_redesign_brief_v1.md`
+- `docs/ui_reporting/manager_role_review_v1.md`
 - `docs/architecture/deployable_demo_app_architecture.md`
 - `docs/architecture/persistence_model_plan.md`
 - `docs/contracts/workflow_run_persistence_contract.md`

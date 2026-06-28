@@ -62,3 +62,38 @@
 - Decision: Arangur v2 should reuse the Education private-demo stack shape for the first deployable app.
 - Reason: The Education app already has a working FastAPI, Docker Compose, Postgres, Lightsail, Caddy, and Cloudflare private-demo pattern.
 - Consequences: Arangur should design its first deployable demo around a FastAPI backend, backend-served browser UI, internal Postgres, protected admin/report surfaces, demo seed path, and Lightsail/Caddy/Cloudflare deployment. See `docs/decisions/0002_copy_education_private_demo_stack.md`.
+
+## Decision 0010: UI Leads With Client Question
+
+- Date: 2026-06-28.
+- Decision: The outward-facing Arangur UI should lead with `Client question`.
+- Reason: Arangur is a portfolio communication system. The advisor needs to begin with the client conversation, not with source selection, workflow names, or analytics modules.
+- Consequences: The current source/workflow/run console is technically useful but transitional. Future UI work should redesign the first screen around client questions and briefing preparation.
+
+## Decision 0011: Default Audience Mode Is Standard Family Office Meeting
+
+- Date: 2026-06-28.
+- Decision: The default first-demo audience depth mode should be `Standard Family Office Meeting`.
+- Reason: This mode balances plain-English client conversation with enough evidence, caveats, and drill-down for a serious family office review.
+- Consequences: Executive, analytical stakeholder, and advisor/internal modes remain important, but first-demo UI and reports should default to the standard meeting depth.
+
+## Decision 0012: First Demo Briefing Paths Include Manager 5 Role Review
+
+- Date: 2026-06-28.
+- Decision: The first briefing paths should include `Why do we own Manager 5?`.
+- Reason: Manager-role explanation is central to communicating multi-manager portfolios and exposes whether managers are differentiated or unintentionally duplicative.
+- Consequences: The next UI/reporting work should support this path alongside `Are we on track?`, `Where are we too concentrated?`, `What could hurt us?`, and `What needs verification?`.
+
+## Decision 0013: Workflows Are Internal; Briefing Stories Are External
+
+- Date: 2026-06-28.
+- Decision: Workflow labels are internal execution concepts, while briefing stories and client questions are the preferred outward-facing product metaphor.
+- Reason: Workflow names help implementation and testing, but advisors and clients think in conversation questions.
+- Consequences: UI and reports should map client questions to internal workflows behind the scenes rather than exposing workflow selection as the primary control.
+
+## Decision 0014: Manager Role Review Flags Shadowed Mandates For Advisor Review
+
+- Date: 2026-06-28.
+- Decision: Manager-role review should compare manager exposures against agreed client/advisor categories, themes, macro concerns, or mandates and flag duplicated or shadowed roles for advisor review.
+- Reason: If one manager closely shadows another across the categories that matter, the advisor needs to ask whether the duplication is intentional or accidental.
+- Consequences: Arangur should not automatically recommend removing a manager. It should raise a mandate/role question and provide evidence for advisor-approved interpretation.

@@ -60,6 +60,7 @@ Use these file sets when starting different kinds of sessions.
 ## Reporting / Advisor-Assistant Restart
 
 - All Codex implementation restart files.
+- `docs/ui_reporting/`.
 - Future report contracts under `docs/contracts/`.
 - Future report examples under `docs/demo/`.
 - Future generated demo report packages under `reports/demo/`.
@@ -144,3 +145,37 @@ Use these file sets when starting different kinds of sessions.
 - `src/arangur/app/`.
 - Future Docker and env example files once implemented.
 - Do not include `.env.private-demo`, real host credentials, Cloudflare tokens, private keys, or actual production secrets.
+
+## UI Reporting / Briefing Restart
+
+- All Codex implementation restart files.
+- `docs/ui_reporting/ui_reporting_philosophy_v1.md`.
+- `docs/ui_reporting/briefing_story_model_v1.md`.
+- `docs/ui_reporting/audience_depth_modes_v1.md`.
+- `docs/ui_reporting/first_demo_briefing_paths_v1.md`.
+- `docs/ui_reporting/demo_console_redesign_brief_v1.md`.
+- `docs/ui_reporting/manager_role_review_v1.md`.
+- `docs/demo/report_workflow_implications.md`.
+- `docs/architecture/deployable_demo_app_architecture.md`.
+- `src/arangur/app/static/index.html` when UI implementation is authorized.
+- Do not implement real client personalization, live Plaid, external APIs, or investment advice language without a specific authorized batch.
+
+## Briefing Story Implementation Restart
+
+- All UI Reporting / Briefing restart files.
+- `src/arangur/workflow_templates.py`.
+- `src/arangur/demo_pipeline.py`.
+- `src/arangur/report_generator.py`.
+- `tests/test_workflow_templates.py`.
+- Existing synthetic report package examples under `reports/demo/`.
+- Do not replace internal workflow contracts without preserving existing API compatibility.
+
+## Manager-Role Review Restart
+
+- All UI Reporting / Briefing restart files.
+- `docs/ui_reporting/manager_role_review_v1.md`.
+- `src/arangur/exposure_overlap.py`.
+- `src/arangur/scenarios.py`.
+- `src/arangur/report_generator.py`.
+- Current synthetic fixture data under `data/demo/`.
+- Do not use real manager data, real mandates, or recommendation language.
