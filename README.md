@@ -79,7 +79,7 @@ Then open:
 - `http://127.0.0.1:8000/reports/demo/index.html`
 - `http://127.0.0.1:8000/`
 
-## Run The Browser Demo Console
+## Run The Guided Briefing Builder
 
 For a fresh checkout, install the current lightweight Python requirements:
 
@@ -93,9 +93,7 @@ Start the FastAPI app:
 python -m uvicorn arangur.app.main:app --reload --app-dir src
 ```
 
-Open `http://127.0.0.1:8000/app/`, choose a client question, choose an audience depth, choose a portfolio source, prepare the briefing, and open the generated report links from the prepared briefing or recent briefings list. The browser console keeps workflow/source mechanics behind the briefing setup and uses the same file-backed API to serve generated artifacts only from `/reports/demo/...`.
-
-Product direction note: the current browser console is functional but transitional. The target UI is a sparse guided briefing builder with a separate client briefing page; see the UI reporting docs below.
+Open `http://127.0.0.1:8000/app/` to use the sparse guided briefing builder. Choose a client question, choose audience depth, choose portfolio context, review the suggested briefing bundle, review the advisor draft, and open the client briefing. Technical report links and local artifact details are kept behind the technical/admin appendix instead of appearing on the first screen.
 
 Create a native demo manager-overlap workflow run:
 

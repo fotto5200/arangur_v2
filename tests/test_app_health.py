@@ -55,32 +55,39 @@ class AppHealthTests(unittest.TestCase):
         self.assertEqual("private_demo", payload["runtime_mode"])
         self.assertFalse(payload["demo_admin_token_configured"])
 
-    def test_root_page_returns_browser_briefing_console(self) -> None:
+    def test_root_page_returns_guided_briefing_builder(self) -> None:
         client = TestClient(create_app(settings=AppSettings()))
         for path in ("/", "/app/", "/app/index.html"):
             with self.subTest(path=path):
                 response = client.get(path)
                 self.assertEqual(200, response.status_code)
                 self.assertIn("text/html", response.headers["content-type"])
-                self.assertIn("Arangur v2 Briefing Console", response.text)
-                self.assertIn("Prepare a client briefing from portfolio evidence.", response.text)
-                self.assertIn("Synthetic/local demo only", response.text)
-                self.assertIn("Client question", response.text)
-                self.assertIn("Audience depth", response.text)
-                self.assertIn("Standard Family Office Meeting", response.text)
-                self.assertIn("Prepare briefing", response.text)
-                self.assertIn("Are we on track?", response.text)
-                self.assertIn("Where are we too concentrated?", response.text)
-                self.assertIn("What could hurt us?", response.text)
-                self.assertIn("Why do we own Manager 5?", response.text)
-                self.assertIn("What needs verification?", response.text)
-                self.assertIn('id="client-question-select"', response.text)
-                self.assertIn('id="audience-depth-select"', response.text)
-                self.assertIn('id="source-select"', response.text)
-                self.assertIn('id="prepare-briefing-button"', response.text)
-                self.assertIn('id="prepared-briefing"', response.text)
-                self.assertIn('id="briefing-history"', response.text)
+                self.assertIn("Arangur v2 Guided Briefing Builder", response.text)
+                self.assertIn("What client conversation are you preparing?", response.text)
+                first_screen = self._first_screen(response.text)
+                self.assertIn("Are we on track?", first_screen)
+                self.assertIn("Where are we too concentrated?", first_screen)
+                self.assertIn("What could hurt us?", first_screen)
+                self.assertIn("What needs verification?", first_screen)
+                self.assertNotIn("Recent briefings", first_screen)
+                self.assertNotIn("JSON", first_screen)
+                self.assertNotIn("report_package", first_screen)
+                self.assertNotIn("quarterly_review", first_screen)
+                self.assertNotIn("manager_overlap_review", first_screen)
+                self.assertNotIn("scenario_risk_review", first_screen)
+                self.assertNotIn("data_coverage_review", first_screen)
+                self.assertNotIn("Why do we own Manager 5?", first_screen)
                 self.assertNotIn("Run workflow", response.text)
+                self.assertIn("Executive / 10-Minute", response.text)
+                self.assertIn("Standard Family Office Meeting", response.text)
+                self.assertIn("Analytical Stakeholder", response.text)
+                self.assertIn("Advisor/Internal", response.text)
+                self.assertIn("Demo portfolio", response.text)
+                self.assertIn("Plaid-shaped mock intake", response.text)
+                self.assertIn("Review suggested briefing bundle", response.text)
+                self.assertIn("Review advisor draft", response.text)
+                self.assertIn("Client briefing", response.text)
+                self.assertIn("Technical/admin appendix", response.text)
 
     def test_browser_demo_console_references_expected_api_endpoints(self) -> None:
         client = TestClient(create_app(settings=AppSettings()))
@@ -95,6 +102,13 @@ class AppHealthTests(unittest.TestCase):
         ):
             with self.subTest(endpoint=endpoint):
                 self.assertIn(endpoint, response.text)
+
+    def _first_screen(self, html: str) -> str:
+        start_marker = "<!-- first-screen-start -->"
+        end_marker = "<!-- first-screen-end -->"
+        self.assertIn(start_marker, html)
+        self.assertIn(end_marker, html)
+        return html[html.index(start_marker) : html.index(end_marker)]
 
 
 if __name__ == "__main__":

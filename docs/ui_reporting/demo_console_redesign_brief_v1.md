@@ -198,3 +198,5 @@ Implemented 2026-06-28 as a dependency-free static browser console served from `
 The current baseline keeps the existing API behavior and maps visible client questions to internal workflow types in frontend JavaScript. Audience depth is displayed in the prepared briefing and recent briefing context when captured by the browser, but backend report packages do not yet persist client question or audience-depth metadata.
 
 This baseline is functional but too dense. It should be treated as a transitional console and replaced by a sparse guided builder before deeper UI polish.
+
+Sparse guided builder replacement implemented 2026-06-28. The current static browser app now steps through client question, audience depth, portfolio context, suggested briefing bundle, advisor draft, and client briefing, with evidence/advisor/technical appendices hidden until requested.
