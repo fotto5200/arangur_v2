@@ -55,64 +55,51 @@ class AppHealthTests(unittest.TestCase):
         self.assertEqual("private_demo", payload["runtime_mode"])
         self.assertFalse(payload["demo_admin_token_configured"])
 
-    def test_root_page_returns_briefing_set_builder(self) -> None:
+    def test_root_page_returns_single_report_spec_composer(self) -> None:
         client = TestClient(create_app(settings=AppSettings()))
         for path in ("/", "/app/", "/app/index.html"):
             with self.subTest(path=path):
                 response = client.get(path)
                 self.assertEqual(200, response.status_code)
                 self.assertIn("text/html", response.headers["content-type"])
-                self.assertIn("Briefing Set Builder", response.text)
-                self.assertIn("Builder Mode", response.text)
-                self.assertIn("Client Preview", response.text)
-                self.assertIn("Technical/Admin Appendix", response.text)
-                self.assertIn("Northstar Family Office", response.text)
-                self.assertIn("Portfolio status", response.text)
-                self.assertIn("Concentration review", response.text)
-                self.assertIn("Scenario impact", response.text)
-                self.assertIn("Verification note", response.text)
-                self.assertIn("Advisor follow-up", response.text)
-                self.assertIn("Duplicate", response.text)
-                self.assertIn("Change lens", response.text)
-                self.assertIn("Change metric", response.text)
-                self.assertIn("Move up", response.text)
-                self.assertIn("Remove", response.text)
+                self.assertIn("Arangur", response.text)
+                self.assertIn("What should this report answer?", response.text)
+                self.assertIn("Current report spec", response.text)
+                self.assertIn("No answers yet.", response.text)
+                self.assertIn("Who is this for?", response.text)
+                self.assertIn("What portfolio context should we use?", response.text)
+                self.assertIn("What lens should this report use?", response.text)
+                self.assertIn("What should this report focus on?", response.text)
+                self.assertIn("Should this report include a scenario?", response.text)
                 first_screen = self._first_screen(response.text)
-                self.assertIn("Builder Mode", first_screen)
-                self.assertIn("Shared context", first_screen)
                 self.assertIn("Are we on track?", first_screen)
                 self.assertIn("Where are we too concentrated?", first_screen)
                 self.assertIn("What could hurt us?", first_screen)
                 self.assertIn("What needs verification?", first_screen)
-                self.assertIn("Demo portfolio", first_screen)
-                self.assertIn("Plaid-shaped mock intake", first_screen)
-                self.assertIn("Generate report sequence", first_screen)
-                self.assertIn("Save briefing set", first_screen)
+                self.assertIn("Back", first_screen)
+                self.assertIn("Start over", first_screen)
                 self.assertNotIn("Recent briefings", first_screen)
-                self.assertNotIn("JSON", first_screen)
-                self.assertNotIn("report_package", first_screen)
-                self.assertNotIn("quarterly_review", first_screen)
-                self.assertNotIn("manager_overlap_review", first_screen)
-                self.assertNotIn("scenario_risk_review", first_screen)
-                self.assertNotIn("data_coverage_review", first_screen)
-                self.assertNotIn("Why do we own Manager 5?", first_screen)
                 self.assertNotIn("Run workflow", response.text)
-                self.assertIn('id="technical-admin-mode" class="mode-panel hidden"', response.text)
-                self.assertIn("Report and JSON artifact links", response.text)
+                self.assertNotIn("Client Preview", response.text)
+                self.assertNotIn("Technical/Admin Appendix", response.text)
+                self.assertNotIn("JSON", response.text)
+                self.assertNotIn("report_package", response.text)
+                self.assertNotIn("/api/runs", response.text)
+                self.assertNotIn("Portfolio status", response.text)
+                self.assertNotIn("Concentration review", response.text)
+                self.assertNotIn("Scenario impact", response.text)
+                self.assertNotIn("Verification note", response.text)
+                self.assertNotIn("fetch(", response.text)
 
-    def test_browser_demo_console_references_expected_api_endpoints(self) -> None:
+    def test_browser_spec_composer_does_not_call_run_api(self) -> None:
         client = TestClient(create_app(settings=AppSettings()))
         response = client.get("/app/")
         self.assertEqual(200, response.status_code)
-        for endpoint in (
-            "/api/sources",
-            "/api/workflows",
-            "/api/runs",
-            "/api/reports/index",
-            "/reports/demo/",
-        ):
-            with self.subTest(endpoint=endpoint):
-                self.assertIn(endpoint, response.text)
+        self.assertNotIn("/api/runs", response.text)
+        self.assertNotIn("fetch(", response.text)
+        self.assertIn("Report spec complete", response.text)
+        self.assertIn("Add this report to briefing set", response.text)
+        self.assertIn("Next batch will decide what happens after a report spec is complete.", response.text)
 
     def _first_screen(self, html: str) -> str:
         start_marker = "<!-- first-screen-start -->"

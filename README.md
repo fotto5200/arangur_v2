@@ -79,7 +79,7 @@ Then open:
 - `http://127.0.0.1:8000/reports/demo/index.html`
 - `http://127.0.0.1:8000/`
 
-## Run The Briefing Set Builder
+## Run The Single Report Spec Composer
 
 For a fresh checkout, install the current lightweight Python requirements:
 
@@ -93,9 +93,9 @@ Start the FastAPI app:
 python -m uvicorn arangur.app.main:app --reload --app-dir src
 ```
 
-Open `http://127.0.0.1:8000/app/` to use the local Briefing Set Builder. Define shared context once, generate a compact ordered report view list, duplicate views, change lens or metric, move/remove rows, and open Client Preview to render the selected client-facing views in order.
+Open `http://127.0.0.1:8000/app/` to use the Single Report Spec Composer prototype. It asks one question at a time, accumulates the report spec on the side, and stops when the spec is complete.
 
-The builder includes a demo-local `Save briefing set` placeholder using browser state only. Technical report links, JSON artifacts, workflow names, run IDs, and local artifact detail remain in the secondary Technical/Admin Appendix instead of the main builder or client preview path.
+This UI does not generate a report yet. It does not call the workflow API, show report links, or render a client preview. The next UI batch should decide what happens after `Add this report to briefing set`.
 
 Create a native demo manager-overlap workflow run:
 

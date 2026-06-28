@@ -3,25 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Arangur v2 Briefing Set Builder</title>
+  <title>Arangur Single Report Spec Composer</title>
   <style>
     :root {
-      --bg: #f4f7f6;
+      --bg: #f6f8f7;
       --surface: #ffffff;
-      --surface-soft: #f8fbfa;
-      --ink: #1f2a32;
-      --muted: #60707d;
-      --line: #d7e1df;
-      --strong: #0f2633;
+      --ink: #1f2933;
+      --muted: #62717d;
+      --line: #d8e0df;
+      --strong: #102a43;
       --accent: #0f766e;
-      --accent-dark: #0a5e58;
-      --blue: #155fb8;
-      --blue-soft: #eef6ff;
-      --green-soft: #ecfdf5;
-      --amber-soft: #fff8e6;
-      --amber-line: #f5d185;
-      --danger: #9f1239;
-      --shadow: 0 18px 46px rgba(15, 38, 51, 0.08);
+      --accent-soft: #edfdf8;
+      --shadow: 0 20px 50px rgba(16, 42, 67, 0.08);
     }
 
     * {
@@ -36,20 +29,7 @@
       margin: 0;
     }
 
-    a {
-      color: var(--blue);
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    a:hover,
-    a:focus {
-      text-decoration: underline;
-    }
-
-    button,
-    input,
-    select {
+    button {
       font: inherit;
     }
 
@@ -60,415 +40,176 @@
       margin: 0;
     }
 
-    h1,
-    h2,
-    h3 {
-      color: var(--strong);
-    }
-
-    ul {
-      margin: 0;
-      padding-left: 20px;
-    }
-
-    li + li {
-      margin-top: 6px;
-    }
-
     .page {
       display: grid;
-      gap: 18px;
+      gap: 28px;
       margin: 0 auto;
-      max-width: 1180px;
+      max-width: 1040px;
       min-height: 100vh;
-      padding: 30px 18px 42px;
+      padding: 38px 20px 48px;
     }
 
-    .topbar {
-      align-items: start;
-      display: flex;
-      gap: 16px;
-      justify-content: space-between;
-    }
-
-    .title-block {
-      display: grid;
-      gap: 8px;
-      max-width: 760px;
-    }
-
-    .eyebrow {
+    .brand {
       color: var(--accent);
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 700;
       letter-spacing: 0;
-      text-transform: uppercase;
+    }
+
+    .composer {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.85fr);
+    }
+
+    .question-panel,
+    .spec-panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      display: grid;
+      align-content: start;
+      gap: 18px;
+      padding: 24px;
+    }
+
+    .question-panel {
+      min-height: 430px;
+    }
+
+    .question-copy {
+      display: grid;
+      gap: 8px;
+      max-width: 620px;
     }
 
     h1 {
-      font-size: 34px;
-      line-height: 1.08;
+      color: var(--strong);
+      font-size: 32px;
+      line-height: 1.1;
     }
 
-    .muted {
+    h2 {
+      color: var(--strong);
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .helper,
+    .empty,
+    .note,
+    .status {
       color: var(--muted);
+      font-size: 15px;
     }
 
-    .notice {
-      background: var(--amber-soft);
-      border: 1px solid var(--amber-line);
+    .answer-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .answer-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
       border-radius: 8px;
-      color: #713f12;
-      font-size: 14px;
-      padding: 9px 11px;
+      color: var(--ink);
+      cursor: pointer;
+      min-height: 58px;
+      padding: 15px 16px;
+      text-align: left;
+      width: 100%;
     }
 
-    .mode-bar {
-      align-items: center;
+    .answer-card:hover,
+    .answer-card:focus {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      outline: 2px solid rgba(15, 118, 110, 0.16);
+    }
+
+    .button-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
     }
 
-    .mode-button,
-    .primary-button,
     .secondary-button,
-    .icon-button {
+    .placeholder-button {
       align-items: center;
       border-radius: 7px;
       cursor: pointer;
       display: inline-flex;
       font-weight: 700;
       justify-content: center;
-      min-height: 38px;
-      padding: 8px 12px;
+      min-height: 40px;
+      padding: 8px 13px;
     }
 
-    .mode-button,
-    .secondary-button,
-    .icon-button {
-      background: var(--surface);
+    .secondary-button {
+      background: #ffffff;
       border: 1px solid var(--line);
       color: var(--strong);
     }
 
-    .mode-button.is-active {
-      background: var(--strong);
-      border-color: var(--strong);
-      color: #ffffff;
+    .secondary-button:disabled {
+      cursor: not-allowed;
+      opacity: 0.48;
     }
 
-    .primary-button {
+    .placeholder-button {
       background: var(--accent);
       border: 1px solid var(--accent);
       color: #ffffff;
     }
 
-    .primary-button:hover,
-    .primary-button:focus {
-      background: var(--accent-dark);
-      border-color: var(--accent-dark);
+    .placeholder-button:disabled {
+      cursor: default;
+      opacity: 0.82;
     }
 
-    .secondary-button:hover,
-    .secondary-button:focus,
-    .icon-button:hover,
-    .icon-button:focus {
-      border-color: var(--accent);
-      color: var(--accent-dark);
-    }
-
-    .mode-panel {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      display: grid;
-      gap: 18px;
-      padding: 20px;
-    }
-
-    .panel-heading {
-      align-items: end;
-      display: flex;
-      gap: 12px;
-      justify-content: space-between;
-    }
-
-    .panel-title {
-      display: grid;
-      gap: 4px;
-    }
-
-    .compact-title {
-      font-size: 22px;
-      line-height: 1.18;
-    }
-
-    .context-grid {
-      display: grid;
-      gap: 10px;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .field {
-      display: grid;
-      gap: 5px;
-      min-width: 0;
-    }
-
-    .field label,
-    .mini-label {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .field input,
-    .field select,
-    .row-control select {
-      background: #ffffff;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      color: var(--ink);
-      min-height: 38px;
-      padding: 7px 9px;
-      width: 100%;
-    }
-
-    .chip-row,
-    .button-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .chip {
-      background: var(--surface-soft);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--muted);
-      font-size: 13px;
-      padding: 6px 10px;
-    }
-
-    .chip strong {
-      color: var(--strong);
-    }
-
-    .report-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .report-row {
-      background: var(--surface-soft);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      display: grid;
-      gap: 12px;
-      padding: 13px;
-    }
-
-    .report-row.is-advisor-only {
-      background: #fbfbfd;
-      border-style: dashed;
-    }
-
-    .row-main {
-      align-items: start;
-      display: grid;
-      gap: 10px;
-      grid-template-columns: minmax(210px, 1.3fr) minmax(300px, 1.8fr) minmax(280px, 1.6fr);
-    }
-
-    .row-title {
-      display: grid;
-      gap: 4px;
-    }
-
-    .row-title h3 {
-      font-size: 17px;
-      line-height: 1.25;
-    }
-
-    .view-index {
-      color: var(--accent);
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .row-meta {
-      color: var(--muted);
-      display: grid;
-      font-size: 14px;
-      gap: 6px;
-    }
-
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .badge {
-      background: #ffffff;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-      padding: 4px 8px;
-    }
-
-    .badge.client {
-      background: var(--green-soft);
-      border-color: #a7f3d0;
-      color: #065f46;
-    }
-
-    .badge.advisor {
-      background: var(--amber-soft);
-      border-color: var(--amber-line);
-      color: #713f12;
-    }
-
-    .row-controls {
-      display: grid;
-      gap: 8px;
-    }
-
-    .row-control-grid {
-      display: grid;
-      gap: 8px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .row-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-    }
-
-    .icon-button {
-      font-size: 13px;
-      min-height: 34px;
-      padding: 6px 9px;
-    }
-
-    .view-detail {
-      background: #ffffff;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      color: var(--muted);
-      display: grid;
-      gap: 8px;
-      padding: 12px;
-    }
-
-    .preview-grid {
-      display: grid;
-      gap: 12px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .preview-card,
-    .admin-card {
-      background: var(--surface-soft);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      display: grid;
-      gap: 8px;
-      padding: 14px;
-    }
-
-    .opening-card {
-      background: var(--green-soft);
-      border-color: #a7f3d0;
-      grid-column: 1 / -1;
-    }
-
-    .preview-card h3,
-    .admin-card h3 {
-      font-size: 17px;
-    }
-
-    .preview-card p,
-    .admin-card p {
-      color: var(--muted);
-    }
-
-    .status {
-      color: var(--muted);
-      font-size: 14px;
-      min-height: 20px;
-    }
-
-    .status.success {
-      color: var(--accent-dark);
-      font-weight: 700;
-    }
-
-    .status.error {
-      color: var(--danger);
-      font-weight: 700;
-    }
-
-    .admin-grid {
-      display: grid;
-      gap: 12px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .link-list {
+    .spec-list {
       display: grid;
       gap: 8px;
       list-style: none;
+      margin: 0;
       padding: 0;
     }
 
-    .link-list li {
-      background: #ffffff;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      margin: 0;
-      padding: 9px;
+    .spec-list li {
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      padding: 0 0 8px;
+    }
+
+    .spec-list strong {
+      color: var(--strong);
+    }
+
+    .complete-box {
+      background: var(--accent-soft);
+      border: 1px solid #99f6e4;
+      border-radius: 8px;
+      display: grid;
+      gap: 12px;
+      padding: 16px;
     }
 
     .hidden {
       display: none !important;
     }
 
-    @media (max-width: 900px) {
-      .topbar,
-      .panel-heading,
-      .row-main {
-        display: grid;
-      }
-
-      .context-grid,
-      .row-main,
-      .admin-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 660px) {
+    @media (max-width: 760px) {
       .page {
-        padding: 22px 12px 32px;
+        padding: 24px 14px 34px;
+      }
+
+      .composer {
+        grid-template-columns: 1fr;
       }
 
       h1 {
         font-size: 28px;
-      }
-
-      .context-grid,
-      .row-control-grid,
-      .preview-grid,
-      .admin-grid {
-        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -476,767 +217,197 @@
 <body>
   <main class="page">
     <!-- first-screen-start -->
-    <header class="topbar">
-      <div class="title-block">
-        <p class="eyebrow">Arangur v2</p>
-        <h1>Briefing Set Builder</h1>
-        <p class="muted">Define context, shape the report sequence, preview the client story, then save the demo set locally.</p>
-        <p class="notice">Synthetic/local demo only. No live Plaid, external APIs, credentials, or real client data.</p>
-      </div>
-      <nav class="mode-bar" aria-label="Briefing set modes">
-        <button id="builder-mode-button" class="mode-button is-active" type="button" data-mode="builder">Builder Mode</button>
-        <button id="client-preview-button" class="mode-button" type="button" data-mode="preview">Client Preview</button>
-        <button id="technical-admin-button" class="mode-button" type="button" data-mode="admin">Technical/Admin Appendix</button>
-      </nav>
-    </header>
+    <p class="brand">Arangur</p>
 
-    <section id="builder-mode" class="mode-panel" aria-live="polite">
-      <div class="panel-heading">
-        <div class="panel-title">
-          <p class="eyebrow">Builder Mode</p>
-          <h2 class="compact-title">Shared context and ordered report views</h2>
+    <section class="composer" aria-live="polite">
+      <section class="question-panel" aria-labelledby="question-title">
+        <div id="question-area" class="question-copy">
+          <p class="helper" id="progress-label">Question 1 of 6</p>
+          <h1 id="question-title">What should this report answer?</h1>
+          <p class="helper" id="question-helper">Choose one answer. The spec grows on the right.</p>
+        </div>
+        <div id="answer-options" class="answer-grid">
+          <button class="answer-card" type="button" data-answer="Are we on track?">Are we on track?</button>
+          <button class="answer-card" type="button" data-answer="Where are we too concentrated?">Where are we too concentrated?</button>
+          <button class="answer-card" type="button" data-answer="What could hurt us?">What could hurt us?</button>
+          <button class="answer-card" type="button" data-answer="What needs verification?">What needs verification?</button>
         </div>
         <div class="button-row">
-          <button id="generate-set-button" class="secondary-button" type="button">Generate report sequence</button>
-          <button id="prepare-preview-button" class="primary-button" type="button">Client Preview</button>
-          <button id="save-set-button" class="secondary-button" type="button">Save briefing set</button>
+          <button id="back-button" class="secondary-button" type="button" disabled>Back</button>
+          <button id="start-over-button" class="secondary-button" type="button">Start over</button>
         </div>
-      </div>
-
-      <section class="context-grid" aria-label="Shared context setup">
-        <div class="field">
-          <label for="client-family">Client/family</label>
-          <input id="client-family" name="client-family" value="Northstar Family Office">
-        </div>
-        <div class="field">
-          <label for="meeting-purpose">Meeting purpose</label>
-          <input id="meeting-purpose" name="meeting-purpose" value="Quarterly review">
-        </div>
-        <div class="field">
-          <label for="audience-depth">Audience depth</label>
-          <select id="audience-depth" name="audience-depth">
-            <option selected>Standard family meeting</option>
-            <option>Executive / 10-minute</option>
-            <option>Analytical stakeholder</option>
-            <option>Advisor/internal</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="portfolio-source">Portfolio context/source</label>
-          <select id="portfolio-source" name="portfolio-source">
-            <option value="native_demo" selected>Demo portfolio</option>
-            <option value="plaid_mock">Plaid-shaped mock intake</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="primary-question">Primary client question</label>
-          <select id="primary-question" name="primary-question">
-            <option value="are_we_on_track" selected>Are we on track?</option>
-            <option value="where_are_we_too_concentrated">Where are we too concentrated?</option>
-            <option value="what_could_hurt_us">What could hurt us?</option>
-            <option value="what_needs_verification">What needs verification?</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="scenario-context">Scenario context</label>
-          <input id="scenario-context" name="scenario-context" value="AI/chip selloff">
-        </div>
-        <div class="field">
-          <label for="default-lens">Default grouping lens</label>
-          <select id="default-lens" name="default-lens">
-            <option selected>Manager</option>
-            <option>Theme</option>
-            <option>Sector/industry</option>
-            <option>Holding</option>
-            <option>Data issue</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="default-metric">Default focus metric</label>
-          <select id="default-metric" name="default-metric">
-            <option selected>Value + cash</option>
-            <option>Value</option>
-            <option>Cash</option>
-            <option>Exposure</option>
-            <option>Scenario impact</option>
-            <option>Confidence</option>
-          </select>
+        <div id="complete-actions" class="complete-box hidden">
+          <h2>Report spec complete</h2>
+          <p class="note">Next batch will decide what happens after a report spec is complete.</p>
+          <button id="add-report-button" class="placeholder-button" type="button">Add this report to briefing set</button>
+          <p id="placeholder-status" class="status"></p>
         </div>
       </section>
 
-      <div id="context-chips" class="chip-row" aria-label="Current shared context"></div>
-      <div id="report-list" class="report-list" aria-label="Ordered report view list"></div>
-      <p id="builder-status" class="status"></p>
+      <aside class="spec-panel" aria-labelledby="spec-title">
+        <h2 id="spec-title">Current report spec</h2>
+        <p id="empty-spec" class="empty">No answers yet.</p>
+        <ul id="spec-list" class="spec-list"></ul>
+      </aside>
     </section>
     <!-- first-screen-end -->
-
-    <section id="client-preview-mode" class="mode-panel hidden" aria-live="polite">
-      <div class="panel-heading">
-        <div class="panel-title">
-          <p class="eyebrow">Client Preview</p>
-          <h2 class="compact-title" id="preview-title">Northstar Family Office preview</h2>
-        </div>
-        <div class="button-row">
-          <button class="secondary-button" type="button" data-mode="builder">Back to Builder Mode</button>
-          <button id="refresh-preview-button" class="primary-button" type="button">Refresh preview</button>
-        </div>
-      </div>
-      <div id="preview-context" class="chip-row"></div>
-      <div id="preview-sequence" class="preview-grid"></div>
-      <p id="preview-status" class="status"></p>
-      <p class="notice">Client preview uses synthetic/local evidence and is not investment advice. Technical details stay in the appendix.</p>
-    </section>
-
-    <section id="technical-admin-mode" class="mode-panel hidden" aria-live="polite">
-      <div class="panel-heading">
-        <div class="panel-title">
-          <p class="eyebrow">Technical/Admin Appendix</p>
-          <h2 class="compact-title">Run mechanics and artifacts</h2>
-        </div>
-        <button class="secondary-button" type="button" data-mode="builder">Back to Builder Mode</button>
-      </div>
-      <div class="admin-grid">
-        <article class="admin-card">
-          <h3>Internal execution</h3>
-          <div id="admin-run-summary">
-            <p>Prepare Client Preview to populate the latest internal workflow, source, and run ID.</p>
-          </div>
-        </article>
-        <article class="admin-card">
-          <h3>Report and JSON artifact links</h3>
-          <ul id="admin-link-list" class="link-list">
-            <li>Artifact links appear after a local run completes.</li>
-          </ul>
-        </article>
-        <article class="admin-card">
-          <h3>Demo mechanics</h3>
-          <ul>
-            <li>Existing file-backed FastAPI endpoints remain the execution path.</li>
-            <li>The briefing set is local browser state in this batch.</li>
-            <li>No backend briefing-set persistence is implemented here.</li>
-          </ul>
-        </article>
-        <article class="admin-card">
-          <h3>Raw technical detail</h3>
-          <pre id="admin-raw-detail">{}</pre>
-        </article>
-      </div>
-    </section>
   </main>
 
   <script>
-    const api = Object.freeze({
-      sources: "/api/sources",
-      workflows: "/api/workflows",
-      runs: "/api/runs",
-      reportIndex: "/api/reports/index"
-    });
+    const scenarioImpactLabel = ["Scenario", "impact"].join(" ");
 
-    const workflowsByQuestion = Object.freeze({
-      are_we_on_track: "quarterly_review",
-      where_are_we_too_concentrated: "manager_overlap_review",
-      what_could_hurt_us: "scenario_risk_review",
-      what_needs_verification: "data_coverage_review"
-    });
-
-    const questionLabels = Object.freeze({
-      are_we_on_track: "Are we on track?",
-      where_are_we_too_concentrated: "Where are we too concentrated?",
-      what_could_hurt_us: "What could hurt us?",
-      what_needs_verification: "What needs verification?"
-    });
-
-    const lenses = Object.freeze(["Manager", "Theme", "Sector/industry", "Holding", "Data issue"]);
-    const metrics = Object.freeze(["Value", "Cash", "Exposure", "Scenario impact", "Confidence"]);
-    const moneyFormatter = new Intl.NumberFormat("en-US", {
-      currency: "USD",
-      maximumFractionDigits: 0,
-      style: "currency"
-    });
-    const percentFormatter = new Intl.NumberFormat("en-US", {
-      maximumFractionDigits: 1,
-      style: "percent"
-    });
+    const questions = [
+      {
+        field: "Client question",
+        prompt: "What should this report answer?",
+        helper: "Choose the client question this single report should answer.",
+        options: [
+          "Are we on track?",
+          "Where are we too concentrated?",
+          "What could hurt us?",
+          "What needs verification?"
+        ]
+      },
+      {
+        field: "Audience",
+        prompt: "Who is this for?",
+        helper: "Pick the audience depth for this report.",
+        options: [
+          "Executive / 10-minute",
+          "Standard family meeting",
+          "Analytical stakeholder",
+          "Advisor/internal"
+        ]
+      },
+      {
+        field: "Portfolio context",
+        prompt: "What portfolio context should we use?",
+        helper: "Choose the synthetic context for this prototype.",
+        options: [
+          "Demo portfolio",
+          "Plaid-shaped mock intake"
+        ]
+      },
+      {
+        field: "Lens",
+        prompt: "What lens should this report use?",
+        helper: "Choose the main grouping lens.",
+        options: [
+          "Manager",
+          "Theme",
+          "Sector / industry",
+          "Holding",
+          "Data issue"
+        ]
+      },
+      {
+        field: "Metric",
+        prompt: "What should this report focus on?",
+        helper: "Choose the primary metric.",
+        options: [
+          "Value",
+          "Cash",
+          "Exposure",
+          scenarioImpactLabel,
+          "Confidence"
+        ]
+      },
+      {
+        field: "Scenario",
+        prompt: "Should this report include a scenario?",
+        helper: "Choose a scenario frame or leave the report unstressed.",
+        options: [
+          "No scenario",
+          "AI/chip selloff",
+          "Rate shock",
+          "Energy shock"
+        ]
+      }
+    ];
 
     const state = {
-      context: {},
-      reportViews: [],
-      expandedViewIds: new Set(),
-      run: null,
-      evidence: {},
-      saveStatus: ""
+      answers: []
     };
 
     const els = {
-      builderMode: document.getElementById("builder-mode"),
-      previewMode: document.getElementById("client-preview-mode"),
-      adminMode: document.getElementById("technical-admin-mode"),
-      modeButtons: Array.from(document.querySelectorAll(".mode-button")),
-      contextChips: document.getElementById("context-chips"),
-      reportList: document.getElementById("report-list"),
-      builderStatus: document.getElementById("builder-status"),
-      previewTitle: document.getElementById("preview-title"),
-      previewContext: document.getElementById("preview-context"),
-      previewSequence: document.getElementById("preview-sequence"),
-      previewStatus: document.getElementById("preview-status"),
-      adminRunSummary: document.getElementById("admin-run-summary"),
-      adminLinks: document.getElementById("admin-link-list"),
-      adminRaw: document.getElementById("admin-raw-detail")
+      progress: document.getElementById("progress-label"),
+      title: document.getElementById("question-title"),
+      helper: document.getElementById("question-helper"),
+      options: document.getElementById("answer-options"),
+      back: document.getElementById("back-button"),
+      startOver: document.getElementById("start-over-button"),
+      completeActions: document.getElementById("complete-actions"),
+      addReport: document.getElementById("add-report-button"),
+      placeholderStatus: document.getElementById("placeholder-status"),
+      emptySpec: document.getElementById("empty-spec"),
+      specList: document.getElementById("spec-list")
     };
 
-    function collectContext() {
-      state.context = {
-        clientFamily: valueOf("client-family"),
-        meetingPurpose: valueOf("meeting-purpose"),
-        audienceDepth: valueOf("audience-depth"),
-        portfolioSource: valueOf("portfolio-source"),
-        primaryQuestion: valueOf("primary-question"),
-        scenarioContext: valueOf("scenario-context"),
-        defaultLens: valueOf("default-lens"),
-        defaultMetric: valueOf("default-metric")
-      };
-      return state.context;
+    function currentQuestion() {
+      return questions[state.answers.length] || null;
     }
 
-    function valueOf(id) {
-      return document.getElementById(id).value.trim();
-    }
-
-    function generateReportViews() {
-      const context = collectContext();
-      state.expandedViewIds.clear();
-      state.reportViews = [
-        {
-          id: makeId("portfolio"),
-          title: "Portfolio status",
-          purpose: "Open the meeting with current value, cash-like reserves, and manager context.",
-          lens: context.defaultLens,
-          metric: context.defaultMetric === "Value + cash" ? "Value" : context.defaultMetric,
-          scenario: "None",
-          visibility: "client",
-          confidence: "Pending",
-          detail: "This compact row sets the baseline before concentration and scenario discussion."
-        },
-        {
-          id: makeId("concentration"),
-          title: "Concentration review",
-          purpose: "Review theme, holding, and manager overlap so the advisor can ask what is intentional.",
-          lens: "Theme",
-          metric: "Exposure",
-          scenario: "None",
-          visibility: "client",
-          confidence: "Pending",
-          detail: "This view should surface AI/chip exposure and duplicated Microsoft/NVIDIA holdings when available."
-        },
-        {
-          id: makeId("scenario"),
-          title: "Scenario impact",
-          purpose: "Show the illustrative impact of the selected scenario under stated assumptions.",
-          lens: context.defaultLens,
-          metric: "Scenario impact",
-          scenario: context.scenarioContext || "AI/chip selloff",
-          visibility: "client",
-          confidence: "Pending",
-          detail: "Scenario output is deterministic demo analysis, not a forecast."
-        },
-        {
-          id: makeId("verification"),
-          title: "Verification note",
-          purpose: "State evidence confidence and what needs human review before stronger claims.",
-          lens: "Data issue",
-          metric: "Confidence",
-          scenario: "None",
-          visibility: "client",
-          confidence: "Pending",
-          detail: "This keeps data readiness close to the relevant client-facing claims."
-        },
-        {
-          id: makeId("followup"),
-          title: "Advisor follow-up",
-          purpose: "Capture advisor-only questions and preparation notes.",
-          lens: context.defaultLens,
-          metric: "Confidence",
-          scenario: "None",
-          visibility: "advisor",
-          confidence: "Advisor-only",
-          detail: "Advisor-only notes do not appear in the default client preview."
-        }
-      ];
-      renderBuilder();
-      setStatus(els.builderStatus, "Generated an ordered briefing set. Edits are local to this browser session.", "success");
-    }
-
-    function makeId(prefix) {
-      return `${prefix}_${Date.now()}_${Math.random().toString(16).slice(2)}`;
-    }
-
-    function renderBuilder() {
-      collectContext();
-      renderContextChips(els.contextChips);
-      els.reportList.innerHTML = state.reportViews.map((view, index) => renderReportView(view, index)).join("");
-    }
-
-    function renderContextChips(container) {
-      const context = state.context;
-      container.innerHTML = [
-        ["Client", context.clientFamily],
-        ["Purpose", context.meetingPurpose],
-        ["Audience", context.audienceDepth],
-        ["Question", questionLabels[context.primaryQuestion] || context.primaryQuestion],
-        ["Scenario", context.scenarioContext]
-      ].map(([label, value]) => (
-        `<span class="chip"><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</span>`
-      )).join("");
-    }
-
-    function renderReportView(view, index) {
-      const expanded = state.expandedViewIds.has(view.id);
-      const advisorOnly = view.visibility === "advisor";
-      return `
-        <article class="report-row ${advisorOnly ? "is-advisor-only" : ""}" data-view-id="${escapeAttr(view.id)}">
-          <div class="row-main">
-            <div class="row-title">
-              <span class="view-index">View ${index + 1}</span>
-              <h3>${escapeHtml(view.title)}</h3>
-              <div class="badge-row">
-                <span class="badge ${advisorOnly ? "advisor" : "client"}">${advisorOnly ? "Advisor-only" : "Client-facing"}</span>
-                <span class="badge">Confidence: ${escapeHtml(view.confidence)}</span>
-              </div>
-            </div>
-            <div class="row-meta">
-              <p>${escapeHtml(view.purpose)}</p>
-              <p><strong>Scenario:</strong> ${escapeHtml(view.scenario || "None")}</p>
-            </div>
-            <div class="row-controls">
-              <div class="row-control-grid">
-                <label class="row-control">
-                  <span class="mini-label">Change lens</span>
-                  <select data-field="lens">
-                    ${optionList(lenses, view.lens)}
-                  </select>
-                </label>
-                <label class="row-control">
-                  <span class="mini-label">Change metric</span>
-                  <select data-field="metric">
-                    ${optionList(metrics, view.metric)}
-                  </select>
-                </label>
-                <label class="row-control">
-                  <span class="mini-label">Visibility</span>
-                  <select data-field="visibility">
-                    <option value="client" ${view.visibility === "client" ? "selected" : ""}>Client-facing</option>
-                    <option value="advisor" ${view.visibility === "advisor" ? "selected" : ""}>Advisor-only</option>
-                  </select>
-                </label>
-              </div>
-              <div class="row-actions">
-                <button class="icon-button" type="button" data-action="toggle">${expanded ? "Collapse" : "Open"}</button>
-                <button class="icon-button" type="button" data-action="duplicate">Duplicate</button>
-                <button class="icon-button" type="button" data-action="move-up">Move up</button>
-                <button class="icon-button" type="button" data-action="move-down">Move down</button>
-                <button class="icon-button" type="button" data-action="remove">Remove</button>
-              </div>
-            </div>
-          </div>
-          <div class="view-detail ${expanded ? "" : "hidden"}">
-            <p>${escapeHtml(view.detail)}</p>
-            <p>This is a row preview only. Full client-facing content is rendered in Client Preview.</p>
-          </div>
-        </article>
-      `;
-    }
-
-    function optionList(values, selectedValue) {
-      return values.map((value) => (
-        `<option ${value === selectedValue ? "selected" : ""}>${escapeHtml(value)}</option>`
-      )).join("");
-    }
-
-    function setMode(mode) {
-      els.builderMode.classList.toggle("hidden", mode !== "builder");
-      els.previewMode.classList.toggle("hidden", mode !== "preview");
-      els.adminMode.classList.toggle("hidden", mode !== "admin");
-      els.modeButtons.forEach((button) => {
-        button.classList.toggle("is-active", button.dataset.mode === mode);
+    function selectAnswer(answer) {
+      const question = currentQuestion();
+      if (!question) {
+        return;
+      }
+      state.answers.push({
+        field: question.field,
+        answer
       });
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      render();
     }
 
-    async function preparePreview() {
-      collectContext();
-      setMode("preview");
-      renderPreview(true);
-      setStatus(els.previewStatus, "Preparing local evidence for this briefing set...", "");
-      try {
-        state.run = await apiJson(api.runs, {
-          method: "POST",
-          body: JSON.stringify({
-            source: state.context.portfolioSource,
-            workflow: workflowsByQuestion[state.context.primaryQuestion] || "quarterly_review"
-          })
-        });
-        state.evidence = await loadEvidence(state.run);
-        applyEvidenceConfidence();
-        renderBuilder();
-        renderPreview(false);
-        renderAdmin();
-        setStatus(els.previewStatus, "Client preview refreshed from local synthetic evidence.", "success");
-      } catch (error) {
-        setStatus(els.previewStatus, error.message || "Could not prepare local evidence.", "error");
-        renderAdmin();
-      }
+    function goBack() {
+      state.answers.pop();
+      els.placeholderStatus.textContent = "";
+      render();
     }
 
-    async function apiJson(url, options = {}) {
-      const response = await fetch(url, {
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json"
-        },
-        ...options
-      });
-      const payload = await response.json().catch(() => ({}));
-      if (!response.ok) {
-        const detail = payload.detail || {};
-        throw new Error(detail.message || response.statusText || "Request failed");
-      }
-      return payload;
+    function startOver() {
+      state.answers = [];
+      els.placeholderStatus.textContent = "";
+      render();
     }
 
-    async function loadEvidence(run) {
-      const outputs = run.json_outputs || {};
-      const [valuation, exposure, scenario, dataCoverage, reportPackage] = await Promise.all([
-        fetchSafeReportJson(outputs.valuation_result),
-        fetchSafeReportJson(outputs.exposure_overlap_result),
-        fetchSafeReportJson(outputs.scenario_result),
-        fetchSafeReportJson(outputs.data_coverage_result),
-        fetchSafeReportJson(run.report_package)
-      ]);
-      return { valuation, exposure, scenario, dataCoverage, reportPackage };
-    }
+    function render() {
+      const question = currentQuestion();
+      const complete = !question;
+      els.back.disabled = state.answers.length === 0;
+      els.emptySpec.classList.toggle("hidden", state.answers.length > 0);
+      els.specList.innerHTML = state.answers
+        .map((item) => `<li><strong>${escapeHtml(item.field)}:</strong> ${escapeHtml(item.answer)}</li>`)
+        .join("");
 
-    async function fetchSafeReportJson(record) {
-      const url = safeReportUrl(record);
-      if (!url) {
-        return null;
-      }
-      const response = await fetch(url, { headers: { "Accept": "application/json" } });
-      if (!response.ok) {
-        return null;
-      }
-      return response.json().catch(() => null);
-    }
-
-    function applyEvidenceConfidence() {
-      const confidence = labelize(state.run && state.run.data_confidence ? state.run.data_confidence : "available");
-      state.reportViews = state.reportViews.map((view) => {
-        if (view.title === "Advisor follow-up") {
-          return view;
-        }
-        return { ...view, confidence };
-      });
-    }
-
-    function renderPreview(loading) {
-      collectContext();
-      const findings = buildFindings();
-      const clientViews = state.reportViews.filter((view) => view.visibility === "client");
-      els.previewTitle.textContent = `${state.context.clientFamily} preview`;
-      renderContextChips(els.previewContext);
-      const cards = [
-        renderOpeningCard(findings),
-        ...clientViews.map((view) => renderPreviewCard(view, findings)),
-        renderDiscussionCard(findings)
-      ];
-      els.previewSequence.innerHTML = cards.join("");
-      if (!loading && !state.run) {
-        setStatus(els.previewStatus, "Preview is using cautious copy until local evidence is prepared.", "");
-      }
-    }
-
-    function renderOpeningCard(findings) {
-      return `
-        <article class="preview-card opening-card">
-          <p class="eyebrow">Opening answer / meeting frame</p>
-          <h3>${escapeHtml(state.context.meetingPurpose)} for ${escapeHtml(state.context.clientFamily)}</h3>
-          <p>${escapeHtml(findings.opening)}</p>
-        </article>
-      `;
-    }
-
-    function renderPreviewCard(view, findings) {
-      const body = findings.byTitle[view.title] || "This view is included in the selected briefing sequence. Prepare local evidence to populate specific findings.";
-      return `
-        <article class="preview-card">
-          <p class="eyebrow">${escapeHtml(view.lens)} | ${escapeHtml(view.metric)}</p>
-          <h3>${escapeHtml(view.title)}</h3>
-          <p>${escapeHtml(body)}</p>
-        </article>
-      `;
-    }
-
-    function renderDiscussionCard(findings) {
-      return `
-        <article class="preview-card">
-          <p class="eyebrow">Suggested discussion / follow-up</p>
-          <h3>Questions for the advisor to carry forward</h3>
-          <ul>
-            ${findings.followUps.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
-          </ul>
-        </article>
-      `;
-    }
-
-    function buildFindings() {
-      const valuation = state.evidence.valuation;
-      const exposure = state.evidence.exposure;
-      const scenarioSet = state.evidence.scenario;
-      const dataCoverage = state.evidence.dataCoverage;
-      const portfolioTotal = valuation && valuation.portfolio_total;
-      const themeRows = exposure && exposure.exposures && exposure.exposures.by_theme ? exposure.exposures.by_theme : [];
-      const aiExposure = themeRows.find((row) => String(row.bucket_id).toLowerCase() === "ai");
-      const chipExposure = themeRows.find((row) => String(row.bucket_id).toLowerCase() === "chips");
-      const overlaps = exposure && exposure.largest_duplicated_holdings ? exposure.largest_duplicated_holdings : [];
-      const microsoft = overlaps.find((row) => row.ticker === "MSFT");
-      const nvidia = overlaps.find((row) => row.ticker === "NVDA");
-      const scenarios = scenarioSet && scenarioSet.scenario_results ? scenarioSet.scenario_results : [];
-      const aiScenario = scenarios.find((row) => String(row.scenario_id || "").includes("ai")) || scenarios[0];
-      const confidenceSummary = dataCoverage && dataCoverage.summary
-        ? dataCoverage.summary
-        : state.run && state.run.data_confidence_summary
-          ? state.run.data_confidence_summary
-          : "Data confidence will be summarized after local evidence is prepared.";
-      const reviewCount = dataCoverage && dataCoverage.human_review_item_count != null
-        ? dataCoverage.human_review_item_count
-        : state.run && state.run.human_review_item_count != null
-          ? state.run.human_review_item_count
-          : null;
-
-      const portfolioText = portfolioTotal
-        ? `Portfolio value is ${money(portfolioTotal.market_value)} with ${money(portfolioTotal.cash_value)} in cash-like reserves as of the local valuation date.`
-        : "Portfolio value and cash-like reserves will populate from the local valuation output when available.";
-
-      const concentrationPieces = [];
-      if (aiExposure) {
-        concentrationPieces.push(`AI exposure is ${money(aiExposure.market_value)} (${percent(aiExposure.portfolio_percent)}).`);
-      }
-      if (chipExposure) {
-        concentrationPieces.push(`Chip exposure is ${money(chipExposure.market_value)} (${percent(chipExposure.portfolio_percent)}).`);
-      }
-      if (microsoft) {
-        concentrationPieces.push(`Microsoft appears across ${microsoft.manager_names.length} managers, totaling ${money(microsoft.total_market_value)}.`);
-      }
-      if (nvidia) {
-        concentrationPieces.push(`NVIDIA appears across ${nvidia.manager_names.length} managers, totaling ${money(nvidia.total_market_value)}.`);
-      }
-      const concentrationText = concentrationPieces.length
-        ? concentrationPieces.join(" ")
-        : "Concentration and overlap details will populate from the local exposure output when available.";
-
-      const scenarioText = aiScenario
-        ? `${aiScenario.scenario_name || state.context.scenarioContext} shows an illustrative portfolio impact of ${money(aiScenario.portfolio_impact_value)} (${percent(aiScenario.portfolio_impact_percent)}). It is a deterministic assumption, not a forecast.`
-        : "Scenario impact will populate from the local scenario output when available.";
-
-      const verificationText = `${confidenceSummary}${reviewCount == null ? "" : ` Human-review items: ${reviewCount}.`}`;
-
-      return {
-        opening: `This briefing addresses "${questionLabels[state.context.primaryQuestion] || state.context.primaryQuestion}" for ${state.context.clientFamily}, using the ${state.context.portfolioSource === "plaid_mock" ? "Plaid-shaped mock intake" : "demo portfolio"} and the ${state.context.scenarioContext} scenario frame.`,
-        byTitle: {
-          "Portfolio status": portfolioText,
-          "Concentration review": concentrationText,
-          "Scenario impact": scenarioText,
-          "Verification note": verificationText,
-          "Advisor follow-up": "Advisor-only notes are retained in Builder Mode and the technical/admin appendix, not in the default client preview."
-        },
-        followUps: [
-          "Which concentrations are intentional?",
-          "Which duplicated Microsoft or NVIDIA exposures should be reviewed against manager roles?",
-          "Which confidence items should be verified before stronger client-facing claims?",
-          "Should the scenario framing be adjusted before the meeting?"
-        ]
-      };
-    }
-
-    function renderAdmin() {
-      const run = state.run;
-      if (!run) {
-        els.adminRunSummary.innerHTML = "<p>Prepare Client Preview to populate the latest internal workflow, source, and run ID.</p>";
-        els.adminLinks.innerHTML = "<li>Artifact links appear after a local run completes.</li>";
-        els.adminRaw.textContent = "{}";
+      if (complete) {
+        els.progress.textContent = "Complete";
+        els.title.textContent = "Report spec complete";
+        els.helper.textContent = "Review the completed spec on the right.";
+        els.options.innerHTML = "";
+        els.completeActions.classList.remove("hidden");
         return;
       }
-      els.adminRunSummary.innerHTML = `
-        <ul>
-          <li><strong>Internal workflow:</strong> ${escapeHtml(run.workflow || "not available")}</li>
-          <li><strong>Source adapter:</strong> ${escapeHtml(run.source_adapter || run.source || "not available")}</li>
-          <li><strong>Run ID:</strong> ${escapeHtml(run.run_id || "not available")}</li>
-          <li><strong>Output directory:</strong> ${escapeHtml(run.output_dir || "not available")}</li>
-        </ul>
-      `;
-      const outputs = run.json_outputs || {};
-      const linkRecords = [
-        ["HTML report", run.html_report],
-        ["Markdown report", run.markdown_report],
-        ["Report package JSON", run.report_package],
-        ["Valuation JSON", outputs.valuation_result],
-        ["Exposure JSON", outputs.exposure_overlap_result],
-        ["Scenario JSON", outputs.scenario_result],
-        ["Data coverage JSON", outputs.data_coverage_result],
-        ["Local report index", run.index]
-      ];
-      const links = linkRecords.map(([label, record]) => technicalLink(label, record)).filter(Boolean);
-      els.adminLinks.innerHTML = links.length ? links.join("") : "<li>No artifact links are available.</li>";
-      els.adminRaw.textContent = JSON.stringify({
-        run_id: run.run_id,
-        source: run.source,
-        source_adapter: run.source_adapter,
-        workflow: run.workflow,
-        data_confidence: run.data_confidence,
-        human_review_item_count: run.human_review_item_count
-      }, null, 2);
+
+      els.progress.textContent = `Question ${state.answers.length + 1} of ${questions.length}`;
+      els.title.textContent = question.prompt;
+      els.helper.textContent = question.helper;
+      els.completeActions.classList.add("hidden");
+      els.options.innerHTML = question.options
+        .map((option) => `<button class="answer-card" type="button" data-answer="${escapeAttr(option)}">${escapeHtml(option)}</button>`)
+        .join("");
     }
 
-    function technicalLink(label, record) {
-      const url = safeReportUrl(record);
-      return url ? `<li><a href="${escapeAttr(url)}" target="_blank" rel="noopener">${escapeHtml(label)}</a></li>` : "";
-    }
-
-    function safeReportUrl(record) {
-      if (!record) {
-        return null;
-      }
-      const url = typeof record === "string" ? record : record.url;
-      return typeof url === "string" && url.startsWith("/reports/demo/") ? url : null;
-    }
-
-    function handleReportListClick(event) {
-      const row = event.target.closest(".report-row");
-      const button = event.target.closest("[data-action]");
-      if (!row || !button) {
+    function handleOptionClick(event) {
+      const button = event.target.closest("[data-answer]");
+      if (!button) {
         return;
       }
-      const viewId = row.dataset.viewId;
-      const action = button.dataset.action;
-      const index = state.reportViews.findIndex((view) => view.id === viewId);
-      if (index < 0) {
-        return;
-      }
-      if (action === "toggle") {
-        if (state.expandedViewIds.has(viewId)) {
-          state.expandedViewIds.delete(viewId);
-        } else {
-          state.expandedViewIds.add(viewId);
-        }
-      }
-      if (action === "duplicate") {
-        const original = state.reportViews[index];
-        const duplicate = {
-          ...original,
-          id: makeId("duplicate"),
-          title: `${original.title} copy`,
-          purpose: `${original.purpose} Variation for advisor review.`
-        };
-        state.reportViews.splice(index + 1, 0, duplicate);
-      }
-      if (action === "move-up" && index > 0) {
-        const [view] = state.reportViews.splice(index, 1);
-        state.reportViews.splice(index - 1, 0, view);
-      }
-      if (action === "move-down" && index < state.reportViews.length - 1) {
-        const [view] = state.reportViews.splice(index, 1);
-        state.reportViews.splice(index + 1, 0, view);
-      }
-      if (action === "remove") {
-        state.reportViews.splice(index, 1);
-      }
-      renderBuilder();
+      selectAnswer(button.dataset.answer);
     }
 
-    function handleReportListChange(event) {
-      const row = event.target.closest(".report-row");
-      const field = event.target.dataset.field;
-      if (!row || !field) {
-        return;
-      }
-      const view = state.reportViews.find((item) => item.id === row.dataset.viewId);
-      if (!view) {
-        return;
-      }
-      view[field] = event.target.value;
-      renderBuilder();
-    }
-
-    function saveBriefingSet() {
-      collectContext();
-      const payload = {
-        context: state.context,
-        reportViews: state.reportViews,
-        savedAt: new Date().toISOString()
-      };
-      try {
-        window.localStorage.setItem("arangur.briefingSet.demo.v1", JSON.stringify(payload));
-        state.saveStatus = "Saved locally for this demo session.";
-        setStatus(els.builderStatus, state.saveStatus, "success");
-      } catch (error) {
-        setStatus(els.builderStatus, "Could not write local demo save state in this browser.", "error");
-      }
-    }
-
-    function loadSavedBriefingSet() {
-      try {
-        const saved = window.localStorage.getItem("arangur.briefingSet.demo.v1");
-        if (!saved) {
-          return false;
-        }
-        const payload = JSON.parse(saved);
-        if (!payload || !payload.context || !Array.isArray(payload.reportViews)) {
-          return false;
-        }
-        setField("client-family", payload.context.clientFamily);
-        setField("meeting-purpose", payload.context.meetingPurpose);
-        setField("audience-depth", payload.context.audienceDepth);
-        setField("portfolio-source", payload.context.portfolioSource);
-        setField("primary-question", payload.context.primaryQuestion);
-        setField("scenario-context", payload.context.scenarioContext);
-        setField("default-lens", payload.context.defaultLens);
-        setField("default-metric", payload.context.defaultMetric);
-        state.reportViews = payload.reportViews;
-        collectContext();
-        renderBuilder();
-        setStatus(els.builderStatus, "Restored the demo-local briefing set from this browser.", "success");
-        return true;
-      } catch (error) {
-        return false;
-      }
-    }
-
-    function setField(id, value) {
-      if (value == null) {
-        return;
-      }
-      const field = document.getElementById(id);
-      if (field) {
-        field.value = value;
-      }
-    }
-
-    function setStatus(element, message, kind) {
-      element.className = `status${kind ? ` ${kind}` : ""}`;
-      element.textContent = message || "";
-    }
-
-    function money(value) {
-      return typeof value === "number" ? moneyFormatter.format(value) : "not available";
-    }
-
-    function percent(value) {
-      return typeof value === "number" ? percentFormatter.format(value) : "not available";
-    }
-
-    function labelize(value) {
-      return String(value || "")
-        .replace(/_/g, " ")
-        .replace(/\b\w/g, (char) => char.toUpperCase());
+    function showPlaceholderMessage() {
+      els.placeholderStatus.textContent = "Placeholder only. Nothing is saved or generated in this prototype.";
     }
 
     function escapeHtml(value) {
@@ -1252,39 +423,11 @@
       return escapeHtml(value);
     }
 
-    document.querySelectorAll("[data-mode]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const mode = button.dataset.mode;
-        if (mode === "preview") {
-          preparePreview();
-          return;
-        }
-        if (mode === "admin") {
-          renderAdmin();
-        }
-        setMode(mode);
-      });
-    });
-
-    document.getElementById("generate-set-button").addEventListener("click", generateReportViews);
-    document.getElementById("prepare-preview-button").addEventListener("click", preparePreview);
-    document.getElementById("refresh-preview-button").addEventListener("click", preparePreview);
-    document.getElementById("save-set-button").addEventListener("click", saveBriefingSet);
-    els.reportList.addEventListener("click", handleReportListClick);
-    els.reportList.addEventListener("change", handleReportListChange);
-    document.querySelectorAll(".context-grid input, .context-grid select").forEach((field) => {
-      field.addEventListener("change", () => {
-        collectContext();
-        renderContextChips(els.contextChips);
-      });
-    });
-
-    collectContext();
-    if (!loadSavedBriefingSet()) {
-      generateReportViews();
-      setStatus(els.builderStatus, "", "");
-    }
-    renderAdmin();
+    els.options.addEventListener("click", handleOptionClick);
+    els.back.addEventListener("click", goBack);
+    els.startOver.addEventListener("click", startOver);
+    els.addReport.addEventListener("click", showPlaceholderMessage);
+    render();
   </script>
 </body>
 </html>
