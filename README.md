@@ -79,7 +79,7 @@ Then open:
 - `http://127.0.0.1:8000/reports/demo/index.html`
 - `http://127.0.0.1:8000/`
 
-## Run The Guided Briefing Builder
+## Run The Briefing Set Builder
 
 For a fresh checkout, install the current lightweight Python requirements:
 
@@ -93,9 +93,9 @@ Start the FastAPI app:
 python -m uvicorn arangur.app.main:app --reload --app-dir src
 ```
 
-Open `http://127.0.0.1:8000/app/` to use the sparse guided briefing builder. Choose a client question, choose audience depth, choose portfolio context, review the suggested briefing bundle, review the advisor draft, and open the client briefing. Technical report links and local artifact details are kept behind the technical/admin appendix instead of appearing on the first screen.
+Open `http://127.0.0.1:8000/app/` to use the local Briefing Set Builder. Define shared context once, generate a compact ordered report view list, duplicate views, change lens or metric, move/remove rows, and open Client Preview to render the selected client-facing views in order.
 
-Current product direction: this sparse builder is a transitional baseline. The next UI target is a Briefing Set Builder with shared context, an ordered report view list, Client Preview Mode, and eventually saved briefing sets.
+The builder includes a demo-local `Save briefing set` placeholder using browser state only. Technical report links, JSON artifacts, workflow names, run IDs, and local artifact detail remain in the secondary Technical/Admin Appendix instead of the main builder or client preview path.
 
 Create a native demo manager-overlap workflow run:
 

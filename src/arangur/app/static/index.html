@@ -3,24 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Arangur v2 Guided Briefing Builder</title>
+  <title>Arangur v2 Briefing Set Builder</title>
   <style>
     :root {
-      --bg: #f5f7f8;
+      --bg: #f4f7f6;
       --surface: #ffffff;
-      --ink: #1f2933;
-      --muted: #5f6f82;
-      --soft: #f8fafc;
-      --line: #d8e0ea;
-      --strong: #102a43;
+      --surface-soft: #f8fbfa;
+      --ink: #1f2a32;
+      --muted: #60707d;
+      --line: #d7e1df;
+      --strong: #0f2633;
       --accent: #0f766e;
-      --accent-dark: #0b5f59;
-      --blue: #0b63ce;
+      --accent-dark: #0a5e58;
+      --blue: #155fb8;
       --blue-soft: #eef6ff;
-      --amber: #fff7ed;
-      --amber-ink: #7c2d12;
-      --green-soft: #edfdf8;
-      --shadow: 0 18px 45px rgba(16, 42, 67, 0.08);
+      --green-soft: #ecfdf5;
+      --amber-soft: #fff8e6;
+      --amber-line: #f5d185;
+      --danger: #9f1239;
+      --shadow: 0 18px 46px rgba(15, 38, 51, 0.08);
     }
 
     * {
@@ -35,10 +36,6 @@
       margin: 0;
     }
 
-    button {
-      font: inherit;
-    }
-
     a {
       color: var(--blue);
       font-weight: 700;
@@ -48,6 +45,12 @@
     a:hover,
     a:focus {
       text-decoration: underline;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
     }
 
     h1,
@@ -73,28 +76,30 @@
     }
 
     .page {
+      display: grid;
+      gap: 18px;
       margin: 0 auto;
-      max-width: 1060px;
+      max-width: 1180px;
       min-height: 100vh;
-      padding: 34px 20px 42px;
+      padding: 30px 18px 42px;
     }
 
-    .builder-shell,
-    .client-shell {
-      display: grid;
-      gap: 22px;
+    .topbar {
+      align-items: start;
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
     }
 
-    .hero {
+    .title-block {
       display: grid;
-      gap: 12px;
-      justify-items: start;
-      max-width: 820px;
+      gap: 8px;
+      max-width: 760px;
     }
 
     .eyebrow {
       color: var(--accent);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0;
       text-transform: uppercase;
@@ -102,140 +107,55 @@
 
     h1 {
       font-size: 34px;
-      line-height: 1.1;
+      line-height: 1.08;
     }
 
-    .prompt {
-      color: var(--strong);
-      font-size: 22px;
-      line-height: 1.25;
+    .muted {
+      color: var(--muted);
     }
 
     .notice {
-      background: var(--amber);
-      border: 1px solid #fed7aa;
+      background: var(--amber-soft);
+      border: 1px solid var(--amber-line);
       border-radius: 8px;
-      color: var(--amber-ink);
+      color: #713f12;
       font-size: 14px;
-      padding: 10px 12px;
+      padding: 9px 11px;
     }
 
-    .progress {
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid var(--line);
-      border-radius: 8px;
+    .mode-bar {
+      align-items: center;
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      padding: 10px;
     }
 
-    .chip {
-      background: var(--soft);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--muted);
-      font-size: 13px;
-      padding: 6px 10px;
-    }
-
-    .chip strong {
-      color: var(--strong);
-    }
-
-    .step {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      display: grid;
-      gap: 18px;
-      padding: 22px;
-    }
-
-    .step-header {
-      display: grid;
-      gap: 6px;
-      max-width: 760px;
-    }
-
-    .step-label {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .step h2 {
-      font-size: 24px;
-      line-height: 1.2;
-    }
-
-    .step-copy {
-      color: var(--muted);
-      max-width: 680px;
-    }
-
-    .choice-grid {
-      display: grid;
-      gap: 12px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .choice-card {
-      background: #ffffff;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      color: var(--ink);
-      cursor: pointer;
-      display: grid;
-      gap: 8px;
-      min-height: 118px;
-      padding: 16px;
-      text-align: left;
-      width: 100%;
-    }
-
-    .choice-card:hover,
-    .choice-card:focus {
-      border-color: var(--accent);
-      outline: 2px solid rgba(15, 118, 110, 0.15);
-    }
-
-    .choice-card.is-selected {
-      background: var(--green-soft);
-      border-color: var(--accent);
-    }
-
-    .choice-title {
-      color: var(--strong);
-      font-size: 17px;
-      font-weight: 700;
-      line-height: 1.25;
-    }
-
-    .choice-detail {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .button-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
+    .mode-button,
     .primary-button,
     .secondary-button,
-    .quiet-button {
+    .icon-button {
       align-items: center;
-      border-radius: 6px;
+      border-radius: 7px;
       cursor: pointer;
       display: inline-flex;
       font-weight: 700;
       justify-content: center;
-      min-height: 42px;
-      padding: 9px 14px;
+      min-height: 38px;
+      padding: 8px 12px;
+    }
+
+    .mode-button,
+    .secondary-button,
+    .icon-button {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--strong);
+    }
+
+    .mode-button.is-active {
+      background: var(--strong);
+      border-color: var(--strong);
+      color: #ffffff;
     }
 
     .primary-button {
@@ -250,36 +170,213 @@
       border-color: var(--accent-dark);
     }
 
-    .secondary-button {
+    .secondary-button:hover,
+    .secondary-button:focus,
+    .icon-button:hover,
+    .icon-button:focus {
+      border-color: var(--accent);
+      color: var(--accent-dark);
+    }
+
+    .mode-panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 18px;
+      padding: 20px;
+    }
+
+    .panel-heading {
+      align-items: end;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+    }
+
+    .panel-title {
+      display: grid;
+      gap: 4px;
+    }
+
+    .compact-title {
+      font-size: 22px;
+      line-height: 1.18;
+    }
+
+    .context-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .field {
+      display: grid;
+      gap: 5px;
+      min-width: 0;
+    }
+
+    .field label,
+    .mini-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .field input,
+    .field select,
+    .row-control select {
       background: #ffffff;
       border: 1px solid var(--line);
-      color: var(--blue);
+      border-radius: 7px;
+      color: var(--ink);
+      min-height: 38px;
+      padding: 7px 9px;
+      width: 100%;
     }
 
-    .quiet-button {
-      background: transparent;
-      border: 0;
-      color: var(--blue);
-      min-height: auto;
-      padding: 4px 0;
+    .chip-row,
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
-    .primary-button:disabled,
-    .secondary-button:disabled {
-      cursor: not-allowed;
-      opacity: 0.62;
+    .chip {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 6px 10px;
     }
 
-    .bundle-grid,
-    .briefing-card-grid {
+    .chip strong {
+      color: var(--strong);
+    }
+
+    .report-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .report-row {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      display: grid;
+      gap: 12px;
+      padding: 13px;
+    }
+
+    .report-row.is-advisor-only {
+      background: #fbfbfd;
+      border-style: dashed;
+    }
+
+    .row-main {
+      align-items: start;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(210px, 1.3fr) minmax(300px, 1.8fr) minmax(280px, 1.6fr);
+    }
+
+    .row-title {
+      display: grid;
+      gap: 4px;
+    }
+
+    .row-title h3 {
+      font-size: 17px;
+      line-height: 1.25;
+    }
+
+    .view-index {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .row-meta {
+      color: var(--muted);
+      display: grid;
+      font-size: 14px;
+      gap: 6px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .badge {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 8px;
+    }
+
+    .badge.client {
+      background: var(--green-soft);
+      border-color: #a7f3d0;
+      color: #065f46;
+    }
+
+    .badge.advisor {
+      background: var(--amber-soft);
+      border-color: var(--amber-line);
+      color: #713f12;
+    }
+
+    .row-controls {
+      display: grid;
+      gap: 8px;
+    }
+
+    .row-control-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .row-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .icon-button {
+      font-size: 13px;
+      min-height: 34px;
+      padding: 6px 9px;
+    }
+
+    .view-detail {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .preview-grid {
       display: grid;
       gap: 12px;
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .bundle-card,
-    .briefing-card {
-      background: #ffffff;
+    .preview-card,
+    .admin-card {
+      background: var(--surface-soft);
       border: 1px solid var(--line);
       border-radius: 8px;
       display: grid;
@@ -287,110 +384,42 @@
       padding: 14px;
     }
 
-    .bundle-card {
-      cursor: pointer;
+    .opening-card {
+      background: var(--green-soft);
+      border-color: #a7f3d0;
+      grid-column: 1 / -1;
     }
 
-    .bundle-card.is-selected {
-      background: var(--blue-soft);
-      border-color: #93c5fd;
+    .preview-card h3,
+    .admin-card h3 {
+      font-size: 17px;
     }
 
-    .card-check {
-      color: var(--accent);
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .draft-panel,
-    .confidence-note {
-      background: var(--soft);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      display: grid;
-      gap: 12px;
-      padding: 16px;
-    }
-
-    .confidence-note {
-      background: #fefce8;
-      border-color: #fde68a;
-      color: #713f12;
+    .preview-card p,
+    .admin-card p {
+      color: var(--muted);
     }
 
     .status {
       color: var(--muted);
       font-size: 14px;
-      min-height: 22px;
-    }
-
-    .status.error {
-      color: #991b1b;
+      min-height: 20px;
     }
 
     .status.success {
-      color: var(--accent);
+      color: var(--accent-dark);
+      font-weight: 700;
     }
 
-    .client-shell {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      padding: 24px;
+    .status.error {
+      color: var(--danger);
+      font-weight: 700;
     }
 
-    .client-header {
+    .admin-grid {
       display: grid;
-      gap: 10px;
-      max-width: 780px;
-    }
-
-    .client-title {
-      font-size: 30px;
-      line-height: 1.1;
-    }
-
-    .answer {
-      background: var(--green-soft);
-      border: 1px solid #bbf7d0;
-      border-radius: 8px;
-      display: grid;
-      gap: 8px;
-      padding: 18px;
-    }
-
-    .drawer {
-      background: rgba(16, 42, 67, 0.28);
-      bottom: 0;
-      display: flex;
-      justify-content: flex-end;
-      left: 0;
-      padding: 18px;
-      position: fixed;
-      right: 0;
-      top: 0;
-      z-index: 10;
-    }
-
-    .drawer-panel {
-      background: #ffffff;
-      border-radius: 8px;
-      box-shadow: 0 24px 80px rgba(16, 42, 67, 0.22);
-      display: grid;
-      gap: 16px;
-      max-width: 520px;
-      overflow: auto;
-      padding: 20px;
-      width: min(100%, 520px);
-    }
-
-    .drawer-header {
-      align-items: start;
-      display: flex;
       gap: 12px;
-      justify-content: space-between;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .link-list {
@@ -401,32 +430,44 @@
     }
 
     .link-list li {
+      background: #ffffff;
       border: 1px solid var(--line);
       border-radius: 7px;
       margin: 0;
-      padding: 10px;
+      padding: 9px;
     }
 
     .hidden {
       display: none !important;
     }
 
-    @media (max-width: 760px) {
+    @media (max-width: 900px) {
+      .topbar,
+      .panel-heading,
+      .row-main {
+        display: grid;
+      }
+
+      .context-grid,
+      .row-main,
+      .admin-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 660px) {
       .page {
-        padding: 22px 14px 32px;
+        padding: 22px 12px 32px;
       }
 
       h1 {
-        font-size: 29px;
+        font-size: 28px;
       }
 
-      .prompt {
-        font-size: 19px;
-      }
-
-      .choice-grid,
-      .bundle-grid,
-      .briefing-card-grid {
+      .context-grid,
+      .row-control-grid,
+      .preview-grid,
+      .admin-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -434,161 +475,154 @@
 </head>
 <body>
   <main class="page">
-    <section id="builder-view" class="builder-shell" aria-live="polite">
-      <!-- first-screen-start -->
-      <header class="hero" id="builder-hero">
-        <p class="eyebrow">Guided briefing builder</p>
-        <h1>Arangur v2 Guided Briefing Builder</h1>
-        <p class="prompt">What client conversation are you preparing?</p>
-        <p class="notice">Synthetic/local demo. No live Plaid, external APIs, credentials, or real client data.</p>
-      </header>
+    <!-- first-screen-start -->
+    <header class="topbar">
+      <div class="title-block">
+        <p class="eyebrow">Arangur v2</p>
+        <h1>Briefing Set Builder</h1>
+        <p class="muted">Define context, shape the report sequence, preview the client story, then save the demo set locally.</p>
+        <p class="notice">Synthetic/local demo only. No live Plaid, external APIs, credentials, or real client data.</p>
+      </div>
+      <nav class="mode-bar" aria-label="Briefing set modes">
+        <button id="builder-mode-button" class="mode-button is-active" type="button" data-mode="builder">Builder Mode</button>
+        <button id="client-preview-button" class="mode-button" type="button" data-mode="preview">Client Preview</button>
+        <button id="technical-admin-button" class="mode-button" type="button" data-mode="admin">Technical/Admin Appendix</button>
+      </nav>
+    </header>
 
-      <section id="step-client-question" class="step active-step" data-step="client-question">
-        <div class="step-header">
-          <p class="step-label">Step 1</p>
-          <h2>Choose client question</h2>
-        </div>
-        <div class="choice-grid" id="question-card-grid">
-          <button class="choice-card question-card" type="button" data-question="are_we_on_track">
-            <span class="choice-title">Are we on track?</span>
-            <span class="choice-detail">Prepare a review around value, allocation, cash, and the main items to discuss.</span>
-          </button>
-          <button class="choice-card question-card" type="button" data-question="where_are_we_too_concentrated">
-            <span class="choice-title">Where are we too concentrated?</span>
-            <span class="choice-detail">Focus the conversation on shared holdings, themes, and manager overlap.</span>
-          </button>
-          <button class="choice-card question-card" type="button" data-question="what_could_hurt_us">
-            <span class="choice-title">What could hurt us?</span>
-            <span class="choice-detail">Frame scenario risk, affected exposures, and the assumptions behind the impact.</span>
-          </button>
-          <button class="choice-card question-card" type="button" data-question="what_needs_verification">
-            <span class="choice-title">What needs verification?</span>
-            <span class="choice-detail">Clarify confidence, human-review items, and what should not be overclaimed.</span>
-          </button>
+    <section id="builder-mode" class="mode-panel" aria-live="polite">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <p class="eyebrow">Builder Mode</p>
+          <h2 class="compact-title">Shared context and ordered report views</h2>
         </div>
         <div class="button-row">
-          <button id="first-technical-entry" class="quiet-button" type="button">Technical/admin view</button>
+          <button id="generate-set-button" class="secondary-button" type="button">Generate report sequence</button>
+          <button id="prepare-preview-button" class="primary-button" type="button">Client Preview</button>
+          <button id="save-set-button" class="secondary-button" type="button">Save briefing set</button>
+        </div>
+      </div>
+
+      <section class="context-grid" aria-label="Shared context setup">
+        <div class="field">
+          <label for="client-family">Client/family</label>
+          <input id="client-family" name="client-family" value="Northstar Family Office">
+        </div>
+        <div class="field">
+          <label for="meeting-purpose">Meeting purpose</label>
+          <input id="meeting-purpose" name="meeting-purpose" value="Quarterly review">
+        </div>
+        <div class="field">
+          <label for="audience-depth">Audience depth</label>
+          <select id="audience-depth" name="audience-depth">
+            <option selected>Standard family meeting</option>
+            <option>Executive / 10-minute</option>
+            <option>Analytical stakeholder</option>
+            <option>Advisor/internal</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="portfolio-source">Portfolio context/source</label>
+          <select id="portfolio-source" name="portfolio-source">
+            <option value="native_demo" selected>Demo portfolio</option>
+            <option value="plaid_mock">Plaid-shaped mock intake</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="primary-question">Primary client question</label>
+          <select id="primary-question" name="primary-question">
+            <option value="are_we_on_track" selected>Are we on track?</option>
+            <option value="where_are_we_too_concentrated">Where are we too concentrated?</option>
+            <option value="what_could_hurt_us">What could hurt us?</option>
+            <option value="what_needs_verification">What needs verification?</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="scenario-context">Scenario context</label>
+          <input id="scenario-context" name="scenario-context" value="AI/chip selloff">
+        </div>
+        <div class="field">
+          <label for="default-lens">Default grouping lens</label>
+          <select id="default-lens" name="default-lens">
+            <option selected>Manager</option>
+            <option>Theme</option>
+            <option>Sector/industry</option>
+            <option>Holding</option>
+            <option>Data issue</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="default-metric">Default focus metric</label>
+          <select id="default-metric" name="default-metric">
+            <option selected>Value + cash</option>
+            <option>Value</option>
+            <option>Cash</option>
+            <option>Exposure</option>
+            <option>Scenario impact</option>
+            <option>Confidence</option>
+          </select>
         </div>
       </section>
-      <!-- first-screen-end -->
 
-      <section id="choice-summary" class="progress hidden" aria-label="Selected briefing choices"></section>
+      <div id="context-chips" class="chip-row" aria-label="Current shared context"></div>
+      <div id="report-list" class="report-list" aria-label="Ordered report view list"></div>
+      <p id="builder-status" class="status"></p>
+    </section>
+    <!-- first-screen-end -->
 
-      <section id="step-audience-depth" class="step hidden" data-step="audience-depth">
-        <div class="step-header">
-          <p class="step-label">Step 2</p>
-          <h2>Choose audience depth</h2>
-          <p class="step-copy">Choose how much detail the briefing should carry. Standard Family Office Meeting is recommended for this demo.</p>
+    <section id="client-preview-mode" class="mode-panel hidden" aria-live="polite">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <p class="eyebrow">Client Preview</p>
+          <h2 class="compact-title" id="preview-title">Northstar Family Office preview</h2>
         </div>
-        <div class="choice-grid">
-          <button class="choice-card audience-card" type="button" data-audience="executive_10_minute">
-            <span class="choice-title">Executive / 10-Minute</span>
-            <span class="choice-detail">Concise answer, top evidence, and essential caveats.</span>
-          </button>
-          <button class="choice-card audience-card is-selected" type="button" data-audience="standard_family_office_meeting">
-            <span class="choice-title">Standard Family Office Meeting</span>
-            <span class="choice-detail">Balanced detail for a serious review conversation.</span>
-          </button>
-          <button class="choice-card audience-card" type="button" data-audience="analytical_stakeholder">
-            <span class="choice-title">Analytical Stakeholder</span>
-            <span class="choice-detail">More methodology context and evidence density.</span>
-          </button>
-          <button class="choice-card audience-card" type="button" data-audience="advisor_internal">
-            <span class="choice-title">Advisor/Internal</span>
-            <span class="choice-detail">Full advisor workspace detail, kept out of the client page by default.</span>
-          </button>
-        </div>
-      </section>
-
-      <section id="step-portfolio-context" class="step hidden" data-step="portfolio-context">
-        <div class="step-header">
-          <p class="step-label">Step 3</p>
-          <h2>Choose portfolio context</h2>
-          <p class="step-copy">Pick the synthetic portfolio context for this briefing. Source mechanics stay behind the scenes.</p>
-        </div>
-        <div class="choice-grid">
-          <button class="choice-card source-card is-selected" type="button" data-source="native_demo">
-            <span class="choice-title">Demo portfolio</span>
-            <span class="choice-detail">Synthetic native portfolio fixture.</span>
-          </button>
-          <button class="choice-card source-card" type="button" data-source="plaid_mock">
-            <span class="choice-title">Plaid-shaped mock intake</span>
-            <span class="choice-detail">Synthetic Plaid-shaped fixture normalized locally.</span>
-          </button>
-        </div>
-      </section>
-
-      <section id="step-briefing-bundle" class="step hidden" data-step="briefing-bundle">
-        <div class="step-header">
-          <p class="step-label">Step 4</p>
-          <h2>Review suggested briefing bundle</h2>
-          <p class="step-copy">Arangur suggests a compact set of briefing cards for this conversation. Keep the defaults or remove a card.</p>
-        </div>
-        <div id="bundle-grid" class="bundle-grid"></div>
         <div class="button-row">
-          <button id="accept-bundle-button" class="primary-button" type="button">Review advisor draft</button>
-          <button class="secondary-button" type="button" data-back-step="portfolio-context">Back</button>
+          <button class="secondary-button" type="button" data-mode="builder">Back to Builder Mode</button>
+          <button id="refresh-preview-button" class="primary-button" type="button">Refresh preview</button>
         </div>
-        <p id="bundle-status" class="status"></p>
-      </section>
-
-      <section id="step-advisor-draft" class="step hidden" data-step="advisor-draft">
-        <div class="step-header">
-          <p class="step-label">Step 5</p>
-          <h2>Review advisor draft</h2>
-          <p class="step-copy">This is the advisor-facing draft. It summarizes the answer and selected cards without exposing raw artifacts.</p>
-        </div>
-        <div id="advisor-draft-content" class="draft-panel"></div>
-        <div class="button-row">
-          <button id="open-client-briefing-button" class="primary-button" type="button">Open client briefing</button>
-          <button class="secondary-button" type="button" data-panel="evidence">Show evidence appendix</button>
-          <button class="secondary-button" type="button" data-panel="advisor">Show advisor notes</button>
-          <button class="secondary-button" type="button" data-panel="technical">Technical/admin details</button>
-          <button id="start-over-button" class="secondary-button" type="button">Start over</button>
-        </div>
-        <p id="run-status" class="status"></p>
-      </section>
+      </div>
+      <div id="preview-context" class="chip-row"></div>
+      <div id="preview-sequence" class="preview-grid"></div>
+      <p id="preview-status" class="status"></p>
+      <p class="notice">Client preview uses synthetic/local evidence and is not investment advice. Technical details stay in the appendix.</p>
     </section>
 
-    <section id="client-briefing-view" class="client-shell hidden" aria-live="polite">
-      <header class="client-header">
-        <p class="eyebrow">Client briefing</p>
-        <h1 class="client-title">Northstar Family Office Review</h1>
-        <p id="client-briefing-context" class="step-copy">Client question will appear here.</p>
-      </header>
-      <section class="answer">
-        <h2>Plain-English answer</h2>
-        <p id="client-answer">The answer will appear after the advisor draft is prepared.</p>
-      </section>
-      <section>
-        <h2>Key briefing cards</h2>
-        <div id="client-card-grid" class="briefing-card-grid"></div>
-      </section>
-      <section class="confidence-note">
-        <h2>Confidence note</h2>
-        <p id="client-confidence">Confidence summary will appear after a local run completes.</p>
-      </section>
-      <div class="button-row">
-        <button class="secondary-button" type="button" data-panel="evidence">Show evidence</button>
-        <button class="secondary-button" type="button" data-panel="scenario">Show scenario assumptions</button>
-        <button class="secondary-button" type="button" data-panel="manager">Show manager detail</button>
-        <button class="secondary-button" type="button" data-panel="advisor">Show advisor notes</button>
-        <button class="secondary-button" type="button" data-panel="technical">Technical appendix</button>
-        <button id="back-to-draft-button" class="secondary-button" type="button">Back to advisor draft</button>
+    <section id="technical-admin-mode" class="mode-panel hidden" aria-live="polite">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <p class="eyebrow">Technical/Admin Appendix</p>
+          <h2 class="compact-title">Run mechanics and artifacts</h2>
+        </div>
+        <button class="secondary-button" type="button" data-mode="builder">Back to Builder Mode</button>
       </div>
-      <p class="notice">Demo briefing only. Uses synthetic/local evidence and is not investment advice.</p>
+      <div class="admin-grid">
+        <article class="admin-card">
+          <h3>Internal execution</h3>
+          <div id="admin-run-summary">
+            <p>Prepare Client Preview to populate the latest internal workflow, source, and run ID.</p>
+          </div>
+        </article>
+        <article class="admin-card">
+          <h3>Report and JSON artifact links</h3>
+          <ul id="admin-link-list" class="link-list">
+            <li>Artifact links appear after a local run completes.</li>
+          </ul>
+        </article>
+        <article class="admin-card">
+          <h3>Demo mechanics</h3>
+          <ul>
+            <li>Existing file-backed FastAPI endpoints remain the execution path.</li>
+            <li>The briefing set is local browser state in this batch.</li>
+            <li>No backend briefing-set persistence is implemented here.</li>
+          </ul>
+        </article>
+        <article class="admin-card">
+          <h3>Raw technical detail</h3>
+          <pre id="admin-raw-detail">{}</pre>
+        </article>
+      </div>
     </section>
   </main>
-
-  <aside id="appendix-drawer" class="drawer hidden" aria-hidden="true">
-    <section class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
-      <div class="drawer-header">
-        <h2 id="drawer-title">Appendix</h2>
-        <button id="close-drawer-button" class="secondary-button" type="button">Close</button>
-      </div>
-      <div id="drawer-content"></div>
-    </section>
-  </aside>
 
   <script>
     const api = Object.freeze({
@@ -598,248 +632,260 @@
       reportIndex: "/api/reports/index"
     });
 
-    const workflowNames = Object.freeze({
-      are_we_on_track: ["quarterly", "review"].join("_"),
-      where_are_we_too_concentrated: ["manager", "overlap", "review"].join("_"),
-      what_could_hurt_us: ["scenario", "risk", "review"].join("_"),
-      what_needs_verification: ["data", "coverage", "review"].join("_")
+    const workflowsByQuestion = Object.freeze({
+      are_we_on_track: "quarterly_review",
+      where_are_we_too_concentrated: "manager_overlap_review",
+      what_could_hurt_us: "scenario_risk_review",
+      what_needs_verification: "data_coverage_review"
     });
 
-    const sourceNames = Object.freeze({
-      native_demo: ["native", "demo"].join("_"),
-      plaid_mock: ["plaid", "mock"].join("_")
+    const questionLabels = Object.freeze({
+      are_we_on_track: "Are we on track?",
+      where_are_we_too_concentrated: "Where are we too concentrated?",
+      what_could_hurt_us: "What could hurt us?",
+      what_needs_verification: "What needs verification?"
     });
 
-    const audienceDepths = Object.freeze({
-      executive_10_minute: {
-        label: "Executive / 10-Minute",
-        summary: "Very concise, with the answer and only the highest-signal support."
-      },
-      standard_family_office_meeting: {
-        label: "Standard Family Office Meeting",
-        summary: "Balanced evidence and caveats for a normal review conversation."
-      },
-      analytical_stakeholder: {
-        label: "Analytical Stakeholder",
-        summary: "More detail, methodology context, and appendix depth."
-      },
-      advisor_internal: {
-        label: "Advisor/Internal",
-        summary: "Full internal review mode, with admin material kept out of the client page."
-      }
+    const lenses = Object.freeze(["Manager", "Theme", "Sector/industry", "Holding", "Data issue"]);
+    const metrics = Object.freeze(["Value", "Cash", "Exposure", "Scenario impact", "Confidence"]);
+    const moneyFormatter = new Intl.NumberFormat("en-US", {
+      currency: "USD",
+      maximumFractionDigits: 0,
+      style: "currency"
     });
-
-    const portfolioContexts = Object.freeze({
-      native_demo: {
-        label: "Demo portfolio",
-        source: sourceNames.native_demo,
-        summary: "Synthetic native portfolio fixture."
-      },
-      plaid_mock: {
-        label: "Plaid-shaped mock intake",
-        source: sourceNames.plaid_mock,
-        summary: "Synthetic Plaid-shaped fixture normalized locally."
-      }
-    });
-
-    const briefingPaths = Object.freeze({
-      are_we_on_track: {
-        label: "Are we on track?",
-        workflow: workflowNames.are_we_on_track,
-        answer: "The demo portfolio is ready for a review conversation around current value, allocation, cash, and the main items that need advisor attention.",
-        draftLead: "Use this briefing to anchor the meeting in the current portfolio picture before making any planning or suitability claims.",
-        cards: [
-          {
-            id: "portfolio_status",
-            title: "Portfolio status",
-            summary: "Start with total value, cash, manager allocation, and whether the current picture is coherent enough for review."
-          },
-          {
-            id: "main_concentration",
-            title: "Main concentration to discuss",
-            summary: "Flag the largest exposure or overlap theme as a discussion item, not an automatic problem."
-          },
-          {
-            id: "scenario_note",
-            title: "Scenario note",
-            summary: "Use the current scenario result as illustrative context under stated assumptions."
-          },
-          {
-            id: "verification_note",
-            title: "Verification note",
-            summary: "Confirm the data confidence signal before turning evidence into client-facing conclusions."
-          }
-        ],
-        keyPoints: [
-          "Anchor the conversation in portfolio evidence, not a full financial-plan conclusion.",
-          "Keep concentration and scenario context visible but secondary to the meeting question.",
-          "Use data confidence to decide what needs advisor review before sharing."
-        ],
-        advisorNotes: [
-          "Do not imply the portfolio is fully on track against goals or IPS targets.",
-          "Use this as a portfolio-evidence review, not a planning-readiness statement.",
-          "Ask what client goal, cash need, or mandate context should be layered in later."
-        ],
-        scenarioAssumptions: "Scenario context is deterministic and illustrative. It does not forecast market movement.",
-        managerDetail: "Manager detail can support allocation discussion, but this path does not fully evaluate manager mandate fit."
-      },
-      where_are_we_too_concentrated: {
-        label: "Where are we too concentrated?",
-        workflow: workflowNames.where_are_we_too_concentrated,
-        answer: "The briefing should focus on where holdings, themes, and managers may be reinforcing the same exposure and whether that overlap is intentional.",
-        draftLead: "Use this briefing to separate purposeful concentration from accidental duplication.",
-        cards: [
-          {
-            id: "shared_holdings",
-            title: "Shared holdings",
-            summary: "Identify direct holdings that appear across accounts or managers."
-          },
-          {
-            id: "theme_concentration",
-            title: "Theme concentration",
-            summary: "Frame theme or sector exposure in client language."
-          },
-          {
-            id: "manager_overlap",
-            title: "Manager overlap",
-            summary: "Compare manager exposure to ask whether similar managers are doing the same job."
-          },
-          {
-            id: "intentional_question",
-            title: "Intentional vs accidental question",
-            summary: "Turn overlap into an advisor question rather than a recommendation."
-          }
-        ],
-        keyPoints: [
-          "Duplication may be intentional when it reinforces a client-agreed thesis.",
-          "Overlap becomes a problem only when it conflicts with the expected role.",
-          "The next useful question is whether the exposure was deliberate."
-        ],
-        advisorNotes: [
-          "Avoid saying concentration is automatically bad.",
-          "Ask which categories or themes the client actually cares about.",
-          "Use the evidence to prompt role and mandate review."
-        ],
-        scenarioAssumptions: "Scenario evidence can be used as supporting context when concentration amplifies downside under the selected assumptions.",
-        managerDetail: "Manager comparison is useful here, but explicit mandate metadata is not implemented in the current demo."
-      },
-      what_could_hurt_us: {
-        label: "What could hurt us?",
-        workflow: workflowNames.what_could_hurt_us,
-        answer: "The briefing should show the illustrative scenario assumption, where the impact lands, and which managers or holdings drive the risk conversation.",
-        draftLead: "Use this briefing to make risk concrete without presenting the scenario as a forecast.",
-        cards: [
-          {
-            id: "scenario_assumption",
-            title: "Scenario assumption",
-            summary: "State the assumption behind the scenario before discussing impact."
-          },
-          {
-            id: "portfolio_impact",
-            title: "Portfolio impact",
-            summary: "Summarize the modeled impact at portfolio level."
-          },
-          {
-            id: "affected_exposures",
-            title: "Affected managers and holdings",
-            summary: "Identify the managers, accounts, or holdings most connected to the scenario."
-          },
-          {
-            id: "not_forecast",
-            title: "Not-a-forecast caveat",
-            summary: "Make clear that this is an illustrative impact under assumptions."
-          }
-        ],
-        keyPoints: [
-          "Lead with the stated scenario assumption.",
-          "Show the impact and drivers as evidence for discussion.",
-          "Keep forecast language out of the client answer."
-        ],
-        advisorNotes: [
-          "Do not present scenario results as a prediction.",
-          "Connect downside to holdings, managers, and concentrations.",
-          "Ask whether the scenario matches the client concern."
-        ],
-        scenarioAssumptions: "The current scenario is deterministic and based on local assumptions. It is not a stochastic range or market forecast.",
-        managerDetail: "Manager detail should show where scenario sensitivity appears, not whether a manager should be replaced."
-      },
-      what_needs_verification: {
-        label: "What needs verification?",
-        workflow: workflowNames.what_needs_verification,
-        answer: "The briefing should identify whether the synthetic evidence is clean enough for discussion and which items need human review before conclusions are overinterpreted.",
-        draftLead: "Use this briefing before relying on a report in a client-facing conversation.",
-        cards: [
-          {
-            id: "confidence_summary",
-            title: "Confidence summary",
-            summary: "Summarize the current confidence signal in one plain-English note."
-          },
-          {
-            id: "human_review_items",
-            title: "Human-review items",
-            summary: "Call out items requiring advisor or operations review."
-          },
-          {
-            id: "data_gaps",
-            title: "Stale, missing, or ambiguous data",
-            summary: "Name gaps that limit what the advisor can responsibly say."
-          },
-          {
-            id: "responsible_language",
-            title: "What can and cannot be said",
-            summary: "Separate source readiness from investment quality or future return claims."
-          }
-        ],
-        keyPoints: [
-          "Confidence is about source readiness and valuation support.",
-          "Human-review items should be resolved before stronger claims are made.",
-          "Data quality does not imply investment quality."
-        ],
-        advisorNotes: [
-          "Use this path when source readiness is the client concern.",
-          "Do not make performance or risk conclusions from confidence labels alone.",
-          "Turn low-confidence evidence into a verification task."
-        ],
-        scenarioAssumptions: "Scenario assumptions are secondary in this path unless a data gap affects scenario mapping.",
-        managerDetail: "Manager detail may reveal missing or opaque source fields, but this path is not a manager-quality review."
-      }
+    const percentFormatter = new Intl.NumberFormat("en-US", {
+      maximumFractionDigits: 1,
+      style: "percent"
     });
 
     const state = {
-      questionId: null,
-      audienceId: "standard_family_office_meeting",
-      contextId: "native_demo",
-      selectedCardIds: [],
+      context: {},
+      reportViews: [],
+      expandedViewIds: new Set(),
       run: null,
-      sources: [],
-      workflows: [],
-      priorRuns: [],
-      reportIndex: null
+      evidence: {},
+      saveStatus: ""
     };
 
     const els = {
-      builder: document.getElementById("builder-view"),
-      client: document.getElementById("client-briefing-view"),
-      summary: document.getElementById("choice-summary"),
-      steps: {
-        question: document.getElementById("step-client-question"),
-        audience: document.getElementById("step-audience-depth"),
-        context: document.getElementById("step-portfolio-context"),
-        bundle: document.getElementById("step-briefing-bundle"),
-        draft: document.getElementById("step-advisor-draft")
-      },
-      bundleGrid: document.getElementById("bundle-grid"),
-      bundleStatus: document.getElementById("bundle-status"),
-      draftContent: document.getElementById("advisor-draft-content"),
-      runStatus: document.getElementById("run-status"),
-      clientContext: document.getElementById("client-briefing-context"),
-      clientAnswer: document.getElementById("client-answer"),
-      clientCards: document.getElementById("client-card-grid"),
-      clientConfidence: document.getElementById("client-confidence"),
-      drawer: document.getElementById("appendix-drawer"),
-      drawerTitle: document.getElementById("drawer-title"),
-      drawerContent: document.getElementById("drawer-content")
+      builderMode: document.getElementById("builder-mode"),
+      previewMode: document.getElementById("client-preview-mode"),
+      adminMode: document.getElementById("technical-admin-mode"),
+      modeButtons: Array.from(document.querySelectorAll(".mode-button")),
+      contextChips: document.getElementById("context-chips"),
+      reportList: document.getElementById("report-list"),
+      builderStatus: document.getElementById("builder-status"),
+      previewTitle: document.getElementById("preview-title"),
+      previewContext: document.getElementById("preview-context"),
+      previewSequence: document.getElementById("preview-sequence"),
+      previewStatus: document.getElementById("preview-status"),
+      adminRunSummary: document.getElementById("admin-run-summary"),
+      adminLinks: document.getElementById("admin-link-list"),
+      adminRaw: document.getElementById("admin-raw-detail")
     };
+
+    function collectContext() {
+      state.context = {
+        clientFamily: valueOf("client-family"),
+        meetingPurpose: valueOf("meeting-purpose"),
+        audienceDepth: valueOf("audience-depth"),
+        portfolioSource: valueOf("portfolio-source"),
+        primaryQuestion: valueOf("primary-question"),
+        scenarioContext: valueOf("scenario-context"),
+        defaultLens: valueOf("default-lens"),
+        defaultMetric: valueOf("default-metric")
+      };
+      return state.context;
+    }
+
+    function valueOf(id) {
+      return document.getElementById(id).value.trim();
+    }
+
+    function generateReportViews() {
+      const context = collectContext();
+      state.expandedViewIds.clear();
+      state.reportViews = [
+        {
+          id: makeId("portfolio"),
+          title: "Portfolio status",
+          purpose: "Open the meeting with current value, cash-like reserves, and manager context.",
+          lens: context.defaultLens,
+          metric: context.defaultMetric === "Value + cash" ? "Value" : context.defaultMetric,
+          scenario: "None",
+          visibility: "client",
+          confidence: "Pending",
+          detail: "This compact row sets the baseline before concentration and scenario discussion."
+        },
+        {
+          id: makeId("concentration"),
+          title: "Concentration review",
+          purpose: "Review theme, holding, and manager overlap so the advisor can ask what is intentional.",
+          lens: "Theme",
+          metric: "Exposure",
+          scenario: "None",
+          visibility: "client",
+          confidence: "Pending",
+          detail: "This view should surface AI/chip exposure and duplicated Microsoft/NVIDIA holdings when available."
+        },
+        {
+          id: makeId("scenario"),
+          title: "Scenario impact",
+          purpose: "Show the illustrative impact of the selected scenario under stated assumptions.",
+          lens: context.defaultLens,
+          metric: "Scenario impact",
+          scenario: context.scenarioContext || "AI/chip selloff",
+          visibility: "client",
+          confidence: "Pending",
+          detail: "Scenario output is deterministic demo analysis, not a forecast."
+        },
+        {
+          id: makeId("verification"),
+          title: "Verification note",
+          purpose: "State evidence confidence and what needs human review before stronger claims.",
+          lens: "Data issue",
+          metric: "Confidence",
+          scenario: "None",
+          visibility: "client",
+          confidence: "Pending",
+          detail: "This keeps data readiness close to the relevant client-facing claims."
+        },
+        {
+          id: makeId("followup"),
+          title: "Advisor follow-up",
+          purpose: "Capture advisor-only questions and preparation notes.",
+          lens: context.defaultLens,
+          metric: "Confidence",
+          scenario: "None",
+          visibility: "advisor",
+          confidence: "Advisor-only",
+          detail: "Advisor-only notes do not appear in the default client preview."
+        }
+      ];
+      renderBuilder();
+      setStatus(els.builderStatus, "Generated an ordered briefing set. Edits are local to this browser session.", "success");
+    }
+
+    function makeId(prefix) {
+      return `${prefix}_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+    }
+
+    function renderBuilder() {
+      collectContext();
+      renderContextChips(els.contextChips);
+      els.reportList.innerHTML = state.reportViews.map((view, index) => renderReportView(view, index)).join("");
+    }
+
+    function renderContextChips(container) {
+      const context = state.context;
+      container.innerHTML = [
+        ["Client", context.clientFamily],
+        ["Purpose", context.meetingPurpose],
+        ["Audience", context.audienceDepth],
+        ["Question", questionLabels[context.primaryQuestion] || context.primaryQuestion],
+        ["Scenario", context.scenarioContext]
+      ].map(([label, value]) => (
+        `<span class="chip"><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</span>`
+      )).join("");
+    }
+
+    function renderReportView(view, index) {
+      const expanded = state.expandedViewIds.has(view.id);
+      const advisorOnly = view.visibility === "advisor";
+      return `
+        <article class="report-row ${advisorOnly ? "is-advisor-only" : ""}" data-view-id="${escapeAttr(view.id)}">
+          <div class="row-main">
+            <div class="row-title">
+              <span class="view-index">View ${index + 1}</span>
+              <h3>${escapeHtml(view.title)}</h3>
+              <div class="badge-row">
+                <span class="badge ${advisorOnly ? "advisor" : "client"}">${advisorOnly ? "Advisor-only" : "Client-facing"}</span>
+                <span class="badge">Confidence: ${escapeHtml(view.confidence)}</span>
+              </div>
+            </div>
+            <div class="row-meta">
+              <p>${escapeHtml(view.purpose)}</p>
+              <p><strong>Scenario:</strong> ${escapeHtml(view.scenario || "None")}</p>
+            </div>
+            <div class="row-controls">
+              <div class="row-control-grid">
+                <label class="row-control">
+                  <span class="mini-label">Change lens</span>
+                  <select data-field="lens">
+                    ${optionList(lenses, view.lens)}
+                  </select>
+                </label>
+                <label class="row-control">
+                  <span class="mini-label">Change metric</span>
+                  <select data-field="metric">
+                    ${optionList(metrics, view.metric)}
+                  </select>
+                </label>
+                <label class="row-control">
+                  <span class="mini-label">Visibility</span>
+                  <select data-field="visibility">
+                    <option value="client" ${view.visibility === "client" ? "selected" : ""}>Client-facing</option>
+                    <option value="advisor" ${view.visibility === "advisor" ? "selected" : ""}>Advisor-only</option>
+                  </select>
+                </label>
+              </div>
+              <div class="row-actions">
+                <button class="icon-button" type="button" data-action="toggle">${expanded ? "Collapse" : "Open"}</button>
+                <button class="icon-button" type="button" data-action="duplicate">Duplicate</button>
+                <button class="icon-button" type="button" data-action="move-up">Move up</button>
+                <button class="icon-button" type="button" data-action="move-down">Move down</button>
+                <button class="icon-button" type="button" data-action="remove">Remove</button>
+              </div>
+            </div>
+          </div>
+          <div class="view-detail ${expanded ? "" : "hidden"}">
+            <p>${escapeHtml(view.detail)}</p>
+            <p>This is a row preview only. Full client-facing content is rendered in Client Preview.</p>
+          </div>
+        </article>
+      `;
+    }
+
+    function optionList(values, selectedValue) {
+      return values.map((value) => (
+        `<option ${value === selectedValue ? "selected" : ""}>${escapeHtml(value)}</option>`
+      )).join("");
+    }
+
+    function setMode(mode) {
+      els.builderMode.classList.toggle("hidden", mode !== "builder");
+      els.previewMode.classList.toggle("hidden", mode !== "preview");
+      els.adminMode.classList.toggle("hidden", mode !== "admin");
+      els.modeButtons.forEach((button) => {
+        button.classList.toggle("is-active", button.dataset.mode === mode);
+      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    async function preparePreview() {
+      collectContext();
+      setMode("preview");
+      renderPreview(true);
+      setStatus(els.previewStatus, "Preparing local evidence for this briefing set...", "");
+      try {
+        state.run = await apiJson(api.runs, {
+          method: "POST",
+          body: JSON.stringify({
+            source: state.context.portfolioSource,
+            workflow: workflowsByQuestion[state.context.primaryQuestion] || "quarterly_review"
+          })
+        });
+        state.evidence = await loadEvidence(state.run);
+        applyEvidenceConfidence();
+        renderBuilder();
+        renderPreview(false);
+        renderAdmin();
+        setStatus(els.previewStatus, "Client preview refreshed from local synthetic evidence.", "success");
+      } catch (error) {
+        setStatus(els.previewStatus, error.message || "Could not prepare local evidence.", "error");
+        renderAdmin();
+      }
+    }
 
     async function apiJson(url, options = {}) {
       const response = await fetch(url, {
@@ -857,311 +903,197 @@
       return payload;
     }
 
-    function selectedQuestion() {
-      return briefingPaths[state.questionId] || null;
+    async function loadEvidence(run) {
+      const outputs = run.json_outputs || {};
+      const [valuation, exposure, scenario, dataCoverage, reportPackage] = await Promise.all([
+        fetchSafeReportJson(outputs.valuation_result),
+        fetchSafeReportJson(outputs.exposure_overlap_result),
+        fetchSafeReportJson(outputs.scenario_result),
+        fetchSafeReportJson(outputs.data_coverage_result),
+        fetchSafeReportJson(run.report_package)
+      ]);
+      return { valuation, exposure, scenario, dataCoverage, reportPackage };
     }
 
-    function selectedAudience() {
-      return audienceDepths[state.audienceId] || audienceDepths.standard_family_office_meeting;
-    }
-
-    function selectedContext() {
-      return portfolioContexts[state.contextId] || portfolioContexts.native_demo;
-    }
-
-    function selectedCards() {
-      const question = selectedQuestion();
-      if (!question) {
-        return [];
+    async function fetchSafeReportJson(record) {
+      const url = safeReportUrl(record);
+      if (!url) {
+        return null;
       }
-      return question.cards.filter((card) => state.selectedCardIds.includes(card.id));
+      const response = await fetch(url, { headers: { "Accept": "application/json" } });
+      if (!response.ok) {
+        return null;
+      }
+      return response.json().catch(() => null);
     }
 
-    function showStep(stepName) {
-      Object.values(els.steps).forEach((step) => step.classList.add("hidden"));
-      const step = els.steps[stepName];
-      if (step) {
-        step.classList.remove("hidden");
-      }
-      els.builder.classList.remove("hidden");
-      els.client.classList.add("hidden");
-      renderSummary();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function renderSummary() {
-      const chips = [];
-      const question = selectedQuestion();
-      if (question) {
-        chips.push(`<span class="chip"><strong>Client question:</strong> ${escapeHtml(question.label)}</span>`);
-      }
-      if (state.questionId) {
-        chips.push(`<span class="chip"><strong>Audience depth:</strong> ${escapeHtml(selectedAudience().label)}</span>`);
-      }
-      if (state.questionId && state.audienceId && state.contextId) {
-        chips.push(`<span class="chip"><strong>Portfolio context:</strong> ${escapeHtml(selectedContext().label)}</span>`);
-      }
-      if (!chips.length) {
-        els.summary.classList.add("hidden");
-        els.summary.innerHTML = "";
-        return;
-      }
-      els.summary.classList.remove("hidden");
-      els.summary.innerHTML = chips.join("");
-    }
-
-    function selectQuestion(questionId) {
-      state.questionId = questionId;
-      const question = selectedQuestion();
-      state.selectedCardIds = question.cards.map((card) => card.id);
-      document.querySelectorAll(".question-card").forEach((card) => {
-        card.classList.toggle("is-selected", card.dataset.question === questionId);
-      });
-      showStep("audience");
-    }
-
-    function selectAudience(audienceId) {
-      state.audienceId = audienceId;
-      document.querySelectorAll(".audience-card").forEach((card) => {
-        card.classList.toggle("is-selected", card.dataset.audience === audienceId);
-      });
-      showStep("context");
-    }
-
-    function selectSource(contextId) {
-      state.contextId = contextId;
-      document.querySelectorAll(".source-card").forEach((card) => {
-        card.classList.toggle("is-selected", card.dataset.source === contextId);
-      });
-      renderBundle();
-      showStep("bundle");
-    }
-
-    function renderBundle() {
-      const question = selectedQuestion();
-      if (!question) {
-        return;
-      }
-      els.bundleGrid.innerHTML = question.cards.map((card) => {
-        const selected = state.selectedCardIds.includes(card.id);
-        return `
-          <button class="bundle-card ${selected ? "is-selected" : ""}" type="button" data-card-id="${escapeAttr(card.id)}">
-            <span class="card-check">${selected ? "Included" : "Removed"}</span>
-            <span class="choice-title">${escapeHtml(card.title)}</span>
-            <span class="choice-detail">${escapeHtml(card.summary)}</span>
-          </button>
-        `;
-      }).join("");
-      els.bundleStatus.textContent = "";
-    }
-
-    function toggleBundleCard(cardId) {
-      if (state.selectedCardIds.includes(cardId)) {
-        state.selectedCardIds = state.selectedCardIds.filter((id) => id !== cardId);
-      } else {
-        state.selectedCardIds.push(cardId);
-      }
-      if (!state.selectedCardIds.length) {
-        const first = selectedQuestion().cards[0];
-        state.selectedCardIds = [first.id];
-        els.bundleStatus.textContent = "At least one briefing card stays selected.";
-      }
-      renderBundle();
-    }
-
-    async function prepareAdvisorDraft() {
-      const question = selectedQuestion();
-      const context = selectedContext();
-      els.bundleStatus.textContent = "";
-      els.runStatus.className = "status";
-      els.runStatus.textContent = "Preparing local briefing evidence...";
-      setDraftButtonsDisabled(true);
-      showStep("draft");
-      try {
-        state.run = await apiJson(api.runs, {
-          method: "POST",
-          body: window["J" + "SON"].stringify({
-            source: context.source,
-            workflow: question.workflow
-          })
-        });
-        renderAdvisorDraft();
-        els.runStatus.className = "status success";
-        els.runStatus.textContent = "Advisor draft prepared from local synthetic evidence.";
-      } catch (error) {
-        els.runStatus.className = "status error";
-        els.runStatus.textContent = error.message || "Could not prepare advisor draft.";
-      } finally {
-        setDraftButtonsDisabled(false);
-      }
-    }
-
-    function setDraftButtonsDisabled(disabled) {
-      document.querySelectorAll("#step-advisor-draft button").forEach((button) => {
-        button.disabled = disabled;
+    function applyEvidenceConfidence() {
+      const confidence = labelize(state.run && state.run.data_confidence ? state.run.data_confidence : "available");
+      state.reportViews = state.reportViews.map((view) => {
+        if (view.title === "Advisor follow-up") {
+          return view;
+        }
+        return { ...view, confidence };
       });
     }
 
-    function renderAdvisorDraft() {
-      const question = selectedQuestion();
-      const confidence = confidenceText();
-      const cards = selectedCards();
-      els.draftContent.innerHTML = `
-        <h3>${escapeHtml(question.label)}</h3>
-        <p>${escapeHtml(question.draftLead)}</p>
-        <div class="answer">
-          <h3>Draft plain-English answer</h3>
-          <p>${escapeHtml(question.answer)}</p>
-        </div>
-        <div>
-          <h3>Key points</h3>
-          <ul>
-            ${question.keyPoints.map((point) => `<li>${escapeHtml(point)}</li>`).join("")}
-          </ul>
-        </div>
-        <div class="confidence-note">
-          <strong>Confidence:</strong> ${escapeHtml(confidence)}
-        </div>
-        <div>
-          <h3>Selected briefing cards</h3>
-          <div class="briefing-card-grid">
-            ${cards.map(renderBriefingCard).join("")}
-          </div>
-        </div>
-      `;
+    function renderPreview(loading) {
+      collectContext();
+      const findings = buildFindings();
+      const clientViews = state.reportViews.filter((view) => view.visibility === "client");
+      els.previewTitle.textContent = `${state.context.clientFamily} preview`;
+      renderContextChips(els.previewContext);
+      const cards = [
+        renderOpeningCard(findings),
+        ...clientViews.map((view) => renderPreviewCard(view, findings)),
+        renderDiscussionCard(findings)
+      ];
+      els.previewSequence.innerHTML = cards.join("");
+      if (!loading && !state.run) {
+        setStatus(els.previewStatus, "Preview is using cautious copy until local evidence is prepared.", "");
+      }
     }
 
-    function renderBriefingCard(card) {
+    function renderOpeningCard(findings) {
       return `
-        <article class="briefing-card">
-          <h3>${escapeHtml(card.title)}</h3>
-          <p>${escapeHtml(card.summary)}</p>
+        <article class="preview-card opening-card">
+          <p class="eyebrow">Opening answer / meeting frame</p>
+          <h3>${escapeHtml(state.context.meetingPurpose)} for ${escapeHtml(state.context.clientFamily)}</h3>
+          <p>${escapeHtml(findings.opening)}</p>
         </article>
       `;
     }
 
-    function openClientBriefing() {
-      const question = selectedQuestion();
-      els.builder.classList.add("hidden");
-      els.client.classList.remove("hidden");
-      els.clientContext.textContent = `Client question: ${question.label} | Audience: ${selectedAudience().label}`;
-      els.clientAnswer.textContent = question.answer;
-      els.clientCards.innerHTML = selectedCards().map(renderBriefingCard).join("");
-      els.clientConfidence.textContent = confidenceText();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    function renderPreviewCard(view, findings) {
+      const body = findings.byTitle[view.title] || "This view is included in the selected briefing sequence. Prepare local evidence to populate specific findings.";
+      return `
+        <article class="preview-card">
+          <p class="eyebrow">${escapeHtml(view.lens)} | ${escapeHtml(view.metric)}</p>
+          <h3>${escapeHtml(view.title)}</h3>
+          <p>${escapeHtml(body)}</p>
+        </article>
+      `;
     }
 
-    function confidenceText() {
-      if (!state.run) {
-        return "Confidence will appear after local evidence is prepared.";
+    function renderDiscussionCard(findings) {
+      return `
+        <article class="preview-card">
+          <p class="eyebrow">Suggested discussion / follow-up</p>
+          <h3>Questions for the advisor to carry forward</h3>
+          <ul>
+            ${findings.followUps.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+          </ul>
+        </article>
+      `;
+    }
+
+    function buildFindings() {
+      const valuation = state.evidence.valuation;
+      const exposure = state.evidence.exposure;
+      const scenarioSet = state.evidence.scenario;
+      const dataCoverage = state.evidence.dataCoverage;
+      const portfolioTotal = valuation && valuation.portfolio_total;
+      const themeRows = exposure && exposure.exposures && exposure.exposures.by_theme ? exposure.exposures.by_theme : [];
+      const aiExposure = themeRows.find((row) => String(row.bucket_id).toLowerCase() === "ai");
+      const chipExposure = themeRows.find((row) => String(row.bucket_id).toLowerCase() === "chips");
+      const overlaps = exposure && exposure.largest_duplicated_holdings ? exposure.largest_duplicated_holdings : [];
+      const microsoft = overlaps.find((row) => row.ticker === "MSFT");
+      const nvidia = overlaps.find((row) => row.ticker === "NVDA");
+      const scenarios = scenarioSet && scenarioSet.scenario_results ? scenarioSet.scenario_results : [];
+      const aiScenario = scenarios.find((row) => String(row.scenario_id || "").includes("ai")) || scenarios[0];
+      const confidenceSummary = dataCoverage && dataCoverage.summary
+        ? dataCoverage.summary
+        : state.run && state.run.data_confidence_summary
+          ? state.run.data_confidence_summary
+          : "Data confidence will be summarized after local evidence is prepared.";
+      const reviewCount = dataCoverage && dataCoverage.human_review_item_count != null
+        ? dataCoverage.human_review_item_count
+        : state.run && state.run.human_review_item_count != null
+          ? state.run.human_review_item_count
+          : null;
+
+      const portfolioText = portfolioTotal
+        ? `Portfolio value is ${money(portfolioTotal.market_value)} with ${money(portfolioTotal.cash_value)} in cash-like reserves as of the local valuation date.`
+        : "Portfolio value and cash-like reserves will populate from the local valuation output when available.";
+
+      const concentrationPieces = [];
+      if (aiExposure) {
+        concentrationPieces.push(`AI exposure is ${money(aiExposure.market_value)} (${percent(aiExposure.portfolio_percent)}).`);
       }
-      const label = labelize(state.run.data_confidence || "not_available");
-      const summary = state.run.data_confidence_summary || "Synthetic evidence is available for advisor review.";
-      const reviewCount = state.run.human_review_item_count == null ? "not available" : String(state.run.human_review_item_count);
-      return `${label}. ${summary} Human-review items: ${reviewCount}.`;
-    }
+      if (chipExposure) {
+        concentrationPieces.push(`Chip exposure is ${money(chipExposure.market_value)} (${percent(chipExposure.portfolio_percent)}).`);
+      }
+      if (microsoft) {
+        concentrationPieces.push(`Microsoft appears across ${microsoft.manager_names.length} managers, totaling ${money(microsoft.total_market_value)}.`);
+      }
+      if (nvidia) {
+        concentrationPieces.push(`NVIDIA appears across ${nvidia.manager_names.length} managers, totaling ${money(nvidia.total_market_value)}.`);
+      }
+      const concentrationText = concentrationPieces.length
+        ? concentrationPieces.join(" ")
+        : "Concentration and overlap details will populate from the local exposure output when available.";
 
-    function openPanel(kind) {
-      const question = selectedQuestion();
-      const panelMap = {
-        evidence: ["Evidence appendix", evidencePanel()],
-        advisor: ["Advisor notes", advisorPanel(question)],
-        technical: ["Technical/admin appendix", technicalPanel()],
-        scenario: ["Scenario assumptions", scenarioPanel(question)],
-        manager: ["Manager detail", managerPanel(question)]
+      const scenarioText = aiScenario
+        ? `${aiScenario.scenario_name || state.context.scenarioContext} shows an illustrative portfolio impact of ${money(aiScenario.portfolio_impact_value)} (${percent(aiScenario.portfolio_impact_percent)}). It is a deterministic assumption, not a forecast.`
+        : "Scenario impact will populate from the local scenario output when available.";
+
+      const verificationText = `${confidenceSummary}${reviewCount == null ? "" : ` Human-review items: ${reviewCount}.`}`;
+
+      return {
+        opening: `This briefing addresses "${questionLabels[state.context.primaryQuestion] || state.context.primaryQuestion}" for ${state.context.clientFamily}, using the ${state.context.portfolioSource === "plaid_mock" ? "Plaid-shaped mock intake" : "demo portfolio"} and the ${state.context.scenarioContext} scenario frame.`,
+        byTitle: {
+          "Portfolio status": portfolioText,
+          "Concentration review": concentrationText,
+          "Scenario impact": scenarioText,
+          "Verification note": verificationText,
+          "Advisor follow-up": "Advisor-only notes are retained in Builder Mode and the technical/admin appendix, not in the default client preview."
+        },
+        followUps: [
+          "Which concentrations are intentional?",
+          "Which duplicated Microsoft or NVIDIA exposures should be reviewed against manager roles?",
+          "Which confidence items should be verified before stronger client-facing claims?",
+          "Should the scenario framing be adjusted before the meeting?"
+        ]
       };
-      const panel = panelMap[kind] || panelMap.evidence;
-      els.drawerTitle.textContent = panel[0];
-      els.drawerContent.innerHTML = panel[1];
-      els.drawer.classList.remove("hidden");
-      els.drawer.setAttribute("aria-hidden", "false");
     }
 
-    function closePanel() {
-      els.drawer.classList.add("hidden");
-      els.drawer.setAttribute("aria-hidden", "true");
-    }
-
-    function evidencePanel() {
-      const cards = selectedCards();
-      const confidence = confidenceText();
-      return `
-        <p>Evidence is organized around the selected briefing cards, not as a raw file inventory.</p>
-        <div class="briefing-card-grid">
-          ${cards.map(renderBriefingCard).join("")}
-        </div>
-        <div class="confidence-note">
-          <strong>Data confidence summary:</strong> ${escapeHtml(confidence)}
-        </div>
-      `;
-    }
-
-    function advisorPanel(question) {
-      if (!question) {
-        return "<p>Select a client question to see advisor notes.</p>";
-      }
-      return `
-        <p>${escapeHtml(question.draftLead)}</p>
-        <ul>
-          ${question.advisorNotes.map((note) => `<li>${escapeHtml(note)}</li>`).join("")}
-        </ul>
-      `;
-    }
-
-    function scenarioPanel(question) {
-      return `<p>${escapeHtml(question ? question.scenarioAssumptions : "Choose a briefing path first.")}</p>`;
-    }
-
-    function managerPanel(question) {
-      return `<p>${escapeHtml(question ? question.managerDetail : "Choose a briefing path first.")}</p>`;
-    }
-
-    function technicalPanel() {
+    function renderAdmin() {
       const run = state.run;
-      const question = selectedQuestion();
-      const runRows = run ? `
+      if (!run) {
+        els.adminRunSummary.innerHTML = "<p>Prepare Client Preview to populate the latest internal workflow, source, and run ID.</p>";
+        els.adminLinks.innerHTML = "<li>Artifact links appear after a local run completes.</li>";
+        els.adminRaw.textContent = "{}";
+        return;
+      }
+      els.adminRunSummary.innerHTML = `
         <ul>
-          <li><strong>Internal workflow:</strong> ${escapeHtml(run.workflow || question.workflow)}</li>
-          <li><strong>Source adapter:</strong> ${escapeHtml(run.source_adapter || run.source || selectedContext().source)}</li>
+          <li><strong>Internal workflow:</strong> ${escapeHtml(run.workflow || "not available")}</li>
+          <li><strong>Source adapter:</strong> ${escapeHtml(run.source_adapter || run.source || "not available")}</li>
           <li><strong>Run ID:</strong> ${escapeHtml(run.run_id || "not available")}</li>
           <li><strong>Output directory:</strong> ${escapeHtml(run.output_dir || "not available")}</li>
         </ul>
-        ${technicalLinks(run)}
-      ` : "<p>No local run has been prepared yet. Prepare the advisor draft to populate run details.</p>";
-      const priorCount = state.priorRuns.length ? `<p>Prior local runs available to admin tools: ${state.priorRuns.length}.</p>` : "";
-      const indexLink = state.reportIndex ? technicalLink("Local report index", state.reportIndex) : "";
-      return `
-        <p>This material supports validation and administration. It stays outside the main advisor and client path.</p>
-        ${runRows}
-        ${priorCount}
-        ${indexLink ? `<ul class="link-list">${indexLink}</ul>` : ""}
-        <h3>What this demo proves</h3>
-        <ul>
-          <li>The browser can guide a briefing while the API still runs local synthetic workflows.</li>
-          <li>Report artifacts remain reachable for technical validation.</li>
-        </ul>
-        <h3>What this demo does not prove</h3>
-        <ul>
-          <li>No live Plaid, real client data, production authentication, or investment advice workflow is included.</li>
-        </ul>
       `;
-    }
-
-    function technicalLinks(run) {
-      const packageRecord = run["report" + "_package"];
-      const outputs = run["json" + "_outputs"] || {};
-      const records = [
+      const outputs = run.json_outputs || {};
+      const linkRecords = [
         ["HTML report", run.html_report],
         ["Markdown report", run.markdown_report],
-        ["Report package data", packageRecord],
-        ["Data coverage data", outputs.data_coverage_result],
-        ["Valuation data", outputs.valuation_result],
-        ["Exposure data", outputs.exposure_overlap_result],
-        ["Scenario data", outputs.scenario_result],
+        ["Report package JSON", run.report_package],
+        ["Valuation JSON", outputs.valuation_result],
+        ["Exposure JSON", outputs.exposure_overlap_result],
+        ["Scenario JSON", outputs.scenario_result],
+        ["Data coverage JSON", outputs.data_coverage_result],
         ["Local report index", run.index]
       ];
-      const links = records.map(([label, record]) => technicalLink(label, record)).filter(Boolean).join("");
-      return links ? `<ul class="link-list">${links}</ul>` : "<p>No technical links are available yet.</p>";
+      const links = linkRecords.map(([label, record]) => technicalLink(label, record)).filter(Boolean);
+      els.adminLinks.innerHTML = links.length ? links.join("") : "<li>No artifact links are available.</li>";
+      els.adminRaw.textContent = JSON.stringify({
+        run_id: run.run_id,
+        source: run.source,
+        source_adapter: run.source_adapter,
+        workflow: run.workflow,
+        data_confidence: run.data_confidence,
+        human_review_item_count: run.human_review_item_count
+      }, null, 2);
     }
 
     function technicalLink(label, record) {
@@ -1174,41 +1106,131 @@
         return null;
       }
       const url = typeof record === "string" ? record : record.url;
-      if (!url || typeof url !== "string") {
-        return null;
+      return typeof url === "string" && url.startsWith("/reports/demo/") ? url : null;
+    }
+
+    function handleReportListClick(event) {
+      const row = event.target.closest(".report-row");
+      const button = event.target.closest("[data-action]");
+      if (!row || !button) {
+        return;
       }
-      return url.startsWith("/reports/demo/") ? url : null;
+      const viewId = row.dataset.viewId;
+      const action = button.dataset.action;
+      const index = state.reportViews.findIndex((view) => view.id === viewId);
+      if (index < 0) {
+        return;
+      }
+      if (action === "toggle") {
+        if (state.expandedViewIds.has(viewId)) {
+          state.expandedViewIds.delete(viewId);
+        } else {
+          state.expandedViewIds.add(viewId);
+        }
+      }
+      if (action === "duplicate") {
+        const original = state.reportViews[index];
+        const duplicate = {
+          ...original,
+          id: makeId("duplicate"),
+          title: `${original.title} copy`,
+          purpose: `${original.purpose} Variation for advisor review.`
+        };
+        state.reportViews.splice(index + 1, 0, duplicate);
+      }
+      if (action === "move-up" && index > 0) {
+        const [view] = state.reportViews.splice(index, 1);
+        state.reportViews.splice(index - 1, 0, view);
+      }
+      if (action === "move-down" && index < state.reportViews.length - 1) {
+        const [view] = state.reportViews.splice(index, 1);
+        state.reportViews.splice(index + 1, 0, view);
+      }
+      if (action === "remove") {
+        state.reportViews.splice(index, 1);
+      }
+      renderBuilder();
     }
 
-    function startOver() {
-      state.questionId = null;
-      state.audienceId = "standard_family_office_meeting";
-      state.contextId = "native_demo";
-      state.selectedCardIds = [];
-      state.run = null;
-      document.querySelectorAll(".choice-card").forEach((card) => card.classList.remove("is-selected"));
-      document.querySelector("[data-audience='standard_family_office_meeting']").classList.add("is-selected");
-      document.querySelector("[data-source='native_demo']").classList.add("is-selected");
-      els.runStatus.textContent = "";
-      els.bundleStatus.textContent = "";
-      showStep("question");
+    function handleReportListChange(event) {
+      const row = event.target.closest(".report-row");
+      const field = event.target.dataset.field;
+      if (!row || !field) {
+        return;
+      }
+      const view = state.reportViews.find((item) => item.id === row.dataset.viewId);
+      if (!view) {
+        return;
+      }
+      view[field] = event.target.value;
+      renderBuilder();
     }
 
-    async function loadReferenceData() {
+    function saveBriefingSet() {
+      collectContext();
+      const payload = {
+        context: state.context,
+        reportViews: state.reportViews,
+        savedAt: new Date().toISOString()
+      };
       try {
-        const [sourcesPayload, workflowsPayload, runsPayload, indexPayload] = await Promise.all([
-          apiJson(api.sources),
-          apiJson(api.workflows),
-          apiJson(api.runs),
-          apiJson(api.reportIndex)
-        ]);
-        state.sources = sourcesPayload.sources || [];
-        state.workflows = workflowsPayload.workflows || [];
-        state.priorRuns = runsPayload.runs || [];
-        state.reportIndex = indexPayload;
+        window.localStorage.setItem("arangur.briefingSet.demo.v1", JSON.stringify(payload));
+        state.saveStatus = "Saved locally for this demo session.";
+        setStatus(els.builderStatus, state.saveStatus, "success");
       } catch (error) {
-        // The builder remains usable until the advisor draft needs a local run.
+        setStatus(els.builderStatus, "Could not write local demo save state in this browser.", "error");
       }
+    }
+
+    function loadSavedBriefingSet() {
+      try {
+        const saved = window.localStorage.getItem("arangur.briefingSet.demo.v1");
+        if (!saved) {
+          return false;
+        }
+        const payload = JSON.parse(saved);
+        if (!payload || !payload.context || !Array.isArray(payload.reportViews)) {
+          return false;
+        }
+        setField("client-family", payload.context.clientFamily);
+        setField("meeting-purpose", payload.context.meetingPurpose);
+        setField("audience-depth", payload.context.audienceDepth);
+        setField("portfolio-source", payload.context.portfolioSource);
+        setField("primary-question", payload.context.primaryQuestion);
+        setField("scenario-context", payload.context.scenarioContext);
+        setField("default-lens", payload.context.defaultLens);
+        setField("default-metric", payload.context.defaultMetric);
+        state.reportViews = payload.reportViews;
+        collectContext();
+        renderBuilder();
+        setStatus(els.builderStatus, "Restored the demo-local briefing set from this browser.", "success");
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function setField(id, value) {
+      if (value == null) {
+        return;
+      }
+      const field = document.getElementById(id);
+      if (field) {
+        field.value = value;
+      }
+    }
+
+    function setStatus(element, message, kind) {
+      element.className = `status${kind ? ` ${kind}` : ""}`;
+      element.textContent = message || "";
+    }
+
+    function money(value) {
+      return typeof value === "number" ? moneyFormatter.format(value) : "not available";
+    }
+
+    function percent(value) {
+      return typeof value === "number" ? percentFormatter.format(value) : "not available";
     }
 
     function labelize(value) {
@@ -1230,42 +1252,39 @@
       return escapeHtml(value);
     }
 
-    document.querySelectorAll(".question-card").forEach((card) => {
-      card.addEventListener("click", () => selectQuestion(card.dataset.question));
+    document.querySelectorAll("[data-mode]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const mode = button.dataset.mode;
+        if (mode === "preview") {
+          preparePreview();
+          return;
+        }
+        if (mode === "admin") {
+          renderAdmin();
+        }
+        setMode(mode);
+      });
     });
 
-    document.querySelectorAll(".audience-card").forEach((card) => {
-      card.addEventListener("click", () => selectAudience(card.dataset.audience));
+    document.getElementById("generate-set-button").addEventListener("click", generateReportViews);
+    document.getElementById("prepare-preview-button").addEventListener("click", preparePreview);
+    document.getElementById("refresh-preview-button").addEventListener("click", preparePreview);
+    document.getElementById("save-set-button").addEventListener("click", saveBriefingSet);
+    els.reportList.addEventListener("click", handleReportListClick);
+    els.reportList.addEventListener("change", handleReportListChange);
+    document.querySelectorAll(".context-grid input, .context-grid select").forEach((field) => {
+      field.addEventListener("change", () => {
+        collectContext();
+        renderContextChips(els.contextChips);
+      });
     });
 
-    document.querySelectorAll(".source-card").forEach((card) => {
-      card.addEventListener("click", () => selectSource(card.dataset.source));
-    });
-
-    document.addEventListener("click", (event) => {
-      const bundleCard = event.target.closest(".bundle-card");
-      if (bundleCard) {
-        toggleBundleCard(bundleCard.dataset.cardId);
-      }
-      const panelButton = event.target.closest("[data-panel]");
-      if (panelButton) {
-        openPanel(panelButton.dataset.panel);
-      }
-      const backButton = event.target.closest("[data-back-step]");
-      if (backButton) {
-        showStep(backButton.dataset.backStep === "portfolio-context" ? "context" : "question");
-      }
-    });
-
-    document.getElementById("accept-bundle-button").addEventListener("click", prepareAdvisorDraft);
-    document.getElementById("open-client-briefing-button").addEventListener("click", openClientBriefing);
-    document.getElementById("start-over-button").addEventListener("click", startOver);
-    document.getElementById("back-to-draft-button").addEventListener("click", () => showStep("draft"));
-    document.getElementById("close-drawer-button").addEventListener("click", closePanel);
-    document.getElementById("first-technical-entry").addEventListener("click", () => openPanel("technical"));
-
-    renderSummary();
-    loadReferenceData();
+    collectContext();
+    if (!loadSavedBriefingSet()) {
+      generateReportViews();
+      setStatus(els.builderStatus, "", "");
+    }
+    renderAdmin();
   </script>
 </body>
 </html>

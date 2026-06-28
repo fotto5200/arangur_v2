@@ -2,11 +2,10 @@
 
 ## Immediate Product/UI Batches
 
-- Implement the Briefing Set Builder UI by transforming the current sparse guided builder into shared context, compact ordered report views, Builder Mode, and Client Preview Mode.
-- Add briefing set metadata to backend/report packages.
-- Add client preview sequence rendering from the selected ordered report views.
-- Add a save/load briefing set skeleton.
-- Then resume backend/client-question and audience-depth metadata refinement or the Docker/Postgres private-demo path.
+- Add backend briefing-set metadata/persistence.
+- Add client-question, audience-depth, and report-view metadata to report packages.
+- Refine Client Preview with richer portfolio-derived findings and better report-view-specific rendering.
+- Add Docker Compose private-demo files and protected/admin surfaces when private-demo access policy is ready.
 
 ## Batch 2: Architecture And Contracts For Thin Demo
 
@@ -209,10 +208,10 @@
 ## Batch 16A-7: Briefing Set Builder UI
 
 - Goal: Transform the current sparse guided builder into a Briefing Set Builder.
-- Mode: Recommended implementation batch.
+- Mode: Implemented local UI baseline.
 - Allowed scope: `src/arangur/app/`, tests, `docs/ui_reporting/`, restart docs, and README pointers.
 - Non-goals: No frontend framework unless explicitly authorized, no real client data, no live Plaid, no production client portal, no autonomous investment advice.
-- Acceptance criteria: UI defines shared context once, generates a compact ordered report view list, supports duplicate/change lens/change metric/reorder/remove, switches between Builder Mode and Client Preview Mode, hides technical/admin artifacts from the main path, and reduces headings/repeated explanatory text.
+- Acceptance criteria: Implemented baseline: UI defines shared context once, generates a compact ordered report view list, supports open/collapse, duplicate, change lens, change metric, client-facing/advisor-only status, reorder, and remove, switches between Builder Mode and Client Preview Mode, uses one existing `/api/runs` call plus safe report artifact fetches for concrete findings where available, saves a demo-local browser-state placeholder, hides technical/admin artifacts from the main path, and reduces headings/repeated explanatory text.
 - Stop conditions: Implementation requires production auth, real client personalization, external APIs, or major backend schema decisions beyond the UI batch.
 
 ## Batch 16A-8: Briefing Set Metadata
