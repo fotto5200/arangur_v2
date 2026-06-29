@@ -36,7 +36,8 @@
 
     button,
     input,
-    select {
+    select,
+    textarea {
       font: inherit;
     }
 
@@ -169,7 +170,8 @@
     }
 
     .field input,
-    .field select {
+    .field select,
+    .field textarea {
       background: #ffffff;
       border: 1px solid var(--line);
       border-radius: 7px;
@@ -177,6 +179,11 @@
       min-height: 38px;
       padding: 8px 10px;
       width: 100%;
+    }
+
+    .field textarea {
+      min-height: 92px;
+      resize: vertical;
     }
 
     .browse-row {
@@ -207,6 +214,48 @@
     .candidate-list {
       border-top: 1px solid var(--line);
       display: grid;
+    }
+
+    .browse-all-panel {
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 10px;
+      max-height: 340px;
+      overflow: auto;
+      padding-top: 10px;
+    }
+
+    .browse-group {
+      display: grid;
+      gap: 2px;
+    }
+
+    .browse-group h3 {
+      color: var(--muted);
+      font-size: 12px;
+      padding: 7px 4px 2px;
+      text-transform: uppercase;
+    }
+
+    .browse-template-row {
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--strong);
+      cursor: pointer;
+      display: flex;
+      font-weight: 700;
+      justify-content: space-between;
+      min-height: 34px;
+      padding: 7px 4px;
+      text-align: left;
+      width: 100%;
+    }
+
+    .browse-template-row:hover,
+    .browse-template-row:focus {
+      background: var(--accent-soft);
+      outline: 2px solid rgba(15, 118, 110, 0.14);
     }
 
     .candidate-row {
@@ -414,6 +463,17 @@
       padding: 10px;
     }
 
+    .set-row.is-narrative {
+      background: #ffffff;
+      border-left: 4px solid var(--accent);
+    }
+
+    .narrative-label {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
     .set-row p {
       color: var(--muted);
       font-size: 13px;
@@ -455,6 +515,11 @@
           <button id="target-advisor" class="target-button" type="button" data-target-set="Advisor Review Set">Advisor Review Set</button>
         </div>
 
+        <div class="button-row">
+          <button id="browse-all-button" class="secondary-button" type="button">Browse all templates</button>
+          <button id="add-narrative-button" class="secondary-button" type="button">Add narrative element</button>
+        </div>
+
         <div id="catalog-error" class="error-box hidden"></div>
 
         <div class="finder-grid" aria-label="Discovery filters">
@@ -482,6 +547,7 @@
         </div>
 
         <div id="category-buttons" class="browse-row" aria-label="Browse categories"></div>
+        <div id="browse-all-panel" class="browse-all-panel hidden" aria-label="All report element templates grouped by category"></div>
         <p id="candidate-count" class="status">Search, browse a category, or choose a filter to find report elements.</p>
         <div id="candidate-list" class="candidate-list" aria-label="Compact candidate report elements"></div>
       </section>
@@ -576,6 +642,64 @@
         options: ["Use current role labels", "Flag missing role labels"]
       }
     };
+    const NARRATIVE_TYPES = {
+      "Client Briefing Set": [
+        { type: "section_title", label: "Section title" },
+        { type: "short_explanation", label: "Short explanation" },
+        { type: "transition", label: "Transition" },
+        { type: "discussion_prompt", label: "Discussion prompt" },
+        { type: "speaker_note", label: "Speaker note" }
+      ],
+      "Advisor Review Set": [
+        { type: "section_title", label: "Section title" },
+        { type: "working_note", label: "Working note" },
+        { type: "diagnostic_comment", label: "Diagnostic comment" },
+        { type: "follow_up_item", label: "Follow-up item" },
+        { type: "client_prep_note", label: "Client-prep note" }
+      ]
+    };
+    const NARRATIVE_PLACEMENTS = {
+      "Client Briefing Set": [
+        "Main client presentation",
+        "Speaker notes",
+        "Client analytical appendix"
+      ],
+      "Advisor Review Set": [
+        "Main advisor review",
+        "Advisor working notes",
+        "Advisor analytical appendix"
+      ]
+    };
+    const NARRATIVE_FIELDS = {
+      section_title: [
+        { key: "title_text", label: "Title text", type: "text", required: true }
+      ],
+      short_explanation: [
+        { key: "heading", label: "Heading", type: "text", required: false },
+        { key: "body_text", label: "Body text", type: "textarea", required: true }
+      ],
+      transition: [
+        { key: "body_text", label: "Transition text", type: "textarea", required: true }
+      ],
+      discussion_prompt: [
+        { key: "prompt_text", label: "Prompt text", type: "textarea", required: true }
+      ],
+      speaker_note: [
+        { key: "note_text", label: "Note text", type: "textarea", required: true }
+      ],
+      working_note: [
+        { key: "note_text", label: "Note text", type: "textarea", required: true }
+      ],
+      diagnostic_comment: [
+        { key: "body_text", label: "Diagnostic comment", type: "textarea", required: true }
+      ],
+      follow_up_item: [
+        { key: "body_text", label: "Follow-up item", type: "textarea", required: true }
+      ],
+      client_prep_note: [
+        { key: "note_text", label: "Client-prep note", type: "textarea", required: true }
+      ]
+    };
 
     const state = {
       templates: [],
@@ -583,6 +707,9 @@
       previewTemplate: null,
       mode: "empty",
       config: {},
+      narrative: {},
+      browseAllOpen: false,
+      editing: null,
       clientSet: [],
       advisorSet: []
     };
@@ -594,6 +721,9 @@
       category: document.getElementById("category-filter"),
       topic: document.getElementById("topic-filter"),
       categoryButtons: document.getElementById("category-buttons"),
+      browseAll: document.getElementById("browse-all-button"),
+      browseAllPanel: document.getElementById("browse-all-panel"),
+      addNarrative: document.getElementById("add-narrative-button"),
       count: document.getElementById("candidate-count"),
       candidates: document.getElementById("candidate-list"),
       error: document.getElementById("catalog-error"),
@@ -636,6 +766,7 @@
       els.categoryButtons.innerHTML = categories
         .map((category) => `<button class="category-pill" type="button" data-category="${escapeAttr(category)}">${escapeHtml(categoryLabel(category))}</button>`)
         .join("");
+      renderBrowseAllPanel();
     }
 
     function setTargetSet(targetSet) {
@@ -651,6 +782,11 @@
         state.config = buildDefaultConfig(state.previewTemplate);
         renderConfig();
       }
+      if (state.mode === "narrative") {
+        state.narrative = buildDefaultNarrative();
+        renderNarrativeForm();
+      }
+      renderBrowseAllPanel();
     }
 
     function hasFinderInput() {
@@ -684,6 +820,46 @@
       els.candidates.innerHTML = results.length
         ? results.map(renderCandidateRow).join("")
         : '<p class="empty">No matching report elements.</p>';
+    }
+
+    function toggleBrowseAll() {
+      state.browseAllOpen = !state.browseAllOpen;
+      els.browseAll.textContent = state.browseAllOpen ? "Hide all templates" : "Browse all templates";
+      els.browseAllPanel.classList.toggle("hidden", !state.browseAllOpen);
+      renderBrowseAllPanel();
+    }
+
+    function renderBrowseAllPanel() {
+      if (!state.browseAllOpen) {
+        els.browseAllPanel.classList.add("hidden");
+        return;
+      }
+      const grouped = templatesByCategory(state.templates.filter(supportsCurrentTarget));
+      const categories = Object.keys(grouped).sort((a, b) => categoryLabel(a).localeCompare(categoryLabel(b)));
+      els.browseAllPanel.classList.remove("hidden");
+      els.browseAllPanel.innerHTML = categories.length
+        ? categories.map((category) => `
+            <section class="browse-group">
+              <h3>${escapeHtml(categoryLabel(category))}</h3>
+              ${grouped[category].map((template) => `
+                <button class="browse-template-row" type="button" data-template-id="${escapeAttr(template.element_id)}">
+                  <span>${escapeHtml(template.title)}</span>
+                  <span class="meta">${escapeHtml(targetSupportLabel(template))}</span>
+                </button>
+              `).join("")}
+            </section>
+          `).join("")
+        : '<p class="empty">No templates support the selected target set.</p>';
+    }
+
+    function templatesByCategory(templates) {
+      return templates.reduce((groups, template) => {
+        const category = template.category || "other";
+        if (!groups[category]) groups[category] = [];
+        groups[category].push(template);
+        groups[category].sort((a, b) => a.title.localeCompare(b.title));
+        return groups;
+      }, {});
     }
 
     function renderCandidateRow(template) {
@@ -756,6 +932,8 @@
       els.selectionTitle.textContent = template.title;
       els.preview.classList.add("hidden");
       els.configPanel.classList.remove("hidden");
+      els.add.textContent = state.editing ? "Save element" : "Add element";
+      els.backToPreview.textContent = "Back to preview";
       const calculationFields = calculationFieldsFor(template);
       const placementFields = placementFieldsFor(template);
       els.form.innerHTML = `
@@ -767,6 +945,128 @@
         ${optionalDetails(template)}
       `;
       renderValidation(template);
+    }
+
+    function startNarrativeElement() {
+      state.previewTemplate = null;
+      state.mode = "narrative";
+      state.editing = null;
+      state.narrative = buildDefaultNarrative();
+      els.status.textContent = "";
+      renderFinder();
+      renderNarrativeForm();
+    }
+
+    function buildDefaultNarrative() {
+      const type = firstValue(NARRATIVE_TYPES[state.targetSet]).type;
+      return {
+        type,
+        placement: firstValue(NARRATIVE_PLACEMENTS[state.targetSet]),
+        fields: {}
+      };
+    }
+
+    function renderNarrativeForm() {
+      const typeConfig = narrativeTypeConfig(state.narrative.type);
+      els.selectionTitle.textContent = state.editing ? "Edit narrative element" : "Add narrative element";
+      els.preview.classList.add("hidden");
+      els.configPanel.classList.remove("hidden");
+      els.add.textContent = state.editing ? "Save narrative element" : "Add narrative element";
+      els.backToPreview.textContent = "Cancel";
+      els.form.innerHTML = `
+        <div class="calculation-fields">
+          <div class="field">
+            <label for="narrative-type">Narrative type</label>
+            <select id="narrative-type" data-narrative-key="type">
+              ${NARRATIVE_TYPES[state.targetSet].map((option) => `<option value="${escapeAttr(option.type)}"${state.narrative.type === option.type ? " selected" : ""}>${escapeHtml(option.label)}</option>`).join("")}
+            </select>
+          </div>
+          <div class="field">
+            <label for="narrative-placement">Add to set as</label>
+            <select id="narrative-placement" data-narrative-key="placement">
+              ${NARRATIVE_PLACEMENTS[state.targetSet].map((placement) => `<option value="${escapeAttr(placement)}"${state.narrative.placement === placement ? " selected" : ""}>${escapeHtml(placement)}</option>`).join("")}
+            </select>
+          </div>
+        </div>
+        <div class="config-form">
+          ${typeConfig.fields.map(renderNarrativeField).join("")}
+        </div>
+      `;
+      renderNarrativeValidation();
+    }
+
+    function renderNarrativeField(field) {
+      const value = state.narrative.fields[field.key] || "";
+      const escapedValue = escapeHtml(value);
+      if (field.type === "textarea") {
+        return `
+          <div class="field">
+            <label for="narrative-${escapeAttr(field.key)}">${escapeHtml(field.label)}${field.required ? "" : " (optional)"}</label>
+            <textarea id="narrative-${escapeAttr(field.key)}" data-narrative-field="${escapeAttr(field.key)}">${escapedValue}</textarea>
+          </div>
+        `;
+      }
+      return `
+        <div class="field">
+          <label for="narrative-${escapeAttr(field.key)}">${escapeHtml(field.label)}${field.required ? "" : " (optional)"}</label>
+          <input id="narrative-${escapeAttr(field.key)}" type="text" data-narrative-field="${escapeAttr(field.key)}" value="${escapeAttr(value)}">
+        </div>
+      `;
+    }
+
+    function handleNarrativeChange(event) {
+      const narrativeKey = event.target.dataset.narrativeKey;
+      const fieldKey = event.target.dataset.narrativeField;
+      if (narrativeKey === "type") {
+        state.narrative.type = event.target.value;
+        state.narrative.fields = {};
+        renderNarrativeForm();
+        return;
+      }
+      if (narrativeKey === "placement") {
+        state.narrative.placement = event.target.value;
+      }
+      if (fieldKey) {
+        state.narrative.fields[fieldKey] = event.target.value;
+      }
+      renderNarrativeValidation();
+    }
+
+    function renderNarrativeValidation() {
+      const message = narrativeValidationMessage();
+      els.validation.classList.remove("hidden", "is-ready", "is-warning");
+      els.validation.classList.add(message.ready ? "is-ready" : "is-warning");
+      els.validation.textContent = message.text;
+      els.add.disabled = !message.ready;
+    }
+
+    function narrativeValidationMessage() {
+      const typeConfig = narrativeTypeConfig(state.narrative.type);
+      const missingField = typeConfig.fields.find((field) => field.required && !String(state.narrative.fields[field.key] || "").trim());
+      if (missingField) {
+        return { ready: false, text: `Enter ${missingField.label.toLowerCase()} to continue.` };
+      }
+      return { ready: true, text: "Ready to add." };
+    }
+
+    function addNarrativeElement() {
+      const message = narrativeValidationMessage();
+      if (!message.ready) return;
+      const typeConfig = narrativeTypeConfig(state.narrative.type);
+      const spec = {
+        id: `${Date.now()}_${Math.random().toString(16).slice(2)}`,
+        element_kind: "narrative",
+        narrative_type: state.narrative.type,
+        title: typeConfig.label,
+        target_set: state.targetSet,
+        placement: state.narrative.placement,
+        fields: { ...state.narrative.fields },
+        warning: null
+      };
+      saveSpecToSet(spec);
+      els.status.textContent = `${state.editing ? "Updated" : "Added"} ${spec.title} in ${state.targetSet}.`;
+      resetSelection();
+      renderSets();
     }
 
     function calculationFieldsFor(template) {
@@ -875,10 +1175,22 @@
     }
 
     function handleConfigChange(event) {
+      if (state.mode === "narrative") {
+        handleNarrativeChange(event);
+        return;
+      }
       const key = event.target.dataset.configKey;
       if (!key || !state.previewTemplate) return;
       state.config[key] = event.target.value;
       renderValidation(state.previewTemplate);
+    }
+
+    function handleAddButton() {
+      if (state.mode === "narrative") {
+        addNarrativeElement();
+        return;
+      }
+      addConfiguredElement();
     }
 
     function addConfiguredElement() {
@@ -886,6 +1198,7 @@
       if (!template || !validationMessage(template).ready) return;
       const spec = {
         id: `${Date.now()}_${Math.random().toString(16).slice(2)}`,
+        element_kind: "analytic",
         element_id: template.element_id,
         title: template.title,
         target_set: state.targetSet,
@@ -894,14 +1207,23 @@
         parameters: configuredParameters(template),
         warning: null
       };
-      if (state.targetSet === "Client Briefing Set") {
+      saveSpecToSet(spec);
+      els.status.textContent = `${state.editing ? "Updated" : "Added"} ${spec.title} in ${state.targetSet}.`;
+      resetSelection();
+      renderSets();
+    }
+
+    function saveSpecToSet(spec) {
+      if (state.editing) {
+        const list = listForKind(state.editing.kind);
+        list[state.editing.index] = { ...spec, id: list[state.editing.index].id };
+        return;
+      }
+      if (spec.target_set === "Client Briefing Set") {
         state.clientSet.push(spec);
       } else {
         state.advisorSet.push(spec);
       }
-      els.status.textContent = `Added ${spec.title} to ${state.targetSet}.`;
-      resetSelection();
-      renderSets();
     }
 
     function configuredParameters(template) {
@@ -926,6 +1248,9 @@
     }
 
     function renderSetRow(spec, index, kind) {
+      if (spec.element_kind === "narrative") {
+        return renderNarrativeSetRow(spec, index, kind);
+      }
       const parameterText = compactParameterText(spec.parameters);
       const advisorPurpose = kind === "advisor" && spec.internal_purpose ? ` | ${spec.internal_purpose}` : "";
       const promoteButton = kind === "advisor" ? `<button class="tiny-button" type="button" data-action="promote" data-kind="advisor" data-index="${index}">Promote to Client Briefing</button>` : "";
@@ -946,10 +1271,29 @@
       `;
     }
 
+    function renderNarrativeSetRow(spec, index, kind) {
+      const summary = narrativeSummary(spec);
+      return `
+        <li class="set-row is-narrative">
+          <span class="narrative-label">Narrative element</span>
+          <h3>${escapeHtml(index + 1)}. ${escapeHtml(spec.title)}</h3>
+          <p>${escapeHtml(spec.placement || "")}</p>
+          <p>${escapeHtml(summary)}</p>
+          <div class="row-actions">
+            <button class="tiny-button" type="button" data-action="edit" data-kind="${escapeAttr(kind)}" data-index="${index}">Edit</button>
+            <button class="tiny-button" type="button" data-action="duplicate" data-kind="${escapeAttr(kind)}" data-index="${index}">Duplicate</button>
+            <button class="tiny-button" type="button" data-action="up" data-kind="${escapeAttr(kind)}" data-index="${index}"${index === 0 ? " disabled" : ""}>Move up</button>
+            <button class="tiny-button" type="button" data-action="down" data-kind="${escapeAttr(kind)}" data-index="${index}">Move down</button>
+            <button class="tiny-button" type="button" data-action="remove" data-kind="${escapeAttr(kind)}" data-index="${index}">Remove</button>
+          </div>
+        </li>
+      `;
+    }
+
     function handleSetAction(event) {
       const button = event.target.closest("[data-action]");
       if (!button) return;
-      const list = button.dataset.kind === "client" ? state.clientSet : state.advisorSet;
+      const list = listForKind(button.dataset.kind);
       const index = Number(button.dataset.index);
       const action = button.dataset.action;
       if (!Number.isInteger(index) || index < 0 || index >= list.length) return;
@@ -964,17 +1308,22 @@
         const item = list.splice(index, 1)[0];
         list.splice(index + 1, 0, item);
       } else if (action === "edit") {
-        editSpec(list[index]);
+        if (list[index].element_kind === "narrative") {
+          editNarrativeSpec(list[index], button.dataset.kind, index);
+        } else {
+          editSpec(list[index], button.dataset.kind, index);
+        }
       } else if (action === "promote") {
         els.status.textContent = "Promote to Client Briefing is a placeholder in this local composer.";
       }
       renderSets();
     }
 
-    function editSpec(spec) {
+    function editSpec(spec, kind, index) {
       const template = state.templates.find((candidate) => candidate.element_id === spec.element_id);
       if (!template) return;
       setTargetSet(spec.target_set);
+      state.editing = { kind, index };
       state.previewTemplate = template;
       state.mode = "config";
       state.config = {
@@ -987,10 +1336,44 @@
       renderFinder();
     }
 
+    function editNarrativeSpec(spec, kind, index) {
+      setTargetSet(spec.target_set);
+      state.editing = { kind, index };
+      state.previewTemplate = null;
+      state.mode = "narrative";
+      state.narrative = {
+        type: spec.narrative_type,
+        placement: spec.placement,
+        fields: { ...spec.fields }
+      };
+      renderNarrativeForm();
+      renderFinder();
+    }
+
+    function listForKind(kind) {
+      return kind === "client" ? state.clientSet : state.advisorSet;
+    }
+
+    function narrativeTypeConfig(type) {
+      const options = NARRATIVE_TYPES[state.targetSet] || [];
+      const option = options.find((candidate) => candidate.type === type) || options[0];
+      return {
+        ...option,
+        fields: NARRATIVE_FIELDS[option.type] || []
+      };
+    }
+
+    function narrativeSummary(spec) {
+      const fields = spec.fields || {};
+      return fields.title_text || fields.heading || fields.prompt_text || fields.note_text || fields.body_text || "Narrative text";
+    }
+
     function resetSelection() {
       state.previewTemplate = null;
       state.mode = "empty";
       state.config = {};
+      state.narrative = {};
+      state.editing = null;
       renderEmptySelection();
       renderFinder();
     }
@@ -1003,6 +1386,8 @@
       els.form.innerHTML = "";
       els.validation.classList.add("hidden");
       els.add.disabled = true;
+      els.add.textContent = "Add element";
+      els.backToPreview.textContent = "Back to preview";
     }
 
     function buildDefaultConfig(template) {
@@ -1183,6 +1568,8 @@
 
     els.targetClient.addEventListener("click", () => setTargetSet("Client Briefing Set"));
     els.targetAdvisor.addEventListener("click", () => setTargetSet("Advisor Review Set"));
+    els.browseAll.addEventListener("click", toggleBrowseAll);
+    els.addNarrative.addEventListener("click", startNarrativeElement);
     els.search.addEventListener("input", renderFinder);
     els.category.addEventListener("change", renderFinder);
     els.topic.addEventListener("change", renderFinder);
@@ -1196,9 +1583,20 @@
       const button = event.target.closest("[data-template-id]");
       if (button) selectForPreview(button.dataset.templateId);
     });
+    els.browseAllPanel.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-template-id]");
+      if (button) selectForPreview(button.dataset.templateId);
+    });
     els.form.addEventListener("change", handleConfigChange);
-    els.add.addEventListener("click", addConfiguredElement);
-    els.backToPreview.addEventListener("click", renderPreview);
+    els.form.addEventListener("input", handleConfigChange);
+    els.add.addEventListener("click", handleAddButton);
+    els.backToPreview.addEventListener("click", () => {
+      if (state.mode === "narrative") {
+        resetSelection();
+      } else {
+        renderPreview();
+      }
+    });
     els.clientList.addEventListener("click", handleSetAction);
     els.advisorList.addEventListener("click", handleSetAction);
 

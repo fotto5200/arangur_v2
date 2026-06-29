@@ -95,9 +95,9 @@ Start the FastAPI app:
 python -m uvicorn arangur.app.main:app --reload --app-dir src
 ```
 
-Open `http://127.0.0.1:8000/app/` to use the Report Element Finder prototype. It starts with a compact static client context line, asks the advisor to choose the target set, loads the report element template catalog from `/api/report-elements`, and provides search, category browsing, and lightweight filters without showing the full catalog as large cards.
+Open `http://127.0.0.1:8000/app/` to use the Report Element Finder prototype. It starts with a compact static client context line, asks the advisor to choose the target set, loads the report element template catalog from `/api/report-elements`, and provides search, category browsing, lightweight filters, and a compact grouped `Browse all templates` path without showing the full catalog as large cards.
 
-After a template is selected, the right side shows a short preview and a `Use this element` action. The configuration step then renders only the fields that template needs, with placement shown separately as `Add to set as`. Completed local specs can be added to either the Client Briefing Set or the Advisor Review Set.
+After a template is selected, the right side shows a short preview and a `Use this element` action. The configuration step then renders only the fields that template needs, with placement shown separately as `Add to set as`. Advisors can also add manual narrative elements such as section titles, explanations, discussion prompts, speaker notes, working notes, and follow-up items. Completed local specs can be added to either the Client Briefing Set or the Advisor Review Set.
 
 This UI does not generate reports, charts, or client preview output yet. It does not call the workflow API or show report links. The next UI batch should decide how completed local spec sets are serialized, exported, or persisted.
 

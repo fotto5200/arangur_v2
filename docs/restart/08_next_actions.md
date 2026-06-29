@@ -260,6 +260,15 @@
 - Acceptance criteria: Implemented baseline: context is a single compact line; target set is chosen before discovery; finder uses search, category browsing, and guided filters; initial state does not show all templates; candidate rows are compact; selected templates show preview before `Use this element`; right-side configuration omits Branch, hides fixed metric/display in details, asks only meaningful selected-template fields, and keeps placement under `Add to set as`; validation is quiet with `Ready to add`; two compact set lists remain.
 - Stop conditions: Durable spec serialization/export/import and backend spec persistence remain follow-up batches.
 
+## Batch 16A-7f: Compact Catalog Browse And Narrative Elements
+
+- Goal: Add an experienced-user browse-all path and manual narrative/text elements to the local Report Element Finder.
+- Mode: Implemented local UI refinement.
+- Allowed scope: `src/arangur/app/static/index.html`, tests, restart docs, and README pointers.
+- Non-goals: No report generation, no charts, no client preview, no workflow API calls, no AI narrative generation, no backend persistence, no Docker/Postgres changes, no live Plaid, no external APIs, no real data.
+- Acceptance criteria: Implemented baseline: `Browse all templates` opens a compact category-grouped one-line-per-template catalog; selecting from that grouped list reuses the template preview/configuration flow; `Add narrative element` supports client briefing narrative types and advisor review narrative types; narrative rows appear in the same ordered set lists as analytic elements, are visually distinct, and support edit, duplicate, move up/down, and remove.
+- Stop conditions: Durable spec serialization/export/import and backend spec persistence remain follow-up batches.
+
 ## Batch 16A-8: Briefing Set Metadata
 
 - Goal: Add selected report element specs and briefing set metadata to backend/report packages after the local spec-set shape is stable.
