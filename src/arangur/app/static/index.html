@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Arangur Report Element Spec Composer</title>
+  <title>Arangur Report Element Finder</title>
   <style>
     :root {
       --bg: #f6f8f7;
@@ -30,7 +30,7 @@
       background: var(--bg);
       color: var(--ink);
       font-family: Arial, sans-serif;
-      line-height: 1.45;
+      line-height: 1.42;
       margin: 0;
     }
 
@@ -49,11 +49,11 @@
 
     .page {
       display: grid;
-      gap: 18px;
+      gap: 14px;
       margin: 0 auto;
       max-width: 1180px;
       min-height: 100vh;
-      padding: 32px 18px 42px;
+      padding: 28px 18px 38px;
     }
 
     .brand {
@@ -63,9 +63,18 @@
       letter-spacing: 0;
     }
 
+    .context-line {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .context-line strong {
+      color: var(--strong);
+    }
+
     h1 {
       color: var(--strong);
-      font-size: 30px;
+      font-size: 28px;
       line-height: 1.1;
     }
 
@@ -77,7 +86,7 @@
 
     h3 {
       color: var(--strong);
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.25;
     }
 
@@ -89,7 +98,12 @@
       font-size: 14px;
     }
 
-    .context-strip,
+    .workspace {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+    }
+
     .panel,
     .set-panel {
       background: var(--surface);
@@ -98,63 +112,54 @@
       box-shadow: var(--shadow);
     }
 
-    .context-strip {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding: 12px;
-    }
-
-    .chip,
-    .tag {
-      background: var(--surface-soft);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--muted);
-      display: inline-flex;
-      font-size: 13px;
-      padding: 6px 10px;
-    }
-
-    .tag {
-      font-size: 12px;
-      padding: 3px 8px;
-    }
-
-    .chip strong,
-    .tag strong {
-      color: var(--strong);
-    }
-
-    .workspace {
-      display: grid;
-      gap: 16px;
-      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
-    }
-
     .panel {
       align-content: start;
       display: grid;
-      gap: 18px;
-      min-height: 420px;
-      padding: 22px;
+      gap: 14px;
+      min-height: 410px;
+      padding: 20px;
     }
 
     .panel-header {
       display: grid;
-      gap: 6px;
+      gap: 5px;
     }
 
-    .filter-grid,
-    .form-grid {
+    .target-toggle {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
       display: grid;
-      gap: 12px;
+      gap: 6px;
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      padding: 5px;
+    }
+
+    .target-button {
+      background: transparent;
+      border: 0;
+      border-radius: 6px;
+      color: var(--strong);
+      cursor: pointer;
+      font-weight: 700;
+      min-height: 38px;
+      padding: 8px;
+    }
+
+    .target-button.is-active {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .finder-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(0, 1.2fr) minmax(150px, 0.8fr) minmax(150px, 0.8fr);
     }
 
     .field {
       display: grid;
-      gap: 6px;
+      gap: 5px;
     }
 
     .field label {
@@ -174,42 +179,166 @@
       width: 100%;
     }
 
-    .candidate-list {
-      display: grid;
-      gap: 10px;
+    .browse-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
     }
 
-    .candidate-card {
+    .category-pill,
+    .quiet-pill {
       background: #ffffff;
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: 999px;
+      color: var(--strong);
+      cursor: pointer;
+      font-size: 12px;
+      min-height: 28px;
+      padding: 5px 9px;
+    }
+
+    .category-pill.is-active {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .candidate-list {
+      border-top: 1px solid var(--line);
+      display: grid;
+    }
+
+    .candidate-row {
+      align-items: center;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink);
+      cursor: pointer;
       display: grid;
       gap: 8px;
-      padding: 14px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      min-height: 54px;
+      padding: 10px 4px;
       text-align: left;
       width: 100%;
     }
 
-    .candidate-card:hover,
-    .candidate-card:focus {
+    .candidate-row:hover,
+    .candidate-row:focus {
       background: var(--accent-soft);
-      border-color: var(--accent);
-      outline: 2px solid rgba(15, 118, 110, 0.16);
+      outline: 2px solid rgba(15, 118, 110, 0.14);
     }
 
-    .candidate-card.is-selected {
+    .candidate-row.is-selected {
       background: var(--accent-soft);
-      border-color: var(--accent);
     }
 
-    .candidate-top {
-      align-items: start;
-      display: flex;
+    .candidate-main {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .candidate-line {
+      color: var(--strong);
+      font-weight: 700;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .candidate-note {
+      color: var(--muted);
+      font-size: 13px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .badge {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      display: inline-flex;
+      font-size: 12px;
+      padding: 3px 8px;
+      white-space: nowrap;
+    }
+
+    .selected-box,
+    .validation-box,
+    .error-box {
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .selected-box,
+    .validation-box {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+    }
+
+    .validation-box.is-ready {
+      background: var(--accent-soft);
+      border-color: #99f6e4;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .validation-box.is-warning {
+      background: var(--amber-soft);
+      border-color: var(--amber-line);
+      color: #713f12;
+    }
+
+    .error-box {
+      background: var(--red-soft);
+      border: 1px solid var(--red-line);
+      color: #9f1239;
+      font-size: 14px;
+    }
+
+    .config-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    .calculation-fields {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .placement-strip {
+      border-top: 1px solid var(--line);
+      display: grid;
       gap: 10px;
-      justify-content: space-between;
+      padding-top: 12px;
     }
 
-    .tag-row,
+    details {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    summary {
+      color: var(--strong);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .detail-list {
+      display: grid;
+      gap: 5px;
+      margin: 8px 0 0;
+      padding-left: 18px;
+    }
+
     .button-row,
     .row-actions {
       display: flex;
@@ -256,30 +385,6 @@
       padding: 5px 8px;
     }
 
-    .fixed-field,
-    .readiness-box,
-    .error-box {
-      border-radius: 8px;
-      display: grid;
-      gap: 8px;
-      padding: 12px;
-    }
-
-    .fixed-field,
-    .readiness-box {
-      background: var(--amber-soft);
-      border: 1px solid var(--amber-line);
-      color: #713f12;
-      font-size: 14px;
-    }
-
-    .error-box {
-      background: var(--red-soft);
-      border: 1px solid var(--red-line);
-      color: #9f1239;
-      font-size: 14px;
-    }
-
     .sets-grid {
       display: grid;
       gap: 16px;
@@ -288,13 +393,13 @@
 
     .set-panel {
       display: grid;
-      gap: 12px;
-      padding: 18px;
+      gap: 10px;
+      padding: 16px;
     }
 
     .set-list {
       display: grid;
-      gap: 10px;
+      gap: 8px;
       list-style: none;
       margin: 0;
       padding: 0;
@@ -305,8 +410,8 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       display: grid;
-      gap: 8px;
-      padding: 12px;
+      gap: 6px;
+      padding: 10px;
     }
 
     .set-row p {
@@ -318,16 +423,16 @@
       display: none !important;
     }
 
-    @media (max-width: 880px) {
+    @media (max-width: 920px) {
       .workspace,
       .sets-grid,
-      .filter-grid,
-      .form-grid {
+      .finder-grid,
+      .calculation-fields {
         grid-template-columns: 1fr;
       }
 
       h1 {
-        font-size: 26px;
+        font-size: 25px;
       }
     }
   </style>
@@ -336,71 +441,65 @@
   <main class="page">
     <!-- first-screen-start -->
     <p class="brand">Arangur</p>
-
-    <section class="context-strip" aria-label="Client and portfolio context">
-      <span class="chip"><strong>Client:</strong> Northstar Family Office</span>
-      <span class="chip"><strong>Portfolio:</strong> Demo portfolio</span>
-      <span class="chip"><strong>Data status:</strong> Loaded</span>
-      <span class="chip"><strong>Valuation confidence:</strong> Mixed</span>
-      <span class="chip"><strong>Human-review items:</strong> 1</span>
-    </section>
+    <p class="context-line"><strong>Northstar Family Office</strong> &middot; Demo portfolio &middot; Data loaded &middot; Confidence: Mixed &middot; 1 review item</p>
 
     <section class="workspace" aria-live="polite">
-      <section class="panel" aria-labelledby="discovery-title">
+      <section class="panel" aria-labelledby="finder-title">
         <div class="panel-header">
-          <p class="helper">Report element discovery</p>
-          <h1 id="discovery-title">Find a report element template</h1>
-          <p class="helper">Search or filter the catalog, then select an element to configure.</p>
-          <p class="helper">No report generation in this composer.</p>
+          <p class="helper">Report element finder</p>
+          <h1 id="finder-title">Choose a target set, then find an element</h1>
+        </div>
+
+        <div class="target-toggle" aria-label="Target set">
+          <button id="target-client" class="target-button is-active" type="button" data-target-set="Client Briefing Set">Client Briefing Set</button>
+          <button id="target-advisor" class="target-button" type="button" data-target-set="Advisor Review Set">Advisor Review Set</button>
         </div>
 
         <div id="catalog-error" class="error-box hidden"></div>
 
-        <div class="filter-grid" aria-label="Discovery filters">
+        <div class="finder-grid" aria-label="Discovery filters">
           <div class="field">
-            <label for="branch-filter">Branch</label>
-            <select id="branch-filter">
-              <option>Client Briefing</option>
-              <option>Advisor Review</option>
-            </select>
+            <label for="search-filter">Search report elements</label>
+            <input id="search-filter" type="search" placeholder="Cash, scenario, manager, data">
           </div>
           <div class="field">
-            <label for="search-filter">Search templates</label>
-            <input id="search-filter" type="search" placeholder="Search by title, topic, or question">
-          </div>
-          <div class="field">
-            <label for="category-filter">Category</label>
+            <label for="category-filter">Browse category</label>
             <select id="category-filter">
-              <option value="">All categories</option>
+              <option value="">Choose category</option>
             </select>
           </div>
           <div class="field">
-            <label for="tag-filter">Topic</label>
-            <select id="tag-filter">
-              <option value="">All topics</option>
+            <label for="topic-filter">Guided filter</label>
+            <select id="topic-filter">
+              <option value="">No filter</option>
+              <option value="scenario">Scenario-related</option>
+              <option value="manager">Manager-related</option>
+              <option value="cash">Cash/liquidity-related</option>
+              <option value="data">Data-readiness-related</option>
+              <option value="concentration">Concentration-related</option>
             </select>
           </div>
         </div>
 
-        <p id="candidate-count" class="status">Loading report element catalog...</p>
-        <div id="candidate-list" class="candidate-list" aria-label="Candidate report elements"></div>
+        <div id="category-buttons" class="browse-row" aria-label="Browse categories"></div>
+        <p id="candidate-count" class="status">Search, browse a category, or choose a filter to find report elements.</p>
+        <div id="candidate-list" class="candidate-list" aria-label="Compact candidate report elements"></div>
       </section>
 
-      <section class="panel" aria-labelledby="config-title">
+      <section class="panel" aria-labelledby="selection-title">
         <div class="panel-header">
-          <p class="helper">Element-specific configuration</p>
-          <h2 id="config-title">Selected element configuration</h2>
-          <p id="config-helper" class="helper">Select a catalog template to see only the fields that element needs.</p>
+          <p class="helper">Selected template</p>
+          <h2 id="selection-title">Select a report element to see details.</h2>
         </div>
 
-        <div id="selected-summary" class="readiness-box hidden"></div>
-        <form id="config-form" class="form-grid"></form>
-        <div id="fixed-fields" class="readiness-box hidden"></div>
-        <div id="readiness-summary" class="readiness-box hidden"></div>
-
-        <div class="button-row">
-          <button id="add-spec-button" class="primary-button" type="button" disabled>Add configured element</button>
-          <button id="clear-selection-button" class="secondary-button" type="button" disabled>Clear selection</button>
+        <div id="preview-panel" class="selected-box hidden"></div>
+        <div id="config-panel" class="hidden">
+          <form id="config-form" class="config-form"></form>
+          <div id="validation-message" class="validation-box hidden"></div>
+          <div class="button-row">
+            <button id="add-spec-button" class="primary-button" type="button" disabled>Add element</button>
+            <button id="back-to-preview-button" class="secondary-button" type="button">Back to preview</button>
+          </div>
         </div>
         <p id="composer-status" class="status"></p>
       </section>
@@ -424,37 +523,87 @@
 
   <script>
     const CATALOG_ENDPOINT = "/api/report-elements";
-    const scenarioOptions = [
+    const TARGET_TO_BRANCH = {
+      "Client Briefing Set": "Client Briefing",
+      "Advisor Review Set": "Advisor Review"
+    };
+    const SCENARIO_OPTIONS = [
       "AI/chip selloff",
       "Rate shock",
       "Energy shock",
       "Taiwan disruption",
       "Private-market liquidity freeze"
     ];
+    const PARAMETER_UI = {
+      lookback_period: {
+        label: "Period",
+        options: ["Last six months", "YTD", "Trailing 12 months"]
+      },
+      threshold_percent: {
+        label: "Threshold",
+        options: ["Top 10", "Over 5%", "Over 10%"]
+      },
+      comparison_period: {
+        label: "Comparison period",
+        options: ["Prior quarter", "Prior year", "YTD"]
+      },
+      cash_need_label: {
+        label: "Cash need",
+        options: ["Routine spending", "Known distribution", "Liquidity reserve"]
+      },
+      comparison_group: {
+        label: "Comparison group",
+        options: ["All active managers", "Same mandate", "Selected sleeve"]
+      },
+      confidence_threshold: {
+        label: "Show confidence below",
+        options: ["Mixed or lower", "Low only", "Human review only"]
+      },
+      human_review_only: {
+        label: "Review focus",
+        options: ["All data issues", "Human-review items only"]
+      },
+      horizon: {
+        label: "Horizon",
+        options: ["3 months", "6 months", "12 months"]
+      },
+      shock_source_note: {
+        label: "Scenario note",
+        options: ["Use template assumptions", "Flag assumptions for review"]
+      },
+      mandate_note: {
+        label: "Mandate note",
+        options: ["Use current role labels", "Flag missing role labels"]
+      }
+    };
 
     const state = {
       templates: [],
-      selectedTemplate: null,
+      targetSet: "Client Briefing Set",
+      previewTemplate: null,
+      mode: "empty",
       config: {},
       clientSet: [],
       advisorSet: []
     };
 
     const els = {
-      branch: document.getElementById("branch-filter"),
+      targetClient: document.getElementById("target-client"),
+      targetAdvisor: document.getElementById("target-advisor"),
       search: document.getElementById("search-filter"),
       category: document.getElementById("category-filter"),
-      tag: document.getElementById("tag-filter"),
+      topic: document.getElementById("topic-filter"),
+      categoryButtons: document.getElementById("category-buttons"),
       count: document.getElementById("candidate-count"),
       candidates: document.getElementById("candidate-list"),
       error: document.getElementById("catalog-error"),
-      summary: document.getElementById("selected-summary"),
-      helper: document.getElementById("config-helper"),
+      selectionTitle: document.getElementById("selection-title"),
+      preview: document.getElementById("preview-panel"),
+      configPanel: document.getElementById("config-panel"),
       form: document.getElementById("config-form"),
-      fixed: document.getElementById("fixed-fields"),
-      readiness: document.getElementById("readiness-summary"),
+      validation: document.getElementById("validation-message"),
       add: document.getElementById("add-spec-button"),
-      clear: document.getElementById("clear-selection-button"),
+      backToPreview: document.getElementById("back-to-preview-button"),
       status: document.getElementById("composer-status"),
       clientEmpty: document.getElementById("client-empty"),
       clientList: document.getElementById("client-set-list"),
@@ -470,311 +619,303 @@
         }
         const payload = await response.json();
         state.templates = Array.isArray(payload.templates) ? payload.templates : [];
-        populateFilters();
-        renderCandidates();
+        populateFinderControls();
+        renderFinder();
       } catch (error) {
-        els.error.textContent = "Could not load the report element catalog. Refresh the app after the API is available.";
+        els.error.textContent = "Could not load the report element catalog. Refresh after the API is available.";
         els.error.classList.remove("hidden");
         els.count.textContent = "Catalog unavailable.";
-        els.candidates.innerHTML = "";
       }
     }
 
-    function populateFilters() {
+    function populateFinderControls() {
       const categories = uniqueValues(state.templates.map((template) => template.category));
-      els.category.innerHTML = '<option value="">All categories</option>' + categories
-        .map((category) => `<option value="${escapeAttr(category)}">${escapeHtml(toTitle(category))}</option>`)
+      els.category.innerHTML = '<option value="">Choose category</option>' + categories
+        .map((category) => `<option value="${escapeAttr(category)}">${escapeHtml(categoryLabel(category))}</option>`)
         .join("");
-
-      const tags = uniqueValues(state.templates.flatMap((template) => template.discovery_tags || []));
-      els.tag.innerHTML = '<option value="">All topics</option>' + tags
-        .map((tag) => `<option value="${escapeAttr(tag)}">${escapeHtml(tag)}</option>`)
+      els.categoryButtons.innerHTML = categories
+        .map((category) => `<button class="category-pill" type="button" data-category="${escapeAttr(category)}">${escapeHtml(categoryLabel(category))}</button>`)
         .join("");
     }
 
-    function renderCandidates() {
-      const candidates = filteredTemplates();
-      const branch = els.branch.value;
-      els.count.textContent = `${candidates.length} candidate report element${candidates.length === 1 ? "" : "s"} for ${branch}.`;
-      if (!candidates.length) {
-        els.candidates.innerHTML = '<p class="empty">No matching report elements.</p>';
-        return;
+    function setTargetSet(targetSet) {
+      state.targetSet = targetSet;
+      els.targetClient.classList.toggle("is-active", targetSet === "Client Briefing Set");
+      els.targetAdvisor.classList.toggle("is-active", targetSet === "Advisor Review Set");
+      if (state.previewTemplate && !supportsCurrentTarget(state.previewTemplate)) {
+        resetSelection();
       }
-      els.candidates.innerHTML = candidates.map(renderCandidate).join("");
+      renderFinder();
+      if (state.mode === "preview") renderPreview();
+      if (state.mode === "config") {
+        state.config = buildDefaultConfig(state.previewTemplate);
+        renderConfig();
+      }
     }
 
-    function filteredTemplates() {
-      const branch = normalize(els.branch.value);
-      const category = normalize(els.category.value);
-      const tag = normalize(els.tag.value);
+    function hasFinderInput() {
+      return Boolean(normalize(els.search.value) || els.category.value || els.topic.value);
+    }
+
+    function finderResults() {
+      if (!hasFinderInput()) return [];
+      const branch = targetBranch();
       const query = normalize(els.search.value);
+      const category = normalize(els.category.value);
+      const topic = normalize(els.topic.value);
       return state.templates.filter((template) => {
         if (!containsNormalized(template.supported_branches, branch)) return false;
         if (category && normalize(template.category) !== category) return false;
-        if (tag && !containsNormalized(template.discovery_tags, tag)) return false;
+        if (topic && !topicMatches(template, topic)) return false;
         if (query && !searchableText(template).includes(query)) return false;
         return true;
       });
     }
 
-    function renderCandidate(template) {
-      const selectedClass = state.selectedTemplate && state.selectedTemplate.element_id === template.element_id ? " is-selected" : "";
-      const tags = (template.discovery_tags || []).slice(0, 4)
-        .map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`)
-        .join("");
+    function renderFinder() {
+      updateCategoryButtonState();
+      const results = finderResults();
+      if (!hasFinderInput()) {
+        els.count.textContent = "Search, browse a category, or choose a filter to find report elements.";
+        els.candidates.innerHTML = "";
+        return;
+      }
+      els.count.textContent = `${results.length} compact candidate${results.length === 1 ? "" : "s"} for ${state.targetSet}.`;
+      els.candidates.innerHTML = results.length
+        ? results.map(renderCandidateRow).join("")
+        : '<p class="empty">No matching report elements.</p>';
+    }
+
+    function renderCandidateRow(template) {
+      const selected = state.previewTemplate && state.previewTemplate.element_id === template.element_id ? " is-selected" : "";
+      const scenarioBadge = template.scenario_requirement === "required" ? '<span class="badge">scenario</span>' : "";
       return `
-        <button class="candidate-card${selectedClass}" type="button" data-template-id="${escapeAttr(template.element_id)}">
-          <span class="candidate-top">
-            <span>
-              <strong>${escapeHtml(template.title)}</strong>
-              <span class="meta"> | ${escapeHtml(toTitle(template.category))}</span>
-            </span>
-            <span class="tag">${escapeHtml(template.scenario_requirement.replace("_", " "))}</span>
+        <button class="candidate-row${selected}" type="button" data-template-id="${escapeAttr(template.element_id)}">
+          <span class="candidate-main">
+            <span class="candidate-line">${escapeHtml(template.title)} - ${escapeHtml(categoryLabel(template.category))} - ${escapeHtml(targetSupportLabel(template))}</span>
+            <span class="candidate-note">${escapeHtml(template.short_description)}</span>
           </span>
-          <span class="meta">${escapeHtml(template.short_description)}</span>
-          <span class="tag-row">
-            <span class="tag"><strong>Branches:</strong>&nbsp;${escapeHtml(template.supported_branches.join(", "))}</span>
-            ${tags}
-          </span>
+          ${scenarioBadge}
         </button>
       `;
     }
 
-    function selectTemplate(elementId) {
+    function selectForPreview(elementId) {
       const template = state.templates.find((candidate) => candidate.element_id === elementId);
       if (!template) return;
-      state.selectedTemplate = template;
-      state.config = defaultConfig(template);
+      state.previewTemplate = template;
+      state.mode = "preview";
+      state.config = {};
       els.status.textContent = "";
-      renderCandidates();
-      renderConfiguration();
+      renderFinder();
+      renderPreview();
     }
 
-    function defaultConfig(template) {
-      const branch = els.branch.value;
-      const placements = placementsFor(template, branch);
-      const config = {
-        branch,
-        placement: placements[0] || "",
-        internalPurpose: "",
-        scope: firstValue(template.supported_scopes),
-        lens: "",
-        metric: template.fixed_metric || firstValue(template.supported_metrics),
-        scenario: template.scenario_requirement === "required" ? firstValue(scenarioOptions) : "None",
-        display: template.fixed_or_default_display || firstValue(template.supported_display_forms)
-      };
-      if (branch === "Advisor Review" && (template.advisor_internal_purposes || []).length) {
-        config.internalPurpose = firstValue(template.advisor_internal_purposes);
-      }
-      if (template.required_parameters.includes("lens")) {
-        config.lens = firstValue(safeLensOptions(template));
-      }
-      return config;
-    }
-
-    function renderConfiguration() {
-      const template = state.selectedTemplate;
+    function renderPreview() {
+      const template = state.previewTemplate;
       if (!template) {
-        els.summary.classList.add("hidden");
-        els.form.innerHTML = "";
-        els.fixed.classList.add("hidden");
-        els.readiness.classList.add("hidden");
-        els.helper.textContent = "Select a catalog template to see only the fields that element needs.";
-        els.add.disabled = true;
-        els.clear.disabled = true;
+        renderEmptySelection();
         return;
       }
-
-      els.helper.textContent = "Configuration fields are derived from the selected report element template.";
-      els.clear.disabled = false;
-      els.summary.classList.remove("hidden");
-      els.summary.innerHTML = `
-        <strong>${escapeHtml(template.title)}</strong>
-        <span>${escapeHtml(template.short_description)}</span>
+      els.selectionTitle.textContent = template.title;
+      els.configPanel.classList.add("hidden");
+      els.preview.classList.remove("hidden");
+      const askFor = fieldSummary(template);
+      els.preview.innerHTML = `
+        <p>${escapeHtml(template.short_description)}</p>
+        <p class="meta">${escapeHtml(usageNote(template))}</p>
+        <p><strong>Will ask for:</strong> ${escapeHtml(askFor || "placement only")}</p>
+        <div class="button-row">
+          <button id="use-template-button" class="primary-button" type="button">Use this element</button>
+        </div>
+        <details>
+          <summary>Template details</summary>
+          <ul class="detail-list">
+            ${template.fixed_metric ? `<li>Fixed measure: ${escapeHtml(template.fixed_metric)}</li>` : ""}
+            ${template.fixed_or_default_display ? `<li>Default display: ${escapeHtml(template.fixed_or_default_display)}</li>` : ""}
+            <li>Supported target sets: ${escapeHtml(targetSupportLabel(template))}</li>
+          </ul>
+        </details>
       `;
-
-      const fields = configurationFields(template);
-      els.form.innerHTML = fields.map(renderField).join("");
-      renderFixedFields(template);
-      renderReadiness(template);
-      els.add.disabled = !isConfigComplete(template);
+      document.getElementById("use-template-button").addEventListener("click", usePreviewedTemplate);
     }
 
-    function configurationFields(template) {
-      const branch = state.config.branch;
-      const fields = [
-        {
-          key: "branch",
-          label: "Branch",
-          required: true,
-          options: template.supported_branches
-        },
-        {
-          key: "placement",
-          label: branch === "Client Briefing" ? "Client package placement" : "Advisor review placement",
-          required: true,
-          options: placementsFor(template, branch)
-        },
-        {
+    function usePreviewedTemplate() {
+      if (!state.previewTemplate) return;
+      state.mode = "config";
+      state.config = buildDefaultConfig(state.previewTemplate);
+      renderConfig();
+    }
+
+    function renderConfig() {
+      const template = state.previewTemplate;
+      if (!template) {
+        renderEmptySelection();
+        return;
+      }
+      els.selectionTitle.textContent = template.title;
+      els.preview.classList.add("hidden");
+      els.configPanel.classList.remove("hidden");
+      const calculationFields = calculationFieldsFor(template);
+      const placementFields = placementFieldsFor(template);
+      els.form.innerHTML = `
+        ${calculationFields.length ? `<div class="calculation-fields">${calculationFields.map(renderField).join("")}</div>` : '<p class="empty">This template only needs placement before adding.</p>'}
+        <div class="placement-strip">
+          <p class="helper">Add to set as</p>
+          <div class="calculation-fields">${placementFields.map(renderField).join("")}</div>
+        </div>
+        ${optionalDetails(template)}
+      `;
+      renderValidation(template);
+    }
+
+    function calculationFieldsFor(template) {
+      const fields = [];
+      if (shouldAsk(template, "scope")) {
+        fields.push({
           key: "scope",
           label: "Scope",
-          required: template.required_parameters.includes("scope"),
           options: template.supported_scopes || []
+        });
+      }
+      if (shouldAsk(template, "lens")) {
+        fields.push({
+          key: "lens",
+          label: lensLabel(template),
+          options: safeLensOptions(template)
+        });
+      }
+      if (shouldAskMetric(template)) {
+        fields.push({
+          key: "metric",
+          label: metricLabel(template),
+          options: template.supported_metrics || []
+        });
+      }
+      if (template.scenario_requirement === "required") {
+        fields.push({
+          key: "scenario_id",
+          label: "Scenario",
+          options: ["Choose scenario"].concat(SCENARIO_OPTIONS)
+        });
+      } else if (template.scenario_requirement === "optional" && shouldShowScenarioOverlay(template)) {
+        fields.push({
+          key: "scenario_id",
+          label: "Scenario overlay",
+          options: ["None"].concat(SCENARIO_OPTIONS)
+        });
+      }
+      meaningfulOptionalParameters(template).forEach((parameter) => {
+        fields.push({
+          key: parameter,
+          label: PARAMETER_UI[parameter].label,
+          options: PARAMETER_UI[parameter].options
+        });
+      });
+      return fields;
+    }
+
+    function placementFieldsFor(template) {
+      const fields = [
+        {
+          key: "placement",
+          label: targetBranch() === "Client Briefing" ? "Client package placement" : "Advisor review placement",
+          options: placementsFor(template)
         }
       ];
-
-      if (branch === "Advisor Review" && (template.advisor_internal_purposes || []).length) {
+      if (targetBranch() === "Advisor Review" && (template.advisor_internal_purposes || []).length) {
         fields.push({
-          key: "internalPurpose",
+          key: "internal_purpose",
           label: "Internal purpose",
-          required: true,
           options: template.advisor_internal_purposes
         });
       }
-
-      const lenses = safeLensOptions(template);
-      if (lenses.length) {
-        fields.push({
-          key: "lens",
-          label: "Lens",
-          required: template.required_parameters.includes("lens"),
-          options: template.required_parameters.includes("lens") ? lenses : ["None"].concat(lenses)
-        });
-      }
-
-      if (!template.fixed_metric && (template.supported_metrics || []).length) {
-        fields.push({
-          key: "metric",
-          label: "Metric",
-          required: template.required_parameters.includes("metric"),
-          options: template.supported_metrics
-        });
-      }
-
-      if (template.scenario_requirement === "required" || template.scenario_requirement === "optional") {
-        fields.push({
-          key: "scenario",
-          label: "Scenario",
-          required: template.scenario_requirement === "required",
-          options: template.scenario_requirement === "required" ? scenarioOptions : ["None"].concat(scenarioOptions)
-        });
-      }
-
-      if ((template.supported_display_forms || []).length) {
-        fields.push({
-          key: "display",
-          label: "Display form",
-          required: false,
-          options: template.supported_display_forms
-        });
-      }
-
       return fields;
     }
 
     function renderField(field) {
       const selected = state.config[field.key] || "";
-      const options = field.options.map((option) => {
-        const isSelected = selected === option ? " selected" : "";
-        return `<option value="${escapeAttr(option)}"${isSelected}>${escapeHtml(option)}</option>`;
-      }).join("");
       return `
         <div class="field">
-          <label for="config-${escapeAttr(field.key)}">${escapeHtml(field.label)}${field.required ? " *" : ""}</label>
+          <label for="config-${escapeAttr(field.key)}">${escapeHtml(field.label)}</label>
           <select id="config-${escapeAttr(field.key)}" data-config-key="${escapeAttr(field.key)}">
-            ${options}
+            ${field.options.map((option) => `<option value="${escapeAttr(option)}"${selected === option ? " selected" : ""}>${escapeHtml(option)}</option>`).join("")}
           </select>
         </div>
       `;
     }
 
-    function renderFixedFields(template) {
-      const fixedLines = [];
-      if (template.fixed_metric) {
-        fixedLines.push(`<p><strong>Fixed metric:</strong> ${escapeHtml(template.fixed_metric)}</p>`);
-      }
-      if (template.scenario_requirement === "not_applicable") {
-        fixedLines.push("<p><strong>Scenario:</strong> not applicable for this element.</p>");
-      }
-      if (!fixedLines.length) {
-        els.fixed.classList.add("hidden");
-        els.fixed.innerHTML = "";
-        return;
-      }
-      els.fixed.classList.remove("hidden");
-      els.fixed.innerHTML = fixedLines.join("");
+    function optionalDetails(template) {
+      const details = [];
+      if (template.fixed_metric) details.push(`Measure: ${template.fixed_metric}`);
+      if (template.fixed_or_default_display) details.push(`Display: ${template.fixed_or_default_display}`);
+      if (template.scenario_requirement === "not_applicable") details.push("Scenario: not applicable");
+      if (!details.length) return "";
+      return `
+        <details>
+          <summary>Template details</summary>
+          <ul class="detail-list">${details.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+        </details>
+      `;
     }
 
-    function renderReadiness(template) {
-      const checks = (template.completeness_checks || []).slice(0, 3);
-      if (!checks.length) {
-        els.readiness.classList.add("hidden");
-        els.readiness.innerHTML = "";
-        return;
+    function renderValidation(template) {
+      const message = validationMessage(template);
+      els.validation.classList.remove("hidden", "is-ready", "is-warning");
+      els.validation.classList.add(message.ready ? "is-ready" : "is-warning");
+      els.validation.textContent = message.text;
+      els.add.disabled = !message.ready;
+    }
+
+    function validationMessage(template) {
+      if (template.scenario_requirement === "required" && (!state.config.scenario_id || state.config.scenario_id === "Choose scenario")) {
+        return { ready: false, text: "Choose a scenario to continue." };
       }
-      els.readiness.classList.remove("hidden");
-      els.readiness.innerHTML = `
-        <strong>Coverage and confidence checks</strong>
-        ${checks.map((check) => `<p>${escapeHtml(check)}</p>`).join("")}
-      `;
+      return { ready: true, text: "Ready to add." };
     }
 
     function handleConfigChange(event) {
       const key = event.target.dataset.configKey;
-      if (!key || !state.selectedTemplate) return;
+      if (!key || !state.previewTemplate) return;
       state.config[key] = event.target.value;
-      if (key === "branch") {
-        els.branch.value = event.target.value;
-        state.config.placement = firstValue(placementsFor(state.selectedTemplate, event.target.value));
-        state.config.internalPurpose = event.target.value === "Advisor Review" ? firstValue(state.selectedTemplate.advisor_internal_purposes) : "";
-      }
-      renderCandidates();
-      renderConfiguration();
+      renderValidation(state.previewTemplate);
     }
 
-    function addSpec() {
-      const template = state.selectedTemplate;
-      if (!template || !isConfigComplete(template)) return;
+    function addConfiguredElement() {
+      const template = state.previewTemplate;
+      if (!template || !validationMessage(template).ready) return;
       const spec = {
         id: `${Date.now()}_${Math.random().toString(16).slice(2)}`,
         element_id: template.element_id,
         title: template.title,
-        category: template.category,
-        branch: state.config.branch,
+        target_set: state.targetSet,
         placement: state.config.placement,
-        internalPurpose: state.config.internalPurpose || null,
-        scope: state.config.scope,
-        lens: state.config.lens && state.config.lens !== "None" ? state.config.lens : null,
-        metric: template.fixed_metric || state.config.metric || null,
-        scenario: state.config.scenario && state.config.scenario !== "None" ? state.config.scenario : null,
-        display: state.config.display || template.fixed_or_default_display,
-        scenarioRequirement: template.scenario_requirement,
-        coverageBadge: coverageBadge(template),
-        completenessChecks: template.completeness_checks || [],
-        defaultCaveatRules: template.default_caveat_rules || []
+        internal_purpose: state.config.internal_purpose || null,
+        parameters: configuredParameters(template),
+        warning: null
       };
-      if (spec.branch === "Client Briefing") {
+      if (state.targetSet === "Client Briefing Set") {
         state.clientSet.push(spec);
       } else {
         state.advisorSet.push(spec);
       }
-      els.status.textContent = `Added ${spec.title} to ${spec.branch} Set.`;
-      state.selectedTemplate = null;
-      state.config = {};
-      renderConfiguration();
-      renderCandidates();
+      els.status.textContent = `Added ${spec.title} to ${state.targetSet}.`;
+      resetSelection();
       renderSets();
     }
 
-    function coverageBadge(template) {
-      const checks = template.completeness_checks || [];
-      if (state.config.scenario && state.config.scenario !== "None") {
-        return firstMatching(checks, "scenario") || "Scenario completeness check required";
-      }
-      if (state.config.lens && state.config.lens !== "None") {
-        return firstMatching(checks, "lens") || "Lens completeness check required";
-      }
-      return firstMatching(checks, "confidence") || firstMatching(checks, "coverage") || "Data readiness check";
+    function configuredParameters(template) {
+      const savedKeys = calculationFieldsFor(template).map((field) => field.key);
+      const parameters = {};
+      savedKeys.forEach((key) => {
+        const value = state.config[key];
+        if (value && value !== "None" && value !== "Choose scenario") {
+          parameters[key] = value;
+        }
+      });
+      if (template.fixed_metric) parameters.fixed_metric = template.fixed_metric;
+      if (template.fixed_or_default_display) parameters.fixed_display = template.fixed_or_default_display;
+      return parameters;
     }
 
     function renderSets() {
@@ -785,18 +926,16 @@
     }
 
     function renderSetRow(spec, index, kind) {
-      const placementLabel = kind === "client" ? spec.placement : `${spec.placement}${spec.internalPurpose ? ` | ${spec.internalPurpose}` : ""}`;
-      const lensText = spec.lens ? ` | ${spec.lens}` : "";
-      const metricText = spec.metric ? ` | ${spec.metric}` : "";
-      const scenarioText = spec.scenario ? ` | ${spec.scenario}` : "";
-      const promoteButton = kind === "advisor" ? '<button class="tiny-button" type="button" data-action="promote" data-kind="advisor" data-index="' + index + '">Promote to Client Briefing</button>' : "";
+      const parameterText = compactParameterText(spec.parameters);
+      const advisorPurpose = kind === "advisor" && spec.internal_purpose ? ` | ${spec.internal_purpose}` : "";
+      const promoteButton = kind === "advisor" ? `<button class="tiny-button" type="button" data-action="promote" data-kind="advisor" data-index="${index}">Promote to Client Briefing</button>` : "";
       return `
         <li class="set-row">
           <h3>${escapeHtml(index + 1)}. ${escapeHtml(spec.title)}</h3>
-          <p>${escapeHtml(placementLabel)}</p>
-          <p>${escapeHtml(spec.scope || "")}${escapeHtml(lensText)}${escapeHtml(metricText)}${escapeHtml(scenarioText)}</p>
-          <p>${escapeHtml(spec.coverageBadge)}</p>
+          <p>${escapeHtml(spec.placement || "")}${escapeHtml(advisorPurpose)}</p>
+          <p>${escapeHtml(parameterText || "Configured")}</p>
           <div class="row-actions">
+            <button class="tiny-button" type="button" data-action="edit" data-kind="${escapeAttr(kind)}" data-index="${index}">Edit</button>
             <button class="tiny-button" type="button" data-action="duplicate" data-kind="${escapeAttr(kind)}" data-index="${index}">Duplicate</button>
             <button class="tiny-button" type="button" data-action="up" data-kind="${escapeAttr(kind)}" data-index="${index}"${index === 0 ? " disabled" : ""}>Move up</button>
             <button class="tiny-button" type="button" data-action="down" data-kind="${escapeAttr(kind)}" data-index="${index}">Move down</button>
@@ -824,36 +963,163 @@
       } else if (action === "down" && index < list.length - 1) {
         const item = list.splice(index, 1)[0];
         list.splice(index + 1, 0, item);
+      } else if (action === "edit") {
+        editSpec(list[index]);
       } else if (action === "promote") {
         els.status.textContent = "Promote to Client Briefing is a placeholder in this local composer.";
       }
       renderSets();
     }
 
-    function clearSelection() {
-      state.selectedTemplate = null;
+    function editSpec(spec) {
+      const template = state.templates.find((candidate) => candidate.element_id === spec.element_id);
+      if (!template) return;
+      setTargetSet(spec.target_set);
+      state.previewTemplate = template;
+      state.mode = "config";
+      state.config = {
+        ...buildDefaultConfig(template),
+        ...spec.parameters,
+        placement: spec.placement,
+        internal_purpose: spec.internal_purpose || ""
+      };
+      renderConfig();
+      renderFinder();
+    }
+
+    function resetSelection() {
+      state.previewTemplate = null;
+      state.mode = "empty";
       state.config = {};
-      els.status.textContent = "";
-      renderCandidates();
-      renderConfiguration();
+      renderEmptySelection();
+      renderFinder();
     }
 
-    function isConfigComplete(template) {
-      if (!state.config.branch || !state.config.placement || !state.config.scope) return false;
-      if (state.config.branch === "Advisor Review" && (template.advisor_internal_purposes || []).length && !state.config.internalPurpose) return false;
-      if (template.required_parameters.includes("lens") && !state.config.lens) return false;
-      if (template.required_parameters.includes("metric") && !state.config.metric && !template.fixed_metric) return false;
-      if (template.scenario_requirement === "required" && (!state.config.scenario || state.config.scenario === "None")) return false;
-      return true;
+    function renderEmptySelection() {
+      els.selectionTitle.textContent = "Select a report element to see details.";
+      els.preview.classList.add("hidden");
+      els.configPanel.classList.add("hidden");
+      els.preview.innerHTML = "";
+      els.form.innerHTML = "";
+      els.validation.classList.add("hidden");
+      els.add.disabled = true;
     }
 
-    function placementsFor(template, branch) {
+    function buildDefaultConfig(template) {
+      const defaults = {
+        placement: firstValue(placementsFor(template))
+      };
+      if (shouldAsk(template, "scope")) defaults.scope = firstValue(template.supported_scopes);
+      if (shouldAsk(template, "lens")) defaults.lens = firstValue(safeLensOptions(template));
+      if (shouldAskMetric(template)) defaults.metric = firstValue(template.supported_metrics);
+      if (template.scenario_requirement === "required") defaults.scenario_id = "Choose scenario";
+      if (template.scenario_requirement === "optional" && shouldShowScenarioOverlay(template)) defaults.scenario_id = "None";
+      meaningfulOptionalParameters(template).forEach((parameter) => {
+        defaults[parameter] = firstValue(PARAMETER_UI[parameter].options);
+      });
+      if (targetBranch() === "Advisor Review" && (template.advisor_internal_purposes || []).length) {
+        defaults.internal_purpose = firstValue(template.advisor_internal_purposes);
+      }
+      return defaults;
+    }
+
+    function shouldAsk(template, key) {
+      if (key === "scope") return (template.supported_scopes || []).length > 1 || template.required_parameters.includes("scope");
+      if (key === "lens") return template.required_parameters.includes("lens");
+      return template.required_parameters.includes(key);
+    }
+
+    function shouldAskMetric(template) {
+      return !template.fixed_metric && template.required_parameters.includes("metric") && (template.supported_metrics || []).length > 1;
+    }
+
+    function shouldShowScenarioOverlay(template) {
+      return template.category === "exposure";
+    }
+
+    function meaningfulOptionalParameters(template) {
+      const preferred = {
+        portfolio_status: ["comparison_period"],
+        concentration: ["threshold_percent"],
+        scenario_impact_by_manager: ["horizon"],
+        cash_generation_summary: ["lookback_period"],
+        manager_comparison: ["comparison_group"],
+        data_confidence_note: ["confidence_threshold"]
+      };
+      if (preferred[template.element_id]) {
+        return preferred[template.element_id].filter((parameter) => PARAMETER_UI[parameter]);
+      }
+      const optional = template.optional_parameters || [];
+      const excluded = new Set(["lens", "scenario_id", "confidence_note"]);
+      return optional.filter((parameter) => PARAMETER_UI[parameter] && !excluded.has(parameter)).slice(0, 2);
+    }
+
+    function fieldSummary(template) {
+      const labels = [];
+      if (shouldAsk(template, "scope")) labels.push("scope");
+      if (shouldAsk(template, "lens")) labels.push("lens");
+      if (template.scenario_requirement === "required") labels.push("scenario");
+      meaningfulOptionalParameters(template).forEach((parameter) => labels.push(PARAMETER_UI[parameter].label.toLowerCase()));
+      labels.push("add to set as");
+      return labels.join(", ");
+    }
+
+    function compactParameterText(parameters) {
+      const pieces = [];
+      if (parameters.scope) pieces.push(parameters.scope);
+      if (parameters.lens) pieces.push(parameters.lens);
+      if (parameters.scenario_id) pieces.push(parameters.scenario_id);
+      if (parameters.lookback_period) pieces.push(parameters.lookback_period);
+      if (parameters.threshold_percent) pieces.push(parameters.threshold_percent);
+      if (parameters.fixed_metric) pieces.push(parameters.fixed_metric);
+      return pieces.join(" | ");
+    }
+
+    function usageNote(template) {
+      const notes = template.branch_notes || {};
+      return notes[targetBranch()] || "Use when this element supports the selected target set.";
+    }
+
+    function placementsFor(template) {
       const placements = template.supported_placements || {};
-      return placements[branch] || [];
+      return placements[targetBranch()] || [];
+    }
+
+    function targetBranch() {
+      return TARGET_TO_BRANCH[state.targetSet];
+    }
+
+    function supportsCurrentTarget(template) {
+      return containsNormalized(template.supported_branches, targetBranch());
+    }
+
+    function targetSupportLabel(template) {
+      const branches = template.supported_branches || [];
+      if (branches.includes("Client Briefing") && branches.includes("Advisor Review")) return "Client + Advisor";
+      return branches.join(" + ");
     }
 
     function safeLensOptions(template) {
       return (template.supported_lenses || []).filter((lens) => lens !== "Manager");
+    }
+
+    function lensLabel(template) {
+      if (template.category === "manager") return "Manager role / mandate lens";
+      if (template.category === "data_readiness") return "Data issue lens";
+      return "Lens";
+    }
+
+    function metricLabel(template) {
+      if (template.category === "manager") return "Compare by";
+      if (template.category === "exposure") return "Measured by";
+      return "Reported as";
+    }
+
+    function topicMatches(template, topic) {
+      const text = searchableText(template);
+      if (topic === "data") return text.includes("data") || text.includes("readiness") || text.includes("confidence");
+      if (topic === "cash") return text.includes("cash") || text.includes("liquidity") || text.includes("income");
+      return text.includes(topic);
     }
 
     function searchableText(template) {
@@ -867,26 +1133,35 @@
       ].join(" "));
     }
 
+    function updateCategoryButtonState() {
+      document.querySelectorAll("[data-category]").forEach((button) => {
+        button.classList.toggle("is-active", button.dataset.category === els.category.value);
+      });
+    }
+
+    function categoryLabel(value) {
+      const labels = {
+        cash: "Cash / Liquidity",
+        exposure: "Concentration / Exposure",
+        scenario: "Scenario / Risk",
+        data_readiness: "Data Readiness",
+        manager: "Manager Review",
+        status: "Portfolio Status"
+      };
+      return labels[value] || String(value || "").replace(/_/g, " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+    }
+
     function containsNormalized(values, candidate) {
       const candidateKey = normalize(candidate);
       return (values || []).some((value) => normalize(value) === candidateKey);
     }
 
     function uniqueValues(values) {
-      return Array.from(new Set(values.filter(Boolean))).sort((a, b) => a.localeCompare(b));
+      return Array.from(new Set(values.filter(Boolean))).sort((a, b) => categoryLabel(a).localeCompare(categoryLabel(b)));
     }
 
     function firstValue(values) {
       return Array.isArray(values) && values.length ? values[0] : "";
-    }
-
-    function firstMatching(values, needle) {
-      const normalizedNeedle = normalize(needle);
-      return (values || []).find((value) => normalize(value).includes(normalizedNeedle));
-    }
-
-    function toTitle(value) {
-      return String(value || "").replace(/_/g, " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
     }
 
     function normalize(value) {
@@ -906,31 +1181,28 @@
       return escapeHtml(value);
     }
 
-    els.branch.addEventListener("change", () => {
-      if (state.selectedTemplate && !state.selectedTemplate.supported_branches.includes(els.branch.value)) {
-        clearSelection();
-      } else if (state.selectedTemplate) {
-        state.config.branch = els.branch.value;
-        state.config.placement = firstValue(placementsFor(state.selectedTemplate, els.branch.value));
-        state.config.internalPurpose = els.branch.value === "Advisor Review" ? firstValue(state.selectedTemplate.advisor_internal_purposes) : "";
-        renderConfiguration();
-      }
-      renderCandidates();
+    els.targetClient.addEventListener("click", () => setTargetSet("Client Briefing Set"));
+    els.targetAdvisor.addEventListener("click", () => setTargetSet("Advisor Review Set"));
+    els.search.addEventListener("input", renderFinder);
+    els.category.addEventListener("change", renderFinder);
+    els.topic.addEventListener("change", renderFinder);
+    els.categoryButtons.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-category]");
+      if (!button) return;
+      els.category.value = button.dataset.category;
+      renderFinder();
     });
-    els.search.addEventListener("input", renderCandidates);
-    els.category.addEventListener("change", renderCandidates);
-    els.tag.addEventListener("change", renderCandidates);
     els.candidates.addEventListener("click", (event) => {
       const button = event.target.closest("[data-template-id]");
-      if (button) selectTemplate(button.dataset.templateId);
+      if (button) selectForPreview(button.dataset.templateId);
     });
     els.form.addEventListener("change", handleConfigChange);
-    els.add.addEventListener("click", addSpec);
-    els.clear.addEventListener("click", clearSelection);
+    els.add.addEventListener("click", addConfiguredElement);
+    els.backToPreview.addEventListener("click", renderPreview);
     els.clientList.addEventListener("click", handleSetAction);
     els.advisorList.addEventListener("click", handleSetAction);
 
-    renderConfiguration();
+    renderEmptySelection();
     renderSets();
     loadCatalog();
   </script>

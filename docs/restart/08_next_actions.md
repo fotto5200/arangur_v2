@@ -251,6 +251,15 @@
 - Acceptance criteria: Implemented baseline: UI fetches `/api/report-elements`, provides branch/search/category/topic discovery, updates candidate templates locally, lets the advisor select a template immediately, renders only configuration fields derived from that template, skips scenario for `not_applicable` templates, keeps plain `Manager` out of lens options, and adds compact local specs to separate Client Briefing Set and Advisor Review Set lists with simple local row controls.
 - Stop conditions: Durable serialization/export/import and backend spec persistence remain follow-up batches.
 
+## Batch 16A-7e: Report Element Finder and Dynamic Configuration UI
+
+- Goal: Refine the catalog-driven composer into a lighter finder-first UI that does not show the full catalog or a universal configuration form.
+- Mode: Implemented local UI refinement.
+- Allowed scope: `src/arangur/app/static/index.html`, tests, restart docs, and README pointers.
+- Non-goals: No report generation, no charts, no workflow API calls, no report links, no backend persistence, no Docker/Postgres changes, no live Plaid, no external APIs, no real data.
+- Acceptance criteria: Implemented baseline: context is a single compact line; target set is chosen before discovery; finder uses search, category browsing, and guided filters; initial state does not show all templates; candidate rows are compact; selected templates show preview before `Use this element`; right-side configuration omits Branch, hides fixed metric/display in details, asks only meaningful selected-template fields, and keeps placement under `Add to set as`; validation is quiet with `Ready to add`; two compact set lists remain.
+- Stop conditions: Durable spec serialization/export/import and backend spec persistence remain follow-up batches.
+
 ## Batch 16A-8: Briefing Set Metadata
 
 - Goal: Add selected report element specs and briefing set metadata to backend/report packages after the local spec-set shape is stable.
