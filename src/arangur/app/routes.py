@@ -4,8 +4,10 @@ from __future__ import annotations
 
 from typing import Any
 
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, HTTPException, Query, Request
 from pydantic import BaseModel
+
+from arangur.report_elements import ReportElementCatalogError, filter_templates, get_template
 
 from .run_service import (
     RunServiceError,
@@ -34,6 +36,49 @@ def sources() -> dict[str, Any]:
 @router.get("/workflows")
 def workflows() -> dict[str, Any]:
     return {"workflows": list_workflows()}
+
+
+@router.get("/report-elements")
+def report_elements(
+    branch: str | None = None,
+    category: str | None = None,
+    q: str | None = None,
+    client_question: str | None = None,
+    advisor_intent: str | None = None,
+    tag: list[str] | None = Query(default=None),
+) -> dict[str, Any]:
+    try:
+        templates = filter_templates(
+            branch=branch,
+            category=category,
+            query=q,
+            tags=tag,
+            client_question=client_question,
+            advisor_intent=advisor_intent,
+        )
+    except ReportElementCatalogError as exc:
+        raise _catalog_http_error(exc) from exc
+    return {
+        "templates": templates,
+        "count": len(templates),
+    }
+
+
+@router.get("/report-elements/{element_id}")
+def report_element_detail(element_id: str) -> dict[str, Any]:
+    try:
+        template = get_template(element_id)
+    except ReportElementCatalogError as exc:
+        raise _catalog_http_error(exc) from exc
+    if not template:
+        raise HTTPException(
+            status_code=404,
+            detail={
+                "code": "report_element_template_not_found",
+                "message": f"Report element template not found: {element_id}",
+            },
+        )
+    return template
 
 
 @router.post("/runs")
@@ -78,5 +123,15 @@ def _http_error(exc: RunServiceError) -> HTTPException:
         detail={
             "code": exc.code,
             "message": exc.message,
+        },
+    )
+
+
+def _catalog_http_error(exc: ReportElementCatalogError) -> HTTPException:
+    return HTTPException(
+        status_code=500,
+        detail={
+            "code": "report_element_catalog_invalid",
+            "message": str(exc),
         },
     )

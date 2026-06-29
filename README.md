@@ -75,6 +75,8 @@ Then open:
 - `http://127.0.0.1:8000/api/health`
 - `http://127.0.0.1:8000/api/sources`
 - `http://127.0.0.1:8000/api/workflows`
+- `http://127.0.0.1:8000/api/report-elements`
+- `http://127.0.0.1:8000/api/report-elements/scenario_impact_by_manager`
 - `http://127.0.0.1:8000/api/runs`
 - `http://127.0.0.1:8000/reports/demo/index.html`
 - `http://127.0.0.1:8000/`
@@ -95,7 +97,9 @@ python -m uvicorn arangur.app.main:app --reload --app-dir src
 
 Open `http://127.0.0.1:8000/app/` to use the Report Element Spec Composer prototype. It starts with a static client/portfolio context strip, asks for one report element at a time, and adds completed specs to either the Client Briefing Set or the Advisor Review Set.
 
-This UI does not generate reports, charts, or client preview output yet. It does not call the workflow API or show report links. The next UI batch should decide how completed element specs become durable report package metadata.
+The backend also exposes a static report-element template catalog at `/api/report-elements` and `/api/report-elements/{element_id}` for future template-driven discovery. The current browser UI is not wired to that catalog yet.
+
+This UI does not generate reports, charts, or client preview output yet. It does not call the workflow API or show report links. The next UI batch should decide how the composer selects catalog templates and how completed element specs become durable report package metadata.
 
 Create a native demo manager-overlap workflow run:
 
@@ -149,6 +153,7 @@ Future scenario, data-coverage, and deployable private-demo work is captured in:
 - `docs/architecture/deployable_demo_app_architecture.md`
 - `docs/architecture/persistence_model_plan.md`
 - `docs/contracts/workflow_run_persistence_contract.md`
+- `docs/contracts/report_element_template_catalog_contract.md`
 - `docs/deployment/private_demo_stack_plan.md`
 - `docs/decisions/0002_copy_education_private_demo_stack.md`
 - `docs/architecture/scenario_engine_roadmap.md`

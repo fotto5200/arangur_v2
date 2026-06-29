@@ -2,9 +2,10 @@
 
 ## Immediate Product/UI Batches
 
+- Wire the browser composer to the report-element template catalog so the user discovers/selects an element template before answering only that template's required configuration questions.
 - Define how completed report element specs become durable report package metadata.
 - Decide how Client Briefing Set and Advisor Review Set rows are edited, duplicated, reordered, removed, and promoted without showing a monolithic console.
-- Add branch, placement, internal purpose, intent, element type, scope, lens, metric, scenario, display form, and coverage metadata to report packages after the interaction model is stable.
+- Add selected `element_id`, branch, placement, internal purpose, scope, lens, metric, scenario, display form, and coverage metadata to report packages after the interaction model is stable.
 - Later add backend briefing-set metadata/persistence.
 - Then resume Docker Compose private-demo files and protected/admin surfaces when private-demo access policy is ready.
 
@@ -233,13 +234,22 @@
 - Acceptance criteria: Implemented baseline: client/portfolio context appears first; branch is required; Client Briefing elements use client package placement; Advisor Review elements use advisor review placement plus internal purpose; intent is separate from element type; scope, lens, metric, scenario, and display are separate axes; plain `Manager` is not a lens option; scenario and lens completeness are acknowledged with demo/static badges; compact specs are added to the correct separate set list; Advisor Review rows include a promote placeholder.
 - Stop conditions: Durable metadata, report generation, or persistence requires a follow-up contract batch.
 
+## Batch 16A-7c: Report Element Template Catalog
+
+- Goal: Add a static/mock report-element template catalog and backend catalog API so future UI discovery is template-driven rather than a fixed questionnaire.
+- Mode: Implemented backend/catalog baseline.
+- Allowed scope: `src/arangur/`, `src/arangur/app/`, tests, `docs/contracts/`, restart docs, and README pointers.
+- Non-goals: No report generation, no charts, no UI rewrite, no saved report specs, no Docker/Postgres changes, no live Plaid, no external APIs, no real data.
+- Acceptance criteria: Implemented baseline: `src/arangur/report_elements/templates.json` defines Portfolio Status, Concentration, Scenario Impact by Manager, Cash Generation Summary, Manager Comparison, and Data Confidence Note templates; `catalog.py` loads, validates, lists, looks up, and filters templates; `/api/report-elements` and `/api/report-elements/{element_id}` expose discovery/detail JSON; tests cover required fields, uniqueness, scenario requirements, scope/lens distinction, filters, and 404 behavior.
+- Stop conditions: A future UI rewrite or durable spec persistence should be handled in separate batches.
+
 ## Batch 16A-8: Briefing Set Metadata
 
-- Goal: Add briefing set metadata to backend/report packages.
+- Goal: Add selected report element specs and briefing set metadata to backend/report packages.
 - Mode: Recommended implementation/design batch after the UI model is stable.
 - Allowed scope: `src/`, `tests/`, `docs/contracts/`, `docs/ui_reporting/`, and generated synthetic report artifacts if intentionally refreshed.
 - Non-goals: No production persistence model for real clients, no full portfolio database redesign, no live data.
-- Acceptance criteria: Report packages can represent shared briefing context, report view sequence, visibility status, audience depth, and client preview metadata while preserving existing workflow-run compatibility.
+- Acceptance criteria: Report packages can represent shared briefing context, selected report element specs, report view sequence, visibility status, audience depth, and client preview metadata while preserving existing workflow-run compatibility.
 - Stop conditions: Schema changes threaten current API compatibility or require unresolved product decisions.
 
 ## Batch 16A-9: Client Preview Sequence Rendering

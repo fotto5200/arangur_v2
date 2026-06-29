@@ -1,0 +1,604 @@
+{
+  "catalog_version": "2026-06-29-demo-v1",
+  "templates": [
+    {
+      "element_id": "portfolio_status",
+      "title": "Portfolio Status",
+      "short_description": "A compact status element that anchors the package in total value, cash, major allocation buckets, and data confidence.",
+      "category": "status",
+      "supported_branches": [
+        "Client Briefing",
+        "Advisor Review"
+      ],
+      "supported_placements": {
+        "Client Briefing": [
+          "Main client presentation",
+          "Speaker notes"
+        ],
+        "Advisor Review": [
+          "Main advisor review",
+          "Advisor working notes"
+        ]
+      },
+      "discovery_tags": [
+        "status",
+        "valuation",
+        "cash",
+        "overview",
+        "meeting anchor"
+      ],
+      "relevant_client_questions": [
+        "Are we on track?",
+        "What changed?"
+      ],
+      "relevant_advisor_review_intents": [
+        "Monitoring",
+        "Client-prep review"
+      ],
+      "supported_scopes": [
+        "Whole portfolio",
+        "Selected account",
+        "Selected sleeve / mandate"
+      ],
+      "required_parameters": [
+        "branch",
+        "placement",
+        "scope"
+      ],
+      "optional_parameters": [
+        "comparison_period",
+        "audience_depth",
+        "confidence_note"
+      ],
+      "fixed_metric": "Market value",
+      "supported_metrics": [
+        "Market value",
+        "Portfolio %",
+        "Liquidity",
+        "Data confidence"
+      ],
+      "supported_lenses": [
+        "Asset class",
+        "Geography",
+        "Currency",
+        "Liquidity bucket"
+      ],
+      "scenario_requirement": "not_applicable",
+      "fixed_or_default_display": "Summary card",
+      "supported_display_forms": [
+        "Summary card",
+        "Table",
+        "Narrative note"
+      ],
+      "advisor_internal_purposes": [
+        "Monitoring",
+        "Client-prep candidate"
+      ],
+      "data_readiness_requirements": [
+        "Valuation result available",
+        "Cash balances included",
+        "Data confidence summary available"
+      ],
+      "completeness_checks": [
+        "Portfolio value reconciles to valuation result",
+        "Cash and non-cash holdings are both represented",
+        "Confidence note is present when valuation confidence is mixed"
+      ],
+      "default_caveat_rules": [
+        "Label status as synthetic demo output",
+        "Avoid performance advice or action recommendations",
+        "Show valuation confidence when source coverage is mixed"
+      ],
+      "branch_notes": {
+        "Client Briefing": "Use as a plain-English meeting anchor.",
+        "Advisor Review": "Use as a readiness and monitoring snapshot before selecting deeper diagnostics."
+      }
+    },
+    {
+      "element_id": "concentration",
+      "title": "Concentration",
+      "short_description": "A lens-based exposure element for finding large weights, duplicated themes, and allocation clusters.",
+      "category": "exposure",
+      "supported_branches": [
+        "Client Briefing",
+        "Advisor Review"
+      ],
+      "supported_placements": {
+        "Client Briefing": [
+          "Main client presentation",
+          "Client analytical appendix",
+          "Speaker notes"
+        ],
+        "Advisor Review": [
+          "Main advisor review",
+          "Advisor analytical appendix",
+          "Advisor working notes"
+        ]
+      },
+      "discovery_tags": [
+        "concentration",
+        "exposure",
+        "overlap",
+        "allocation",
+        "risk prompt"
+      ],
+      "relevant_client_questions": [
+        "Where are we too concentrated?",
+        "What could hurt us?",
+        "What changed?"
+      ],
+      "relevant_advisor_review_intents": [
+        "Exposure drift check",
+        "Mandate audit",
+        "Client-prep review"
+      ],
+      "supported_scopes": [
+        "Whole portfolio",
+        "Selected manager",
+        "Selected account",
+        "Selected sleeve / mandate"
+      ],
+      "required_parameters": [
+        "branch",
+        "placement",
+        "scope",
+        "lens",
+        "metric"
+      ],
+      "optional_parameters": [
+        "threshold_percent",
+        "comparison_period",
+        "scenario_id"
+      ],
+      "fixed_metric": null,
+      "supported_metrics": [
+        "Market value",
+        "Portfolio %",
+        "Exposure",
+        "P&L"
+      ],
+      "supported_lenses": [
+        "Sector",
+        "Theme",
+        "Asset class",
+        "Geography",
+        "Currency",
+        "Liquidity bucket",
+        "Value/growth",
+        "Manager role / mandate"
+      ],
+      "scenario_requirement": "optional",
+      "fixed_or_default_display": "Table",
+      "supported_display_forms": [
+        "Table",
+        "Bar chart",
+        "Summary card",
+        "Appendix item"
+      ],
+      "advisor_internal_purposes": [
+        "Diagnostic",
+        "Monitoring",
+        "Thesis/mandate audit",
+        "Client-prep candidate"
+      ],
+      "data_readiness_requirements": [
+        "Holdings classified for the selected lens",
+        "Valuation result available",
+        "Exposure or overlap summary available"
+      ],
+      "completeness_checks": [
+        "Lens completeness: all holdings assigned or flagged",
+        "Proxy and human-review classifications are counted",
+        "Threshold behavior is explicit when a threshold is supplied"
+      ],
+      "default_caveat_rules": [
+        "Concentration is a discussion prompt, not a recommendation",
+        "Call out proxy classifications and human-review items",
+        "Avoid implying fund look-through when only direct holdings are available"
+      ],
+      "branch_notes": {
+        "Client Briefing": "Use the few concentration points that explain the meeting question.",
+        "Advisor Review": "Use fuller diagnostics and mandate checks before deciding whether a client-facing point belongs in the package."
+      }
+    },
+    {
+      "element_id": "scenario_impact_by_manager",
+      "title": "Scenario Impact by Manager",
+      "short_description": "A scenario-dependent element comparing manager or mandate exposure under a complete deterministic scenario.",
+      "category": "scenario",
+      "supported_branches": [
+        "Client Briefing",
+        "Advisor Review"
+      ],
+      "supported_placements": {
+        "Client Briefing": [
+          "Client analytical appendix",
+          "Speaker notes"
+        ],
+        "Advisor Review": [
+          "Main advisor review",
+          "Advisor analytical appendix",
+          "Advisor working notes"
+        ]
+      },
+      "discovery_tags": [
+        "scenario",
+        "manager review",
+        "stress",
+        "risk prompt",
+        "mandate"
+      ],
+      "relevant_client_questions": [
+        "What could hurt us?",
+        "Why do we own each manager?"
+      ],
+      "relevant_advisor_review_intents": [
+        "Manager review",
+        "Scenario/theme alignment",
+        "Mandate audit"
+      ],
+      "supported_scopes": [
+        "All managers compared",
+        "Selected manager",
+        "Selected sleeve / mandate",
+        "Whole portfolio"
+      ],
+      "required_parameters": [
+        "branch",
+        "placement",
+        "scope",
+        "scenario_id"
+      ],
+      "optional_parameters": [
+        "lens",
+        "horizon",
+        "shock_source_note"
+      ],
+      "fixed_metric": "Scenario impact",
+      "supported_metrics": [
+        "Scenario impact",
+        "P&L",
+        "Exposure"
+      ],
+      "supported_lenses": [
+        "Manager role / mandate",
+        "Theme",
+        "Asset class",
+        "Liquidity bucket"
+      ],
+      "scenario_requirement": "required",
+      "fixed_or_default_display": "Table",
+      "supported_display_forms": [
+        "Table",
+        "Bar chart",
+        "Appendix item"
+      ],
+      "advisor_internal_purposes": [
+        "Diagnostic",
+        "Manager review",
+        "Thesis/mandate audit",
+        "Client-prep candidate"
+      ],
+      "data_readiness_requirements": [
+        "Scenario definition selected",
+        "Scenario result available for selected scope",
+        "Manager or mandate mapping available",
+        "Valuation result available"
+      ],
+      "completeness_checks": [
+        "Scenario completeness: complete treatment is yes",
+        "Direct repricing and proxy coverage are reported",
+        "Human-review scenario mappings are counted",
+        "Scenario horizon is visible"
+      ],
+      "default_caveat_rules": [
+        "State that scenario output is deterministic and not a forecast",
+        "Show proxy and remainder treatment",
+        "Do not imply probability, recommendation, or manager ranking"
+      ],
+      "branch_notes": {
+        "Client Briefing": "Use only when the scenario explanation is meeting-ready and caveated.",
+        "Advisor Review": "Use as the main manager-level stress diagnostic."
+      }
+    },
+    {
+      "element_id": "cash_generation_summary",
+      "title": "Cash Generation Summary",
+      "short_description": "A cash-flow-oriented element for summarizing cash contribution, liquidity role, and cash-generation coverage.",
+      "category": "cash",
+      "supported_branches": [
+        "Client Briefing",
+        "Advisor Review"
+      ],
+      "supported_placements": {
+        "Client Briefing": [
+          "Main client presentation",
+          "Speaker notes",
+          "Client analytical appendix"
+        ],
+        "Advisor Review": [
+          "Main advisor review",
+          "Advisor working notes",
+          "Advisor analytical appendix"
+        ]
+      },
+      "discovery_tags": [
+        "cash",
+        "income",
+        "liquidity",
+        "distribution",
+        "cash need"
+      ],
+      "relevant_client_questions": [
+        "Are we generating the cash we need?",
+        "Are we on track?"
+      ],
+      "relevant_advisor_review_intents": [
+        "Monitoring",
+        "Client-prep review",
+        "Mandate audit"
+      ],
+      "supported_scopes": [
+        "Whole portfolio",
+        "All managers compared",
+        "Selected manager",
+        "Selected sleeve / mandate"
+      ],
+      "required_parameters": [
+        "branch",
+        "placement",
+        "scope"
+      ],
+      "optional_parameters": [
+        "lens",
+        "scenario_id",
+        "cash_need_label",
+        "lookback_period"
+      ],
+      "fixed_metric": "Cash generated",
+      "supported_metrics": [
+        "Cash generated",
+        "Liquidity",
+        "Market value",
+        "Portfolio %"
+      ],
+      "supported_lenses": [
+        "Cash-generation role",
+        "Asset class",
+        "Liquidity bucket",
+        "Currency",
+        "Manager role / mandate"
+      ],
+      "scenario_requirement": "optional",
+      "fixed_or_default_display": "Summary card",
+      "supported_display_forms": [
+        "Summary card",
+        "Table",
+        "Narrative note",
+        "Appendix item"
+      ],
+      "advisor_internal_purposes": [
+        "Monitoring",
+        "Thesis/mandate audit",
+        "Client-prep candidate"
+      ],
+      "data_readiness_requirements": [
+        "Cash balances available",
+        "Income or cash-generation proxy available",
+        "Liquidity bucket classification available"
+      ],
+      "completeness_checks": [
+        "Cash-generation lens coverage is reported when lens is selected",
+        "Missing income source data is flagged",
+        "Cash and liquidity caveats are present"
+      ],
+      "default_caveat_rules": [
+        "Do not imply a guaranteed income stream",
+        "Separate cash balance from recurring cash generation",
+        "Flag proxy data where true income fields are not available"
+      ],
+      "branch_notes": {
+        "Client Briefing": "Use to answer cash-need questions in plain language.",
+        "Advisor Review": "Use to check whether cash and liquidity claims are supportable."
+      }
+    },
+    {
+      "element_id": "manager_comparison",
+      "title": "Manager Comparison",
+      "short_description": "A manager-scope element for comparing mandates, exposure roles, contribution, and readiness without treating manager as a lens.",
+      "category": "manager",
+      "supported_branches": [
+        "Client Briefing",
+        "Advisor Review"
+      ],
+      "supported_placements": {
+        "Client Briefing": [
+          "Client analytical appendix",
+          "Speaker notes"
+        ],
+        "Advisor Review": [
+          "Main advisor review",
+          "Advisor analytical appendix",
+          "Advisor working notes"
+        ]
+      },
+      "discovery_tags": [
+        "manager",
+        "mandate",
+        "comparison",
+        "overlap",
+        "role"
+      ],
+      "relevant_client_questions": [
+        "Why do we own each manager?",
+        "Where are we too concentrated?"
+      ],
+      "relevant_advisor_review_intents": [
+        "Manager review",
+        "Mandate audit",
+        "Client-prep review"
+      ],
+      "supported_scopes": [
+        "All managers compared",
+        "Selected manager",
+        "Selected sleeve / mandate"
+      ],
+      "required_parameters": [
+        "branch",
+        "placement",
+        "scope",
+        "metric"
+      ],
+      "optional_parameters": [
+        "lens",
+        "comparison_group",
+        "mandate_note"
+      ],
+      "fixed_metric": null,
+      "supported_metrics": [
+        "Market value",
+        "Portfolio %",
+        "Cash generated",
+        "Exposure",
+        "Attribution contribution",
+        "Data confidence"
+      ],
+      "supported_lenses": [
+        "Manager role / mandate",
+        "Theme",
+        "Asset class",
+        "Cash-generation role",
+        "Liquidity bucket"
+      ],
+      "scenario_requirement": "not_applicable",
+      "fixed_or_default_display": "Grid",
+      "supported_display_forms": [
+        "Grid",
+        "Table",
+        "Bar chart",
+        "Appendix item"
+      ],
+      "advisor_internal_purposes": [
+        "Manager review",
+        "Thesis/mandate audit",
+        "Client-prep candidate"
+      ],
+      "data_readiness_requirements": [
+        "Manager mapping available",
+        "Valuation result available",
+        "Mandate or role labels available when role lens is selected"
+      ],
+      "completeness_checks": [
+        "All managers compared scope includes every manager or flags exclusions",
+        "Manager role / mandate lens coverage is reported when selected",
+        "Missing mandate labels are human-review items"
+      ],
+      "default_caveat_rules": [
+        "Do not rank managers as recommendations",
+        "Distinguish mandate role from performance judgment",
+        "Flag missing or synthetic mandate labels"
+      ],
+      "branch_notes": {
+        "Client Briefing": "Use sparingly as appendix or speaker-note support for manager rationale.",
+        "Advisor Review": "Use as the primary manager role and mandate diagnostic."
+      }
+    },
+    {
+      "element_id": "data_confidence_note",
+      "title": "Data Confidence Note",
+      "short_description": "A readiness note explaining source coverage, confidence labels, missing fields, and human-review items.",
+      "category": "data_readiness",
+      "supported_branches": [
+        "Client Briefing",
+        "Advisor Review"
+      ],
+      "supported_placements": {
+        "Client Briefing": [
+          "Speaker notes",
+          "Technical/support appendix"
+        ],
+        "Advisor Review": [
+          "Main advisor review",
+          "Advisor working notes",
+          "Advisor analytical appendix",
+          "Technical/support appendix"
+        ]
+      },
+      "discovery_tags": [
+        "data confidence",
+        "readiness",
+        "human review",
+        "coverage",
+        "verification"
+      ],
+      "relevant_client_questions": [
+        "What needs verification?",
+        "Are we on track?"
+      ],
+      "relevant_advisor_review_intents": [
+        "Data readiness check",
+        "Client-prep review",
+        "Monitoring"
+      ],
+      "supported_scopes": [
+        "Whole portfolio",
+        "Selected account",
+        "Selected manager",
+        "Selected sleeve / mandate"
+      ],
+      "required_parameters": [
+        "branch",
+        "placement",
+        "scope"
+      ],
+      "optional_parameters": [
+        "lens",
+        "confidence_threshold",
+        "human_review_only"
+      ],
+      "fixed_metric": "Data confidence",
+      "supported_metrics": [
+        "Data confidence",
+        "Human-review count"
+      ],
+      "supported_lenses": [
+        "Data issue",
+        "Instrument type",
+        "Asset class",
+        "Liquidity bucket"
+      ],
+      "scenario_requirement": "not_applicable",
+      "fixed_or_default_display": "Narrative note",
+      "supported_display_forms": [
+        "Narrative note",
+        "Appendix item",
+        "Table",
+        "Summary card"
+      ],
+      "advisor_internal_purposes": [
+        "Data readiness",
+        "Monitoring",
+        "Client-prep candidate"
+      ],
+      "data_readiness_requirements": [
+        "Data coverage result available",
+        "Human-review count available",
+        "Confidence labels available for selected scope"
+      ],
+      "completeness_checks": [
+        "Data confidence summary is present",
+        "Human-review items are counted",
+        "Unknown or low confidence dimensions are visible"
+      ],
+      "default_caveat_rules": [
+        "Explain confidence as source readiness, not investment quality",
+        "Do not hide human-review items",
+        "Keep client-facing wording concise and non-technical unless placed in support appendix"
+      ],
+      "branch_notes": {
+        "Client Briefing": "Use as speaker-note or support material unless verification status is central to the meeting.",
+        "Advisor Review": "Use as the operational readiness check before publishing client-facing elements."
+      }
+    }
+  ]
+}

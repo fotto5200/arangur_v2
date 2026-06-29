@@ -10,6 +10,7 @@ __all__ = [
     "market_data",
     "plaid_mock_adapter",
     "report_index",
+    "report_elements",
     "report_generator",
     "scenarios",
     "valuation",
