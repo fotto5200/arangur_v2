@@ -155,6 +155,7 @@ Use these file sets when starting different kinds of sessions.
 - `docs/ui_reporting/first_demo_briefing_paths_v1.md`.
 - `docs/ui_reporting/demo_console_redesign_brief_v1.md`.
 - `docs/ui_reporting/guided_briefing_builder_correction_v1.md`.
+- `docs/ui_reporting/report_element_finder_composer_current_model_v1.md`.
 - `docs/ui_reporting/briefing_set_builder_model_v1.md`.
 - `docs/ui_reporting/briefing_set_report_view_model_v1.md`.
 - `docs/ui_reporting/briefing_set_client_preview_model_v1.md`.
@@ -165,6 +166,19 @@ Use these file sets when starting different kinds of sessions.
 - `docs/architecture/deployable_demo_app_architecture.md`.
 - `src/arangur/app/static/index.html` when UI implementation is authorized.
 - Do not implement real client personalization, live Plaid, external APIs, or investment advice language without a specific authorized batch.
+
+## Report Element Finder / Composer Restart
+
+- All UI Reporting / Briefing restart files.
+- `docs/ui_reporting/report_element_finder_composer_current_model_v1.md`.
+- `docs/contracts/report_element_template_catalog_contract.md`.
+- `docs/restart/CURRENT_STATE.md`.
+- `docs/restart/08_next_actions.md`.
+- `README.md`.
+- `src/arangur/app/static/index.html` when UI implementation is authorized.
+- `src/arangur/report_elements/` when catalog implementation is authorized.
+- `tests/test_app_health.py` and `tests/test_report_element_catalog.py` when implementation is authorized.
+- Keep discovery separate from saved spec fields, keep configuration template-driven, and do not implement report generation, backend persistence, live Plaid, external APIs, real data, or investment advice language unless a later batch explicitly authorizes it.
 
 ## Guided Builder Implementation Restart
 

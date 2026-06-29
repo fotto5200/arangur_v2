@@ -12,6 +12,19 @@ Discovery inputs help narrow candidate report elements. Examples include search 
 
 Discovery inputs usually should not become part of the final saved report spec. A saved spec should be built from the selected template plus the configuration fields required or allowed by that template, such as branch, placement, scope, lens, metric, scenario, display form, and any caveat or readiness metadata.
 
+The browser composer should treat search text, category filters, guided filters, category shortcut buttons, and browse-all picker navigation as discovery controls only. Selecting a template starts configuration; it does not automatically add anything to a set.
+
+## Template-Driven Configuration
+
+The selected template controls the configuration form. The UI should not expose a universal report form with every possible field.
+
+Expected behavior:
+
+- Fixed template values, such as `fixed_metric` or `fixed_or_default_display`, should travel with the spec without becoming unnecessary user questions.
+- Scenario fields should appear only when the selected template supports or requires a scenario.
+- Scope, lens, metric, display, placement, and advisor internal purpose choices should be constrained by the selected template and current branch.
+- Completion checks should follow the template's required parameters and scenario requirement.
+
 ## Template Fields
 
 Each template includes:
@@ -64,9 +77,27 @@ Plain `Manager` is not a lens. Manager belongs in scope when the user is choosin
 
 Scenario-dependent elements should also expose scenario completeness checks, including whether the scenario treatment is complete, how much is directly repriced, how much uses proxy/remainder treatment, human-review counts, and the scenario horizon where available.
 
+## Narrative Elements And Ordered Set Compatibility
+
+The current composer supports manual narrative elements alongside analytic, catalog-backed elements. Narrative elements include section titles, short explanations, transitions, discussion prompts, speaker notes, advisor working notes, diagnostic comments, follow-up items, and client-prep notes.
+
+Narrative elements are not generated reports and do not require analytics. They should still be treated as first-class ordered set elements because they control the briefing sequence around analytic evidence.
+
+Future implementations can model narrative elements as either:
+
+- catalog-compatible templates with stable narrative template IDs; or
+- a parallel narrative type registry that serializes into the same ordered set envelope as analytic elements.
+
+Either approach should preserve common ordered-row fields such as element kind, target set or branch, title/type, placement, order, and editable content.
+
 ## Report Spec Serialization Expectations
 
-A future saved report element spec should serialize:
+A future saved set spec should serialize two ordered lists or one ordered list with target-set grouping:
+
+- Client Briefing Set elements
+- Advisor Review Set elements
+
+Analytic report element specs should serialize:
 
 - selected `element_id`
 - branch and placement
@@ -74,6 +105,14 @@ A future saved report element spec should serialize:
 - configured scope, lens, metric, scenario, and display form as required by the template
 - caveat and completeness metadata needed for review
 - template version or catalog version when durable metadata is introduced
+
+Narrative element specs should serialize:
+
+- stable narrative type
+- target set or branch
+- placement
+- title/text fields required by the narrative type
+- order within the set
 
 Discovery-only inputs should be omitted unless a product decision later requires keeping them for audit or explanation.
 

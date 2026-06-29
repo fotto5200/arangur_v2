@@ -2,9 +2,9 @@
 
 ## Immediate Product/UI Batches
 
-- Define how completed local Client Briefing Set and Advisor Review Set specs are serialized/exported or persisted.
+- Serialize/export completed local Client Briefing Set and Advisor Review Set specs without report generation.
 - Decide how Client Briefing Set and Advisor Review Set rows are edited, duplicated, reordered, removed, and promoted without showing a monolithic console.
-- Add selected `element_id`, branch, placement, internal purpose, scope, lens, metric, scenario, display form, and coverage metadata to report packages after the interaction model is stable.
+- Later add selected `element_id`, branch, placement, internal purpose, scope, lens, metric, scenario, display form, and coverage metadata to report packages after the local spec-set shape is serializable.
 - Later add backend briefing-set metadata/persistence.
 - Then resume Docker Compose private-demo files and protected/admin surfaces when private-demo access policy is ready.
 
@@ -278,7 +278,25 @@
 - Acceptance criteria: Implemented baseline: `Browse all templates` toggles an attached dropdown-style picker near the button; categories are clear rows; templates are indented one-line rows without long descriptions, branch/topic chips, scenario badges, fixed metric/display, or coverage information; selecting a template closes the picker and reuses the existing selected-template preview and `Use this element` flow; the default empty state and search/category/filter candidate behavior remain unchanged.
 - Stop conditions: Durable spec serialization/export/import and backend spec persistence remain follow-up batches.
 
-## Batch 16A-8: Briefing Set Metadata
+## Batch 16A-7h: Report Element Finder / Composer Current Model Docs
+
+- Goal: Stabilize documentation for the current Report Element Finder / Composer model before implementing serialization/export.
+- Mode: Implemented documentation stabilization batch.
+- Allowed scope: `docs/ui_reporting/`, `docs/contracts/`, `docs/restart/`, and README pointers.
+- Non-goals: No UI behavior changes, no serialization/export implementation, no report generation, no charts, no client preview, no workflow API calls, no backend persistence, no Docker/Postgres changes, no live Plaid, no external APIs, no real data.
+- Acceptance criteria: Implemented baseline: `docs/ui_reporting/report_element_finder_composer_current_model_v1.md` documents the current workflow, Client Briefing Set vs Advisor Review Set, discovery versus configuration, template-specific fields, scope/lens/scenario distinctions, metric/measure behavior, display/formatting boundaries, narrative elements, demo limitations, and next actions; contract, README, and restart docs point future batches toward spec-set serialization/export before report generation.
+- Stop conditions: Product model contradictions, code changes, real data, credentials, legacy MATLAB inspection, report generation, or persistence implementation remain out of scope.
+
+## Batch 16A-8: Report Element Spec Set Serialization / Export
+
+- Goal: Serialize/export completed local Client Briefing Set and Advisor Review Set specs without generating reports.
+- Mode: Recommended implementation batch after the current model documentation is stable.
+- Allowed scope: likely `src/arangur/app/static/index.html`, tests, `docs/contracts/`, `docs/ui_reporting/`, restart docs, and README pointers.
+- Non-goals: No report generation, no chart generation, no client preview rendering, no workflow API calls from the composer, no backend persistence, no Docker/Postgres changes, no live Plaid, no external APIs, no real data.
+- Acceptance criteria: The local browser composer can produce a deterministic JSON-friendly representation of the ordered Client Briefing Set and Advisor Review Set, including analytic elements, narrative elements, target set, placement, element order, selected template IDs, configured parameters, narrative fields, and catalog/version metadata where available; export/copy behavior is local-only and does not call report generation APIs.
+- Stop conditions: Export shape requires unresolved product decisions, durable backend persistence is needed, report generation is requested, or client-facing preview/rendering becomes necessary.
+
+## Batch 16A-8b: Briefing Set Metadata
 
 - Goal: Add selected report element specs and briefing set metadata to backend/report packages after the local spec-set shape is stable.
 - Mode: Recommended implementation/design batch after the UI model is stable.

@@ -95,11 +95,13 @@ Start the FastAPI app:
 python -m uvicorn arangur.app.main:app --reload --app-dir src
 ```
 
-Open `http://127.0.0.1:8000/app/` to use the Report Element Finder prototype. It starts with a compact static client context line, asks the advisor to choose the target set, loads the report element template catalog from `/api/report-elements`, and provides search, category browsing, lightweight filters, and an attached compact grouped `Browse all templates` picker without showing the full catalog as large cards or an inline catalog list.
+Open `http://127.0.0.1:8000/app/` to use the Report Element Finder / Composer prototype. It starts with a compact static client context line, asks the advisor to choose the target set, loads the report element template catalog from `/api/report-elements`, and provides search, category browsing, lightweight filters, and an attached compact grouped `Browse all templates` picker without showing the full catalog as large cards or an inline catalog list.
 
-After a template is selected, the right side shows a short preview and a `Use this element` action. The configuration step then renders only the fields that template needs, with placement shown separately as `Add to set as`. Advisors can also add manual narrative elements such as section titles, explanations, discussion prompts, speaker notes, working notes, and follow-up items. Completed local specs can be added to either the Client Briefing Set or the Advisor Review Set.
+Discovery controls help locate templates; they are not saved as report specs. After a template is selected, the right side shows a short preview and a `Use this element` action. The configuration step then renders only the fields that template needs, with placement shown separately as `Add to set as`. Scope, lens, metric/measure, scenario, display, and advisor internal purpose are template-driven rather than universal form fields.
 
-This UI does not generate reports, charts, or client preview output yet. It does not call the workflow API or show report links. The next UI batch should decide how completed local spec sets are serialized, exported, or persisted.
+Configured analytic elements can be added to either the Client Briefing Set or the Advisor Review Set. Advisors can also add manual narrative elements such as section titles, explanations, discussion prompts, speaker notes, working notes, and follow-up items. Analytic and narrative elements live in the same ordered local set lists and can be edited, duplicated, moved, or removed.
+
+This UI does not generate reports, charts, or client preview output yet. It does not call the workflow API or show report links. The next UI batch should serialize/export completed local spec sets without report generation; backend persistence remains a later batch.
 
 Create a native demo manager-overlap workflow run:
 
@@ -148,6 +150,7 @@ Future scenario, data-coverage, and deployable private-demo work is captured in:
 - `docs/ui_reporting/briefing_set_report_view_model_v1.md`
 - `docs/ui_reporting/briefing_set_client_preview_model_v1.md`
 - `docs/ui_reporting/briefing_set_builder_implementation_brief_v1.md`
+- `docs/ui_reporting/report_element_finder_composer_current_model_v1.md`
 - `docs/ui_reporting/client_briefing_page_model_v1.md`
 - `docs/ui_reporting/manager_role_review_v1.md`
 - `docs/architecture/deployable_demo_app_architecture.md`
