@@ -17,6 +17,8 @@
       --accent-soft: #edfdf8;
       --amber-soft: #fff8e6;
       --amber-line: #f2d083;
+      --red-soft: #fff1f2;
+      --red-line: #fecdd3;
       --shadow: 0 20px 50px rgba(16, 42, 67, 0.08);
     }
 
@@ -32,7 +34,9 @@
       margin: 0;
     }
 
-    button {
+    button,
+    input,
+    select {
       font: inherit;
     }
 
@@ -47,7 +51,7 @@
       display: grid;
       gap: 18px;
       margin: 0 auto;
-      max-width: 1120px;
+      max-width: 1180px;
       min-height: 100vh;
       padding: 32px 18px 42px;
     }
@@ -57,6 +61,32 @@
       font-size: 14px;
       font-weight: 700;
       letter-spacing: 0;
+    }
+
+    h1 {
+      color: var(--strong);
+      font-size: 30px;
+      line-height: 1.1;
+    }
+
+    h2 {
+      color: var(--strong);
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    h3 {
+      color: var(--strong);
+      font-size: 16px;
+      line-height: 1.25;
+    }
+
+    .helper,
+    .empty,
+    .status,
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
     }
 
     .context-strip,
@@ -75,100 +105,116 @@
       padding: 12px;
     }
 
-    .chip {
+    .chip,
+    .tag {
       background: var(--surface-soft);
       border: 1px solid var(--line);
       border-radius: 999px;
       color: var(--muted);
+      display: inline-flex;
       font-size: 13px;
       padding: 6px 10px;
     }
 
-    .chip strong {
+    .tag {
+      font-size: 12px;
+      padding: 3px 8px;
+    }
+
+    .chip strong,
+    .tag strong {
       color: var(--strong);
     }
 
-    .composer {
+    .workspace {
       display: grid;
       gap: 16px;
-      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
     }
 
     .panel {
       align-content: start;
       display: grid;
       gap: 18px;
-      min-height: 430px;
-      padding: 24px;
+      min-height: 420px;
+      padding: 22px;
     }
 
-    .question-copy {
+    .panel-header {
       display: grid;
-      gap: 8px;
-      max-width: 680px;
+      gap: 6px;
     }
 
-    h1 {
+    .filter-grid,
+    .form-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .field label {
       color: var(--strong);
-      font-size: 32px;
-      line-height: 1.1;
+      font-size: 13px;
+      font-weight: 700;
     }
 
-    h2 {
-      color: var(--strong);
-      font-size: 21px;
-      line-height: 1.2;
+    .field input,
+    .field select {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      color: var(--ink);
+      min-height: 38px;
+      padding: 8px 10px;
+      width: 100%;
     }
 
-    h3 {
-      color: var(--strong);
-      font-size: 16px;
-      line-height: 1.25;
-    }
-
-    .helper,
-    .empty,
-    .note,
-    .status {
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .answer-grid {
+    .candidate-list {
       display: grid;
       gap: 10px;
     }
 
-    .answer-card {
+    .candidate-card {
       background: #ffffff;
       border: 1px solid var(--line);
       border-radius: 8px;
-      color: var(--ink);
-      cursor: pointer;
       display: grid;
-      gap: 4px;
-      min-height: 58px;
-      padding: 14px 16px;
+      gap: 8px;
+      padding: 14px;
       text-align: left;
       width: 100%;
     }
 
-    .answer-card:hover,
-    .answer-card:focus {
+    .candidate-card:hover,
+    .candidate-card:focus {
       background: var(--accent-soft);
       border-color: var(--accent);
       outline: 2px solid rgba(15, 118, 110, 0.16);
     }
 
-    .answer-card span {
-      color: var(--muted);
-      font-size: 13px;
+    .candidate-card.is-selected {
+      background: var(--accent-soft);
+      border-color: var(--accent);
     }
 
-    .button-row {
+    .candidate-top {
+      align-items: start;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+    }
+
+    .tag-row,
+    .button-row,
+    .row-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
     }
 
     .secondary-button,
@@ -197,7 +243,9 @@
       color: #ffffff;
     }
 
-    .secondary-button:disabled {
+    .primary-button:disabled,
+    .secondary-button:disabled,
+    .tiny-button:disabled {
       cursor: not-allowed;
       opacity: 0.48;
     }
@@ -208,42 +256,28 @@
       padding: 5px 8px;
     }
 
-    .spec-list {
+    .fixed-field,
+    .readiness-box,
+    .error-box {
+      border-radius: 8px;
       display: grid;
       gap: 8px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
+      padding: 12px;
     }
 
-    .spec-list li {
-      border-bottom: 1px solid var(--line);
-      color: var(--muted);
-      padding: 0 0 8px;
-    }
-
-    .spec-list strong {
-      color: var(--strong);
-    }
-
-    .review-box {
-      background: var(--accent-soft);
-      border: 1px solid #99f6e4;
-      border-radius: 8px;
-      display: grid;
-      gap: 12px;
-      padding: 16px;
-    }
-
-    .badge-box {
+    .fixed-field,
+    .readiness-box {
       background: var(--amber-soft);
       border: 1px solid var(--amber-line);
-      border-radius: 8px;
       color: #713f12;
-      display: grid;
       font-size: 14px;
-      gap: 6px;
-      padding: 12px;
+    }
+
+    .error-box {
+      background: var(--red-soft);
+      border: 1px solid var(--red-line);
+      color: #9f1239;
+      font-size: 14px;
     }
 
     .sets-grid {
@@ -280,24 +314,20 @@
       font-size: 13px;
     }
 
-    .row-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
     .hidden {
       display: none !important;
     }
 
-    @media (max-width: 820px) {
-      .composer,
-      .sets-grid {
+    @media (max-width: 880px) {
+      .workspace,
+      .sets-grid,
+      .filter-grid,
+      .form-grid {
         grid-template-columns: 1fr;
       }
 
       h1 {
-        font-size: 28px;
+        font-size: 26px;
       }
     }
   </style>
@@ -313,40 +343,69 @@
       <span class="chip"><strong>Data status:</strong> Loaded</span>
       <span class="chip"><strong>Valuation confidence:</strong> Mixed</span>
       <span class="chip"><strong>Human-review items:</strong> 1</span>
-      <span class="chip"><strong>Last updated:</strong> Demo fixture</span>
     </section>
 
-    <section class="composer" aria-live="polite">
-      <section class="panel" aria-labelledby="question-title">
-        <div class="question-copy">
-          <p class="helper" id="progress-label">Element step</p>
-          <h1 id="question-title">Which report branch is this element for?</h1>
-          <p class="helper" id="question-helper">Choose whether this element belongs in the client package or the advisor's internal review set.</p>
+    <section class="workspace" aria-live="polite">
+      <section class="panel" aria-labelledby="discovery-title">
+        <div class="panel-header">
+          <p class="helper">Report element discovery</p>
+          <h1 id="discovery-title">Find a report element template</h1>
+          <p class="helper">Search or filter the catalog, then select an element to configure.</p>
           <p class="helper">No report generation in this composer.</p>
         </div>
-        <div id="answer-options" class="answer-grid">
-          <button class="answer-card" type="button" data-answer="Client Briefing">Client Briefing<span>Client presentation, speaker notes, client backup, or support material.</span></button>
-          <button class="answer-card" type="button" data-answer="Advisor Review">Advisor Review<span>Internal diagnostics, monitoring, manager review, mandate audit, or data readiness.</span></button>
+
+        <div id="catalog-error" class="error-box hidden"></div>
+
+        <div class="filter-grid" aria-label="Discovery filters">
+          <div class="field">
+            <label for="branch-filter">Branch</label>
+            <select id="branch-filter">
+              <option>Client Briefing</option>
+              <option>Advisor Review</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="search-filter">Search templates</label>
+            <input id="search-filter" type="search" placeholder="Search by title, topic, or question">
+          </div>
+          <div class="field">
+            <label for="category-filter">Category</label>
+            <select id="category-filter">
+              <option value="">All categories</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="tag-filter">Topic</label>
+            <select id="tag-filter">
+              <option value="">All topics</option>
+            </select>
+          </div>
         </div>
-        <div id="coverage-badges" class="badge-box hidden"></div>
-        <div id="review-actions" class="review-box hidden">
-          <h2>Report element spec complete</h2>
-          <p class="note">Review the compact spec on the right, then add it to the selected set.</p>
-          <button id="add-spec-button" class="primary-button" type="button">Add element to selected set</button>
+
+        <p id="candidate-count" class="status">Loading report element catalog...</p>
+        <div id="candidate-list" class="candidate-list" aria-label="Candidate report elements"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="config-title">
+        <div class="panel-header">
+          <p class="helper">Element-specific configuration</p>
+          <h2 id="config-title">Selected element configuration</h2>
+          <p id="config-helper" class="helper">Select a catalog template to see only the fields that element needs.</p>
         </div>
+
+        <div id="selected-summary" class="readiness-box hidden"></div>
+        <form id="config-form" class="form-grid"></form>
+        <div id="fixed-fields" class="readiness-box hidden"></div>
+        <div id="readiness-summary" class="readiness-box hidden"></div>
+
         <div class="button-row">
-          <button id="back-button" class="secondary-button" type="button" disabled>Back</button>
-          <button id="start-over-button" class="secondary-button" type="button">Start over element</button>
+          <button id="add-spec-button" class="primary-button" type="button" disabled>Add configured element</button>
+          <button id="clear-selection-button" class="secondary-button" type="button" disabled>Clear selection</button>
         </div>
         <p id="composer-status" class="status"></p>
       </section>
-
-      <aside class="panel" aria-labelledby="spec-title">
-        <h2 id="spec-title">Current element spec</h2>
-        <p id="empty-spec" class="empty">No element choices yet.</p>
-        <ul id="spec-list" class="spec-list"></ul>
-      </aside>
     </section>
+
     <section class="sets-grid" aria-label="Report set lists">
       <section class="set-panel" aria-labelledby="client-set-title">
         <h2 id="client-set-title">Client Briefing Set</h2>
@@ -364,95 +423,8 @@
   </main>
 
   <script>
-    const clientIntentOptions = [
-      "Are we on track?",
-      "What changed?",
-      "Are we generating the cash we need?",
-      "Where are we too concentrated?",
-      "What could hurt us?",
-      "Why do we own each manager?",
-      "What needs verification?"
-    ];
-
-    const advisorIntentOptions = [
-      "Mandate audit",
-      "Manager review",
-      "Scenario/theme alignment",
-      "Exposure drift check",
-      "Data readiness check",
-      "Client-prep review"
-    ];
-
-    const clientPlacementOptions = [
-      "Main client presentation",
-      "Speaker notes",
-      "Client analytical appendix",
-      "Technical/support appendix"
-    ];
-
-    const advisorPlacementOptions = [
-      "Main advisor review",
-      "Advisor working notes",
-      "Advisor analytical appendix",
-      "Technical/support appendix"
-    ];
-
-    const internalPurposeOptions = [
-      "Diagnostic",
-      "Monitoring",
-      "Data readiness",
-      "Manager review",
-      "Thesis/mandate audit",
-      "Client-prep candidate"
-    ];
-
-    const elementTypeOptions = [
-      "Portfolio Status",
-      "Concentration",
-      "Scenario Impact",
-      "Cash Generation",
-      "Manager Comparison",
-      "Data Confidence"
-    ];
-
-    const scopeOptions = [
-      "Whole portfolio",
-      "All managers compared",
-      "Selected manager",
-      "Selected account",
-      "Selected sleeve / mandate"
-    ];
-
-    const lensOptions = [
-      "Industry",
-      "Sector",
-      "Theme",
-      "Asset class",
-      "Geography",
-      "Currency",
-      "Liquidity bucket",
-      "Value/growth",
-      "Cash-generation role",
-      "Data issue",
-      "Instrument type",
-      "Manager role / mandate"
-    ];
-
-    const metricOptions = [
-      "Market value",
-      "Portfolio %",
-      "P&L",
-      "Cash generated",
-      "Exposure",
-      "Scenario impact",
-      "Attribution contribution",
-      "Data confidence",
-      "Liquidity",
-      "Human-review count"
-    ];
-
+    const CATALOG_ENDPOINT = "/api/report-elements";
     const scenarioOptions = [
-      "None",
       "AI/chip selloff",
       "Rate shock",
       "Energy shock",
@@ -460,366 +432,349 @@
       "Private-market liquidity freeze"
     ];
 
-    const displayOptions = [
-      "Summary card",
-      "Table",
-      "Bar chart",
-      "Grid",
-      "Narrative note",
-      "Appendix item"
-    ];
-
-    const elementScenarioMode = {
-      "Portfolio Status": "irrelevant",
-      "Concentration": "optional",
-      "Scenario Impact": "required",
-      "Cash Generation": "optional",
-      "Manager Comparison": "irrelevant",
-      "Data Confidence": "irrelevant"
-    };
-
-    const branchLabels = {
-      client: "Client Briefing",
-      advisor: "Advisor Review"
-    };
-
     const state = {
-      answers: {},
-      history: [],
+      templates: [],
+      selectedTemplate: null,
+      config: {},
       clientSet: [],
       advisorSet: []
     };
 
     const els = {
-      progress: document.getElementById("progress-label"),
-      title: document.getElementById("question-title"),
-      helper: document.getElementById("question-helper"),
-      options: document.getElementById("answer-options"),
-      badges: document.getElementById("coverage-badges"),
-      review: document.getElementById("review-actions"),
-      addSpec: document.getElementById("add-spec-button"),
-      back: document.getElementById("back-button"),
-      startOver: document.getElementById("start-over-button"),
+      branch: document.getElementById("branch-filter"),
+      search: document.getElementById("search-filter"),
+      category: document.getElementById("category-filter"),
+      tag: document.getElementById("tag-filter"),
+      count: document.getElementById("candidate-count"),
+      candidates: document.getElementById("candidate-list"),
+      error: document.getElementById("catalog-error"),
+      summary: document.getElementById("selected-summary"),
+      helper: document.getElementById("config-helper"),
+      form: document.getElementById("config-form"),
+      fixed: document.getElementById("fixed-fields"),
+      readiness: document.getElementById("readiness-summary"),
+      add: document.getElementById("add-spec-button"),
+      clear: document.getElementById("clear-selection-button"),
       status: document.getElementById("composer-status"),
-      emptySpec: document.getElementById("empty-spec"),
-      specList: document.getElementById("spec-list"),
       clientEmpty: document.getElementById("client-empty"),
       clientList: document.getElementById("client-set-list"),
       advisorEmpty: document.getElementById("advisor-empty"),
       advisorList: document.getElementById("advisor-set-list")
     };
 
-    function currentStep() {
-      const branch = state.answers.branch;
-      const type = state.answers.elementType;
-      if (!branch) {
-        return {
+    async function loadCatalog() {
+      try {
+        const response = await fetch(CATALOG_ENDPOINT);
+        if (!response.ok) {
+          throw new Error(`Catalog request failed: ${response.status}`);
+        }
+        const payload = await response.json();
+        state.templates = Array.isArray(payload.templates) ? payload.templates : [];
+        populateFilters();
+        renderCandidates();
+      } catch (error) {
+        els.error.textContent = "Could not load the report element catalog. Refresh the app after the API is available.";
+        els.error.classList.remove("hidden");
+        els.count.textContent = "Catalog unavailable.";
+        els.candidates.innerHTML = "";
+      }
+    }
+
+    function populateFilters() {
+      const categories = uniqueValues(state.templates.map((template) => template.category));
+      els.category.innerHTML = '<option value="">All categories</option>' + categories
+        .map((category) => `<option value="${escapeAttr(category)}">${escapeHtml(toTitle(category))}</option>`)
+        .join("");
+
+      const tags = uniqueValues(state.templates.flatMap((template) => template.discovery_tags || []));
+      els.tag.innerHTML = '<option value="">All topics</option>' + tags
+        .map((tag) => `<option value="${escapeAttr(tag)}">${escapeHtml(tag)}</option>`)
+        .join("");
+    }
+
+    function renderCandidates() {
+      const candidates = filteredTemplates();
+      const branch = els.branch.value;
+      els.count.textContent = `${candidates.length} candidate report element${candidates.length === 1 ? "" : "s"} for ${branch}.`;
+      if (!candidates.length) {
+        els.candidates.innerHTML = '<p class="empty">No matching report elements.</p>';
+        return;
+      }
+      els.candidates.innerHTML = candidates.map(renderCandidate).join("");
+    }
+
+    function filteredTemplates() {
+      const branch = normalize(els.branch.value);
+      const category = normalize(els.category.value);
+      const tag = normalize(els.tag.value);
+      const query = normalize(els.search.value);
+      return state.templates.filter((template) => {
+        if (!containsNormalized(template.supported_branches, branch)) return false;
+        if (category && normalize(template.category) !== category) return false;
+        if (tag && !containsNormalized(template.discovery_tags, tag)) return false;
+        if (query && !searchableText(template).includes(query)) return false;
+        return true;
+      });
+    }
+
+    function renderCandidate(template) {
+      const selectedClass = state.selectedTemplate && state.selectedTemplate.element_id === template.element_id ? " is-selected" : "";
+      const tags = (template.discovery_tags || []).slice(0, 4)
+        .map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`)
+        .join("");
+      return `
+        <button class="candidate-card${selectedClass}" type="button" data-template-id="${escapeAttr(template.element_id)}">
+          <span class="candidate-top">
+            <span>
+              <strong>${escapeHtml(template.title)}</strong>
+              <span class="meta"> | ${escapeHtml(toTitle(template.category))}</span>
+            </span>
+            <span class="tag">${escapeHtml(template.scenario_requirement.replace("_", " "))}</span>
+          </span>
+          <span class="meta">${escapeHtml(template.short_description)}</span>
+          <span class="tag-row">
+            <span class="tag"><strong>Branches:</strong>&nbsp;${escapeHtml(template.supported_branches.join(", "))}</span>
+            ${tags}
+          </span>
+        </button>
+      `;
+    }
+
+    function selectTemplate(elementId) {
+      const template = state.templates.find((candidate) => candidate.element_id === elementId);
+      if (!template) return;
+      state.selectedTemplate = template;
+      state.config = defaultConfig(template);
+      els.status.textContent = "";
+      renderCandidates();
+      renderConfiguration();
+    }
+
+    function defaultConfig(template) {
+      const branch = els.branch.value;
+      const placements = placementsFor(template, branch);
+      const config = {
+        branch,
+        placement: placements[0] || "",
+        internalPurpose: "",
+        scope: firstValue(template.supported_scopes),
+        lens: "",
+        metric: template.fixed_metric || firstValue(template.supported_metrics),
+        scenario: template.scenario_requirement === "required" ? firstValue(scenarioOptions) : "None",
+        display: template.fixed_or_default_display || firstValue(template.supported_display_forms)
+      };
+      if (branch === "Advisor Review" && (template.advisor_internal_purposes || []).length) {
+        config.internalPurpose = firstValue(template.advisor_internal_purposes);
+      }
+      if (template.required_parameters.includes("lens")) {
+        config.lens = firstValue(safeLensOptions(template));
+      }
+      return config;
+    }
+
+    function renderConfiguration() {
+      const template = state.selectedTemplate;
+      if (!template) {
+        els.summary.classList.add("hidden");
+        els.form.innerHTML = "";
+        els.fixed.classList.add("hidden");
+        els.readiness.classList.add("hidden");
+        els.helper.textContent = "Select a catalog template to see only the fields that element needs.";
+        els.add.disabled = true;
+        els.clear.disabled = true;
+        return;
+      }
+
+      els.helper.textContent = "Configuration fields are derived from the selected report element template.";
+      els.clear.disabled = false;
+      els.summary.classList.remove("hidden");
+      els.summary.innerHTML = `
+        <strong>${escapeHtml(template.title)}</strong>
+        <span>${escapeHtml(template.short_description)}</span>
+      `;
+
+      const fields = configurationFields(template);
+      els.form.innerHTML = fields.map(renderField).join("");
+      renderFixedFields(template);
+      renderReadiness(template);
+      els.add.disabled = !isConfigComplete(template);
+    }
+
+    function configurationFields(template) {
+      const branch = state.config.branch;
+      const fields = [
+        {
           key: "branch",
           label: "Branch",
-          prompt: "Which report branch is this element for?",
-          helper: "Client Briefing and Advisor Review are separate authored sets.",
-          options: ["Client Briefing", "Advisor Review"]
-        };
-      }
-      if (!state.answers.intent) {
-        return {
-          key: "intent",
-          label: branch === "Client Briefing" ? "Client intent" : "Review intent",
-          prompt: branch === "Client Briefing" ? "What client intent should this support?" : "What advisor-review intent should this support?",
-          helper: "Intent narrows the element choices; it is not the full spec.",
-          options: branch === "Client Briefing" ? clientIntentOptions : advisorIntentOptions
-        };
-      }
-      if (branch === "Client Briefing" && !state.answers.audience) {
-        return {
-          key: "audience",
-          label: "Audience",
-          prompt: "Who is the client-facing package for?",
-          helper: "Audience depth is intent context, not the entire report spec.",
-          options: ["10-minute principal briefing", "Standard family meeting", "Analytical stakeholder", "Advisor/internal prep"]
-        };
-      }
-      if (branch === "Client Briefing" && !state.answers.placement) {
-        return {
+          required: true,
+          options: template.supported_branches
+        },
+        {
           key: "placement",
-          label: "Client package placement",
-          prompt: "Where should this element live in the client package?",
-          helper: "Presentation, speaker notes, backup, and support material are distinct placements.",
-          options: clientPlacementOptions
-        };
-      }
-      if (branch === "Advisor Review" && !state.answers.placement) {
-        return {
-          key: "placement",
-          label: "Advisor review placement",
-          prompt: "Where should this element live in the advisor review set?",
-          helper: "Advisor analytical appendix is for internal tie-outs and verification detail.",
-          options: advisorPlacementOptions
-        };
-      }
-      if (branch === "Advisor Review" && !state.answers.internalPurpose) {
-        return {
-          key: "internalPurpose",
-          label: "Internal purpose",
-          prompt: "What internal purpose should this element serve?",
-          helper: "Advisor Review elements can support diagnostics, monitoring, manager review, mandate audit, or data readiness.",
-          options: internalPurposeOptions
-        };
-      }
-      if (!type) {
-        return {
-          key: "elementType",
-          label: "Element type",
-          prompt: "What kind of report element are you adding?",
-          helper: "Choose one building block. Full report generation comes later.",
-          options: elementTypeOptions
-        };
-      }
-      if (!state.answers.scope) {
-        return {
+          label: branch === "Client Briefing" ? "Client package placement" : "Advisor review placement",
+          required: true,
+          options: placementsFor(template, branch)
+        },
+        {
           key: "scope",
           label: "Scope",
-          prompt: "Whose portfolio slice are we looking at?",
-          helper: "Manager belongs here as a scope/entity axis, not as a plain lens.",
-          options: suggestedScopeOptions(type)
-        };
+          required: template.required_parameters.includes("scope"),
+          options: template.supported_scopes || []
+        }
+      ];
+
+      if (branch === "Advisor Review" && (template.advisor_internal_purposes || []).length) {
+        fields.push({
+          key: "internalPurpose",
+          label: "Internal purpose",
+          required: true,
+          options: template.advisor_internal_purposes
+        });
       }
-      if (!state.answers.lens) {
-        return {
+
+      const lenses = safeLensOptions(template);
+      if (lenses.length) {
+        fields.push({
           key: "lens",
           label: "Lens",
-          prompt: "How should positions be classified or grouped?",
-          helper: "Lens is a classification scheme. Plain Manager is not a lens value.",
-          options: suggestedLensOptions(type)
-        };
+          required: template.required_parameters.includes("lens"),
+          options: template.required_parameters.includes("lens") ? lenses : ["None"].concat(lenses)
+        });
       }
-      if (!state.answers.metric) {
-        return {
+
+      if (!template.fixed_metric && (template.supported_metrics || []).length) {
+        fields.push({
           key: "metric",
           label: "Metric",
-          prompt: "What are we measuring?",
-          helper: "Metric is separate from scope, lens, and scenario.",
-          options: suggestedMetricOptions(type)
-        };
+          required: template.required_parameters.includes("metric"),
+          options: template.supported_metrics
+        });
       }
-      if (needsScenarioStep(type) && !state.answers.scenario) {
-        return {
+
+      if (template.scenario_requirement === "required" || template.scenario_requirement === "optional") {
+        fields.push({
           key: "scenario",
           label: "Scenario",
-          prompt: type === "Scenario Impact" ? "Which complete scenario should this use?" : "Should this element include a scenario?",
-          helper: "Scenario is required only when the report element depends on a pricing environment.",
-          options: type === "Scenario Impact" ? scenarioOptions.filter((option) => option !== "None") : scenarioOptions
-        };
+          required: template.scenario_requirement === "required",
+          options: template.scenario_requirement === "required" ? scenarioOptions : ["None"].concat(scenarioOptions)
+        });
       }
-      if (!state.answers.display) {
-        return {
+
+      if ((template.supported_display_forms || []).length) {
+        fields.push({
           key: "display",
-          label: "Display",
-          prompt: "How should this element appear later?",
-          helper: "No chart or report is generated yet. This stores the intended display form.",
-          options: suggestedDisplayOptions(type)
-        };
+          label: "Display form",
+          required: false,
+          options: template.supported_display_forms
+        });
       }
-      return null;
+
+      return fields;
     }
 
-    function suggestedScopeOptions(type) {
-      if (type === "Manager Comparison") {
-        return ["All managers compared", "Selected manager"];
-      }
-      if (type === "Cash Generation") {
-        return ["Whole portfolio", "All managers compared", "Selected manager", "Selected sleeve / mandate"];
-      }
-      return scopeOptions;
+    function renderField(field) {
+      const selected = state.config[field.key] || "";
+      const options = field.options.map((option) => {
+        const isSelected = selected === option ? " selected" : "";
+        return `<option value="${escapeAttr(option)}"${isSelected}>${escapeHtml(option)}</option>`;
+      }).join("");
+      return `
+        <div class="field">
+          <label for="config-${escapeAttr(field.key)}">${escapeHtml(field.label)}${field.required ? " *" : ""}</label>
+          <select id="config-${escapeAttr(field.key)}" data-config-key="${escapeAttr(field.key)}">
+            ${options}
+          </select>
+        </div>
+      `;
     }
 
-    function suggestedLensOptions(type) {
-      if (type === "Data Confidence") {
-        return ["Data issue", "Instrument type", "Asset class", "Liquidity bucket"];
+    function renderFixedFields(template) {
+      const fixedLines = [];
+      if (template.fixed_metric) {
+        fixedLines.push(`<p><strong>Fixed metric:</strong> ${escapeHtml(template.fixed_metric)}</p>`);
       }
-      if (type === "Manager Comparison") {
-        return ["Manager role / mandate", "Theme", "Asset class", "Cash-generation role", "Liquidity bucket"];
+      if (template.scenario_requirement === "not_applicable") {
+        fixedLines.push("<p><strong>Scenario:</strong> not applicable for this element.</p>");
       }
-      return lensOptions;
-    }
-
-    function suggestedMetricOptions(type) {
-      if (type === "Cash Generation") {
-        return ["Cash generated", "Liquidity", "Market value", "Portfolio %"];
-      }
-      if (type === "Scenario Impact") {
-        return ["Scenario impact", "P&L", "Exposure"];
-      }
-      if (type === "Data Confidence") {
-        return ["Data confidence", "Human-review count"];
-      }
-      return metricOptions;
-    }
-
-    function suggestedDisplayOptions(type) {
-      if (type === "Data Confidence") {
-        return ["Table", "Summary card", "Appendix item"];
-      }
-      if (type === "Manager Comparison") {
-        return ["Grid", "Table", "Bar chart"];
-      }
-      return displayOptions;
-    }
-
-    function needsScenarioStep(type) {
-      return elementScenarioMode[type] === "required" || elementScenarioMode[type] === "optional";
-    }
-
-    function selectAnswer(answer) {
-      const step = currentStep();
-      if (!step) {
+      if (!fixedLines.length) {
+        els.fixed.classList.add("hidden");
+        els.fixed.innerHTML = "";
         return;
       }
-      state.history.push({ key: step.key, previous: state.answers[step.key] });
-      state.answers[step.key] = answer;
-      if (step.key === "elementType" && elementScenarioMode[answer] === "irrelevant") {
-        state.answers.scenario = "None";
-      }
-      els.status.textContent = "";
-      render();
+      els.fixed.classList.remove("hidden");
+      els.fixed.innerHTML = fixedLines.join("");
     }
 
-    function goBack() {
-      const last = state.history.pop();
-      if (!last) {
+    function renderReadiness(template) {
+      const checks = (template.completeness_checks || []).slice(0, 3);
+      if (!checks.length) {
+        els.readiness.classList.add("hidden");
+        els.readiness.innerHTML = "";
         return;
       }
-      delete state.answers[last.key];
-      if (last.key === "elementType") {
-        delete state.answers.scope;
-        delete state.answers.lens;
-        delete state.answers.metric;
-        delete state.answers.scenario;
-        delete state.answers.display;
-      }
-      if (last.key === "branch") {
-        state.answers = {};
-        state.history = [];
-      }
-      els.status.textContent = "";
-      render();
+      els.readiness.classList.remove("hidden");
+      els.readiness.innerHTML = `
+        <strong>Coverage and confidence checks</strong>
+        ${checks.map((check) => `<p>${escapeHtml(check)}</p>`).join("")}
+      `;
     }
 
-    function startOverElement() {
-      state.answers = {};
-      state.history = [];
-      els.status.textContent = "";
-      render();
+    function handleConfigChange(event) {
+      const key = event.target.dataset.configKey;
+      if (!key || !state.selectedTemplate) return;
+      state.config[key] = event.target.value;
+      if (key === "branch") {
+        els.branch.value = event.target.value;
+        state.config.placement = firstValue(placementsFor(state.selectedTemplate, event.target.value));
+        state.config.internalPurpose = event.target.value === "Advisor Review" ? firstValue(state.selectedTemplate.advisor_internal_purposes) : "";
+      }
+      renderCandidates();
+      renderConfiguration();
     }
 
-    function addSpecToSet() {
-      const spec = buildSpec();
-      if (!spec) {
-        return;
-      }
+    function addSpec() {
+      const template = state.selectedTemplate;
+      if (!template || !isConfigComplete(template)) return;
+      const spec = {
+        id: `${Date.now()}_${Math.random().toString(16).slice(2)}`,
+        element_id: template.element_id,
+        title: template.title,
+        category: template.category,
+        branch: state.config.branch,
+        placement: state.config.placement,
+        internalPurpose: state.config.internalPurpose || null,
+        scope: state.config.scope,
+        lens: state.config.lens && state.config.lens !== "None" ? state.config.lens : null,
+        metric: template.fixed_metric || state.config.metric || null,
+        scenario: state.config.scenario && state.config.scenario !== "None" ? state.config.scenario : null,
+        display: state.config.display || template.fixed_or_default_display,
+        scenarioRequirement: template.scenario_requirement,
+        coverageBadge: coverageBadge(template),
+        completenessChecks: template.completeness_checks || [],
+        defaultCaveatRules: template.default_caveat_rules || []
+      };
       if (spec.branch === "Client Briefing") {
         state.clientSet.push(spec);
       } else {
         state.advisorSet.push(spec);
       }
-      els.status.textContent = `Added ${spec.elementType} to ${spec.branch} Set.`;
-      state.answers = { branch: spec.branch };
-      state.history = [{ key: "branch", previous: undefined }];
-      render();
-    }
-
-    function buildSpec() {
-      const answers = state.answers;
-      if (currentStep()) {
-        return null;
-      }
-      return {
-        id: `${Date.now()}_${Math.random().toString(16).slice(2)}`,
-        branch: answers.branch,
-        intent: answers.intent,
-        audience: answers.audience || null,
-        placement: answers.placement,
-        internalPurpose: answers.internalPurpose || null,
-        elementType: answers.elementType,
-        scope: answers.scope,
-        lens: answers.lens,
-        metric: answers.metric,
-        scenario: answers.scenario || "None",
-        display: answers.display,
-        lensCoverage: "Coverage: 100% assigned - 82% direct - 14% proxy - 4% human review",
-        scenarioCoverage: scenarioCoverageText(answers.scenario),
-        confidence: "mixed confidence"
-      };
-    }
-
-    function scenarioCoverageText(scenario) {
-      if (!scenario || scenario === "None") {
-        return "Scenario: none";
-      }
-      return "Complete treatment: yes - Direct repricing: demo 62% - Proxy/remainder: demo 34% - Human review: demo 1 - Horizon: demo 3 months";
-    }
-
-    function render() {
-      const step = currentStep();
-      els.back.disabled = state.history.length === 0;
-      renderSpec();
+      els.status.textContent = `Added ${spec.title} to ${spec.branch} Set.`;
+      state.selectedTemplate = null;
+      state.config = {};
+      renderConfiguration();
+      renderCandidates();
       renderSets();
-      renderBadges();
-      if (!step) {
-        els.progress.textContent = "Review";
-        els.title.textContent = "Report element spec complete";
-        els.helper.textContent = "Add this compact element spec to the correct report set.";
-        els.options.innerHTML = "";
-        els.review.classList.remove("hidden");
-        return;
+    }
+
+    function coverageBadge(template) {
+      const checks = template.completeness_checks || [];
+      if (state.config.scenario && state.config.scenario !== "None") {
+        return firstMatching(checks, "scenario") || "Scenario completeness check required";
       }
-      els.progress.textContent = step.label;
-      els.title.textContent = step.prompt;
-      els.helper.textContent = step.helper;
-      els.review.classList.add("hidden");
-      els.options.innerHTML = step.options.map(renderOption).join("");
-    }
-
-    function renderOption(option) {
-      return `<button class="answer-card" type="button" data-answer="${escapeAttr(option)}">${escapeHtml(option)}</button>`;
-    }
-
-    function renderSpec() {
-      const entries = specEntries();
-      els.emptySpec.classList.toggle("hidden", entries.length > 0);
-      els.specList.innerHTML = entries
-        .map(([label, value]) => `<li><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</li>`)
-        .join("");
-    }
-
-    function specEntries() {
-      const answers = state.answers;
-      const entries = [];
-      if (answers.branch) entries.push(["Branch", answers.branch]);
-      if (answers.intent) entries.push([answers.branch === "Client Briefing" ? "Client intent" : "Review intent", answers.intent]);
-      if (answers.audience) entries.push(["Audience", answers.audience]);
-      if (answers.placement) entries.push([answers.branch === "Client Briefing" ? "Client package placement" : "Advisor review placement", answers.placement]);
-      if (answers.internalPurpose) entries.push(["Internal purpose", answers.internalPurpose]);
-      if (answers.elementType) entries.push(["Element type", answers.elementType]);
-      if (answers.scope) entries.push(["Scope", answers.scope]);
-      if (answers.lens) entries.push(["Lens", answers.lens]);
-      if (answers.metric) entries.push(["Metric", answers.metric]);
-      if (answers.scenario) entries.push(["Scenario", answers.scenario]);
-      if (answers.display) entries.push(["Display", answers.display]);
-      return entries;
-    }
-
-    function renderBadges() {
-      const answers = state.answers;
-      const badges = [];
-      if (answers.lens) {
-        badges.push("Lens completeness: Coverage: 100% assigned - 82% direct - 14% proxy - 4% human review");
+      if (state.config.lens && state.config.lens !== "None") {
+        return firstMatching(checks, "lens") || "Lens completeness check required";
       }
-      if (answers.scenario && answers.scenario !== "None") {
-        badges.push(`Scenario completeness: ${scenarioCoverageText(answers.scenario)}`);
-      }
-      els.badges.classList.toggle("hidden", badges.length === 0);
-      els.badges.innerHTML = badges.map((badge) => `<p>${escapeHtml(badge)}</p>`).join("");
+      return firstMatching(checks, "confidence") || firstMatching(checks, "coverage") || "Data readiness check";
     }
 
     function renderSets() {
@@ -830,32 +785,112 @@
     }
 
     function renderSetRow(spec, index, kind) {
-      const placementLabel = kind === "client" ? spec.placement : `${spec.placement} - ${spec.internalPurpose}`;
-      const promoteButton = kind === "advisor" ? '<button class="tiny-button" type="button">Promote placeholder</button>' : "";
+      const placementLabel = kind === "client" ? spec.placement : `${spec.placement}${spec.internalPurpose ? ` | ${spec.internalPurpose}` : ""}`;
+      const lensText = spec.lens ? ` | ${spec.lens}` : "";
+      const metricText = spec.metric ? ` | ${spec.metric}` : "";
+      const scenarioText = spec.scenario ? ` | ${spec.scenario}` : "";
+      const promoteButton = kind === "advisor" ? '<button class="tiny-button" type="button" data-action="promote" data-kind="advisor" data-index="' + index + '">Promote to Client Briefing</button>' : "";
       return `
         <li class="set-row">
-          <h3>${escapeHtml(index + 1)}. ${escapeHtml(spec.elementType)}</h3>
+          <h3>${escapeHtml(index + 1)}. ${escapeHtml(spec.title)}</h3>
           <p>${escapeHtml(placementLabel)}</p>
-          <p>${escapeHtml(spec.scope)} | ${escapeHtml(spec.lens)} | ${escapeHtml(spec.metric)}${spec.scenario !== "None" ? ` | ${escapeHtml(spec.scenario)}` : ""}</p>
-          <p>${escapeHtml(spec.lensCoverage)} - ${escapeHtml(spec.confidence)}</p>
+          <p>${escapeHtml(spec.scope || "")}${escapeHtml(lensText)}${escapeHtml(metricText)}${escapeHtml(scenarioText)}</p>
+          <p>${escapeHtml(spec.coverageBadge)}</p>
           <div class="row-actions">
-            <button class="tiny-button" type="button">Open/edit</button>
-            <button class="tiny-button" type="button">Duplicate</button>
-            <button class="tiny-button" type="button">Move up</button>
-            <button class="tiny-button" type="button">Move down</button>
-            <button class="tiny-button" type="button">Remove</button>
+            <button class="tiny-button" type="button" data-action="duplicate" data-kind="${escapeAttr(kind)}" data-index="${index}">Duplicate</button>
+            <button class="tiny-button" type="button" data-action="up" data-kind="${escapeAttr(kind)}" data-index="${index}"${index === 0 ? " disabled" : ""}>Move up</button>
+            <button class="tiny-button" type="button" data-action="down" data-kind="${escapeAttr(kind)}" data-index="${index}">Move down</button>
+            <button class="tiny-button" type="button" data-action="remove" data-kind="${escapeAttr(kind)}" data-index="${index}">Remove</button>
             ${promoteButton}
           </div>
         </li>
       `;
     }
 
-    function handleOptionClick(event) {
-      const button = event.target.closest("[data-answer]");
-      if (!button) {
-        return;
+    function handleSetAction(event) {
+      const button = event.target.closest("[data-action]");
+      if (!button) return;
+      const list = button.dataset.kind === "client" ? state.clientSet : state.advisorSet;
+      const index = Number(button.dataset.index);
+      const action = button.dataset.action;
+      if (!Number.isInteger(index) || index < 0 || index >= list.length) return;
+      if (action === "remove") {
+        list.splice(index, 1);
+      } else if (action === "duplicate") {
+        list.splice(index + 1, 0, { ...list[index], id: `${Date.now()}_${Math.random().toString(16).slice(2)}` });
+      } else if (action === "up" && index > 0) {
+        const item = list.splice(index, 1)[0];
+        list.splice(index - 1, 0, item);
+      } else if (action === "down" && index < list.length - 1) {
+        const item = list.splice(index, 1)[0];
+        list.splice(index + 1, 0, item);
+      } else if (action === "promote") {
+        els.status.textContent = "Promote to Client Briefing is a placeholder in this local composer.";
       }
-      selectAnswer(button.dataset.answer);
+      renderSets();
+    }
+
+    function clearSelection() {
+      state.selectedTemplate = null;
+      state.config = {};
+      els.status.textContent = "";
+      renderCandidates();
+      renderConfiguration();
+    }
+
+    function isConfigComplete(template) {
+      if (!state.config.branch || !state.config.placement || !state.config.scope) return false;
+      if (state.config.branch === "Advisor Review" && (template.advisor_internal_purposes || []).length && !state.config.internalPurpose) return false;
+      if (template.required_parameters.includes("lens") && !state.config.lens) return false;
+      if (template.required_parameters.includes("metric") && !state.config.metric && !template.fixed_metric) return false;
+      if (template.scenario_requirement === "required" && (!state.config.scenario || state.config.scenario === "None")) return false;
+      return true;
+    }
+
+    function placementsFor(template, branch) {
+      const placements = template.supported_placements || {};
+      return placements[branch] || [];
+    }
+
+    function safeLensOptions(template) {
+      return (template.supported_lenses || []).filter((lens) => lens !== "Manager");
+    }
+
+    function searchableText(template) {
+      return normalize([
+        template.title,
+        template.short_description,
+        template.category,
+        (template.discovery_tags || []).join(" "),
+        (template.relevant_client_questions || []).join(" "),
+        (template.relevant_advisor_review_intents || []).join(" ")
+      ].join(" "));
+    }
+
+    function containsNormalized(values, candidate) {
+      const candidateKey = normalize(candidate);
+      return (values || []).some((value) => normalize(value) === candidateKey);
+    }
+
+    function uniqueValues(values) {
+      return Array.from(new Set(values.filter(Boolean))).sort((a, b) => a.localeCompare(b));
+    }
+
+    function firstValue(values) {
+      return Array.isArray(values) && values.length ? values[0] : "";
+    }
+
+    function firstMatching(values, needle) {
+      const normalizedNeedle = normalize(needle);
+      return (values || []).find((value) => normalize(value).includes(normalizedNeedle));
+    }
+
+    function toTitle(value) {
+      return String(value || "").replace(/_/g, " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+    }
+
+    function normalize(value) {
+      return String(value == null ? "" : value).trim().toLowerCase().replace(/\s+/g, " ");
     }
 
     function escapeHtml(value) {
@@ -871,11 +906,33 @@
       return escapeHtml(value);
     }
 
-    els.options.addEventListener("click", handleOptionClick);
-    els.back.addEventListener("click", goBack);
-    els.startOver.addEventListener("click", startOverElement);
-    els.addSpec.addEventListener("click", addSpecToSet);
-    render();
+    els.branch.addEventListener("change", () => {
+      if (state.selectedTemplate && !state.selectedTemplate.supported_branches.includes(els.branch.value)) {
+        clearSelection();
+      } else if (state.selectedTemplate) {
+        state.config.branch = els.branch.value;
+        state.config.placement = firstValue(placementsFor(state.selectedTemplate, els.branch.value));
+        state.config.internalPurpose = els.branch.value === "Advisor Review" ? firstValue(state.selectedTemplate.advisor_internal_purposes) : "";
+        renderConfiguration();
+      }
+      renderCandidates();
+    });
+    els.search.addEventListener("input", renderCandidates);
+    els.category.addEventListener("change", renderCandidates);
+    els.tag.addEventListener("change", renderCandidates);
+    els.candidates.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-template-id]");
+      if (button) selectTemplate(button.dataset.templateId);
+    });
+    els.form.addEventListener("change", handleConfigChange);
+    els.add.addEventListener("click", addSpec);
+    els.clear.addEventListener("click", clearSelection);
+    els.clientList.addEventListener("click", handleSetAction);
+    els.advisorList.addEventListener("click", handleSetAction);
+
+    renderConfiguration();
+    renderSets();
+    loadCatalog();
   </script>
 </body>
 </html>

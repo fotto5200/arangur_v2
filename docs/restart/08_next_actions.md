@@ -2,8 +2,7 @@
 
 ## Immediate Product/UI Batches
 
-- Wire the browser composer to the report-element template catalog so the user discovers/selects an element template before answering only that template's required configuration questions.
-- Define how completed report element specs become durable report package metadata.
+- Define how completed local Client Briefing Set and Advisor Review Set specs are serialized/exported or persisted.
 - Decide how Client Briefing Set and Advisor Review Set rows are edited, duplicated, reordered, removed, and promoted without showing a monolithic console.
 - Add selected `element_id`, branch, placement, internal purpose, scope, lens, metric, scenario, display form, and coverage metadata to report packages after the interaction model is stable.
 - Later add backend briefing-set metadata/persistence.
@@ -243,9 +242,18 @@
 - Acceptance criteria: Implemented baseline: `src/arangur/report_elements/templates.json` defines Portfolio Status, Concentration, Scenario Impact by Manager, Cash Generation Summary, Manager Comparison, and Data Confidence Note templates; `catalog.py` loads, validates, lists, looks up, and filters templates; `/api/report-elements` and `/api/report-elements/{element_id}` expose discovery/detail JSON; tests cover required fields, uniqueness, scenario requirements, scope/lens distinction, filters, and 404 behavior.
 - Stop conditions: A future UI rewrite or durable spec persistence should be handled in separate batches.
 
+## Batch 16A-7d: Catalog-Driven Report Element Composer UI
+
+- Goal: Wire the browser composer to the report-element template catalog so discovery precedes element-specific configuration.
+- Mode: Implemented local UI baseline.
+- Allowed scope: `src/arangur/app/static/index.html`, tests, restart docs, contracts/docs clarifications, and README pointers.
+- Non-goals: No report generation, no charts, no workflow API calls, no report links, no saved specs, no backend persistence, no Docker/Postgres changes, no live Plaid, no external APIs, no real data.
+- Acceptance criteria: Implemented baseline: UI fetches `/api/report-elements`, provides branch/search/category/topic discovery, updates candidate templates locally, lets the advisor select a template immediately, renders only configuration fields derived from that template, skips scenario for `not_applicable` templates, keeps plain `Manager` out of lens options, and adds compact local specs to separate Client Briefing Set and Advisor Review Set lists with simple local row controls.
+- Stop conditions: Durable serialization/export/import and backend spec persistence remain follow-up batches.
+
 ## Batch 16A-8: Briefing Set Metadata
 
-- Goal: Add selected report element specs and briefing set metadata to backend/report packages.
+- Goal: Add selected report element specs and briefing set metadata to backend/report packages after the local spec-set shape is stable.
 - Mode: Recommended implementation/design batch after the UI model is stable.
 - Allowed scope: `src/`, `tests/`, `docs/contracts/`, `docs/ui_reporting/`, and generated synthetic report artifacts if intentionally refreshed.
 - Non-goals: No production persistence model for real clients, no full portfolio database redesign, no live data.

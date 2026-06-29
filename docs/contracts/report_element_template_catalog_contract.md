@@ -79,12 +79,12 @@ Discovery-only inputs should be omitted unless a product decision later requires
 
 ## Deliberately Not Implemented Yet
 
-This batch does not implement:
+This catalog contract does not implement:
 
 - report generation
 - chart generation
-- frontend catalog-driven discovery
 - saved report-element specs
 - backend persistence for report specs
+- durable export/import of frontend spec sets
 - production authorization or client data models
 - live Plaid, external APIs, vendor data, or real financial/client data

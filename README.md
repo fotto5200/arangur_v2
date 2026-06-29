@@ -95,11 +95,11 @@ Start the FastAPI app:
 python -m uvicorn arangur.app.main:app --reload --app-dir src
 ```
 
-Open `http://127.0.0.1:8000/app/` to use the Report Element Spec Composer prototype. It starts with a static client/portfolio context strip, asks for one report element at a time, and adds completed specs to either the Client Briefing Set or the Advisor Review Set.
+Open `http://127.0.0.1:8000/app/` to use the Report Element Spec Composer prototype. It starts with a compact static client/portfolio context strip, loads the report element template catalog from `/api/report-elements`, and lets the advisor browse/search/filter candidate element templates before configuring one.
 
-The backend also exposes a static report-element template catalog at `/api/report-elements` and `/api/report-elements/{element_id}` for future template-driven discovery. The current browser UI is not wired to that catalog yet.
+After a template is selected, the composer renders only the fields that template needs, such as branch placement, advisor internal purpose, scope, lens, metric, scenario, and display form. Completed local specs can be added to either the Client Briefing Set or the Advisor Review Set.
 
-This UI does not generate reports, charts, or client preview output yet. It does not call the workflow API or show report links. The next UI batch should decide how the composer selects catalog templates and how completed element specs become durable report package metadata.
+This UI does not generate reports, charts, or client preview output yet. It does not call the workflow API or show report links. The next UI batch should decide how completed local spec sets are serialized, exported, or persisted.
 
 Create a native demo manager-overlap workflow run:
 
@@ -170,6 +170,7 @@ python -m unittest tests.test_report_index
 python -m unittest tests.test_workflow_templates
 python -m unittest tests.test_data_coverage
 python -m unittest tests.test_app_health
+python -m unittest tests.test_report_element_catalog
 python -m unittest tests.test_app_runs_api
 python -m unittest tests.test_app_persistence
 ```
