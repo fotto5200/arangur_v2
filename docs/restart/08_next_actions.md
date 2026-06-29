@@ -269,6 +269,15 @@
 - Acceptance criteria: Implemented baseline: `Browse all templates` opens a compact category-grouped one-line-per-template catalog; selecting from that grouped list reuses the template preview/configuration flow; `Add narrative element` supports client briefing narrative types and advisor review narrative types; narrative rows appear in the same ordered set lists as analytic elements, are visually distinct, and support edit, duplicate, move up/down, and remove.
 - Stop conditions: Durable spec serialization/export/import and backend spec persistence remain follow-up batches.
 
+## Batch 16A-7g: Compact Grouped Template Picker Refinement
+
+- Goal: Replace the inline browse-all catalog area with an attached compact grouped picker for fast template selection.
+- Mode: Implemented local UI refinement.
+- Allowed scope: `src/arangur/app/static/index.html`, tests, restart docs, and README pointers.
+- Non-goals: No finder redesign, no modal, no report generation, no charts, no workflow API calls, no AI narrative generation, no backend persistence, no Docker/Postgres changes, no live Plaid, no external APIs, no real data.
+- Acceptance criteria: Implemented baseline: `Browse all templates` toggles an attached dropdown-style picker near the button; categories are clear rows; templates are indented one-line rows without long descriptions, branch/topic chips, scenario badges, fixed metric/display, or coverage information; selecting a template closes the picker and reuses the existing selected-template preview and `Use this element` flow; the default empty state and search/category/filter candidate behavior remain unchanged.
+- Stop conditions: Durable spec serialization/export/import and backend spec persistence remain follow-up batches.
+
 ## Batch 16A-8: Briefing Set Metadata
 
 - Goal: Add selected report element specs and briefing set metadata to backend/report packages after the local spec-set shape is stable.

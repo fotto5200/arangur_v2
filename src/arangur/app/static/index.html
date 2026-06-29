@@ -216,39 +216,67 @@
       display: grid;
     }
 
+    .browse-picker {
+      display: inline-flex;
+      position: relative;
+    }
+
     .browse-all-panel {
-      border-top: 1px solid var(--line);
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
       display: grid;
-      gap: 10px;
-      max-height: 340px;
+      gap: 4px;
+      left: 0;
+      margin-top: 6px;
+      max-height: min(420px, 62vh);
+      min-width: min(380px, calc(100vw - 48px));
       overflow: auto;
-      padding-top: 10px;
+      padding: 8px;
+      position: absolute;
+      top: 100%;
+      width: min(430px, calc(100vw - 48px));
+      z-index: 20;
     }
 
     .browse-group {
       display: grid;
-      gap: 2px;
+      gap: 1px;
+      padding: 4px 0 6px;
     }
 
-    .browse-group h3 {
+    .browse-group + .browse-group {
+      border-top: 1px solid var(--line);
+    }
+
+    .browse-category-row {
+      align-items: center;
       color: var(--muted);
+      display: flex;
       font-size: 12px;
-      padding: 7px 4px 2px;
+      font-weight: 800;
+      gap: 6px;
+      min-height: 27px;
+      padding: 4px 6px;
       text-transform: uppercase;
     }
 
     .browse-template-row {
       background: transparent;
       border: 0;
-      border-bottom: 1px solid var(--line);
+      border-radius: 6px;
       color: var(--strong);
       cursor: pointer;
-      display: flex;
-      font-weight: 700;
-      justify-content: space-between;
-      min-height: 34px;
-      padding: 7px 4px;
+      display: block;
+      font-size: 13px;
+      font-weight: 650;
+      min-height: 30px;
+      overflow: hidden;
+      padding: 6px 8px 6px 26px;
       text-align: left;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       width: 100%;
     }
 
@@ -516,7 +544,10 @@
         </div>
 
         <div class="button-row">
-          <button id="browse-all-button" class="secondary-button" type="button">Browse all templates</button>
+          <div class="browse-picker">
+            <button id="browse-all-button" class="secondary-button" type="button" aria-expanded="false" aria-controls="browse-all-panel">Browse all templates</button>
+            <div id="browse-all-panel" class="browse-all-panel hidden" role="menu" aria-label="All report element templates grouped by category"></div>
+          </div>
           <button id="add-narrative-button" class="secondary-button" type="button">Add narrative element</button>
         </div>
 
@@ -547,7 +578,6 @@
         </div>
 
         <div id="category-buttons" class="browse-row" aria-label="Browse categories"></div>
-        <div id="browse-all-panel" class="browse-all-panel hidden" aria-label="All report element templates grouped by category"></div>
         <p id="candidate-count" class="status">Search, browse a category, or choose a filter to find report elements.</p>
         <div id="candidate-list" class="candidate-list" aria-label="Compact candidate report elements"></div>
       </section>
@@ -823,10 +853,15 @@
     }
 
     function toggleBrowseAll() {
-      state.browseAllOpen = !state.browseAllOpen;
-      els.browseAll.textContent = state.browseAllOpen ? "Hide all templates" : "Browse all templates";
-      els.browseAllPanel.classList.toggle("hidden", !state.browseAllOpen);
-      renderBrowseAllPanel();
+      setBrowseAllOpen(!state.browseAllOpen);
+    }
+
+    function setBrowseAllOpen(open) {
+      state.browseAllOpen = open;
+      els.browseAll.textContent = open ? "Hide all templates" : "Browse all templates";
+      els.browseAll.setAttribute("aria-expanded", String(open));
+      els.browseAllPanel.classList.toggle("hidden", !open);
+      if (open) renderBrowseAllPanel();
     }
 
     function renderBrowseAllPanel() {
@@ -840,12 +875,9 @@
       els.browseAllPanel.innerHTML = categories.length
         ? categories.map((category) => `
             <section class="browse-group">
-              <h3>${escapeHtml(categoryLabel(category))}</h3>
+              <div class="browse-category-row"><span aria-hidden="true">v</span>${escapeHtml(categoryLabel(category))}</div>
               ${grouped[category].map((template) => `
-                <button class="browse-template-row" type="button" data-template-id="${escapeAttr(template.element_id)}">
-                  <span>${escapeHtml(template.title)}</span>
-                  <span class="meta">${escapeHtml(targetSupportLabel(template))}</span>
-                </button>
+                <button class="browse-template-row" type="button" role="menuitem" data-template-id="${escapeAttr(template.element_id)}">${escapeHtml(template.title)}</button>
               `).join("")}
             </section>
           `).join("")
@@ -1585,7 +1617,17 @@
     });
     els.browseAllPanel.addEventListener("click", (event) => {
       const button = event.target.closest("[data-template-id]");
-      if (button) selectForPreview(button.dataset.templateId);
+      if (button) {
+        setBrowseAllOpen(false);
+        selectForPreview(button.dataset.templateId);
+      }
+    });
+    document.addEventListener("click", (event) => {
+      if (!state.browseAllOpen || event.target.closest(".browse-picker")) return;
+      setBrowseAllOpen(false);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && state.browseAllOpen) setBrowseAllOpen(false);
     });
     els.form.addEventListener("change", handleConfigChange);
     els.form.addEventListener("input", handleConfigChange);
