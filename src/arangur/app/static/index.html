@@ -108,23 +108,72 @@
     .home-panel {
       display: grid;
       gap: 18px;
-      max-width: 760px;
+      max-width: 980px;
     }
 
     .home-actions {
       display: grid;
       gap: 10px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .home-secondary {
+    .home-flow-section,
+    .saved-workflow-panel,
+    .workflow-management-panel,
+    .developer-tools-panel {
       border-top: 1px solid var(--line);
       display: grid;
       gap: 10px;
       padding-top: 12px;
     }
 
-    .home-secondary > summary {
+    .home-flow-section:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .home-flow-title {
+      display: grid;
+      gap: 4px;
+    }
+
+    .workflow-name-grid {
+      align-items: end;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(240px, 1fr) auto;
+    }
+
+    .saved-workflow-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .saved-workflow-row {
+      align-items: center;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      padding: 10px;
+    }
+
+    .saved-workflow-row strong {
+      color: var(--strong);
+      display: block;
+      font-size: 14px;
+    }
+
+    .saved-workflow-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+
+    .developer-tools-panel > summary {
       color: var(--strong);
       cursor: pointer;
       font-weight: 700;
@@ -894,7 +943,9 @@
       .sets-grid,
       .finder-grid,
       .calculation-fields,
-      .home-actions {
+      .home-actions,
+      .workflow-name-grid,
+      .saved-workflow-row {
         grid-template-columns: 1fr;
       }
 
@@ -923,23 +974,59 @@
       <section class="panel home-panel">
         <div class="panel-header">
           <p class="helper">Advisor Home</p>
-          <h1 id="advisor-home-title">Start a briefing workflow</h1>
-          <p class="helper">Build a current set, continue a draft, or open a demo preview reference.</p>
+          <h1 id="advisor-home-title">Manage briefing workflows</h1>
+          <p class="helper">Design reusable workflows, populate them with the current demo snapshot, and preview the briefing surfaces.</p>
         </div>
 
-        <div class="home-actions" aria-label="Advisor workflow choices">
-          <button id="home-build-client-button" class="primary-button" type="button">Build Client Briefing Set</button>
-          <button id="home-build-advisor-button" class="primary-button" type="button">Build Advisor Review Set</button>
-          <button id="home-continue-draft-button" class="secondary-button" type="button">Open Saved Set / Continue Draft</button>
-        </div>
+        <section class="home-flow-section" aria-labelledby="design-workflow-title">
+          <div class="home-flow-title">
+            <p class="helper">Design / Edit</p>
+            <h2 id="design-workflow-title">Design or edit briefing workflows</h2>
+          </div>
+          <div class="home-actions" aria-label="Design or edit workflow choices">
+            <button id="home-build-client-button" class="primary-button" type="button">New Client Briefing Workflow</button>
+            <button id="home-build-advisor-button" class="primary-button" type="button">New Advisor Review Workflow</button>
+            <button id="home-open-saved-button" class="secondary-button" type="button">Open saved workflow</button>
+            <button id="home-copy-workflow-button" class="secondary-button" type="button">Copy existing workflow</button>
+          </div>
+        </section>
 
-        <details class="home-secondary">
-          <summary>Advanced</summary>
-          <p class="helper">View Demo Preview / QA Reference links and draft tools stay secondary.</p>
+        <section class="home-flow-section" aria-labelledby="populate-workflow-title">
+          <div class="home-flow-title">
+            <p class="helper">Populate</p>
+            <h2 id="populate-workflow-title">Populate workflow with data</h2>
+            <p class="helper">Use a saved workflow with the current demo data snapshot. Report generation from saved workflows is a next workflow.</p>
+          </div>
+        </section>
+
+        <section class="home-flow-section" aria-labelledby="present-report-title">
+          <div class="home-flow-title">
+            <p class="helper">Present</p>
+            <h2 id="present-report-title">Present or view reports</h2>
+            <p class="helper">Preview the current Client Briefing or Advisor Review. Generated report history is not implemented in this local demo.</p>
+          </div>
           <div class="button-row">
-            <a class="tiny-button" href="/simulation/briefing_set_previews/client_briefing_set_preview.html" target="_blank" rel="noopener">View Demo Client Preview</a>
-            <a class="tiny-button" href="/simulation/briefing_set_previews/advisor_review_set_preview.html" target="_blank" rel="noopener">View Demo Advisor Preview</a>
-            <button id="home-advanced-tools-button" class="secondary-button" type="button">Open Advanced Tools</button>
+            <button id="home-preview-client-button" class="secondary-button" type="button">Preview Client Briefing</button>
+            <button id="home-preview-advisor-button" class="secondary-button" type="button">Preview Advisor Review</button>
+          </div>
+        </section>
+
+        <section class="saved-workflow-panel" aria-labelledby="saved-workflows-title">
+          <div class="home-flow-title">
+            <p class="helper">Saved Workflows</p>
+            <h2 id="saved-workflows-title">Named saved workflows</h2>
+          </div>
+          <div id="home-saved-workflow-list" class="saved-workflow-list" aria-label="Named saved workflows"></div>
+          <p id="home-saved-workflow-status" class="status"></p>
+        </section>
+
+        <details class="developer-tools-panel">
+          <summary>Developer / QA tools</summary>
+          <p class="helper">QA references and technical transfer tools stay outside the advisor workflow.</p>
+          <div class="button-row">
+            <a class="tiny-button" href="/simulation/briefing_set_previews/client_briefing_set_preview.html" target="_blank" rel="noopener">Open QA Client reference</a>
+            <a class="tiny-button" href="/simulation/briefing_set_previews/advisor_review_set_preview.html" target="_blank" rel="noopener">Open QA Advisor reference</a>
+            <button id="home-advanced-tools-button" class="secondary-button" type="button">Open Developer / QA tools</button>
           </div>
         </details>
       </section>
@@ -955,6 +1042,24 @@
         <button id="builder-home-button" class="secondary-button" type="button">Advisor Home</button>
       </div>
 
+      <section class="set-panel workflow-management-panel" aria-labelledby="current-workflow-title">
+        <div class="workflow-name-grid">
+          <div class="field">
+            <label for="workflow-name-input">Workflow name</label>
+            <input id="workflow-name-input" type="text" placeholder="Northstar Standard Quarterly Review">
+          </div>
+          <div class="button-row">
+            <button id="save-workflow-button" class="primary-button" type="button">Save current workflow</button>
+            <button id="copy-current-workflow-button" class="secondary-button" type="button">Copy Workflow</button>
+          </div>
+        </div>
+        <div>
+          <h2 id="current-workflow-title">Current Draft Workflow</h2>
+          <p id="workflow-dirty-status" class="status">Unsaved current work</p>
+          <p id="workflow-save-status" class="status"></p>
+        </div>
+      </section>
+
       <section class="workspace" aria-live="polite">
         <section class="panel" aria-labelledby="finder-title">
           <div class="panel-header">
@@ -963,8 +1068,8 @@
           </div>
 
           <div class="target-toggle" aria-label="Target set">
-            <button id="target-client" class="target-button is-active" type="button" data-target-set="Client Briefing Set">Client Briefing Set</button>
-            <button id="target-advisor" class="target-button" type="button" data-target-set="Advisor Review Set">Advisor Review Set</button>
+            <button id="target-client" class="target-button is-active" type="button" data-target-set="Client Briefing Set">Client Briefing Workflow</button>
+            <button id="target-advisor" class="target-button" type="button" data-target-set="Advisor Review Set">Advisor Review Workflow</button>
           </div>
 
           <div class="button-row">
@@ -1027,7 +1132,7 @@
 
       <section class="sets-grid" aria-label="Report set lists">
         <section class="set-panel" aria-labelledby="client-set-title">
-          <h2 id="client-set-title">Client Briefing Set</h2>
+          <h2 id="client-set-title">Client Briefing Workflow</h2>
           <p id="client-empty" class="empty">No client briefing elements yet.</p>
           <ul id="client-set-list" class="set-list"></ul>
           <div class="set-actions">
@@ -1037,7 +1142,7 @@
         </section>
 
         <section class="set-panel" aria-labelledby="advisor-set-title">
-          <h2 id="advisor-set-title">Advisor Review Set</h2>
+          <h2 id="advisor-set-title">Advisor Review Workflow</h2>
           <p id="advisor-empty" class="empty">No advisor review elements yet.</p>
           <ul id="advisor-set-list" class="set-list"></ul>
           <div class="set-actions">
@@ -1058,14 +1163,14 @@
       </section>
 
       <details id="advanced-tools" class="set-panel advanced-panel">
-        <summary>Advanced</summary>
-        <p class="helper">Optional tools for handoff, draft save/load, and reference previews.</p>
+        <summary>Developer / QA tools</summary>
+        <p class="helper">Optional technical tools for handoff, backend draft checks, and reference previews.</p>
 
         <div class="advanced-section" aria-labelledby="local-transfer-title">
-          <h3 id="local-transfer-title">Local set transfer</h3>
+          <h3 id="local-transfer-title">Local workflow JSON transfer</h3>
           <div class="button-row">
-            <button id="copy-spec-set-button" class="secondary-button" type="button">Copy local set JSON</button>
-            <button id="download-spec-set-button" class="secondary-button" type="button">Download local set JSON</button>
+            <button id="copy-spec-set-button" class="secondary-button" type="button">Copy local workflow JSON</button>
+            <button id="download-spec-set-button" class="secondary-button" type="button">Download local workflow JSON</button>
           </div>
           <p id="spec-set-status" class="status"></p>
           <details id="serialized-spec-details" class="technical-details">
@@ -1073,21 +1178,21 @@
             <textarea id="serialized-spec-output" class="serialized-output" readonly aria-label="Technical serialized local spec set"></textarea>
           </details>
           <details id="restore-spec-details" class="technical-details">
-            <summary>Restore local spec set</summary>
+            <summary>Restore local workflow JSON</summary>
             <div class="field">
-              <label for="restore-spec-input">Paste exported local set JSON</label>
+              <label for="restore-spec-input">Paste exported local workflow JSON</label>
               <textarea id="restore-spec-input" class="restore-input" aria-label="Paste exported spec set"></textarea>
             </div>
             <div class="button-row">
-              <button id="restore-spec-set-button" class="secondary-button" type="button">Restore local set</button>
+              <button id="restore-spec-set-button" class="secondary-button" type="button">Restore local workflow</button>
             </div>
             <p id="restore-spec-status" class="status"></p>
           </details>
         </div>
 
         <div class="advanced-section" aria-labelledby="backend-drafts-title">
-          <h3 id="backend-drafts-title">Backend save/load</h3>
-          <p class="helper">Optional private-demo persistence for draft briefing spec sets. Local export/download remains available.</p>
+          <h3 id="backend-drafts-title">Backend save/load test controls</h3>
+          <p class="helper">Optional private-demo persistence check for draft workflow payloads. Named local workflow saving remains primary in this demo.</p>
           <div class="button-row">
             <button id="save-backend-spec-set-button" class="secondary-button" type="button">Save to backend</button>
             <button id="load-backend-spec-sets-button" class="secondary-button" type="button">Load saved sets</button>
@@ -1129,6 +1234,13 @@
     const BRIEFING_PREVIEW_INDEX_ENDPOINT = "/simulation/briefing_set_previews/briefing_set_preview_index.json";
     const VIEW_FRAGMENT_BASE = "/simulation/report_element_views/";
     const LOCAL_SPEC_SET_SCHEMA_VERSION = "arangur.local_briefing_spec_set.v1";
+    const LOCAL_WORKFLOW_STORAGE_KEY = "arangur.local_named_briefing_workflows.v1";
+    const LOCAL_WORKFLOW_SCHEMA_VERSION = "arangur.local_named_briefing_workflows.v1";
+    const EXAMPLE_WORKFLOW_NAMES = [
+      "Northstar Standard Quarterly Review",
+      "Family Office Advisor Review Draft",
+      "Q3 Client Briefing Draft"
+    ];
     const CLIENT_CONTEXT = {
       client_family: "Northstar Family Office",
       portfolio_context: "Demo portfolio",
@@ -1233,6 +1345,15 @@
       selected_sleeve: "Selected sleeve:",
       selected_strategy: "Selected strategy:"
     };
+    const PREVIEW_SUPPORTED_SCOPES_BY_ELEMENT = {
+      portfolio_status: ["Whole portfolio"],
+      concentration: ["Whole portfolio"],
+      scenario_impact_by_manager: ["All managers compared"],
+      cash_generation_summary: ["Whole portfolio", "All managers compared"],
+      manager_comparison: ["All managers compared"],
+      data_confidence_note: ["Whole portfolio"]
+    };
+    const UNSUPPORTED_SELECTED_SCOPE_PREVIEW_MESSAGE = "Selected-scope preview is not available for this demo-rendered element. Choose a supported scope before adding this element.";
     const SCENARIO_OPTIONS = [
       "AI/chip selloff",
       "Rate shock",
@@ -1355,6 +1476,10 @@
       currentPreviewKind: null,
       currentPreviewReady: false,
       route: "home",
+      currentWorkflowId: null,
+      currentWorkflowName: "",
+      workflowDirty: false,
+      savedWorkflows: [],
       savedSpecSets: [],
       clientSet: [],
       advisorSet: []
@@ -1364,10 +1489,21 @@
       advisorHome: document.getElementById("advisor-home"),
       homeBuildClient: document.getElementById("home-build-client-button"),
       homeBuildAdvisor: document.getElementById("home-build-advisor-button"),
-      homeContinueDraft: document.getElementById("home-continue-draft-button"),
+      homeOpenSaved: document.getElementById("home-open-saved-button"),
+      homeCopyWorkflow: document.getElementById("home-copy-workflow-button"),
+      homePreviewClient: document.getElementById("home-preview-client-button"),
+      homePreviewAdvisor: document.getElementById("home-preview-advisor-button"),
       homeAdvancedTools: document.getElementById("home-advanced-tools-button"),
+      homeSavedWorkflowList: document.getElementById("home-saved-workflow-list"),
+      homeSavedWorkflowStatus: document.getElementById("home-saved-workflow-status"),
       builderSurface: document.getElementById("builder-surface"),
       builderHome: document.getElementById("builder-home-button"),
+      workflowNameInput: document.getElementById("workflow-name-input"),
+      saveWorkflow: document.getElementById("save-workflow-button"),
+      copyCurrentWorkflow: document.getElementById("copy-current-workflow-button"),
+      currentWorkflowTitle: document.getElementById("current-workflow-title"),
+      workflowDirtyStatus: document.getElementById("workflow-dirty-status"),
+      workflowSaveStatus: document.getElementById("workflow-save-status"),
       targetClient: document.getElementById("target-client"),
       targetAdvisor: document.getElementById("target-advisor"),
       search: document.getElementById("search-filter"),
@@ -1511,6 +1647,227 @@
     function openBuilderForTarget(targetSet) {
       setTargetSet(targetSet);
       navigateToRoute("builder");
+    }
+
+    function startNewWorkflow(targetSet) {
+      state.currentWorkflowId = null;
+      state.currentWorkflowName = "";
+      state.workflowDirty = true;
+      state.clientSet = [];
+      state.advisorSet = [];
+      closeCurrentSetPreview({ skipNavigation: true, skipScroll: true });
+      closeElementPreview();
+      resetSelection();
+      setTargetSet(targetSet);
+      renderSets();
+      renderWorkflowChrome();
+      navigateToRoute("builder");
+    }
+
+    function loadLocalNamedWorkflows() {
+      try {
+        const raw = window.localStorage ? window.localStorage.getItem(LOCAL_WORKFLOW_STORAGE_KEY) : null;
+        const payload = raw ? JSON.parse(raw) : null;
+        state.savedWorkflows = Array.isArray(payload && payload.workflows) ? payload.workflows : [];
+      } catch (error) {
+        state.savedWorkflows = [];
+      }
+      renderSavedWorkflows();
+    }
+
+    function persistLocalNamedWorkflows() {
+      try {
+        if (!window.localStorage) return false;
+        const payload = {
+          schema_version: LOCAL_WORKFLOW_SCHEMA_VERSION,
+          workflows: state.savedWorkflows
+        };
+        window.localStorage.setItem(LOCAL_WORKFLOW_STORAGE_KEY, JSON.stringify(payload));
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function renderWorkflowChrome() {
+      const name = state.currentWorkflowName || "";
+      els.workflowNameInput.value = name;
+      els.currentWorkflowTitle.textContent = name ? `Current Draft Workflow - ${name}` : "Current Draft Workflow";
+      els.workflowDirtyStatus.textContent = state.workflowDirty
+        ? "Unsaved current work"
+        : `Saved workflow${name ? `: ${name}` : ""}`;
+    }
+
+    function renderSavedWorkflows() {
+      if (!state.savedWorkflows.length) {
+        els.homeSavedWorkflowList.innerHTML = EXAMPLE_WORKFLOW_NAMES.map((name) => `
+          <div class="saved-workflow-row is-example">
+            <div>
+              <strong>${escapeHtml(name)}</strong>
+              <p class="meta">Example saved workflow name. Save a workflow to replace these examples.</p>
+            </div>
+            <span class="badge">Example</span>
+          </div>
+        `).join("");
+        els.homeSavedWorkflowStatus.textContent = "No named workflows saved in this browser yet.";
+        return;
+      }
+      els.homeSavedWorkflowList.innerHTML = state.savedWorkflows.map((workflow) => `
+        <div class="saved-workflow-row" data-workflow-id="${escapeAttr(workflow.id)}">
+          <div>
+            <strong>${escapeHtml(workflow.name)}</strong>
+            <p class="meta">${escapeHtml(savedWorkflowMeta(workflow))}</p>
+          </div>
+          <div class="saved-workflow-actions">
+            <button class="tiny-button" type="button" data-workflow-action="open" data-workflow-id="${escapeAttr(workflow.id)}">Open</button>
+            <button class="tiny-button" type="button" data-workflow-action="copy" data-workflow-id="${escapeAttr(workflow.id)}">Copy Workflow</button>
+            <button class="tiny-button" type="button" data-workflow-action="delete" data-workflow-id="${escapeAttr(workflow.id)}">Delete</button>
+          </div>
+        </div>
+      `).join("");
+      els.homeSavedWorkflowStatus.textContent = `${state.savedWorkflows.length} named saved ${state.savedWorkflows.length === 1 ? "workflow" : "workflows"} in this browser.`;
+    }
+
+    function savedWorkflowMeta(workflow) {
+      const payload = workflow.payload || {};
+      const clientCount = Array.isArray(payload.client_briefing_set) ? payload.client_briefing_set.length : 0;
+      const advisorCount = Array.isArray(payload.advisor_review_set) ? payload.advisor_review_set.length : 0;
+      return `${pluralizeSpec(clientCount, "client element")} and ${pluralizeSpec(advisorCount, "advisor element")} saved locally`;
+    }
+
+    function saveCurrentWorkflow() {
+      const name = els.workflowNameInput.value.trim();
+      if (!name) {
+        els.workflowSaveStatus.textContent = "Name this workflow before saving.";
+        return;
+      }
+      state.currentWorkflowName = name;
+      const id = state.currentWorkflowId || existingWorkflowIdForName(name) || newLocalId("workflow");
+      const workflow = {
+        id,
+        name,
+        saved_at: new Date().toISOString(),
+        schema_version: LOCAL_WORKFLOW_SCHEMA_VERSION,
+        payload: {
+          ...buildLocalSpecSet(),
+          workflow_name: name
+        }
+      };
+      const existingIndex = state.savedWorkflows.findIndex((candidate) => candidate.id === id);
+      if (existingIndex >= 0) {
+        state.savedWorkflows[existingIndex] = workflow;
+      } else {
+        state.savedWorkflows.unshift(workflow);
+      }
+      state.currentWorkflowId = id;
+      const persisted = persistLocalNamedWorkflows();
+      state.workflowDirty = !persisted;
+      renderSavedWorkflows();
+      renderWorkflowChrome();
+      els.workflowSaveStatus.textContent = persisted
+        ? `Saved workflow: ${name}.`
+        : "Could not save named workflow in this browser. Use local workflow JSON export/download for now.";
+    }
+
+    function copyCurrentWorkflow() {
+      const baseName = els.workflowNameInput.value.trim() || state.currentWorkflowName || "Untitled Briefing Workflow";
+      state.currentWorkflowId = null;
+      state.currentWorkflowName = uniqueWorkflowName(`Copy of ${baseName}`);
+      state.workflowDirty = true;
+      renderWorkflowChrome();
+      saveCurrentWorkflow();
+    }
+
+    function openSavedWorkflow(workflowId) {
+      const workflow = state.savedWorkflows.find((candidate) => candidate.id === workflowId);
+      if (!workflow) return;
+      applyWorkflowPayload(workflow.payload || {});
+      state.currentWorkflowId = workflow.id;
+      state.currentWorkflowName = workflow.name;
+      state.workflowDirty = false;
+      renderWorkflowChrome();
+      els.homeSavedWorkflowStatus.textContent = `Opened saved workflow: ${workflow.name}.`;
+      navigateToRoute("builder");
+    }
+
+    function duplicateSavedWorkflow(workflowId) {
+      const workflow = state.savedWorkflows.find((candidate) => candidate.id === workflowId);
+      if (!workflow) return;
+      const copy = {
+        ...workflow,
+        id: newLocalId("workflow"),
+        name: uniqueWorkflowName(`Copy of ${workflow.name}`),
+        saved_at: new Date().toISOString(),
+        payload: {
+          ...(workflow.payload || {}),
+          exported_at: new Date().toISOString()
+        }
+      };
+      copy.payload.workflow_name = copy.name;
+      state.savedWorkflows.unshift(copy);
+      const persisted = persistLocalNamedWorkflows();
+      renderSavedWorkflows();
+      els.homeSavedWorkflowStatus.textContent = persisted
+        ? `Copied workflow: ${copy.name}.`
+        : "Copied workflow in this session, but this browser could not persist it.";
+    }
+
+    function deleteSavedWorkflow(workflowId) {
+      const workflow = state.savedWorkflows.find((candidate) => candidate.id === workflowId);
+      state.savedWorkflows = state.savedWorkflows.filter((candidate) => candidate.id !== workflowId);
+      if (state.currentWorkflowId === workflowId) {
+        state.currentWorkflowId = null;
+        state.workflowDirty = true;
+      }
+      const persisted = persistLocalNamedWorkflows();
+      renderSavedWorkflows();
+      renderWorkflowChrome();
+      els.homeSavedWorkflowStatus.textContent = persisted
+        ? (workflow ? `Deleted workflow: ${workflow.name}.` : "Deleted saved workflow.")
+        : "Updated this session, but this browser could not persist the saved workflow list.";
+    }
+
+    function applyWorkflowPayload(payload) {
+      state.clientSet = restoreSpecList(payload.client_briefing_set, "Client Briefing Set");
+      state.advisorSet = restoreSpecList(payload.advisor_review_set, "Advisor Review Set");
+      closeCurrentSetPreview({ skipNavigation: true, skipScroll: true });
+      closeElementPreview();
+      resetSelection();
+      renderSets();
+    }
+
+    function handleSavedWorkflowAction(event) {
+      const button = event.target.closest("[data-workflow-action]");
+      if (!button) return;
+      const workflowId = button.dataset.workflowId;
+      if (button.dataset.workflowAction === "open") openSavedWorkflow(workflowId);
+      if (button.dataset.workflowAction === "copy") duplicateSavedWorkflow(workflowId);
+      if (button.dataset.workflowAction === "delete") deleteSavedWorkflow(workflowId);
+    }
+
+    function markWorkflowDirty() {
+      state.workflowDirty = true;
+      renderWorkflowChrome();
+    }
+
+    function existingWorkflowIdForName(name) {
+      const key = normalize(name);
+      const workflow = state.savedWorkflows.find((candidate) => normalize(candidate.name) === key);
+      return workflow ? workflow.id : null;
+    }
+
+    function uniqueWorkflowName(baseName) {
+      const existingNames = new Set(state.savedWorkflows.map((workflow) => normalize(workflow.name)));
+      if (!existingNames.has(normalize(baseName))) return baseName;
+      let index = 2;
+      while (existingNames.has(normalize(`${baseName} ${index}`))) {
+        index += 1;
+      }
+      return `${baseName} ${index}`;
+    }
+
+    function newLocalId(prefix) {
+      return `${prefix}_${Date.now()}_${Math.random().toString(16).slice(2)}`;
     }
 
     async function loadRenderedViewSummary() {
@@ -1859,7 +2216,8 @@
         warning: null
       };
       saveSpecToSet(spec);
-      els.status.textContent = `${state.editing ? "Updated" : "Added"} ${spec.title} in ${state.targetSet}.`;
+      els.status.textContent = `${state.editing ? "Updated" : "Added"} ${spec.title} in ${targetWorkflowLabel(state.targetSet)}.`;
+      markWorkflowDirty();
       resetSelection();
       renderSets();
     }
@@ -1870,7 +2228,7 @@
         fields.push({
           key: "scope",
           label: "Scope",
-          options: template.supported_scopes || []
+          options: previewSupportedScopesForTemplate(template)
         });
         const selectedEntityField = selectedScopeFieldFor(state.config.scope);
         if (selectedEntityField) {
@@ -1926,6 +2284,30 @@
 
     function selectedScopeConfigForScope(scope) {
       return SELECTED_SCOPE_CONFIG[normalize(scope)] || null;
+    }
+
+    function previewSupportedScopesForTemplate(template) {
+      const configured = PREVIEW_SUPPORTED_SCOPES_BY_ELEMENT[template.element_id];
+      if (!configured) return template.supported_scopes || [];
+      const supported = template.supported_scopes || [];
+      return configured.filter((scope) => containsNormalized(supported, scope));
+    }
+
+    function previewScopeUnsupported(template, scope) {
+      if (!template) return false;
+      return previewScopeUnsupportedForElement(template.element_id, scope);
+    }
+
+    function previewScopeUnsupportedForElement(elementId, scope) {
+      if (!elementId || !scope) return false;
+      const configured = PREVIEW_SUPPORTED_SCOPES_BY_ELEMENT[elementId];
+      if (!configured) return false;
+      return !containsNormalized(configured, scope);
+    }
+
+    function specUsesUnsupportedPreviewScope(spec) {
+      if (!spec || spec.element_kind !== "analytic") return false;
+      return previewScopeUnsupportedForElement(spec.element_id, spec.parameters && spec.parameters.scope);
     }
 
     function selectedScopeMissing(template) {
@@ -2006,6 +2388,9 @@
           text: SELECTED_SCOPE_VALIDATION_MESSAGES[missingSelectedScope.validationLabel]
         };
       }
+      if (previewScopeUnsupported(template, state.config.scope)) {
+        return { ready: false, text: UNSUPPORTED_SELECTED_SCOPE_PREVIEW_MESSAGE };
+      }
       return { ready: true, text: "Ready to add." };
     }
 
@@ -2052,7 +2437,8 @@
         warning: null
       };
       saveSpecToSet(spec);
-      els.status.textContent = `${state.editing ? "Updated" : "Added"} ${spec.title} in ${state.targetSet}.`;
+      els.status.textContent = `${state.editing ? "Updated" : "Added"} ${spec.title} in ${targetWorkflowLabel(state.targetSet)}.`;
+      markWorkflowDirty();
       resetSelection();
       renderSets();
     }
@@ -2110,6 +2496,9 @@
       const previewStatus = previewMatch ? "Previewable" : "Not previewable yet";
       const previewStatusClass = previewMatch ? "is-available" : "is-unavailable";
       const promoteButton = kind === "advisor" ? `<button class="tiny-button" type="button" data-action="promote" data-kind="advisor" data-index="${index}">Promote to Client Briefing</button>` : "";
+      const unavailableMessage = specUsesUnsupportedPreviewScope(spec)
+        ? "Selected-scope preview is not available for this demo-rendered element. Edit the scope before previewing."
+        : "This element is not previewable yet in the demo. Edit or remove it before previewing.";
       const elementTools = previewMatch
         ? `
           <details>
@@ -2119,7 +2508,7 @@
             </div>
           </details>
         `
-        : '<p class="meta">This element is not previewable yet in the demo. Edit or remove it before previewing.</p>';
+        : `<p class="meta">${escapeHtml(unavailableMessage)}</p>`;
       return `
         <li class="set-row">
           <h3>${escapeHtml(index + 1)}. ${escapeHtml(spec.title)}</h3>
@@ -2164,20 +2553,25 @@
       const list = listForKind(button.dataset.kind);
       const index = Number(button.dataset.index);
       const action = button.dataset.action;
+      let mutated = false;
       if (!Number.isInteger(index) || index < 0 || index >= list.length) return;
       if (action === "open-preview") {
         openElementPreview(list[index]);
         return;
       } else if (action === "remove") {
         list.splice(index, 1);
+        mutated = true;
       } else if (action === "duplicate") {
         list.splice(index + 1, 0, { ...list[index], id: `${Date.now()}_${Math.random().toString(16).slice(2)}` });
+        mutated = true;
       } else if (action === "up" && index > 0) {
         const item = list.splice(index, 1)[0];
         list.splice(index - 1, 0, item);
+        mutated = true;
       } else if (action === "down" && index < list.length - 1) {
         const item = list.splice(index, 1)[0];
         list.splice(index + 1, 0, item);
+        mutated = true;
       } else if (action === "edit") {
         if (list[index].element_kind === "narrative") {
           editNarrativeSpec(list[index], button.dataset.kind, index);
@@ -2187,6 +2581,7 @@
       } else if (action === "promote") {
         els.status.textContent = "Promote to Client Briefing is a placeholder in this local composer.";
       }
+      if (mutated) markWorkflowDirty();
       renderSets();
     }
 
@@ -2283,14 +2678,14 @@
 
     async function copyCurrentSpecSet() {
       if (!hasAnyLocalSpecs()) {
-        els.specSetStatus.textContent = "Add at least one element before copying local set JSON.";
+        els.specSetStatus.textContent = "Add at least one element before copying local workflow JSON.";
         return;
       }
       const text = localSpecSetText();
       if (navigator.clipboard && navigator.clipboard.writeText) {
         try {
           await navigator.clipboard.writeText(text);
-          els.specSetStatus.textContent = `Copied local set JSON with ${localSpecCountText()}.`;
+          els.specSetStatus.textContent = `Copied local workflow JSON with ${localSpecCountText()}.`;
           return;
         } catch (error) {
           els.specSetStatus.textContent = "Clipboard copy was blocked. Use the technical local export details panel.";
@@ -2302,7 +2697,7 @@
 
     function downloadCurrentSpecSet() {
       if (!hasAnyLocalSpecs()) {
-        els.specSetStatus.textContent = "Add at least one element before downloading local set JSON.";
+        els.specSetStatus.textContent = "Add at least one element before downloading local workflow JSON.";
         return;
       }
       const blob = new Blob([localSpecSetText()], { type: "application/json" });
@@ -2314,7 +2709,7 @@
       link.click();
       link.remove();
       URL.revokeObjectURL(url);
-      els.specSetStatus.textContent = `Downloaded local set JSON with ${localSpecCountText()}.`;
+      els.specSetStatus.textContent = `Downloaded local workflow JSON with ${localSpecCountText()}.`;
     }
 
     function restoreCurrentSpecSet() {
@@ -2322,7 +2717,7 @@
       try {
         payload = JSON.parse(els.restoreSpecInput.value || "");
       } catch (error) {
-        els.restoreSpecStatus.textContent = "Paste valid local set JSON, then try restore again.";
+        els.restoreSpecStatus.textContent = "Paste valid local workflow JSON, then try restore again.";
         return;
       }
       const validation = validateLocalSpecSetPayload(payload);
@@ -2330,13 +2725,11 @@
         els.restoreSpecStatus.textContent = validation.text;
         return;
       }
-      state.clientSet = restoreSpecList(payload.client_briefing_set, "Client Briefing Set");
-      state.advisorSet = restoreSpecList(payload.advisor_review_set, "Advisor Review Set");
-      closeCurrentSetPreview({ skipNavigation: true, skipScroll: true });
-      closeElementPreview();
-      resetSelection();
-      renderSets();
-      els.restoreSpecStatus.textContent = `Restored ${pluralizeSpec(state.clientSet.length, "Client spec")} and ${pluralizeSpec(state.advisorSet.length, "Advisor spec")}.`;
+      applyWorkflowPayload(payload);
+      state.currentWorkflowId = null;
+      state.currentWorkflowName = payload.workflow_name || "";
+      markWorkflowDirty();
+      els.restoreSpecStatus.textContent = `Restored ${pluralizeSpec(state.clientSet.length, "Client element")} and ${pluralizeSpec(state.advisorSet.length, "Advisor element")}.`;
     }
 
     async function saveCurrentSpecSetToBackend() {
@@ -2356,7 +2749,7 @@
           throw new Error(errorMessageFromPayload(payload, "Could not save this briefing spec set."));
         }
         if (!payload.persistence_configured || !payload.saved) {
-          els.backendSpecStatus.textContent = payload.message || "Backend persistence is not configured. Use local export/download for now.";
+          els.backendSpecStatus.textContent = payload.message || "Backend persistence is not configured. Use local workflow JSON export/download for now.";
           renderSavedSpecSets();
           return;
         }
@@ -2364,7 +2757,7 @@
         els.backendSpecStatus.textContent = `Saved backend draft ${summary.spec_set_id || ""} with ${savedSpecSetCountLabel(summary)}.`;
         await loadBackendSpecSets({ quiet: true });
       } catch (error) {
-        els.backendSpecStatus.textContent = error.message || "Backend save is unavailable. Use local export/download for now.";
+        els.backendSpecStatus.textContent = error.message || "Backend save is unavailable. Use local workflow JSON export/download for now.";
       }
     }
 
@@ -2381,7 +2774,7 @@
         state.savedSpecSets = Array.isArray(payload.spec_sets) ? payload.spec_sets : [];
         renderSavedSpecSets();
         if (!payload.persistence_configured) {
-          els.backendSpecStatus.textContent = payload.message || "Backend persistence is not configured. Use local export/download for now.";
+          els.backendSpecStatus.textContent = payload.message || "Backend persistence is not configured. Use local workflow JSON export/download for now.";
           return;
         }
         if (!options.quiet) {
@@ -2390,7 +2783,7 @@
             : "No saved backend sets yet.";
         }
       } catch (error) {
-        els.backendSpecStatus.textContent = error.message || "Saved backend sets are unavailable. Use local export/download for now.";
+        els.backendSpecStatus.textContent = error.message || "Saved backend sets are unavailable. Use local workflow JSON export/download for now.";
       }
     }
 
@@ -2440,12 +2833,10 @@
           els.backendSpecStatus.textContent = validation.text;
           return;
         }
-        state.clientSet = restoreSpecList(specPayload.client_briefing_set, "Client Briefing Set");
-        state.advisorSet = restoreSpecList(specPayload.advisor_review_set, "Advisor Review Set");
-        closeCurrentSetPreview({ skipNavigation: true, skipScroll: true });
-        closeElementPreview();
-        resetSelection();
-        renderSets();
+        applyWorkflowPayload(specPayload);
+        state.currentWorkflowId = null;
+        state.currentWorkflowName = specPayload.workflow_name || "";
+        markWorkflowDirty();
         els.backendSpecStatus.textContent = `Restored backend draft with ${localSpecCountText()}.`;
       } catch (error) {
         els.backendSpecStatus.textContent = error.message || "Could not restore the saved backend set.";
@@ -2463,7 +2854,7 @@
           throw new Error(errorMessageFromPayload(payload, "Could not delete this saved briefing spec set."));
         }
         if (!payload.persistence_configured) {
-          els.backendSpecStatus.textContent = payload.message || "Backend persistence is not configured. Use local export/download for now.";
+          els.backendSpecStatus.textContent = payload.message || "Backend persistence is not configured. Use local workflow JSON export/download for now.";
           return;
         }
         els.backendSpecStatus.textContent = payload.deleted ? "Deleted backend draft." : "Saved backend draft was not found.";
@@ -2893,7 +3284,11 @@
     }
 
     function setLabelForKind(kind) {
-      return kind === "client" ? "Client Briefing Set" : "Advisor Review Set";
+      return kind === "client" ? "Client Briefing Workflow" : "Advisor Review Workflow";
+    }
+
+    function targetWorkflowLabel(targetSet) {
+      return targetSet === "Client Briefing Set" ? "Client Briefing Workflow" : "Advisor Review Workflow";
     }
 
     function previewHtmlFilename(kind) {
@@ -3015,7 +3410,7 @@
       const defaults = {
         placement: firstValue(placementsFor(template))
       };
-      if (shouldAsk(template, "scope")) defaults.scope = firstValue(template.supported_scopes);
+      if (shouldAsk(template, "scope")) defaults.scope = firstValue(previewSupportedScopesForTemplate(template));
       const selectedEntityField = selectedScopeFieldFor(defaults.scope);
       if (selectedEntityField) defaults[selectedEntityField.key] = "";
       if (shouldAsk(template, "lens")) defaults.lens = firstValue(safeLensOptions(template));
@@ -3065,7 +3460,7 @@
     function fieldSummary(template) {
       const labels = [];
       if (shouldAsk(template, "scope")) labels.push("scope");
-      if ((template.supported_scopes || []).some((scope) => selectedScopeConfigForScope(scope))) {
+      if (previewSupportedScopesForTemplate(template).some((scope) => selectedScopeConfigForScope(scope))) {
         labels.push("selected entity when needed");
       }
       if (shouldAsk(template, "lens")) labels.push("lens");
@@ -3110,6 +3505,7 @@
 
     function previewMatchForSpec(spec) {
       if (!spec || spec.element_kind !== "analytic") return null;
+      if (specUsesUnsupportedPreviewScope(spec)) return null;
       const key = renderedViewKeyForSpec(spec);
       if (!key) return null;
       return state.renderedViewsByKey[key] || null;
@@ -3251,11 +3647,31 @@
       return escapeHtml(value);
     }
 
-    els.homeBuildClient.addEventListener("click", () => openBuilderForTarget("Client Briefing Set"));
-    els.homeBuildAdvisor.addEventListener("click", () => openBuilderForTarget("Advisor Review Set"));
-    els.homeContinueDraft.addEventListener("click", () => navigateToRoute("advanced"));
+    els.homeBuildClient.addEventListener("click", () => startNewWorkflow("Client Briefing Set"));
+    els.homeBuildAdvisor.addEventListener("click", () => startNewWorkflow("Advisor Review Set"));
+    els.homeOpenSaved.addEventListener("click", () => {
+      els.homeSavedWorkflowStatus.textContent = state.savedWorkflows.length
+        ? "Choose a named saved workflow below."
+        : "No named workflows saved in this browser yet.";
+      els.homeSavedWorkflowList.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    els.homeCopyWorkflow.addEventListener("click", () => {
+      els.homeSavedWorkflowStatus.textContent = state.savedWorkflows.length
+        ? "Choose Copy Workflow on a named saved workflow below."
+        : "Save a workflow before copying one.";
+      els.homeSavedWorkflowList.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    els.homePreviewClient.addEventListener("click", () => navigateToRoute("preview/client"));
+    els.homePreviewAdvisor.addEventListener("click", () => navigateToRoute("preview/advisor"));
     els.homeAdvancedTools.addEventListener("click", () => navigateToRoute("advanced"));
     els.builderHome.addEventListener("click", () => navigateToRoute("home"));
+    els.workflowNameInput.addEventListener("input", () => {
+      state.currentWorkflowName = els.workflowNameInput.value.trim();
+      markWorkflowDirty();
+    });
+    els.saveWorkflow.addEventListener("click", saveCurrentWorkflow);
+    els.copyCurrentWorkflow.addEventListener("click", copyCurrentWorkflow);
+    els.homeSavedWorkflowList.addEventListener("click", handleSavedWorkflowAction);
     els.targetClient.addEventListener("click", () => setTargetSet("Client Briefing Set"));
     els.targetAdvisor.addEventListener("click", () => setTargetSet("Advisor Review Set"));
     els.browseAll.addEventListener("click", toggleBrowseAll);
@@ -3316,6 +3732,8 @@
     renderEmptySelection();
     renderSets();
     renderSavedSpecSets();
+    renderWorkflowChrome();
+    loadLocalNamedWorkflows();
     initializeRoute();
     loadCatalog();
     loadPreviewArtifacts();
