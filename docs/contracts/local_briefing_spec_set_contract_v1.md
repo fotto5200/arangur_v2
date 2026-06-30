@@ -82,8 +82,10 @@ shows a placeholder instead of inventing content.
 ## Local-Only Limitations
 
 The local spec set is not persisted by the backend and is not a durable system
-of record. Copy, download, and restore actions happen in the browser. Restoring
-an exported spec set repopulates only the current browser composer state.
+of record. Copy, download, and restore actions happen in the browser. Copy and
+download actions are intended for non-empty local sets and should give calm
+feedback when no specs have been added yet. Restoring an exported spec set
+repopulates only the current browser composer state.
 
 The current local preview assembles existing rendered element fragments and
 narrative text. It does not generate new analytics, call `/api/runs`, write

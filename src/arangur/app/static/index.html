@@ -471,8 +471,40 @@
 
     .set-panel {
       display: grid;
-      gap: 10px;
-      padding: 16px;
+      gap: 12px;
+      padding: 18px;
+    }
+
+    .local-actions-panel,
+    .sample-preview-panel,
+    .element-preview-panel,
+    .current-set-preview-panel {
+      box-shadow: none;
+    }
+
+    .local-actions-panel {
+      background: var(--surface-soft);
+    }
+
+    .local-actions-panel .button-row {
+      gap: 7px;
+    }
+
+    .technical-details {
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+    }
+
+    .technical-details summary {
+      color: var(--muted);
+    }
+
+    .preview-section-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
     }
 
     .set-list {
@@ -527,16 +559,6 @@
       color: #713f12;
     }
 
-    .sample-preview-panel,
-    .element-preview-panel,
-    .current-set-preview-panel {
-      box-shadow: none;
-    }
-
-    .local-actions-panel {
-      box-shadow: none;
-    }
-
     .serialized-output,
     .restore-input {
       background: #ffffff;
@@ -565,9 +587,15 @@
       padding: 14px;
     }
 
+    .current-set-preview-body {
+      max-height: none;
+      overflow: visible;
+      padding: 18px;
+    }
+
     .current-preview-document {
       display: grid;
-      gap: 14px;
+      gap: 16px;
     }
 
     .current-preview-context {
@@ -578,12 +606,21 @@
       padding: 10px;
     }
 
+    .current-preview-note {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
     .preview-export-actions {
       border-top: 1px solid var(--line);
       display: grid;
-      gap: 10px;
+      gap: 8px;
       margin-top: 14px;
       padding-top: 14px;
+    }
+
+    .preview-export-actions .button-row {
+      gap: 7px;
     }
 
     .preview-footer-note {
@@ -605,14 +642,16 @@
     }
 
     .current-set-preview-item {
-      border-bottom: 1px solid var(--line);
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
       display: grid;
       gap: 10px;
-      padding: 0 0 16px;
+      padding: 14px;
     }
 
     .current-set-preview-item + .current-set-preview-item {
-      padding-top: 16px;
+      margin-top: 2px;
     }
 
     .preview-placeholder {
@@ -668,6 +707,10 @@
         padding: 0;
       }
 
+      body.print-current-preview .current-preview-document {
+        gap: 14px;
+      }
+
       body.print-current-preview .preview-export-actions,
       body.print-current-preview #current-preview-export-status,
       body.print-current-preview #close-current-set-preview-button {
@@ -682,7 +725,9 @@
       }
 
       body.print-current-preview .current-set-preview-item {
+        border: 1px solid #d1d5db;
         break-inside: avoid;
+        margin-top: 12px;
         page-break-inside: avoid;
       }
 
@@ -804,7 +849,7 @@
 
     <section class="set-panel local-actions-panel" aria-labelledby="local-actions-title">
       <h2 id="local-actions-title">Current local set</h2>
-      <p class="helper">Browser-local only. Export copies the current unsaved Client Briefing Set and Advisor Review Set; it does not save to the backend.</p>
+      <p class="helper">Preview or move the current browser-local set. Nothing here saves to the backend.</p>
       <div class="button-row">
         <button id="preview-client-set-button" class="secondary-button" type="button">Preview Client Briefing Set</button>
         <button id="preview-advisor-set-button" class="secondary-button" type="button">Preview Advisor Review Set</button>
@@ -812,12 +857,12 @@
         <button id="download-spec-set-button" class="secondary-button" type="button">Download current spec set</button>
       </div>
       <p id="spec-set-status" class="status"></p>
-      <details id="serialized-spec-details">
-        <summary>Serialized spec-set data</summary>
-        <textarea id="serialized-spec-output" class="serialized-output" readonly aria-label="Serialized local spec set"></textarea>
+      <details id="serialized-spec-details" class="technical-details">
+        <summary>Technical local export details</summary>
+        <textarea id="serialized-spec-output" class="serialized-output" readonly aria-label="Technical serialized local spec set"></textarea>
       </details>
-      <details id="restore-spec-details">
-        <summary>Restore from exported spec set</summary>
+      <details id="restore-spec-details" class="technical-details">
+        <summary>Restore local spec set</summary>
         <div class="field">
           <label for="restore-spec-input">Paste exported spec-set data</label>
           <textarea id="restore-spec-input" class="restore-input" aria-label="Paste exported spec set"></textarea>
@@ -830,7 +875,7 @@
     </section>
 
     <section class="set-panel sample-preview-panel" aria-labelledby="sample-preview-title">
-      <h2 id="sample-preview-title">Deterministic sample previews</h2>
+      <h2 id="sample-preview-title">Sample previews</h2>
       <p class="helper">Static samples generated from the committed demo outputs, separate from the current local set preview above.</p>
       <div class="button-row">
         <a class="tiny-button" href="/simulation/briefing_set_previews/client_briefing_set_preview.html" target="_blank" rel="noopener">Open deterministic sample Client preview</a>
@@ -839,7 +884,7 @@
     </section>
 
     <section id="current-set-preview-region" class="set-panel current-set-preview-panel hidden" aria-labelledby="current-set-preview-title">
-      <p class="helper">Current local set preview</p>
+      <p class="preview-section-label">Current local preview</p>
       <h2 id="current-set-preview-title">Current set preview</h2>
       <p id="current-set-preview-summary" class="meta"></p>
       <div id="current-set-preview-body" class="current-set-preview-body"></div>
@@ -876,6 +921,7 @@
       review_item_count: 1
     };
     const SYNTHETIC_PREVIEW_NOTICE = "Synthetic demo preview assembled in the browser from local selections. It is not persisted, not investment advice, and not a production report.";
+    const SYNTHETIC_PREVIEW_SHORT_NOTICE = "Browser-local synthetic preview. Not persisted.";
     const TARGET_TO_BRANCH = {
       "Client Briefing Set": "Client Briefing",
       "Advisor Review Set": "Advisor Review"
@@ -1777,21 +1823,29 @@
     }
 
     async function copyCurrentSpecSet() {
+      if (!hasAnyLocalSpecs()) {
+        els.specSetStatus.textContent = "Add at least one element before copying the local spec set.";
+        return;
+      }
       const text = localSpecSetText();
       if (navigator.clipboard && navigator.clipboard.writeText) {
         try {
           await navigator.clipboard.writeText(text);
-          els.specSetStatus.textContent = "Copied current spec set to clipboard.";
+          els.specSetStatus.textContent = `Copied local spec set with ${localSpecCountText()}.`;
           return;
         } catch (error) {
-          els.specSetStatus.textContent = "Clipboard copy was blocked. Use the serialized details panel.";
+          els.specSetStatus.textContent = "Clipboard copy was blocked. Use the technical local export details panel.";
           return;
         }
       }
-      els.specSetStatus.textContent = "Clipboard copy is not available. Use the serialized details panel.";
+      els.specSetStatus.textContent = "Clipboard copy is not available. Use the technical local export details panel.";
     }
 
     function downloadCurrentSpecSet() {
+      if (!hasAnyLocalSpecs()) {
+        els.specSetStatus.textContent = "Add at least one element before downloading the local spec set.";
+        return;
+      }
       const blob = new Blob([localSpecSetText()], { type: "application/json" });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
@@ -1801,7 +1855,7 @@
       link.click();
       link.remove();
       URL.revokeObjectURL(url);
-      els.specSetStatus.textContent = "Downloaded current spec set.";
+      els.specSetStatus.textContent = `Downloaded local spec set with ${localSpecCountText()}.`;
     }
 
     function restoreCurrentSpecSet() {
@@ -1809,7 +1863,7 @@
       try {
         payload = JSON.parse(els.restoreSpecInput.value || "");
       } catch (error) {
-        els.restoreSpecStatus.textContent = "Could not restore: pasted data is not valid serialized spec-set data.";
+        els.restoreSpecStatus.textContent = "Paste valid local spec-set JSON, then try restore again.";
         return;
       }
       const validation = validateLocalSpecSetPayload(payload);
@@ -1823,20 +1877,32 @@
       closeElementPreview();
       resetSelection();
       renderSets();
-      els.restoreSpecStatus.textContent = "Restored local Client Briefing Set and Advisor Review Set.";
+      els.restoreSpecStatus.textContent = `Restored ${pluralizeSpec(state.clientSet.length, "Client spec")} and ${pluralizeSpec(state.advisorSet.length, "Advisor spec")}.`;
     }
 
     function validateLocalSpecSetPayload(payload) {
       if (!payload || typeof payload !== "object") {
-        return { ready: false, text: "Could not restore: spec-set data must be an object." };
+        return { ready: false, text: "The pasted local spec set must be a JSON object." };
       }
       if (payload.schema_version !== LOCAL_SPEC_SET_SCHEMA_VERSION) {
-        return { ready: false, text: "Could not restore: unsupported spec-set schema." };
+        return { ready: false, text: "This paste uses a different local spec-set version." };
       }
       if (!Array.isArray(payload.client_briefing_set) || !Array.isArray(payload.advisor_review_set)) {
-        return { ready: false, text: "Could not restore: both ordered set lists are required." };
+        return { ready: false, text: "The pasted local spec set needs both Client and Advisor lists." };
       }
       return { ready: true, text: "Ready to restore." };
+    }
+
+    function hasAnyLocalSpecs() {
+      return state.clientSet.length + state.advisorSet.length > 0;
+    }
+
+    function localSpecCountText() {
+      return `${pluralizeSpec(state.clientSet.length, "Client spec")} and ${pluralizeSpec(state.advisorSet.length, "Advisor spec")}`;
+    }
+
+    function pluralizeSpec(count, label) {
+      return `${count} ${label}${count === 1 ? "" : "s"}`;
     }
 
     function restoreSpecList(serializedList, targetSet) {
@@ -1878,8 +1944,8 @@
       els.currentSetPreviewRegion.classList.remove("hidden");
       els.currentSetPreviewTitle.textContent = title;
       els.currentSetPreviewSummary.textContent = artifact.ready
-        ? "Print-friendly current preview assembled in the browser from the unsaved local set."
-        : `${setLabelForKind(kind)} is empty.`;
+        ? `${previewPurposeForKind(kind)} - ${pluralizeSpec(artifact.itemCount, "element")} from the current browser-local set.`
+        : `This local ${setLabelForKind(kind)} is empty.`;
       els.currentPreviewExportStatus.textContent = "";
       if (!artifact.ready) {
         els.currentSetPreviewBody.innerHTML = emptyCurrentPreviewHtml(kind);
@@ -1900,26 +1966,29 @@
       const context = clientContextSummary();
       if (!list.length) {
         return {
-          ready: false,
-          title,
-          context,
-          screenHtml: "",
-          standaloneHtml: "",
-          text: ""
-        };
-      }
-      const items = await Promise.all(list.map((spec, index) => renderCurrentSetPreviewItem(spec, index, targetSet)));
-      const bodyHtml = items.map((item) => item.html).join("");
-      const screenHtml = renderCurrentPreviewDocumentHtml(context, bodyHtml);
-      return {
-        ready: true,
+        ready: false,
         title,
         context,
-        screenHtml,
-        standaloneHtml: buildStandalonePreviewHtml(title, context, bodyHtml),
-        text: buildCurrentPreviewText(title, context, items)
+        itemCount: 0,
+        screenHtml: "",
+        standaloneHtml: "",
+        text: ""
       };
     }
+    const items = await Promise.all(list.map((spec, index) => renderCurrentSetPreviewItem(spec, index, targetSet)));
+    const bodyHtml = items.map((item) => item.html).join("");
+    const purpose = previewPurposeForKind(kind);
+    const screenHtml = renderCurrentPreviewDocumentHtml(purpose, context, bodyHtml);
+    return {
+      ready: true,
+      title,
+      context,
+      itemCount: list.length,
+      screenHtml,
+      standaloneHtml: buildStandalonePreviewHtml(title, purpose, context, bodyHtml),
+      text: buildCurrentPreviewText(title, purpose, context, items)
+    };
+  }
 
     async function renderCurrentSetPreviewItem(spec, index, targetSet) {
       const title = `${index + 1}. ${spec.title || "Untitled element"}`;
@@ -1980,18 +2049,19 @@
       }
     }
 
-    function renderCurrentPreviewDocumentHtml(context, bodyHtml) {
+    function renderCurrentPreviewDocumentHtml(purpose, context, bodyHtml) {
       return `
         <div class="current-preview-document">
+          <p class="preview-section-label">${escapeHtml(purpose)}</p>
           <p class="current-preview-context"><strong>Context:</strong> ${escapeHtml(context)}</p>
-          <p class="meta">${escapeHtml(SYNTHETIC_PREVIEW_NOTICE)}</p>
+          <p class="current-preview-note">${escapeHtml(SYNTHETIC_PREVIEW_SHORT_NOTICE)}</p>
           ${bodyHtml}
           <footer class="preview-footer-note">${escapeHtml(SYNTHETIC_PREVIEW_NOTICE)}</footer>
         </div>
       `;
     }
 
-    function buildStandalonePreviewHtml(title, context, bodyHtml) {
+    function buildStandalonePreviewHtml(title, purpose, context, bodyHtml) {
       const generatedAt = new Date().toLocaleString();
       return `<!doctype html>
 <html lang="en">
@@ -2001,26 +2071,33 @@
   <title>${escapeHtml(title)}</title>
   <style>
     body { background: #ffffff; color: #111827; font-family: Arial, sans-serif; line-height: 1.5; margin: 0; }
-    main { margin: 0 auto; max-width: 920px; padding: 32px 24px; }
+    main { margin: 0 auto; max-width: 860px; padding: 30px 24px; }
     h1, h2, h3 { color: #111827; page-break-after: avoid; }
-    h1 { font-size: 28px; margin: 0 0 10px; }
+    h1 { font-size: 27px; line-height: 1.12; margin: 0 0 10px; }
     h2 { font-size: 20px; margin-top: 24px; }
     h3 { font-size: 16px; margin-bottom: 6px; }
-    .kicker, .meta, footer { color: #4b5563; font-size: 13px; }
-    .context, .notice { background: #f8fafc; border: 1px solid #d7dee8; border-radius: 8px; padding: 10px 12px; }
-    .current-set-preview-item { border-top: 1px solid #d7dee8; break-inside: avoid; padding: 18px 0; page-break-inside: avoid; }
+    .kicker, .purpose, .meta, footer { color: #4b5563; font-size: 13px; }
+    .purpose { font-weight: 700; letter-spacing: 0; text-transform: uppercase; }
+    .context, .notice { background: #f8fafc; border: 1px solid #d7dee8; border-radius: 8px; padding: 9px 11px; }
+    .current-set-preview-item { border-top: 1px solid #d7dee8; break-inside: avoid; padding: 16px 0; page-break-inside: avoid; }
     .preview-placeholder { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; color: #713f12; padding: 10px; }
     table { border-collapse: collapse; font-size: 13px; width: 100%; }
     th, td { border-bottom: 1px solid #d7dee8; padding: 6px; text-align: left; vertical-align: top; }
     footer { border-top: 1px solid #d7dee8; margin-top: 24px; padding-top: 12px; }
+    @media print {
+      main { max-width: none; padding: 0; }
+      .current-set-preview-item { page-break-inside: avoid; }
+      table { font-size: 12px; }
+    }
   </style>
 </head>
 <body>
   <main>
     <p class="kicker">Arangur local preview</p>
     <h1>${escapeHtml(title)}</h1>
+    <p class="purpose">${escapeHtml(purpose)}</p>
     <p class="context"><strong>Context:</strong> ${escapeHtml(context)}</p>
-    <p class="notice">${escapeHtml(SYNTHETIC_PREVIEW_NOTICE)}</p>
+    <p class="notice">${escapeHtml(SYNTHETIC_PREVIEW_SHORT_NOTICE)}</p>
     ${bodyHtml}
     <footer>Generated ${escapeHtml(generatedAt)} from browser-local demo state. ${escapeHtml(SYNTHETIC_PREVIEW_NOTICE)}</footer>
   </main>
@@ -2028,9 +2105,10 @@
 </html>`;
     }
 
-    function buildCurrentPreviewText(title, context, items) {
+    function buildCurrentPreviewText(title, purpose, context, items) {
       return [
         title,
+        purpose,
         "",
         `Context: ${context}`,
         SYNTHETIC_PREVIEW_NOTICE,
@@ -2044,7 +2122,7 @@
     function emptyCurrentPreviewHtml(kind) {
       return `
         <div class="preview-empty-state">
-          <p class="empty">No elements have been added to this local ${escapeHtml(setLabelForKind(kind))} yet.</p>
+          <p class="empty">This local ${escapeHtml(setLabelForKind(kind))} has no elements yet.</p>
           <p class="meta">Add a report element first, then open this preview again before printing or exporting.</p>
         </div>
       `;
@@ -2063,6 +2141,7 @@
         ? '<button class="secondary-button" type="button" data-preview-action="download-html" data-kind="client">Download current Client Briefing Set HTML</button>'
         : '<button class="secondary-button" type="button" data-preview-action="download-html" data-kind="advisor">Download current Advisor Review Set HTML</button>';
       els.currentPreviewExportActions.innerHTML = `
+        <p class="preview-section-label">Preview actions</p>
         <div class="button-row">
           ${printButton}
           ${downloadButton}
@@ -2157,6 +2236,10 @@
 
     function previewTitleForKind(kind) {
       return kind === "client" ? "Current Client Briefing Set Preview" : "Current Advisor Review Set Preview";
+    }
+
+    function previewPurposeForKind(kind) {
+      return kind === "client" ? "Client-facing briefing sequence" : "Advisor/internal review sequence";
     }
 
     function setLabelForKind(kind) {
