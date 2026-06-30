@@ -279,6 +279,7 @@ Use these file sets when starting different kinds of sessions.
 - All UI Reporting / Briefing restart files.
 - `docs/ui_reporting/report_element_finder_composer_current_model_v1.md`.
 - `docs/contracts/report_element_template_catalog_contract.md`.
+- `docs/contracts/local_briefing_spec_set_contract_v1.md` when local export/import behavior is relevant.
 - `docs/restart/CURRENT_STATE.md`.
 - `docs/restart/08_next_actions.md`.
 - `README.md`.
@@ -352,6 +353,15 @@ Use these file sets when starting different kinds of sessions.
 - `data/simulation/briefing_set_previews/briefing_set_preview_index.json`.
 - `tests/test_app_health.py`.
 - Do not call `/api/runs` from the composer flow, generate reports from local specs, persist specs, show report-package artifacts in the main path, serve the whole repo, add dependencies, or use real data.
+
+## Local Spec Set Export And Preview Restart
+
+- All Composer Rendered Preview Integration restart files.
+- `docs/contracts/local_briefing_spec_set_contract_v1.md`.
+- `src/arangur/app/static/index.html`.
+- `tests/test_app_health.py`.
+- `README.md`.
+- Do not add backend persistence, database tables, report generation, new analytics, Docker/Postgres changes, live Plaid, external APIs, real data, or raw report artifacts to the main composer path.
 
 ## Guided Builder Implementation Restart
 

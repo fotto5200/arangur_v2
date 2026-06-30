@@ -528,11 +528,35 @@
     }
 
     .sample-preview-panel,
-    .element-preview-panel {
+    .element-preview-panel,
+    .current-set-preview-panel {
       box-shadow: none;
     }
 
-    .element-preview-body {
+    .local-actions-panel {
+      box-shadow: none;
+    }
+
+    .serialized-output,
+    .restore-input {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      font-family: Consolas, monospace;
+      font-size: 12px;
+      min-height: 160px;
+      padding: 10px;
+      resize: vertical;
+      width: 100%;
+    }
+
+    .restore-input {
+      min-height: 120px;
+    }
+
+    .element-preview-body,
+    .current-set-preview-body {
       background: #ffffff;
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -541,19 +565,42 @@
       padding: 14px;
     }
 
-    .element-preview-body section {
+    .element-preview-body section,
+    .current-set-preview-body section {
       display: grid;
       gap: 10px;
     }
 
-    .element-preview-body table {
+    .current-set-preview-item {
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      gap: 10px;
+      padding: 0 0 16px;
+    }
+
+    .current-set-preview-item + .current-set-preview-item {
+      padding-top: 16px;
+    }
+
+    .preview-placeholder {
+      background: var(--amber-soft);
+      border: 1px solid var(--amber-line);
+      border-radius: 8px;
+      color: #713f12;
+      padding: 10px;
+    }
+
+    .element-preview-body table,
+    .current-set-preview-body table {
       border-collapse: collapse;
       font-size: 13px;
       width: 100%;
     }
 
     .element-preview-body th,
-    .element-preview-body td {
+    .element-preview-body td,
+    .current-set-preview-body th,
+    .current-set-preview-body td {
       border-bottom: 1px solid var(--line);
       padding: 6px;
       text-align: left;
@@ -668,12 +715,49 @@
       </section>
     </section>
 
-    <section class="set-panel sample-preview-panel" aria-labelledby="sample-preview-title">
-      <h2 id="sample-preview-title">Generated demo previews</h2>
-      <p class="helper">Samples generated from the current deterministic demo outputs, not from this unsaved local set.</p>
+    <section class="set-panel local-actions-panel" aria-labelledby="local-actions-title">
+      <h2 id="local-actions-title">Current local set</h2>
+      <p class="helper">Browser-local only. Export copies the current unsaved Client Briefing Set and Advisor Review Set; it does not save to the backend.</p>
       <div class="button-row">
-        <a class="tiny-button" href="/simulation/briefing_set_previews/client_briefing_set_preview.html" target="_blank" rel="noopener">Open sample Client Briefing Set preview</a>
-        <a class="tiny-button" href="/simulation/briefing_set_previews/advisor_review_set_preview.html" target="_blank" rel="noopener">Open sample Advisor Review Set preview</a>
+        <button id="preview-client-set-button" class="secondary-button" type="button">Preview Client Briefing Set</button>
+        <button id="preview-advisor-set-button" class="secondary-button" type="button">Preview Advisor Review Set</button>
+        <button id="copy-spec-set-button" class="secondary-button" type="button">Copy current spec set</button>
+        <button id="download-spec-set-button" class="secondary-button" type="button">Download current spec set</button>
+      </div>
+      <p id="spec-set-status" class="status"></p>
+      <details id="serialized-spec-details">
+        <summary>Serialized spec-set data</summary>
+        <textarea id="serialized-spec-output" class="serialized-output" readonly aria-label="Serialized local spec set"></textarea>
+      </details>
+      <details id="restore-spec-details">
+        <summary>Restore from exported spec set</summary>
+        <div class="field">
+          <label for="restore-spec-input">Paste exported spec-set data</label>
+          <textarea id="restore-spec-input" class="restore-input" aria-label="Paste exported spec set"></textarea>
+        </div>
+        <div class="button-row">
+          <button id="restore-spec-set-button" class="secondary-button" type="button">Restore spec set</button>
+        </div>
+        <p id="restore-spec-status" class="status"></p>
+      </details>
+    </section>
+
+    <section class="set-panel sample-preview-panel" aria-labelledby="sample-preview-title">
+      <h2 id="sample-preview-title">Deterministic sample previews</h2>
+      <p class="helper">Static samples generated from the committed demo outputs, separate from the current local set preview above.</p>
+      <div class="button-row">
+        <a class="tiny-button" href="/simulation/briefing_set_previews/client_briefing_set_preview.html" target="_blank" rel="noopener">Open deterministic sample Client preview</a>
+        <a class="tiny-button" href="/simulation/briefing_set_previews/advisor_review_set_preview.html" target="_blank" rel="noopener">Open deterministic sample Advisor preview</a>
+      </div>
+    </section>
+
+    <section id="current-set-preview-region" class="set-panel current-set-preview-panel hidden" aria-labelledby="current-set-preview-title">
+      <p class="helper">Current local set preview</p>
+      <h2 id="current-set-preview-title">Current set preview</h2>
+      <p id="current-set-preview-summary" class="meta"></p>
+      <div id="current-set-preview-body" class="current-set-preview-body"></div>
+      <div class="button-row">
+        <button id="close-current-set-preview-button" class="secondary-button" type="button">Return to composer</button>
       </div>
     </section>
 
@@ -694,6 +778,14 @@
     const VIEW_SUMMARY_ENDPOINT = "/simulation/report_element_views/report_element_view_summary.json";
     const BRIEFING_PREVIEW_INDEX_ENDPOINT = "/simulation/briefing_set_previews/briefing_set_preview_index.json";
     const VIEW_FRAGMENT_BASE = "/simulation/report_element_views/";
+    const LOCAL_SPEC_SET_SCHEMA_VERSION = "arangur.local_briefing_spec_set.v1";
+    const CLIENT_CONTEXT = {
+      client_family: "Northstar Family Office",
+      portfolio_context: "Demo portfolio",
+      data_status: "Data loaded",
+      valuation_confidence: "Mixed",
+      review_item_count: 1
+    };
     const TARGET_TO_BRANCH = {
       "Client Briefing Set": "Client Briefing",
       "Advisor Review Set": "Advisor Review"
@@ -846,6 +938,20 @@
       clientList: document.getElementById("client-set-list"),
       advisorEmpty: document.getElementById("advisor-empty"),
       advisorList: document.getElementById("advisor-set-list"),
+      previewClientSet: document.getElementById("preview-client-set-button"),
+      previewAdvisorSet: document.getElementById("preview-advisor-set-button"),
+      copySpecSet: document.getElementById("copy-spec-set-button"),
+      downloadSpecSet: document.getElementById("download-spec-set-button"),
+      specSetStatus: document.getElementById("spec-set-status"),
+      serializedSpecOutput: document.getElementById("serialized-spec-output"),
+      restoreSpecInput: document.getElementById("restore-spec-input"),
+      restoreSpecSet: document.getElementById("restore-spec-set-button"),
+      restoreSpecStatus: document.getElementById("restore-spec-status"),
+      currentSetPreviewRegion: document.getElementById("current-set-preview-region"),
+      currentSetPreviewTitle: document.getElementById("current-set-preview-title"),
+      currentSetPreviewSummary: document.getElementById("current-set-preview-summary"),
+      currentSetPreviewBody: document.getElementById("current-set-preview-body"),
+      closeCurrentSetPreview: document.getElementById("close-current-set-preview-button"),
       elementPreviewRegion: document.getElementById("element-preview-region"),
       elementPreviewTitle: document.getElementById("element-preview-title"),
       elementPreviewSummary: document.getElementById("element-preview-summary"),
@@ -1402,6 +1508,7 @@
       els.advisorEmpty.classList.toggle("hidden", state.advisorSet.length > 0);
       els.clientList.innerHTML = state.clientSet.map((spec, index) => renderSetRow(spec, index, "client")).join("");
       els.advisorList.innerHTML = state.advisorSet.map((spec, index) => renderSetRow(spec, index, "advisor")).join("");
+      updateSerializedSpecOutput();
     }
 
     function renderSetRow(spec, index, kind) {
@@ -1515,6 +1622,232 @@
       els.elementPreviewBody.innerHTML = "";
     }
 
+    function buildLocalSpecSet() {
+      return {
+        schema_version: LOCAL_SPEC_SET_SCHEMA_VERSION,
+        exported_at: new Date().toISOString(),
+        synthetic_data: true,
+        client_context: { ...CLIENT_CONTEXT },
+        client_briefing_set: serializeSpecList(state.clientSet, "Client Briefing Set"),
+        advisor_review_set: serializeSpecList(state.advisorSet, "Advisor Review Set")
+      };
+    }
+
+    function serializeSpecList(list, targetSet) {
+      return list.map((spec, index) => serializeSpec(spec, index, targetSet));
+    }
+
+    function serializeSpec(spec, index, targetSet) {
+      const match = previewMatchForSpec(spec);
+      const base = {
+        order: index + 1,
+        local_spec_id: spec.id,
+        element_kind: spec.element_kind || "analytic",
+        element_id: spec.element_id || null,
+        element_title: spec.title,
+        target_set: targetSet,
+        target_branch: TARGET_TO_BRANCH[targetSet],
+        placement: spec.placement || "",
+        advisor_internal_purpose: spec.internal_purpose || null,
+        configured_parameters: spec.parameters || {},
+        preview_available: Boolean(match),
+        matched_rendered_view: match
+          ? {
+              view_id: match.key,
+              element_title: match.title,
+              html_fragment_url: match.htmlUrl,
+              markdown_fragment_url: match.markdownUrl
+            }
+          : null,
+        confidence_badge: match ? "rendered_demo_view_available" : "not_available",
+        caveat: "Browser-local demo spec only; not persisted and not a generated report."
+      };
+      if (spec.element_kind === "narrative") {
+        base.narrative_type = spec.narrative_type;
+        base.narrative_fields = { ...(spec.fields || {}) };
+        base.configured_parameters = {};
+        base.preview_available = false;
+        base.matched_rendered_view = null;
+        base.confidence_badge = "narrative_local_only";
+      }
+      return base;
+    }
+
+    function updateSerializedSpecOutput() {
+      if (!els.serializedSpecOutput) return;
+      els.serializedSpecOutput.value = localSpecSetText();
+    }
+
+    function localSpecSetText() {
+      return JSON.stringify(buildLocalSpecSet(), null, 2);
+    }
+
+    async function copyCurrentSpecSet() {
+      const text = localSpecSetText();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        try {
+          await navigator.clipboard.writeText(text);
+          els.specSetStatus.textContent = "Copied current spec set to clipboard.";
+          return;
+        } catch (error) {
+          els.specSetStatus.textContent = "Clipboard copy was blocked. Use the serialized details panel.";
+          return;
+        }
+      }
+      els.specSetStatus.textContent = "Clipboard copy is not available. Use the serialized details panel.";
+    }
+
+    function downloadCurrentSpecSet() {
+      const blob = new Blob([localSpecSetText()], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "arangur_local_briefing_spec_set.json";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+      els.specSetStatus.textContent = "Downloaded current spec set.";
+    }
+
+    function restoreCurrentSpecSet() {
+      let payload;
+      try {
+        payload = JSON.parse(els.restoreSpecInput.value || "");
+      } catch (error) {
+        els.restoreSpecStatus.textContent = "Could not restore: pasted data is not valid serialized spec-set data.";
+        return;
+      }
+      const validation = validateLocalSpecSetPayload(payload);
+      if (!validation.ready) {
+        els.restoreSpecStatus.textContent = validation.text;
+        return;
+      }
+      state.clientSet = restoreSpecList(payload.client_briefing_set, "Client Briefing Set");
+      state.advisorSet = restoreSpecList(payload.advisor_review_set, "Advisor Review Set");
+      closeCurrentSetPreview();
+      closeElementPreview();
+      resetSelection();
+      renderSets();
+      els.restoreSpecStatus.textContent = "Restored local Client Briefing Set and Advisor Review Set.";
+    }
+
+    function validateLocalSpecSetPayload(payload) {
+      if (!payload || typeof payload !== "object") {
+        return { ready: false, text: "Could not restore: spec-set data must be an object." };
+      }
+      if (payload.schema_version !== LOCAL_SPEC_SET_SCHEMA_VERSION) {
+        return { ready: false, text: "Could not restore: unsupported spec-set schema." };
+      }
+      if (!Array.isArray(payload.client_briefing_set) || !Array.isArray(payload.advisor_review_set)) {
+        return { ready: false, text: "Could not restore: both ordered set lists are required." };
+      }
+      return { ready: true, text: "Ready to restore." };
+    }
+
+    function restoreSpecList(serializedList, targetSet) {
+      return serializedList.map((item) => {
+        const kind = item.element_kind === "narrative" ? "narrative" : "analytic";
+        if (kind === "narrative") {
+          const type = item.narrative_type || firstValue(NARRATIVE_TYPES[targetSet]).type;
+          const typeConfig = narrativeTypeConfigForTarget(type, targetSet);
+          return {
+            id: item.local_spec_id || `${Date.now()}_${Math.random().toString(16).slice(2)}`,
+            element_kind: "narrative",
+            narrative_type: type,
+            title: item.element_title || typeConfig.label,
+            target_set: targetSet,
+            placement: item.placement || firstValue(NARRATIVE_PLACEMENTS[targetSet]),
+            fields: { ...(item.narrative_fields || {}) },
+            warning: null
+          };
+        }
+        return {
+          id: item.local_spec_id || `${Date.now()}_${Math.random().toString(16).slice(2)}`,
+          element_kind: "analytic",
+          element_id: item.element_id,
+          title: item.element_title || item.element_id || "Report element",
+          target_set: targetSet,
+          placement: item.placement || "",
+          internal_purpose: item.advisor_internal_purpose || null,
+          parameters: { ...(item.configured_parameters || {}) },
+          warning: null
+        };
+      });
+    }
+
+    async function openCurrentSetPreview(kind) {
+      const targetSet = kind === "client" ? "Client Briefing Set" : "Advisor Review Set";
+      const list = listForKind(kind);
+      const title = kind === "client" ? "Current Client Briefing Set Preview" : "Current Advisor Review Set Preview";
+      els.currentSetPreviewRegion.classList.remove("hidden");
+      els.currentSetPreviewTitle.textContent = title;
+      els.currentSetPreviewSummary.textContent = "Assembled from the current unsaved local set using existing rendered demo views when available.";
+      if (!list.length) {
+        els.currentSetPreviewBody.innerHTML = '<p class="empty">No elements have been added to this local set yet.</p>';
+        els.currentSetPreviewRegion.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+      els.currentSetPreviewBody.innerHTML = '<p class="empty">Loading current local set preview...</p>';
+      const items = await Promise.all(list.map((spec, index) => renderCurrentSetPreviewItem(spec, index, targetSet)));
+      els.currentSetPreviewBody.innerHTML = `
+        <p class="meta">Synthetic demo preview assembled in the browser from current local selections. It is not persisted and does not generate a report.</p>
+        ${items.join("")}
+      `;
+      els.currentSetPreviewRegion.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    async function renderCurrentSetPreviewItem(spec, index, targetSet) {
+      const title = `${index + 1}. ${spec.title || "Untitled element"}`;
+      const placement = spec.placement ? ` | ${spec.placement}` : "";
+      if (spec.element_kind === "narrative") {
+        return `
+          <article class="current-set-preview-item">
+            <h3>${escapeHtml(title)}</h3>
+            <p class="meta">Narrative element${escapeHtml(placement)}</p>
+            <p>${escapeHtml(narrativeSummary(spec))}</p>
+          </article>
+        `;
+      }
+      const match = previewMatchForSpec(spec);
+      if (!match) {
+        return `
+          <article class="current-set-preview-item">
+            <h3>${escapeHtml(title)}</h3>
+            <p class="meta">${escapeHtml(targetSet)}${escapeHtml(placement)}</p>
+            <div class="preview-placeholder">No rendered preview available yet for this spec.</div>
+          </article>
+        `;
+      }
+      try {
+        const response = await fetch(match.htmlUrl);
+        if (!response.ok) throw new Error(`Preview request failed: ${response.status}`);
+        const fragment = await response.text();
+        return `
+          <article class="current-set-preview-item">
+            <h3>${escapeHtml(title)}</h3>
+            <p class="meta">${escapeHtml(targetSet)}${escapeHtml(placement)}</p>
+            ${fragment}
+          </article>
+        `;
+      } catch (error) {
+        return `
+          <article class="current-set-preview-item">
+            <h3>${escapeHtml(title)}</h3>
+            <p class="meta">${escapeHtml(targetSet)}${escapeHtml(placement)}</p>
+            <div class="preview-placeholder">No rendered preview available yet for this spec.</div>
+          </article>
+        `;
+      }
+    }
+
+    function closeCurrentSetPreview() {
+      els.currentSetPreviewRegion.classList.add("hidden");
+      els.currentSetPreviewTitle.textContent = "Current set preview";
+      els.currentSetPreviewSummary.textContent = "";
+      els.currentSetPreviewBody.innerHTML = "";
+    }
+
     function editSpec(spec, kind, index) {
       const template = state.templates.find((candidate) => candidate.element_id === spec.element_id);
       if (!template) return;
@@ -1551,7 +1884,11 @@
     }
 
     function narrativeTypeConfig(type) {
-      const options = NARRATIVE_TYPES[state.targetSet] || [];
+      return narrativeTypeConfigForTarget(type, state.targetSet);
+    }
+
+    function narrativeTypeConfigForTarget(type, targetSet) {
+      const options = NARRATIVE_TYPES[targetSet] || [];
       const option = options.find((candidate) => candidate.type === type) || options[0];
       return {
         ...option,
@@ -1842,6 +2179,12 @@
     });
     els.clientList.addEventListener("click", handleSetAction);
     els.advisorList.addEventListener("click", handleSetAction);
+    els.previewClientSet.addEventListener("click", () => openCurrentSetPreview("client"));
+    els.previewAdvisorSet.addEventListener("click", () => openCurrentSetPreview("advisor"));
+    els.copySpecSet.addEventListener("click", copyCurrentSpecSet);
+    els.downloadSpecSet.addEventListener("click", downloadCurrentSpecSet);
+    els.restoreSpecSet.addEventListener("click", restoreCurrentSpecSet);
+    els.closeCurrentSetPreview.addEventListener("click", closeCurrentSetPreview);
     els.closeElementPreview.addEventListener("click", closeElementPreview);
 
     renderEmptySelection();

@@ -227,9 +227,13 @@ Configured analytic elements can be added to either the Client Briefing Set or t
 
 When a configured analytic spec matches a committed rendered demo view, the row shows `Preview available` and can open the rendered element fragment in a small one-element preview panel. Specs that do not match the current deterministic fixture set show `Preview not available yet for this spec.` The app also links to the static sample Client Briefing Set and Advisor Review Set previews generated under `data/simulation/briefing_set_previews/`; those samples come from current deterministic demo outputs, not from the unsaved local composer set.
 
+The current unsaved Client Briefing Set and Advisor Review Set can be copied or downloaded as a browser-local spec-set export using schema `arangur.local_briefing_spec_set.v1`. A collapsed serialized-data panel and simple restore control are available for local handoff and restart testing. This export is not backend persistence and does not create database records.
+
+Use `Preview Client Briefing Set` or `Preview Advisor Review Set` to assemble the current local ordered set in the browser. Matching analytic specs use existing rendered demo element views; unmatched specs show placeholders, and narrative elements render as local text. This current-set preview is separate from the deterministic sample preview files.
+
 The app serves committed synthetic simulation artifacts under `/simulation/...` for this local preview flow. It does not serve the whole repo and does not expose credentials or real data.
 
-This UI does not generate reports, charts, persisted specs, or client preview output from the local set yet. It does not call the workflow API or show report-package links. The next UI batch should serialize/export completed local spec sets or generate a preview from the local ordered set without backend persistence.
+This UI does not generate reports, charts, or persisted specs from the local set. It does not call the workflow API or show report-package links. A later batch can adapt the local export shape into backend persistence after product and data-model decisions are stable.
 
 Create a native demo manager-overlap workflow run:
 
@@ -291,6 +295,7 @@ Future scenario, data-coverage, and deployable private-demo work is captured in:
 - `docs/contracts/report_element_input_mapping_contract_v1.md`
 - `docs/contracts/report_element_rendering_contract_v1.md`
 - `docs/contracts/briefing_set_preview_contract_v1.md`
+- `docs/contracts/local_briefing_spec_set_contract_v1.md`
 - `docs/contracts/workflow_run_persistence_contract.md`
 - `docs/contracts/report_element_template_catalog_contract.md`
 - `docs/decisions/0003_three_surface_simulation_kernel.md`
