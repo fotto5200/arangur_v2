@@ -220,15 +220,17 @@ Start the FastAPI app:
 python -m uvicorn arangur.app.main:app --reload --app-dir src
 ```
 
-Open `http://127.0.0.1:8000/app/` to use the Report Element Finder / Composer prototype. It starts with a compact static client context line, asks the advisor to choose the target set, loads the report element template catalog from `/api/report-elements`, and provides search, category browsing, lightweight filters, and an attached compact grouped `Browse all templates` picker without showing the full catalog as large cards or an inline catalog list.
+Open `http://127.0.0.1:8000/app/` to use the Report Element Finder / Composer prototype. It lands on a sparse Advisor Home with choices to build a Client Briefing Set, build an Advisor Review Set, open a saved draft, or use secondary demo reference and Advanced tools. The static app uses hash routes such as `#home`, `#builder`, `#preview/client`, `#preview/advisor`, and `#advanced` so browser Back moves from Preview to Builder and from Builder to Advisor Home.
 
-Discovery controls help locate templates; they are not saved as report specs. After a template is selected, the right side shows a short preview and a `Use this element` action. The configuration step then renders only the fields that template needs, with placement shown separately as `Add to set as`. Scope, lens, metric/measure, scenario, display, and advisor internal purpose are template-driven rather than universal form fields.
+The Builder workspace keeps the compact static client context line, asks the advisor to choose or switch the target set, loads the report element template catalog from `/api/report-elements`, and provides search, category browsing, lightweight filters, and an attached compact grouped `Browse all templates` picker without showing the full catalog as large cards or an inline catalog list.
+
+Discovery controls help locate templates; they are not saved as report specs. After a template is selected, the right side shows a short preview and a `Use this element` action. The configuration step then renders only the fields that template needs, with placement shown separately as `Add to set as`. Scope, lens, metric/measure, scenario, display, and advisor internal purpose are template-driven rather than universal form fields. When scope is a selected manager, account, sleeve, or strategy, the UI adds a required demo selector and stores the selected entity in the local spec parameters.
 
 Configured analytic elements can be added to either the Client Briefing Set or the Advisor Review Set. Advisors can also add manual narrative elements such as section titles, explanations, discussion prompts, speaker notes, working notes, and follow-up items. Analytic and narrative elements live in the same ordered local set lists and can be edited, duplicated, moved, or removed.
 
 When a configured analytic spec matches a committed rendered demo view, the row shows that it is previewable. Specs that do not match the current fixture set are flagged before preview as not previewable yet, with advisor-facing guidance to replace, remove, or keep them out of the preview. Individual element preview is available as a secondary element tool.
 
-The main advisor flow is build -> preview -> edit. Use `Preview Client Briefing` or `Preview Advisor Review` from the set panels to open a focused preview surface for the current ordered set. Empty sets are not previewed; the builder asks for at least one client briefing or advisor review element first.
+The main advisor flow is Advisor Home -> Builder -> Preview -> edit. Use `Preview Client Briefing` or `Preview Advisor Review` from the set panels to open a focused preview surface for the current ordered set. Empty sets are not previewed; the builder asks for at least one client briefing or advisor review element first.
 
 Matching analytic specs use existing rendered demo element views; unsupported sections use the nontechnical placeholder `This section is not available in the demo preview.` Narrative elements render as briefing text rather than metadata rows. The preview surface shows only Back to Builder, Print, Export HTML, Copy text, and a compact demo caveat.
 

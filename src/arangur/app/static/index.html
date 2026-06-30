@@ -62,6 +62,25 @@
       gap: 14px;
     }
 
+    .home-surface {
+      display: grid;
+      gap: 14px;
+    }
+
+    body.app-route-home .builder-surface,
+    body.app-route-home #current-set-preview-region,
+    body.app-route-builder .home-surface,
+    body.app-route-builder #current-set-preview-region,
+    body.app-route-preview .home-surface,
+    body.app-route-preview .builder-surface {
+      display: none !important;
+    }
+
+    body.app-route-builder .builder-surface,
+    body.app-route-preview #current-set-preview-region {
+      display: grid !important;
+    }
+
     body.preview-mode .builder-surface {
       display: none;
     }
@@ -84,6 +103,38 @@
 
     .context-line strong {
       color: var(--strong);
+    }
+
+    .home-panel {
+      display: grid;
+      gap: 18px;
+      max-width: 760px;
+    }
+
+    .home-actions {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .home-secondary {
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 10px;
+      padding-top: 12px;
+    }
+
+    .home-secondary > summary {
+      color: var(--strong);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .builder-topbar {
+      align-items: start;
+      display: flex;
+      gap: 14px;
+      justify-content: space-between;
     }
 
     h1 {
@@ -741,6 +792,14 @@
       margin-top: 2px;
     }
 
+    .preview-item-context {
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      gap: 4px;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+    }
+
     .preview-placeholder {
       background: var(--amber-soft);
       border: 1px solid var(--amber-line);
@@ -834,8 +893,14 @@
       .workspace,
       .sets-grid,
       .finder-grid,
-      .calculation-fields {
+      .calculation-fields,
+      .home-actions {
         grid-template-columns: 1fr;
+      }
+
+      .builder-topbar {
+        align-items: stretch;
+        flex-direction: column;
       }
 
       .preview-shell-header {
@@ -848,12 +913,47 @@
     }
   </style>
 </head>
-<body>
+<body class="app-route-home">
   <main class="page">
-    <div id="builder-surface" class="builder-surface">
+    <section id="advisor-home" class="home-surface" aria-labelledby="advisor-home-title">
       <!-- first-screen-start -->
       <p class="brand">Arangur</p>
       <p class="context-line"><strong>Northstar Family Office</strong> &middot; Demo portfolio &middot; Data loaded &middot; Confidence: Mixed &middot; 1 review item</p>
+
+      <section class="panel home-panel">
+        <div class="panel-header">
+          <p class="helper">Advisor Home</p>
+          <h1 id="advisor-home-title">Start a briefing workflow</h1>
+          <p class="helper">Build a current set, continue a draft, or open a demo preview reference.</p>
+        </div>
+
+        <div class="home-actions" aria-label="Advisor workflow choices">
+          <button id="home-build-client-button" class="primary-button" type="button">Build Client Briefing Set</button>
+          <button id="home-build-advisor-button" class="primary-button" type="button">Build Advisor Review Set</button>
+          <button id="home-continue-draft-button" class="secondary-button" type="button">Open Saved Set / Continue Draft</button>
+        </div>
+
+        <details class="home-secondary">
+          <summary>Advanced</summary>
+          <p class="helper">View Demo Preview / QA Reference links and draft tools stay secondary.</p>
+          <div class="button-row">
+            <a class="tiny-button" href="/simulation/briefing_set_previews/client_briefing_set_preview.html" target="_blank" rel="noopener">View Demo Client Preview</a>
+            <a class="tiny-button" href="/simulation/briefing_set_previews/advisor_review_set_preview.html" target="_blank" rel="noopener">View Demo Advisor Preview</a>
+            <button id="home-advanced-tools-button" class="secondary-button" type="button">Open Advanced Tools</button>
+          </div>
+        </details>
+      </section>
+      <!-- first-screen-end -->
+    </section>
+
+    <div id="builder-surface" class="builder-surface">
+      <div class="builder-topbar">
+        <div>
+          <p class="brand">Arangur</p>
+          <p class="context-line"><strong>Northstar Family Office</strong> &middot; Demo portfolio &middot; Data loaded &middot; Confidence: Mixed &middot; 1 review item</p>
+        </div>
+        <button id="builder-home-button" class="secondary-button" type="button">Advisor Home</button>
+      </div>
 
       <section class="workspace" aria-live="polite">
         <section class="panel" aria-labelledby="finder-title">
@@ -946,8 +1046,6 @@
           </div>
         </section>
       </section>
-
-      <!-- first-screen-end -->
 
       <section id="element-preview-region" class="set-panel element-preview-panel hidden" aria-labelledby="element-preview-title">
         <p class="helper">Element detail preview</p>
@@ -1043,6 +1141,97 @@
     const TARGET_TO_BRANCH = {
       "Client Briefing Set": "Client Briefing",
       "Advisor Review Set": "Advisor Review"
+    };
+    const ROUTE_HASHES = {
+      home: "#home",
+      builder: "#builder",
+      advanced: "#advanced",
+      "preview/client": "#preview/client",
+      "preview/advisor": "#preview/advisor"
+    };
+    const ROUTE_BODY_CLASSES = ["app-route-home", "app-route-builder", "app-route-preview"];
+    const DEMO_SELECTED_ENTITY_OPTIONS = {
+      managers: [
+        "Manager A - Growth / AI Infrastructure",
+        "Manager B - Core Quality Equity",
+        "Manager C - Income and Cash Generation",
+        "Manager D - Private Markets / Real Assets",
+        "Manager E - Liquidity Reserve / Defensive Ballast",
+        "Manager F - Opportunistic Macro / Hedge"
+      ],
+      accounts: [
+        "Manager A Public Equity Sleeve",
+        "Manager B Core Quality Account",
+        "Manager C Income Account",
+        "Manager D Private Markets Account",
+        "Manager E Liquidity Reserve Account",
+        "Manager F Opportunistic Macro Account"
+      ],
+      sleeves: [
+        "Public Equity Sleeve",
+        "Core Quality Sleeve",
+        "Income Sleeve",
+        "Private Markets Sleeve",
+        "Liquidity Reserve Sleeve",
+        "Opportunistic Macro Sleeve"
+      ],
+      strategies: [
+        "Growth / AI Infrastructure",
+        "Core Quality Equity",
+        "Income and Cash Generation",
+        "Private Markets / Real Assets",
+        "Liquidity Reserve / Defensive Ballast",
+        "Opportunistic Macro / Hedge"
+      ]
+    };
+    const SELECTED_SCOPE_CONFIG = {
+      "selected manager": {
+        key: "selected_manager",
+        label: "Select manager",
+        summaryLabel: "Selected manager",
+        validationLabel: "manager",
+        options: DEMO_SELECTED_ENTITY_OPTIONS.managers
+      },
+      "selected account": {
+        key: "selected_account",
+        label: "Select account",
+        summaryLabel: "Selected account",
+        validationLabel: "account",
+        options: DEMO_SELECTED_ENTITY_OPTIONS.accounts
+      },
+      "selected sleeve": {
+        key: "selected_sleeve",
+        label: "Select sleeve",
+        summaryLabel: "Selected sleeve",
+        validationLabel: "sleeve",
+        options: DEMO_SELECTED_ENTITY_OPTIONS.sleeves
+      },
+      "selected sleeve / mandate": {
+        key: "selected_sleeve",
+        label: "Select sleeve",
+        summaryLabel: "Selected sleeve",
+        validationLabel: "sleeve",
+        options: DEMO_SELECTED_ENTITY_OPTIONS.sleeves
+      },
+      "selected strategy": {
+        key: "selected_strategy",
+        label: "Select strategy",
+        summaryLabel: "Selected strategy",
+        validationLabel: "strategy",
+        options: DEMO_SELECTED_ENTITY_OPTIONS.strategies
+      }
+    };
+    const SELECTED_SCOPE_VALIDATION_MESSAGES = {
+      manager: "Choose a manager before adding this element.",
+      account: "Choose an account before adding this element.",
+      sleeve: "Choose a sleeve before adding this element.",
+      strategy: "Choose a strategy before adding this element."
+    };
+    const SELECTED_ENTITY_TEXT_PREFIXES = {
+      selected_manager: "Selected manager:",
+      selected_account: "Selected account:",
+      selected_sleeve: "Selected sleeve:",
+      selected_strategy: "Selected strategy:"
     };
     const SCENARIO_OPTIONS = [
       "AI/chip selloff",
@@ -1165,12 +1354,20 @@
       editing: null,
       currentPreviewKind: null,
       currentPreviewReady: false,
+      route: "home",
       savedSpecSets: [],
       clientSet: [],
       advisorSet: []
     };
 
     const els = {
+      advisorHome: document.getElementById("advisor-home"),
+      homeBuildClient: document.getElementById("home-build-client-button"),
+      homeBuildAdvisor: document.getElementById("home-build-advisor-button"),
+      homeContinueDraft: document.getElementById("home-continue-draft-button"),
+      homeAdvancedTools: document.getElementById("home-advanced-tools-button"),
+      builderSurface: document.getElementById("builder-surface"),
+      builderHome: document.getElementById("builder-home-button"),
       targetClient: document.getElementById("target-client"),
       targetAdvisor: document.getElementById("target-advisor"),
       search: document.getElementById("search-filter"),
@@ -1210,6 +1407,7 @@
       loadBackendSpecSets: document.getElementById("load-backend-spec-sets-button"),
       backendSpecStatus: document.getElementById("backend-spec-status"),
       savedSpecSetsList: document.getElementById("saved-spec-sets-list"),
+      advancedTools: document.getElementById("advanced-tools"),
       currentSetPreviewRegion: document.getElementById("current-set-preview-region"),
       currentSetPreviewTitle: document.getElementById("current-set-preview-title"),
       currentSetPreviewSummary: document.getElementById("current-set-preview-summary"),
@@ -1244,6 +1442,75 @@
     async function loadPreviewArtifacts() {
       await Promise.all([loadRenderedViewSummary(), loadBriefingPreviewIndex()]);
       renderSets();
+    }
+
+    function initializeRoute() {
+      const route = routeFromHash();
+      if (window.location.hash !== routeHash(route)) {
+        window.history.replaceState({ route }, "", routeHash(route));
+      }
+      applyRoute(route, { skipScroll: true });
+    }
+
+    function routeFromHash() {
+      return normalizeRoute(window.location.hash.replace(/^#/, ""));
+    }
+
+    function normalizeRoute(route) {
+      const normalized = String(route || "").replace(/^#/, "").trim().toLowerCase();
+      return ROUTE_HASHES[normalized] ? normalized : "home";
+    }
+
+    function routeHash(route) {
+      return ROUTE_HASHES[normalizeRoute(route)] || ROUTE_HASHES.home;
+    }
+
+    function navigateToRoute(route) {
+      const normalized = normalizeRoute(route);
+      const targetHash = routeHash(normalized);
+      if (window.location.hash === targetHash) {
+        applyRoute(normalized);
+        return;
+      }
+      window.location.hash = targetHash;
+    }
+
+    function replaceRoute(route) {
+      const normalized = normalizeRoute(route);
+      window.history.replaceState({ route: normalized }, "", routeHash(normalized));
+      applyRoute(normalized, { skipScroll: true });
+    }
+
+    async function applyRoute(route, options = {}) {
+      const normalized = normalizeRoute(route);
+      state.route = normalized;
+      document.body.classList.remove(...ROUTE_BODY_CLASSES);
+      if (normalized === "home") {
+        document.body.classList.add("app-route-home");
+        hideCurrentSetPreview({ skipScroll: true });
+        closeElementPreview();
+        setBrowseAllOpen(false);
+        if (els.advancedTools) els.advancedTools.open = false;
+        return;
+      }
+      if (normalized === "builder" || normalized === "advanced") {
+        document.body.classList.add("app-route-builder");
+        hideCurrentSetPreview({ skipScroll: options.skipScroll });
+        if (els.advancedTools) els.advancedTools.open = normalized === "advanced";
+        if (normalized === "advanced" && els.advancedTools && !options.skipScroll) {
+          setTimeout(() => els.advancedTools.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
+        }
+        return;
+      }
+      document.body.classList.add("app-route-preview");
+      const kind = normalized === "preview/advisor" ? "advisor" : "client";
+      const opened = await openCurrentSetPreview(kind, { skipNavigation: true, skipScroll: options.skipScroll });
+      if (!opened) replaceRoute("builder");
+    }
+
+    function openBuilderForTarget(targetSet) {
+      setTargetSet(targetSet);
+      navigateToRoute("builder");
     }
 
     async function loadRenderedViewSummary() {
@@ -1605,6 +1872,10 @@
           label: "Scope",
           options: template.supported_scopes || []
         });
+        const selectedEntityField = selectedScopeFieldFor(state.config.scope);
+        if (selectedEntityField) {
+          fields.push(selectedEntityField);
+        }
       }
       if (shouldAsk(template, "lens")) {
         fields.push({
@@ -1641,6 +1912,35 @@
         });
       });
       return fields;
+    }
+
+    function selectedScopeFieldFor(scope) {
+      const config = selectedScopeConfigForScope(scope);
+      if (!config) return null;
+      return {
+        key: config.key,
+        label: config.label,
+        options: [`Choose ${config.validationLabel}`].concat(config.options)
+      };
+    }
+
+    function selectedScopeConfigForScope(scope) {
+      return SELECTED_SCOPE_CONFIG[normalize(scope)] || null;
+    }
+
+    function selectedScopeMissing(template) {
+      if (!shouldAsk(template, "scope")) return null;
+      const config = selectedScopeConfigForScope(state.config.scope);
+      if (!config) return null;
+      const value = state.config[config.key];
+      if (!value || normalize(value).startsWith("choose ")) return config;
+      return null;
+    }
+
+    function clearSelectedEntityConfig() {
+      Object.values(SELECTED_SCOPE_CONFIG).forEach((config) => {
+        delete state.config[config.key];
+      });
     }
 
     function placementFieldsFor(template) {
@@ -1699,6 +1999,13 @@
       if (template.scenario_requirement === "required" && (!state.config.scenario_id || state.config.scenario_id === "Choose scenario")) {
         return { ready: false, text: "Choose a scenario to continue." };
       }
+      const missingSelectedScope = selectedScopeMissing(template);
+      if (missingSelectedScope) {
+        return {
+          ready: false,
+          text: SELECTED_SCOPE_VALIDATION_MESSAGES[missingSelectedScope.validationLabel]
+        };
+      }
       return { ready: true, text: "Ready to add." };
     }
 
@@ -1710,6 +2017,15 @@
       const key = event.target.dataset.configKey;
       if (!key || !state.previewTemplate) return;
       state.config[key] = event.target.value;
+      if (key === "scope") {
+        clearSelectedEntityConfig();
+        const selectedEntityField = selectedScopeFieldFor(state.config.scope);
+        if (selectedEntityField) {
+          state.config[selectedEntityField.key] = "";
+        }
+        renderConfig();
+        return;
+      }
       renderValidation(state.previewTemplate);
     }
 
@@ -1759,7 +2075,7 @@
       const parameters = {};
       savedKeys.forEach((key) => {
         const value = state.config[key];
-        if (value && value !== "None" && value !== "Choose scenario") {
+        if (value && value !== "None" && value !== "Choose scenario" && !normalize(value).startsWith("choose ")) {
           parameters[key] = value;
         }
       });
@@ -2016,7 +2332,7 @@
       }
       state.clientSet = restoreSpecList(payload.client_briefing_set, "Client Briefing Set");
       state.advisorSet = restoreSpecList(payload.advisor_review_set, "Advisor Review Set");
-      closeCurrentSetPreview();
+      closeCurrentSetPreview({ skipNavigation: true, skipScroll: true });
       closeElementPreview();
       resetSelection();
       renderSets();
@@ -2126,7 +2442,7 @@
         }
         state.clientSet = restoreSpecList(specPayload.client_briefing_set, "Client Briefing Set");
         state.advisorSet = restoreSpecList(specPayload.advisor_review_set, "Advisor Review Set");
-        closeCurrentSetPreview();
+        closeCurrentSetPreview({ skipNavigation: true, skipScroll: true });
         closeElementPreview();
         resetSelection();
         renderSets();
@@ -2236,7 +2552,7 @@
       });
     }
 
-    async function openCurrentSetPreview(kind) {
+    async function openCurrentSetPreview(kind, options = {}) {
       if (!listForKind(kind).length) {
         const message = kind === "client"
           ? "Add at least one client briefing element before previewing."
@@ -2261,12 +2577,16 @@
       if (!artifact.ready) {
         els.currentSetPreviewBody.innerHTML = emptyCurrentPreviewHtml(kind);
         renderPreviewExportActions(kind, false);
-        els.currentSetPreviewRegion.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (!options.skipScroll) {
+          els.currentSetPreviewRegion.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
         return false;
       }
       els.currentSetPreviewBody.innerHTML = artifact.screenHtml;
       renderPreviewExportActions(kind, true);
-      els.currentSetPreviewRegion.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (!options.skipScroll) {
+        els.currentSetPreviewRegion.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
       return true;
     }
 
@@ -2309,41 +2629,54 @@
           text: renderNarrativePreviewText(spec)
         };
       }
+      const displayTitle = selectedEntityTitle(title, spec.parameters || {});
+      const selectedEntity = selectedEntitySummary(spec.parameters || {});
+      const selectedEntityHtml = selectedEntity ? `<p class="meta">${escapeHtml(selectedEntity.text)}</p>` : "";
+      const selectedEntityText = selectedEntity ? selectedEntity.text : "";
       const match = previewMatchForSpec(spec);
       if (!match) {
         const placeholder = "This section is not available in the demo preview.";
         return {
           html: `
             <section class="current-set-preview-item">
-              <h3>${escapeHtml(title)}</h3>
+              <h3>${escapeHtml(displayTitle)}</h3>
+              ${selectedEntityHtml}
               <div class="preview-placeholder">${escapeHtml(placeholder)}</div>
             </section>
           `,
-          text: `${title}\n${placeholder}`
+          text: [displayTitle, selectedEntityText, placeholder].filter(Boolean).join("\n")
         };
       }
       try {
         const response = await fetch(match.htmlUrl);
         if (!response.ok) throw new Error(`Preview request failed: ${response.status}`);
         const fragment = sanitizePreviewFragment(await response.text());
+        const contextHtml = selectedEntity ? `
+          <div class="preview-item-context">
+            <h3>${escapeHtml(displayTitle)}</h3>
+            ${selectedEntityHtml}
+          </div>
+        ` : "";
         return {
           html: `
             <section class="current-set-preview-item">
+              ${contextHtml}
               ${fragment}
             </section>
           `,
-          text: htmlFragmentText(fragment)
+          text: [selectedEntity ? displayTitle : "", selectedEntityText, htmlFragmentText(fragment)].filter(Boolean).join("\n")
         };
       } catch (error) {
         const placeholder = "This section is not available in the demo preview.";
         return {
           html: `
             <section class="current-set-preview-item">
-              <h3>${escapeHtml(title)}</h3>
+              <h3>${escapeHtml(displayTitle)}</h3>
+              ${selectedEntityHtml}
               <div class="preview-placeholder">${escapeHtml(placeholder)}</div>
             </section>
           `,
-          text: `${title}\n${placeholder}`
+          text: [displayTitle, selectedEntityText, placeholder].filter(Boolean).join("\n")
         };
       }
     }
@@ -2404,6 +2737,7 @@
     .purpose { font-weight: 700; letter-spacing: 0; text-transform: uppercase; }
     .context, .notice { background: #f8fafc; border: 1px solid #d7dee8; border-radius: 8px; padding: 9px 11px; }
     .current-set-preview-item { border-top: 1px solid #d7dee8; break-inside: avoid; padding: 16px 0; page-break-inside: avoid; }
+    .preview-item-context { border-bottom: 1px solid #d7dee8; margin-bottom: 10px; padding-bottom: 10px; }
     .preview-placeholder { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; color: #713f12; padding: 10px; }
     table { border-collapse: collapse; font-size: 13px; width: 100%; }
     th, td { border-bottom: 1px solid #d7dee8; padding: 6px; text-align: left; vertical-align: top; }
@@ -2578,7 +2912,15 @@
       URL.revokeObjectURL(url);
     }
 
-    function closeCurrentSetPreview() {
+    function closeCurrentSetPreview(options = {}) {
+      if (!options.skipNavigation) {
+        navigateToRoute("builder");
+        return;
+      }
+      hideCurrentSetPreview(options);
+    }
+
+    function hideCurrentSetPreview(options = {}) {
       document.body.classList.remove("preview-mode");
       els.currentSetPreviewRegion.classList.add("hidden");
       els.currentSetPreviewTitle.textContent = "Preview";
@@ -2589,7 +2931,9 @@
       els.currentPreviewExportStatus.textContent = "";
       state.currentPreviewKind = null;
       state.currentPreviewReady = false;
-      document.getElementById("builder-surface").scrollIntoView({ behavior: "smooth", block: "start" });
+      if (!options.skipScroll) {
+        els.builderSurface.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
 
     function editSpec(spec, kind, index) {
@@ -2672,6 +3016,8 @@
         placement: firstValue(placementsFor(template))
       };
       if (shouldAsk(template, "scope")) defaults.scope = firstValue(template.supported_scopes);
+      const selectedEntityField = selectedScopeFieldFor(defaults.scope);
+      if (selectedEntityField) defaults[selectedEntityField.key] = "";
       if (shouldAsk(template, "lens")) defaults.lens = firstValue(safeLensOptions(template));
       if (shouldAskMetric(template)) defaults.metric = firstValue(template.supported_metrics);
       if (template.scenario_requirement === "required") defaults.scenario_id = "Choose scenario";
@@ -2719,6 +3065,9 @@
     function fieldSummary(template) {
       const labels = [];
       if (shouldAsk(template, "scope")) labels.push("scope");
+      if ((template.supported_scopes || []).some((scope) => selectedScopeConfigForScope(scope))) {
+        labels.push("selected entity when needed");
+      }
       if (shouldAsk(template, "lens")) labels.push("lens");
       if (template.scenario_requirement === "required") labels.push("scenario");
       meaningfulOptionalParameters(template).forEach((parameter) => labels.push(PARAMETER_UI[parameter].label.toLowerCase()));
@@ -2727,14 +3076,36 @@
     }
 
     function compactParameterText(parameters) {
+      parameters = parameters || {};
       const pieces = [];
       if (parameters.scope) pieces.push(parameters.scope);
+      const selectedEntity = selectedEntitySummary(parameters);
+      if (selectedEntity) pieces.push(selectedEntity.text);
       if (parameters.lens) pieces.push(parameters.lens);
       if (parameters.scenario_id) pieces.push(parameters.scenario_id);
       if (parameters.lookback_period) pieces.push(parameters.lookback_period);
       if (parameters.threshold_percent) pieces.push(parameters.threshold_percent);
       if (parameters.fixed_metric) pieces.push(parameters.fixed_metric);
       return pieces.join(" | ");
+    }
+
+    function selectedEntitySummary(parameters) {
+      const config = Object.values(SELECTED_SCOPE_CONFIG).find((candidate) => {
+        const value = parameters[candidate.key];
+        return value && !normalize(value).startsWith("choose ");
+      });
+      if (!config) return null;
+      return {
+        key: config.key,
+        label: config.summaryLabel,
+        value: parameters[config.key],
+        text: `${SELECTED_ENTITY_TEXT_PREFIXES[config.key]} ${parameters[config.key]}`
+      };
+    }
+
+    function selectedEntityTitle(title, parameters) {
+      const selectedEntity = selectedEntitySummary(parameters || {});
+      return selectedEntity ? `${title} - ${selectedEntity.value}` : title;
     }
 
     function previewMatchForSpec(spec) {
@@ -2880,6 +3251,11 @@
       return escapeHtml(value);
     }
 
+    els.homeBuildClient.addEventListener("click", () => openBuilderForTarget("Client Briefing Set"));
+    els.homeBuildAdvisor.addEventListener("click", () => openBuilderForTarget("Advisor Review Set"));
+    els.homeContinueDraft.addEventListener("click", () => navigateToRoute("advanced"));
+    els.homeAdvancedTools.addEventListener("click", () => navigateToRoute("advanced"));
+    els.builderHome.addEventListener("click", () => navigateToRoute("home"));
     els.targetClient.addEventListener("click", () => setTargetSet("Client Briefing Set"));
     els.targetAdvisor.addEventListener("click", () => setTargetSet("Advisor Review Set"));
     els.browseAll.addEventListener("click", toggleBrowseAll);
@@ -2923,8 +3299,8 @@
     });
     els.clientList.addEventListener("click", handleSetAction);
     els.advisorList.addEventListener("click", handleSetAction);
-    els.previewClientSet.addEventListener("click", () => openCurrentSetPreview("client"));
-    els.previewAdvisorSet.addEventListener("click", () => openCurrentSetPreview("advisor"));
+    els.previewClientSet.addEventListener("click", () => navigateToRoute("preview/client"));
+    els.previewAdvisorSet.addEventListener("click", () => navigateToRoute("preview/advisor"));
     els.copySpecSet.addEventListener("click", copyCurrentSpecSet);
     els.downloadSpecSet.addEventListener("click", downloadCurrentSpecSet);
     els.restoreSpecSet.addEventListener("click", restoreCurrentSpecSet);
@@ -2934,11 +3310,13 @@
     els.currentPreviewExportActions.addEventListener("click", handleCurrentPreviewExportAction);
     els.closeCurrentSetPreview.addEventListener("click", closeCurrentSetPreview);
     els.closeElementPreview.addEventListener("click", closeElementPreview);
+    window.addEventListener("hashchange", () => applyRoute(routeFromHash()));
     window.addEventListener("afterprint", () => document.body.classList.remove("print-current-preview"));
 
     renderEmptySelection();
     renderSets();
     renderSavedSpecSets();
+    initializeRoute();
     loadCatalog();
     loadPreviewArtifacts();
   </script>

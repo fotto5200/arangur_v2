@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import re
+import shutil
+import subprocess
 import sys
 import unittest
 from pathlib import Path
@@ -63,6 +66,26 @@ class AppHealthTests(unittest.TestCase):
                 self.assertEqual(200, response.status_code)
                 self.assertIn("text/html", response.headers["content-type"])
                 self.assertIn("Arangur", response.text)
+                self.assertIn("Advisor Home", response.text)
+                self.assertIn("Start a briefing workflow", response.text)
+                self.assertIn("Build Client Briefing Set", response.text)
+                self.assertIn("Build Advisor Review Set", response.text)
+                self.assertIn("Open Saved Set / Continue Draft", response.text)
+                self.assertIn("View Demo Preview / QA Reference", response.text)
+                self.assertIn("Open Advanced Tools", response.text)
+                self.assertIn('body class="app-route-home"', response.text)
+                self.assertIn('"#home"', response.text)
+                self.assertIn('"#builder"', response.text)
+                self.assertIn('"#preview/client"', response.text)
+                self.assertIn('"#preview/advisor"', response.text)
+                self.assertIn('"#advanced"', response.text)
+                self.assertIn("navigateToRoute", response.text)
+                self.assertIn("replaceRoute", response.text)
+                self.assertIn("applyRoute", response.text)
+                self.assertIn("routeFromHash", response.text)
+                self.assertIn("window.location.hash", response.text)
+                self.assertIn('window.addEventListener("hashchange"', response.text)
+                self.assertIn("window.history.replaceState", response.text)
                 self.assertIn("Report element finder", response.text)
                 self.assertIn("Choose a target set, then find an element", response.text)
                 self.assertIn("Search report elements", response.text)
@@ -157,6 +180,19 @@ class AppHealthTests(unittest.TestCase):
                 self.assertIn("Add to set as", response.text)
                 self.assertIn("Ready to add.", response.text)
                 self.assertIn("Choose a scenario to continue.", response.text)
+                self.assertIn("Select manager", response.text)
+                self.assertIn("Select account", response.text)
+                self.assertIn("Select sleeve", response.text)
+                self.assertIn("Select strategy", response.text)
+                self.assertIn("selected_manager", response.text)
+                self.assertIn("selected_account", response.text)
+                self.assertIn("selected_sleeve", response.text)
+                self.assertIn("selected_strategy", response.text)
+                self.assertIn("Choose a manager before adding this element.", response.text)
+                self.assertIn("Choose an account before adding this element.", response.text)
+                self.assertIn("Choose a sleeve before adding this element.", response.text)
+                self.assertIn("Selected manager:", response.text)
+                self.assertIn("selectedEntityTitle", response.text)
                 self.assertIn("Client Briefing Set", response.text)
                 self.assertIn("Advisor Review Set", response.text)
                 self.assertIn("No client briefing elements yet.", response.text)
@@ -174,18 +210,26 @@ class AppHealthTests(unittest.TestCase):
                 self.assertIn("Promote to Client Briefing", response.text)
                 first_screen = self._first_screen(response.text)
                 self.assertIn("<strong>Northstar Family Office</strong> &middot; Demo portfolio &middot; Data loaded &middot; Confidence: Mixed &middot; 1 review item", first_screen)
-                self.assertIn("Choose a target set, then find an element", first_screen)
-                self.assertIn("Search report elements", first_screen)
-                self.assertIn("Browse all templates", first_screen)
-                self.assertIn("Add narrative element", first_screen)
-                self.assertIn("Client Briefing Set", first_screen)
-                self.assertIn("Advisor Review Set", first_screen)
-                self.assertIn("Search, browse a category, or choose a filter to find report elements.", first_screen)
-                self.assertIn("Select a report element to see details.", first_screen)
-                self.assertIn("Preview Client Briefing", first_screen)
-                self.assertIn("Preview Advisor Review", first_screen)
-                self.assertIn("Add at least one client briefing element before previewing.", first_screen)
-                self.assertIn("Add at least one advisor review element before previewing.", first_screen)
+                self.assertIn("Advisor Home", first_screen)
+                self.assertIn("Start a briefing workflow", first_screen)
+                self.assertIn("Build Client Briefing Set", first_screen)
+                self.assertIn("Build Advisor Review Set", first_screen)
+                self.assertIn("Open Saved Set / Continue Draft", first_screen)
+                self.assertIn("View Demo Preview / QA Reference", first_screen)
+                self.assertIn("View Demo Client Preview", first_screen)
+                self.assertIn("View Demo Advisor Preview", first_screen)
+                self.assertIn("Open Advanced Tools", first_screen)
+                self.assertNotIn("Report element finder", first_screen)
+                self.assertNotIn("Choose a target set, then find an element", first_screen)
+                self.assertNotIn("Search report elements", first_screen)
+                self.assertNotIn("Browse all templates", first_screen)
+                self.assertNotIn("Add narrative element", first_screen)
+                self.assertNotIn("Search, browse a category, or choose a filter to find report elements.", first_screen)
+                self.assertNotIn("Select a report element to see details.", first_screen)
+                self.assertNotIn("Preview Client Briefing", first_screen)
+                self.assertNotIn("Preview Advisor Review", first_screen)
+                self.assertNotIn("Add at least one client briefing element before previewing.", first_screen)
+                self.assertNotIn("Add at least one advisor review element before previewing.", first_screen)
                 self.assertNotIn("Copy local set JSON", first_screen)
                 self.assertNotIn("Download local set JSON", first_screen)
                 self.assertNotIn("Backend save/load", first_screen)
@@ -201,7 +245,6 @@ class AppHealthTests(unittest.TestCase):
                 self.assertNotIn("Last updated: Demo fixture", first_screen)
                 self.assertNotIn("Recent briefings", first_screen)
                 self.assertNotIn("Run workflow", response.text)
-                self.assertNotIn("Client Preview", response.text)
                 self.assertNotIn("Technical/Admin Appendix", response.text)
                 self.assertNotIn(".json", first_screen)
                 self.assertNotIn("Sample previews", response.text)
@@ -320,6 +363,22 @@ class AppHealthTests(unittest.TestCase):
         self.assertIn("Body text", response.text)
         self.assertIn("Prompt text", response.text)
         self.assertIn("Note text", response.text)
+
+    def test_static_app_embedded_javascript_parses(self) -> None:
+        node = shutil.which("node")
+        if not node:
+            self.skipTest("node is not available for embedded JavaScript parse smoke")
+        html = (ROOT / "src" / "arangur" / "app" / "static" / "index.html").read_text(encoding="utf-8")
+        scripts = re.findall(r"<script>(.*?)</script>", html, flags=re.DOTALL)
+        self.assertEqual(1, len(scripts))
+        result = subprocess.run(
+            [node, "--check", "-"],
+            input=scripts[0],
+            capture_output=True,
+            check=False,
+            text=True,
+        )
+        self.assertEqual(0, result.returncode, result.stderr)
 
     def _first_screen(self, html: str) -> str:
         start_marker = "<!-- first-screen-start -->"
