@@ -1,0 +1,2280 @@
+{
+  "base_market_state_id": "market_state_2026_06_30",
+  "base_state_date": "2026-06-30",
+  "caveats": [
+    "Synthetic deterministic scenario states only.",
+    "Scenario states are assumption inputs, not forecasts or valuation outputs."
+  ],
+  "generated_at": "2026-06-30T00:00:00Z",
+  "generator_version": "synthetic_market_state_generator.v1",
+  "required_state_variables": [
+    "ai_infrastructure_proxy",
+    "bond_price_proxy",
+    "cash_treatment",
+    "commodity_price",
+    "credit_spread_proxy",
+    "crypto_price",
+    "duration_bucket_price",
+    "energy_price_proxy",
+    "etf_price",
+    "fx_rate",
+    "human_review_flag",
+    "liquidity_discount_proxy",
+    "manager_composite_proxy",
+    "manager_mark",
+    "money_market_nav",
+    "optional_lookthrough_proxy",
+    "private_equity_proxy",
+    "private_mark",
+    "rate_proxy",
+    "real_asset_proxy",
+    "time_to_maturity",
+    "underlying_price",
+    "volatility_proxy"
+  ],
+  "scenario_set_id": "scenario_set_northstar_synthetic_market_state_history_seed_20260701",
+  "scenarios": [
+    {
+      "base_market_state_id": "market_state_2026_06_30",
+      "caveats": [
+        "Deterministic synthetic scenario state, not a forecast.",
+        "No position values or portfolio values are calculated in this scenario state."
+      ],
+      "completeness_summary": {
+        "cash_treatment_count": 2,
+        "confidence_counts": {
+          "high": 7,
+          "low": 4,
+          "medium": 12
+        },
+        "covered_variable_count": 23,
+        "direct_treatment_count": 6,
+        "human_review_count": 1,
+        "missing_variable_count": 0,
+        "model_input_treatment_count": 3,
+        "proxy_treatment_count": 9,
+        "required_variable_count": 23,
+        "stale_mark_treatment_count": 2,
+        "status": "complete"
+      },
+      "core_driver_shocks": [
+        {
+          "base_value": 89.457444,
+          "driver_id": "ai_infrastructure_semiconductor",
+          "shock_percent": -0.24,
+          "shocked_value": 67.987657
+        },
+        {
+          "base_value": 85.364878,
+          "driver_id": "bitcoin_crypto",
+          "shock_percent": 0.0,
+          "shocked_value": 85.364878
+        },
+        {
+          "base_value": 107.85303,
+          "driver_id": "credit_spread_proxy",
+          "shock_percent": 0.08,
+          "shocked_value": 116.481272
+        },
+        {
+          "base_value": 97.501453,
+          "driver_id": "energy_oil",
+          "shock_percent": 0.0,
+          "shocked_value": 97.501453
+        },
+        {
+          "base_value": 101.693866,
+          "driver_id": "long_duration_bond_price",
+          "shock_percent": 0.0,
+          "shocked_value": 101.693866
+        },
+        {
+          "base_value": 93.253116,
+          "driver_id": "private_market_liquidity",
+          "shock_percent": -0.06,
+          "shocked_value": 87.657929
+        },
+        {
+          "base_value": 98.099802,
+          "driver_id": "real_assets_infrastructure",
+          "shock_percent": 0.0,
+          "shocked_value": 98.099802
+        },
+        {
+          "base_value": 102.663719,
+          "driver_id": "short_duration_bond_price",
+          "shock_percent": 0.0,
+          "shocked_value": 102.663719
+        },
+        {
+          "base_value": 88.702815,
+          "driver_id": "us_growth_tech_equity",
+          "shock_percent": -0.16,
+          "shocked_value": 74.510365
+        },
+        {
+          "base_value": 86.871792,
+          "driver_id": "us_large_cap_equity",
+          "shock_percent": -0.08,
+          "shocked_value": 79.922049
+        },
+        {
+          "base_value": 97.046312,
+          "driver_id": "usd_fx_broad",
+          "shock_percent": 0.0,
+          "shocked_value": 97.046312
+        },
+        {
+          "base_value": 20.006968,
+          "driver_id": "volatility_proxy",
+          "shock_percent": 0.35,
+          "shocked_value": 27.009407
+        }
+      ],
+      "description": "Synthetic stress to AI infrastructure, semiconductors, growth tech, and risk appetite.",
+      "direct_treatment_count": 6,
+      "display_name": "AI / Chip Selloff",
+      "expanded_state_values": [
+        {
+          "confidence": "medium",
+          "description": "Synthetic AI infrastructure proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(ai_infrastructure_semiconductor, us_growth_tech_equity, real_assets_infrastructure)",
+          "scenario_shock_percent": -0.196,
+          "source_driver_ids": [
+            "ai_infrastructure_semiconductor",
+            "us_growth_tech_equity",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "ai_infrastructure_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 58.394157,
+          "value_type": "index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic bond price proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(short_duration_bond_price, long_duration_bond_price)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "short_duration_bond_price",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "bond_price_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 102.1303,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Cash face-value treatment.",
+          "proxy_rule": "cash_treatment:fixed_or_explicit_treatment",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [],
+          "state_variable_id": "cash_treatment",
+          "treatment_type": "cash_treatment",
+          "unit": "face_value_scalar",
+          "value": 1.0,
+          "value_type": "cash_scalar"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic commodity price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(energy_oil, real_assets_infrastructure)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "energy_oil",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "commodity_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 97.621123,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic credit spread proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(credit_spread_proxy)",
+          "scenario_shock_percent": 0.08,
+          "source_driver_ids": [
+            "credit_spread_proxy"
+          ],
+          "state_variable_id": "credit_spread_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 125.799774,
+          "value_type": "spread_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic crypto price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(bitcoin_crypto)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "bitcoin_crypto"
+          ],
+          "state_variable_id": "crypto_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 85.364878,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic duration-bucket price proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(short_duration_bond_price, long_duration_bond_price)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "short_duration_bond_price",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "duration_bucket_price",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 101.984822,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic energy price proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(energy_oil)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "energy_oil"
+          ],
+          "state_variable_id": "energy_price_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 97.501453,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic ETF price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(us_large_cap_equity, us_growth_tech_equity)",
+          "scenario_shock_percent": -0.104,
+          "source_driver_ids": [
+            "us_large_cap_equity",
+            "us_growth_tech_equity"
+          ],
+          "state_variable_id": "etf_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 70.155495,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic broad FX rate proxy.",
+          "proxy_rule": "direct:weighted_driver_map(usd_fx_broad)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "usd_fx_broad"
+          ],
+          "state_variable_id": "fx_rate",
+          "treatment_type": "direct",
+          "unit": "index_ratio",
+          "value": 0.970463,
+          "value_type": "fx_index"
+        },
+        {
+          "confidence": "low",
+          "description": "Explicit human-review state treatment.",
+          "proxy_rule": "human_review:fixed_or_explicit_treatment",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [],
+          "state_variable_id": "human_review_flag",
+          "treatment_type": "human_review",
+          "unit": "boolean_scalar",
+          "value": 1.0,
+          "value_type": "flag"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic liquidity discount model input.",
+          "proxy_rule": "model_input:weighted_driver_map(private_market_liquidity, volatility_proxy)",
+          "scenario_shock_percent": 0.1615,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "volatility_proxy"
+          ],
+          "state_variable_id": "liquidity_discount_proxy",
+          "treatment_type": "model_input",
+          "unit": "decimal_percent",
+          "value": 0.165174,
+          "value_type": "discount_percent"
+        },
+        {
+          "confidence": "low",
+          "description": "Synthetic opaque manager composite proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(private_market_liquidity, credit_spread_proxy, volatility_proxy)",
+          "scenario_shock_percent": -0.1375,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "credit_spread_proxy",
+            "volatility_proxy"
+          ],
+          "state_variable_id": "manager_composite_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 6.862304,
+          "value_type": "index"
+        },
+        {
+          "confidence": "low",
+          "description": "Synthetic manager mark input, updated in coarse stale buckets.",
+          "proxy_rule": "stale_mark:weighted_driver_map(private_market_liquidity, real_assets_infrastructure, credit_spread_proxy)",
+          "scenario_shock_percent": -0.043,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "real_assets_infrastructure",
+            "credit_spread_proxy"
+          ],
+          "state_variable_id": "manager_mark",
+          "treatment_type": "stale_mark",
+          "unit": "index_level",
+          "value": 94.377216,
+          "value_type": "mark_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic money-market NAV treatment.",
+          "proxy_rule": "cash_treatment:weighted_driver_map(short_duration_bond_price)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "short_duration_bond_price"
+          ],
+          "state_variable_id": "money_market_nav",
+          "treatment_type": "cash_treatment",
+          "unit": "nav",
+          "value": 1.000266,
+          "value_type": "nav"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic ETF look-through proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(us_large_cap_equity, ai_infrastructure_semiconductor, real_assets_infrastructure)",
+          "scenario_shock_percent": -0.104,
+          "source_driver_ids": [
+            "us_large_cap_equity",
+            "ai_infrastructure_semiconductor",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "optional_lookthrough_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 72.194305,
+          "value_type": "index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic private equity proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(private_market_liquidity, us_growth_tech_equity, us_large_cap_equity)",
+          "scenario_shock_percent": -0.099,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "us_growth_tech_equity",
+            "us_large_cap_equity"
+          ],
+          "state_variable_id": "private_equity_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 73.439704,
+          "value_type": "index"
+        },
+        {
+          "confidence": "low",
+          "description": "Synthetic stale private mark input.",
+          "proxy_rule": "stale_mark:weighted_driver_map(private_market_liquidity, real_assets_infrastructure)",
+          "scenario_shock_percent": -0.03,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "private_mark",
+          "treatment_type": "stale_mark",
+          "unit": "index_level",
+          "value": 100.001669,
+          "value_type": "mark_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic rate model input derived from bond proxies.",
+          "proxy_rule": "model_input:weighted_driver_map(short_duration_bond_price, long_duration_bond_price)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "short_duration_bond_price",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "rate_proxy",
+          "treatment_type": "model_input",
+          "unit": "decimal_rate",
+          "value": 0.036342,
+          "value_type": "rate_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic real asset proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(real_assets_infrastructure, energy_oil, long_duration_bond_price)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "real_assets_infrastructure",
+            "energy_oil",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "real_asset_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 98.489324,
+          "value_type": "index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic option time-to-maturity input.",
+          "proxy_rule": "model_input:fixed_or_explicit_treatment",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [],
+          "state_variable_id": "time_to_maturity",
+          "treatment_type": "model_input",
+          "unit": "years",
+          "value": 0.503425,
+          "value_type": "years"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic underlying public security price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(us_large_cap_equity, us_growth_tech_equity, ai_infrastructure_semiconductor)",
+          "scenario_shock_percent": -0.14,
+          "source_driver_ids": [
+            "us_large_cap_equity",
+            "us_growth_tech_equity",
+            "ai_infrastructure_semiconductor"
+          ],
+          "state_variable_id": "underlying_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 65.05133,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic volatility proxy.",
+          "proxy_rule": "direct:weighted_driver_map(volatility_proxy)",
+          "scenario_shock_percent": 0.35,
+          "source_driver_ids": [
+            "volatility_proxy"
+          ],
+          "state_variable_id": "volatility_proxy",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 36.462699,
+          "value_type": "volatility_index"
+        }
+      ],
+      "horizon": "3 months",
+      "human_review_count": 1,
+      "proxy_treatment_count": 9,
+      "scenario_date": "2026-06-30",
+      "scenario_id": "ai_chip_selloff",
+      "scenario_state_id": "scenario_state_ai_chip_selloff",
+      "schema_version": "simulation_scenario_market_state.v1",
+      "synthetic_data": true
+    },
+    {
+      "base_market_state_id": "market_state_2026_06_30",
+      "caveats": [
+        "Deterministic synthetic scenario state, not a forecast.",
+        "No position values or portfolio values are calculated in this scenario state."
+      ],
+      "completeness_summary": {
+        "cash_treatment_count": 2,
+        "confidence_counts": {
+          "high": 7,
+          "low": 4,
+          "medium": 12
+        },
+        "covered_variable_count": 23,
+        "direct_treatment_count": 6,
+        "human_review_count": 1,
+        "missing_variable_count": 0,
+        "model_input_treatment_count": 3,
+        "proxy_treatment_count": 9,
+        "required_variable_count": 23,
+        "stale_mark_treatment_count": 2,
+        "status": "complete"
+      },
+      "core_driver_shocks": [
+        {
+          "base_value": 89.457444,
+          "driver_id": "ai_infrastructure_semiconductor",
+          "shock_percent": 0.0,
+          "shocked_value": 89.457444
+        },
+        {
+          "base_value": 85.364878,
+          "driver_id": "bitcoin_crypto",
+          "shock_percent": 0.0,
+          "shocked_value": 85.364878
+        },
+        {
+          "base_value": 107.85303,
+          "driver_id": "credit_spread_proxy",
+          "shock_percent": 0.12,
+          "shocked_value": 120.795394
+        },
+        {
+          "base_value": 97.501453,
+          "driver_id": "energy_oil",
+          "shock_percent": 0.0,
+          "shocked_value": 97.501453
+        },
+        {
+          "base_value": 101.693866,
+          "driver_id": "long_duration_bond_price",
+          "shock_percent": -0.095,
+          "shocked_value": 92.032949
+        },
+        {
+          "base_value": 93.253116,
+          "driver_id": "private_market_liquidity",
+          "shock_percent": -0.07,
+          "shocked_value": 86.725398
+        },
+        {
+          "base_value": 98.099802,
+          "driver_id": "real_assets_infrastructure",
+          "shock_percent": 0.0,
+          "shocked_value": 98.099802
+        },
+        {
+          "base_value": 102.663719,
+          "driver_id": "short_duration_bond_price",
+          "shock_percent": -0.015,
+          "shocked_value": 101.123763
+        },
+        {
+          "base_value": 88.702815,
+          "driver_id": "us_growth_tech_equity",
+          "shock_percent": -0.06,
+          "shocked_value": 83.380646
+        },
+        {
+          "base_value": 86.871792,
+          "driver_id": "us_large_cap_equity",
+          "shock_percent": 0.0,
+          "shocked_value": 86.871792
+        },
+        {
+          "base_value": 97.046312,
+          "driver_id": "usd_fx_broad",
+          "shock_percent": 0.0,
+          "shocked_value": 97.046312
+        },
+        {
+          "base_value": 20.006968,
+          "driver_id": "volatility_proxy",
+          "shock_percent": 0.18,
+          "shocked_value": 23.608222
+        }
+      ],
+      "description": "Synthetic upward-rate shock reflected through bond-price proxies and credit stress.",
+      "direct_treatment_count": 6,
+      "display_name": "Rate Shock",
+      "expanded_state_values": [
+        {
+          "confidence": "medium",
+          "description": "Synthetic AI infrastructure proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(ai_infrastructure_semiconductor, us_growth_tech_equity, real_assets_infrastructure)",
+          "scenario_shock_percent": -0.015,
+          "source_driver_ids": [
+            "ai_infrastructure_semiconductor",
+            "us_growth_tech_equity",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "ai_infrastructure_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 87.470443,
+          "value_type": "index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic bond price proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(short_duration_bond_price, long_duration_bond_price)",
+          "scenario_shock_percent": -0.059,
+          "source_driver_ids": [
+            "short_duration_bond_price",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "bond_price_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 90.45251,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Cash face-value treatment.",
+          "proxy_rule": "cash_treatment:fixed_or_explicit_treatment",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [],
+          "state_variable_id": "cash_treatment",
+          "treatment_type": "cash_treatment",
+          "unit": "face_value_scalar",
+          "value": 1.0,
+          "value_type": "cash_scalar"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic commodity price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(energy_oil, real_assets_infrastructure)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "energy_oil",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "commodity_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 97.621123,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic credit spread proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(credit_spread_proxy)",
+          "scenario_shock_percent": 0.12,
+          "source_driver_ids": [
+            "credit_spread_proxy"
+          ],
+          "state_variable_id": "credit_spread_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 135.290841,
+          "value_type": "spread_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic crypto price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(bitcoin_crypto)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "bitcoin_crypto"
+          ],
+          "state_variable_id": "crypto_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 85.364878,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic duration-bucket price proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(short_duration_bond_price, long_duration_bond_price)",
+          "scenario_shock_percent": -0.071,
+          "source_driver_ids": [
+            "short_duration_bond_price",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "duration_bucket_price",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 88.032219,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic energy price proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(energy_oil)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "energy_oil"
+          ],
+          "state_variable_id": "energy_price_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 97.501453,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic ETF price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(us_large_cap_equity, us_growth_tech_equity)",
+          "scenario_shock_percent": -0.018,
+          "source_driver_ids": [
+            "us_large_cap_equity",
+            "us_growth_tech_equity"
+          ],
+          "state_variable_id": "etf_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 84.279608,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic broad FX rate proxy.",
+          "proxy_rule": "direct:weighted_driver_map(usd_fx_broad)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "usd_fx_broad"
+          ],
+          "state_variable_id": "fx_rate",
+          "treatment_type": "direct",
+          "unit": "index_ratio",
+          "value": 0.970463,
+          "value_type": "fx_index"
+        },
+        {
+          "confidence": "low",
+          "description": "Explicit human-review state treatment.",
+          "proxy_rule": "human_review:fixed_or_explicit_treatment",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [],
+          "state_variable_id": "human_review_flag",
+          "treatment_type": "human_review",
+          "unit": "boolean_scalar",
+          "value": 1.0,
+          "value_type": "flag"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic liquidity discount model input.",
+          "proxy_rule": "model_input:weighted_driver_map(private_market_liquidity, volatility_proxy)",
+          "scenario_shock_percent": 0.1085,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "volatility_proxy"
+          ],
+          "state_variable_id": "liquidity_discount_proxy",
+          "treatment_type": "model_input",
+          "unit": "decimal_percent",
+          "value": 0.150279,
+          "value_type": "discount_percent"
+        },
+        {
+          "confidence": "low",
+          "description": "Synthetic opaque manager composite proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(private_market_liquidity, credit_spread_proxy, volatility_proxy)",
+          "scenario_shock_percent": -0.11,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "credit_spread_proxy",
+            "volatility_proxy"
+          ],
+          "state_variable_id": "manager_composite_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 6.462998,
+          "value_type": "index"
+        },
+        {
+          "confidence": "low",
+          "description": "Synthetic manager mark input, updated in coarse stale buckets.",
+          "proxy_rule": "stale_mark:weighted_driver_map(private_market_liquidity, real_assets_infrastructure, credit_spread_proxy)",
+          "scenario_shock_percent": -0.0555,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "real_assets_infrastructure",
+            "credit_spread_proxy"
+          ],
+          "state_variable_id": "manager_mark",
+          "treatment_type": "stale_mark",
+          "unit": "index_level",
+          "value": 93.861038,
+          "value_type": "mark_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic money-market NAV treatment.",
+          "proxy_rule": "cash_treatment:weighted_driver_map(short_duration_bond_price)",
+          "scenario_shock_percent": -0.015,
+          "source_driver_ids": [
+            "short_duration_bond_price"
+          ],
+          "state_variable_id": "money_market_nav",
+          "treatment_type": "cash_treatment",
+          "unit": "nav",
+          "value": 1.000112,
+          "value_type": "nav"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic ETF look-through proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(us_large_cap_equity, ai_infrastructure_semiconductor, real_assets_infrastructure)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "us_large_cap_equity",
+            "ai_infrastructure_semiconductor",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "optional_lookthrough_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 89.763807,
+          "value_type": "index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic private equity proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(private_market_liquidity, us_growth_tech_equity, us_large_cap_equity)",
+          "scenario_shock_percent": -0.0525,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "us_growth_tech_equity",
+            "us_large_cap_equity"
+          ],
+          "state_variable_id": "private_equity_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 81.090853,
+          "value_type": "index"
+        },
+        {
+          "confidence": "low",
+          "description": "Synthetic stale private mark input.",
+          "proxy_rule": "stale_mark:weighted_driver_map(private_market_liquidity, real_assets_infrastructure)",
+          "scenario_shock_percent": -0.035,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "private_mark",
+          "treatment_type": "stale_mark",
+          "unit": "index_level",
+          "value": 99.792633,
+          "value_type": "mark_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic rate model input derived from bond proxies.",
+          "proxy_rule": "model_input:weighted_driver_map(short_duration_bond_price, long_duration_bond_price)",
+          "scenario_shock_percent": 0.071,
+          "source_driver_ids": [
+            "short_duration_bond_price",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "rate_proxy",
+          "treatment_type": "model_input",
+          "unit": "decimal_rate",
+          "value": 0.051518,
+          "value_type": "rate_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic real asset proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(real_assets_infrastructure, energy_oil, long_duration_bond_price)",
+          "scenario_shock_percent": -0.01425,
+          "source_driver_ids": [
+            "real_assets_infrastructure",
+            "energy_oil",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "real_asset_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 95.657364,
+          "value_type": "index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic option time-to-maturity input.",
+          "proxy_rule": "model_input:fixed_or_explicit_treatment",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [],
+          "state_variable_id": "time_to_maturity",
+          "treatment_type": "model_input",
+          "unit": "years",
+          "value": 0.503425,
+          "value_type": "years"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic underlying public security price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(us_large_cap_equity, us_growth_tech_equity, ai_infrastructure_semiconductor)",
+          "scenario_shock_percent": -0.021,
+          "source_driver_ids": [
+            "us_large_cap_equity",
+            "us_growth_tech_equity",
+            "ai_infrastructure_semiconductor"
+          ],
+          "state_variable_id": "underlying_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 84.357514,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic volatility proxy.",
+          "proxy_rule": "direct:weighted_driver_map(volatility_proxy)",
+          "scenario_shock_percent": 0.18,
+          "source_driver_ids": [
+            "volatility_proxy"
+          ],
+          "state_variable_id": "volatility_proxy",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 27.857702,
+          "value_type": "volatility_index"
+        }
+      ],
+      "horizon": "3 months",
+      "human_review_count": 1,
+      "proxy_treatment_count": 9,
+      "scenario_date": "2026-06-30",
+      "scenario_id": "rate_shock",
+      "scenario_state_id": "scenario_state_rate_shock",
+      "schema_version": "simulation_scenario_market_state.v1",
+      "synthetic_data": true
+    },
+    {
+      "base_market_state_id": "market_state_2026_06_30",
+      "caveats": [
+        "Deterministic synthetic scenario state, not a forecast.",
+        "No position values or portfolio values are calculated in this scenario state."
+      ],
+      "completeness_summary": {
+        "cash_treatment_count": 2,
+        "confidence_counts": {
+          "high": 7,
+          "low": 4,
+          "medium": 12
+        },
+        "covered_variable_count": 23,
+        "direct_treatment_count": 6,
+        "human_review_count": 1,
+        "missing_variable_count": 0,
+        "model_input_treatment_count": 3,
+        "proxy_treatment_count": 9,
+        "required_variable_count": 23,
+        "stale_mark_treatment_count": 2,
+        "status": "complete"
+      },
+      "core_driver_shocks": [
+        {
+          "base_value": 89.457444,
+          "driver_id": "ai_infrastructure_semiconductor",
+          "shock_percent": -0.07,
+          "shocked_value": 83.195423
+        },
+        {
+          "base_value": 85.364878,
+          "driver_id": "bitcoin_crypto",
+          "shock_percent": 0.0,
+          "shocked_value": 85.364878
+        },
+        {
+          "base_value": 107.85303,
+          "driver_id": "credit_spread_proxy",
+          "shock_percent": 0.0,
+          "shocked_value": 107.85303
+        },
+        {
+          "base_value": 97.501453,
+          "driver_id": "energy_oil",
+          "shock_percent": 0.28,
+          "shocked_value": 124.80186
+        },
+        {
+          "base_value": 101.693866,
+          "driver_id": "long_duration_bond_price",
+          "shock_percent": 0.0,
+          "shocked_value": 101.693866
+        },
+        {
+          "base_value": 93.253116,
+          "driver_id": "private_market_liquidity",
+          "shock_percent": 0.0,
+          "shocked_value": 93.253116
+        },
+        {
+          "base_value": 98.099802,
+          "driver_id": "real_assets_infrastructure",
+          "shock_percent": 0.08,
+          "shocked_value": 105.947786
+        },
+        {
+          "base_value": 102.663719,
+          "driver_id": "short_duration_bond_price",
+          "shock_percent": 0.0,
+          "shocked_value": 102.663719
+        },
+        {
+          "base_value": 88.702815,
+          "driver_id": "us_growth_tech_equity",
+          "shock_percent": 0.0,
+          "shocked_value": 88.702815
+        },
+        {
+          "base_value": 86.871792,
+          "driver_id": "us_large_cap_equity",
+          "shock_percent": -0.03,
+          "shocked_value": 84.265638
+        },
+        {
+          "base_value": 97.046312,
+          "driver_id": "usd_fx_broad",
+          "shock_percent": 0.04,
+          "shocked_value": 100.928164
+        },
+        {
+          "base_value": 20.006968,
+          "driver_id": "volatility_proxy",
+          "shock_percent": 0.16,
+          "shocked_value": 23.208083
+        }
+      ],
+      "description": "Synthetic energy and power bottleneck shock with inflation-sensitive pressure.",
+      "direct_treatment_count": 6,
+      "display_name": "Energy Shock",
+      "expanded_state_values": [
+        {
+          "confidence": "medium",
+          "description": "Synthetic AI infrastructure proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(ai_infrastructure_semiconductor, us_growth_tech_equity, real_assets_infrastructure)",
+          "scenario_shock_percent": -0.0375,
+          "source_driver_ids": [
+            "ai_infrastructure_semiconductor",
+            "us_growth_tech_equity",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "ai_infrastructure_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 83.590726,
+          "value_type": "index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic bond price proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(short_duration_bond_price, long_duration_bond_price)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "short_duration_bond_price",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "bond_price_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 102.1303,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Cash face-value treatment.",
+          "proxy_rule": "cash_treatment:fixed_or_explicit_treatment",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [],
+          "state_variable_id": "cash_treatment",
+          "treatment_type": "cash_treatment",
+          "unit": "face_value_scalar",
+          "value": 1.0,
+          "value_type": "cash_scalar"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic commodity price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(energy_oil, real_assets_infrastructure)",
+          "scenario_shock_percent": 0.24,
+          "source_driver_ids": [
+            "energy_oil",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "commodity_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 150.078496,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic credit spread proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(credit_spread_proxy)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "credit_spread_proxy"
+          ],
+          "state_variable_id": "credit_spread_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 107.85303,
+          "value_type": "spread_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic crypto price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(bitcoin_crypto)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "bitcoin_crypto"
+          ],
+          "state_variable_id": "crypto_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 85.364878,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic duration-bucket price proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(short_duration_bond_price, long_duration_bond_price)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "short_duration_bond_price",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "duration_bucket_price",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 101.984822,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic energy price proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(energy_oil)",
+          "scenario_shock_percent": 0.28,
+          "source_driver_ids": [
+            "energy_oil"
+          ],
+          "state_variable_id": "energy_price_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 159.746381,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic ETF price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(us_large_cap_equity, us_growth_tech_equity)",
+          "scenario_shock_percent": -0.021,
+          "source_driver_ids": [
+            "us_large_cap_equity",
+            "us_growth_tech_equity"
+          ],
+          "state_variable_id": "etf_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 83.799259,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic broad FX rate proxy.",
+          "proxy_rule": "direct:weighted_driver_map(usd_fx_broad)",
+          "scenario_shock_percent": 0.04,
+          "source_driver_ids": [
+            "usd_fx_broad"
+          ],
+          "state_variable_id": "fx_rate",
+          "treatment_type": "direct",
+          "unit": "index_ratio",
+          "value": 1.049653,
+          "value_type": "fx_index"
+        },
+        {
+          "confidence": "low",
+          "description": "Explicit human-review state treatment.",
+          "proxy_rule": "human_review:fixed_or_explicit_treatment",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [],
+          "state_variable_id": "human_review_flag",
+          "treatment_type": "human_review",
+          "unit": "boolean_scalar",
+          "value": 1.0,
+          "value_type": "flag"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic liquidity discount model input.",
+          "proxy_rule": "model_input:weighted_driver_map(private_market_liquidity, volatility_proxy)",
+          "scenario_shock_percent": 0.056,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "volatility_proxy"
+          ],
+          "state_variable_id": "liquidity_discount_proxy",
+          "treatment_type": "model_input",
+          "unit": "decimal_percent",
+          "value": 0.128319,
+          "value_type": "discount_percent"
+        },
+        {
+          "confidence": "low",
+          "description": "Synthetic opaque manager composite proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(private_market_liquidity, credit_spread_proxy, volatility_proxy)",
+          "scenario_shock_percent": -0.04,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "credit_spread_proxy",
+            "volatility_proxy"
+          ],
+          "state_variable_id": "manager_composite_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 13.306829,
+          "value_type": "index"
+        },
+        {
+          "confidence": "low",
+          "description": "Synthetic manager mark input, updated in coarse stale buckets.",
+          "proxy_rule": "stale_mark:weighted_driver_map(private_market_liquidity, real_assets_infrastructure, credit_spread_proxy)",
+          "scenario_shock_percent": 0.028,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "real_assets_infrastructure",
+            "credit_spread_proxy"
+          ],
+          "state_variable_id": "manager_mark",
+          "treatment_type": "stale_mark",
+          "unit": "index_level",
+          "value": 97.294846,
+          "value_type": "mark_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic money-market NAV treatment.",
+          "proxy_rule": "cash_treatment:weighted_driver_map(short_duration_bond_price)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "short_duration_bond_price"
+          ],
+          "state_variable_id": "money_market_nav",
+          "treatment_type": "cash_treatment",
+          "unit": "nav",
+          "value": 1.000266,
+          "value_type": "nav"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic ETF look-through proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(us_large_cap_equity, ai_infrastructure_semiconductor, real_assets_infrastructure)",
+          "scenario_shock_percent": -0.018,
+          "source_driver_ids": [
+            "us_large_cap_equity",
+            "ai_infrastructure_semiconductor",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "optional_lookthrough_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 86.744493,
+          "value_type": "index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic private equity proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(private_market_liquidity, us_growth_tech_equity, us_large_cap_equity)",
+          "scenario_shock_percent": -0.006,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "us_growth_tech_equity",
+            "us_large_cap_equity"
+          ],
+          "state_variable_id": "private_equity_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 89.323837,
+          "value_type": "index"
+        },
+        {
+          "confidence": "low",
+          "description": "Synthetic stale private mark input.",
+          "proxy_rule": "stale_mark:weighted_driver_map(private_market_liquidity, real_assets_infrastructure)",
+          "scenario_shock_percent": 0.04,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "private_mark",
+          "treatment_type": "stale_mark",
+          "unit": "index_level",
+          "value": 102.971057,
+          "value_type": "mark_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic rate model input derived from bond proxies.",
+          "proxy_rule": "model_input:weighted_driver_map(short_duration_bond_price, long_duration_bond_price)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "short_duration_bond_price",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "rate_proxy",
+          "treatment_type": "model_input",
+          "unit": "decimal_rate",
+          "value": 0.036342,
+          "value_type": "rate_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic real asset proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(real_assets_infrastructure, energy_oil, long_duration_bond_price)",
+          "scenario_shock_percent": 0.118,
+          "source_driver_ids": [
+            "real_assets_infrastructure",
+            "energy_oil",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "real_asset_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 123.005956,
+          "value_type": "index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic option time-to-maturity input.",
+          "proxy_rule": "model_input:fixed_or_explicit_treatment",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [],
+          "state_variable_id": "time_to_maturity",
+          "treatment_type": "model_input",
+          "unit": "years",
+          "value": 0.503425,
+          "value_type": "years"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic underlying public security price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(us_large_cap_equity, us_growth_tech_equity, ai_infrastructure_semiconductor)",
+          "scenario_shock_percent": -0.0275,
+          "source_driver_ids": [
+            "us_large_cap_equity",
+            "us_growth_tech_equity",
+            "ai_infrastructure_semiconductor"
+          ],
+          "state_variable_id": "underlying_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 83.25048,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic volatility proxy.",
+          "proxy_rule": "direct:weighted_driver_map(volatility_proxy)",
+          "scenario_shock_percent": 0.16,
+          "source_driver_ids": [
+            "volatility_proxy"
+          ],
+          "state_variable_id": "volatility_proxy",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 26.921376,
+          "value_type": "volatility_index"
+        }
+      ],
+      "horizon": "3 months",
+      "human_review_count": 1,
+      "proxy_treatment_count": 9,
+      "scenario_date": "2026-06-30",
+      "scenario_id": "energy_shock",
+      "scenario_state_id": "scenario_state_energy_shock",
+      "schema_version": "simulation_scenario_market_state.v1",
+      "synthetic_data": true
+    },
+    {
+      "base_market_state_id": "market_state_2026_06_30",
+      "caveats": [
+        "Deterministic synthetic scenario state, not a forecast.",
+        "No position values or portfolio values are calculated in this scenario state."
+      ],
+      "completeness_summary": {
+        "cash_treatment_count": 2,
+        "confidence_counts": {
+          "high": 7,
+          "low": 4,
+          "medium": 12
+        },
+        "covered_variable_count": 23,
+        "direct_treatment_count": 6,
+        "human_review_count": 1,
+        "missing_variable_count": 0,
+        "model_input_treatment_count": 3,
+        "proxy_treatment_count": 9,
+        "required_variable_count": 23,
+        "stale_mark_treatment_count": 2,
+        "status": "complete"
+      },
+      "core_driver_shocks": [
+        {
+          "base_value": 89.457444,
+          "driver_id": "ai_infrastructure_semiconductor",
+          "shock_percent": 0.0,
+          "shocked_value": 89.457444
+        },
+        {
+          "base_value": 85.364878,
+          "driver_id": "bitcoin_crypto",
+          "shock_percent": 0.0,
+          "shocked_value": 85.364878
+        },
+        {
+          "base_value": 107.85303,
+          "driver_id": "credit_spread_proxy",
+          "shock_percent": 0.22,
+          "shocked_value": 131.580697
+        },
+        {
+          "base_value": 97.501453,
+          "driver_id": "energy_oil",
+          "shock_percent": 0.0,
+          "shocked_value": 97.501453
+        },
+        {
+          "base_value": 101.693866,
+          "driver_id": "long_duration_bond_price",
+          "shock_percent": 0.025,
+          "shocked_value": 104.236213
+        },
+        {
+          "base_value": 93.253116,
+          "driver_id": "private_market_liquidity",
+          "shock_percent": -0.22,
+          "shocked_value": 72.73743
+        },
+        {
+          "base_value": 98.099802,
+          "driver_id": "real_assets_infrastructure",
+          "shock_percent": -0.08,
+          "shocked_value": 90.251818
+        },
+        {
+          "base_value": 102.663719,
+          "driver_id": "short_duration_bond_price",
+          "shock_percent": 0.0,
+          "shocked_value": 102.663719
+        },
+        {
+          "base_value": 88.702815,
+          "driver_id": "us_growth_tech_equity",
+          "shock_percent": 0.0,
+          "shocked_value": 88.702815
+        },
+        {
+          "base_value": 86.871792,
+          "driver_id": "us_large_cap_equity",
+          "shock_percent": -0.06,
+          "shocked_value": 81.659484
+        },
+        {
+          "base_value": 97.046312,
+          "driver_id": "usd_fx_broad",
+          "shock_percent": 0.0,
+          "shocked_value": 97.046312
+        },
+        {
+          "base_value": 20.006968,
+          "driver_id": "volatility_proxy",
+          "shock_percent": 0.28,
+          "shocked_value": 25.608919
+        }
+      ],
+      "description": "Synthetic stress to private-market liquidity, credit spreads, stale marks, and opaque manager books.",
+      "direct_treatment_count": 6,
+      "display_name": "Private-Market Liquidity Freeze",
+      "expanded_state_values": [
+        {
+          "confidence": "medium",
+          "description": "Synthetic AI infrastructure proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(ai_infrastructure_semiconductor, us_growth_tech_equity, real_assets_infrastructure)",
+          "scenario_shock_percent": -0.008,
+          "source_driver_ids": [
+            "ai_infrastructure_semiconductor",
+            "us_growth_tech_equity",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "ai_infrastructure_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 88.633438,
+          "value_type": "index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic bond price proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(short_duration_bond_price, long_duration_bond_price)",
+          "scenario_shock_percent": 0.01375,
+          "source_driver_ids": [
+            "short_duration_bond_price",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "bond_price_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 104.952109,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Cash face-value treatment.",
+          "proxy_rule": "cash_treatment:fixed_or_explicit_treatment",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [],
+          "state_variable_id": "cash_treatment",
+          "treatment_type": "cash_treatment",
+          "unit": "face_value_scalar",
+          "value": 1.0,
+          "value_type": "cash_scalar"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic commodity price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(energy_oil, real_assets_infrastructure)",
+          "scenario_shock_percent": -0.016,
+          "source_driver_ids": [
+            "energy_oil",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "commodity_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 94.514702,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic credit spread proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(credit_spread_proxy)",
+          "scenario_shock_percent": 0.22,
+          "source_driver_ids": [
+            "credit_spread_proxy"
+          ],
+          "state_variable_id": "credit_spread_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 160.52845,
+          "value_type": "spread_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic crypto price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(bitcoin_crypto)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "bitcoin_crypto"
+          ],
+          "state_variable_id": "crypto_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 85.364878,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic duration-bucket price proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(short_duration_bond_price, long_duration_bond_price)",
+          "scenario_shock_percent": 0.0175,
+          "source_driver_ids": [
+            "short_duration_bond_price",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "duration_bucket_price",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 105.580343,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic energy price proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(energy_oil)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "energy_oil"
+          ],
+          "state_variable_id": "energy_price_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 97.501453,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic ETF price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(us_large_cap_equity, us_growth_tech_equity)",
+          "scenario_shock_percent": -0.042,
+          "source_driver_ids": [
+            "us_large_cap_equity",
+            "us_growth_tech_equity"
+          ],
+          "state_variable_id": "etf_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 80.254039,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic broad FX rate proxy.",
+          "proxy_rule": "direct:weighted_driver_map(usd_fx_broad)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "usd_fx_broad"
+          ],
+          "state_variable_id": "fx_rate",
+          "treatment_type": "direct",
+          "unit": "index_ratio",
+          "value": 0.970463,
+          "value_type": "fx_index"
+        },
+        {
+          "confidence": "low",
+          "description": "Explicit human-review state treatment.",
+          "proxy_rule": "human_review:fixed_or_explicit_treatment",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [],
+          "state_variable_id": "human_review_flag",
+          "treatment_type": "human_review",
+          "unit": "boolean_scalar",
+          "value": 1.0,
+          "value_type": "flag"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic liquidity discount model input.",
+          "proxy_rule": "model_input:weighted_driver_map(private_market_liquidity, volatility_proxy)",
+          "scenario_shock_percent": 0.241,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "volatility_proxy"
+          ],
+          "state_variable_id": "liquidity_discount_proxy",
+          "treatment_type": "model_input",
+          "unit": "decimal_percent",
+          "value": 0.209167,
+          "value_type": "discount_percent"
+        },
+        {
+          "confidence": "low",
+          "description": "Synthetic opaque manager composite proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(private_market_liquidity, credit_spread_proxy, volatility_proxy)",
+          "scenario_shock_percent": -0.235,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "credit_spread_proxy",
+            "volatility_proxy"
+          ],
+          "state_variable_id": "manager_composite_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": -2.240447,
+          "value_type": "index"
+        },
+        {
+          "confidence": "low",
+          "description": "Synthetic manager mark input, updated in coarse stale buckets.",
+          "proxy_rule": "stale_mark:weighted_driver_map(private_market_liquidity, real_assets_infrastructure, credit_spread_proxy)",
+          "scenario_shock_percent": -0.171,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "real_assets_infrastructure",
+            "credit_spread_proxy"
+          ],
+          "state_variable_id": "manager_mark",
+          "treatment_type": "stale_mark",
+          "unit": "index_level",
+          "value": 89.22569,
+          "value_type": "mark_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic money-market NAV treatment.",
+          "proxy_rule": "cash_treatment:weighted_driver_map(short_duration_bond_price)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "short_duration_bond_price"
+          ],
+          "state_variable_id": "money_market_nav",
+          "treatment_type": "cash_treatment",
+          "unit": "nav",
+          "value": 1.000266,
+          "value_type": "nav"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic ETF look-through proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(us_large_cap_equity, ai_infrastructure_semiconductor, real_assets_infrastructure)",
+          "scenario_shock_percent": -0.049,
+          "source_driver_ids": [
+            "us_large_cap_equity",
+            "ai_infrastructure_semiconductor",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "optional_lookthrough_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 81.146396,
+          "value_type": "index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic private equity proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(private_market_liquidity, us_growth_tech_equity, us_large_cap_equity)",
+          "scenario_shock_percent": -0.111,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "us_growth_tech_equity",
+            "us_large_cap_equity"
+          ],
+          "state_variable_id": "private_equity_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 71.217546,
+          "value_type": "index"
+        },
+        {
+          "confidence": "low",
+          "description": "Synthetic stale private mark input.",
+          "proxy_rule": "stale_mark:weighted_driver_map(private_market_liquidity, real_assets_infrastructure)",
+          "scenario_shock_percent": -0.15,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "private_mark",
+          "treatment_type": "stale_mark",
+          "unit": "index_level",
+          "value": 95.009921,
+          "value_type": "mark_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic rate model input derived from bond proxies.",
+          "proxy_rule": "model_input:weighted_driver_map(short_duration_bond_price, long_duration_bond_price)",
+          "scenario_shock_percent": -0.0175,
+          "source_driver_ids": [
+            "short_duration_bond_price",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "rate_proxy",
+          "treatment_type": "model_input",
+          "unit": "decimal_rate",
+          "value": 0.032931,
+          "value_type": "rate_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic real asset proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(real_assets_infrastructure, energy_oil, long_duration_bond_price)",
+          "scenario_shock_percent": -0.04425,
+          "source_driver_ids": [
+            "real_assets_infrastructure",
+            "energy_oil",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "real_asset_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 89.995222,
+          "value_type": "index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic option time-to-maturity input.",
+          "proxy_rule": "model_input:fixed_or_explicit_treatment",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [],
+          "state_variable_id": "time_to_maturity",
+          "treatment_type": "model_input",
+          "unit": "years",
+          "value": 0.503425,
+          "value_type": "years"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic underlying public security price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(us_large_cap_equity, us_growth_tech_equity, ai_infrastructure_semiconductor)",
+          "scenario_shock_percent": -0.027,
+          "source_driver_ids": [
+            "us_large_cap_equity",
+            "us_growth_tech_equity",
+            "ai_infrastructure_semiconductor"
+          ],
+          "state_variable_id": "underlying_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 83.370768,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic volatility proxy.",
+          "proxy_rule": "direct:weighted_driver_map(volatility_proxy)",
+          "scenario_shock_percent": 0.28,
+          "source_driver_ids": [
+            "volatility_proxy"
+          ],
+          "state_variable_id": "volatility_proxy",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 32.779416,
+          "value_type": "volatility_index"
+        }
+      ],
+      "horizon": "3 months",
+      "human_review_count": 1,
+      "proxy_treatment_count": 9,
+      "scenario_date": "2026-06-30",
+      "scenario_id": "private_market_liquidity_freeze",
+      "scenario_state_id": "scenario_state_private_market_liquidity_freeze",
+      "schema_version": "simulation_scenario_market_state.v1",
+      "synthetic_data": true
+    },
+    {
+      "base_market_state_id": "market_state_2026_06_30",
+      "caveats": [
+        "Deterministic synthetic scenario state, not a forecast.",
+        "No position values or portfolio values are calculated in this scenario state."
+      ],
+      "completeness_summary": {
+        "cash_treatment_count": 2,
+        "confidence_counts": {
+          "high": 7,
+          "low": 4,
+          "medium": 12
+        },
+        "covered_variable_count": 23,
+        "direct_treatment_count": 6,
+        "human_review_count": 1,
+        "missing_variable_count": 0,
+        "model_input_treatment_count": 3,
+        "proxy_treatment_count": 9,
+        "required_variable_count": 23,
+        "stale_mark_treatment_count": 2,
+        "status": "complete"
+      },
+      "core_driver_shocks": [
+        {
+          "base_value": 89.457444,
+          "driver_id": "ai_infrastructure_semiconductor",
+          "shock_percent": -0.3,
+          "shocked_value": 62.620211
+        },
+        {
+          "base_value": 85.364878,
+          "driver_id": "bitcoin_crypto",
+          "shock_percent": -0.16,
+          "shocked_value": 71.706498
+        },
+        {
+          "base_value": 107.85303,
+          "driver_id": "credit_spread_proxy",
+          "shock_percent": 0.0,
+          "shocked_value": 107.85303
+        },
+        {
+          "base_value": 97.501453,
+          "driver_id": "energy_oil",
+          "shock_percent": 0.1,
+          "shocked_value": 107.251598
+        },
+        {
+          "base_value": 101.693866,
+          "driver_id": "long_duration_bond_price",
+          "shock_percent": 0.0,
+          "shocked_value": 101.693866
+        },
+        {
+          "base_value": 93.253116,
+          "driver_id": "private_market_liquidity",
+          "shock_percent": -0.1,
+          "shocked_value": 83.927804
+        },
+        {
+          "base_value": 98.099802,
+          "driver_id": "real_assets_infrastructure",
+          "shock_percent": 0.0,
+          "shocked_value": 98.099802
+        },
+        {
+          "base_value": 102.663719,
+          "driver_id": "short_duration_bond_price",
+          "shock_percent": 0.0,
+          "shocked_value": 102.663719
+        },
+        {
+          "base_value": 88.702815,
+          "driver_id": "us_growth_tech_equity",
+          "shock_percent": -0.14,
+          "shocked_value": 76.284421
+        },
+        {
+          "base_value": 86.871792,
+          "driver_id": "us_large_cap_equity",
+          "shock_percent": 0.0,
+          "shocked_value": 86.871792
+        },
+        {
+          "base_value": 97.046312,
+          "driver_id": "usd_fx_broad",
+          "shock_percent": 0.08,
+          "shocked_value": 104.810017
+        },
+        {
+          "base_value": 20.006968,
+          "driver_id": "volatility_proxy",
+          "shock_percent": 0.42,
+          "shocked_value": 28.409895
+        }
+      ],
+      "description": "Synthetic geopolitical semiconductor and supply-chain stress scenario.",
+      "direct_treatment_count": 6,
+      "display_name": "Taiwan Disruption",
+      "expanded_state_values": [
+        {
+          "confidence": "medium",
+          "description": "Synthetic AI infrastructure proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(ai_infrastructure_semiconductor, us_growth_tech_equity, real_assets_infrastructure)",
+          "scenario_shock_percent": -0.23,
+          "source_driver_ids": [
+            "ai_infrastructure_semiconductor",
+            "us_growth_tech_equity",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "ai_infrastructure_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 53.579851,
+          "value_type": "index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic bond price proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(short_duration_bond_price, long_duration_bond_price)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "short_duration_bond_price",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "bond_price_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 102.1303,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Cash face-value treatment.",
+          "proxy_rule": "cash_treatment:fixed_or_explicit_treatment",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [],
+          "state_variable_id": "cash_treatment",
+          "treatment_type": "cash_treatment",
+          "unit": "face_value_scalar",
+          "value": 1.0,
+          "value_type": "cash_scalar"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic commodity price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(energy_oil, real_assets_infrastructure)",
+          "scenario_shock_percent": 0.08,
+          "source_driver_ids": [
+            "energy_oil",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "commodity_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 113.854938,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic credit spread proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(credit_spread_proxy)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "credit_spread_proxy"
+          ],
+          "state_variable_id": "credit_spread_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 107.85303,
+          "value_type": "spread_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic crypto price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(bitcoin_crypto)",
+          "scenario_shock_percent": -0.16,
+          "source_driver_ids": [
+            "bitcoin_crypto"
+          ],
+          "state_variable_id": "crypto_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 60.233458,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic duration-bucket price proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(short_duration_bond_price, long_duration_bond_price)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "short_duration_bond_price",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "duration_bucket_price",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 101.984822,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic energy price proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(energy_oil)",
+          "scenario_shock_percent": 0.1,
+          "source_driver_ids": [
+            "energy_oil"
+          ],
+          "state_variable_id": "energy_price_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 117.976758,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic ETF price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(us_large_cap_equity, us_growth_tech_equity)",
+          "scenario_shock_percent": -0.042,
+          "source_driver_ids": [
+            "us_large_cap_equity",
+            "us_growth_tech_equity"
+          ],
+          "state_variable_id": "etf_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 80.180366,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic broad FX rate proxy.",
+          "proxy_rule": "direct:weighted_driver_map(usd_fx_broad)",
+          "scenario_shock_percent": 0.08,
+          "source_driver_ids": [
+            "usd_fx_broad"
+          ],
+          "state_variable_id": "fx_rate",
+          "treatment_type": "direct",
+          "unit": "index_ratio",
+          "value": 1.131948,
+          "value_type": "fx_index"
+        },
+        {
+          "confidence": "low",
+          "description": "Explicit human-review state treatment.",
+          "proxy_rule": "human_review:fixed_or_explicit_treatment",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [],
+          "state_variable_id": "human_review_flag",
+          "treatment_type": "human_review",
+          "unit": "boolean_scalar",
+          "value": 1.0,
+          "value_type": "flag"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic liquidity discount model input.",
+          "proxy_rule": "model_input:weighted_driver_map(private_market_liquidity, volatility_proxy)",
+          "scenario_shock_percent": 0.212,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "volatility_proxy"
+          ],
+          "state_variable_id": "liquidity_discount_proxy",
+          "treatment_type": "model_input",
+          "unit": "decimal_percent",
+          "value": 0.185641,
+          "value_type": "discount_percent"
+        },
+        {
+          "confidence": "low",
+          "description": "Synthetic opaque manager composite proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(private_market_liquidity, credit_spread_proxy, volatility_proxy)",
+          "scenario_shock_percent": -0.155,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "credit_spread_proxy",
+            "volatility_proxy"
+          ],
+          "state_variable_id": "manager_composite_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 6.673955,
+          "value_type": "index"
+        },
+        {
+          "confidence": "low",
+          "description": "Synthetic manager mark input, updated in coarse stale buckets.",
+          "proxy_rule": "stale_mark:weighted_driver_map(private_market_liquidity, real_assets_infrastructure, credit_spread_proxy)",
+          "scenario_shock_percent": -0.045,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "real_assets_infrastructure",
+            "credit_spread_proxy"
+          ],
+          "state_variable_id": "manager_mark",
+          "treatment_type": "stale_mark",
+          "unit": "index_level",
+          "value": 94.325657,
+          "value_type": "mark_index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic money-market NAV treatment.",
+          "proxy_rule": "cash_treatment:weighted_driver_map(short_duration_bond_price)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "short_duration_bond_price"
+          ],
+          "state_variable_id": "money_market_nav",
+          "treatment_type": "cash_treatment",
+          "unit": "nav",
+          "value": 1.000266,
+          "value_type": "nav"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic ETF look-through proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(us_large_cap_equity, ai_infrastructure_semiconductor, real_assets_infrastructure)",
+          "scenario_shock_percent": -0.075,
+          "source_driver_ids": [
+            "us_large_cap_equity",
+            "ai_infrastructure_semiconductor",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "optional_lookthrough_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 76.825411,
+          "value_type": "index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic private equity proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(private_market_liquidity, us_growth_tech_equity, us_large_cap_equity)",
+          "scenario_shock_percent": -0.094,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "us_growth_tech_equity",
+            "us_large_cap_equity"
+          ],
+          "state_variable_id": "private_equity_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 74.148324,
+          "value_type": "index"
+        },
+        {
+          "confidence": "low",
+          "description": "Synthetic stale private mark input.",
+          "proxy_rule": "stale_mark:weighted_driver_map(private_market_liquidity, real_assets_infrastructure)",
+          "scenario_shock_percent": -0.05,
+          "source_driver_ids": [
+            "private_market_liquidity",
+            "real_assets_infrastructure"
+          ],
+          "state_variable_id": "private_mark",
+          "treatment_type": "stale_mark",
+          "unit": "index_level",
+          "value": 99.166575,
+          "value_type": "mark_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic rate model input derived from bond proxies.",
+          "proxy_rule": "model_input:weighted_driver_map(short_duration_bond_price, long_duration_bond_price)",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [
+            "short_duration_bond_price",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "rate_proxy",
+          "treatment_type": "model_input",
+          "unit": "decimal_rate",
+          "value": 0.036342,
+          "value_type": "rate_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic real asset proxy.",
+          "proxy_rule": "proxy:weighted_driver_map(real_assets_infrastructure, energy_oil, long_duration_bond_price)",
+          "scenario_shock_percent": 0.025,
+          "source_driver_ids": [
+            "real_assets_infrastructure",
+            "energy_oil",
+            "long_duration_bond_price"
+          ],
+          "state_variable_id": "real_asset_proxy",
+          "treatment_type": "proxy",
+          "unit": "index_level",
+          "value": 103.450032,
+          "value_type": "index"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic option time-to-maturity input.",
+          "proxy_rule": "model_input:fixed_or_explicit_treatment",
+          "scenario_shock_percent": 0.0,
+          "source_driver_ids": [],
+          "state_variable_id": "time_to_maturity",
+          "treatment_type": "model_input",
+          "unit": "years",
+          "value": 0.503425,
+          "value_type": "years"
+        },
+        {
+          "confidence": "high",
+          "description": "Synthetic underlying public security price proxy.",
+          "proxy_rule": "direct:weighted_driver_map(us_large_cap_equity, us_growth_tech_equity, ai_infrastructure_semiconductor)",
+          "scenario_shock_percent": -0.109,
+          "source_driver_ids": [
+            "us_large_cap_equity",
+            "us_growth_tech_equity",
+            "ai_infrastructure_semiconductor"
+          ],
+          "state_variable_id": "underlying_price",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 69.779463,
+          "value_type": "price_index"
+        },
+        {
+          "confidence": "medium",
+          "description": "Synthetic volatility proxy.",
+          "proxy_rule": "direct:weighted_driver_map(volatility_proxy)",
+          "scenario_shock_percent": 0.42,
+          "source_driver_ids": [
+            "volatility_proxy"
+          ],
+          "state_variable_id": "volatility_proxy",
+          "treatment_type": "direct",
+          "unit": "index_level",
+          "value": 40.34205,
+          "value_type": "volatility_index"
+        }
+      ],
+      "horizon": "3 months",
+      "human_review_count": 1,
+      "proxy_treatment_count": 9,
+      "scenario_date": "2026-06-30",
+      "scenario_id": "taiwan_disruption",
+      "scenario_state_id": "scenario_state_taiwan_disruption",
+      "schema_version": "simulation_scenario_market_state.v1",
+      "synthetic_data": true
+    }
+  ],
+  "schema_version": "simulation_scenario_market_states.v1",
+  "synthetic_data": true
+}

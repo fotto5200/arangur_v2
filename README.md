@@ -63,6 +63,22 @@ This writes:
 
 The universe includes synthetic managers, accounts/sleeves, instruments, 74 positions, 90-day transaction traces, themes/lenses, data-quality flags, human-review items, and future market-state requirements for later simulation batches.
 
+## Generate The Synthetic Market State
+
+The second simulation-kernel surface consumes the synthetic position universe and generates deterministic synthetic market/state-of-world fixtures. It produces direct prices, proxy state, rates/FX/spread/volatility proxies, private and stale mark treatments, confidence flags, proxy mappings, historical paths, scenario market states, and a covariance recovery check. It does not generate position values, portfolio values, value-change packages, reports, charts, live market data, vendor data, external API calls, or real client data.
+
+```powershell
+python src\arangur\simulation\synthetic_market_state_generator.py
+```
+
+This writes:
+
+- `data/simulation/synthetic_market_state_history.json`
+- `data/simulation/synthetic_market_state_summary.json`
+- `data/simulation/synthetic_scenario_market_states.json`
+
+The default fixture covers 91 calendar dates, 12 core drivers, all 23 market-state variables required by the synthetic position universe, and five scenarios: AI/chip selloff, rate shock, energy shock, private-market liquidity freeze, and Taiwan disruption.
+
 ## Local Report Index
 
 Both demo runner commands refresh a shared static report index:
@@ -173,6 +189,7 @@ Future scenario, data-coverage, and deployable private-demo work is captured in:
 - `docs/architecture/persistence_model_plan.md`
 - `docs/contracts/simulation_kernel_contracts_v1.md`
 - `docs/contracts/synthetic_position_universe_contract_v1.md`
+- `docs/contracts/synthetic_market_state_contract_v1.md`
 - `docs/contracts/workflow_run_persistence_contract.md`
 - `docs/contracts/report_element_template_catalog_contract.md`
 - `docs/decisions/0003_three_surface_simulation_kernel.md`
@@ -192,6 +209,7 @@ python -m unittest tests.test_report_index
 python -m unittest tests.test_workflow_templates
 python -m unittest tests.test_data_coverage
 python -m unittest tests.test_synthetic_position_universe
+python -m unittest tests.test_synthetic_market_state
 python -m unittest tests.test_app_health
 python -m unittest tests.test_report_element_catalog
 python -m unittest tests.test_app_runs_api

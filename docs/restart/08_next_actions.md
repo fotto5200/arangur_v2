@@ -3,8 +3,8 @@
 ## Immediate Architecture / Simulation Kernel Batches
 
 - Completed baseline: deterministic synthetic position universe generator with 74 synthetic positions across public, private, cash, manager-level, and opaque assets, six managers, accounts, sleeves, 90-day transaction/history traces, themes, data-quality flags, and human-review flags.
-- Implement the synthetic market/state-of-world generator next: seeded market state, prices, rates proxies, FX, volatility proxies, credit spread proxies, private marks, proxy mappings, confidence flags, historical paths, scenario states, and covariance recovery checks. Do not implement daily valuation in this batch.
-- Then implement the simplified daily valuation engine: date-by-date economic valuation from positions, market state, and transactions, separating opening value, flows, income/distributions, market/value change, and closing value.
+- Completed baseline: deterministic synthetic market/state-of-world generator with 91 calendar dates, 12 core drivers, 23 expanded required state variables, proxy mappings, confidence flags, historical paths, five scenario market states, and a covariance recovery check. This batch intentionally does not generate position values, portfolio values, value-change packages, reports, or charts.
+- Implement the simplified daily valuation engine next: date-by-date economic valuation from positions, market state, and transactions, separating opening value, flows, income/distributions, market/value change, and closing value. Do not connect report generation in that batch unless explicitly authorized.
 - Connect valuation outputs to report element templates: portfolio status, concentration, scenario impact by manager, cash generation, manager comparison, and data confidence elements should consume stable value-change and confidence packages.
 - Later resume serialization/export of completed local Client Briefing Set and Advisor Review Set specs if desired, after simulation outputs clarify the downstream report-element input shape.
 - Later add backend briefing-set metadata/persistence only after local spec-set and simulation-output contracts are stable.

@@ -41,6 +41,7 @@ Use these file sets when starting different kinds of sessions.
 - `docs/architecture/simulation_kernel_three_surface_model_v1.md`.
 - `docs/contracts/simulation_kernel_contracts_v1.md`.
 - `docs/contracts/synthetic_position_universe_contract_v1.md`.
+- `docs/contracts/synthetic_market_state_contract_v1.md`.
 - `docs/decisions/0003_three_surface_simulation_kernel.md`.
 - `docs/architecture/thin_demo_system_architecture.md`.
 - `docs/contracts/canonical_portfolio_snapshot_contract.md`.
@@ -50,8 +51,10 @@ Use these file sets when starting different kinds of sessions.
 - `docs/architecture/data_availability_workstream.md`.
 - `docs/contracts/data_coverage_result_contract.md`.
 - `data/simulation/synthetic_position_universe_summary.json`.
+- `data/simulation/synthetic_market_state_summary.json`.
 - `src/arangur/simulation/`.
 - `tests/test_synthetic_position_universe.py`.
+- `tests/test_synthetic_market_state.py`.
 - Do not include real client data, live Plaid, external APIs, credentials, vendor market data, or legacy MATLAB.
 
 ## Synthetic Data Generation Restart
@@ -61,11 +64,18 @@ Use these file sets when starting different kinds of sessions.
 - `docs/contracts/market_data_fixture_contract.md`.
 - `docs/contracts/plaid_mock_ingestion_contract.md` only for source-neutral adapter context, not live Plaid behavior.
 - `docs/contracts/synthetic_position_universe_contract_v1.md`.
+- `docs/contracts/synthetic_market_state_contract_v1.md`.
 - `data/simulation/synthetic_position_universe.json`.
 - `data/simulation/synthetic_position_universe_summary.json`.
+- `data/simulation/synthetic_market_state_history.json`.
+- `data/simulation/synthetic_market_state_summary.json`.
+- `data/simulation/synthetic_scenario_market_states.json`.
 - `src/arangur/simulation/position_universe.py`.
 - `src/arangur/simulation/synthetic_position_universe_generator.py`.
+- `src/arangur/simulation/market_state.py`.
+- `src/arangur/simulation/synthetic_market_state_generator.py`.
 - `tests/test_synthetic_position_universe.py`.
+- `tests/test_synthetic_market_state.py`.
 - Future synthetic fixtures under `data/demo/` when implementation is authorized.
 - Future generator source files under `src/` when implementation is authorized.
 - Future focused generator tests under `tests/` when implementation is authorized.
@@ -77,6 +87,11 @@ Use these file sets when starting different kinds of sessions.
 - `docs/contracts/analytics_outputs_contract.md`.
 - `docs/contracts/report_package_contract.md`.
 - `docs/contracts/data_coverage_result_contract.md`.
+- `docs/contracts/synthetic_position_universe_contract_v1.md`.
+- `docs/contracts/synthetic_market_state_contract_v1.md`.
+- `data/simulation/synthetic_position_universe.json`.
+- `data/simulation/synthetic_market_state_history.json`.
+- `data/simulation/synthetic_scenario_market_states.json`.
 - Current synthetic generated report package examples under `reports/demo/` if implementation is authorized.
 - Future valuation source files under `src/` when implementation is authorized.
 - Future focused valuation tests under `tests/` when implementation is authorized.
