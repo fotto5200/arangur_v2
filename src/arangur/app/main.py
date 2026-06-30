@@ -32,7 +32,7 @@ def create_app(settings: AppSettings | None = None) -> FastAPI:
             CORSMiddleware,
             allow_origins=list(resolved_settings.allowed_origins),
             allow_credentials=True,
-            allow_methods=["GET", "POST", "OPTIONS"],
+            allow_methods=["GET", "POST", "DELETE", "OPTIONS"],
             allow_headers=["Authorization", "Content-Type"],
         )
 

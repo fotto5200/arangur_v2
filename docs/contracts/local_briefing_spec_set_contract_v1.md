@@ -98,11 +98,12 @@ standard print, clipboard, and Blob/download behavior. They do not create
 server-side files, database records, durable report packages, or production
 client-ready reports.
 
-## Future Backend Path
+## Backend Persistence Path
 
-A later persistence batch can adapt this envelope into a backend briefing-set
-metadata model once product and data-model decisions are stable. That future
-model should preserve:
+The first optional backend persistence path now accepts this envelope through
+`POST /api/briefing-spec-sets`, stores the raw payload in Postgres when
+configured, and derives summary/item rows for listing and reopening drafts.
+That backend model preserves:
 
 - ordered Client Briefing Set and Advisor Review Set contents;
 - template ids and configured parameters for analytic specs;
@@ -111,5 +112,6 @@ model should preserve:
 - synthetic-data and source-version metadata;
 - clear separation between saved specs and generated report artifacts.
 
-Backend persistence should not treat this browser-local timestamp or local spec
-id as production-grade audit metadata without an explicit migration design.
+Backend persistence remains optional and draft-oriented. It should not treat
+this browser-local timestamp or local spec id as production-grade audit
+metadata without an explicit migration design.

@@ -499,6 +499,35 @@
       color: var(--muted);
     }
 
+    .saved-set-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .saved-set-row {
+      align-items: center;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      padding: 9px;
+    }
+
+    .saved-set-row strong {
+      color: var(--strong);
+      display: block;
+      font-size: 13px;
+    }
+
+    .saved-set-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+
     .preview-section-label {
       color: var(--muted);
       font-size: 12px;
@@ -849,7 +878,7 @@
 
     <section class="set-panel local-actions-panel" aria-labelledby="local-actions-title">
       <h2 id="local-actions-title">Current local set</h2>
-      <p class="helper">Preview, copy, download, or restore the current browser-local set. Nothing here saves to the backend.</p>
+      <p class="helper">Preview, copy, download, or restore the current browser-local set. Backend save/load is optional and secondary.</p>
       <div class="button-row">
         <button id="preview-client-set-button" class="secondary-button" type="button">Preview Client Briefing Set</button>
         <button id="preview-advisor-set-button" class="secondary-button" type="button">Preview Advisor Review Set</button>
@@ -871,6 +900,16 @@
           <button id="restore-spec-set-button" class="secondary-button" type="button">Restore local set</button>
         </div>
         <p id="restore-spec-status" class="status"></p>
+      </details>
+      <details id="backend-spec-details" class="technical-details">
+        <summary>Backend save/load</summary>
+        <p class="helper">Optional private-demo persistence for draft briefing spec sets. Local export/download remains available.</p>
+        <div class="button-row">
+          <button id="save-backend-spec-set-button" class="secondary-button" type="button">Save to backend</button>
+          <button id="load-backend-spec-sets-button" class="secondary-button" type="button">Load saved sets</button>
+        </div>
+        <p id="backend-spec-status" class="status"></p>
+        <div id="saved-spec-sets-list" class="saved-set-list" aria-label="Saved backend briefing spec sets"></div>
       </details>
     </section>
 
@@ -909,6 +948,7 @@
 
   <script>
     const CATALOG_ENDPOINT = "/api/report-elements";
+    const BRIEFING_SPEC_SETS_ENDPOINT = "/api/briefing-spec-sets";
     const VIEW_SUMMARY_ENDPOINT = "/simulation/report_element_views/report_element_view_summary.json";
     const BRIEFING_PREVIEW_INDEX_ENDPOINT = "/simulation/briefing_set_previews/briefing_set_preview_index.json";
     const VIEW_FRAGMENT_BASE = "/simulation/report_element_views/";
@@ -1047,6 +1087,7 @@
       editing: null,
       currentPreviewKind: null,
       currentPreviewReady: false,
+      savedSpecSets: [],
       clientSet: [],
       advisorSet: []
     };
@@ -1085,6 +1126,10 @@
       restoreSpecInput: document.getElementById("restore-spec-input"),
       restoreSpecSet: document.getElementById("restore-spec-set-button"),
       restoreSpecStatus: document.getElementById("restore-spec-status"),
+      saveBackendSpecSet: document.getElementById("save-backend-spec-set-button"),
+      loadBackendSpecSets: document.getElementById("load-backend-spec-sets-button"),
+      backendSpecStatus: document.getElementById("backend-spec-status"),
+      savedSpecSetsList: document.getElementById("saved-spec-sets-list"),
       currentSetPreviewRegion: document.getElementById("current-set-preview-region"),
       currentSetPreviewTitle: document.getElementById("current-set-preview-title"),
       currentSetPreviewSummary: document.getElementById("current-set-preview-summary"),
@@ -1880,6 +1925,163 @@
       els.restoreSpecStatus.textContent = `Restored ${pluralizeSpec(state.clientSet.length, "Client spec")} and ${pluralizeSpec(state.advisorSet.length, "Advisor spec")}.`;
     }
 
+    async function saveCurrentSpecSetToBackend() {
+      if (!hasAnyLocalSpecs()) {
+        els.backendSpecStatus.textContent = "Add at least one element before saving to backend.";
+        return;
+      }
+      els.backendSpecStatus.textContent = "Saving backend draft...";
+      try {
+        const response = await fetch(BRIEFING_SPEC_SETS_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: localSpecSetText()
+        });
+        const payload = await readJsonResponse(response);
+        if (!response.ok) {
+          throw new Error(errorMessageFromPayload(payload, "Could not save this briefing spec set."));
+        }
+        if (!payload.persistence_configured || !payload.saved) {
+          els.backendSpecStatus.textContent = payload.message || "Backend persistence is not configured. Use local export/download for now.";
+          renderSavedSpecSets();
+          return;
+        }
+        const summary = payload.spec_set || {};
+        els.backendSpecStatus.textContent = `Saved backend draft ${summary.spec_set_id || ""} with ${savedSpecSetCountLabel(summary)}.`;
+        await loadBackendSpecSets({ quiet: true });
+      } catch (error) {
+        els.backendSpecStatus.textContent = error.message || "Backend save is unavailable. Use local export/download for now.";
+      }
+    }
+
+    async function loadBackendSpecSets(options = {}) {
+      if (!options.quiet) {
+        els.backendSpecStatus.textContent = "Checking saved backend sets...";
+      }
+      try {
+        const response = await fetch(BRIEFING_SPEC_SETS_ENDPOINT);
+        const payload = await readJsonResponse(response);
+        if (!response.ok) {
+          throw new Error(errorMessageFromPayload(payload, "Could not load saved briefing spec sets."));
+        }
+        state.savedSpecSets = Array.isArray(payload.spec_sets) ? payload.spec_sets : [];
+        renderSavedSpecSets();
+        if (!payload.persistence_configured) {
+          els.backendSpecStatus.textContent = payload.message || "Backend persistence is not configured. Use local export/download for now.";
+          return;
+        }
+        if (!options.quiet) {
+          els.backendSpecStatus.textContent = state.savedSpecSets.length
+            ? `${pluralizeSpec(state.savedSpecSets.length, "saved backend set")} loaded.`
+            : "No saved backend sets yet.";
+        }
+      } catch (error) {
+        els.backendSpecStatus.textContent = error.message || "Saved backend sets are unavailable. Use local export/download for now.";
+      }
+    }
+
+    function renderSavedSpecSets() {
+      if (!els.savedSpecSetsList) return;
+      if (!state.savedSpecSets.length) {
+        els.savedSpecSetsList.innerHTML = '<p class="empty">No saved backend sets loaded.</p>';
+        return;
+      }
+      els.savedSpecSetsList.innerHTML = state.savedSpecSets.map((specSet) => `
+        <div class="saved-set-row">
+          <span>
+            <strong>${escapeHtml(specSet.title || "Saved briefing spec set")}</strong>
+            <span class="meta">${escapeHtml(savedSpecSetSummary(specSet))}</span>
+          </span>
+          <span class="saved-set-actions">
+            <button class="tiny-button" type="button" data-saved-action="restore" data-spec-set-id="${escapeAttr(specSet.spec_set_id)}">Restore</button>
+            <button class="tiny-button" type="button" data-saved-action="delete" data-spec-set-id="${escapeAttr(specSet.spec_set_id)}">Delete</button>
+          </span>
+        </div>
+      `).join("");
+    }
+
+    async function handleSavedSpecSetAction(event) {
+      const button = event.target.closest("[data-saved-action]");
+      if (!button) return;
+      const specSetId = button.dataset.specSetId;
+      if (!specSetId) return;
+      if (button.dataset.savedAction === "restore") {
+        await restoreBackendSpecSet(specSetId);
+      } else if (button.dataset.savedAction === "delete") {
+        await deleteBackendSpecSet(specSetId);
+      }
+    }
+
+    async function restoreBackendSpecSet(specSetId) {
+      els.backendSpecStatus.textContent = "Loading backend draft...";
+      try {
+        const response = await fetch(`${BRIEFING_SPEC_SETS_ENDPOINT}/${encodeURIComponent(specSetId)}`);
+        const payload = await readJsonResponse(response);
+        if (!response.ok) {
+          throw new Error(errorMessageFromPayload(payload, "Could not load this saved briefing spec set."));
+        }
+        const specPayload = payload.payload;
+        const validation = validateLocalSpecSetPayload(specPayload);
+        if (!validation.ready) {
+          els.backendSpecStatus.textContent = validation.text;
+          return;
+        }
+        state.clientSet = restoreSpecList(specPayload.client_briefing_set, "Client Briefing Set");
+        state.advisorSet = restoreSpecList(specPayload.advisor_review_set, "Advisor Review Set");
+        closeCurrentSetPreview();
+        closeElementPreview();
+        resetSelection();
+        renderSets();
+        els.backendSpecStatus.textContent = `Restored backend draft with ${localSpecCountText()}.`;
+      } catch (error) {
+        els.backendSpecStatus.textContent = error.message || "Could not restore the saved backend set.";
+      }
+    }
+
+    async function deleteBackendSpecSet(specSetId) {
+      els.backendSpecStatus.textContent = "Deleting backend draft...";
+      try {
+        const response = await fetch(`${BRIEFING_SPEC_SETS_ENDPOINT}/${encodeURIComponent(specSetId)}`, {
+          method: "DELETE"
+        });
+        const payload = await readJsonResponse(response);
+        if (!response.ok) {
+          throw new Error(errorMessageFromPayload(payload, "Could not delete this saved briefing spec set."));
+        }
+        if (!payload.persistence_configured) {
+          els.backendSpecStatus.textContent = payload.message || "Backend persistence is not configured. Use local export/download for now.";
+          return;
+        }
+        els.backendSpecStatus.textContent = payload.deleted ? "Deleted backend draft." : "Saved backend draft was not found.";
+        await loadBackendSpecSets({ quiet: true });
+      } catch (error) {
+        els.backendSpecStatus.textContent = error.message || "Could not delete the saved backend set.";
+      }
+    }
+
+    async function readJsonResponse(response) {
+      try {
+        return await response.json();
+      } catch (error) {
+        return {};
+      }
+    }
+
+    function errorMessageFromPayload(payload, fallback) {
+      if (payload && payload.detail && payload.detail.message) return payload.detail.message;
+      if (payload && payload.message) return payload.message;
+      return fallback;
+    }
+
+    function savedSpecSetSummary(specSet) {
+      const context = specSet.client_name || specSet.portfolio_context || "Demo context";
+      return `${context} - ${savedSpecSetCountLabel(specSet)} - ${specSet.status || "draft"}`;
+    }
+
+    function savedSpecSetCountLabel(specSet) {
+      return `${pluralizeSpec(specSet.client_briefing_set_count || 0, "Client spec")} and ${pluralizeSpec(specSet.advisor_review_set_count || 0, "Advisor spec")}`;
+    }
+
     function validateLocalSpecSetPayload(payload) {
       if (!payload || typeof payload !== "object") {
         return { ready: false, text: "The pasted local set must be a JSON object." };
@@ -2610,6 +2812,9 @@
     els.copySpecSet.addEventListener("click", copyCurrentSpecSet);
     els.downloadSpecSet.addEventListener("click", downloadCurrentSpecSet);
     els.restoreSpecSet.addEventListener("click", restoreCurrentSpecSet);
+    els.saveBackendSpecSet.addEventListener("click", saveCurrentSpecSetToBackend);
+    els.loadBackendSpecSets.addEventListener("click", () => loadBackendSpecSets());
+    els.savedSpecSetsList.addEventListener("click", handleSavedSpecSetAction);
     els.currentPreviewExportActions.addEventListener("click", handleCurrentPreviewExportAction);
     els.closeCurrentSetPreview.addEventListener("click", closeCurrentSetPreview);
     els.closeElementPreview.addEventListener("click", closeElementPreview);
@@ -2617,6 +2822,7 @@
 
     renderEmptySelection();
     renderSets();
+    renderSavedSpecSets();
     loadCatalog();
     loadPreviewArtifacts();
   </script>

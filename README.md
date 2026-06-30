@@ -188,7 +188,7 @@ Open `reports/demo/index.html` in a browser to browse the native demo and Plaid-
 
 ## Run The FastAPI App
 
-The first deployable-app shell exposes health, source/workflow discovery, synchronous local workflow runs, local run browsing, and static generated report artifacts. It remains file-backed and synthetic-only; it does not use Postgres, Docker, live Plaid, external APIs, real client data, or production authentication yet.
+The first deployable-app shell exposes health, source/workflow discovery, synchronous local workflow runs, local run browsing, static generated report artifacts, and optional briefing spec-set save/load endpoints. Default local mode remains file-backed and synthetic-only; optional Postgres persistence is available for private-demo metadata when configured. The app does not use Docker, live Plaid, external APIs, real client data, or production authentication yet.
 
 ```powershell
 python -m uvicorn arangur.app.main:app --reload --app-dir src
@@ -201,6 +201,7 @@ Then open:
 - `http://127.0.0.1:8000/api/workflows`
 - `http://127.0.0.1:8000/api/report-elements`
 - `http://127.0.0.1:8000/api/report-elements/scenario_impact_by_manager`
+- `http://127.0.0.1:8000/api/briefing-spec-sets`
 - `http://127.0.0.1:8000/api/runs`
 - `http://127.0.0.1:8000/reports/demo/index.html`
 - `http://127.0.0.1:8000/`
@@ -227,15 +228,17 @@ Configured analytic elements can be added to either the Client Briefing Set or t
 
 When a configured analytic spec matches a committed rendered demo view, the row shows `Preview available` and can open the rendered element fragment in a small one-element preview panel. Specs that do not match the current deterministic fixture set show `Preview not available yet for this spec.` The app also links to the static sample Client Briefing Set and Advisor Review Set previews generated under `data/simulation/briefing_set_previews/`; those samples come from current deterministic demo outputs, not from the unsaved local composer set.
 
-The current unsaved Client Briefing Set and Advisor Review Set can be copied or downloaded as browser-local set JSON using schema `arangur.local_briefing_spec_set.v1` after at least one element has been added. A collapsed `Technical local export details` panel and `Restore local spec set` control are available for local handoff and restart testing. This export is not backend persistence and does not create database records.
+The current unsaved Client Briefing Set and Advisor Review Set can be copied or downloaded as browser-local set JSON using schema `arangur.local_briefing_spec_set.v1` after at least one element has been added. A collapsed `Technical local export details` panel and `Restore local spec set` control are available for local handoff and restart testing. Local export/download remains available in all modes and does not create database records.
 
 Use `Preview Client Briefing Set` or `Preview Advisor Review Set` to assemble the current local ordered set in the browser. Matching analytic specs use existing rendered demo element views; unmatched specs show placeholders, and narrative elements render as local text. This current-set preview is separate from the deterministic sample preview files.
 
 After a non-empty current local preview is open, secondary controls can print the selected Client Briefing Set or Advisor Review Set, download a standalone HTML preview, or copy plain preview text. The print path uses the browser's normal Print to PDF flow and hides composer controls, JSON details, artifact paths, and edit controls. The downloaded HTML is created with browser-local Blob/download behavior from the current local state and existing rendered demo fragments; it is not written by the server and is not persisted.
 
+An optional collapsed `Backend save/load` panel can save or reopen the same briefing spec-set payload through `/api/briefing-spec-sets` when Postgres persistence is configured. In default local mode, the page shows `Backend persistence is not configured. Use local export/download for now.` and the browser-local copy/download/restore path remains the intended fallback.
+
 The app serves committed synthetic simulation artifacts under `/simulation/...` for this local preview flow. It does not serve the whole repo and does not expose credentials or real data.
 
-This UI does not generate reports, charts, or persisted specs from the local set. It does not call the workflow API or show report-package links. Backend persistence, durable export records, and server-side report generation remain future work after product and data-model decisions are stable.
+This UI does not generate reports, charts, or server-side preview files from the local set. It does not call the workflow API or show report-package links. Backend briefing spec-set persistence is draft metadata only; durable production records and server-side report generation remain future work after product and data-model decisions are stable.
 
 Create a native demo manager-overlap workflow run:
 
@@ -260,7 +263,7 @@ set DB_ENGINE=none
 python -m uvicorn arangur.app.main:app --reload --app-dir src
 ```
 
-With `DB_ENGINE=none`, no database is required. Workflow runs still generate local artifacts and `/api/runs` scans `reports/demo/**/report_package.json`.
+With `DB_ENGINE=none`, no database is required. Workflow runs still generate local artifacts and `/api/runs` scans `reports/demo/**/report_package.json`. `/api/briefing-spec-sets` returns an empty saved-set list and save attempts return a not-configured message after validating the browser-local payload.
 
 The first private-demo persistence skeleton can use Postgres when a later Docker/private-demo batch provides the database:
 
@@ -270,7 +273,7 @@ set DATABASE_URL=postgresql://arangur_demo:password@postgres:5432/arangur_privat
 python -m uvicorn arangur.app.main:app --reload --app-dir src
 ```
 
-When `DB_ENGINE=postgres` and `DATABASE_URL` are set, the app creates minimal `workflow_run`, `report_artifact`, and `run_event` tables if missing and persists run metadata plus artifact links after local report generation. Postgres is not required for ordinary local tests.
+When `DB_ENGINE=postgres` and `DATABASE_URL` are set, the app creates minimal `workflow_run`, `report_artifact`, `run_event`, `briefing_spec_set`, and `briefing_spec_item` tables if missing. Workflow runs persist run metadata plus artifact links after local report generation. Briefing spec-set save/load persists draft browser-composer payloads and derived item summaries. Postgres is not required for ordinary local tests, and Docker/private-demo packaging remains a later setup step.
 
 ## Design Roadmaps
 
@@ -298,6 +301,7 @@ Future scenario, data-coverage, and deployable private-demo work is captured in:
 - `docs/contracts/report_element_rendering_contract_v1.md`
 - `docs/contracts/briefing_set_preview_contract_v1.md`
 - `docs/contracts/local_briefing_spec_set_contract_v1.md`
+- `docs/contracts/briefing_spec_set_persistence_contract_v1.md`
 - `docs/contracts/workflow_run_persistence_contract.md`
 - `docs/contracts/report_element_template_catalog_contract.md`
 - `docs/decisions/0003_three_surface_simulation_kernel.md`

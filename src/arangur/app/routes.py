@@ -9,6 +9,14 @@ from pydantic import BaseModel
 
 from arangur.report_elements import ReportElementCatalogError, filter_templates, get_template
 
+from .briefing_spec_sets import (
+    BriefingSpecSetError,
+    delete_briefing_spec_set,
+    get_briefing_spec_set,
+    list_briefing_spec_sets,
+    save_briefing_spec_set,
+)
+from .persistence import PersistenceError, persistence_enabled
 from .run_service import (
     RunServiceError,
     create_workflow_run,
@@ -81,6 +89,66 @@ def report_element_detail(element_id: str) -> dict[str, Any]:
     return template
 
 
+@router.post("/briefing-spec-sets")
+def create_briefing_spec_set(payload: dict[str, Any], http_request: Request) -> dict[str, Any]:
+    try:
+        return save_briefing_spec_set(http_request.app.state.settings, payload)
+    except BriefingSpecSetError as exc:
+        raise _briefing_spec_set_http_error(exc) from exc
+    except PersistenceError as exc:
+        raise _persistence_http_error(exc) from exc
+
+
+@router.get("/briefing-spec-sets")
+def briefing_spec_sets(http_request: Request) -> dict[str, Any]:
+    settings = http_request.app.state.settings
+    try:
+        configured = persistence_enabled(settings)
+        return {
+            "persistence_configured": configured,
+            "message": ""
+            if configured
+            else "Backend persistence is not configured. Use local export/download for now.",
+            "spec_sets": list_briefing_spec_sets(settings),
+        }
+    except PersistenceError as exc:
+        raise _persistence_http_error(exc) from exc
+
+
+@router.get("/briefing-spec-sets/{spec_set_id}")
+def briefing_spec_set_detail(spec_set_id: str, http_request: Request) -> dict[str, Any]:
+    try:
+        detail = get_briefing_spec_set(http_request.app.state.settings, spec_set_id)
+    except PersistenceError as exc:
+        raise _persistence_http_error(exc) from exc
+    if detail is None:
+        raise HTTPException(
+            status_code=404,
+            detail={
+                "code": "briefing_spec_set_not_found",
+                "message": f"Briefing spec set not found: {spec_set_id}",
+            },
+        )
+    return detail
+
+
+@router.delete("/briefing-spec-sets/{spec_set_id}")
+def remove_briefing_spec_set(spec_set_id: str, http_request: Request) -> dict[str, Any]:
+    settings = http_request.app.state.settings
+    try:
+        configured = persistence_enabled(settings)
+        deleted = delete_briefing_spec_set(settings, spec_set_id)
+    except PersistenceError as exc:
+        raise _persistence_http_error(exc) from exc
+    return {
+        "persistence_configured": configured,
+        "deleted": deleted,
+        "message": ""
+        if configured
+        else "Backend persistence is not configured. Use local export/download for now.",
+    }
+
+
 @router.post("/runs")
 def create_run(request: RunCreateRequest, http_request: Request) -> dict[str, Any]:
     try:
@@ -132,6 +200,26 @@ def _catalog_http_error(exc: ReportElementCatalogError) -> HTTPException:
         status_code=500,
         detail={
             "code": "report_element_catalog_invalid",
+            "message": str(exc),
+        },
+    )
+
+
+def _briefing_spec_set_http_error(exc: BriefingSpecSetError) -> HTTPException:
+    return HTTPException(
+        status_code=400,
+        detail={
+            "code": exc.code,
+            "message": exc.message,
+        },
+    )
+
+
+def _persistence_http_error(exc: PersistenceError) -> HTTPException:
+    return HTTPException(
+        status_code=500,
+        detail={
+            "code": "persistence_failed",
             "message": str(exc),
         },
     )

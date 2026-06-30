@@ -6,7 +6,7 @@ The first deployable Arangur demo needs enough Postgres persistence to track wor
 
 The current JSON artifacts remain the canonical evidence for detailed outputs. Postgres should initially store durable run history, search/list metadata, artifact references, and selected summaries needed by the browser UI.
 
-Current implementation baseline: `src/arangur/app/persistence.py` defines optional Postgres persistence for `workflow_run`, `report_artifact`, and `run_event`. The default `DB_ENGINE=none` mode remains file-backed and requires no database. When `DB_ENGINE=postgres` and `DATABASE_URL` are set, the app can initialize the minimal tables and persist run metadata after local report generation.
+Current implementation baseline: `src/arangur/app/persistence.py` defines optional Postgres schema initialization for `workflow_run`, `report_artifact`, `run_event`, `briefing_spec_set`, and `briefing_spec_item`. Workflow run metadata persists after local report generation. `src/arangur/app/briefing_spec_sets.py` validates and optionally persists browser-composed draft briefing spec sets. The default `DB_ENGINE=none` mode remains file-backed/no-database for workflow runs and returns a not-configured no-op response for briefing spec-set saves.
 
 This is still not a full migration system or production data model.
 

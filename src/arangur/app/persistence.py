@@ -57,10 +57,51 @@ CREATE TABLE IF NOT EXISTS run_event (
 )
 """
 
+CREATE_BRIEFING_SPEC_SET_TABLE_SQL = """
+CREATE TABLE IF NOT EXISTS briefing_spec_set (
+    spec_set_id TEXT PRIMARY KEY,
+    schema_version TEXT NOT NULL,
+    title TEXT NOT NULL,
+    client_name TEXT,
+    portfolio_context TEXT,
+    synthetic_data BOOLEAN NOT NULL DEFAULT TRUE,
+    source TEXT NOT NULL,
+    status TEXT NOT NULL,
+    client_briefing_set_count INTEGER NOT NULL DEFAULT 0,
+    advisor_review_set_count INTEGER NOT NULL DEFAULT 0,
+    raw_spec_set_json JSONB NOT NULL,
+    summary_json JSONB NOT NULL DEFAULT '{}'::jsonb,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+)
+"""
+
+CREATE_BRIEFING_SPEC_ITEM_TABLE_SQL = """
+CREATE TABLE IF NOT EXISTS briefing_spec_item (
+    item_id TEXT PRIMARY KEY,
+    spec_set_id TEXT NOT NULL REFERENCES briefing_spec_set(spec_set_id) ON DELETE CASCADE,
+    branch TEXT NOT NULL,
+    order_index INTEGER NOT NULL,
+    element_id TEXT,
+    element_title TEXT,
+    placement TEXT,
+    advisor_internal_purpose TEXT,
+    parameters_json JSONB NOT NULL DEFAULT '{}'::jsonb,
+    matched_view_id TEXT,
+    preview_available BOOLEAN NOT NULL DEFAULT FALSE,
+    confidence_label TEXT,
+    raw_spec_json JSONB NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    UNIQUE (spec_set_id, branch, order_index)
+)
+"""
+
 SCHEMA_STATEMENTS = (
     CREATE_WORKFLOW_RUN_TABLE_SQL,
     CREATE_REPORT_ARTIFACT_TABLE_SQL,
     CREATE_RUN_EVENT_TABLE_SQL,
+    CREATE_BRIEFING_SPEC_SET_TABLE_SQL,
+    CREATE_BRIEFING_SPEC_ITEM_TABLE_SQL,
 )
 
 UPSERT_WORKFLOW_RUN_SQL = """

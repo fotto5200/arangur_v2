@@ -50,9 +50,13 @@ class AppPersistenceTests(unittest.TestCase):
         self.assertIn("CREATE TABLE IF NOT EXISTS workflow_run", schema)
         self.assertIn("CREATE TABLE IF NOT EXISTS report_artifact", schema)
         self.assertIn("CREATE TABLE IF NOT EXISTS run_event", schema)
+        self.assertIn("CREATE TABLE IF NOT EXISTS briefing_spec_set", schema)
+        self.assertIn("CREATE TABLE IF NOT EXISTS briefing_spec_item", schema)
         self.assertIn("run_id TEXT PRIMARY KEY", schema)
         self.assertIn("artifact_type TEXT NOT NULL", schema)
         self.assertIn("details_json JSONB", schema)
+        self.assertIn("raw_spec_set_json JSONB NOT NULL", schema)
+        self.assertIn("raw_spec_json JSONB NOT NULL", schema)
 
     def test_workflow_run_record_maps_summary_metadata(self) -> None:
         record = workflow_run_record_from_summary(self._sample_run())

@@ -235,12 +235,17 @@ Use these file sets when starting different kinds of sessions.
 - `docs/architecture/deployable_demo_app_architecture.md`.
 - `docs/deployment/private_demo_stack_plan.md`.
 - `docs/contracts/workflow_run_persistence_contract.md`.
+- `docs/contracts/briefing_spec_set_persistence_contract_v1.md`.
+- `docs/contracts/local_briefing_spec_set_contract_v1.md` when briefing spec-set persistence is relevant.
 - `docs/contracts/report_package_contract.md`.
 - `docs/contracts/data_coverage_result_contract.md`.
 - `src/arangur/app/persistence.py`.
+- `src/arangur/app/briefing_spec_sets.py`.
 - `tests/test_app_persistence.py`.
+- `tests/test_briefing_spec_set_persistence.py`.
+- `tests/test_app_briefing_spec_sets_api.py`.
 - Current JSON artifact examples under `reports/demo/`.
-- Do not model real client accounts, persist credentials, or decompose full holdings/tax lots unless specifically authorized.
+- Do not model real client accounts, persist credentials, generate reports from saved spec sets, or decompose full holdings/tax lots unless specifically authorized.
 
 ## Docker / Private-Demo Restart
 
@@ -280,16 +285,18 @@ Use these file sets when starting different kinds of sessions.
 - `docs/ui_reporting/report_element_finder_composer_current_model_v1.md`.
 - `docs/contracts/report_element_template_catalog_contract.md`.
 - `docs/contracts/local_briefing_spec_set_contract_v1.md` when local export/import behavior is relevant.
+- `docs/contracts/briefing_spec_set_persistence_contract_v1.md` when backend save/load behavior is relevant.
 - `docs/restart/CURRENT_STATE.md`.
 - `docs/restart/08_next_actions.md`.
 - `README.md`.
 - `src/arangur/app/static/index.html` when UI implementation is authorized.
 - `src/arangur/app/main.py` and `src/arangur/app/run_service.py` when static artifact access is relevant.
+- `src/arangur/app/routes.py` and `src/arangur/app/briefing_spec_sets.py` when backend save/load behavior is relevant.
 - `src/arangur/report_elements/` when catalog implementation is authorized.
 - `data/simulation/report_element_views/report_element_view_summary.json` when rendered preview matching is relevant.
 - `data/simulation/briefing_set_previews/briefing_set_preview_index.json` when briefing-set preview links are relevant.
-- `tests/test_app_health.py`, `tests/test_report_element_catalog.py`, and `tests/test_briefing_set_preview.py` when implementation is authorized.
-- Keep discovery separate from saved spec fields, keep configuration template-driven, and do not implement report generation, backend persistence, live Plaid, external APIs, real data, or investment advice language unless a later batch explicitly authorizes it.
+- `tests/test_app_health.py`, `tests/test_app_briefing_spec_sets_api.py`, `tests/test_briefing_spec_set_persistence.py`, `tests/test_report_element_catalog.py`, and `tests/test_briefing_set_preview.py` when implementation is authorized.
+- Keep discovery separate from saved spec fields, keep configuration template-driven, keep backend save/load secondary to local export/restore, and do not implement report generation, live Plaid, external APIs, real data, or investment advice language unless a later batch explicitly authorizes it.
 
 ## Report Element Input Mapping Restart
 
