@@ -1,0 +1,105 @@
+{
+  "account_count": 6,
+  "as_of_date": "2026-06-30",
+  "asset_classes": [
+    "cash_money_market",
+    "commodities_energy",
+    "crypto",
+    "data_center_investment",
+    "etf",
+    "fixed_income",
+    "fx",
+    "opaque_manager_level",
+    "option_like",
+    "private_credit",
+    "private_equity",
+    "public_equity",
+    "real_estate"
+  ],
+  "history_end_date": "2026-06-30",
+  "history_start_date": "2026-04-01",
+  "human_review_count": 12,
+  "human_review_positions": [
+    "pos_a_ai_infra_call_spread_note",
+    "pos_c_private_credit_income_fund",
+    "pos_d_northstar_ai_growth_fund",
+    "pos_d_venture_ai_infrastructure_fund",
+    "pos_d_data_center_development_jv",
+    "pos_d_power_campus_preferred",
+    "pos_d_data_center_land_option",
+    "pos_d_opaque_manager_level_private_book",
+    "pos_d_private_mark_placeholder",
+    "pos_f_macro_overlay_manager_book",
+    "pos_f_rates_volatility_collar",
+    "pos_f_ai_chip_downside_put_spread"
+  ],
+  "instrument_count": 72,
+  "manager_count": 6,
+  "manager_overlap_examples": [
+    {
+      "display_name": "AI Compute Leader",
+      "instrument_id": "instr_ai_compute_leader",
+      "manager_ids": [
+        "mgr_a_growth_ai_infrastructure",
+        "mgr_b_core_quality_equity"
+      ],
+      "position_ids": [
+        "pos_a_ai_compute_leader",
+        "pos_b_ai_compute_leader"
+      ],
+      "themes": [
+        "AI infrastructure",
+        "growth/value",
+        "manager overlap",
+        "semiconductors"
+      ]
+    },
+    {
+      "display_name": "Cloud Platform Compounder",
+      "instrument_id": "instr_cloud_platform_compounder",
+      "manager_ids": [
+        "mgr_a_growth_ai_infrastructure",
+        "mgr_b_core_quality_equity"
+      ],
+      "position_ids": [
+        "pos_a_cloud_platform_compounder",
+        "pos_b_cloud_platform_compounder"
+      ],
+      "themes": [
+        "AI infrastructure",
+        "growth/value",
+        "manager overlap"
+      ]
+    }
+  ],
+  "position_count": 74,
+  "schema_version": "simulation_position_universe_summary.v1",
+  "seed": 20260630,
+  "sleeve_count": 6,
+  "stale_or_private_mark_count": 19,
+  "themes": [
+    "AI infrastructure",
+    "USD exposure",
+    "cash generation",
+    "crypto risk",
+    "data center power demand",
+    "data confidence / valuation issue",
+    "defensive ballast",
+    "energy bottlenecks",
+    "growth/value",
+    "inflation sensitivity",
+    "manager overlap",
+    "opaque/private marks",
+    "private-market liquidity",
+    "rates sensitivity",
+    "semiconductors"
+  ],
+  "transaction_count": 82,
+  "transaction_date_range": {
+    "day_span": 90,
+    "end": "2026-06-30",
+    "start": "2026-04-01"
+  },
+  "universe_id": "northstar_synthetic_position_universe_seed_20260630",
+  "validation_status": "valid"
+}

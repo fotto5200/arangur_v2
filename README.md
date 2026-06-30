@@ -48,6 +48,21 @@ Non-default native workflows generate under `reports/demo/workflows/<workflow>/`
 
 Open the Markdown report in an editor or preview pane, or open the HTML report directly in a browser.
 
+## Generate The Synthetic Position Universe
+
+The first simulation-kernel surface generates a deterministic synthetic multi-manager position universe. It is independent from the current report pipeline and does not generate prices, market-state histories, scenario paths, or valuation outputs.
+
+```powershell
+python src\arangur\simulation\synthetic_position_universe_generator.py
+```
+
+This writes:
+
+- `data/simulation/synthetic_position_universe.json`
+- `data/simulation/synthetic_position_universe_summary.json`
+
+The universe includes synthetic managers, accounts/sleeves, instruments, 74 positions, 90-day transaction traces, themes/lenses, data-quality flags, human-review items, and future market-state requirements for later simulation batches.
+
 ## Local Report Index
 
 Both demo runner commands refresh a shared static report index:
@@ -157,6 +172,7 @@ Future scenario, data-coverage, and deployable private-demo work is captured in:
 - `docs/architecture/deployable_demo_app_architecture.md`
 - `docs/architecture/persistence_model_plan.md`
 - `docs/contracts/simulation_kernel_contracts_v1.md`
+- `docs/contracts/synthetic_position_universe_contract_v1.md`
 - `docs/contracts/workflow_run_persistence_contract.md`
 - `docs/contracts/report_element_template_catalog_contract.md`
 - `docs/decisions/0003_three_surface_simulation_kernel.md`
@@ -175,6 +191,7 @@ python -m unittest tests.test_plaid_mock_pipeline
 python -m unittest tests.test_report_index
 python -m unittest tests.test_workflow_templates
 python -m unittest tests.test_data_coverage
+python -m unittest tests.test_synthetic_position_universe
 python -m unittest tests.test_app_health
 python -m unittest tests.test_report_element_catalog
 python -m unittest tests.test_app_runs_api

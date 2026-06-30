@@ -13,6 +13,7 @@ __all__ = [
     "report_elements",
     "report_generator",
     "scenarios",
+    "simulation",
     "valuation",
     "workflow_templates",
 ]
