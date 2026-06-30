@@ -1,0 +1,720 @@
+{
+  "as_of_date": "2026-06-30",
+  "caveats": [
+    "Synthetic demo data only.",
+    "Payload is a structured input for later rendering; it is not a generated report, chart, browser view, or client-ready briefing.",
+    "Concentration rows are grouped from synthetic current valuation records.",
+    "Theme exposure is split equally across each position's assigned themes.",
+    "Overlap exposure is inferred from repeated synthetic display names across managers."
+  ],
+  "confidence_summary": {
+    "by_confidence": [
+      {
+        "count": 19,
+        "id": "high",
+        "percent_of_total": 0.346849,
+        "synthetic_data": true,
+        "value": 14115000.0
+      },
+      {
+        "count": 15,
+        "id": "low",
+        "percent_of_total": 0.209485,
+        "synthetic_data": true,
+        "value": 8525000.0
+      },
+      {
+        "count": 36,
+        "id": "medium",
+        "percent_of_total": 0.41295,
+        "synthetic_data": true,
+        "value": 16805000.0
+      },
+      {
+        "count": 4,
+        "id": "unknown",
+        "percent_of_total": 0.030716,
+        "synthetic_data": true,
+        "value": 1250000.0
+      }
+    ],
+    "by_valuation_tier": [
+      {
+        "count": 6,
+        "id": "cash_face_value",
+        "percent_of_total": 0.06045,
+        "synthetic_data": true,
+        "value": 2460000.0
+      },
+      {
+        "count": 26,
+        "id": "direct_price_or_mark",
+        "percent_of_total": 0.416882,
+        "synthetic_data": true,
+        "value": 16965000.0
+      },
+      {
+        "count": 12,
+        "id": "human_review_required",
+        "percent_of_total": 0.143138,
+        "synthetic_data": true,
+        "value": 5825000.0
+      },
+      {
+        "count": 23,
+        "id": "proxy_valuation",
+        "percent_of_total": 0.282467,
+        "synthetic_data": true,
+        "value": 11495000.0
+      },
+      {
+        "count": 7,
+        "id": "stale_or_manager_mark",
+        "percent_of_total": 0.097064,
+        "synthetic_data": true,
+        "value": 3950000.0
+      }
+    ],
+    "human_review_count": 12,
+    "human_review_value": 5825000.0,
+    "label": "medium",
+    "synthetic_data": true
+  },
+  "element_id": "concentration",
+  "element_title": "Concentration",
+  "evidence_items": [
+    {
+      "asset_class": "public_equity",
+      "confidence": "high",
+      "display_name": "AI Compute Leader",
+      "human_review_required": false,
+      "instrument_type": "public_equity",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "manager_name": "Manager A - Growth / AI Infrastructure",
+      "percent_of_total": 0.04546,
+      "position_id": "pos_a_ai_compute_leader",
+      "synthetic_data": true,
+      "themes": [
+        "AI infrastructure",
+        "growth/value",
+        "manager overlap",
+        "semiconductors"
+      ],
+      "valuation_tier": "direct_price_or_mark",
+      "value": 1850000.0
+    },
+    {
+      "asset_class": "public_equity",
+      "confidence": "high",
+      "display_name": "Cloud Platform Compounder",
+      "human_review_required": false,
+      "instrument_type": "public_equity",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "manager_name": "Manager A - Growth / AI Infrastructure",
+      "percent_of_total": 0.036368,
+      "position_id": "pos_a_cloud_platform_compounder",
+      "synthetic_data": true,
+      "themes": [
+        "AI infrastructure",
+        "growth/value",
+        "manager overlap"
+      ],
+      "valuation_tier": "direct_price_or_mark",
+      "value": 1480000.0
+    },
+    {
+      "asset_class": "fixed_income",
+      "confidence": "high",
+      "display_name": "Treasury Bill Ladder",
+      "human_review_required": false,
+      "instrument_type": "fixed_income",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+      "percent_of_total": 0.032928,
+      "position_id": "pos_e_treasury_bill_ladder",
+      "synthetic_data": true,
+      "themes": [
+        "USD exposure",
+        "defensive ballast",
+        "rates sensitivity"
+      ],
+      "valuation_tier": "proxy_valuation",
+      "value": 1340000.0
+    },
+    {
+      "asset_class": "public_equity",
+      "confidence": "high",
+      "display_name": "Cloud Platform Compounder",
+      "human_review_required": false,
+      "instrument_type": "public_equity",
+      "manager_id": "mgr_b_core_quality_equity",
+      "manager_name": "Manager B - Core Quality Equity",
+      "percent_of_total": 0.032436,
+      "position_id": "pos_b_cloud_platform_compounder",
+      "synthetic_data": true,
+      "themes": [
+        "AI infrastructure",
+        "growth/value",
+        "manager overlap"
+      ],
+      "valuation_tier": "direct_price_or_mark",
+      "value": 1320000.0
+    },
+    {
+      "asset_class": "private_equity",
+      "confidence": "low",
+      "display_name": "Northstar AI Growth Fund LP",
+      "human_review_required": true,
+      "instrument_type": "private_equity",
+      "manager_id": "mgr_d_private_real_assets",
+      "manager_name": "Manager D - Private Markets / Real Assets",
+      "percent_of_total": 0.030962,
+      "position_id": "pos_d_northstar_ai_growth_fund",
+      "synthetic_data": true,
+      "themes": [
+        "AI infrastructure",
+        "data confidence / valuation issue",
+        "opaque/private marks",
+        "private-market liquidity"
+      ],
+      "valuation_tier": "human_review_required",
+      "value": 1260000.0
+    }
+  ],
+  "generated_at": "2026-06-30T00:00:00Z",
+  "headline_metrics": {
+    "group_count": {
+      "unit": "count",
+      "value": 15
+    },
+    "largest_group": {
+      "unit": "label",
+      "value": "growth/value"
+    },
+    "largest_group_percent": {
+      "unit": "ratio",
+      "value": 0.156653
+    },
+    "largest_group_value": {
+      "unit": "USD",
+      "value": 6375000.0
+    },
+    "lens": {
+      "unit": "label",
+      "value": "Theme"
+    },
+    "top_holding_value": {
+      "unit": "USD",
+      "value": 1850000.0
+    }
+  },
+  "human_review_items": [
+    {
+      "confidence": "low",
+      "instrument_id": "instr_ai_infra_call_spread_note",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "position_id": "pos_a_ai_infra_call_spread_note",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 275000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_private_credit_income_fund",
+      "manager_id": "mgr_c_income_cash_generation",
+      "position_id": "pos_c_private_credit_income_fund",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 540000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_northstar_ai_growth_fund",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_northstar_ai_growth_fund",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 1260000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_venture_ai_infrastructure_fund",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_venture_ai_infrastructure_fund",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 740000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_data_center_development_jv",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_data_center_development_jv",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 940000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_power_campus_preferred",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_power_campus_preferred",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 455000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_data_center_land_option",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_data_center_land_option",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 185000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_opaque_manager_level_private_book",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_opaque_manager_level_private_book",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 610000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_private_mark_placeholder",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_private_mark_placeholder",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 125000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_macro_overlay_manager_book",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_macro_overlay_manager_book",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 330000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_rates_volatility_collar",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_rates_volatility_collar",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 210000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_ai_chip_downside_put_spread",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_ai_chip_downside_put_spread",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 155000.0
+    }
+  ],
+  "mapper_version": "report_element_input_mapping.v1",
+  "parameters_used": {
+    "branch": "Advisor Review",
+    "lens": "Theme",
+    "metric": "Market value",
+    "placement": "Risk review",
+    "scope": "Whole portfolio"
+  },
+  "placement": "Risk review",
+  "portfolio_id": "portfolio_northstar_family_office",
+  "reporting_currency": "USD",
+  "schema_version": "report_element_input_payload.v1",
+  "source_data": {
+    "market_state": {
+      "current_market_state_id": "market_state_2026_06_30",
+      "history_id": "northstar_synthetic_market_state_history_seed_20260701",
+      "path": "data/simulation/synthetic_market_state_history.json",
+      "scenario_path": "data/simulation/synthetic_scenario_market_states.json",
+      "schema_version": "simulation_market_state_history.v1",
+      "synthetic_data": true
+    },
+    "position_universe": {
+      "path": "data/simulation/synthetic_position_universe.json",
+      "schema_version": "simulation_position_universe.v1",
+      "synthetic_data": true,
+      "universe_id": "northstar_synthetic_position_universe_seed_20260630"
+    },
+    "scenario_results": {
+      "path": "data/simulation/scenario_revaluation_results.json",
+      "scenario_count": 5,
+      "scenario_revaluation_id": "scenario_revaluations_northstar_synthetic_position_universe_seed_20260630",
+      "schema_version": "simulation_scenario_revaluation_results.v1",
+      "synthetic_data": true
+    },
+    "valuation_history": {
+      "daily_portfolio_path": "data/simulation/daily_portfolio_valuation_history.json",
+      "daily_position_path": "data/simulation/daily_position_valuation_history.json",
+      "portfolio_valuation_history_id": "daily_portfolio_values_daily_position_values_northstar_synthetic_position_universe_seed_20260630_northstar_synthetic_market_state_history_seed_20260701",
+      "position_valuation_history_id": "daily_position_values_northstar_synthetic_position_universe_seed_20260630_northstar_synthetic_market_state_history_seed_20260701",
+      "synthetic_data": true,
+      "value_change_path": "data/simulation/value_change_package.json"
+    }
+  },
+  "synthetic_data": true,
+  "tables": {
+    "grouped_rows": [
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "id": "growth/value",
+        "percent_of_total": 0.156653,
+        "synthetic_data": true,
+        "value": 6375000.0
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "id": "AI infrastructure",
+        "percent_of_total": 0.121721,
+        "synthetic_data": true,
+        "value": 4953416.67
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "id": "defensive ballast",
+        "percent_of_total": 0.120961,
+        "synthetic_data": true,
+        "value": 4922500.0
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "id": "cash generation",
+        "percent_of_total": 0.104261,
+        "synthetic_data": true,
+        "value": 4242916.67
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "id": "rates sensitivity",
+        "percent_of_total": 0.083425,
+        "synthetic_data": true,
+        "value": 3395000.0
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "id": "USD exposure",
+        "percent_of_total": 0.064668,
+        "synthetic_data": true,
+        "value": 2631666.67
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "id": "private-market liquidity",
+        "percent_of_total": 0.060001,
+        "synthetic_data": true,
+        "value": 2441750.0
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "id": "semiconductors",
+        "percent_of_total": 0.051634,
+        "synthetic_data": true,
+        "value": 2101250.0
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "id": "inflation sensitivity",
+        "percent_of_total": 0.046935,
+        "synthetic_data": true,
+        "value": 1910000.0
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "id": "manager overlap",
+        "percent_of_total": 0.043238,
+        "synthetic_data": true,
+        "value": 1759583.33
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "id": "data confidence / valuation issue",
+        "percent_of_total": 0.038365,
+        "synthetic_data": true,
+        "value": 1561250.0
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "id": "data center power demand",
+        "percent_of_total": 0.035592,
+        "synthetic_data": true,
+        "value": 1448416.67
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "id": "energy bottlenecks",
+        "percent_of_total": 0.035387,
+        "synthetic_data": true,
+        "value": 1440083.33
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "id": "opaque/private marks",
+        "percent_of_total": 0.031793,
+        "synthetic_data": true,
+        "value": 1293833.33
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "id": "crypto risk",
+        "percent_of_total": 0.005365,
+        "synthetic_data": true,
+        "value": 218333.33
+      }
+    ],
+    "overlap_exposure_rows": [
+      {
+        "display_name": "Cloud Platform Compounder",
+        "manager_ids": [
+          "mgr_a_growth_ai_infrastructure",
+          "mgr_b_core_quality_equity"
+        ],
+        "percent_of_total": 0.068805,
+        "position_ids": [
+          "pos_a_cloud_platform_compounder",
+          "pos_b_cloud_platform_compounder"
+        ],
+        "synthetic_data": true,
+        "value": 2800000.0
+      },
+      {
+        "display_name": "AI Compute Leader",
+        "manager_ids": [
+          "mgr_a_growth_ai_infrastructure",
+          "mgr_b_core_quality_equity"
+        ],
+        "percent_of_total": 0.060695,
+        "position_ids": [
+          "pos_a_ai_compute_leader",
+          "pos_b_ai_compute_leader"
+        ],
+        "synthetic_data": true,
+        "value": 2470000.0
+      }
+    ],
+    "top_holdings": [
+      {
+        "asset_class": "public_equity",
+        "confidence": "high",
+        "display_name": "AI Compute Leader",
+        "human_review_required": false,
+        "instrument_type": "public_equity",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "percent_of_total": 0.04546,
+        "position_id": "pos_a_ai_compute_leader",
+        "synthetic_data": true,
+        "themes": [
+          "AI infrastructure",
+          "growth/value",
+          "manager overlap",
+          "semiconductors"
+        ],
+        "valuation_tier": "direct_price_or_mark",
+        "value": 1850000.0
+      },
+      {
+        "asset_class": "public_equity",
+        "confidence": "high",
+        "display_name": "Cloud Platform Compounder",
+        "human_review_required": false,
+        "instrument_type": "public_equity",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "percent_of_total": 0.036368,
+        "position_id": "pos_a_cloud_platform_compounder",
+        "synthetic_data": true,
+        "themes": [
+          "AI infrastructure",
+          "growth/value",
+          "manager overlap"
+        ],
+        "valuation_tier": "direct_price_or_mark",
+        "value": 1480000.0
+      },
+      {
+        "asset_class": "fixed_income",
+        "confidence": "high",
+        "display_name": "Treasury Bill Ladder",
+        "human_review_required": false,
+        "instrument_type": "fixed_income",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "percent_of_total": 0.032928,
+        "position_id": "pos_e_treasury_bill_ladder",
+        "synthetic_data": true,
+        "themes": [
+          "USD exposure",
+          "defensive ballast",
+          "rates sensitivity"
+        ],
+        "valuation_tier": "proxy_valuation",
+        "value": 1340000.0
+      },
+      {
+        "asset_class": "public_equity",
+        "confidence": "high",
+        "display_name": "Cloud Platform Compounder",
+        "human_review_required": false,
+        "instrument_type": "public_equity",
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "percent_of_total": 0.032436,
+        "position_id": "pos_b_cloud_platform_compounder",
+        "synthetic_data": true,
+        "themes": [
+          "AI infrastructure",
+          "growth/value",
+          "manager overlap"
+        ],
+        "valuation_tier": "direct_price_or_mark",
+        "value": 1320000.0
+      },
+      {
+        "asset_class": "private_equity",
+        "confidence": "low",
+        "display_name": "Northstar AI Growth Fund LP",
+        "human_review_required": true,
+        "instrument_type": "private_equity",
+        "manager_id": "mgr_d_private_real_assets",
+        "manager_name": "Manager D - Private Markets / Real Assets",
+        "percent_of_total": 0.030962,
+        "position_id": "pos_d_northstar_ai_growth_fund",
+        "synthetic_data": true,
+        "themes": [
+          "AI infrastructure",
+          "data confidence / valuation issue",
+          "opaque/private marks",
+          "private-market liquidity"
+        ],
+        "valuation_tier": "human_review_required",
+        "value": 1260000.0
+      },
+      {
+        "asset_class": "public_equity",
+        "confidence": "medium",
+        "display_name": "Chip Fabrication Partner",
+        "human_review_required": false,
+        "instrument_type": "public_equity",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "percent_of_total": 0.027645,
+        "position_id": "pos_a_chip_fabrication_partner",
+        "synthetic_data": true,
+        "themes": [
+          "AI infrastructure",
+          "growth/value",
+          "semiconductors"
+        ],
+        "valuation_tier": "direct_price_or_mark",
+        "value": 1125000.0
+      },
+      {
+        "asset_class": "cash_money_market",
+        "confidence": "high",
+        "display_name": "Government Money Market Fund",
+        "human_review_required": false,
+        "instrument_type": "money_market",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "percent_of_total": 0.024082,
+        "position_id": "pos_e_government_money_market",
+        "synthetic_data": true,
+        "themes": [
+          "USD exposure",
+          "cash generation",
+          "defensive ballast"
+        ],
+        "valuation_tier": "cash_face_value",
+        "value": 980000.0
+      },
+      {
+        "asset_class": "data_center_investment",
+        "confidence": "low",
+        "display_name": "Data Center Development JV",
+        "human_review_required": true,
+        "instrument_type": "data_center_investment",
+        "manager_id": "mgr_d_private_real_assets",
+        "manager_name": "Manager D - Private Markets / Real Assets",
+        "percent_of_total": 0.023099,
+        "position_id": "pos_d_data_center_development_jv",
+        "synthetic_data": true,
+        "themes": [
+          "AI infrastructure",
+          "data center power demand",
+          "energy bottlenecks",
+          "opaque/private marks",
+          "private-market liquidity"
+        ],
+        "valuation_tier": "human_review_required",
+        "value": 940000.0
+      },
+      {
+        "asset_class": "public_equity",
+        "confidence": "high",
+        "display_name": "Semicap Equipment Maker",
+        "human_review_required": false,
+        "instrument_type": "public_equity",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "percent_of_total": 0.022607,
+        "position_id": "pos_a_semicap_equipment_maker",
+        "synthetic_data": true,
+        "themes": [
+          "AI infrastructure",
+          "growth/value",
+          "semiconductors"
+        ],
+        "valuation_tier": "direct_price_or_mark",
+        "value": 920000.0
+      },
+      {
+        "asset_class": "public_equity",
+        "confidence": "high",
+        "display_name": "Consumer Platform Quality",
+        "human_review_required": false,
+        "instrument_type": "public_equity",
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "percent_of_total": 0.022361,
+        "position_id": "pos_b_consumer_platform_quality",
+        "synthetic_data": true,
+        "themes": [
+          "defensive ballast",
+          "growth/value"
+        ],
+        "valuation_tier": "direct_price_or_mark",
+        "value": 910000.0
+      }
+    ]
+  },
+  "target_branch": "Advisor Review",
+  "template_category": "exposure",
+  "validation": {
+    "errors": [],
+    "mapper_version": "report_element_input_mapping.v1",
+    "status": "valid",
+    "validated_at": "2026-06-30T00:00:00Z",
+    "warnings": []
+  }
+}

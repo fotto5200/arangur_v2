@@ -116,6 +116,15 @@ Narrative element specs should serialize:
 
 Discovery-only inputs should be omitted unless a product decision later requires keeping them for audit or explanation.
 
+## Simulation Input Mapping
+
+The first implemented downstream consumer of this catalog is the synthetic
+report-element input mapping layer described in
+`docs/contracts/report_element_input_mapping_contract_v1.md`. That layer maps
+the current simulation outputs into structured payloads for the six initial
+analytic templates while still stopping before final report generation,
+charting, browser UI, or persistence.
+
 ## Deliberately Not Implemented Yet
 
 This catalog contract does not implement:

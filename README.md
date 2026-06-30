@@ -97,6 +97,27 @@ This writes:
 
 The default fixture values 74 positions over 91 dates, emits one daily portfolio valuation per market-state date, revalues all five scenarios, and keeps transaction/flow effects separate from synthetic economic value movement.
 
+## Generate Report Element Input Payloads
+
+The first report-element input mapping layer consumes the synthetic simulation fixtures and writes structured renderer-ready inputs for the initial report-element templates. It does not generate final reports, charts, browser UI, client briefings, persistence records, live data calls, or external API calls.
+
+```powershell
+python src\arangur\report_elements\input_mapping.py
+```
+
+This writes:
+
+- `data/simulation/report_element_inputs/portfolio_status.json`
+- `data/simulation/report_element_inputs/concentration_theme.json`
+- `data/simulation/report_element_inputs/concentration_sector_industry.json`
+- `data/simulation/report_element_inputs/scenario_impact_by_manager_ai_chip_selloff.json`
+- `data/simulation/report_element_inputs/cash_generation_summary.json`
+- `data/simulation/report_element_inputs/manager_comparison.json`
+- `data/simulation/report_element_inputs/data_confidence_note.json`
+- `data/simulation/report_element_inputs/report_element_input_summary.json`
+
+The default fixtures map Portfolio Status, Concentration, Scenario Impact by Manager, Cash Generation Summary, Manager Comparison, and Data Confidence Note to structured metrics, evidence rows, tables, confidence summaries, caveats, and human-review items.
+
 ## Local Report Index
 
 Both demo runner commands refresh a shared static report index:
@@ -209,6 +230,7 @@ Future scenario, data-coverage, and deployable private-demo work is captured in:
 - `docs/contracts/synthetic_position_universe_contract_v1.md`
 - `docs/contracts/synthetic_market_state_contract_v1.md`
 - `docs/contracts/simplified_daily_valuation_contract_v1.md`
+- `docs/contracts/report_element_input_mapping_contract_v1.md`
 - `docs/contracts/workflow_run_persistence_contract.md`
 - `docs/contracts/report_element_template_catalog_contract.md`
 - `docs/decisions/0003_three_surface_simulation_kernel.md`
@@ -230,6 +252,7 @@ python -m unittest tests.test_data_coverage
 python -m unittest tests.test_synthetic_position_universe
 python -m unittest tests.test_synthetic_market_state
 python -m unittest tests.test_simplified_daily_valuation
+python -m unittest tests.test_report_element_input_mapping
 python -m unittest tests.test_app_health
 python -m unittest tests.test_report_element_catalog
 python -m unittest tests.test_app_runs_api

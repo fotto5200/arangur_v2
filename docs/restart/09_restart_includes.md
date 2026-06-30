@@ -43,6 +43,7 @@ Use these file sets when starting different kinds of sessions.
 - `docs/contracts/synthetic_position_universe_contract_v1.md`.
 - `docs/contracts/synthetic_market_state_contract_v1.md`.
 - `docs/contracts/simplified_daily_valuation_contract_v1.md`.
+- `docs/contracts/report_element_input_mapping_contract_v1.md`.
 - `docs/decisions/0003_three_surface_simulation_kernel.md`.
 - `docs/architecture/thin_demo_system_architecture.md`.
 - `docs/contracts/canonical_portfolio_snapshot_contract.md`.
@@ -54,10 +55,13 @@ Use these file sets when starting different kinds of sessions.
 - `data/simulation/synthetic_position_universe_summary.json`.
 - `data/simulation/synthetic_market_state_summary.json`.
 - `data/simulation/simplified_valuation_summary.json`.
+- `data/simulation/report_element_inputs/report_element_input_summary.json`.
 - `src/arangur/simulation/`.
+- `src/arangur/report_elements/input_mapping.py`.
 - `tests/test_synthetic_position_universe.py`.
 - `tests/test_synthetic_market_state.py`.
 - `tests/test_simplified_daily_valuation.py`.
+- `tests/test_report_element_input_mapping.py`.
 - Do not include real client data, live Plaid, external APIs, credentials, vendor market data, or legacy MATLAB.
 
 ## Synthetic Data Generation Restart
@@ -79,15 +83,25 @@ Use these file sets when starting different kinds of sessions.
 - `data/simulation/value_change_package.json`.
 - `data/simulation/scenario_revaluation_results.json`.
 - `data/simulation/simplified_valuation_summary.json`.
+- `data/simulation/report_element_inputs/portfolio_status.json`.
+- `data/simulation/report_element_inputs/concentration_theme.json`.
+- `data/simulation/report_element_inputs/concentration_sector_industry.json`.
+- `data/simulation/report_element_inputs/scenario_impact_by_manager_ai_chip_selloff.json`.
+- `data/simulation/report_element_inputs/cash_generation_summary.json`.
+- `data/simulation/report_element_inputs/manager_comparison.json`.
+- `data/simulation/report_element_inputs/data_confidence_note.json`.
+- `data/simulation/report_element_inputs/report_element_input_summary.json`.
 - `src/arangur/simulation/position_universe.py`.
 - `src/arangur/simulation/synthetic_position_universe_generator.py`.
 - `src/arangur/simulation/market_state.py`.
 - `src/arangur/simulation/synthetic_market_state_generator.py`.
 - `src/arangur/simulation/daily_valuation.py`.
 - `src/arangur/simulation/simplified_daily_valuation_engine.py`.
+- `src/arangur/report_elements/input_mapping.py`.
 - `tests/test_synthetic_position_universe.py`.
 - `tests/test_synthetic_market_state.py`.
 - `tests/test_simplified_daily_valuation.py`.
+- `tests/test_report_element_input_mapping.py`.
 - Future synthetic fixtures under `data/demo/` when implementation is authorized.
 - Future generator source files under `src/` when implementation is authorized.
 - Future focused generator tests under `tests/` when implementation is authorized.
@@ -258,6 +272,27 @@ Use these file sets when starting different kinds of sessions.
 - `src/arangur/report_elements/` when catalog implementation is authorized.
 - `tests/test_app_health.py` and `tests/test_report_element_catalog.py` when implementation is authorized.
 - Keep discovery separate from saved spec fields, keep configuration template-driven, and do not implement report generation, backend persistence, live Plaid, external APIs, real data, or investment advice language unless a later batch explicitly authorizes it.
+
+## Report Element Input Mapping Restart
+
+- All Simulation Kernel restart files.
+- `docs/contracts/report_element_input_mapping_contract_v1.md`.
+- `docs/contracts/report_element_template_catalog_contract.md`.
+- `data/simulation/synthetic_position_universe.json`.
+- `data/simulation/synthetic_market_state_history.json`.
+- `data/simulation/synthetic_scenario_market_states.json`.
+- `data/simulation/daily_position_valuation_history.json`.
+- `data/simulation/daily_portfolio_valuation_history.json`.
+- `data/simulation/value_change_package.json`.
+- `data/simulation/scenario_revaluation_results.json`.
+- `data/simulation/simplified_valuation_summary.json`.
+- `data/simulation/report_element_inputs/`.
+- `src/arangur/report_elements/catalog.py`.
+- `src/arangur/report_elements/templates.json`.
+- `src/arangur/report_elements/input_mapping.py`.
+- `tests/test_report_element_catalog.py`.
+- `tests/test_report_element_input_mapping.py`.
+- Do not generate final reports, charts, browser UI, client briefings, backend persistence, live Plaid, external APIs, Docker/Postgres changes, or real data.
 
 ## Guided Builder Implementation Restart
 

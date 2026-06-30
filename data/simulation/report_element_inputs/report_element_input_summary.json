@@ -1,0 +1,92 @@
+{
+  "as_of_date": "2026-06-30",
+  "caveat": "Structured report-element inputs only; no final reports, charts, browser UI, persistence, live data, or external APIs are produced.",
+  "current_portfolio_value": 40695000.0,
+  "element_ids": [
+    "portfolio_status",
+    "concentration",
+    "concentration",
+    "scenario_impact_by_manager",
+    "cash_generation_summary",
+    "manager_comparison",
+    "data_confidence_note"
+  ],
+  "generated_at": "2026-06-30T00:00:00Z",
+  "mapper_version": "report_element_input_mapping.v1",
+  "output_dir": "data/simulation/report_element_inputs",
+  "output_files": [
+    "portfolio_status.json",
+    "concentration_theme.json",
+    "concentration_sector_industry.json",
+    "scenario_impact_by_manager_ai_chip_selloff.json",
+    "cash_generation_summary.json",
+    "manager_comparison.json",
+    "data_confidence_note.json",
+    "report_element_input_summary.json"
+  ],
+  "payload_count": 7,
+  "schema_version": "report_element_input_summary.v1",
+  "source_files_used": {
+    "daily_portfolio_valuation_history": "data/simulation/daily_portfolio_valuation_history.json",
+    "daily_position_valuation_history": "data/simulation/daily_position_valuation_history.json",
+    "market_state_history": "data/simulation/synthetic_market_state_history.json",
+    "position_universe": "data/simulation/synthetic_position_universe.json",
+    "scenario_market_states": "data/simulation/synthetic_scenario_market_states.json",
+    "scenario_revaluation_results": "data/simulation/scenario_revaluation_results.json",
+    "simplified_valuation_summary": "data/simulation/simplified_valuation_summary.json",
+    "value_change_package": "data/simulation/value_change_package.json"
+  },
+  "synthetic_data": true,
+  "validation_results": {
+    "cash_generation_summary.json": {
+      "errors": [],
+      "mapper_version": "report_element_input_mapping.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "concentration_sector_industry.json": {
+      "errors": [],
+      "mapper_version": "report_element_input_mapping.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "concentration_theme.json": {
+      "errors": [],
+      "mapper_version": "report_element_input_mapping.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "data_confidence_note.json": {
+      "errors": [],
+      "mapper_version": "report_element_input_mapping.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "manager_comparison.json": {
+      "errors": [],
+      "mapper_version": "report_element_input_mapping.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "portfolio_status.json": {
+      "errors": [],
+      "mapper_version": "report_element_input_mapping.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "scenario_impact_by_manager_ai_chip_selloff.json": {
+      "errors": [],
+      "mapper_version": "report_element_input_mapping.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    }
+  },
+  "validation_status": "valid"
+}
