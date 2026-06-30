@@ -154,3 +154,11 @@ This rendering layer does not implement:
 - Docker/Postgres changes;
 - production valuation, accounting, or performance claims;
 - live Plaid, vendor market data, external APIs, or real client data.
+
+## Downstream Preview Assembly
+
+The first downstream composition layer is described in
+`docs/contracts/briefing_set_preview_contract_v1.md`. It consumes these rendered
+view files and assembles deterministic Client Briefing Set and Advisor Review
+Set previews while still stopping before browser UI integration, persistence,
+charts, full client-ready reports, live data, or production reporting claims.

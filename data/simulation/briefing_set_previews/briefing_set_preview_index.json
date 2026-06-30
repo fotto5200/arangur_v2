@@ -1,0 +1,86 @@
+{
+  "builder_version": "briefing_set_preview_builder.v1",
+  "caveat": "Static briefing-set previews only; no browser UI integration, persistence, charts, live data, or external APIs are produced.",
+  "generated_at": "2026-06-30T00:00:00Z",
+  "output_dir": "data/simulation/briefing_set_previews",
+  "output_files": [
+    "client_briefing_set_preview.json",
+    "client_briefing_set_preview.md",
+    "client_briefing_set_preview.html",
+    "advisor_review_set_preview.json",
+    "advisor_review_set_preview.md",
+    "advisor_review_set_preview.html",
+    "briefing_set_preview_index.json",
+    "index.html"
+  ],
+  "preview_count": 2,
+  "previews": [
+    {
+      "element_count": 4,
+      "html_file": "client_briefing_set_preview.html",
+      "included_element_ids": [
+        "portfolio_status",
+        "concentration",
+        "scenario_impact_by_manager",
+        "data_confidence_note"
+      ],
+      "json_file": "client_briefing_set_preview.json",
+      "markdown_file": "client_briefing_set_preview.md",
+      "preview_id": "client_briefing_set_preview",
+      "preview_type": "client_briefing_set",
+      "synthetic_data": true,
+      "title": "Client Briefing Set Preview",
+      "validation": {
+        "builder_version": "briefing_set_preview_builder.v1",
+        "errors": [],
+        "status": "valid",
+        "validated_at": "2026-06-30T00:00:00Z",
+        "warnings": []
+      }
+    },
+    {
+      "element_count": 5,
+      "html_file": "advisor_review_set_preview.html",
+      "included_element_ids": [
+        "manager_comparison",
+        "cash_generation_summary",
+        "concentration",
+        "scenario_impact_by_manager",
+        "data_confidence_note"
+      ],
+      "json_file": "advisor_review_set_preview.json",
+      "markdown_file": "advisor_review_set_preview.md",
+      "preview_id": "advisor_review_set_preview",
+      "preview_type": "advisor_review_set",
+      "synthetic_data": true,
+      "title": "Advisor Review Set Preview",
+      "validation": {
+        "builder_version": "briefing_set_preview_builder.v1",
+        "errors": [],
+        "status": "valid",
+        "validated_at": "2026-06-30T00:00:00Z",
+        "warnings": []
+      }
+    }
+  ],
+  "schema_version": "briefing_set_preview_index.v1",
+  "source_rendered_element_view_summary": "data/simulation/report_element_views/report_element_view_summary.json",
+  "synthetic_data": true,
+  "validation_results": {
+    "advisor_review_set_preview.json": {
+      "builder_version": "briefing_set_preview_builder.v1",
+      "errors": [],
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "client_briefing_set_preview.json": {
+      "builder_version": "briefing_set_preview_builder.v1",
+      "errors": [],
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    }
+  },
+  "validation_status": "valid"
+}

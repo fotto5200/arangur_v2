@@ -151,6 +151,27 @@ This writes:
 - `data/simulation/report_element_views/data_confidence_note.html`
 - `data/simulation/report_element_views/report_element_view_summary.json`
 
+## Assemble Briefing Set Previews
+
+The first briefing-set preview layer consumes rendered report element views and writes deterministic file-based Client Briefing Set and Advisor Review Set previews. These previews prove that rendered elements can be composed into ordered sets. They are not browser UI integration, persisted briefing sets, charts, report packages, live data calls, or production client-ready reports.
+
+```powershell
+python src\arangur\report_elements\briefing_set_preview.py
+```
+
+This writes:
+
+- `data/simulation/briefing_set_previews/client_briefing_set_preview.json`
+- `data/simulation/briefing_set_previews/client_briefing_set_preview.md`
+- `data/simulation/briefing_set_previews/client_briefing_set_preview.html`
+- `data/simulation/briefing_set_previews/advisor_review_set_preview.json`
+- `data/simulation/briefing_set_previews/advisor_review_set_preview.md`
+- `data/simulation/briefing_set_previews/advisor_review_set_preview.html`
+- `data/simulation/briefing_set_previews/briefing_set_preview_index.json`
+- `data/simulation/briefing_set_previews/index.html`
+
+The client preview uses Portfolio Status, Concentration by Theme, Scenario Impact by Manager, and Data Confidence Note. The advisor preview uses Manager Comparison, Cash Generation Summary, Concentration by Sector/Industry, Scenario Impact by Manager, and Data Confidence Note.
+
 ## Local Report Index
 
 Both demo runner commands refresh a shared static report index:
@@ -265,6 +286,7 @@ Future scenario, data-coverage, and deployable private-demo work is captured in:
 - `docs/contracts/simplified_daily_valuation_contract_v1.md`
 - `docs/contracts/report_element_input_mapping_contract_v1.md`
 - `docs/contracts/report_element_rendering_contract_v1.md`
+- `docs/contracts/briefing_set_preview_contract_v1.md`
 - `docs/contracts/workflow_run_persistence_contract.md`
 - `docs/contracts/report_element_template_catalog_contract.md`
 - `docs/decisions/0003_three_surface_simulation_kernel.md`
@@ -288,6 +310,7 @@ python -m unittest tests.test_synthetic_market_state
 python -m unittest tests.test_simplified_daily_valuation
 python -m unittest tests.test_report_element_input_mapping
 python -m unittest tests.test_report_element_rendering
+python -m unittest tests.test_briefing_set_preview
 python -m unittest tests.test_app_health
 python -m unittest tests.test_report_element_catalog
 python -m unittest tests.test_app_runs_api

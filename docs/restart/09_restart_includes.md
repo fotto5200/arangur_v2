@@ -45,6 +45,7 @@ Use these file sets when starting different kinds of sessions.
 - `docs/contracts/simplified_daily_valuation_contract_v1.md`.
 - `docs/contracts/report_element_input_mapping_contract_v1.md`.
 - `docs/contracts/report_element_rendering_contract_v1.md`.
+- `docs/contracts/briefing_set_preview_contract_v1.md`.
 - `docs/decisions/0003_three_surface_simulation_kernel.md`.
 - `docs/architecture/thin_demo_system_architecture.md`.
 - `docs/contracts/canonical_portfolio_snapshot_contract.md`.
@@ -58,14 +59,17 @@ Use these file sets when starting different kinds of sessions.
 - `data/simulation/simplified_valuation_summary.json`.
 - `data/simulation/report_element_inputs/report_element_input_summary.json`.
 - `data/simulation/report_element_views/report_element_view_summary.json`.
+- `data/simulation/briefing_set_previews/briefing_set_preview_index.json`.
 - `src/arangur/simulation/`.
 - `src/arangur/report_elements/input_mapping.py`.
 - `src/arangur/report_elements/rendering.py`.
+- `src/arangur/report_elements/briefing_set_preview.py`.
 - `tests/test_synthetic_position_universe.py`.
 - `tests/test_synthetic_market_state.py`.
 - `tests/test_simplified_daily_valuation.py`.
 - `tests/test_report_element_input_mapping.py`.
 - `tests/test_report_element_rendering.py`.
+- `tests/test_briefing_set_preview.py`.
 - Do not include real client data, live Plaid, external APIs, credentials, vendor market data, or legacy MATLAB.
 
 ## Synthetic Data Generation Restart
@@ -96,6 +100,7 @@ Use these file sets when starting different kinds of sessions.
 - `data/simulation/report_element_inputs/data_confidence_note.json`.
 - `data/simulation/report_element_inputs/report_element_input_summary.json`.
 - `data/simulation/report_element_views/`.
+- `data/simulation/briefing_set_previews/`.
 - `src/arangur/simulation/position_universe.py`.
 - `src/arangur/simulation/synthetic_position_universe_generator.py`.
 - `src/arangur/simulation/market_state.py`.
@@ -104,11 +109,13 @@ Use these file sets when starting different kinds of sessions.
 - `src/arangur/simulation/simplified_daily_valuation_engine.py`.
 - `src/arangur/report_elements/input_mapping.py`.
 - `src/arangur/report_elements/rendering.py`.
+- `src/arangur/report_elements/briefing_set_preview.py`.
 - `tests/test_synthetic_position_universe.py`.
 - `tests/test_synthetic_market_state.py`.
 - `tests/test_simplified_daily_valuation.py`.
 - `tests/test_report_element_input_mapping.py`.
 - `tests/test_report_element_rendering.py`.
+- `tests/test_briefing_set_preview.py`.
 - Future synthetic fixtures under `data/demo/` when implementation is authorized.
 - Future generator source files under `src/` when implementation is authorized.
 - Future focused generator tests under `tests/` when implementation is authorized.
@@ -285,6 +292,7 @@ Use these file sets when starting different kinds of sessions.
 - All Simulation Kernel restart files.
 - `docs/contracts/report_element_input_mapping_contract_v1.md`.
 - `docs/contracts/report_element_rendering_contract_v1.md` when rendering behavior is relevant.
+- `docs/contracts/briefing_set_preview_contract_v1.md` when preview assembly behavior is relevant.
 - `docs/contracts/report_element_template_catalog_contract.md`.
 - `data/simulation/synthetic_position_universe.json`.
 - `data/simulation/synthetic_market_state_history.json`.
@@ -296,13 +304,16 @@ Use these file sets when starting different kinds of sessions.
 - `data/simulation/simplified_valuation_summary.json`.
 - `data/simulation/report_element_inputs/`.
 - `data/simulation/report_element_views/` when checking rendered fragments.
+- `data/simulation/briefing_set_previews/` when checking assembled preview fixtures.
 - `src/arangur/report_elements/catalog.py`.
 - `src/arangur/report_elements/templates.json`.
 - `src/arangur/report_elements/input_mapping.py`.
 - `src/arangur/report_elements/rendering.py`.
+- `src/arangur/report_elements/briefing_set_preview.py` when preview assembly behavior is relevant.
 - `tests/test_report_element_catalog.py`.
 - `tests/test_report_element_input_mapping.py`.
 - `tests/test_report_element_rendering.py`.
+- `tests/test_briefing_set_preview.py` when preview assembly behavior is relevant.
 - Do not generate full client briefings, charts, browser UI integration, backend persistence, live Plaid, external APIs, Docker/Postgres changes, or real data unless explicitly authorized.
 
 ## Report Element Rendering Restart
@@ -315,6 +326,17 @@ Use these file sets when starting different kinds of sessions.
 - `tests/test_report_element_rendering.py`.
 - `README.md`.
 - Do not modify the browser composer UI, FastAPI routes, persistence, Docker/Postgres, live Plaid, external APIs, real data, charts, or full briefing generation unless a later batch explicitly authorizes it.
+
+## Briefing Set Preview Assembly Restart
+
+- All Report Element Rendering restart files.
+- `docs/contracts/briefing_set_preview_contract_v1.md`.
+- `data/simulation/report_element_views/report_element_view_summary.json`.
+- `data/simulation/briefing_set_previews/briefing_set_preview_index.json`.
+- `src/arangur/report_elements/briefing_set_preview.py`.
+- `tests/test_briefing_set_preview.py`.
+- `README.md`.
+- Do not modify the browser composer UI, FastAPI routes, persistence, Docker/Postgres, live Plaid, external APIs, real data, charts, or production client-ready report generation unless a later batch explicitly authorizes it.
 
 ## Guided Builder Implementation Restart
 

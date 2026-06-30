@@ -1,0 +1,1072 @@
+{
+  "advisor_notes": [
+    "Review mandate fit before promoting manager-level content to a client briefing.",
+    "Confirm cash-generation framing remains separate from statement-grade cash accounting.",
+    "Resolve human-review and low-confidence items before using these views outside the synthetic demo."
+  ],
+  "builder_version": "briefing_set_preview_builder.v1",
+  "caveats": [
+    "Synthetic demo data only.",
+    "Briefing-set preview only; not a persisted briefing set, chart, production report, or investment recommendation.",
+    "Advisor review set preview only; not a persisted briefing set, client report, or recommendation.",
+    "Human-review items and confidence labels are synthetic readiness signals.",
+    "Scenario content is deterministic synthetic analysis and not a forecast."
+  ],
+  "client_or_portfolio_context": {
+    "as_of_date": "2026-06-30",
+    "audience": "Advisor Review Set",
+    "audience_tone": "advisor/internal",
+    "context_note": "Synthetic internal review sequence assembled from rendered report elements.",
+    "portfolio_label": "Northstar Family Office synthetic demo portfolio",
+    "synthetic_data": true
+  },
+  "confidence_summary": {
+    "by_confidence": [
+      {
+        "count": 19,
+        "id": "high",
+        "percent_of_total": 0.346849,
+        "synthetic_data": true,
+        "value": 14115000.0
+      },
+      {
+        "count": 15,
+        "id": "low",
+        "percent_of_total": 0.209485,
+        "synthetic_data": true,
+        "value": 8525000.0
+      },
+      {
+        "count": 36,
+        "id": "medium",
+        "percent_of_total": 0.41295,
+        "synthetic_data": true,
+        "value": 16805000.0
+      },
+      {
+        "count": 4,
+        "id": "unknown",
+        "percent_of_total": 0.030716,
+        "synthetic_data": true,
+        "value": 1250000.0
+      }
+    ],
+    "by_valuation_tier": [
+      {
+        "count": 6,
+        "id": "cash_face_value",
+        "percent_of_total": 0.06045,
+        "synthetic_data": true,
+        "value": 2460000.0
+      },
+      {
+        "count": 26,
+        "id": "direct_price_or_mark",
+        "percent_of_total": 0.416882,
+        "synthetic_data": true,
+        "value": 16965000.0
+      },
+      {
+        "count": 12,
+        "id": "human_review_required",
+        "percent_of_total": 0.143138,
+        "synthetic_data": true,
+        "value": 5825000.0
+      },
+      {
+        "count": 23,
+        "id": "proxy_valuation",
+        "percent_of_total": 0.282467,
+        "synthetic_data": true,
+        "value": 11495000.0
+      },
+      {
+        "count": 7,
+        "id": "stale_or_manager_mark",
+        "percent_of_total": 0.097064,
+        "synthetic_data": true,
+        "value": 3950000.0
+      }
+    ],
+    "human_review_count": 12,
+    "human_review_value": 5825000.0,
+    "label": "medium",
+    "source_element_title": "Data Confidence Note",
+    "synthetic_data": true
+  },
+  "generated_at": "2026-06-30T00:00:00Z",
+  "included_element_ids": [
+    "manager_comparison",
+    "cash_generation_summary",
+    "concentration",
+    "scenario_impact_by_manager",
+    "data_confidence_note"
+  ],
+  "ordered_elements": [
+    {
+      "as_of_date": "2026-06-30",
+      "caveats": [
+        "Synthetic demo data only.",
+        "Rendered report-element fragment only; not a full client briefing, chart, or production report.",
+        "Payload is a structured input for later rendering; it is not a generated report, chart, browser view, or client-ready briefing.",
+        "Manager comparison rows combine synthetic manager metadata, current valuation aggregates, and period value-change output.",
+        "Mandate and theme text is synthetic metadata, not due diligence or recommendation language.",
+        "Manager rows compare synthetic mandate and valuation evidence; they are not manager rankings or recommendations."
+      ],
+      "confidence_summary": {
+        "by_confidence": [
+          {
+            "count": 19,
+            "id": "high",
+            "percent_of_total": 0.346849,
+            "synthetic_data": true,
+            "value": 14115000.0
+          },
+          {
+            "count": 15,
+            "id": "low",
+            "percent_of_total": 0.209485,
+            "synthetic_data": true,
+            "value": 8525000.0
+          },
+          {
+            "count": 36,
+            "id": "medium",
+            "percent_of_total": 0.41295,
+            "synthetic_data": true,
+            "value": 16805000.0
+          },
+          {
+            "count": 4,
+            "id": "unknown",
+            "percent_of_total": 0.030716,
+            "synthetic_data": true,
+            "value": 1250000.0
+          }
+        ],
+        "by_valuation_tier": [
+          {
+            "count": 6,
+            "id": "cash_face_value",
+            "percent_of_total": 0.06045,
+            "synthetic_data": true,
+            "value": 2460000.0
+          },
+          {
+            "count": 26,
+            "id": "direct_price_or_mark",
+            "percent_of_total": 0.416882,
+            "synthetic_data": true,
+            "value": 16965000.0
+          },
+          {
+            "count": 12,
+            "id": "human_review_required",
+            "percent_of_total": 0.143138,
+            "synthetic_data": true,
+            "value": 5825000.0
+          },
+          {
+            "count": 23,
+            "id": "proxy_valuation",
+            "percent_of_total": 0.282467,
+            "synthetic_data": true,
+            "value": 11495000.0
+          },
+          {
+            "count": 7,
+            "id": "stale_or_manager_mark",
+            "percent_of_total": 0.097064,
+            "synthetic_data": true,
+            "value": 3950000.0
+          }
+        ],
+        "human_review_count": 12,
+        "human_review_value": 5825000.0,
+        "label": "medium",
+        "synthetic_data": true
+      },
+      "element_id": "manager_comparison",
+      "element_key": "manager_comparison",
+      "element_title": "Manager Comparison",
+      "element_view_path": "data/simulation/report_element_views/manager_comparison.view.json",
+      "headline": "Manager Comparison",
+      "html_fragment_path": "data/simulation/report_element_views/manager_comparison.html",
+      "human_review_count": 12,
+      "human_review_items": [
+        {
+          "confidence": "low",
+          "instrument_id": "instr_ai_infra_call_spread_note",
+          "manager_id": "mgr_a_growth_ai_infrastructure",
+          "position_id": "pos_a_ai_infra_call_spread_note",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 275000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_private_credit_income_fund",
+          "manager_id": "mgr_c_income_cash_generation",
+          "position_id": "pos_c_private_credit_income_fund",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 540000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_northstar_ai_growth_fund",
+          "manager_id": "mgr_d_private_real_assets",
+          "position_id": "pos_d_northstar_ai_growth_fund",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 1260000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_venture_ai_infrastructure_fund",
+          "manager_id": "mgr_d_private_real_assets",
+          "position_id": "pos_d_venture_ai_infrastructure_fund",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 740000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_data_center_development_jv",
+          "manager_id": "mgr_d_private_real_assets",
+          "position_id": "pos_d_data_center_development_jv",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 940000.0
+        }
+      ],
+      "key_metrics": [
+        {
+          "formatted_value": "6",
+          "label": "Managers",
+          "synthetic_data": true,
+          "unit": "count",
+          "value": 6
+        },
+        {
+          "formatted_value": "$10,115,000.00",
+          "label": "Largest manager value",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": 10115000.0
+        },
+        {
+          "formatted_value": "-$3,146,699.47",
+          "label": "Period economic value change",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": -3146699.47
+        },
+        {
+          "formatted_value": "4",
+          "label": "Managers with human-review items",
+          "synthetic_data": true,
+          "unit": "count",
+          "value": 4
+        }
+      ],
+      "markdown_fragment_path": "data/simulation/report_element_views/manager_comparison.md",
+      "order": 1,
+      "placement": "Manager review",
+      "summary_text": "The synthetic comparison includes 6 managers. The largest current manager value is $10,115,000.00; rows show mandate, current value, period value change, themes, and confidence notes without ranking managers as recommendations.",
+      "synthetic_data": true
+    },
+    {
+      "as_of_date": "2026-06-30",
+      "caveats": [
+        "Synthetic demo data only.",
+        "Rendered report-element fragment only; not a full client briefing, chart, or production report.",
+        "Payload is a structured input for later rendering; it is not a generated report, chart, browser view, or client-ready briefing.",
+        "Cash generation is a simplified synthetic summary from transactions and valuation outputs.",
+        "This payload separates flows, income/distributions, fees, and current cash-like positions without statement-grade cash accounting.",
+        "Rendered cash generation is simplified synthetic cash accounting, not a statement-grade cash reconciliation."
+      ],
+      "confidence_summary": {
+        "by_confidence": [
+          {
+            "count": 19,
+            "id": "high",
+            "percent_of_total": 0.346849,
+            "synthetic_data": true,
+            "value": 14115000.0
+          },
+          {
+            "count": 15,
+            "id": "low",
+            "percent_of_total": 0.209485,
+            "synthetic_data": true,
+            "value": 8525000.0
+          },
+          {
+            "count": 36,
+            "id": "medium",
+            "percent_of_total": 0.41295,
+            "synthetic_data": true,
+            "value": 16805000.0
+          },
+          {
+            "count": 4,
+            "id": "unknown",
+            "percent_of_total": 0.030716,
+            "synthetic_data": true,
+            "value": 1250000.0
+          }
+        ],
+        "by_valuation_tier": [
+          {
+            "count": 6,
+            "id": "cash_face_value",
+            "percent_of_total": 0.06045,
+            "synthetic_data": true,
+            "value": 2460000.0
+          },
+          {
+            "count": 26,
+            "id": "direct_price_or_mark",
+            "percent_of_total": 0.416882,
+            "synthetic_data": true,
+            "value": 16965000.0
+          },
+          {
+            "count": 12,
+            "id": "human_review_required",
+            "percent_of_total": 0.143138,
+            "synthetic_data": true,
+            "value": 5825000.0
+          },
+          {
+            "count": 23,
+            "id": "proxy_valuation",
+            "percent_of_total": 0.282467,
+            "synthetic_data": true,
+            "value": 11495000.0
+          },
+          {
+            "count": 7,
+            "id": "stale_or_manager_mark",
+            "percent_of_total": 0.097064,
+            "synthetic_data": true,
+            "value": 3950000.0
+          }
+        ],
+        "human_review_count": 12,
+        "human_review_value": 5825000.0,
+        "label": "medium",
+        "synthetic_data": true
+      },
+      "element_id": "cash_generation_summary",
+      "element_key": "cash_generation_summary",
+      "element_title": "Cash Generation Summary",
+      "element_view_path": "data/simulation/report_element_views/cash_generation_summary.view.json",
+      "headline": "Cash Generation Summary: $2,460,000.00 cash-like value",
+      "html_fragment_path": "data/simulation/report_element_views/cash_generation_summary.html",
+      "human_review_count": 12,
+      "human_review_items": [
+        {
+          "confidence": "low",
+          "instrument_id": "instr_ai_infra_call_spread_note",
+          "manager_id": "mgr_a_growth_ai_infrastructure",
+          "position_id": "pos_a_ai_infra_call_spread_note",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 275000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_private_credit_income_fund",
+          "manager_id": "mgr_c_income_cash_generation",
+          "position_id": "pos_c_private_credit_income_fund",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 540000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_northstar_ai_growth_fund",
+          "manager_id": "mgr_d_private_real_assets",
+          "position_id": "pos_d_northstar_ai_growth_fund",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 1260000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_venture_ai_infrastructure_fund",
+          "manager_id": "mgr_d_private_real_assets",
+          "position_id": "pos_d_venture_ai_infrastructure_fund",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 740000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_data_center_development_jv",
+          "manager_id": "mgr_d_private_real_assets",
+          "position_id": "pos_d_data_center_development_jv",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 940000.0
+        }
+      ],
+      "key_metrics": [
+        {
+          "formatted_value": "$2,460,000.00",
+          "label": "Current cash-like value",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": 2460000.0
+        },
+        {
+          "formatted_value": "$175,984.83",
+          "label": "Period income/distributions",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": 175984.83
+        },
+        {
+          "formatted_value": "-$804,263.00",
+          "label": "Period transaction flows",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": -804263.0
+        },
+        {
+          "formatted_value": "-$42,000.00",
+          "label": "Period fees",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": -42000.0
+        },
+        {
+          "formatted_value": "6",
+          "label": "Cash-like positions",
+          "synthetic_data": true,
+          "unit": "count",
+          "value": 6
+        }
+      ],
+      "markdown_fragment_path": "data/simulation/report_element_views/cash_generation_summary.md",
+      "order": 2,
+      "placement": "Cash and liquidity review",
+      "summary_text": "Across the synthetic period from 2026-04-01 to 2026-06-30, the portfolio has $2,460,000.00 in cash-like value, $175,984.83 of income/distributions, and -$804,263.00 of transaction flows. Cash accounting remains simplified and synthetic.",
+      "synthetic_data": true
+    },
+    {
+      "as_of_date": "2026-06-30",
+      "caveats": [
+        "Synthetic demo data only.",
+        "Rendered report-element fragment only; not a full client briefing, chart, or production report.",
+        "Payload is a structured input for later rendering; it is not a generated report, chart, browser view, or client-ready briefing.",
+        "Concentration rows are grouped from synthetic current valuation records.",
+        "Theme exposure is split equally across each position's assigned themes.",
+        "Overlap exposure is inferred from repeated synthetic display names across managers.",
+        "Concentration is rendered as a synthetic discussion prompt, not a recommendation or fund look-through claim."
+      ],
+      "confidence_summary": {
+        "by_confidence": [
+          {
+            "count": 19,
+            "id": "high",
+            "percent_of_total": 0.346849,
+            "synthetic_data": true,
+            "value": 14115000.0
+          },
+          {
+            "count": 15,
+            "id": "low",
+            "percent_of_total": 0.209485,
+            "synthetic_data": true,
+            "value": 8525000.0
+          },
+          {
+            "count": 36,
+            "id": "medium",
+            "percent_of_total": 0.41295,
+            "synthetic_data": true,
+            "value": 16805000.0
+          },
+          {
+            "count": 4,
+            "id": "unknown",
+            "percent_of_total": 0.030716,
+            "synthetic_data": true,
+            "value": 1250000.0
+          }
+        ],
+        "by_valuation_tier": [
+          {
+            "count": 6,
+            "id": "cash_face_value",
+            "percent_of_total": 0.06045,
+            "synthetic_data": true,
+            "value": 2460000.0
+          },
+          {
+            "count": 26,
+            "id": "direct_price_or_mark",
+            "percent_of_total": 0.416882,
+            "synthetic_data": true,
+            "value": 16965000.0
+          },
+          {
+            "count": 12,
+            "id": "human_review_required",
+            "percent_of_total": 0.143138,
+            "synthetic_data": true,
+            "value": 5825000.0
+          },
+          {
+            "count": 23,
+            "id": "proxy_valuation",
+            "percent_of_total": 0.282467,
+            "synthetic_data": true,
+            "value": 11495000.0
+          },
+          {
+            "count": 7,
+            "id": "stale_or_manager_mark",
+            "percent_of_total": 0.097064,
+            "synthetic_data": true,
+            "value": 3950000.0
+          }
+        ],
+        "human_review_count": 12,
+        "human_review_value": 5825000.0,
+        "label": "medium",
+        "synthetic_data": true
+      },
+      "element_id": "concentration",
+      "element_key": "concentration_sector_industry",
+      "element_title": "Concentration",
+      "element_view_path": "data/simulation/report_element_views/concentration_sector_industry.view.json",
+      "headline": "Concentration: Sector / Industry",
+      "html_fragment_path": "data/simulation/report_element_views/concentration_sector_industry.html",
+      "human_review_count": 12,
+      "human_review_items": [
+        {
+          "confidence": "low",
+          "instrument_id": "instr_ai_infra_call_spread_note",
+          "manager_id": "mgr_a_growth_ai_infrastructure",
+          "position_id": "pos_a_ai_infra_call_spread_note",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 275000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_private_credit_income_fund",
+          "manager_id": "mgr_c_income_cash_generation",
+          "position_id": "pos_c_private_credit_income_fund",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 540000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_northstar_ai_growth_fund",
+          "manager_id": "mgr_d_private_real_assets",
+          "position_id": "pos_d_northstar_ai_growth_fund",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 1260000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_venture_ai_infrastructure_fund",
+          "manager_id": "mgr_d_private_real_assets",
+          "position_id": "pos_d_venture_ai_infrastructure_fund",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 740000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_data_center_development_jv",
+          "manager_id": "mgr_d_private_real_assets",
+          "position_id": "pos_d_data_center_development_jv",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 940000.0
+        }
+      ],
+      "key_metrics": [
+        {
+          "formatted_value": "Sector / Industry",
+          "label": "Lens",
+          "synthetic_data": true,
+          "unit": "label",
+          "value": "Sector / Industry"
+        },
+        {
+          "formatted_value": "70",
+          "label": "Group count",
+          "synthetic_data": true,
+          "unit": "count",
+          "value": 70
+        },
+        {
+          "formatted_value": "technology / cloud infrastructure",
+          "label": "Largest group",
+          "synthetic_data": true,
+          "unit": "label",
+          "value": "technology / cloud infrastructure"
+        },
+        {
+          "formatted_value": "$2,800,000.00",
+          "label": "Largest group value",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": 2800000.0
+        },
+        {
+          "formatted_value": "6.88%",
+          "label": "Largest group percent",
+          "synthetic_data": true,
+          "unit": "ratio",
+          "value": 0.068805
+        },
+        {
+          "formatted_value": "$1,850,000.00",
+          "label": "Top holding value",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": 1850000.0
+        }
+      ],
+      "markdown_fragment_path": "data/simulation/report_element_views/concentration_sector_industry.md",
+      "order": 3,
+      "placement": "Exposure diagnostic",
+      "summary_text": "The Sector / Industry lens shows technology / cloud infrastructure as the largest concentration bucket at $2,800,000.00 (6.88%). The view keeps top buckets and holdings visible as discussion prompts rather than recommendations.",
+      "synthetic_data": true
+    },
+    {
+      "as_of_date": "2026-06-30",
+      "caveats": [
+        "Synthetic demo data only.",
+        "Rendered report-element fragment only; not a full client briefing, chart, or production report.",
+        "Payload is a structured input for later rendering; it is not a generated report, chart, browser view, or client-ready briefing.",
+        "Deterministic synthetic scenario revaluation, not a forecast.",
+        "Scenario results are simplified economic revaluations and are not connected to report generation in this batch.",
+        "Deterministic synthetic scenario output only; not a forecast, probability estimate, guarantee, or manager recommendation."
+      ],
+      "confidence_summary": {
+        "by_confidence": [
+          {
+            "count": 19,
+            "id": "high",
+            "percent_of_total": 0.336149,
+            "synthetic_data": true,
+            "value": 11512526.76
+          },
+          {
+            "count": 15,
+            "id": "low",
+            "percent_of_total": 0.233113,
+            "synthetic_data": true,
+            "value": 7983723.15
+          },
+          {
+            "count": 36,
+            "id": "medium",
+            "percent_of_total": 0.399645,
+            "synthetic_data": true,
+            "value": 13687156.03
+          },
+          {
+            "count": 4,
+            "id": "unknown",
+            "percent_of_total": 0.031093,
+            "synthetic_data": true,
+            "value": 1064886.4
+          }
+        ],
+        "by_valuation_tier": [
+          {
+            "count": 6,
+            "id": "cash_face_value",
+            "percent_of_total": 0.071828,
+            "synthetic_data": true,
+            "value": 2460000.0
+          },
+          {
+            "count": 26,
+            "id": "direct_price_or_mark",
+            "percent_of_total": 0.379122,
+            "synthetic_data": true,
+            "value": 12984286.16
+          },
+          {
+            "count": 12,
+            "id": "human_review_required",
+            "percent_of_total": 0.155504,
+            "synthetic_data": true,
+            "value": 5325733.46
+          },
+          {
+            "count": 23,
+            "id": "proxy_valuation",
+            "percent_of_total": 0.284843,
+            "synthetic_data": true,
+            "value": 9755396.63
+          },
+          {
+            "count": 7,
+            "id": "stale_or_manager_mark",
+            "percent_of_total": 0.108703,
+            "synthetic_data": true,
+            "value": 3722876.09
+          }
+        ],
+        "human_review_count": 12,
+        "human_review_value": 5325733.46,
+        "label": "medium",
+        "synthetic_data": true
+      },
+      "element_id": "scenario_impact_by_manager",
+      "element_key": "scenario_impact_by_manager_ai_chip_selloff",
+      "element_title": "Scenario Impact by Manager",
+      "element_view_path": "data/simulation/report_element_views/scenario_impact_by_manager_ai_chip_selloff.view.json",
+      "headline": "AI / Chip Selloff impact: -$6,446,707.66",
+      "html_fragment_path": "data/simulation/report_element_views/scenario_impact_by_manager_ai_chip_selloff.html",
+      "human_review_count": 12,
+      "human_review_items": [
+        {
+          "confidence": "low",
+          "manager_id": "mgr_a_growth_ai_infrastructure",
+          "position_id": "pos_a_ai_infra_call_spread_note",
+          "reason": "Scenario revaluation includes human-review or low-confidence treatment.",
+          "scenario_impact": 35553.74,
+          "scenario_value": 310553.74,
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required"
+        },
+        {
+          "confidence": "low",
+          "manager_id": "mgr_c_income_cash_generation",
+          "position_id": "pos_c_private_credit_income_fund",
+          "reason": "Scenario revaluation includes human-review or low-confidence treatment.",
+          "scenario_impact": -40115.46,
+          "scenario_value": 499884.54,
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required"
+        },
+        {
+          "confidence": "low",
+          "manager_id": "mgr_d_private_real_assets",
+          "position_id": "pos_d_northstar_ai_growth_fund",
+          "reason": "Scenario revaluation includes human-review or low-confidence treatment.",
+          "scenario_impact": -119010.63,
+          "scenario_value": 1140989.37,
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required"
+        },
+        {
+          "confidence": "low",
+          "manager_id": "mgr_d_private_real_assets",
+          "position_id": "pos_d_venture_ai_infrastructure_fund",
+          "reason": "Scenario revaluation includes human-review or low-confidence treatment.",
+          "scenario_impact": -69895.13,
+          "scenario_value": 670104.87,
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required"
+        },
+        {
+          "confidence": "low",
+          "manager_id": "mgr_d_private_real_assets",
+          "position_id": "pos_d_data_center_development_jv",
+          "reason": "Scenario revaluation includes human-review or low-confidence treatment.",
+          "scenario_impact": -137656.91,
+          "scenario_value": 802343.09,
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required"
+        }
+      ],
+      "key_metrics": [
+        {
+          "formatted_value": "$40,695,000.00",
+          "label": "Base value",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": 40695000.0
+        },
+        {
+          "formatted_value": "$34,248,292.34",
+          "label": "Scenario value",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": 34248292.34
+        },
+        {
+          "formatted_value": "-$6,446,707.66",
+          "label": "Total scenario impact",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": -6446707.66
+        },
+        {
+          "formatted_value": "-15.84%",
+          "label": "Total scenario impact percent",
+          "synthetic_data": true,
+          "unit": "ratio",
+          "value": -0.158415
+        },
+        {
+          "formatted_value": "6",
+          "label": "Managers",
+          "synthetic_data": true,
+          "unit": "count",
+          "value": 6
+        },
+        {
+          "formatted_value": "AI / Chip Selloff",
+          "label": "Scenario",
+          "synthetic_data": true,
+          "unit": null,
+          "value": "AI / Chip Selloff"
+        }
+      ],
+      "markdown_fragment_path": "data/simulation/report_element_views/scenario_impact_by_manager_ai_chip_selloff.md",
+      "order": 4,
+      "placement": "Scenario diagnostic",
+      "summary_text": "The AI/chip selloff scenario shows a deterministic synthetic portfolio impact of -$6,446,707.66 (-15.84%) over 3 months. Manager-level impacts are shown for review; this scenario is not a forecast or probability estimate.",
+      "synthetic_data": true
+    },
+    {
+      "as_of_date": "2026-06-30",
+      "caveats": [
+        "Synthetic demo data only.",
+        "Rendered report-element fragment only; not a full client briefing, chart, or production report.",
+        "Payload is a structured input for later rendering; it is not a generated report, chart, browser view, or client-ready briefing.",
+        "Synthetic simplified valuation fixture only; no UI or report generation output is produced.",
+        "Data confidence rows summarize synthetic valuation treatments, stale/private marks, proxy usage, and human-review flags.",
+        "Confidence describes synthetic source readiness and valuation treatment, not investment quality."
+      ],
+      "confidence_summary": {
+        "by_confidence": [
+          {
+            "count": 19,
+            "id": "high",
+            "percent_of_total": 0.346849,
+            "synthetic_data": true,
+            "value": 14115000.0
+          },
+          {
+            "count": 15,
+            "id": "low",
+            "percent_of_total": 0.209485,
+            "synthetic_data": true,
+            "value": 8525000.0
+          },
+          {
+            "count": 36,
+            "id": "medium",
+            "percent_of_total": 0.41295,
+            "synthetic_data": true,
+            "value": 16805000.0
+          },
+          {
+            "count": 4,
+            "id": "unknown",
+            "percent_of_total": 0.030716,
+            "synthetic_data": true,
+            "value": 1250000.0
+          }
+        ],
+        "by_valuation_tier": [
+          {
+            "count": 6,
+            "id": "cash_face_value",
+            "percent_of_total": 0.06045,
+            "synthetic_data": true,
+            "value": 2460000.0
+          },
+          {
+            "count": 26,
+            "id": "direct_price_or_mark",
+            "percent_of_total": 0.416882,
+            "synthetic_data": true,
+            "value": 16965000.0
+          },
+          {
+            "count": 12,
+            "id": "human_review_required",
+            "percent_of_total": 0.143138,
+            "synthetic_data": true,
+            "value": 5825000.0
+          },
+          {
+            "count": 23,
+            "id": "proxy_valuation",
+            "percent_of_total": 0.282467,
+            "synthetic_data": true,
+            "value": 11495000.0
+          },
+          {
+            "count": 7,
+            "id": "stale_or_manager_mark",
+            "percent_of_total": 0.097064,
+            "synthetic_data": true,
+            "value": 3950000.0
+          }
+        ],
+        "human_review_count": 12,
+        "human_review_value": 5825000.0,
+        "label": "medium",
+        "synthetic_data": true
+      },
+      "element_id": "data_confidence_note",
+      "element_key": "data_confidence_note",
+      "element_title": "Data Confidence Note",
+      "element_view_path": "data/simulation/report_element_views/data_confidence_note.view.json",
+      "headline": "Data Confidence Note: medium",
+      "html_fragment_path": "data/simulation/report_element_views/data_confidence_note.html",
+      "human_review_count": 12,
+      "human_review_items": [
+        {
+          "confidence": "low",
+          "instrument_id": "instr_ai_infra_call_spread_note",
+          "manager_id": "mgr_a_growth_ai_infrastructure",
+          "position_id": "pos_a_ai_infra_call_spread_note",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 275000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_private_credit_income_fund",
+          "manager_id": "mgr_c_income_cash_generation",
+          "position_id": "pos_c_private_credit_income_fund",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 540000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_northstar_ai_growth_fund",
+          "manager_id": "mgr_d_private_real_assets",
+          "position_id": "pos_d_northstar_ai_growth_fund",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 1260000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_venture_ai_infrastructure_fund",
+          "manager_id": "mgr_d_private_real_assets",
+          "position_id": "pos_d_venture_ai_infrastructure_fund",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 740000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_data_center_development_jv",
+          "manager_id": "mgr_d_private_real_assets",
+          "position_id": "pos_d_data_center_development_jv",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 940000.0
+        }
+      ],
+      "key_metrics": [
+        {
+          "formatted_value": "medium",
+          "label": "Confidence label",
+          "synthetic_data": true,
+          "unit": "label",
+          "value": "medium"
+        },
+        {
+          "formatted_value": "12",
+          "label": "Human-review positions",
+          "synthetic_data": true,
+          "unit": "count",
+          "value": 12
+        },
+        {
+          "formatted_value": "$5,825,000.00",
+          "label": "Human-review value",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": 5825000.0
+        },
+        {
+          "formatted_value": "$19,425,000.00",
+          "label": "Direct or cash value",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": 19425000.0
+        },
+        {
+          "formatted_value": "$15,445,000.00",
+          "label": "Proxy or stale/private value",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": 15445000.0
+        }
+      ],
+      "markdown_fragment_path": "data/simulation/report_element_views/data_confidence_note.md",
+      "order": 5,
+      "placement": "Data readiness review",
+      "summary_text": "Current synthetic data confidence is labeled medium. Human review covers 12 positions representing $5,825,000.00; valuation treatment rows make direct, cash, proxy, stale/private, and human-review buckets visible before later preview or publication.",
+      "synthetic_data": true
+    }
+  ],
+  "preview_id": "advisor_review_set_preview",
+  "preview_summary": "The advisor review preview starts with manager comparison, checks cash generation, reviews sector and industry concentration, stress-tests the AI/chip selloff scenario, and finishes with data confidence and human-review readiness.",
+  "preview_type": "advisor_review_set",
+  "purpose": "Review manager roles, cash behavior, sector and industry concentration, scenario exposure, and data confidence before deciding what belongs in client material.",
+  "review_notes": [
+    "Advisor/internal preview emphasizes diagnostics, confidence, and human-review items.",
+    "Scenario output should remain a deterministic risk prompt, not a probability estimate."
+  ],
+  "schema_version": "briefing_set_preview.v1",
+  "source_view_summary": {
+    "summary_path": "data/simulation/report_element_views/report_element_view_summary.json",
+    "synthetic_data": true,
+    "view_count": 7,
+    "view_keys": [
+      "cash_generation_summary",
+      "concentration_sector_industry",
+      "concentration_theme",
+      "data_confidence_note",
+      "manager_comparison",
+      "portfolio_status",
+      "scenario_impact_by_manager_ai_chip_selloff"
+    ]
+  },
+  "synthetic_data": true,
+  "title": "Advisor Review Set Preview",
+  "validation": {
+    "builder_version": "briefing_set_preview_builder.v1",
+    "errors": [],
+    "status": "valid",
+    "validated_at": "2026-06-30T00:00:00Z",
+    "warnings": []
+  }
+}
