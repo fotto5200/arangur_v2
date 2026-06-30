@@ -231,9 +231,11 @@ The current unsaved Client Briefing Set and Advisor Review Set can be copied or 
 
 Use `Preview Client Briefing Set` or `Preview Advisor Review Set` to assemble the current local ordered set in the browser. Matching analytic specs use existing rendered demo element views; unmatched specs show placeholders, and narrative elements render as local text. This current-set preview is separate from the deterministic sample preview files.
 
+After a non-empty current local preview is open, secondary controls can print the selected Client Briefing Set or Advisor Review Set, download a standalone HTML preview, or copy plain preview text. The print path uses the browser's normal Print to PDF flow and hides composer controls, JSON details, artifact paths, and edit controls. The downloaded HTML is created with browser-local Blob/download behavior from the current local state and existing rendered demo fragments; it is not written by the server and is not persisted.
+
 The app serves committed synthetic simulation artifacts under `/simulation/...` for this local preview flow. It does not serve the whole repo and does not expose credentials or real data.
 
-This UI does not generate reports, charts, or persisted specs from the local set. It does not call the workflow API or show report-package links. A later batch can adapt the local export shape into backend persistence after product and data-model decisions are stable.
+This UI does not generate reports, charts, or persisted specs from the local set. It does not call the workflow API or show report-package links. Backend persistence, durable export records, and server-side report generation remain future work after product and data-model decisions are stable.
 
 Create a native demo manager-overlap workflow run:
 

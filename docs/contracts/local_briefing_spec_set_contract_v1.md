@@ -89,6 +89,13 @@ The current local preview assembles existing rendered element fragments and
 narrative text. It does not generate new analytics, call `/api/runs`, write
 files, create reports, or use live data.
 
+The browser can also derive print-friendly current previews, standalone HTML
+downloads, and plain copied preview text from the same local spec set plus the
+matched rendered view fragments. Those actions run entirely in the browser with
+standard print, clipboard, and Blob/download behavior. They do not create
+server-side files, database records, durable report packages, or production
+client-ready reports.
+
 ## Future Backend Path
 
 A later persistence batch can adapt this envelope into a backend briefing-set

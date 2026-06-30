@@ -363,6 +363,13 @@ Use these file sets when starting different kinds of sessions.
 - `README.md`.
 - Do not add backend persistence, database tables, report generation, new analytics, Docker/Postgres changes, live Plaid, external APIs, real data, or raw report artifacts to the main composer path.
 
+## Local Preview Print And Export Restart
+
+- All Local Spec Set Export And Preview restart files.
+- `docs/contracts/briefing_set_preview_contract_v1.md`.
+- `docs/contracts/report_element_rendering_contract_v1.md`.
+- Do not create server-side preview files, persist exported HTML, call `/api/runs` from the composer, add dependencies, expose raw JSON/artifact paths in the main preview, or turn browser-local print/export into production report generation.
+
 ## Guided Builder Implementation Restart
 
 - All UI Reporting / Briefing restart files.

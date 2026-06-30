@@ -565,6 +565,39 @@
       padding: 14px;
     }
 
+    .current-preview-document {
+      display: grid;
+      gap: 14px;
+    }
+
+    .current-preview-context {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      padding: 10px;
+    }
+
+    .preview-export-actions {
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 14px;
+    }
+
+    .preview-footer-note {
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      padding-top: 10px;
+    }
+
+    .preview-empty-state {
+      display: grid;
+      gap: 8px;
+    }
+
     .element-preview-body section,
     .current-set-preview-body section {
       display: grid;
@@ -609,6 +642,60 @@
 
     .hidden {
       display: none !important;
+    }
+
+    @media print {
+      body.print-current-preview {
+        background: #ffffff;
+      }
+
+      body.print-current-preview .page > :not(#current-set-preview-region) {
+        display: none !important;
+      }
+
+      body.print-current-preview #current-set-preview-region {
+        border: 0;
+        box-shadow: none;
+        display: grid !important;
+        max-width: none;
+        padding: 0;
+      }
+
+      body.print-current-preview .current-set-preview-body {
+        border: 0;
+        max-height: none;
+        overflow: visible;
+        padding: 0;
+      }
+
+      body.print-current-preview .preview-export-actions,
+      body.print-current-preview #current-preview-export-status,
+      body.print-current-preview #close-current-set-preview-button {
+        display: none !important;
+      }
+
+      body.print-current-preview h1,
+      body.print-current-preview h2,
+      body.print-current-preview h3 {
+        color: #111827;
+        page-break-after: avoid;
+      }
+
+      body.print-current-preview .current-set-preview-item {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      body.print-current-preview table {
+        border-collapse: collapse;
+        font-size: 12px;
+      }
+
+      body.print-current-preview th,
+      body.print-current-preview td {
+        border-bottom: 1px solid #d1d5db;
+        padding: 6px;
+      }
     }
 
     @media (max-width: 920px) {
@@ -756,6 +843,8 @@
       <h2 id="current-set-preview-title">Current set preview</h2>
       <p id="current-set-preview-summary" class="meta"></p>
       <div id="current-set-preview-body" class="current-set-preview-body"></div>
+      <div id="current-preview-export-actions" class="preview-export-actions hidden" aria-label="Current local preview print and export controls"></div>
+      <p id="current-preview-export-status" class="status"></p>
       <div class="button-row">
         <button id="close-current-set-preview-button" class="secondary-button" type="button">Return to composer</button>
       </div>
@@ -786,6 +875,7 @@
       valuation_confidence: "Mixed",
       review_item_count: 1
     };
+    const SYNTHETIC_PREVIEW_NOTICE = "Synthetic demo preview assembled in the browser from local selections. It is not persisted, not investment advice, and not a production report.";
     const TARGET_TO_BRANCH = {
       "Client Briefing Set": "Client Briefing",
       "Advisor Review Set": "Advisor Review"
@@ -909,6 +999,8 @@
       briefingPreviews: [],
       browseAllOpen: false,
       editing: null,
+      currentPreviewKind: null,
+      currentPreviewReady: false,
       clientSet: [],
       advisorSet: []
     };
@@ -951,6 +1043,8 @@
       currentSetPreviewTitle: document.getElementById("current-set-preview-title"),
       currentSetPreviewSummary: document.getElementById("current-set-preview-summary"),
       currentSetPreviewBody: document.getElementById("current-set-preview-body"),
+      currentPreviewExportActions: document.getElementById("current-preview-export-actions"),
+      currentPreviewExportStatus: document.getElementById("current-preview-export-status"),
       closeCurrentSetPreview: document.getElementById("close-current-set-preview-button"),
       elementPreviewRegion: document.getElementById("element-preview-region"),
       elementPreviewTitle: document.getElementById("element-preview-title"),
@@ -1777,68 +1871,312 @@
     }
 
     async function openCurrentSetPreview(kind) {
-      const targetSet = kind === "client" ? "Client Briefing Set" : "Advisor Review Set";
-      const list = listForKind(kind);
-      const title = kind === "client" ? "Current Client Briefing Set Preview" : "Current Advisor Review Set Preview";
+      const title = previewTitleForKind(kind);
+      const artifact = await buildCurrentPreviewArtifact(kind);
+      state.currentPreviewKind = kind;
+      state.currentPreviewReady = artifact.ready;
       els.currentSetPreviewRegion.classList.remove("hidden");
       els.currentSetPreviewTitle.textContent = title;
-      els.currentSetPreviewSummary.textContent = "Assembled from the current unsaved local set using existing rendered demo views when available.";
-      if (!list.length) {
-        els.currentSetPreviewBody.innerHTML = '<p class="empty">No elements have been added to this local set yet.</p>';
+      els.currentSetPreviewSummary.textContent = artifact.ready
+        ? "Print-friendly current preview assembled in the browser from the unsaved local set."
+        : `${setLabelForKind(kind)} is empty.`;
+      els.currentPreviewExportStatus.textContent = "";
+      if (!artifact.ready) {
+        els.currentSetPreviewBody.innerHTML = emptyCurrentPreviewHtml(kind);
+        renderPreviewExportActions(kind, false);
         els.currentSetPreviewRegion.scrollIntoView({ behavior: "smooth", block: "start" });
-        return;
+        return false;
       }
-      els.currentSetPreviewBody.innerHTML = '<p class="empty">Loading current local set preview...</p>';
-      const items = await Promise.all(list.map((spec, index) => renderCurrentSetPreviewItem(spec, index, targetSet)));
-      els.currentSetPreviewBody.innerHTML = `
-        <p class="meta">Synthetic demo preview assembled in the browser from current local selections. It is not persisted and does not generate a report.</p>
-        ${items.join("")}
-      `;
+      els.currentSetPreviewBody.innerHTML = artifact.screenHtml;
+      renderPreviewExportActions(kind, true);
       els.currentSetPreviewRegion.scrollIntoView({ behavior: "smooth", block: "start" });
+      return true;
+    }
+
+    async function buildCurrentPreviewArtifact(kind) {
+      const list = listForKind(kind);
+      const targetSet = setLabelForKind(kind);
+      const title = previewTitleForKind(kind);
+      const context = clientContextSummary();
+      if (!list.length) {
+        return {
+          ready: false,
+          title,
+          context,
+          screenHtml: "",
+          standaloneHtml: "",
+          text: ""
+        };
+      }
+      const items = await Promise.all(list.map((spec, index) => renderCurrentSetPreviewItem(spec, index, targetSet)));
+      const bodyHtml = items.map((item) => item.html).join("");
+      const screenHtml = renderCurrentPreviewDocumentHtml(context, bodyHtml);
+      return {
+        ready: true,
+        title,
+        context,
+        screenHtml,
+        standaloneHtml: buildStandalonePreviewHtml(title, context, bodyHtml),
+        text: buildCurrentPreviewText(title, context, items)
+      };
     }
 
     async function renderCurrentSetPreviewItem(spec, index, targetSet) {
       const title = `${index + 1}. ${spec.title || "Untitled element"}`;
       const placement = spec.placement ? ` | ${spec.placement}` : "";
       if (spec.element_kind === "narrative") {
-        return `
-          <article class="current-set-preview-item">
-            <h3>${escapeHtml(title)}</h3>
-            <p class="meta">Narrative element${escapeHtml(placement)}</p>
-            <p>${escapeHtml(narrativeSummary(spec))}</p>
-          </article>
-        `;
+        const summary = narrativeSummary(spec);
+        return {
+          html: `
+            <article class="current-set-preview-item">
+              <h3>${escapeHtml(title)}</h3>
+              <p class="meta">Narrative element${escapeHtml(placement)}</p>
+              <p>${escapeHtml(summary)}</p>
+            </article>
+          `,
+          text: `${title}\nNarrative element${placement}\n${summary}`
+        };
       }
       const match = previewMatchForSpec(spec);
       if (!match) {
-        return `
-          <article class="current-set-preview-item">
-            <h3>${escapeHtml(title)}</h3>
-            <p class="meta">${escapeHtml(targetSet)}${escapeHtml(placement)}</p>
-            <div class="preview-placeholder">No rendered preview available yet for this spec.</div>
-          </article>
-        `;
+        const placeholder = "No rendered preview available yet for this spec.";
+        return {
+          html: `
+            <article class="current-set-preview-item">
+              <h3>${escapeHtml(title)}</h3>
+              <p class="meta">${escapeHtml(targetSet)}${escapeHtml(placement)}</p>
+              <div class="preview-placeholder">${escapeHtml(placeholder)}</div>
+            </article>
+          `,
+          text: `${title}\n${targetSet}${placement}\n${placeholder}`
+        };
       }
       try {
         const response = await fetch(match.htmlUrl);
         if (!response.ok) throw new Error(`Preview request failed: ${response.status}`);
-        const fragment = await response.text();
-        return `
-          <article class="current-set-preview-item">
-            <h3>${escapeHtml(title)}</h3>
-            <p class="meta">${escapeHtml(targetSet)}${escapeHtml(placement)}</p>
-            ${fragment}
-          </article>
-        `;
+        const fragment = sanitizePreviewFragment(await response.text());
+        return {
+          html: `
+            <article class="current-set-preview-item">
+              <h3>${escapeHtml(title)}</h3>
+              <p class="meta">${escapeHtml(targetSet)}${escapeHtml(placement)}</p>
+              ${fragment}
+            </article>
+          `,
+          text: `${title}\n${targetSet}${placement}\n${htmlFragmentText(fragment)}`
+        };
       } catch (error) {
-        return `
-          <article class="current-set-preview-item">
-            <h3>${escapeHtml(title)}</h3>
-            <p class="meta">${escapeHtml(targetSet)}${escapeHtml(placement)}</p>
-            <div class="preview-placeholder">No rendered preview available yet for this spec.</div>
-          </article>
-        `;
+        const placeholder = "No rendered preview available yet for this spec.";
+        return {
+          html: `
+            <article class="current-set-preview-item">
+              <h3>${escapeHtml(title)}</h3>
+              <p class="meta">${escapeHtml(targetSet)}${escapeHtml(placement)}</p>
+              <div class="preview-placeholder">${escapeHtml(placeholder)}</div>
+            </article>
+          `,
+          text: `${title}\n${targetSet}${placement}\n${placeholder}`
+        };
       }
+    }
+
+    function renderCurrentPreviewDocumentHtml(context, bodyHtml) {
+      return `
+        <div class="current-preview-document">
+          <p class="current-preview-context"><strong>Context:</strong> ${escapeHtml(context)}</p>
+          <p class="meta">${escapeHtml(SYNTHETIC_PREVIEW_NOTICE)}</p>
+          ${bodyHtml}
+          <footer class="preview-footer-note">${escapeHtml(SYNTHETIC_PREVIEW_NOTICE)}</footer>
+        </div>
+      `;
+    }
+
+    function buildStandalonePreviewHtml(title, context, bodyHtml) {
+      const generatedAt = new Date().toLocaleString();
+      return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${escapeHtml(title)}</title>
+  <style>
+    body { background: #ffffff; color: #111827; font-family: Arial, sans-serif; line-height: 1.5; margin: 0; }
+    main { margin: 0 auto; max-width: 920px; padding: 32px 24px; }
+    h1, h2, h3 { color: #111827; page-break-after: avoid; }
+    h1 { font-size: 28px; margin: 0 0 10px; }
+    h2 { font-size: 20px; margin-top: 24px; }
+    h3 { font-size: 16px; margin-bottom: 6px; }
+    .kicker, .meta, footer { color: #4b5563; font-size: 13px; }
+    .context, .notice { background: #f8fafc; border: 1px solid #d7dee8; border-radius: 8px; padding: 10px 12px; }
+    .current-set-preview-item { border-top: 1px solid #d7dee8; break-inside: avoid; padding: 18px 0; page-break-inside: avoid; }
+    .preview-placeholder { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; color: #713f12; padding: 10px; }
+    table { border-collapse: collapse; font-size: 13px; width: 100%; }
+    th, td { border-bottom: 1px solid #d7dee8; padding: 6px; text-align: left; vertical-align: top; }
+    footer { border-top: 1px solid #d7dee8; margin-top: 24px; padding-top: 12px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="kicker">Arangur local preview</p>
+    <h1>${escapeHtml(title)}</h1>
+    <p class="context"><strong>Context:</strong> ${escapeHtml(context)}</p>
+    <p class="notice">${escapeHtml(SYNTHETIC_PREVIEW_NOTICE)}</p>
+    ${bodyHtml}
+    <footer>Generated ${escapeHtml(generatedAt)} from browser-local demo state. ${escapeHtml(SYNTHETIC_PREVIEW_NOTICE)}</footer>
+  </main>
+</body>
+</html>`;
+    }
+
+    function buildCurrentPreviewText(title, context, items) {
+      return [
+        title,
+        "",
+        `Context: ${context}`,
+        SYNTHETIC_PREVIEW_NOTICE,
+        "",
+        items.map((item) => item.text).join("\n\n"),
+        "",
+        `Caveat: ${SYNTHETIC_PREVIEW_NOTICE}`
+      ].join("\n");
+    }
+
+    function emptyCurrentPreviewHtml(kind) {
+      return `
+        <div class="preview-empty-state">
+          <p class="empty">No elements have been added to this local ${escapeHtml(setLabelForKind(kind))} yet.</p>
+          <p class="meta">Add a report element first, then open this preview again before printing or exporting.</p>
+        </div>
+      `;
+    }
+
+    function renderPreviewExportActions(kind, hasItems) {
+      if (!hasItems) {
+        els.currentPreviewExportActions.classList.add("hidden");
+        els.currentPreviewExportActions.innerHTML = "";
+        return;
+      }
+      const printButton = kind === "client"
+        ? '<button class="secondary-button" type="button" data-preview-action="print" data-kind="client">Print current Client Briefing Set</button>'
+        : '<button class="secondary-button" type="button" data-preview-action="print" data-kind="advisor">Print current Advisor Review Set</button>';
+      const downloadButton = kind === "client"
+        ? '<button class="secondary-button" type="button" data-preview-action="download-html" data-kind="client">Download current Client Briefing Set HTML</button>'
+        : '<button class="secondary-button" type="button" data-preview-action="download-html" data-kind="advisor">Download current Advisor Review Set HTML</button>';
+      els.currentPreviewExportActions.innerHTML = `
+        <div class="button-row">
+          ${printButton}
+          ${downloadButton}
+          <button class="secondary-button" type="button" data-preview-action="copy-text">Copy current preview text</button>
+        </div>
+      `;
+      els.currentPreviewExportActions.classList.remove("hidden");
+    }
+
+    async function handleCurrentPreviewExportAction(event) {
+      const button = event.target.closest("[data-preview-action]");
+      if (!button) return;
+      const action = button.dataset.previewAction;
+      const kind = button.dataset.kind || state.currentPreviewKind;
+      if (action === "print") {
+        await printCurrentPreview(kind);
+      } else if (action === "download-html") {
+        await downloadCurrentPreviewHtml(kind);
+      } else if (action === "copy-text") {
+        await copyCurrentPreviewText();
+      }
+    }
+
+    async function printCurrentPreview(kind) {
+      const ready = await ensureCurrentPreviewReady(kind);
+      if (!ready) return;
+      document.body.classList.add("print-current-preview");
+      window.print();
+      setTimeout(() => document.body.classList.remove("print-current-preview"), 1000);
+    }
+
+    async function downloadCurrentPreviewHtml(kind) {
+      const artifact = await buildCurrentPreviewArtifact(kind);
+      if (!artifact.ready) {
+        els.currentPreviewExportStatus.textContent = `Nothing to download yet. Add a report element to the ${setLabelForKind(kind)} first.`;
+        return;
+      }
+      downloadTextFile(artifact.standaloneHtml, previewHtmlFilename(kind), "text/html");
+      els.currentPreviewExportStatus.textContent = `Downloaded current ${setLabelForKind(kind)} HTML preview.`;
+    }
+
+    async function copyCurrentPreviewText() {
+      if (!state.currentPreviewKind) {
+        els.currentPreviewExportStatus.textContent = "Open a current set preview before copying preview text.";
+        return;
+      }
+      const artifact = await buildCurrentPreviewArtifact(state.currentPreviewKind);
+      if (!artifact.ready) {
+        els.currentPreviewExportStatus.textContent = `Nothing to copy yet. Add a report element to the ${setLabelForKind(state.currentPreviewKind)} first.`;
+        return;
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        try {
+          await navigator.clipboard.writeText(artifact.text);
+          els.currentPreviewExportStatus.textContent = "Copied current preview text to clipboard.";
+          return;
+        } catch (error) {
+          els.currentPreviewExportStatus.textContent = "Clipboard copy was blocked. Use browser print or HTML download instead.";
+          return;
+        }
+      }
+      els.currentPreviewExportStatus.textContent = "Clipboard copy is not available. Use browser print or HTML download instead.";
+    }
+
+    async function ensureCurrentPreviewReady(kind) {
+      if (state.currentPreviewKind !== kind || els.currentSetPreviewRegion.classList.contains("hidden")) {
+        return openCurrentSetPreview(kind);
+      }
+      if (!state.currentPreviewReady) {
+        els.currentPreviewExportStatus.textContent = `Nothing to print or export yet. Add a report element to the ${setLabelForKind(kind)} first.`;
+        return false;
+      }
+      return true;
+    }
+
+    function sanitizePreviewFragment(fragment) {
+      const template = document.createElement("template");
+      template.innerHTML = fragment;
+      template.content.querySelectorAll("script, style, link, iframe, object, embed, form, button").forEach((node) => node.remove());
+      return template.innerHTML;
+    }
+
+    function htmlFragmentText(fragment) {
+      const holder = document.createElement("div");
+      holder.innerHTML = sanitizePreviewFragment(fragment);
+      return holder.textContent.replace(/\s+/g, " ").trim();
+    }
+
+    function clientContextSummary() {
+      return `${CLIENT_CONTEXT.client_family} | ${CLIENT_CONTEXT.portfolio_context} | ${CLIENT_CONTEXT.data_status} | Confidence: ${CLIENT_CONTEXT.valuation_confidence} | ${CLIENT_CONTEXT.review_item_count} review item`;
+    }
+
+    function previewTitleForKind(kind) {
+      return kind === "client" ? "Current Client Briefing Set Preview" : "Current Advisor Review Set Preview";
+    }
+
+    function setLabelForKind(kind) {
+      return kind === "client" ? "Client Briefing Set" : "Advisor Review Set";
+    }
+
+    function previewHtmlFilename(kind) {
+      return kind === "client" ? "arangur_current_client_briefing_set_preview.html" : "arangur_current_advisor_review_set_preview.html";
+    }
+
+    function downloadTextFile(text, filename, mimeType) {
+      const blob = new Blob([text], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
     }
 
     function closeCurrentSetPreview() {
@@ -1846,6 +2184,11 @@
       els.currentSetPreviewTitle.textContent = "Current set preview";
       els.currentSetPreviewSummary.textContent = "";
       els.currentSetPreviewBody.innerHTML = "";
+      els.currentPreviewExportActions.classList.add("hidden");
+      els.currentPreviewExportActions.innerHTML = "";
+      els.currentPreviewExportStatus.textContent = "";
+      state.currentPreviewKind = null;
+      state.currentPreviewReady = false;
     }
 
     function editSpec(spec, kind, index) {
@@ -2184,8 +2527,10 @@
     els.copySpecSet.addEventListener("click", copyCurrentSpecSet);
     els.downloadSpecSet.addEventListener("click", downloadCurrentSpecSet);
     els.restoreSpecSet.addEventListener("click", restoreCurrentSpecSet);
+    els.currentPreviewExportActions.addEventListener("click", handleCurrentPreviewExportAction);
     els.closeCurrentSetPreview.addEventListener("click", closeCurrentSetPreview);
     els.closeElementPreview.addEventListener("click", closeElementPreview);
+    window.addEventListener("afterprint", () => document.body.classList.remove("print-current-preview"));
 
     renderEmptySelection();
     renderSets();
