@@ -57,6 +57,19 @@
       padding: 28px 18px 38px;
     }
 
+    .builder-surface {
+      display: grid;
+      gap: 14px;
+    }
+
+    body.preview-mode .builder-surface {
+      display: none;
+    }
+
+    body.preview-mode #current-set-preview-region {
+      display: grid !important;
+    }
+
     .brand {
       color: var(--accent);
       font-size: 14px;
@@ -477,6 +490,7 @@
 
     .local-actions-panel,
     .sample-preview-panel,
+    .advanced-panel,
     .element-preview-panel,
     .current-set-preview-panel {
       box-shadow: none;
@@ -488,6 +502,13 @@
 
     .local-actions-panel .button-row {
       gap: 7px;
+    }
+
+    .set-actions {
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 7px;
+      padding-top: 10px;
     }
 
     .technical-details {
@@ -526,6 +547,27 @@
       flex-wrap: wrap;
       gap: 6px;
       justify-content: flex-end;
+    }
+
+    .advanced-panel {
+      background: var(--surface-soft);
+    }
+
+    .advanced-panel > summary {
+      color: var(--strong);
+      font-size: 16px;
+    }
+
+    .advanced-panel[open] {
+      display: grid;
+      gap: 12px;
+    }
+
+    .advanced-section {
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 10px;
+      padding-top: 12px;
     }
 
     .preview-section-label {
@@ -625,6 +667,13 @@
     .current-preview-document {
       display: grid;
       gap: 16px;
+    }
+
+    .preview-header {
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      gap: 6px;
+      padding-bottom: 12px;
     }
 
     .current-preview-context {
@@ -788,162 +837,176 @@
 </head>
 <body>
   <main class="page">
-    <!-- first-screen-start -->
-    <p class="brand">Arangur</p>
-    <p class="context-line"><strong>Northstar Family Office</strong> &middot; Demo portfolio &middot; Data loaded &middot; Confidence: Mixed &middot; 1 review item</p>
+    <div id="builder-surface" class="builder-surface">
+      <!-- first-screen-start -->
+      <p class="brand">Arangur</p>
+      <p class="context-line"><strong>Northstar Family Office</strong> &middot; Demo portfolio &middot; Data loaded &middot; Confidence: Mixed &middot; 1 review item</p>
 
-    <section class="workspace" aria-live="polite">
-      <section class="panel" aria-labelledby="finder-title">
-        <div class="panel-header">
-          <p class="helper">Report element finder</p>
-          <h1 id="finder-title">Choose a target set, then find an element</h1>
-        </div>
-
-        <div class="target-toggle" aria-label="Target set">
-          <button id="target-client" class="target-button is-active" type="button" data-target-set="Client Briefing Set">Client Briefing Set</button>
-          <button id="target-advisor" class="target-button" type="button" data-target-set="Advisor Review Set">Advisor Review Set</button>
-        </div>
-
-        <div class="button-row">
-          <div class="browse-picker">
-            <button id="browse-all-button" class="secondary-button" type="button" aria-expanded="false" aria-controls="browse-all-panel">Browse all templates</button>
-            <div id="browse-all-panel" class="browse-all-panel hidden" role="menu" aria-label="All report element templates grouped by category"></div>
+      <section class="workspace" aria-live="polite">
+        <section class="panel" aria-labelledby="finder-title">
+          <div class="panel-header">
+            <p class="helper">Report element finder</p>
+            <h1 id="finder-title">Choose a target set, then find an element</h1>
           </div>
-          <button id="add-narrative-button" class="secondary-button" type="button">Add narrative element</button>
-        </div>
 
-        <div id="catalog-error" class="error-box hidden"></div>
-
-        <div class="finder-grid" aria-label="Discovery filters">
-          <div class="field">
-            <label for="search-filter">Search report elements</label>
-            <input id="search-filter" type="search" placeholder="Cash, scenario, manager, data">
+          <div class="target-toggle" aria-label="Target set">
+            <button id="target-client" class="target-button is-active" type="button" data-target-set="Client Briefing Set">Client Briefing Set</button>
+            <button id="target-advisor" class="target-button" type="button" data-target-set="Advisor Review Set">Advisor Review Set</button>
           </div>
-          <div class="field">
-            <label for="category-filter">Browse category</label>
-            <select id="category-filter">
-              <option value="">Choose category</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="topic-filter">Guided filter</label>
-            <select id="topic-filter">
-              <option value="">No filter</option>
-              <option value="scenario">Scenario-related</option>
-              <option value="manager">Manager-related</option>
-              <option value="cash">Cash/liquidity-related</option>
-              <option value="data">Data-readiness-related</option>
-              <option value="concentration">Concentration-related</option>
-            </select>
-          </div>
-        </div>
 
-        <div id="category-buttons" class="browse-row" aria-label="Browse categories"></div>
-        <p id="candidate-count" class="status">Search, browse a category, or choose a filter to find report elements.</p>
-        <div id="candidate-list" class="candidate-list" aria-label="Compact candidate report elements"></div>
-      </section>
-
-      <section class="panel" aria-labelledby="selection-title">
-        <div class="panel-header">
-          <p class="helper">Selected template</p>
-          <h2 id="selection-title">Select a report element to see details.</h2>
-        </div>
-
-        <div id="preview-panel" class="selected-box hidden"></div>
-        <div id="config-panel" class="hidden">
-          <form id="config-form" class="config-form"></form>
-          <div id="validation-message" class="validation-box hidden"></div>
           <div class="button-row">
-            <button id="add-spec-button" class="primary-button" type="button" disabled>Add element</button>
-            <button id="back-to-preview-button" class="secondary-button" type="button">Back to preview</button>
+            <div class="browse-picker">
+              <button id="browse-all-button" class="secondary-button" type="button" aria-expanded="false" aria-controls="browse-all-panel">Browse all templates</button>
+              <div id="browse-all-panel" class="browse-all-panel hidden" role="menu" aria-label="All report element templates grouped by category"></div>
+            </div>
+            <button id="add-narrative-button" class="secondary-button" type="button">Add narrative element</button>
+          </div>
+
+          <div id="catalog-error" class="error-box hidden"></div>
+
+          <div class="finder-grid" aria-label="Discovery filters">
+            <div class="field">
+              <label for="search-filter">Search report elements</label>
+              <input id="search-filter" type="search" placeholder="Cash, scenario, manager, data">
+            </div>
+            <div class="field">
+              <label for="category-filter">Browse category</label>
+              <select id="category-filter">
+                <option value="">Choose category</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="topic-filter">Guided filter</label>
+              <select id="topic-filter">
+                <option value="">No filter</option>
+                <option value="scenario">Scenario-related</option>
+                <option value="manager">Manager-related</option>
+                <option value="cash">Cash/liquidity-related</option>
+                <option value="data">Data-readiness-related</option>
+                <option value="concentration">Concentration-related</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="category-buttons" class="browse-row" aria-label="Browse categories"></div>
+          <p id="candidate-count" class="status">Search, browse a category, or choose a filter to find report elements.</p>
+          <div id="candidate-list" class="candidate-list" aria-label="Compact candidate report elements"></div>
+        </section>
+
+        <section class="panel" aria-labelledby="selection-title">
+          <div class="panel-header">
+            <p class="helper">Selected template</p>
+            <h2 id="selection-title">Select a report element to see details.</h2>
+          </div>
+
+          <div id="preview-panel" class="selected-box hidden"></div>
+          <div id="config-panel" class="hidden">
+            <form id="config-form" class="config-form"></form>
+            <div id="validation-message" class="validation-box hidden"></div>
+            <div class="button-row">
+              <button id="add-spec-button" class="primary-button" type="button" disabled>Add element</button>
+              <button id="back-to-preview-button" class="secondary-button" type="button">Back to preview</button>
+            </div>
+          </div>
+          <p id="composer-status" class="status"></p>
+        </section>
+      </section>
+
+      <section class="sets-grid" aria-label="Report set lists">
+        <section class="set-panel" aria-labelledby="client-set-title">
+          <h2 id="client-set-title">Client Briefing Set</h2>
+          <p id="client-empty" class="empty">No client briefing elements yet.</p>
+          <ul id="client-set-list" class="set-list"></ul>
+          <div class="set-actions">
+            <button id="preview-client-set-button" class="primary-button" type="button" disabled>Preview Client Briefing</button>
+            <p id="client-preview-status" class="status">Add at least one client briefing element before previewing.</p>
+          </div>
+        </section>
+
+        <section class="set-panel" aria-labelledby="advisor-set-title">
+          <h2 id="advisor-set-title">Advisor Review Set</h2>
+          <p id="advisor-empty" class="empty">No advisor review elements yet.</p>
+          <ul id="advisor-set-list" class="set-list"></ul>
+          <div class="set-actions">
+            <button id="preview-advisor-set-button" class="primary-button" type="button" disabled>Preview Advisor Review</button>
+            <p id="advisor-preview-status" class="status">Add at least one advisor review element before previewing.</p>
+          </div>
+        </section>
+      </section>
+
+      <!-- first-screen-end -->
+
+      <section id="element-preview-region" class="set-panel element-preview-panel hidden" aria-labelledby="element-preview-title">
+        <p class="helper">Element detail preview</p>
+        <h2 id="element-preview-title">Element preview</h2>
+        <p id="element-preview-summary" class="meta"></p>
+        <div id="element-preview-body" class="element-preview-body"></div>
+        <div class="button-row">
+          <button id="close-element-preview-button" class="secondary-button" type="button">Close preview</button>
+        </div>
+      </section>
+
+      <details id="advanced-tools" class="set-panel advanced-panel">
+        <summary>Advanced</summary>
+        <p class="helper">Developer and QA tools for local handoff, backend draft storage, and reference previews.</p>
+
+        <div class="advanced-section" aria-labelledby="local-transfer-title">
+          <h3 id="local-transfer-title">Local set transfer</h3>
+          <div class="button-row">
+            <button id="copy-spec-set-button" class="secondary-button" type="button">Copy local set JSON</button>
+            <button id="download-spec-set-button" class="secondary-button" type="button">Download local set JSON</button>
+          </div>
+          <p id="spec-set-status" class="status"></p>
+          <details id="serialized-spec-details" class="technical-details">
+            <summary>Technical local export details</summary>
+            <textarea id="serialized-spec-output" class="serialized-output" readonly aria-label="Technical serialized local spec set"></textarea>
+          </details>
+          <details id="restore-spec-details" class="technical-details">
+            <summary>Restore local spec set</summary>
+            <div class="field">
+              <label for="restore-spec-input">Paste exported local set JSON</label>
+              <textarea id="restore-spec-input" class="restore-input" aria-label="Paste exported spec set"></textarea>
+            </div>
+            <div class="button-row">
+              <button id="restore-spec-set-button" class="secondary-button" type="button">Restore local set</button>
+            </div>
+            <p id="restore-spec-status" class="status"></p>
+          </details>
+        </div>
+
+        <div class="advanced-section" aria-labelledby="backend-drafts-title">
+          <h3 id="backend-drafts-title">Backend save/load</h3>
+          <p class="helper">Optional private-demo persistence for draft briefing spec sets. Local export/download remains available.</p>
+          <div class="button-row">
+            <button id="save-backend-spec-set-button" class="secondary-button" type="button">Save to backend</button>
+            <button id="load-backend-spec-sets-button" class="secondary-button" type="button">Load saved sets</button>
+          </div>
+          <p id="backend-spec-status" class="status"></p>
+          <div id="saved-spec-sets-list" class="saved-set-list" aria-label="Saved backend briefing spec sets"></div>
+        </div>
+
+        <div class="advanced-section" aria-labelledby="qa-preview-title">
+          <h3 id="qa-preview-title">QA reference previews</h3>
+          <p class="helper">Static references generated from committed demo outputs, separate from the current builder preview.</p>
+          <div class="button-row">
+            <a class="tiny-button" href="/simulation/briefing_set_previews/client_briefing_set_preview.html" target="_blank" rel="noopener">Open QA Client reference</a>
+            <a class="tiny-button" href="/simulation/briefing_set_previews/advisor_review_set_preview.html" target="_blank" rel="noopener">Open QA Advisor reference</a>
           </div>
         </div>
-        <p id="composer-status" class="status"></p>
-      </section>
-    </section>
-
-    <section class="sets-grid" aria-label="Report set lists">
-      <section class="set-panel" aria-labelledby="client-set-title">
-        <h2 id="client-set-title">Client Briefing Set</h2>
-        <p id="client-empty" class="empty">No client briefing elements yet.</p>
-        <ul id="client-set-list" class="set-list"></ul>
-      </section>
-
-      <section class="set-panel" aria-labelledby="advisor-set-title">
-        <h2 id="advisor-set-title">Advisor Review Set</h2>
-        <p id="advisor-empty" class="empty">No advisor review elements yet.</p>
-        <ul id="advisor-set-list" class="set-list"></ul>
-      </section>
-    </section>
-
-    <section class="set-panel local-actions-panel" aria-labelledby="local-actions-title">
-      <h2 id="local-actions-title">Current local set</h2>
-      <p class="helper">Preview, copy, download, or restore the current browser-local set. Backend save/load is optional and secondary.</p>
-      <div class="button-row">
-        <button id="preview-client-set-button" class="secondary-button" type="button">Preview Client Briefing Set</button>
-        <button id="preview-advisor-set-button" class="secondary-button" type="button">Preview Advisor Review Set</button>
-        <button id="copy-spec-set-button" class="secondary-button" type="button">Copy local set JSON</button>
-        <button id="download-spec-set-button" class="secondary-button" type="button">Download local set JSON</button>
-      </div>
-      <p id="spec-set-status" class="status"></p>
-      <details id="serialized-spec-details" class="technical-details">
-        <summary>Technical local export details</summary>
-        <textarea id="serialized-spec-output" class="serialized-output" readonly aria-label="Technical serialized local spec set"></textarea>
       </details>
-      <details id="restore-spec-details" class="technical-details">
-        <summary>Restore local spec set</summary>
-        <div class="field">
-          <label for="restore-spec-input">Paste exported local set JSON</label>
-          <textarea id="restore-spec-input" class="restore-input" aria-label="Paste exported spec set"></textarea>
-        </div>
-        <div class="button-row">
-          <button id="restore-spec-set-button" class="secondary-button" type="button">Restore local set</button>
-        </div>
-        <p id="restore-spec-status" class="status"></p>
-      </details>
-      <details id="backend-spec-details" class="technical-details">
-        <summary>Backend save/load</summary>
-        <p class="helper">Optional private-demo persistence for draft briefing spec sets. Local export/download remains available.</p>
-        <div class="button-row">
-          <button id="save-backend-spec-set-button" class="secondary-button" type="button">Save to backend</button>
-          <button id="load-backend-spec-sets-button" class="secondary-button" type="button">Load saved sets</button>
-        </div>
-        <p id="backend-spec-status" class="status"></p>
-        <div id="saved-spec-sets-list" class="saved-set-list" aria-label="Saved backend briefing spec sets"></div>
-      </details>
-    </section>
-
-    <section class="set-panel sample-preview-panel" aria-labelledby="sample-preview-title">
-      <h2 id="sample-preview-title">Sample previews</h2>
-      <p class="helper">Static samples generated from the committed demo outputs, separate from the current local set preview above.</p>
-      <div class="button-row">
-        <a class="tiny-button" href="/simulation/briefing_set_previews/client_briefing_set_preview.html" target="_blank" rel="noopener">Open deterministic sample Client preview</a>
-        <a class="tiny-button" href="/simulation/briefing_set_previews/advisor_review_set_preview.html" target="_blank" rel="noopener">Open deterministic sample Advisor preview</a>
-      </div>
-    </section>
+    </div>
 
     <section id="current-set-preview-region" class="set-panel current-set-preview-panel hidden" aria-labelledby="current-set-preview-title">
-      <p class="preview-section-label">Current local preview</p>
-      <h2 id="current-set-preview-title">Current set preview</h2>
+      <p class="preview-section-label">Demo data &middot; Not investment advice</p>
+      <h2 id="current-set-preview-title">Preview</h2>
       <p id="current-set-preview-summary" class="meta"></p>
       <div id="current-set-preview-body" class="current-set-preview-body"></div>
-      <div id="current-preview-export-actions" class="preview-export-actions hidden" aria-label="Current local preview print and export controls"></div>
+      <div id="current-preview-export-actions" class="preview-export-actions hidden" aria-label="Preview print and export controls"></div>
       <p id="current-preview-export-status" class="status"></p>
       <div class="button-row">
-        <button id="close-current-set-preview-button" class="secondary-button" type="button">Return to composer</button>
+        <button id="close-current-set-preview-button" class="secondary-button" type="button">Back to Builder</button>
       </div>
     </section>
-
-    <section id="element-preview-region" class="set-panel element-preview-panel hidden" aria-labelledby="element-preview-title">
-      <p class="helper">Rendered element view</p>
-      <h2 id="element-preview-title">Element preview</h2>
-      <p id="element-preview-summary" class="meta"></p>
-      <div id="element-preview-body" class="element-preview-body"></div>
-      <div class="button-row">
-        <button id="close-element-preview-button" class="secondary-button" type="button">Close preview</button>
-      </div>
-    </section>
-    <!-- first-screen-end -->
   </main>
 
   <script>
@@ -960,8 +1023,8 @@
       valuation_confidence: "Mixed",
       review_item_count: 1
     };
-    const SYNTHETIC_PREVIEW_NOTICE = "Synthetic demo preview assembled in the browser from local selections. It is not persisted, not investment advice, and not a production report.";
-    const SYNTHETIC_PREVIEW_SHORT_NOTICE = "Browser-local synthetic preview. Not persisted.";
+    const SYNTHETIC_PREVIEW_NOTICE = "Demo data. Not investment advice.";
+    const SYNTHETIC_PREVIEW_SHORT_NOTICE = "Demo data. Not investment advice.";
     const TARGET_TO_BRANCH = {
       "Client Briefing Set": "Client Briefing",
       "Advisor Review Set": "Advisor Review"
@@ -1119,6 +1182,8 @@
       advisorList: document.getElementById("advisor-set-list"),
       previewClientSet: document.getElementById("preview-client-set-button"),
       previewAdvisorSet: document.getElementById("preview-advisor-set-button"),
+      clientPreviewStatus: document.getElementById("client-preview-status"),
+      advisorPreviewStatus: document.getElementById("advisor-preview-status"),
       copySpecSet: document.getElementById("copy-spec-set-button"),
       downloadSpecSet: document.getElementById("download-spec-set-button"),
       specSetStatus: document.getElementById("spec-set-status"),
@@ -1693,6 +1758,14 @@
       els.advisorEmpty.classList.toggle("hidden", state.advisorSet.length > 0);
       els.clientList.innerHTML = state.clientSet.map((spec, index) => renderSetRow(spec, index, "client")).join("");
       els.advisorList.innerHTML = state.advisorSet.map((spec, index) => renderSetRow(spec, index, "advisor")).join("");
+      els.previewClientSet.disabled = state.clientSet.length === 0;
+      els.previewAdvisorSet.disabled = state.advisorSet.length === 0;
+      els.clientPreviewStatus.textContent = state.clientSet.length
+        ? ""
+        : "Add at least one client briefing element before previewing.";
+      els.advisorPreviewStatus.textContent = state.advisorSet.length
+        ? ""
+        : "Add at least one advisor review element before previewing.";
       updateSerializedSpecOutput();
     }
 
@@ -1703,9 +1776,19 @@
       const parameterText = compactParameterText(spec.parameters);
       const advisorPurpose = kind === "advisor" && spec.internal_purpose ? ` | ${spec.internal_purpose}` : "";
       const previewMatch = previewMatchForSpec(spec);
-      const previewStatus = previewMatch ? "Preview available" : "Preview not available yet";
+      const previewStatus = previewMatch ? "Previewable" : "Not previewable yet";
       const previewStatusClass = previewMatch ? "is-available" : "is-unavailable";
       const promoteButton = kind === "advisor" ? `<button class="tiny-button" type="button" data-action="promote" data-kind="advisor" data-index="${index}">Promote to Client Briefing</button>` : "";
+      const elementTools = previewMatch
+        ? `
+          <details>
+            <summary>Element tools</summary>
+            <div class="button-row">
+              <button class="tiny-button" type="button" data-action="open-preview" data-kind="${escapeAttr(kind)}" data-index="${index}">Preview element</button>
+            </div>
+          </details>
+        `
+        : '<p class="meta">This element is not previewable yet. Replace it, remove it, or keep it out of the preview.</p>';
       return `
         <li class="set-row">
           <h3>${escapeHtml(index + 1)}. ${escapeHtml(spec.title)}</h3>
@@ -1713,7 +1796,6 @@
           <p>${escapeHtml(parameterText || "Configured")}</p>
           <span class="preview-status ${previewStatusClass}">${escapeHtml(previewStatus)}</span>
           <div class="row-actions">
-            <button class="tiny-button" type="button" data-action="open-preview" data-kind="${escapeAttr(kind)}" data-index="${index}"${previewMatch ? "" : " disabled"}>Open preview</button>
             <button class="tiny-button" type="button" data-action="edit" data-kind="${escapeAttr(kind)}" data-index="${index}">Edit</button>
             <button class="tiny-button" type="button" data-action="duplicate" data-kind="${escapeAttr(kind)}" data-index="${index}">Duplicate</button>
             <button class="tiny-button" type="button" data-action="up" data-kind="${escapeAttr(kind)}" data-index="${index}"${index === 0 ? " disabled" : ""}>Move up</button>
@@ -1721,6 +1803,7 @@
             <button class="tiny-button" type="button" data-action="remove" data-kind="${escapeAttr(kind)}" data-index="${index}">Remove</button>
             ${promoteButton}
           </div>
+          ${elementTools}
         </li>
       `;
     }
@@ -1781,10 +1864,10 @@
       els.elementPreviewRegion.classList.remove("hidden");
       els.elementPreviewTitle.textContent = match ? match.title : "Element preview";
       els.elementPreviewSummary.textContent = match
-        ? "Rendered deterministic demo fragment for this configured spec."
-        : "Preview not available yet for this spec.";
+        ? "Demo element preview."
+        : "This element is not previewable yet in the demo.";
       if (!match) {
-        els.elementPreviewBody.innerHTML = '<p class="empty">Preview not available yet for this spec.</p>';
+        els.elementPreviewBody.innerHTML = '<p class="empty">This element is not previewable yet in the demo.</p>';
         return;
       }
       els.elementPreviewBody.innerHTML = '<p class="empty">Loading preview...</p>';
@@ -1796,7 +1879,7 @@
         const fragment = await response.text();
         els.elementPreviewBody.innerHTML = fragment;
       } catch (error) {
-        els.elementPreviewBody.innerHTML = '<p class="empty">Preview not available yet for this spec.</p>';
+        els.elementPreviewBody.innerHTML = '<p class="empty">This element is not previewable yet in the demo.</p>';
       }
     }
 
@@ -2139,15 +2222,26 @@
     }
 
     async function openCurrentSetPreview(kind) {
+      if (!listForKind(kind).length) {
+        const message = kind === "client"
+          ? "Add at least one client briefing element before previewing."
+          : "Add at least one advisor review element before previewing.";
+        if (kind === "client") {
+          els.clientPreviewStatus.textContent = message;
+        } else {
+          els.advisorPreviewStatus.textContent = message;
+        }
+        return false;
+      }
       const title = previewTitleForKind(kind);
       const artifact = await buildCurrentPreviewArtifact(kind);
       state.currentPreviewKind = kind;
       state.currentPreviewReady = artifact.ready;
+      closeElementPreview();
+      document.body.classList.add("preview-mode");
       els.currentSetPreviewRegion.classList.remove("hidden");
       els.currentSetPreviewTitle.textContent = title;
-      els.currentSetPreviewSummary.textContent = artifact.ready
-        ? `${previewPurposeForKind(kind)} - ${pluralizeSpec(artifact.itemCount, "element")} from the current browser-local set.`
-        : `This local ${setLabelForKind(kind)} is empty.`;
+      els.currentSetPreviewSummary.textContent = `${clientContextSummary()} | ${SYNTHETIC_PREVIEW_SHORT_NOTICE}`;
       els.currentPreviewExportStatus.textContent = "";
       if (!artifact.ready) {
         els.currentSetPreviewBody.innerHTML = emptyCurrentPreviewHtml(kind);
@@ -2193,33 +2287,24 @@
     }
 
     async function renderCurrentSetPreviewItem(spec, index, targetSet) {
-      const title = `${index + 1}. ${spec.title || "Untitled element"}`;
-      const placement = spec.placement ? ` | ${spec.placement}` : "";
+      const title = spec.title || "Untitled element";
       if (spec.element_kind === "narrative") {
-        const summary = narrativeSummary(spec);
         return {
-          html: `
-            <article class="current-set-preview-item">
-              <h3>${escapeHtml(title)}</h3>
-              <p class="meta">Narrative element${escapeHtml(placement)}</p>
-              <p>${escapeHtml(summary)}</p>
-            </article>
-          `,
-          text: `${title}\nNarrative element${placement}\n${summary}`
+          html: renderNarrativePreviewHtml(spec),
+          text: renderNarrativePreviewText(spec)
         };
       }
       const match = previewMatchForSpec(spec);
       if (!match) {
-        const placeholder = "No rendered preview available yet for this spec.";
+        const placeholder = "This section is not available in the demo preview.";
         return {
           html: `
-            <article class="current-set-preview-item">
+            <section class="current-set-preview-item">
               <h3>${escapeHtml(title)}</h3>
-              <p class="meta">${escapeHtml(targetSet)}${escapeHtml(placement)}</p>
               <div class="preview-placeholder">${escapeHtml(placeholder)}</div>
-            </article>
+            </section>
           `,
-          text: `${title}\n${targetSet}${placement}\n${placeholder}`
+          text: `${title}\n${placeholder}`
         };
       }
       try {
@@ -2228,35 +2313,57 @@
         const fragment = sanitizePreviewFragment(await response.text());
         return {
           html: `
-            <article class="current-set-preview-item">
-              <h3>${escapeHtml(title)}</h3>
-              <p class="meta">${escapeHtml(targetSet)}${escapeHtml(placement)}</p>
+            <section class="current-set-preview-item">
               ${fragment}
-            </article>
+            </section>
           `,
-          text: `${title}\n${targetSet}${placement}\n${htmlFragmentText(fragment)}`
+          text: htmlFragmentText(fragment)
         };
       } catch (error) {
-        const placeholder = "No rendered preview available yet for this spec.";
+        const placeholder = "This section is not available in the demo preview.";
         return {
           html: `
-            <article class="current-set-preview-item">
+            <section class="current-set-preview-item">
               <h3>${escapeHtml(title)}</h3>
-              <p class="meta">${escapeHtml(targetSet)}${escapeHtml(placement)}</p>
               <div class="preview-placeholder">${escapeHtml(placeholder)}</div>
-            </article>
+            </section>
           `,
-          text: `${title}\n${targetSet}${placement}\n${placeholder}`
+          text: `${title}\n${placeholder}`
         };
       }
+    }
+
+    function renderNarrativePreviewHtml(spec) {
+      const fields = spec.fields || {};
+      const body = fields.body_text || fields.prompt_text || fields.note_text || narrativeSummary(spec);
+      if (spec.narrative_type === "section_title") {
+        return `<section class="current-set-preview-item"><h2>${escapeHtml(fields.title_text || spec.title)}</h2></section>`;
+      }
+      if (fields.heading) {
+        return `
+          <section class="current-set-preview-item">
+            <h3>${escapeHtml(fields.heading)}</h3>
+            <p>${escapeHtml(body)}</p>
+          </section>
+        `;
+      }
+      return `<section class="current-set-preview-item"><p>${escapeHtml(body)}</p></section>`;
+    }
+
+    function renderNarrativePreviewText(spec) {
+      const fields = spec.fields || {};
+      if (spec.narrative_type === "section_title") return fields.title_text || spec.title;
+      return fields.body_text || fields.prompt_text || fields.note_text || narrativeSummary(spec);
     }
 
     function renderCurrentPreviewDocumentHtml(purpose, context, bodyHtml) {
       return `
         <div class="current-preview-document">
-          <p class="preview-section-label">${escapeHtml(purpose)}</p>
-          <p class="current-preview-context"><strong>Context:</strong> ${escapeHtml(context)}</p>
-          <p class="current-preview-note">${escapeHtml(SYNTHETIC_PREVIEW_SHORT_NOTICE)}</p>
+          <header class="preview-header">
+            <p class="preview-section-label">${escapeHtml(SYNTHETIC_PREVIEW_SHORT_NOTICE)}</p>
+            <h1>${escapeHtml(purpose)}</h1>
+            <p class="current-preview-context"><strong>Context:</strong> ${escapeHtml(context)}</p>
+          </header>
           ${bodyHtml}
           <footer class="preview-footer-note">${escapeHtml(SYNTHETIC_PREVIEW_NOTICE)}</footer>
         </div>
@@ -2295,13 +2402,13 @@
 </head>
 <body>
   <main>
-    <p class="kicker">Arangur local preview</p>
+    <p class="kicker">Arangur preview</p>
     <h1>${escapeHtml(title)}</h1>
     <p class="purpose">${escapeHtml(purpose)}</p>
     <p class="context"><strong>Context:</strong> ${escapeHtml(context)}</p>
     <p class="notice">${escapeHtml(SYNTHETIC_PREVIEW_SHORT_NOTICE)}</p>
     ${bodyHtml}
-    <footer>Generated ${escapeHtml(generatedAt)} from browser-local demo state. ${escapeHtml(SYNTHETIC_PREVIEW_NOTICE)}</footer>
+    <footer>Exported ${escapeHtml(generatedAt)}. ${escapeHtml(SYNTHETIC_PREVIEW_NOTICE)}</footer>
   </main>
 </body>
 </html>`;
@@ -2324,8 +2431,7 @@
     function emptyCurrentPreviewHtml(kind) {
       return `
         <div class="preview-empty-state">
-          <p class="empty">This local ${escapeHtml(setLabelForKind(kind))} has no elements yet.</p>
-          <p class="meta">Add a report element first, then open this preview again before printing or exporting.</p>
+          <p class="empty">${escapeHtml(kind === "client" ? "Add at least one client briefing element before previewing." : "Add at least one advisor review element before previewing.")}</p>
         </div>
       `;
     }
@@ -2336,18 +2442,11 @@
         els.currentPreviewExportActions.innerHTML = "";
         return;
       }
-      const printButton = kind === "client"
-        ? '<button class="secondary-button" type="button" data-preview-action="print" data-kind="client">Print current Client Briefing Set</button>'
-        : '<button class="secondary-button" type="button" data-preview-action="print" data-kind="advisor">Print current Advisor Review Set</button>';
-      const downloadButton = kind === "client"
-        ? '<button class="secondary-button" type="button" data-preview-action="download-html" data-kind="client">Download current Client Briefing Set HTML</button>'
-        : '<button class="secondary-button" type="button" data-preview-action="download-html" data-kind="advisor">Download current Advisor Review Set HTML</button>';
       els.currentPreviewExportActions.innerHTML = `
-        <p class="preview-section-label">Preview actions</p>
         <div class="button-row">
-          ${printButton}
-          ${downloadButton}
-          <button class="secondary-button" type="button" data-preview-action="copy-text">Copy current preview text</button>
+          <button class="secondary-button" type="button" data-preview-action="print" data-kind="${escapeAttr(kind)}">Print</button>
+          <button class="secondary-button" type="button" data-preview-action="download-html" data-kind="${escapeAttr(kind)}">Export HTML</button>
+          <button class="secondary-button" type="button" data-preview-action="copy-text">Copy text</button>
         </div>
       `;
       els.currentPreviewExportActions.classList.remove("hidden");
@@ -2382,7 +2481,7 @@
         return;
       }
       downloadTextFile(artifact.standaloneHtml, previewHtmlFilename(kind), "text/html");
-      els.currentPreviewExportStatus.textContent = `Downloaded current ${setLabelForKind(kind)} HTML preview.`;
+      els.currentPreviewExportStatus.textContent = `Exported ${previewPurposeForKind(kind)} HTML.`;
     }
 
     async function copyCurrentPreviewText() {
@@ -2398,7 +2497,7 @@
       if (navigator.clipboard && navigator.clipboard.writeText) {
         try {
           await navigator.clipboard.writeText(artifact.text);
-          els.currentPreviewExportStatus.textContent = "Copied current preview text to clipboard.";
+          els.currentPreviewExportStatus.textContent = "Copied preview text to clipboard.";
           return;
         } catch (error) {
           els.currentPreviewExportStatus.textContent = "Clipboard copy was blocked. Use browser print or HTML download instead.";
@@ -2437,11 +2536,11 @@
     }
 
     function previewTitleForKind(kind) {
-      return kind === "client" ? "Current Client Briefing Set Preview" : "Current Advisor Review Set Preview";
+      return kind === "client" ? "Preview Client Briefing" : "Preview Advisor Review";
     }
 
     function previewPurposeForKind(kind) {
-      return kind === "client" ? "Client-facing briefing sequence" : "Advisor/internal review sequence";
+      return kind === "client" ? "Client Briefing" : "Advisor Review";
     }
 
     function setLabelForKind(kind) {
@@ -2465,8 +2564,9 @@
     }
 
     function closeCurrentSetPreview() {
+      document.body.classList.remove("preview-mode");
       els.currentSetPreviewRegion.classList.add("hidden");
-      els.currentSetPreviewTitle.textContent = "Current set preview";
+      els.currentSetPreviewTitle.textContent = "Preview";
       els.currentSetPreviewSummary.textContent = "";
       els.currentSetPreviewBody.innerHTML = "";
       els.currentPreviewExportActions.classList.add("hidden");
@@ -2474,6 +2574,7 @@
       els.currentPreviewExportStatus.textContent = "";
       state.currentPreviewKind = null;
       state.currentPreviewReady = false;
+      document.getElementById("builder-surface").scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
     function editSpec(spec, kind, index) {
