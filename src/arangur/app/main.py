@@ -10,7 +10,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
 from .routes import router as api_router
-from .run_service import reports_demo_dir
+from .run_service import reports_demo_dir, simulation_data_dir
 from .settings import APP_NAME, AppSettings, load_settings
 
 
@@ -41,6 +41,11 @@ def create_app(settings: AppSettings | None = None) -> FastAPI:
         "/reports/demo",
         StaticFiles(directory=reports_demo_dir(), html=True, check_dir=False),
         name="reports_demo",
+    )
+    app.mount(
+        "/simulation",
+        StaticFiles(directory=simulation_data_dir(), html=True, check_dir=False),
+        name="simulation_data",
     )
 
     @app.get("/api/health")

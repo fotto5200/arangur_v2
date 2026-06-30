@@ -225,7 +225,11 @@ Discovery controls help locate templates; they are not saved as report specs. Af
 
 Configured analytic elements can be added to either the Client Briefing Set or the Advisor Review Set. Advisors can also add manual narrative elements such as section titles, explanations, discussion prompts, speaker notes, working notes, and follow-up items. Analytic and narrative elements live in the same ordered local set lists and can be edited, duplicated, moved, or removed.
 
-This UI does not generate reports, charts, or client preview output yet. It does not call the workflow API or show report links. The next UI batch should serialize/export completed local spec sets without report generation; backend persistence remains a later batch.
+When a configured analytic spec matches a committed rendered demo view, the row shows `Preview available` and can open the rendered element fragment in a small one-element preview panel. Specs that do not match the current deterministic fixture set show `Preview not available yet for this spec.` The app also links to the static sample Client Briefing Set and Advisor Review Set previews generated under `data/simulation/briefing_set_previews/`; those samples come from current deterministic demo outputs, not from the unsaved local composer set.
+
+The app serves committed synthetic simulation artifacts under `/simulation/...` for this local preview flow. It does not serve the whole repo and does not expose credentials or real data.
+
+This UI does not generate reports, charts, persisted specs, or client preview output from the local set yet. It does not call the workflow API or show report-package links. The next UI batch should serialize/export completed local spec sets or generate a preview from the local ordered set without backend persistence.
 
 Create a native demo manager-overlap workflow run:
 

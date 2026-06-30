@@ -460,6 +460,7 @@
       font-size: 12px;
       min-height: 30px;
       padding: 5px 8px;
+      text-decoration: none;
     }
 
     .sets-grid {
@@ -505,6 +506,58 @@
     .set-row p {
       color: var(--muted);
       font-size: 13px;
+    }
+
+    .preview-status {
+      border-radius: 999px;
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 8px;
+      width: fit-content;
+    }
+
+    .preview-status.is-available {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .preview-status.is-unavailable {
+      background: var(--amber-soft);
+      color: #713f12;
+    }
+
+    .sample-preview-panel,
+    .element-preview-panel {
+      box-shadow: none;
+    }
+
+    .element-preview-body {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      max-height: 520px;
+      overflow: auto;
+      padding: 14px;
+    }
+
+    .element-preview-body section {
+      display: grid;
+      gap: 10px;
+    }
+
+    .element-preview-body table {
+      border-collapse: collapse;
+      font-size: 13px;
+      width: 100%;
+    }
+
+    .element-preview-body th,
+    .element-preview-body td {
+      border-bottom: 1px solid var(--line);
+      padding: 6px;
+      text-align: left;
+      vertical-align: top;
     }
 
     .hidden {
@@ -614,11 +667,33 @@
         <ul id="advisor-set-list" class="set-list"></ul>
       </section>
     </section>
+
+    <section class="set-panel sample-preview-panel" aria-labelledby="sample-preview-title">
+      <h2 id="sample-preview-title">Generated demo previews</h2>
+      <p class="helper">Samples generated from the current deterministic demo outputs, not from this unsaved local set.</p>
+      <div class="button-row">
+        <a class="tiny-button" href="/simulation/briefing_set_previews/client_briefing_set_preview.html" target="_blank" rel="noopener">Open sample Client Briefing Set preview</a>
+        <a class="tiny-button" href="/simulation/briefing_set_previews/advisor_review_set_preview.html" target="_blank" rel="noopener">Open sample Advisor Review Set preview</a>
+      </div>
+    </section>
+
+    <section id="element-preview-region" class="set-panel element-preview-panel hidden" aria-labelledby="element-preview-title">
+      <p class="helper">Rendered element view</p>
+      <h2 id="element-preview-title">Element preview</h2>
+      <p id="element-preview-summary" class="meta"></p>
+      <div id="element-preview-body" class="element-preview-body"></div>
+      <div class="button-row">
+        <button id="close-element-preview-button" class="secondary-button" type="button">Close preview</button>
+      </div>
+    </section>
     <!-- first-screen-end -->
   </main>
 
   <script>
     const CATALOG_ENDPOINT = "/api/report-elements";
+    const VIEW_SUMMARY_ENDPOINT = "/simulation/report_element_views/report_element_view_summary.json";
+    const BRIEFING_PREVIEW_INDEX_ENDPOINT = "/simulation/briefing_set_previews/briefing_set_preview_index.json";
+    const VIEW_FRAGMENT_BASE = "/simulation/report_element_views/";
     const TARGET_TO_BRANCH = {
       "Client Briefing Set": "Client Briefing",
       "Advisor Review Set": "Advisor Review"
@@ -738,6 +813,8 @@
       mode: "empty",
       config: {},
       narrative: {},
+      renderedViewsByKey: {},
+      briefingPreviews: [],
       browseAllOpen: false,
       editing: null,
       clientSet: [],
@@ -768,7 +845,12 @@
       clientEmpty: document.getElementById("client-empty"),
       clientList: document.getElementById("client-set-list"),
       advisorEmpty: document.getElementById("advisor-empty"),
-      advisorList: document.getElementById("advisor-set-list")
+      advisorList: document.getElementById("advisor-set-list"),
+      elementPreviewRegion: document.getElementById("element-preview-region"),
+      elementPreviewTitle: document.getElementById("element-preview-title"),
+      elementPreviewSummary: document.getElementById("element-preview-summary"),
+      elementPreviewBody: document.getElementById("element-preview-body"),
+      closeElementPreview: document.getElementById("close-element-preview-button")
     };
 
     async function loadCatalog() {
@@ -785,6 +867,49 @@
         els.error.textContent = "Could not load the report element catalog. Refresh after the API is available.";
         els.error.classList.remove("hidden");
         els.count.textContent = "Catalog unavailable.";
+      }
+    }
+
+    async function loadPreviewArtifacts() {
+      await Promise.all([loadRenderedViewSummary(), loadBriefingPreviewIndex()]);
+      renderSets();
+    }
+
+    async function loadRenderedViewSummary() {
+      try {
+        const response = await fetch(VIEW_SUMMARY_ENDPOINT);
+        if (!response.ok) {
+          throw new Error(`Rendered view summary request failed: ${response.status}`);
+        }
+        const payload = await response.json();
+        const renderedFiles = Array.isArray(payload.rendered_files) ? payload.rendered_files : [];
+        state.renderedViewsByKey = renderedFiles.reduce((views, file) => {
+          const key = viewKeyFromFile(file.view_file || file.html_file || "");
+          if (key && file.html_file) {
+            views[key] = {
+              key,
+              title: file.element_title || key,
+              htmlUrl: `${VIEW_FRAGMENT_BASE}${file.html_file}`,
+              markdownUrl: file.markdown_file ? `${VIEW_FRAGMENT_BASE}${file.markdown_file}` : null
+            };
+          }
+          return views;
+        }, {});
+      } catch (error) {
+        state.renderedViewsByKey = {};
+      }
+    }
+
+    async function loadBriefingPreviewIndex() {
+      try {
+        const response = await fetch(BRIEFING_PREVIEW_INDEX_ENDPOINT);
+        if (!response.ok) {
+          throw new Error(`Briefing preview index request failed: ${response.status}`);
+        }
+        const payload = await response.json();
+        state.briefingPreviews = Array.isArray(payload.previews) ? payload.previews : [];
+      } catch (error) {
+        state.briefingPreviews = [];
       }
     }
 
@@ -1285,13 +1410,18 @@
       }
       const parameterText = compactParameterText(spec.parameters);
       const advisorPurpose = kind === "advisor" && spec.internal_purpose ? ` | ${spec.internal_purpose}` : "";
+      const previewMatch = previewMatchForSpec(spec);
+      const previewStatus = previewMatch ? "Preview available" : "Preview not available yet";
+      const previewStatusClass = previewMatch ? "is-available" : "is-unavailable";
       const promoteButton = kind === "advisor" ? `<button class="tiny-button" type="button" data-action="promote" data-kind="advisor" data-index="${index}">Promote to Client Briefing</button>` : "";
       return `
         <li class="set-row">
           <h3>${escapeHtml(index + 1)}. ${escapeHtml(spec.title)}</h3>
           <p>${escapeHtml(spec.placement || "")}${escapeHtml(advisorPurpose)}</p>
           <p>${escapeHtml(parameterText || "Configured")}</p>
+          <span class="preview-status ${previewStatusClass}">${escapeHtml(previewStatus)}</span>
           <div class="row-actions">
+            <button class="tiny-button" type="button" data-action="open-preview" data-kind="${escapeAttr(kind)}" data-index="${index}"${previewMatch ? "" : " disabled"}>Open preview</button>
             <button class="tiny-button" type="button" data-action="edit" data-kind="${escapeAttr(kind)}" data-index="${index}">Edit</button>
             <button class="tiny-button" type="button" data-action="duplicate" data-kind="${escapeAttr(kind)}" data-index="${index}">Duplicate</button>
             <button class="tiny-button" type="button" data-action="up" data-kind="${escapeAttr(kind)}" data-index="${index}"${index === 0 ? " disabled" : ""}>Move up</button>
@@ -1329,7 +1459,10 @@
       const index = Number(button.dataset.index);
       const action = button.dataset.action;
       if (!Number.isInteger(index) || index < 0 || index >= list.length) return;
-      if (action === "remove") {
+      if (action === "open-preview") {
+        openElementPreview(list[index]);
+        return;
+      } else if (action === "remove") {
         list.splice(index, 1);
       } else if (action === "duplicate") {
         list.splice(index + 1, 0, { ...list[index], id: `${Date.now()}_${Math.random().toString(16).slice(2)}` });
@@ -1349,6 +1482,37 @@
         els.status.textContent = "Promote to Client Briefing is a placeholder in this local composer.";
       }
       renderSets();
+    }
+
+    async function openElementPreview(spec) {
+      const match = previewMatchForSpec(spec);
+      els.elementPreviewRegion.classList.remove("hidden");
+      els.elementPreviewTitle.textContent = match ? match.title : "Element preview";
+      els.elementPreviewSummary.textContent = match
+        ? "Rendered deterministic demo fragment for this configured spec."
+        : "Preview not available yet for this spec.";
+      if (!match) {
+        els.elementPreviewBody.innerHTML = '<p class="empty">Preview not available yet for this spec.</p>';
+        return;
+      }
+      els.elementPreviewBody.innerHTML = '<p class="empty">Loading preview...</p>';
+      try {
+        const response = await fetch(match.htmlUrl);
+        if (!response.ok) {
+          throw new Error(`Preview request failed: ${response.status}`);
+        }
+        const fragment = await response.text();
+        els.elementPreviewBody.innerHTML = fragment;
+      } catch (error) {
+        els.elementPreviewBody.innerHTML = '<p class="empty">Preview not available yet for this spec.</p>';
+      }
+    }
+
+    function closeElementPreview() {
+      els.elementPreviewRegion.classList.add("hidden");
+      els.elementPreviewTitle.textContent = "Element preview";
+      els.elementPreviewSummary.textContent = "";
+      els.elementPreviewBody.innerHTML = "";
     }
 
     function editSpec(spec, kind, index) {
@@ -1490,6 +1654,43 @@
       if (parameters.threshold_percent) pieces.push(parameters.threshold_percent);
       if (parameters.fixed_metric) pieces.push(parameters.fixed_metric);
       return pieces.join(" | ");
+    }
+
+    function previewMatchForSpec(spec) {
+      if (!spec || spec.element_kind !== "analytic") return null;
+      const key = renderedViewKeyForSpec(spec);
+      if (!key) return null;
+      return state.renderedViewsByKey[key] || null;
+    }
+
+    function renderedViewKeyForSpec(spec) {
+      const parameters = spec.parameters || {};
+      if (spec.element_id === "portfolio_status") return "portfolio_status";
+      if (spec.element_id === "cash_generation_summary") return "cash_generation_summary";
+      if (spec.element_id === "manager_comparison") return "manager_comparison";
+      if (spec.element_id === "data_confidence_note") return "data_confidence_note";
+      if (spec.element_id === "concentration") {
+        const lens = normalize(parameters.lens);
+        if (lens.includes("theme")) return "concentration_theme";
+        if (lens.includes("sector") || lens.includes("industry")) return "concentration_sector_industry";
+        return null;
+      }
+      if (spec.element_id === "scenario_impact_by_manager") {
+        const scenario = normalize(parameters.scenario_id).replace(/\//g, " ");
+        if (scenario.includes("ai chip selloff") || scenario.includes("ai_chip_selloff")) {
+          return "scenario_impact_by_manager_ai_chip_selloff";
+        }
+        return null;
+      }
+      return null;
+    }
+
+    function viewKeyFromFile(filename) {
+      const name = String(filename || "").split("/").pop();
+      if (name.endsWith(".view.json")) return name.slice(0, -10);
+      if (name.endsWith(".html")) return name.slice(0, -5);
+      if (name.endsWith(".md")) return name.slice(0, -3);
+      return "";
     }
 
     function usageNote(template) {
@@ -1641,10 +1842,12 @@
     });
     els.clientList.addEventListener("click", handleSetAction);
     els.advisorList.addEventListener("click", handleSetAction);
+    els.closeElementPreview.addEventListener("click", closeElementPreview);
 
     renderEmptySelection();
     renderSets();
     loadCatalog();
+    loadPreviewArtifacts();
   </script>
 </body>
 </html>

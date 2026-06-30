@@ -283,8 +283,11 @@ Use these file sets when starting different kinds of sessions.
 - `docs/restart/08_next_actions.md`.
 - `README.md`.
 - `src/arangur/app/static/index.html` when UI implementation is authorized.
+- `src/arangur/app/main.py` and `src/arangur/app/run_service.py` when static artifact access is relevant.
 - `src/arangur/report_elements/` when catalog implementation is authorized.
-- `tests/test_app_health.py` and `tests/test_report_element_catalog.py` when implementation is authorized.
+- `data/simulation/report_element_views/report_element_view_summary.json` when rendered preview matching is relevant.
+- `data/simulation/briefing_set_previews/briefing_set_preview_index.json` when briefing-set preview links are relevant.
+- `tests/test_app_health.py`, `tests/test_report_element_catalog.py`, and `tests/test_briefing_set_preview.py` when implementation is authorized.
 - Keep discovery separate from saved spec fields, keep configuration template-driven, and do not implement report generation, backend persistence, live Plaid, external APIs, real data, or investment advice language unless a later batch explicitly authorizes it.
 
 ## Report Element Input Mapping Restart
@@ -337,6 +340,18 @@ Use these file sets when starting different kinds of sessions.
 - `tests/test_briefing_set_preview.py`.
 - `README.md`.
 - Do not modify the browser composer UI, FastAPI routes, persistence, Docker/Postgres, live Plaid, external APIs, real data, charts, or production client-ready report generation unless a later batch explicitly authorizes it.
+
+## Composer Rendered Preview Integration Restart
+
+- All Report Element Finder / Composer restart files.
+- All Briefing Set Preview Assembly restart files.
+- `src/arangur/app/main.py`.
+- `src/arangur/app/run_service.py`.
+- `src/arangur/app/static/index.html`.
+- `data/simulation/report_element_views/report_element_view_summary.json`.
+- `data/simulation/briefing_set_previews/briefing_set_preview_index.json`.
+- `tests/test_app_health.py`.
+- Do not call `/api/runs` from the composer flow, generate reports from local specs, persist specs, show report-package artifacts in the main path, serve the whole repo, add dependencies, or use real data.
 
 ## Guided Builder Implementation Restart
 

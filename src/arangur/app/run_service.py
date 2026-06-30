@@ -35,6 +35,7 @@ API_SOURCES = {
 }
 
 REPORTS_DEMO_PATH = "reports/demo"
+SIMULATION_DATA_PATH = "data/simulation"
 
 
 class RunServiceError(ValueError):
@@ -138,6 +139,10 @@ def report_index_metadata(root: Path | None = None) -> dict[str, Any]:
 
 def reports_demo_dir(root: Path | None = None) -> Path:
     return (root or project_root()) / REPORTS_DEMO_PATH
+
+
+def simulation_data_dir(root: Path | None = None) -> Path:
+    return (root or project_root()) / SIMULATION_DATA_PATH
 
 
 def _run_summary_from_package(root: Path, package_path: Path, package: dict[str, Any]) -> dict[str, Any]:

@@ -94,6 +94,15 @@ class AppHealthTests(unittest.TestCase):
                 self.assertIn("fetch(CATALOG_ENDPOINT)", response.text)
                 self.assertIn("Client Briefing Set", response.text)
                 self.assertIn("Advisor Review Set", response.text)
+                self.assertIn("Generated demo previews", response.text)
+                self.assertIn("Open sample Client Briefing Set preview", response.text)
+                self.assertIn("Open sample Advisor Review Set preview", response.text)
+                self.assertIn('VIEW_SUMMARY_ENDPOINT = "/simulation/report_element_views/report_element_view_summary.json"', response.text)
+                self.assertIn('BRIEFING_PREVIEW_INDEX_ENDPOINT = "/simulation/briefing_set_previews/briefing_set_preview_index.json"', response.text)
+                self.assertIn("Preview available", response.text)
+                self.assertIn("Preview not available yet", response.text)
+                self.assertIn("openElementPreview", response.text)
+                self.assertIn("renderedViewKeyForSpec", response.text)
                 self.assertIn("Use this element", response.text)
                 self.assertIn("Add to set as", response.text)
                 self.assertIn("Ready to add.", response.text)
@@ -134,23 +143,56 @@ class AppHealthTests(unittest.TestCase):
                 self.assertNotIn("Client Preview", response.text)
                 self.assertNotIn("Technical/Admin Appendix", response.text)
                 self.assertNotIn("JSON", response.text)
+                self.assertNotIn(".json", first_screen)
                 self.assertNotIn("report_package", response.text)
                 self.assertNotIn("/api/runs", response.text)
 
-    def test_browser_report_element_composer_fetches_catalog_only(self) -> None:
+    def test_browser_report_element_composer_fetches_catalog_and_preview_artifacts_only(self) -> None:
         client = TestClient(create_app(settings=AppSettings()))
         response = client.get("/app/")
         self.assertEqual(200, response.status_code)
         self.assertIn("/api/report-elements", response.text)
+        self.assertIn("/simulation/report_element_views/report_element_view_summary.json", response.text)
+        self.assertIn("/simulation/briefing_set_previews/briefing_set_preview_index.json", response.text)
+        self.assertIn("/simulation/briefing_set_previews/client_briefing_set_preview.html", response.text)
+        self.assertIn("/simulation/briefing_set_previews/advisor_review_set_preview.html", response.text)
         self.assertIn("fetch(CATALOG_ENDPOINT)", response.text)
+        self.assertIn("fetch(VIEW_SUMMARY_ENDPOINT)", response.text)
+        self.assertIn("fetch(BRIEFING_PREVIEW_INDEX_ENDPOINT)", response.text)
         self.assertNotIn("/api/runs", response.text)
         self.assertNotIn("report_package", response.text)
         self.assertNotIn("reports/demo/index", response.text)
+        first_screen = self._first_screen(response.text)
+        self.assertNotIn(".json", first_screen)
         self.assertNotIn("Run workflow", response.text)
         self.assertIn("Search report elements", response.text)
         self.assertIn("Add element", response.text)
         self.assertIn("Browse all templates", response.text)
         self.assertIn("Add narrative element", response.text)
+
+    def test_simulation_artifacts_are_served_from_safe_static_mount(self) -> None:
+        client = TestClient(create_app(settings=AppSettings()))
+
+        view_summary = client.get("/simulation/report_element_views/report_element_view_summary.json")
+        self.assertEqual(200, view_summary.status_code)
+        self.assertEqual("report_element_view_summary.v1", view_summary.json()["schema_version"])
+        self.assertEqual(7, view_summary.json()["view_count"])
+
+        preview_index = client.get("/simulation/briefing_set_previews/briefing_set_preview_index.json")
+        self.assertEqual(200, preview_index.status_code)
+        self.assertEqual("briefing_set_preview_index.v1", preview_index.json()["schema_version"])
+        self.assertEqual(2, preview_index.json()["preview_count"])
+
+        element_fragment = client.get("/simulation/report_element_views/portfolio_status.html")
+        self.assertEqual(200, element_fragment.status_code)
+        self.assertIn("Portfolio Status", element_fragment.text)
+
+        sample_preview = client.get("/simulation/briefing_set_previews/client_briefing_set_preview.html")
+        self.assertEqual(200, sample_preview.status_code)
+        self.assertIn("Client Briefing Set Preview", sample_preview.text)
+
+        escaped_root_file = client.get("/simulation/../README.md")
+        self.assertEqual(404, escaped_root_file.status_code)
 
     def test_lens_options_do_not_include_plain_manager(self) -> None:
         client = TestClient(create_app(settings=AppSettings()))
