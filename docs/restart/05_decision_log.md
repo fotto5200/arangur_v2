@@ -174,3 +174,10 @@
 - Decision: UI should reduce headings and repeated explanatory text.
 - Reason: The builder should feel lightweight, elegant, and advisor-guided rather than like documentation embedded in the product surface.
 - Consequences: Future UI implementation should prefer concise labels, compact controls, stable rows/cards, and fewer repeated section headings.
+
+## Decision 0026: Use A Three-Surface Simulation Kernel For The Fuller Demo
+
+- Date: 2026-06-30.
+- Decision: Arangur v2 should use a three-surface simulation kernel made of a Synthetic Position Universe, Synthetic Market / State-of-World Generator, and Simplified Daily Valuation Engine for near-term full-system demo development.
+- Reason: Simulating ingestion, market state, and valuation behind stable contracts can produce realistic synthetic outputs for reporting and briefing without waiting for production ingestion, vendor market data, or production accounting.
+- Consequences: The next implementation batches should build the synthetic position universe first, then the synthetic market/state generator, then the simplified daily valuation engine, while keeping all outputs synthetic, confidence-labeled, and replaceable. See `docs/decisions/0003_three_surface_simulation_kernel.md`.

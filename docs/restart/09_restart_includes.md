@@ -35,6 +35,43 @@ Use these file sets when starting different kinds of sessions.
 - Future source files under `src/`.
 - Future tests under `tests/`.
 
+## Simulation Kernel Restart
+
+- All Codex implementation restart files.
+- `docs/architecture/simulation_kernel_three_surface_model_v1.md`.
+- `docs/contracts/simulation_kernel_contracts_v1.md`.
+- `docs/decisions/0003_three_surface_simulation_kernel.md`.
+- `docs/architecture/thin_demo_system_architecture.md`.
+- `docs/contracts/canonical_portfolio_snapshot_contract.md`.
+- `docs/contracts/report_element_template_catalog_contract.md`.
+- `docs/ui_reporting/report_element_finder_composer_current_model_v1.md`.
+- `docs/architecture/scenario_engine_roadmap.md`.
+- `docs/architecture/data_availability_workstream.md`.
+- `docs/contracts/data_coverage_result_contract.md`.
+- Do not include real client data, live Plaid, external APIs, credentials, vendor market data, or legacy MATLAB.
+
+## Synthetic Data Generation Restart
+
+- All Simulation Kernel restart files.
+- `docs/contracts/demo_data_contract.md`.
+- `docs/contracts/market_data_fixture_contract.md`.
+- `docs/contracts/plaid_mock_ingestion_contract.md` only for source-neutral adapter context, not live Plaid behavior.
+- Future synthetic fixtures under `data/demo/` when implementation is authorized.
+- Future generator source files under `src/` when implementation is authorized.
+- Future focused generator tests under `tests/` when implementation is authorized.
+- Keep all managers, accounts, positions, transactions, marks, and history fully synthetic.
+
+## Valuation Engine Abstraction Restart
+
+- All Simulation Kernel restart files.
+- `docs/contracts/analytics_outputs_contract.md`.
+- `docs/contracts/report_package_contract.md`.
+- `docs/contracts/data_coverage_result_contract.md`.
+- Current synthetic generated report package examples under `reports/demo/` if implementation is authorized.
+- Future valuation source files under `src/` when implementation is authorized.
+- Future focused valuation tests under `tests/` when implementation is authorized.
+- Do not implement tax lots, settlement reconciliation, production fixed-income accounting, production private-market accounting, or production performance attribution unless a later batch explicitly authorizes it.
+
 ## Plaid Integration Restart
 
 - All Codex implementation restart files.

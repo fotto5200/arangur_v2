@@ -1,11 +1,13 @@
 # Next Actions
 
-## Immediate Product/UI Batches
+## Immediate Architecture / Simulation Kernel Batches
 
-- Serialize/export completed local Client Briefing Set and Advisor Review Set specs without report generation.
-- Decide how Client Briefing Set and Advisor Review Set rows are edited, duplicated, reordered, removed, and promoted without showing a monolithic console.
-- Later add selected `element_id`, branch, placement, internal purpose, scope, lens, metric, scenario, display form, and coverage metadata to report packages after the local spec-set shape is serializable.
-- Later add backend briefing-set metadata/persistence.
+- Implement the synthetic position universe generator: 50-100 synthetic positions across public, private, cash, manager-level, and opaque assets, with managers, accounts, sleeves, 90-day transactions/history, themes, data-quality flags, and human-review flags.
+- Implement the synthetic market/state-of-world generator: seeded market state, prices, rates proxies, FX, volatility proxies, credit spread proxies, private marks, proxy mappings, confidence flags, historical paths, scenario states, and covariance recovery checks.
+- Implement the simplified daily valuation engine: date-by-date economic valuation from positions, market state, and transactions, separating opening value, flows, income/distributions, market/value change, and closing value.
+- Connect valuation outputs to report element templates: portfolio status, concentration, scenario impact by manager, cash generation, manager comparison, and data confidence elements should consume stable value-change and confidence packages.
+- Later resume serialization/export of completed local Client Briefing Set and Advisor Review Set specs if desired, after simulation outputs clarify the downstream report-element input shape.
+- Later add backend briefing-set metadata/persistence only after local spec-set and simulation-output contracts are stable.
 - Then resume Docker Compose private-demo files and protected/admin surfaces when private-demo access policy is ready.
 
 ## Batch 2: Architecture And Contracts For Thin Demo

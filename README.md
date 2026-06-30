@@ -153,10 +153,13 @@ Future scenario, data-coverage, and deployable private-demo work is captured in:
 - `docs/ui_reporting/report_element_finder_composer_current_model_v1.md`
 - `docs/ui_reporting/client_briefing_page_model_v1.md`
 - `docs/ui_reporting/manager_role_review_v1.md`
+- `docs/architecture/simulation_kernel_three_surface_model_v1.md`
 - `docs/architecture/deployable_demo_app_architecture.md`
 - `docs/architecture/persistence_model_plan.md`
+- `docs/contracts/simulation_kernel_contracts_v1.md`
 - `docs/contracts/workflow_run_persistence_contract.md`
 - `docs/contracts/report_element_template_catalog_contract.md`
+- `docs/decisions/0003_three_surface_simulation_kernel.md`
 - `docs/deployment/private_demo_stack_plan.md`
 - `docs/decisions/0002_copy_education_private_demo_stack.md`
 - `docs/architecture/scenario_engine_roadmap.md`
