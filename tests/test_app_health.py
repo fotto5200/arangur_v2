@@ -124,7 +124,7 @@ class AppHealthTests(unittest.TestCase):
                 self.assertIn("Open QA Client reference", response.text)
                 self.assertIn("Open QA Advisor reference", response.text)
                 self.assertIn("This section is not available in the demo preview.", response.text)
-                self.assertIn("This element is not previewable yet. Replace it, remove it, or keep it out of the preview.", response.text)
+                self.assertIn("This element is not previewable yet in the demo. Edit or remove it before previewing.", response.text)
                 self.assertIn("Add at least one element before copying local set JSON.", response.text)
                 self.assertIn("Add at least one element before downloading local set JSON.", response.text)
                 self.assertIn("Restored ${pluralizeSpec", response.text)

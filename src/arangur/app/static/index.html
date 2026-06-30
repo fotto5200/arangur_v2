@@ -676,6 +676,18 @@
       padding-bottom: 12px;
     }
 
+    .preview-shell-header {
+      align-items: start;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .preview-shell-title {
+      display: grid;
+      gap: 6px;
+    }
+
     .current-preview-context {
       background: var(--surface-soft);
       border: 1px solid var(--line);
@@ -690,11 +702,8 @@
     }
 
     .preview-export-actions {
-      border-top: 1px solid var(--line);
       display: grid;
       gap: 8px;
-      margin-top: 14px;
-      padding-top: 14px;
     }
 
     .preview-export-actions .button-row {
@@ -829,6 +838,10 @@
         grid-template-columns: 1fr;
       }
 
+      .preview-shell-header {
+        grid-template-columns: 1fr;
+      }
+
       h1 {
         font-size: 25px;
       }
@@ -948,7 +961,7 @@
 
       <details id="advanced-tools" class="set-panel advanced-panel">
         <summary>Advanced</summary>
-        <p class="helper">Developer and QA tools for local handoff, backend draft storage, and reference previews.</p>
+        <p class="helper">Optional tools for handoff, draft save/load, and reference previews.</p>
 
         <div class="advanced-section" aria-labelledby="local-transfer-title">
           <h3 id="local-transfer-title">Local set transfer</h3>
@@ -987,7 +1000,7 @@
 
         <div class="advanced-section" aria-labelledby="qa-preview-title">
           <h3 id="qa-preview-title">QA reference previews</h3>
-          <p class="helper">Static references generated from committed demo outputs, separate from the current builder preview.</p>
+          <p class="helper">Reference previews stay separate from the current builder preview.</p>
           <div class="button-row">
             <a class="tiny-button" href="/simulation/briefing_set_previews/client_briefing_set_preview.html" target="_blank" rel="noopener">Open QA Client reference</a>
             <a class="tiny-button" href="/simulation/briefing_set_previews/advisor_review_set_preview.html" target="_blank" rel="noopener">Open QA Advisor reference</a>
@@ -997,15 +1010,17 @@
     </div>
 
     <section id="current-set-preview-region" class="set-panel current-set-preview-panel hidden" aria-labelledby="current-set-preview-title">
-      <p class="preview-section-label">Demo data &middot; Not investment advice</p>
-      <h2 id="current-set-preview-title">Preview</h2>
-      <p id="current-set-preview-summary" class="meta"></p>
-      <div id="current-set-preview-body" class="current-set-preview-body"></div>
-      <div id="current-preview-export-actions" class="preview-export-actions hidden" aria-label="Preview print and export controls"></div>
-      <p id="current-preview-export-status" class="status"></p>
-      <div class="button-row">
+      <div class="preview-shell-header">
+        <div class="preview-shell-title">
+          <p class="preview-section-label">Demo data &middot; Not investment advice</p>
+          <h2 id="current-set-preview-title">Preview</h2>
+          <p id="current-set-preview-summary" class="meta"></p>
+        </div>
         <button id="close-current-set-preview-button" class="secondary-button" type="button">Back to Builder</button>
       </div>
+      <div id="current-preview-export-actions" class="preview-export-actions hidden" aria-label="Preview print and export controls"></div>
+      <div id="current-set-preview-body" class="current-set-preview-body"></div>
+      <p id="current-preview-export-status" class="status"></p>
     </section>
   </main>
 
@@ -1788,7 +1803,7 @@
             </div>
           </details>
         `
-        : '<p class="meta">This element is not previewable yet. Replace it, remove it, or keep it out of the preview.</p>';
+        : '<p class="meta">This element is not previewable yet in the demo. Edit or remove it before previewing.</p>';
       return `
         <li class="set-row">
           <h3>${escapeHtml(index + 1)}. ${escapeHtml(spec.title)}</h3>
