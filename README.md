@@ -79,6 +79,24 @@ This writes:
 
 The default fixture covers 91 calendar dates, 12 core drivers, all 23 market-state variables required by the synthetic position universe, and five scenarios: AI/chip selloff, rate shock, energy shock, private-market liquidity freeze, and Taiwan disruption.
 
+## Generate The Simplified Daily Valuation Outputs
+
+The third simulation-kernel surface consumes the synthetic position universe, market-state history, and scenario market states. It generates deterministic simplified economic daily valuations, value-change packages, scenario revaluation outputs, confidence summaries, and validation results. It does not implement production accounting, tax lots, settlement reconciliation, full fixed-income/private-asset accounting, UI changes, report generation, live data, external APIs, or real client data.
+
+```powershell
+python src\arangur\simulation\simplified_daily_valuation_engine.py
+```
+
+This writes:
+
+- `data/simulation/daily_position_valuation_history.json`
+- `data/simulation/daily_portfolio_valuation_history.json`
+- `data/simulation/value_change_package.json`
+- `data/simulation/scenario_revaluation_results.json`
+- `data/simulation/simplified_valuation_summary.json`
+
+The default fixture values 74 positions over 91 dates, emits one daily portfolio valuation per market-state date, revalues all five scenarios, and keeps transaction/flow effects separate from synthetic economic value movement.
+
 ## Local Report Index
 
 Both demo runner commands refresh a shared static report index:
@@ -190,6 +208,7 @@ Future scenario, data-coverage, and deployable private-demo work is captured in:
 - `docs/contracts/simulation_kernel_contracts_v1.md`
 - `docs/contracts/synthetic_position_universe_contract_v1.md`
 - `docs/contracts/synthetic_market_state_contract_v1.md`
+- `docs/contracts/simplified_daily_valuation_contract_v1.md`
 - `docs/contracts/workflow_run_persistence_contract.md`
 - `docs/contracts/report_element_template_catalog_contract.md`
 - `docs/decisions/0003_three_surface_simulation_kernel.md`
@@ -210,6 +229,7 @@ python -m unittest tests.test_workflow_templates
 python -m unittest tests.test_data_coverage
 python -m unittest tests.test_synthetic_position_universe
 python -m unittest tests.test_synthetic_market_state
+python -m unittest tests.test_simplified_daily_valuation
 python -m unittest tests.test_app_health
 python -m unittest tests.test_report_element_catalog
 python -m unittest tests.test_app_runs_api

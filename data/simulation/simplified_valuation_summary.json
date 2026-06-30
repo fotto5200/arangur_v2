@@ -1,0 +1,264 @@
+{
+  "caveat": "Synthetic simplified valuation fixture only; no UI or report generation output is produced.",
+  "confidence_summary": {
+    "by_confidence": [
+      {
+        "count": 19,
+        "id": "high",
+        "percent_of_total": 0.346849,
+        "synthetic_data": true,
+        "value": 14115000.0
+      },
+      {
+        "count": 15,
+        "id": "low",
+        "percent_of_total": 0.209485,
+        "synthetic_data": true,
+        "value": 8525000.0
+      },
+      {
+        "count": 36,
+        "id": "medium",
+        "percent_of_total": 0.41295,
+        "synthetic_data": true,
+        "value": 16805000.0
+      },
+      {
+        "count": 4,
+        "id": "unknown",
+        "percent_of_total": 0.030716,
+        "synthetic_data": true,
+        "value": 1250000.0
+      }
+    ],
+    "by_valuation_tier": [
+      {
+        "count": 6,
+        "id": "cash_face_value",
+        "percent_of_total": 0.06045,
+        "synthetic_data": true,
+        "value": 2460000.0
+      },
+      {
+        "count": 26,
+        "id": "direct_price_or_mark",
+        "percent_of_total": 0.416882,
+        "synthetic_data": true,
+        "value": 16965000.0
+      },
+      {
+        "count": 12,
+        "id": "human_review_required",
+        "percent_of_total": 0.143138,
+        "synthetic_data": true,
+        "value": 5825000.0
+      },
+      {
+        "count": 23,
+        "id": "proxy_valuation",
+        "percent_of_total": 0.282467,
+        "synthetic_data": true,
+        "value": 11495000.0
+      },
+      {
+        "count": 7,
+        "id": "stale_or_manager_mark",
+        "percent_of_total": 0.097064,
+        "synthetic_data": true,
+        "value": 3950000.0
+      }
+    ],
+    "human_review_count": 12,
+    "human_review_value": 5825000.0
+  },
+  "date_count": 91,
+  "end_date": "2026-06-30",
+  "generated_at": "2026-06-30T00:00:00Z",
+  "generator_version": "simplified_daily_valuation_engine.v1",
+  "human_review_count": 12,
+  "human_review_value": 5825000.0,
+  "largest_negative_contributors": [
+    {
+      "asset_class": "public_equity",
+      "closing_value": 1850000.0,
+      "confidence": "high",
+      "display_name": "AI Compute Leader",
+      "economic_value_change": -172954.71,
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "position_id": "pos_a_ai_compute_leader",
+      "synthetic_data": true,
+      "valuation_tier": "direct_price_or_mark"
+    },
+    {
+      "asset_class": "public_equity",
+      "closing_value": 1480000.0,
+      "confidence": "high",
+      "display_name": "Cloud Platform Compounder",
+      "economic_value_change": -170128.09,
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "position_id": "pos_a_cloud_platform_compounder",
+      "synthetic_data": true,
+      "valuation_tier": "direct_price_or_mark"
+    },
+    {
+      "asset_class": "public_equity",
+      "closing_value": 1320000.0,
+      "confidence": "high",
+      "display_name": "Cloud Platform Compounder",
+      "economic_value_change": -144750.33,
+      "manager_id": "mgr_b_core_quality_equity",
+      "position_id": "pos_b_cloud_platform_compounder",
+      "synthetic_data": true,
+      "valuation_tier": "direct_price_or_mark"
+    },
+    {
+      "asset_class": "fixed_income",
+      "closing_value": 840000.0,
+      "confidence": "medium",
+      "display_name": "Investment Grade Bond ETF",
+      "economic_value_change": -133024.74,
+      "manager_id": "mgr_c_income_cash_generation",
+      "position_id": "pos_c_investment_grade_bond_etf",
+      "synthetic_data": true,
+      "valuation_tier": "proxy_valuation"
+    },
+    {
+      "asset_class": "public_equity",
+      "closing_value": 1125000.0,
+      "confidence": "medium",
+      "display_name": "Chip Fabrication Partner",
+      "economic_value_change": -111595.94,
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "position_id": "pos_a_chip_fabrication_partner",
+      "synthetic_data": true,
+      "valuation_tier": "direct_price_or_mark"
+    },
+    {
+      "asset_class": "etf",
+      "closing_value": 880000.0,
+      "confidence": "medium",
+      "display_name": "Quality Factor ETF",
+      "economic_value_change": -109479.21,
+      "manager_id": "mgr_b_core_quality_equity",
+      "position_id": "pos_b_quality_factor_etf",
+      "synthetic_data": true,
+      "valuation_tier": "proxy_valuation"
+    },
+    {
+      "asset_class": "fixed_income",
+      "closing_value": 720000.0,
+      "confidence": "medium",
+      "display_name": "Short TIPS ETF",
+      "economic_value_change": -108745.89,
+      "manager_id": "mgr_c_income_cash_generation",
+      "position_id": "pos_c_short_tips_etf",
+      "synthetic_data": true,
+      "valuation_tier": "proxy_valuation"
+    },
+    {
+      "asset_class": "public_equity",
+      "closing_value": 920000.0,
+      "confidence": "high",
+      "display_name": "Semicap Equipment Maker",
+      "economic_value_change": -106106.33,
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "position_id": "pos_a_semicap_equipment_maker",
+      "synthetic_data": true,
+      "valuation_tier": "direct_price_or_mark"
+    }
+  ],
+  "largest_positive_contributors": [
+    {
+      "asset_class": "fixed_income",
+      "closing_value": 1340000.0,
+      "confidence": "high",
+      "display_name": "Treasury Bill Ladder",
+      "economic_value_change": 72945.33,
+      "manager_id": "mgr_e_liquidity_defensive",
+      "position_id": "pos_e_treasury_bill_ladder",
+      "synthetic_data": true,
+      "valuation_tier": "proxy_valuation"
+    },
+    {
+      "asset_class": "fixed_income",
+      "closing_value": 560000.0,
+      "confidence": "medium",
+      "display_name": "Municipal Income Ladder",
+      "economic_value_change": 8012.11,
+      "manager_id": "mgr_c_income_cash_generation",
+      "position_id": "pos_c_municipal_income_ladder",
+      "synthetic_data": true,
+      "valuation_tier": "proxy_valuation"
+    },
+    {
+      "asset_class": "option_like",
+      "closing_value": 155000.0,
+      "confidence": "low",
+      "display_name": "AI Chip Downside Put Spread",
+      "economic_value_change": 7892.75,
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_ai_chip_downside_put_spread",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required"
+    },
+    {
+      "asset_class": "commodities_energy",
+      "closing_value": 280000.0,
+      "confidence": "medium",
+      "display_name": "WTI Energy Exposure",
+      "economic_value_change": 4418.36,
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_wti_energy_exposure",
+      "synthetic_data": true,
+      "valuation_tier": "direct_price_or_mark"
+    },
+    {
+      "asset_class": "fx",
+      "closing_value": 420000.0,
+      "confidence": "medium",
+      "display_name": "EUR/USD Forward Exposure",
+      "economic_value_change": 2425.55,
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_eurusd_forward_exposure",
+      "synthetic_data": true,
+      "valuation_tier": "direct_price_or_mark"
+    },
+    {
+      "asset_class": "fixed_income",
+      "closing_value": 430000.0,
+      "confidence": "medium",
+      "display_name": "Agency MBS Proxy",
+      "economic_value_change": 1245.72,
+      "manager_id": "mgr_c_income_cash_generation",
+      "position_id": "pos_c_agency_mbs_proxy",
+      "synthetic_data": true,
+      "valuation_tier": "proxy_valuation"
+    },
+    {
+      "asset_class": "fx",
+      "closing_value": 360000.0,
+      "confidence": "medium",
+      "display_name": "JPY Defensive Hedge",
+      "economic_value_change": 378.38,
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_jpy_defensive_hedge",
+      "synthetic_data": true,
+      "valuation_tier": "direct_price_or_mark"
+    }
+  ],
+  "portfolio_valuation_count": 91,
+  "position_count": 74,
+  "position_valuation_count": 6734,
+  "scenario_count": 5,
+  "schema_version": "simulation_simplified_valuation_summary.v1",
+  "start_date": "2026-04-01",
+  "synthetic_data": true,
+  "total_current_portfolio_value": 40695000.0,
+  "transaction_flow_summary": {
+    "total_fees": -42000.0,
+    "total_income_distributions": 175984.83,
+    "total_market_or_economic_change": -3146699.47,
+    "total_transactions_or_flows": -804263.0
+  },
+  "validation_status": "valid"
+}

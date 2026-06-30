@@ -1,0 +1,795 @@
+{
+  "caveats": [
+    "Synthetic simplified value-change package only.",
+    "Opening-date flows are treated as setup annotations because Surface 1 uses current positions as the history baseline.",
+    "The package separates flows from economic value movement but does not perform tax-lot, settlement, accrual, or performance accounting."
+  ],
+  "closing_value": 40695000.0,
+  "data_confidence_summary": {
+    "by_confidence": [
+      {
+        "count": 19,
+        "id": "high",
+        "percent_of_total": 0.346849,
+        "synthetic_data": true,
+        "value": 14115000.0
+      },
+      {
+        "count": 15,
+        "id": "low",
+        "percent_of_total": 0.209485,
+        "synthetic_data": true,
+        "value": 8525000.0
+      },
+      {
+        "count": 36,
+        "id": "medium",
+        "percent_of_total": 0.41295,
+        "synthetic_data": true,
+        "value": 16805000.0
+      },
+      {
+        "count": 4,
+        "id": "unknown",
+        "percent_of_total": 0.030716,
+        "synthetic_data": true,
+        "value": 1250000.0
+      }
+    ],
+    "by_valuation_tier": [
+      {
+        "count": 6,
+        "id": "cash_face_value",
+        "percent_of_total": 0.06045,
+        "synthetic_data": true,
+        "value": 2460000.0
+      },
+      {
+        "count": 26,
+        "id": "direct_price_or_mark",
+        "percent_of_total": 0.416882,
+        "synthetic_data": true,
+        "value": 16965000.0
+      },
+      {
+        "count": 12,
+        "id": "human_review_required",
+        "percent_of_total": 0.143138,
+        "synthetic_data": true,
+        "value": 5825000.0
+      },
+      {
+        "count": 23,
+        "id": "proxy_valuation",
+        "percent_of_total": 0.282467,
+        "synthetic_data": true,
+        "value": 11495000.0
+      },
+      {
+        "count": 7,
+        "id": "stale_or_manager_mark",
+        "percent_of_total": 0.097064,
+        "synthetic_data": true,
+        "value": 3950000.0
+      }
+    ],
+    "human_review_count": 12,
+    "human_review_value": 5825000.0
+  },
+  "end_date": "2026-06-30",
+  "generated_at": "2026-06-30T00:00:00Z",
+  "generator_version": "simplified_daily_valuation_engine.v1",
+  "human_review_items": [
+    {
+      "confidence": "low",
+      "instrument_id": "instr_ai_infra_call_spread_note",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "position_id": "pos_a_ai_infra_call_spread_note",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 275000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_private_credit_income_fund",
+      "manager_id": "mgr_c_income_cash_generation",
+      "position_id": "pos_c_private_credit_income_fund",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 540000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_northstar_ai_growth_fund",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_northstar_ai_growth_fund",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 1260000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_venture_ai_infrastructure_fund",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_venture_ai_infrastructure_fund",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 740000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_data_center_development_jv",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_data_center_development_jv",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 940000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_power_campus_preferred",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_power_campus_preferred",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 455000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_data_center_land_option",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_data_center_land_option",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 185000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_opaque_manager_level_private_book",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_opaque_manager_level_private_book",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 610000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_private_mark_placeholder",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_private_mark_placeholder",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 125000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_macro_overlay_manager_book",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_macro_overlay_manager_book",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 330000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_rates_volatility_collar",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_rates_volatility_collar",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 210000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_ai_chip_downside_put_spread",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_ai_chip_downside_put_spread",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 155000.0
+    }
+  ],
+  "largest_negative_contributors": [
+    {
+      "asset_class": "public_equity",
+      "closing_value": 1850000.0,
+      "confidence": "high",
+      "display_name": "AI Compute Leader",
+      "economic_value_change": -172954.71,
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "position_id": "pos_a_ai_compute_leader",
+      "synthetic_data": true,
+      "valuation_tier": "direct_price_or_mark"
+    },
+    {
+      "asset_class": "public_equity",
+      "closing_value": 1480000.0,
+      "confidence": "high",
+      "display_name": "Cloud Platform Compounder",
+      "economic_value_change": -170128.09,
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "position_id": "pos_a_cloud_platform_compounder",
+      "synthetic_data": true,
+      "valuation_tier": "direct_price_or_mark"
+    },
+    {
+      "asset_class": "public_equity",
+      "closing_value": 1320000.0,
+      "confidence": "high",
+      "display_name": "Cloud Platform Compounder",
+      "economic_value_change": -144750.33,
+      "manager_id": "mgr_b_core_quality_equity",
+      "position_id": "pos_b_cloud_platform_compounder",
+      "synthetic_data": true,
+      "valuation_tier": "direct_price_or_mark"
+    },
+    {
+      "asset_class": "fixed_income",
+      "closing_value": 840000.0,
+      "confidence": "medium",
+      "display_name": "Investment Grade Bond ETF",
+      "economic_value_change": -133024.74,
+      "manager_id": "mgr_c_income_cash_generation",
+      "position_id": "pos_c_investment_grade_bond_etf",
+      "synthetic_data": true,
+      "valuation_tier": "proxy_valuation"
+    },
+    {
+      "asset_class": "public_equity",
+      "closing_value": 1125000.0,
+      "confidence": "medium",
+      "display_name": "Chip Fabrication Partner",
+      "economic_value_change": -111595.94,
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "position_id": "pos_a_chip_fabrication_partner",
+      "synthetic_data": true,
+      "valuation_tier": "direct_price_or_mark"
+    },
+    {
+      "asset_class": "etf",
+      "closing_value": 880000.0,
+      "confidence": "medium",
+      "display_name": "Quality Factor ETF",
+      "economic_value_change": -109479.21,
+      "manager_id": "mgr_b_core_quality_equity",
+      "position_id": "pos_b_quality_factor_etf",
+      "synthetic_data": true,
+      "valuation_tier": "proxy_valuation"
+    },
+    {
+      "asset_class": "fixed_income",
+      "closing_value": 720000.0,
+      "confidence": "medium",
+      "display_name": "Short TIPS ETF",
+      "economic_value_change": -108745.89,
+      "manager_id": "mgr_c_income_cash_generation",
+      "position_id": "pos_c_short_tips_etf",
+      "synthetic_data": true,
+      "valuation_tier": "proxy_valuation"
+    },
+    {
+      "asset_class": "public_equity",
+      "closing_value": 920000.0,
+      "confidence": "high",
+      "display_name": "Semicap Equipment Maker",
+      "economic_value_change": -106106.33,
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "position_id": "pos_a_semicap_equipment_maker",
+      "synthetic_data": true,
+      "valuation_tier": "direct_price_or_mark"
+    }
+  ],
+  "largest_positive_contributors": [
+    {
+      "asset_class": "fixed_income",
+      "closing_value": 1340000.0,
+      "confidence": "high",
+      "display_name": "Treasury Bill Ladder",
+      "economic_value_change": 72945.33,
+      "manager_id": "mgr_e_liquidity_defensive",
+      "position_id": "pos_e_treasury_bill_ladder",
+      "synthetic_data": true,
+      "valuation_tier": "proxy_valuation"
+    },
+    {
+      "asset_class": "fixed_income",
+      "closing_value": 560000.0,
+      "confidence": "medium",
+      "display_name": "Municipal Income Ladder",
+      "economic_value_change": 8012.11,
+      "manager_id": "mgr_c_income_cash_generation",
+      "position_id": "pos_c_municipal_income_ladder",
+      "synthetic_data": true,
+      "valuation_tier": "proxy_valuation"
+    },
+    {
+      "asset_class": "option_like",
+      "closing_value": 155000.0,
+      "confidence": "low",
+      "display_name": "AI Chip Downside Put Spread",
+      "economic_value_change": 7892.75,
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_ai_chip_downside_put_spread",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required"
+    },
+    {
+      "asset_class": "commodities_energy",
+      "closing_value": 280000.0,
+      "confidence": "medium",
+      "display_name": "WTI Energy Exposure",
+      "economic_value_change": 4418.36,
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_wti_energy_exposure",
+      "synthetic_data": true,
+      "valuation_tier": "direct_price_or_mark"
+    },
+    {
+      "asset_class": "fx",
+      "closing_value": 420000.0,
+      "confidence": "medium",
+      "display_name": "EUR/USD Forward Exposure",
+      "economic_value_change": 2425.55,
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_eurusd_forward_exposure",
+      "synthetic_data": true,
+      "valuation_tier": "direct_price_or_mark"
+    },
+    {
+      "asset_class": "fixed_income",
+      "closing_value": 430000.0,
+      "confidence": "medium",
+      "display_name": "Agency MBS Proxy",
+      "economic_value_change": 1245.72,
+      "manager_id": "mgr_c_income_cash_generation",
+      "position_id": "pos_c_agency_mbs_proxy",
+      "synthetic_data": true,
+      "valuation_tier": "proxy_valuation"
+    },
+    {
+      "asset_class": "fx",
+      "closing_value": 360000.0,
+      "confidence": "medium",
+      "display_name": "JPY Defensive Hedge",
+      "economic_value_change": 378.38,
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_jpy_defensive_hedge",
+      "synthetic_data": true,
+      "valuation_tier": "direct_price_or_mark"
+    }
+  ],
+  "opening_date_flow_annotations": {
+    "fees_total": 0.0,
+    "income_distributions_total": 0.0,
+    "note": "Opening-date flows are recorded as annotations and excluded from period tie-out.",
+    "transaction_flow_total": 2225307.44
+  },
+  "opening_value": 44511977.64,
+  "package_id": "value_change_daily_position_values_northstar_synthetic_position_universe_seed_20260630_northstar_synthetic_market_state_history_seed_20260701",
+  "portfolio_id": "portfolio_northstar_family_office",
+  "reporting_currency": "USD",
+  "schema_version": "simulation_value_change_package.v1",
+  "source": {
+    "generator": "arangur.simulation.simplified_daily_valuation_engine",
+    "generator_version": "simplified_daily_valuation_engine.v1",
+    "is_synthetic": true,
+    "market_state_history_id": "northstar_synthetic_market_state_history_seed_20260701",
+    "market_state_schema_version": "simulation_market_state_history.v1",
+    "position_universe_id": "northstar_synthetic_position_universe_seed_20260630",
+    "position_universe_schema_version": "simulation_position_universe.v1"
+  },
+  "start_date": "2026-04-01",
+  "synthetic_data": true,
+  "total_fees": -42000.0,
+  "total_income_distributions": 175984.83,
+  "total_market_or_economic_change": -3146699.47,
+  "total_transactions_or_flows": -804263.0,
+  "validation_status": "valid",
+  "value_change_by_asset_class": [
+    {
+      "closing_value": 2460000.0,
+      "economic_value_change": -17363.32,
+      "fees": 0.0,
+      "id": "cash_money_market",
+      "income_distributions": 17804.1,
+      "opening_value": 2459559.22,
+      "synthetic_data": true,
+      "transaction_flows": 0.0,
+      "value_change": 440.78
+    },
+    {
+      "closing_value": 1865000.0,
+      "economic_value_change": -210310.51,
+      "fees": 0.0,
+      "id": "commodities_energy",
+      "income_distributions": 11280.37,
+      "opening_value": 2091553.6,
+      "synthetic_data": true,
+      "transaction_flows": -27523.46,
+      "value_change": -226553.6
+    },
+    {
+      "closing_value": 655000.0,
+      "economic_value_change": -92647.06,
+      "fees": 0.0,
+      "id": "crypto",
+      "income_distributions": 0.0,
+      "opening_value": 767294.48,
+      "synthetic_data": true,
+      "transaction_flows": -19647.42,
+      "value_change": -112294.48
+    },
+    {
+      "closing_value": 1785000.0,
+      "economic_value_change": -74854.45,
+      "fees": 0.0,
+      "id": "data_center_investment",
+      "income_distributions": 9084.95,
+      "opening_value": 1850769.5,
+      "synthetic_data": true,
+      "transaction_flows": 0.0,
+      "value_change": -65769.5
+    },
+    {
+      "closing_value": 3390000.0,
+      "economic_value_change": -388576.17,
+      "fees": 0.0,
+      "id": "etf",
+      "income_distributions": 3396.29,
+      "opening_value": 3862601.72,
+      "synthetic_data": true,
+      "transaction_flows": -87421.84,
+      "value_change": -472601.72
+    },
+    {
+      "closing_value": 6310000.0,
+      "economic_value_change": -480300.76,
+      "fees": 0.0,
+      "id": "fixed_income",
+      "income_distributions": 73682.47,
+      "opening_value": 6762268.09,
+      "synthetic_data": true,
+      "transaction_flows": -45649.8,
+      "value_change": -452268.09
+    },
+    {
+      "closing_value": 1090000.0,
+      "economic_value_change": -40413.34,
+      "fees": 0.0,
+      "id": "fx",
+      "income_distributions": 0.0,
+      "opening_value": 1156957.34,
+      "synthetic_data": true,
+      "transaction_flows": -26544.0,
+      "value_change": -66957.34
+    },
+    {
+      "closing_value": 1065000.0,
+      "economic_value_change": -128770.69,
+      "fees": 0.0,
+      "id": "opaque_manager_level",
+      "income_distributions": 0.0,
+      "opening_value": 1193770.69,
+      "synthetic_data": true,
+      "transaction_flows": 0.0,
+      "value_change": -128770.69
+    },
+    {
+      "closing_value": 825000.0,
+      "economic_value_change": -48762.42,
+      "fees": 0.0,
+      "id": "option_like",
+      "income_distributions": 0.0,
+      "opening_value": 893062.75,
+      "synthetic_data": true,
+      "transaction_flows": -19300.33,
+      "value_change": -68062.75
+    },
+    {
+      "closing_value": 1900000.0,
+      "economic_value_change": -103397.39,
+      "fees": 0.0,
+      "id": "private_credit",
+      "income_distributions": 17577.57,
+      "opening_value": 1985819.82,
+      "synthetic_data": true,
+      "transaction_flows": 0.0,
+      "value_change": -85819.82
+    },
+    {
+      "closing_value": 2690000.0,
+      "economic_value_change": -115134.0,
+      "fees": 0.0,
+      "id": "private_equity",
+      "income_distributions": 3911.04,
+      "opening_value": 2801222.96,
+      "synthetic_data": true,
+      "transaction_flows": 0.0,
+      "value_change": -111222.96
+    },
+    {
+      "closing_value": 14180000.0,
+      "economic_value_change": -1540550.76,
+      "fees": 0.0,
+      "id": "public_equity",
+      "income_distributions": 0.0,
+      "opening_value": 16108185.21,
+      "synthetic_data": true,
+      "transaction_flows": -387634.45,
+      "value_change": -1928185.21
+    },
+    {
+      "closing_value": 2480000.0,
+      "economic_value_change": -127618.6,
+      "fees": 0.0,
+      "id": "real_estate",
+      "income_distributions": 39248.04,
+      "opening_value": 2578912.26,
+      "synthetic_data": true,
+      "transaction_flows": -10541.7,
+      "value_change": -98912.26
+    }
+  ],
+  "value_change_by_manager": [
+    {
+      "closing_value": 10115000.0,
+      "economic_value_change": -1052296.71,
+      "fees": 0.0,
+      "id": "mgr_a_growth_ai_infrastructure",
+      "income_distributions": 2004.33,
+      "opening_value": 11442155.73,
+      "synthetic_data": true,
+      "transaction_flows": -276863.35,
+      "value_change": -1327155.73
+    },
+    {
+      "closing_value": 7655000.0,
+      "economic_value_change": -821509.25,
+      "fees": 0.0,
+      "id": "mgr_b_core_quality_equity",
+      "income_distributions": 1741.16,
+      "opening_value": 8671737.48,
+      "synthetic_data": true,
+      "transaction_flows": -196969.39,
+      "value_change": -1016737.48
+    },
+    {
+      "closing_value": 5300000.0,
+      "economic_value_change": -563964.57,
+      "fees": 0.0,
+      "id": "mgr_c_income_cash_generation",
+      "income_distributions": 70359.9,
+      "opening_value": 5793604.67,
+      "synthetic_data": true,
+      "transaction_flows": 0.0,
+      "value_change": -493604.67
+    },
+    {
+      "closing_value": 8265000.0,
+      "economic_value_change": -380482.72,
+      "fees": 0.0,
+      "id": "mgr_d_private_real_assets",
+      "income_distributions": 62142.43,
+      "opening_value": 8586760.71,
+      "synthetic_data": true,
+      "transaction_flows": -3420.42,
+      "value_change": -321760.71
+    },
+    {
+      "closing_value": 5715000.0,
+      "economic_value_change": -248026.57,
+      "fees": 0.0,
+      "id": "mgr_e_liquidity_defensive",
+      "income_distributions": 39737.01,
+      "opening_value": 5998252.63,
+      "synthetic_data": true,
+      "transaction_flows": -74963.07,
+      "value_change": -283252.63
+    },
+    {
+      "closing_value": 3645000.0,
+      "economic_value_change": -302419.65,
+      "fees": 0.0,
+      "id": "mgr_f_opportunistic_macro",
+      "income_distributions": 0.0,
+      "opening_value": 4019466.42,
+      "synthetic_data": true,
+      "transaction_flows": -72046.77,
+      "value_change": -374466.42
+    }
+  ],
+  "value_change_by_theme": [
+    {
+      "allocation_method": "equal_split_across_position_themes",
+      "closing_value": 4953416.67,
+      "economic_value_change": -482286.85,
+      "fees": 0.0,
+      "id": "AI infrastructure",
+      "income_distributions": 3028.32,
+      "opening_value": 5542898.98,
+      "synthetic_data": true,
+      "transaction_flows": -110223.79,
+      "value_change": -589482.32
+    },
+    {
+      "allocation_method": "equal_split_across_position_themes",
+      "closing_value": 2631666.67,
+      "economic_value_change": -80617.16,
+      "fees": 0.0,
+      "id": "USD exposure",
+      "income_distributions": 8085.33,
+      "opening_value": 2743997.18,
+      "synthetic_data": true,
+      "transaction_flows": -39798.68,
+      "value_change": -112330.51
+    },
+    {
+      "allocation_method": "equal_split_across_position_themes",
+      "closing_value": 4242916.67,
+      "economic_value_change": -345230.35,
+      "fees": 0.0,
+      "id": "cash generation",
+      "income_distributions": 46734.12,
+      "opening_value": 4571169.58,
+      "synthetic_data": true,
+      "transaction_flows": -29756.69,
+      "value_change": -328252.91
+    },
+    {
+      "allocation_method": "equal_split_across_position_themes",
+      "closing_value": 218333.33,
+      "economic_value_change": -30882.35,
+      "fees": 0.0,
+      "id": "crypto risk",
+      "income_distributions": 0.0,
+      "opening_value": 255764.83,
+      "synthetic_data": true,
+      "transaction_flows": -6549.14,
+      "value_change": -37431.49
+    },
+    {
+      "allocation_method": "equal_split_across_position_themes",
+      "closing_value": 1448416.67,
+      "economic_value_change": -126320.17,
+      "fees": 0.0,
+      "id": "data center power demand",
+      "income_distributions": 3028.32,
+      "opening_value": 1583703.77,
+      "synthetic_data": true,
+      "transaction_flows": -11995.25,
+      "value_change": -135287.1
+    },
+    {
+      "allocation_method": "equal_split_across_position_themes",
+      "closing_value": 1561250.0,
+      "economic_value_change": -110234.25,
+      "fees": 0.0,
+      "id": "data confidence / valuation issue",
+      "income_distributions": 0.0,
+      "opening_value": 1691631.57,
+      "synthetic_data": true,
+      "transaction_flows": -20147.32,
+      "value_change": -130381.57
+    },
+    {
+      "allocation_method": "equal_split_across_position_themes",
+      "closing_value": 4922500.0,
+      "economic_value_change": -353086.88,
+      "fees": 0.0,
+      "id": "defensive ballast",
+      "income_distributions": 25017.56,
+      "opening_value": 5325327.75,
+      "synthetic_data": true,
+      "transaction_flows": -74758.43,
+      "value_change": -402827.75
+    },
+    {
+      "allocation_method": "equal_split_across_position_themes",
+      "closing_value": 1440083.33,
+      "economic_value_change": -125734.81,
+      "fees": 0.0,
+      "id": "energy bottlenecks",
+      "income_distributions": 4936.69,
+      "opening_value": 1568992.5,
+      "synthetic_data": true,
+      "transaction_flows": -8111.04,
+      "value_change": -128909.16
+    },
+    {
+      "allocation_method": "equal_split_across_position_themes",
+      "closing_value": 6375000.0,
+      "economic_value_change": -687828.03,
+      "fees": 0.0,
+      "id": "growth/value",
+      "income_distributions": 3001.82,
+      "opening_value": 7230181.37,
+      "synthetic_data": true,
+      "transaction_flows": -170355.17,
+      "value_change": -855181.37
+    },
+    {
+      "allocation_method": "equal_split_across_position_themes",
+      "closing_value": 1910000.0,
+      "economic_value_change": -165323.89,
+      "fees": 0.0,
+      "id": "inflation sensitivity",
+      "income_distributions": 23119.86,
+      "opening_value": 2059169.36,
+      "synthetic_data": true,
+      "transaction_flows": -6965.33,
+      "value_change": -149169.36
+    },
+    {
+      "allocation_method": "equal_split_across_position_themes",
+      "closing_value": 1759583.33,
+      "economic_value_change": -179693.47,
+      "fees": 0.0,
+      "id": "manager overlap",
+      "income_distributions": 0.0,
+      "opening_value": 1993509.8,
+      "synthetic_data": true,
+      "transaction_flows": -54233.0,
+      "value_change": -233926.47
+    },
+    {
+      "allocation_method": "equal_split_across_position_themes",
+      "closing_value": 1293833.33,
+      "economic_value_change": -83856.4,
+      "fees": 0.0,
+      "id": "opaque/private marks",
+      "income_distributions": 1303.68,
+      "opening_value": 1376386.05,
+      "synthetic_data": true,
+      "transaction_flows": 0.0,
+      "value_change": -82552.72
+    },
+    {
+      "allocation_method": "equal_split_across_position_themes",
+      "closing_value": 2441750.0,
+      "economic_value_change": -120966.13,
+      "fees": 0.0,
+      "id": "private-market liquidity",
+      "income_distributions": 20314.91,
+      "opening_value": 2542401.22,
+      "synthetic_data": true,
+      "transaction_flows": 0.0,
+      "value_change": -100651.22
+    },
+    {
+      "allocation_method": "equal_split_across_position_themes",
+      "closing_value": 3395000.0,
+      "economic_value_change": -266614.63,
+      "fees": 0.0,
+      "id": "rates sensitivity",
+      "income_distributions": 37414.21,
+      "opening_value": 3648002.22,
+      "synthetic_data": true,
+      "transaction_flows": -23801.8,
+      "value_change": -253002.22
+    },
+    {
+      "allocation_method": "equal_split_across_position_themes",
+      "closing_value": 2101250.0,
+      "economic_value_change": -210024.1,
+      "fees": 0.0,
+      "id": "semiconductors",
+      "income_distributions": 0.0,
+      "opening_value": 2378841.48,
+      "synthetic_data": true,
+      "transaction_flows": -67567.37,
+      "value_change": -277591.48
+    }
+  ]
+}
