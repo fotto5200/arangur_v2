@@ -1,0 +1,204 @@
+{
+  "caveat": "Report-element view fragments only; no full client briefing, charts, browser UI integration, persistence, live data, or external APIs are produced.",
+  "generated_at": "2026-06-30T00:00:00Z",
+  "html_fragment_count": 7,
+  "input_dir": "data/simulation/report_element_inputs",
+  "markdown_fragment_count": 7,
+  "output_dir": "data/simulation/report_element_views",
+  "output_files": [
+    "portfolio_status.view.json",
+    "portfolio_status.md",
+    "portfolio_status.html",
+    "concentration_theme.view.json",
+    "concentration_theme.md",
+    "concentration_theme.html",
+    "concentration_sector_industry.view.json",
+    "concentration_sector_industry.md",
+    "concentration_sector_industry.html",
+    "scenario_impact_by_manager_ai_chip_selloff.view.json",
+    "scenario_impact_by_manager_ai_chip_selloff.md",
+    "scenario_impact_by_manager_ai_chip_selloff.html",
+    "cash_generation_summary.view.json",
+    "cash_generation_summary.md",
+    "cash_generation_summary.html",
+    "manager_comparison.view.json",
+    "manager_comparison.md",
+    "manager_comparison.html",
+    "data_confidence_note.view.json",
+    "data_confidence_note.md",
+    "data_confidence_note.html",
+    "report_element_view_summary.json"
+  ],
+  "rendered_elements": [
+    "portfolio_status",
+    "concentration",
+    "concentration",
+    "scenario_impact_by_manager",
+    "cash_generation_summary",
+    "manager_comparison",
+    "data_confidence_note"
+  ],
+  "rendered_files": [
+    {
+      "element_id": "portfolio_status",
+      "element_title": "Portfolio Status",
+      "html_file": "portfolio_status.html",
+      "input_file": "portfolio_status.json",
+      "markdown_file": "portfolio_status.md",
+      "validation": {
+        "errors": [],
+        "renderer_version": "report_element_rendering.v1",
+        "status": "valid",
+        "validated_at": "2026-06-30T00:00:00Z",
+        "warnings": []
+      },
+      "view_file": "portfolio_status.view.json"
+    },
+    {
+      "element_id": "concentration",
+      "element_title": "Concentration",
+      "html_file": "concentration_theme.html",
+      "input_file": "concentration_theme.json",
+      "markdown_file": "concentration_theme.md",
+      "validation": {
+        "errors": [],
+        "renderer_version": "report_element_rendering.v1",
+        "status": "valid",
+        "validated_at": "2026-06-30T00:00:00Z",
+        "warnings": []
+      },
+      "view_file": "concentration_theme.view.json"
+    },
+    {
+      "element_id": "concentration",
+      "element_title": "Concentration",
+      "html_file": "concentration_sector_industry.html",
+      "input_file": "concentration_sector_industry.json",
+      "markdown_file": "concentration_sector_industry.md",
+      "validation": {
+        "errors": [],
+        "renderer_version": "report_element_rendering.v1",
+        "status": "valid",
+        "validated_at": "2026-06-30T00:00:00Z",
+        "warnings": []
+      },
+      "view_file": "concentration_sector_industry.view.json"
+    },
+    {
+      "element_id": "scenario_impact_by_manager",
+      "element_title": "Scenario Impact by Manager",
+      "html_file": "scenario_impact_by_manager_ai_chip_selloff.html",
+      "input_file": "scenario_impact_by_manager_ai_chip_selloff.json",
+      "markdown_file": "scenario_impact_by_manager_ai_chip_selloff.md",
+      "validation": {
+        "errors": [],
+        "renderer_version": "report_element_rendering.v1",
+        "status": "valid",
+        "validated_at": "2026-06-30T00:00:00Z",
+        "warnings": []
+      },
+      "view_file": "scenario_impact_by_manager_ai_chip_selloff.view.json"
+    },
+    {
+      "element_id": "cash_generation_summary",
+      "element_title": "Cash Generation Summary",
+      "html_file": "cash_generation_summary.html",
+      "input_file": "cash_generation_summary.json",
+      "markdown_file": "cash_generation_summary.md",
+      "validation": {
+        "errors": [],
+        "renderer_version": "report_element_rendering.v1",
+        "status": "valid",
+        "validated_at": "2026-06-30T00:00:00Z",
+        "warnings": []
+      },
+      "view_file": "cash_generation_summary.view.json"
+    },
+    {
+      "element_id": "manager_comparison",
+      "element_title": "Manager Comparison",
+      "html_file": "manager_comparison.html",
+      "input_file": "manager_comparison.json",
+      "markdown_file": "manager_comparison.md",
+      "validation": {
+        "errors": [],
+        "renderer_version": "report_element_rendering.v1",
+        "status": "valid",
+        "validated_at": "2026-06-30T00:00:00Z",
+        "warnings": []
+      },
+      "view_file": "manager_comparison.view.json"
+    },
+    {
+      "element_id": "data_confidence_note",
+      "element_title": "Data Confidence Note",
+      "html_file": "data_confidence_note.html",
+      "input_file": "data_confidence_note.json",
+      "markdown_file": "data_confidence_note.md",
+      "validation": {
+        "errors": [],
+        "renderer_version": "report_element_rendering.v1",
+        "status": "valid",
+        "validated_at": "2026-06-30T00:00:00Z",
+        "warnings": []
+      },
+      "view_file": "data_confidence_note.view.json"
+    }
+  ],
+  "renderer_version": "report_element_rendering.v1",
+  "schema_version": "report_element_view_summary.v1",
+  "synthetic_data": true,
+  "validation_results": {
+    "cash_generation_summary.view.json": {
+      "errors": [],
+      "renderer_version": "report_element_rendering.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "concentration_sector_industry.view.json": {
+      "errors": [],
+      "renderer_version": "report_element_rendering.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "concentration_theme.view.json": {
+      "errors": [],
+      "renderer_version": "report_element_rendering.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "data_confidence_note.view.json": {
+      "errors": [],
+      "renderer_version": "report_element_rendering.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "manager_comparison.view.json": {
+      "errors": [],
+      "renderer_version": "report_element_rendering.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "portfolio_status.view.json": {
+      "errors": [],
+      "renderer_version": "report_element_rendering.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "scenario_impact_by_manager_ai_chip_selloff.view.json": {
+      "errors": [],
+      "renderer_version": "report_element_rendering.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    }
+  },
+  "validation_status": "valid",
+  "view_count": 7
+}

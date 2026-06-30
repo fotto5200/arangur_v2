@@ -1,0 +1,552 @@
+{
+  "as_of_date": "2026-06-30",
+  "caveats": [
+    "Synthetic demo data only.",
+    "Rendered report-element fragment only; not a full client briefing, chart, or production report.",
+    "Payload is a structured input for later rendering; it is not a generated report, chart, browser view, or client-ready briefing.",
+    "Synthetic simplified valuation fixture only; no UI or report generation output is produced.",
+    "Data confidence rows summarize synthetic valuation treatments, stale/private marks, proxy usage, and human-review flags.",
+    "Confidence describes synthetic source readiness and valuation treatment, not investment quality."
+  ],
+  "confidence_summary": {
+    "by_confidence": [
+      {
+        "count": 19,
+        "id": "high",
+        "percent_of_total": 0.346849,
+        "synthetic_data": true,
+        "value": 14115000.0
+      },
+      {
+        "count": 15,
+        "id": "low",
+        "percent_of_total": 0.209485,
+        "synthetic_data": true,
+        "value": 8525000.0
+      },
+      {
+        "count": 36,
+        "id": "medium",
+        "percent_of_total": 0.41295,
+        "synthetic_data": true,
+        "value": 16805000.0
+      },
+      {
+        "count": 4,
+        "id": "unknown",
+        "percent_of_total": 0.030716,
+        "synthetic_data": true,
+        "value": 1250000.0
+      }
+    ],
+    "by_valuation_tier": [
+      {
+        "count": 6,
+        "id": "cash_face_value",
+        "percent_of_total": 0.06045,
+        "synthetic_data": true,
+        "value": 2460000.0
+      },
+      {
+        "count": 26,
+        "id": "direct_price_or_mark",
+        "percent_of_total": 0.416882,
+        "synthetic_data": true,
+        "value": 16965000.0
+      },
+      {
+        "count": 12,
+        "id": "human_review_required",
+        "percent_of_total": 0.143138,
+        "synthetic_data": true,
+        "value": 5825000.0
+      },
+      {
+        "count": 23,
+        "id": "proxy_valuation",
+        "percent_of_total": 0.282467,
+        "synthetic_data": true,
+        "value": 11495000.0
+      },
+      {
+        "count": 7,
+        "id": "stale_or_manager_mark",
+        "percent_of_total": 0.097064,
+        "synthetic_data": true,
+        "value": 3950000.0
+      }
+    ],
+    "human_review_count": 12,
+    "human_review_value": 5825000.0,
+    "label": "medium",
+    "synthetic_data": true
+  },
+  "detail_tables": {
+    "confidence_rows": [
+      {
+        "count": 19,
+        "id": "high",
+        "percent_of_total": 0.346849,
+        "synthetic_data": true,
+        "value": 14115000.0
+      },
+      {
+        "count": 15,
+        "id": "low",
+        "percent_of_total": 0.209485,
+        "synthetic_data": true,
+        "value": 8525000.0
+      },
+      {
+        "count": 36,
+        "id": "medium",
+        "percent_of_total": 0.41295,
+        "synthetic_data": true,
+        "value": 16805000.0
+      },
+      {
+        "count": 4,
+        "id": "unknown",
+        "percent_of_total": 0.030716,
+        "synthetic_data": true,
+        "value": 1250000.0
+      }
+    ],
+    "data_issue_rows": [
+      {
+        "human_review_count": 0,
+        "id": "none",
+        "percent_of_total": 0.562108,
+        "position_count": 37,
+        "synthetic_data": true,
+        "value": 22875000.0
+      },
+      {
+        "human_review_count": 0,
+        "id": "proxy_classification",
+        "percent_of_total": 0.118196,
+        "position_count": 9,
+        "synthetic_data": true,
+        "value": 4810000.0
+      },
+      {
+        "human_review_count": 0,
+        "id": "private_mark",
+        "percent_of_total": 0.097064,
+        "position_count": 7,
+        "synthetic_data": true,
+        "value": 3950000.0
+      },
+      {
+        "human_review_count": 0,
+        "id": "proxy_required",
+        "percent_of_total": 0.079494,
+        "position_count": 9,
+        "synthetic_data": true,
+        "value": 3235000.0
+      },
+      {
+        "human_review_count": 6,
+        "id": "human_review",
+        "percent_of_total": 0.064996,
+        "position_count": 6,
+        "synthetic_data": true,
+        "value": 2645000.0
+      },
+      {
+        "human_review_count": 2,
+        "id": "stale_private_mark",
+        "percent_of_total": 0.044231,
+        "position_count": 2,
+        "synthetic_data": true,
+        "value": 1800000.0
+      },
+      {
+        "human_review_count": 1,
+        "id": "opaque_private_mark",
+        "percent_of_total": 0.018184,
+        "position_count": 1,
+        "synthetic_data": true,
+        "value": 740000.0
+      },
+      {
+        "human_review_count": 3,
+        "id": "model_required",
+        "percent_of_total": 0.015727,
+        "position_count": 3,
+        "synthetic_data": true,
+        "value": 640000.0
+      }
+    ],
+    "market_state_treatment_rows": [
+      {
+        "id": "cash_treatment_count",
+        "synthetic_data": true,
+        "value": 2
+      },
+      {
+        "id": "confidence_counts",
+        "synthetic_data": true,
+        "value": {
+          "high": 7,
+          "low": 4,
+          "medium": 12
+        }
+      },
+      {
+        "id": "covered_variable_count",
+        "synthetic_data": true,
+        "value": 23
+      },
+      {
+        "id": "direct_treatment_count",
+        "synthetic_data": true,
+        "value": 6
+      },
+      {
+        "id": "human_review_count",
+        "synthetic_data": true,
+        "value": 1
+      },
+      {
+        "id": "missing_variable_count",
+        "synthetic_data": true,
+        "value": 0
+      },
+      {
+        "id": "model_input_treatment_count",
+        "synthetic_data": true,
+        "value": 3
+      },
+      {
+        "id": "proxy_treatment_count",
+        "synthetic_data": true,
+        "value": 9
+      },
+      {
+        "id": "required_variable_count",
+        "synthetic_data": true,
+        "value": 23
+      },
+      {
+        "id": "stale_mark_treatment_count",
+        "synthetic_data": true,
+        "value": 2
+      },
+      {
+        "id": "status",
+        "synthetic_data": true,
+        "value": "complete"
+      },
+      {
+        "id": "market_state_confidence_high",
+        "synthetic_data": true,
+        "value": 7
+      },
+      {
+        "id": "market_state_confidence_low",
+        "synthetic_data": true,
+        "value": 4
+      },
+      {
+        "id": "market_state_confidence_medium",
+        "synthetic_data": true,
+        "value": 12
+      }
+    ],
+    "valuation_treatment_rows": [
+      {
+        "count": 6,
+        "id": "cash_face_value",
+        "percent_of_total": 0.06045,
+        "synthetic_data": true,
+        "value": 2460000.0
+      },
+      {
+        "count": 26,
+        "id": "direct_price_or_mark",
+        "percent_of_total": 0.416882,
+        "synthetic_data": true,
+        "value": 16965000.0
+      },
+      {
+        "count": 12,
+        "id": "human_review_required",
+        "percent_of_total": 0.143138,
+        "synthetic_data": true,
+        "value": 5825000.0
+      },
+      {
+        "count": 23,
+        "id": "proxy_valuation",
+        "percent_of_total": 0.282467,
+        "synthetic_data": true,
+        "value": 11495000.0
+      },
+      {
+        "count": 7,
+        "id": "stale_or_manager_mark",
+        "percent_of_total": 0.097064,
+        "synthetic_data": true,
+        "value": 3950000.0
+      }
+    ]
+  },
+  "element_id": "data_confidence_note",
+  "element_title": "Data Confidence Note",
+  "evidence_rows": [
+    {
+      "count": 19,
+      "id": "high",
+      "percent_of_total": 0.346849,
+      "row_type": "confidence_bucket",
+      "synthetic_data": true,
+      "value": 14115000.0
+    },
+    {
+      "count": 15,
+      "id": "low",
+      "percent_of_total": 0.209485,
+      "row_type": "confidence_bucket",
+      "synthetic_data": true,
+      "value": 8525000.0
+    },
+    {
+      "count": 36,
+      "id": "medium",
+      "percent_of_total": 0.41295,
+      "row_type": "confidence_bucket",
+      "synthetic_data": true,
+      "value": 16805000.0
+    },
+    {
+      "count": 4,
+      "id": "unknown",
+      "percent_of_total": 0.030716,
+      "row_type": "confidence_bucket",
+      "synthetic_data": true,
+      "value": 1250000.0
+    },
+    {
+      "count": 6,
+      "id": "cash_face_value",
+      "percent_of_total": 0.06045,
+      "row_type": "valuation_treatment",
+      "synthetic_data": true,
+      "value": 2460000.0
+    },
+    {
+      "count": 26,
+      "id": "direct_price_or_mark",
+      "percent_of_total": 0.416882,
+      "row_type": "valuation_treatment",
+      "synthetic_data": true,
+      "value": 16965000.0
+    },
+    {
+      "count": 12,
+      "id": "human_review_required",
+      "percent_of_total": 0.143138,
+      "row_type": "valuation_treatment",
+      "synthetic_data": true,
+      "value": 5825000.0
+    },
+    {
+      "count": 23,
+      "id": "proxy_valuation",
+      "percent_of_total": 0.282467,
+      "row_type": "valuation_treatment",
+      "synthetic_data": true,
+      "value": 11495000.0
+    },
+    {
+      "count": 7,
+      "id": "stale_or_manager_mark",
+      "percent_of_total": 0.097064,
+      "row_type": "valuation_treatment",
+      "synthetic_data": true,
+      "value": 3950000.0
+    }
+  ],
+  "generated_at": "2026-06-30T00:00:00Z",
+  "headline": "Data Confidence Note: medium",
+  "human_review_items": [
+    {
+      "confidence": "low",
+      "instrument_id": "instr_ai_infra_call_spread_note",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "position_id": "pos_a_ai_infra_call_spread_note",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 275000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_private_credit_income_fund",
+      "manager_id": "mgr_c_income_cash_generation",
+      "position_id": "pos_c_private_credit_income_fund",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 540000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_northstar_ai_growth_fund",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_northstar_ai_growth_fund",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 1260000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_venture_ai_infrastructure_fund",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_venture_ai_infrastructure_fund",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 740000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_data_center_development_jv",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_data_center_development_jv",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 940000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_power_campus_preferred",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_power_campus_preferred",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 455000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_data_center_land_option",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_data_center_land_option",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 185000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_opaque_manager_level_private_book",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_opaque_manager_level_private_book",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 610000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_private_mark_placeholder",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_private_mark_placeholder",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 125000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_macro_overlay_manager_book",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_macro_overlay_manager_book",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 330000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_rates_volatility_collar",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_rates_volatility_collar",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 210000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_ai_chip_downside_put_spread",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_ai_chip_downside_put_spread",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 155000.0
+    }
+  ],
+  "input_parameters": {
+    "branch": "Client Briefing",
+    "placement": "Appendix",
+    "scope": "Whole portfolio"
+  },
+  "key_metrics": [
+    {
+      "formatted_value": "medium",
+      "label": "Confidence label",
+      "synthetic_data": true,
+      "unit": "label",
+      "value": "medium"
+    },
+    {
+      "formatted_value": "12",
+      "label": "Human-review positions",
+      "synthetic_data": true,
+      "unit": "count",
+      "value": 12
+    },
+    {
+      "formatted_value": "$5,825,000.00",
+      "label": "Human-review value",
+      "synthetic_data": true,
+      "unit": "USD",
+      "value": 5825000.0
+    },
+    {
+      "formatted_value": "$19,425,000.00",
+      "label": "Direct or cash value",
+      "synthetic_data": true,
+      "unit": "USD",
+      "value": 19425000.0
+    },
+    {
+      "formatted_value": "$15,445,000.00",
+      "label": "Proxy or stale/private value",
+      "synthetic_data": true,
+      "unit": "USD",
+      "value": 15445000.0
+    }
+  ],
+  "render_type": "markdown_html_fragment",
+  "renderer_version": "report_element_rendering.v1",
+  "schema_version": "report_element_view_payload.v1",
+  "source_input_path": "data/simulation/report_element_inputs/data_confidence_note.json",
+  "summary_text": "Current synthetic data confidence is labeled medium. Human review covers 12 positions representing $5,825,000.00; valuation treatment rows make direct, cash, proxy, stale/private, and human-review buckets visible before later preview or publication.",
+  "synthetic_data": true,
+  "template_category": "data_readiness",
+  "validation": {
+    "errors": [],
+    "renderer_version": "report_element_rendering.v1",
+    "status": "valid",
+    "validated_at": "2026-06-30T00:00:00Z",
+    "warnings": []
+  },
+  "view_type": "report_element_view"
+}

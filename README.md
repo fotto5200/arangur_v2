@@ -118,6 +118,39 @@ This writes:
 
 The default fixtures map Portfolio Status, Concentration, Scenario Impact by Manager, Cash Generation Summary, Manager Comparison, and Data Confidence Note to structured metrics, evidence rows, tables, confidence summaries, caveats, and human-review items.
 
+## Render Report Element View Fragments
+
+The first report-element rendering layer consumes the input payloads and writes simple deterministic view JSON plus Markdown and HTML fragments. These are reviewable fragments for later briefing-set preview. They are not full client briefings, charts, browser UI state, persistence records, report packages, live data calls, or production reports.
+
+```powershell
+python src\arangur\report_elements\rendering.py
+```
+
+This writes:
+
+- `data/simulation/report_element_views/portfolio_status.view.json`
+- `data/simulation/report_element_views/portfolio_status.md`
+- `data/simulation/report_element_views/portfolio_status.html`
+- `data/simulation/report_element_views/concentration_theme.view.json`
+- `data/simulation/report_element_views/concentration_theme.md`
+- `data/simulation/report_element_views/concentration_theme.html`
+- `data/simulation/report_element_views/concentration_sector_industry.view.json`
+- `data/simulation/report_element_views/concentration_sector_industry.md`
+- `data/simulation/report_element_views/concentration_sector_industry.html`
+- `data/simulation/report_element_views/scenario_impact_by_manager_ai_chip_selloff.view.json`
+- `data/simulation/report_element_views/scenario_impact_by_manager_ai_chip_selloff.md`
+- `data/simulation/report_element_views/scenario_impact_by_manager_ai_chip_selloff.html`
+- `data/simulation/report_element_views/cash_generation_summary.view.json`
+- `data/simulation/report_element_views/cash_generation_summary.md`
+- `data/simulation/report_element_views/cash_generation_summary.html`
+- `data/simulation/report_element_views/manager_comparison.view.json`
+- `data/simulation/report_element_views/manager_comparison.md`
+- `data/simulation/report_element_views/manager_comparison.html`
+- `data/simulation/report_element_views/data_confidence_note.view.json`
+- `data/simulation/report_element_views/data_confidence_note.md`
+- `data/simulation/report_element_views/data_confidence_note.html`
+- `data/simulation/report_element_views/report_element_view_summary.json`
+
 ## Local Report Index
 
 Both demo runner commands refresh a shared static report index:
@@ -231,6 +264,7 @@ Future scenario, data-coverage, and deployable private-demo work is captured in:
 - `docs/contracts/synthetic_market_state_contract_v1.md`
 - `docs/contracts/simplified_daily_valuation_contract_v1.md`
 - `docs/contracts/report_element_input_mapping_contract_v1.md`
+- `docs/contracts/report_element_rendering_contract_v1.md`
 - `docs/contracts/workflow_run_persistence_contract.md`
 - `docs/contracts/report_element_template_catalog_contract.md`
 - `docs/decisions/0003_three_surface_simulation_kernel.md`
@@ -253,6 +287,7 @@ python -m unittest tests.test_synthetic_position_universe
 python -m unittest tests.test_synthetic_market_state
 python -m unittest tests.test_simplified_daily_valuation
 python -m unittest tests.test_report_element_input_mapping
+python -m unittest tests.test_report_element_rendering
 python -m unittest tests.test_app_health
 python -m unittest tests.test_report_element_catalog
 python -m unittest tests.test_app_runs_api

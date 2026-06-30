@@ -1,0 +1,629 @@
+{
+  "as_of_date": "2026-06-30",
+  "caveats": [
+    "Synthetic demo data only.",
+    "Rendered report-element fragment only; not a full client briefing, chart, or production report.",
+    "Payload is a structured input for later rendering; it is not a generated report, chart, browser view, or client-ready briefing.",
+    "Cash generation is a simplified synthetic summary from transactions and valuation outputs.",
+    "This payload separates flows, income/distributions, fees, and current cash-like positions without statement-grade cash accounting.",
+    "Rendered cash generation is simplified synthetic cash accounting, not a statement-grade cash reconciliation."
+  ],
+  "confidence_summary": {
+    "by_confidence": [
+      {
+        "count": 19,
+        "id": "high",
+        "percent_of_total": 0.346849,
+        "synthetic_data": true,
+        "value": 14115000.0
+      },
+      {
+        "count": 15,
+        "id": "low",
+        "percent_of_total": 0.209485,
+        "synthetic_data": true,
+        "value": 8525000.0
+      },
+      {
+        "count": 36,
+        "id": "medium",
+        "percent_of_total": 0.41295,
+        "synthetic_data": true,
+        "value": 16805000.0
+      },
+      {
+        "count": 4,
+        "id": "unknown",
+        "percent_of_total": 0.030716,
+        "synthetic_data": true,
+        "value": 1250000.0
+      }
+    ],
+    "by_valuation_tier": [
+      {
+        "count": 6,
+        "id": "cash_face_value",
+        "percent_of_total": 0.06045,
+        "synthetic_data": true,
+        "value": 2460000.0
+      },
+      {
+        "count": 26,
+        "id": "direct_price_or_mark",
+        "percent_of_total": 0.416882,
+        "synthetic_data": true,
+        "value": 16965000.0
+      },
+      {
+        "count": 12,
+        "id": "human_review_required",
+        "percent_of_total": 0.143138,
+        "synthetic_data": true,
+        "value": 5825000.0
+      },
+      {
+        "count": 23,
+        "id": "proxy_valuation",
+        "percent_of_total": 0.282467,
+        "synthetic_data": true,
+        "value": 11495000.0
+      },
+      {
+        "count": 7,
+        "id": "stale_or_manager_mark",
+        "percent_of_total": 0.097064,
+        "synthetic_data": true,
+        "value": 3950000.0
+      }
+    ],
+    "human_review_count": 12,
+    "human_review_value": 5825000.0,
+    "label": "medium",
+    "synthetic_data": true
+  },
+  "detail_tables": {
+    "cash_generation_by_manager": [
+      {
+        "current_cash_like_value": 310000.0,
+        "economic_value_change": -1052296.71,
+        "fees": 0.0,
+        "income_distributions": 2004.33,
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "mandate": "Growth / AI Infrastructure",
+        "period_days": 90,
+        "synthetic_data": true,
+        "transaction_flows": -276863.35
+      },
+      {
+        "current_cash_like_value": 220000.0,
+        "economic_value_change": -821509.25,
+        "fees": 0.0,
+        "income_distributions": 1741.16,
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "mandate": "Core Quality Equity",
+        "period_days": 90,
+        "synthetic_data": true,
+        "transaction_flows": -196969.39
+      },
+      {
+        "current_cash_like_value": 180000.0,
+        "economic_value_change": -563964.57,
+        "fees": 0.0,
+        "income_distributions": 70359.9,
+        "manager_id": "mgr_c_income_cash_generation",
+        "manager_name": "Manager C - Income and Cash Generation",
+        "mandate": "Income and Cash Generation",
+        "period_days": 90,
+        "synthetic_data": true,
+        "transaction_flows": 0.0
+      },
+      {
+        "current_cash_like_value": 0.0,
+        "economic_value_change": -380482.72,
+        "fees": 0.0,
+        "income_distributions": 62142.43,
+        "manager_id": "mgr_d_private_real_assets",
+        "manager_name": "Manager D - Private Markets / Real Assets",
+        "mandate": "Private Markets / Real Assets",
+        "period_days": 90,
+        "synthetic_data": true,
+        "transaction_flows": -3420.42
+      },
+      {
+        "current_cash_like_value": 1750000.0,
+        "economic_value_change": -248026.57,
+        "fees": 0.0,
+        "income_distributions": 39737.01,
+        "manager_id": "mgr_e_liquidity_defensive",
+        "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "mandate": "Liquidity Reserve / Defensive Ballast",
+        "period_days": 90,
+        "synthetic_data": true,
+        "transaction_flows": -74963.07
+      },
+      {
+        "current_cash_like_value": 0.0,
+        "economic_value_change": -302419.65,
+        "fees": 0.0,
+        "income_distributions": 0.0,
+        "manager_id": "mgr_f_opportunistic_macro",
+        "manager_name": "Manager F - Opportunistic Macro / Hedge",
+        "mandate": "Opportunistic Macro / Hedge",
+        "period_days": 90,
+        "synthetic_data": true,
+        "transaction_flows": -72046.77
+      }
+    ],
+    "cash_like_positions": [
+      {
+        "asset_class": "cash_money_market",
+        "confidence": "high",
+        "display_name": "Public AI Sleeve Money Market Sweep",
+        "human_review_required": false,
+        "instrument_type": "money_market",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "percent_of_total": 0.007618,
+        "position_id": "pos_a_public_ai_money_market_sweep",
+        "synthetic_data": true,
+        "themes": [
+          "USD exposure",
+          "defensive ballast"
+        ],
+        "valuation_tier": "cash_face_value",
+        "value": 310000.0
+      },
+      {
+        "asset_class": "cash_money_market",
+        "confidence": "high",
+        "display_name": "Core Quality Cash Sweep",
+        "human_review_required": false,
+        "instrument_type": "money_market",
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "percent_of_total": 0.005406,
+        "position_id": "pos_b_core_quality_cash_sweep",
+        "synthetic_data": true,
+        "themes": [
+          "USD exposure",
+          "defensive ballast"
+        ],
+        "valuation_tier": "cash_face_value",
+        "value": 220000.0
+      },
+      {
+        "asset_class": "cash_money_market",
+        "confidence": "high",
+        "display_name": "Income Sleeve Cash Reserve",
+        "human_review_required": false,
+        "instrument_type": "money_market",
+        "manager_id": "mgr_c_income_cash_generation",
+        "manager_name": "Manager C - Income and Cash Generation",
+        "percent_of_total": 0.004423,
+        "position_id": "pos_c_income_sleeve_cash",
+        "synthetic_data": true,
+        "themes": [
+          "USD exposure",
+          "cash generation",
+          "defensive ballast"
+        ],
+        "valuation_tier": "cash_face_value",
+        "value": 180000.0
+      },
+      {
+        "asset_class": "cash_money_market",
+        "confidence": "high",
+        "display_name": "Government Money Market Fund",
+        "human_review_required": false,
+        "instrument_type": "money_market",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "percent_of_total": 0.024082,
+        "position_id": "pos_e_government_money_market",
+        "synthetic_data": true,
+        "themes": [
+          "USD exposure",
+          "cash generation",
+          "defensive ballast"
+        ],
+        "valuation_tier": "cash_face_value",
+        "value": 980000.0
+      },
+      {
+        "asset_class": "cash_money_market",
+        "confidence": "high",
+        "display_name": "Municipal Cash Reserve",
+        "human_review_required": false,
+        "instrument_type": "money_market",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "percent_of_total": 0.006389,
+        "position_id": "pos_e_municipal_cash_reserve",
+        "synthetic_data": true,
+        "themes": [
+          "USD exposure",
+          "cash generation",
+          "defensive ballast"
+        ],
+        "valuation_tier": "cash_face_value",
+        "value": 260000.0
+      },
+      {
+        "asset_class": "cash_money_market",
+        "confidence": "high",
+        "display_name": "Operating Cash USD",
+        "human_review_required": false,
+        "instrument_type": "cash",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "percent_of_total": 0.012532,
+        "position_id": "pos_e_operating_cash_usd",
+        "synthetic_data": true,
+        "themes": [
+          "USD exposure",
+          "defensive ballast"
+        ],
+        "valuation_tier": "cash_face_value",
+        "value": 510000.0
+      }
+    ],
+    "value_change_by_manager": [
+      {
+        "closing_value": 10115000.0,
+        "economic_value_change": -1052296.71,
+        "fees": 0.0,
+        "id": "mgr_a_growth_ai_infrastructure",
+        "income_distributions": 2004.33,
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "mandate": "Growth / AI Infrastructure",
+        "opening_value": 11442155.73,
+        "synthetic_data": true,
+        "transaction_flows": -276863.35,
+        "value_change": -1327155.73
+      },
+      {
+        "closing_value": 7655000.0,
+        "economic_value_change": -821509.25,
+        "fees": 0.0,
+        "id": "mgr_b_core_quality_equity",
+        "income_distributions": 1741.16,
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "mandate": "Core Quality Equity",
+        "opening_value": 8671737.48,
+        "synthetic_data": true,
+        "transaction_flows": -196969.39,
+        "value_change": -1016737.48
+      },
+      {
+        "closing_value": 5300000.0,
+        "economic_value_change": -563964.57,
+        "fees": 0.0,
+        "id": "mgr_c_income_cash_generation",
+        "income_distributions": 70359.9,
+        "manager_id": "mgr_c_income_cash_generation",
+        "manager_name": "Manager C - Income and Cash Generation",
+        "mandate": "Income and Cash Generation",
+        "opening_value": 5793604.67,
+        "synthetic_data": true,
+        "transaction_flows": 0.0,
+        "value_change": -493604.67
+      },
+      {
+        "closing_value": 8265000.0,
+        "economic_value_change": -380482.72,
+        "fees": 0.0,
+        "id": "mgr_d_private_real_assets",
+        "income_distributions": 62142.43,
+        "manager_id": "mgr_d_private_real_assets",
+        "manager_name": "Manager D - Private Markets / Real Assets",
+        "mandate": "Private Markets / Real Assets",
+        "opening_value": 8586760.71,
+        "synthetic_data": true,
+        "transaction_flows": -3420.42,
+        "value_change": -321760.71
+      },
+      {
+        "closing_value": 5715000.0,
+        "economic_value_change": -248026.57,
+        "fees": 0.0,
+        "id": "mgr_e_liquidity_defensive",
+        "income_distributions": 39737.01,
+        "manager_id": "mgr_e_liquidity_defensive",
+        "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "mandate": "Liquidity Reserve / Defensive Ballast",
+        "opening_value": 5998252.63,
+        "synthetic_data": true,
+        "transaction_flows": -74963.07,
+        "value_change": -283252.63
+      },
+      {
+        "closing_value": 3645000.0,
+        "economic_value_change": -302419.65,
+        "fees": 0.0,
+        "id": "mgr_f_opportunistic_macro",
+        "income_distributions": 0.0,
+        "manager_id": "mgr_f_opportunistic_macro",
+        "manager_name": "Manager F - Opportunistic Macro / Hedge",
+        "mandate": "Opportunistic Macro / Hedge",
+        "opening_value": 4019466.42,
+        "synthetic_data": true,
+        "transaction_flows": -72046.77,
+        "value_change": -374466.42
+      }
+    ]
+  },
+  "element_id": "cash_generation_summary",
+  "element_title": "Cash Generation Summary",
+  "evidence_rows": [
+    {
+      "current_cash_like_value": 310000.0,
+      "economic_value_change": -1052296.71,
+      "fees": 0.0,
+      "income_distributions": 2004.33,
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "manager_name": "Manager A - Growth / AI Infrastructure",
+      "mandate": "Growth / AI Infrastructure",
+      "period_days": 90,
+      "row_type": "manager_cash_generation",
+      "synthetic_data": true,
+      "transaction_flows": -276863.35
+    },
+    {
+      "current_cash_like_value": 220000.0,
+      "economic_value_change": -821509.25,
+      "fees": 0.0,
+      "income_distributions": 1741.16,
+      "manager_id": "mgr_b_core_quality_equity",
+      "manager_name": "Manager B - Core Quality Equity",
+      "mandate": "Core Quality Equity",
+      "period_days": 90,
+      "row_type": "manager_cash_generation",
+      "synthetic_data": true,
+      "transaction_flows": -196969.39
+    },
+    {
+      "current_cash_like_value": 180000.0,
+      "economic_value_change": -563964.57,
+      "fees": 0.0,
+      "income_distributions": 70359.9,
+      "manager_id": "mgr_c_income_cash_generation",
+      "manager_name": "Manager C - Income and Cash Generation",
+      "mandate": "Income and Cash Generation",
+      "period_days": 90,
+      "row_type": "manager_cash_generation",
+      "synthetic_data": true,
+      "transaction_flows": 0.0
+    },
+    {
+      "current_cash_like_value": 0.0,
+      "economic_value_change": -380482.72,
+      "fees": 0.0,
+      "income_distributions": 62142.43,
+      "manager_id": "mgr_d_private_real_assets",
+      "manager_name": "Manager D - Private Markets / Real Assets",
+      "mandate": "Private Markets / Real Assets",
+      "period_days": 90,
+      "row_type": "manager_cash_generation",
+      "synthetic_data": true,
+      "transaction_flows": -3420.42
+    },
+    {
+      "current_cash_like_value": 1750000.0,
+      "economic_value_change": -248026.57,
+      "fees": 0.0,
+      "income_distributions": 39737.01,
+      "manager_id": "mgr_e_liquidity_defensive",
+      "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+      "mandate": "Liquidity Reserve / Defensive Ballast",
+      "period_days": 90,
+      "row_type": "manager_cash_generation",
+      "synthetic_data": true,
+      "transaction_flows": -74963.07
+    },
+    {
+      "current_cash_like_value": 0.0,
+      "economic_value_change": -302419.65,
+      "fees": 0.0,
+      "income_distributions": 0.0,
+      "manager_id": "mgr_f_opportunistic_macro",
+      "manager_name": "Manager F - Opportunistic Macro / Hedge",
+      "mandate": "Opportunistic Macro / Hedge",
+      "period_days": 90,
+      "row_type": "manager_cash_generation",
+      "synthetic_data": true,
+      "transaction_flows": -72046.77
+    }
+  ],
+  "generated_at": "2026-06-30T00:00:00Z",
+  "headline": "Cash Generation Summary: $2,460,000.00 cash-like value",
+  "human_review_items": [
+    {
+      "confidence": "low",
+      "instrument_id": "instr_ai_infra_call_spread_note",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "position_id": "pos_a_ai_infra_call_spread_note",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 275000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_private_credit_income_fund",
+      "manager_id": "mgr_c_income_cash_generation",
+      "position_id": "pos_c_private_credit_income_fund",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 540000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_northstar_ai_growth_fund",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_northstar_ai_growth_fund",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 1260000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_venture_ai_infrastructure_fund",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_venture_ai_infrastructure_fund",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 740000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_data_center_development_jv",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_data_center_development_jv",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 940000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_power_campus_preferred",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_power_campus_preferred",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 455000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_data_center_land_option",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_data_center_land_option",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 185000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_opaque_manager_level_private_book",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_opaque_manager_level_private_book",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 610000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_private_mark_placeholder",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_private_mark_placeholder",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 125000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_macro_overlay_manager_book",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_macro_overlay_manager_book",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 330000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_rates_volatility_collar",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_rates_volatility_collar",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 210000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_ai_chip_downside_put_spread",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_ai_chip_downside_put_spread",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 155000.0
+    }
+  ],
+  "input_parameters": {
+    "branch": "Client Briefing",
+    "period_days": 90,
+    "placement": "Main body",
+    "scope": "All managers compared"
+  },
+  "key_metrics": [
+    {
+      "formatted_value": "$2,460,000.00",
+      "label": "Current cash-like value",
+      "synthetic_data": true,
+      "unit": "USD",
+      "value": 2460000.0
+    },
+    {
+      "formatted_value": "$175,984.83",
+      "label": "Period income/distributions",
+      "synthetic_data": true,
+      "unit": "USD",
+      "value": 175984.83
+    },
+    {
+      "formatted_value": "-$804,263.00",
+      "label": "Period transaction flows",
+      "synthetic_data": true,
+      "unit": "USD",
+      "value": -804263.0
+    },
+    {
+      "formatted_value": "-$42,000.00",
+      "label": "Period fees",
+      "synthetic_data": true,
+      "unit": "USD",
+      "value": -42000.0
+    },
+    {
+      "formatted_value": "6",
+      "label": "Cash-like positions",
+      "synthetic_data": true,
+      "unit": "count",
+      "value": 6
+    }
+  ],
+  "period": {
+    "basis": "synthetic_valuation_period",
+    "end_date": "2026-06-30",
+    "period_days": 90,
+    "start_date": "2026-04-01"
+  },
+  "render_type": "markdown_html_fragment",
+  "renderer_version": "report_element_rendering.v1",
+  "schema_version": "report_element_view_payload.v1",
+  "source_input_path": "data/simulation/report_element_inputs/cash_generation_summary.json",
+  "summary_text": "Across the synthetic period from 2026-04-01 to 2026-06-30, the portfolio has $2,460,000.00 in cash-like value, $175,984.83 of income/distributions, and -$804,263.00 of transaction flows. Cash accounting remains simplified and synthetic.",
+  "synthetic_data": true,
+  "template_category": "cash",
+  "validation": {
+    "errors": [],
+    "renderer_version": "report_element_rendering.v1",
+    "status": "valid",
+    "validated_at": "2026-06-30T00:00:00Z",
+    "warnings": []
+  },
+  "view_type": "report_element_view"
+}

@@ -15,6 +15,13 @@ from .input_mapping import (
     validate_report_element_input,
     write_demo_report_element_inputs,
 )
+from .rendering import (
+    render_all_demo_report_element_views,
+    render_report_element_html,
+    render_report_element_markdown,
+    render_report_element_view,
+    validate_report_element_view,
+)
 
 __all__ = [
     "ReportElementCatalogError",
@@ -25,7 +32,12 @@ __all__ = [
     "list_templates",
     "load_simulation_outputs",
     "load_templates",
+    "render_all_demo_report_element_views",
+    "render_report_element_html",
+    "render_report_element_markdown",
+    "render_report_element_view",
     "validate_report_element_input",
+    "validate_report_element_view",
     "validate_template_catalog",
     "write_demo_report_element_inputs",
 ]

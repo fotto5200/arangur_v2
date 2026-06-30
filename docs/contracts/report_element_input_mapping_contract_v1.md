@@ -119,3 +119,11 @@ report-generation keys.
 
 The summary payload reports payload count, element ids, output files, source
 files used, `as_of_date`, current portfolio value, and validation status.
+
+## Downstream Rendering
+
+The first downstream renderer is described in
+`docs/contracts/report_element_rendering_contract_v1.md`. It consumes these
+input payloads and emits simple view JSON plus Markdown/HTML fragments while
+still stopping before full client briefing generation, charts, browser UI
+integration, persistence, live data, or production reporting claims.

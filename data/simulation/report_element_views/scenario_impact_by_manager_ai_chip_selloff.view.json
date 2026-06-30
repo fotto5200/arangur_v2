@@ -1,0 +1,812 @@
+{
+  "as_of_date": "2026-06-30",
+  "caveats": [
+    "Synthetic demo data only.",
+    "Rendered report-element fragment only; not a full client briefing, chart, or production report.",
+    "Payload is a structured input for later rendering; it is not a generated report, chart, browser view, or client-ready briefing.",
+    "Deterministic synthetic scenario revaluation, not a forecast.",
+    "Scenario results are simplified economic revaluations and are not connected to report generation in this batch.",
+    "Deterministic synthetic scenario output only; not a forecast, probability estimate, guarantee, or manager recommendation."
+  ],
+  "confidence_summary": {
+    "by_confidence": [
+      {
+        "count": 19,
+        "id": "high",
+        "percent_of_total": 0.336149,
+        "synthetic_data": true,
+        "value": 11512526.76
+      },
+      {
+        "count": 15,
+        "id": "low",
+        "percent_of_total": 0.233113,
+        "synthetic_data": true,
+        "value": 7983723.15
+      },
+      {
+        "count": 36,
+        "id": "medium",
+        "percent_of_total": 0.399645,
+        "synthetic_data": true,
+        "value": 13687156.03
+      },
+      {
+        "count": 4,
+        "id": "unknown",
+        "percent_of_total": 0.031093,
+        "synthetic_data": true,
+        "value": 1064886.4
+      }
+    ],
+    "by_valuation_tier": [
+      {
+        "count": 6,
+        "id": "cash_face_value",
+        "percent_of_total": 0.071828,
+        "synthetic_data": true,
+        "value": 2460000.0
+      },
+      {
+        "count": 26,
+        "id": "direct_price_or_mark",
+        "percent_of_total": 0.379122,
+        "synthetic_data": true,
+        "value": 12984286.16
+      },
+      {
+        "count": 12,
+        "id": "human_review_required",
+        "percent_of_total": 0.155504,
+        "synthetic_data": true,
+        "value": 5325733.46
+      },
+      {
+        "count": 23,
+        "id": "proxy_valuation",
+        "percent_of_total": 0.284843,
+        "synthetic_data": true,
+        "value": 9755396.63
+      },
+      {
+        "count": 7,
+        "id": "stale_or_manager_mark",
+        "percent_of_total": 0.108703,
+        "synthetic_data": true,
+        "value": 3722876.09
+      }
+    ],
+    "human_review_count": 12,
+    "human_review_value": 5325733.46,
+    "label": "medium",
+    "synthetic_data": true
+  },
+  "detail_tables": {
+    "asset_class_impacts": [
+      {
+        "base_value": 2460000.0,
+        "id": "cash_money_market",
+        "percent_of_base_total": 0.06045,
+        "scenario_impact": 0.0,
+        "scenario_impact_percent": 0.0,
+        "scenario_value": 2460000.0,
+        "synthetic_data": true
+      },
+      {
+        "base_value": 1865000.0,
+        "id": "commodities_energy",
+        "percent_of_base_total": 0.045829,
+        "scenario_impact": -335582.53,
+        "scenario_impact_percent": -0.179937,
+        "scenario_value": 1529417.47,
+        "synthetic_data": true
+      },
+      {
+        "base_value": 655000.0,
+        "id": "crypto",
+        "percent_of_base_total": 0.016095,
+        "scenario_impact": 0.0,
+        "scenario_impact_percent": 0.0,
+        "scenario_value": 655000.0,
+        "synthetic_data": true
+      },
+      {
+        "base_value": 1785000.0,
+        "id": "data_center_investment",
+        "percent_of_base_total": 0.043863,
+        "scenario_impact": -261401.69,
+        "scenario_impact_percent": -0.146444,
+        "scenario_value": 1523598.31,
+        "synthetic_data": true
+      },
+      {
+        "base_value": 3390000.0,
+        "id": "etf",
+        "percent_of_base_total": 0.083303,
+        "scenario_impact": -668623.07,
+        "scenario_impact_percent": -0.197234,
+        "scenario_value": 2721376.93,
+        "synthetic_data": true
+      },
+      {
+        "base_value": 6310000.0,
+        "id": "fixed_income",
+        "percent_of_base_total": 0.155056,
+        "scenario_impact": -716945.38,
+        "scenario_impact_percent": -0.113621,
+        "scenario_value": 5593054.62,
+        "synthetic_data": true
+      },
+      {
+        "base_value": 1090000.0,
+        "id": "fx",
+        "percent_of_base_total": 0.026785,
+        "scenario_impact": -61142.52,
+        "scenario_impact_percent": -0.056094,
+        "scenario_value": 1028857.48,
+        "synthetic_data": true
+      },
+      {
+        "base_value": 1065000.0,
+        "id": "opaque_manager_level",
+        "percent_of_base_total": 0.02617,
+        "scenario_impact": -209031.57,
+        "scenario_impact_percent": -0.196274,
+        "scenario_value": 855968.43,
+        "synthetic_data": true
+      }
+    ],
+    "manager_impacts": [
+      {
+        "base_value": 10115000.0,
+        "id": "mgr_a_growth_ai_infrastructure",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "mandate": "Growth / AI Infrastructure",
+        "percent_of_base_total": 0.248556,
+        "scenario_impact": -2408684.51,
+        "scenario_impact_percent": -0.23813,
+        "scenario_value": 7706315.49,
+        "synthetic_data": true
+      },
+      {
+        "base_value": 7655000.0,
+        "id": "mgr_b_core_quality_equity",
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "mandate": "Core Quality Equity",
+        "percent_of_base_total": 0.188107,
+        "scenario_impact": -1833264.1,
+        "scenario_impact_percent": -0.239486,
+        "scenario_value": 5821735.9,
+        "synthetic_data": true
+      },
+      {
+        "base_value": 5300000.0,
+        "id": "mgr_c_income_cash_generation",
+        "manager_id": "mgr_c_income_cash_generation",
+        "manager_name": "Manager C - Income and Cash Generation",
+        "mandate": "Income and Cash Generation",
+        "percent_of_base_total": 0.130237,
+        "scenario_impact": -789653.01,
+        "scenario_impact_percent": -0.148991,
+        "scenario_value": 4510346.99,
+        "synthetic_data": true
+      },
+      {
+        "base_value": 8265000.0,
+        "id": "mgr_d_private_real_assets",
+        "manager_id": "mgr_d_private_real_assets",
+        "manager_name": "Manager D - Private Markets / Real Assets",
+        "mandate": "Private Markets / Real Assets",
+        "percent_of_base_total": 0.203096,
+        "scenario_impact": -740661.63,
+        "scenario_impact_percent": -0.089614,
+        "scenario_value": 7524338.37,
+        "synthetic_data": true
+      },
+      {
+        "base_value": 5715000.0,
+        "id": "mgr_e_liquidity_defensive",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "mandate": "Liquidity Reserve / Defensive Ballast",
+        "percent_of_base_total": 0.140435,
+        "scenario_impact": -449693.39,
+        "scenario_impact_percent": -0.078687,
+        "scenario_value": 5265306.61,
+        "synthetic_data": true
+      },
+      {
+        "base_value": 3645000.0,
+        "id": "mgr_f_opportunistic_macro",
+        "manager_id": "mgr_f_opportunistic_macro",
+        "manager_name": "Manager F - Opportunistic Macro / Hedge",
+        "mandate": "Opportunistic Macro / Hedge",
+        "percent_of_base_total": 0.089569,
+        "scenario_impact": -224751.02,
+        "scenario_impact_percent": -0.06166,
+        "scenario_value": 3420248.98,
+        "synthetic_data": true
+      }
+    ],
+    "theme_impacts": [
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "base_value": 4953416.67,
+        "id": "AI infrastructure",
+        "percent_of_base_total": 0.121721,
+        "scenario_impact": -1081094.89,
+        "scenario_impact_percent": -0.218252,
+        "scenario_value": 3872321.78,
+        "synthetic_data": true
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "base_value": 2631666.67,
+        "id": "USD exposure",
+        "percent_of_base_total": 0.064668,
+        "scenario_impact": -158010.26,
+        "scenario_impact_percent": -0.060042,
+        "scenario_value": 2473656.41,
+        "synthetic_data": true
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "base_value": 4242916.67,
+        "id": "cash generation",
+        "percent_of_base_total": 0.104261,
+        "scenario_impact": -575849.59,
+        "scenario_impact_percent": -0.13572,
+        "scenario_value": 3667067.08,
+        "synthetic_data": true
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "base_value": 218333.33,
+        "id": "crypto risk",
+        "percent_of_base_total": 0.005365,
+        "scenario_impact": 0.0,
+        "scenario_impact_percent": 0.0,
+        "scenario_value": 218333.33,
+        "synthetic_data": true
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "base_value": 1448416.67,
+        "id": "data center power demand",
+        "percent_of_base_total": 0.035592,
+        "scenario_impact": -264045.74,
+        "scenario_impact_percent": -0.1823,
+        "scenario_value": 1184370.93,
+        "synthetic_data": true
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "base_value": 1561250.0,
+        "id": "data confidence / valuation issue",
+        "percent_of_base_total": 0.038365,
+        "scenario_impact": -73903.48,
+        "scenario_impact_percent": -0.047336,
+        "scenario_value": 1487346.52,
+        "synthetic_data": true
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "base_value": 4922500.0,
+        "id": "defensive ballast",
+        "percent_of_base_total": 0.120961,
+        "scenario_impact": -628765.8,
+        "scenario_impact_percent": -0.127733,
+        "scenario_value": 4293734.2,
+        "synthetic_data": true
+      },
+      {
+        "allocation_method": "equal_split_across_position_themes",
+        "base_value": 1440083.33,
+        "id": "energy bottlenecks",
+        "percent_of_base_total": 0.035387,
+        "scenario_impact": -217358.85,
+        "scenario_impact_percent": -0.150935,
+        "scenario_value": 1222724.48,
+        "synthetic_data": true
+      }
+    ],
+    "top_position_impacts": [
+      {
+        "asset_class": "public_equity",
+        "base_value": 1850000.0,
+        "confidence": "high",
+        "display_name": "AI Compute Leader",
+        "human_review_required": false,
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "position_id": "pos_a_ai_compute_leader",
+        "scenario_impact": -482906.27,
+        "scenario_impact_percent": -0.26103,
+        "scenario_value": 1367093.73,
+        "synthetic_data": true,
+        "themes": [
+          "AI infrastructure",
+          "growth/value",
+          "manager overlap",
+          "semiconductors"
+        ],
+        "valuation_tier": "direct_price_or_mark"
+      },
+      {
+        "asset_class": "public_equity",
+        "base_value": 1480000.0,
+        "confidence": "high",
+        "display_name": "Cloud Platform Compounder",
+        "human_review_required": false,
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "position_id": "pos_a_cloud_platform_compounder",
+        "scenario_impact": -386325.01,
+        "scenario_impact_percent": -0.26103,
+        "scenario_value": 1093674.99,
+        "synthetic_data": true,
+        "themes": [
+          "AI infrastructure",
+          "growth/value",
+          "manager overlap"
+        ],
+        "valuation_tier": "direct_price_or_mark"
+      },
+      {
+        "asset_class": "public_equity",
+        "base_value": 1320000.0,
+        "confidence": "high",
+        "display_name": "Cloud Platform Compounder",
+        "human_review_required": false,
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "position_id": "pos_b_cloud_platform_compounder",
+        "scenario_impact": -344560.15,
+        "scenario_impact_percent": -0.26103,
+        "scenario_value": 975439.85,
+        "synthetic_data": true,
+        "themes": [
+          "AI infrastructure",
+          "growth/value",
+          "manager overlap"
+        ],
+        "valuation_tier": "direct_price_or_mark"
+      },
+      {
+        "asset_class": "public_equity",
+        "base_value": 1125000.0,
+        "confidence": "medium",
+        "display_name": "Chip Fabrication Partner",
+        "human_review_required": false,
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "position_id": "pos_a_chip_fabrication_partner",
+        "scenario_impact": -293659.22,
+        "scenario_impact_percent": -0.26103,
+        "scenario_value": 831340.78,
+        "synthetic_data": true,
+        "themes": [
+          "AI infrastructure",
+          "growth/value",
+          "semiconductors"
+        ],
+        "valuation_tier": "direct_price_or_mark"
+      },
+      {
+        "asset_class": "public_equity",
+        "base_value": 920000.0,
+        "confidence": "high",
+        "display_name": "Semicap Equipment Maker",
+        "human_review_required": false,
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "position_id": "pos_a_semicap_equipment_maker",
+        "scenario_impact": -240147.98,
+        "scenario_impact_percent": -0.26103,
+        "scenario_value": 679852.02,
+        "synthetic_data": true,
+        "themes": [
+          "AI infrastructure",
+          "growth/value",
+          "semiconductors"
+        ],
+        "valuation_tier": "direct_price_or_mark"
+      },
+      {
+        "asset_class": "public_equity",
+        "base_value": 910000.0,
+        "confidence": "high",
+        "display_name": "Consumer Platform Quality",
+        "human_review_required": false,
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "position_id": "pos_b_consumer_platform_quality",
+        "scenario_impact": -237537.68,
+        "scenario_impact_percent": -0.26103,
+        "scenario_value": 672462.32,
+        "synthetic_data": true,
+        "themes": [
+          "defensive ballast",
+          "growth/value"
+        ],
+        "valuation_tier": "direct_price_or_mark"
+      },
+      {
+        "asset_class": "public_equity",
+        "base_value": 760000.0,
+        "confidence": "high",
+        "display_name": "Payments Network Core",
+        "human_review_required": false,
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "position_id": "pos_b_payments_network_core",
+        "scenario_impact": -198383.12,
+        "scenario_impact_percent": -0.26103,
+        "scenario_value": 561616.88,
+        "synthetic_data": true,
+        "themes": [
+          "cash generation",
+          "growth/value"
+        ],
+        "valuation_tier": "direct_price_or_mark"
+      },
+      {
+        "asset_class": "public_equity",
+        "base_value": 740000.0,
+        "confidence": "medium",
+        "display_name": "Accelerator Design House",
+        "human_review_required": false,
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "position_id": "pos_a_accelerator_design_house",
+        "scenario_impact": -193162.51,
+        "scenario_impact_percent": -0.26103,
+        "scenario_value": 546837.49,
+        "synthetic_data": true,
+        "themes": [
+          "AI infrastructure",
+          "growth/value",
+          "semiconductors"
+        ],
+        "valuation_tier": "direct_price_or_mark"
+      },
+      {
+        "asset_class": "etf",
+        "base_value": 880000.0,
+        "confidence": "medium",
+        "display_name": "Quality Factor ETF",
+        "human_review_required": false,
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "position_id": "pos_b_quality_factor_etf",
+        "scenario_impact": -173565.87,
+        "scenario_impact_percent": -0.197234,
+        "scenario_value": 706434.13,
+        "synthetic_data": true,
+        "themes": [
+          "defensive ballast",
+          "growth/value"
+        ],
+        "valuation_tier": "proxy_valuation"
+      },
+      {
+        "asset_class": "public_equity",
+        "base_value": 635000.0,
+        "confidence": "high",
+        "display_name": "Quality Consumer Staples",
+        "human_review_required": false,
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "position_id": "pos_b_quality_consumer_staples",
+        "scenario_impact": -165754.31,
+        "scenario_impact_percent": -0.26103,
+        "scenario_value": 469245.69,
+        "synthetic_data": true,
+        "themes": [
+          "cash generation",
+          "defensive ballast",
+          "growth/value"
+        ],
+        "valuation_tier": "direct_price_or_mark"
+      }
+    ]
+  },
+  "element_id": "scenario_impact_by_manager",
+  "element_title": "Scenario Impact by Manager",
+  "evidence_rows": [
+    {
+      "base_value": 10115000.0,
+      "id": "mgr_a_growth_ai_infrastructure",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "manager_name": "Manager A - Growth / AI Infrastructure",
+      "mandate": "Growth / AI Infrastructure",
+      "percent_of_base_total": 0.248556,
+      "row_type": "manager_scenario_impact",
+      "scenario_impact": -2408684.51,
+      "scenario_impact_percent": -0.23813,
+      "scenario_value": 7706315.49,
+      "synthetic_data": true
+    },
+    {
+      "base_value": 7655000.0,
+      "id": "mgr_b_core_quality_equity",
+      "manager_id": "mgr_b_core_quality_equity",
+      "manager_name": "Manager B - Core Quality Equity",
+      "mandate": "Core Quality Equity",
+      "percent_of_base_total": 0.188107,
+      "row_type": "manager_scenario_impact",
+      "scenario_impact": -1833264.1,
+      "scenario_impact_percent": -0.239486,
+      "scenario_value": 5821735.9,
+      "synthetic_data": true
+    },
+    {
+      "base_value": 5300000.0,
+      "id": "mgr_c_income_cash_generation",
+      "manager_id": "mgr_c_income_cash_generation",
+      "manager_name": "Manager C - Income and Cash Generation",
+      "mandate": "Income and Cash Generation",
+      "percent_of_base_total": 0.130237,
+      "row_type": "manager_scenario_impact",
+      "scenario_impact": -789653.01,
+      "scenario_impact_percent": -0.148991,
+      "scenario_value": 4510346.99,
+      "synthetic_data": true
+    },
+    {
+      "base_value": 8265000.0,
+      "id": "mgr_d_private_real_assets",
+      "manager_id": "mgr_d_private_real_assets",
+      "manager_name": "Manager D - Private Markets / Real Assets",
+      "mandate": "Private Markets / Real Assets",
+      "percent_of_base_total": 0.203096,
+      "row_type": "manager_scenario_impact",
+      "scenario_impact": -740661.63,
+      "scenario_impact_percent": -0.089614,
+      "scenario_value": 7524338.37,
+      "synthetic_data": true
+    },
+    {
+      "base_value": 5715000.0,
+      "id": "mgr_e_liquidity_defensive",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+      "mandate": "Liquidity Reserve / Defensive Ballast",
+      "percent_of_base_total": 0.140435,
+      "row_type": "manager_scenario_impact",
+      "scenario_impact": -449693.39,
+      "scenario_impact_percent": -0.078687,
+      "scenario_value": 5265306.61,
+      "synthetic_data": true
+    },
+    {
+      "base_value": 3645000.0,
+      "id": "mgr_f_opportunistic_macro",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "manager_name": "Manager F - Opportunistic Macro / Hedge",
+      "mandate": "Opportunistic Macro / Hedge",
+      "percent_of_base_total": 0.089569,
+      "row_type": "manager_scenario_impact",
+      "scenario_impact": -224751.02,
+      "scenario_impact_percent": -0.06166,
+      "scenario_value": 3420248.98,
+      "synthetic_data": true
+    }
+  ],
+  "generated_at": "2026-06-30T00:00:00Z",
+  "headline": "AI / Chip Selloff impact: -$6,446,707.66",
+  "human_review_items": [
+    {
+      "confidence": "low",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "position_id": "pos_a_ai_infra_call_spread_note",
+      "reason": "Scenario revaluation includes human-review or low-confidence treatment.",
+      "scenario_impact": 35553.74,
+      "scenario_value": 310553.74,
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required"
+    },
+    {
+      "confidence": "low",
+      "manager_id": "mgr_c_income_cash_generation",
+      "position_id": "pos_c_private_credit_income_fund",
+      "reason": "Scenario revaluation includes human-review or low-confidence treatment.",
+      "scenario_impact": -40115.46,
+      "scenario_value": 499884.54,
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required"
+    },
+    {
+      "confidence": "low",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_northstar_ai_growth_fund",
+      "reason": "Scenario revaluation includes human-review or low-confidence treatment.",
+      "scenario_impact": -119010.63,
+      "scenario_value": 1140989.37,
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required"
+    },
+    {
+      "confidence": "low",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_venture_ai_infrastructure_fund",
+      "reason": "Scenario revaluation includes human-review or low-confidence treatment.",
+      "scenario_impact": -69895.13,
+      "scenario_value": 670104.87,
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required"
+    },
+    {
+      "confidence": "low",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_data_center_development_jv",
+      "reason": "Scenario revaluation includes human-review or low-confidence treatment.",
+      "scenario_impact": -137656.91,
+      "scenario_value": 802343.09,
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required"
+    },
+    {
+      "confidence": "low",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_power_campus_preferred",
+      "reason": "Scenario revaluation includes human-review or low-confidence treatment.",
+      "scenario_impact": -66631.8,
+      "scenario_value": 388368.2,
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required"
+    },
+    {
+      "confidence": "unknown",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_data_center_land_option",
+      "reason": "Scenario revaluation includes human-review or low-confidence treatment.",
+      "scenario_impact": 23917.97,
+      "scenario_value": 208917.97,
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required"
+    },
+    {
+      "confidence": "unknown",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_opaque_manager_level_private_book",
+      "reason": "Scenario revaluation includes human-review or low-confidence treatment.",
+      "scenario_impact": -119727.0,
+      "scenario_value": 490273.0,
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required"
+    },
+    {
+      "confidence": "unknown",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_private_mark_placeholder",
+      "reason": "Scenario revaluation includes human-review or low-confidence treatment.",
+      "scenario_impact": -24534.22,
+      "scenario_value": 100465.78,
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required"
+    },
+    {
+      "confidence": "unknown",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_macro_overlay_manager_book",
+      "reason": "Scenario revaluation includes human-review or low-confidence treatment.",
+      "scenario_impact": -64770.35,
+      "scenario_value": 265229.65,
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required"
+    },
+    {
+      "confidence": "low",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_rates_volatility_collar",
+      "reason": "Scenario revaluation includes human-review or low-confidence treatment.",
+      "scenario_impact": 27150.13,
+      "scenario_value": 237150.13,
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required"
+    },
+    {
+      "confidence": "low",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_ai_chip_downside_put_spread",
+      "reason": "Scenario revaluation includes human-review or low-confidence treatment.",
+      "scenario_impact": 56453.12,
+      "scenario_value": 211453.12,
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required"
+    }
+  ],
+  "input_parameters": {
+    "branch": "Advisor Review",
+    "placement": "Scenario appendix",
+    "scenario_id": "ai_chip_selloff",
+    "scope": "All managers compared"
+  },
+  "key_metrics": [
+    {
+      "formatted_value": "$40,695,000.00",
+      "label": "Base value",
+      "synthetic_data": true,
+      "unit": "USD",
+      "value": 40695000.0
+    },
+    {
+      "formatted_value": "$34,248,292.34",
+      "label": "Scenario value",
+      "synthetic_data": true,
+      "unit": "USD",
+      "value": 34248292.34
+    },
+    {
+      "formatted_value": "-$6,446,707.66",
+      "label": "Total scenario impact",
+      "synthetic_data": true,
+      "unit": "USD",
+      "value": -6446707.66
+    },
+    {
+      "formatted_value": "-15.84%",
+      "label": "Total scenario impact percent",
+      "synthetic_data": true,
+      "unit": "ratio",
+      "value": -0.158415
+    },
+    {
+      "formatted_value": "6",
+      "label": "Managers",
+      "synthetic_data": true,
+      "unit": "count",
+      "value": 6
+    },
+    {
+      "formatted_value": "AI / Chip Selloff",
+      "label": "Scenario",
+      "synthetic_data": true,
+      "unit": null,
+      "value": "AI / Chip Selloff"
+    }
+  ],
+  "render_type": "markdown_html_fragment",
+  "renderer_version": "report_element_rendering.v1",
+  "scenario": {
+    "description": "Synthetic stress to AI infrastructure, semiconductors, growth tech, and risk appetite.",
+    "display_name": "AI / Chip Selloff",
+    "horizon": "3 months",
+    "scenario_completeness": {
+      "cash_treatment_count": 2,
+      "confidence_counts": {
+        "high": 7,
+        "low": 4,
+        "medium": 12
+      },
+      "covered_variable_count": 23,
+      "direct_treatment_count": 6,
+      "human_review_count": 1,
+      "missing_variable_count": 0,
+      "model_input_treatment_count": 3,
+      "proxy_treatment_count": 9,
+      "required_variable_count": 23,
+      "stale_mark_treatment_count": 2,
+      "status": "complete"
+    },
+    "scenario_date": "2026-06-30",
+    "scenario_id": "ai_chip_selloff",
+    "synthetic_data": true
+  },
+  "schema_version": "report_element_view_payload.v1",
+  "source_input_path": "data/simulation/report_element_inputs/scenario_impact_by_manager_ai_chip_selloff.json",
+  "summary_text": "The AI/chip selloff scenario shows a deterministic synthetic portfolio impact of -$6,446,707.66 (-15.84%) over 3 months. Manager-level impacts are shown for review; this scenario is not a forecast or probability estimate.",
+  "synthetic_data": true,
+  "template_category": "scenario",
+  "validation": {
+    "errors": [],
+    "renderer_version": "report_element_rendering.v1",
+    "status": "valid",
+    "validated_at": "2026-06-30T00:00:00Z",
+    "warnings": []
+  },
+  "view_type": "report_element_view"
+}

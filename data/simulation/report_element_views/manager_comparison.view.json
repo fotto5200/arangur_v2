@@ -1,0 +1,909 @@
+{
+  "as_of_date": "2026-06-30",
+  "caveats": [
+    "Synthetic demo data only.",
+    "Rendered report-element fragment only; not a full client briefing, chart, or production report.",
+    "Payload is a structured input for later rendering; it is not a generated report, chart, browser view, or client-ready briefing.",
+    "Manager comparison rows combine synthetic manager metadata, current valuation aggregates, and period value-change output.",
+    "Mandate and theme text is synthetic metadata, not due diligence or recommendation language.",
+    "Manager rows compare synthetic mandate and valuation evidence; they are not manager rankings or recommendations."
+  ],
+  "confidence_summary": {
+    "by_confidence": [
+      {
+        "count": 19,
+        "id": "high",
+        "percent_of_total": 0.346849,
+        "synthetic_data": true,
+        "value": 14115000.0
+      },
+      {
+        "count": 15,
+        "id": "low",
+        "percent_of_total": 0.209485,
+        "synthetic_data": true,
+        "value": 8525000.0
+      },
+      {
+        "count": 36,
+        "id": "medium",
+        "percent_of_total": 0.41295,
+        "synthetic_data": true,
+        "value": 16805000.0
+      },
+      {
+        "count": 4,
+        "id": "unknown",
+        "percent_of_total": 0.030716,
+        "synthetic_data": true,
+        "value": 1250000.0
+      }
+    ],
+    "by_valuation_tier": [
+      {
+        "count": 6,
+        "id": "cash_face_value",
+        "percent_of_total": 0.06045,
+        "synthetic_data": true,
+        "value": 2460000.0
+      },
+      {
+        "count": 26,
+        "id": "direct_price_or_mark",
+        "percent_of_total": 0.416882,
+        "synthetic_data": true,
+        "value": 16965000.0
+      },
+      {
+        "count": 12,
+        "id": "human_review_required",
+        "percent_of_total": 0.143138,
+        "synthetic_data": true,
+        "value": 5825000.0
+      },
+      {
+        "count": 23,
+        "id": "proxy_valuation",
+        "percent_of_total": 0.282467,
+        "synthetic_data": true,
+        "value": 11495000.0
+      },
+      {
+        "count": 7,
+        "id": "stale_or_manager_mark",
+        "percent_of_total": 0.097064,
+        "synthetic_data": true,
+        "value": 3950000.0
+      }
+    ],
+    "human_review_count": 12,
+    "human_review_value": 5825000.0,
+    "label": "medium",
+    "synthetic_data": true
+  },
+  "detail_tables": {
+    "manager_rows": [
+      {
+        "closing_value": 10115000.0,
+        "confidence_summary": {
+          "by_confidence": [
+            {
+              "count": 5,
+              "id": "high",
+              "percent_of_total": 0.507662,
+              "synthetic_data": true,
+              "value": 5135000.0
+            },
+            {
+              "count": 1,
+              "id": "low",
+              "percent_of_total": 0.027187,
+              "synthetic_data": true,
+              "value": 275000.0
+            },
+            {
+              "count": 8,
+              "id": "medium",
+              "percent_of_total": 0.465151,
+              "synthetic_data": true,
+              "value": 4705000.0
+            }
+          ]
+        },
+        "current_value": 10115000.0,
+        "economic_value_change": -1052296.71,
+        "human_review_count": 1,
+        "human_review_value": 275000.0,
+        "income_distributions": 2004.33,
+        "intended_role": "High-conviction public growth and AI infrastructure exposure.",
+        "liquidity_profile": "mostly_liquid",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "mandate": "Growth / AI Infrastructure",
+        "opening_value": 11442155.73,
+        "percent_of_total": 0.248556,
+        "position_count": 14,
+        "primary_themes": [
+          "AI infrastructure",
+          "semiconductors",
+          "data center power demand",
+          "growth/value"
+        ],
+        "synthetic_data": true,
+        "transaction_flows": -276863.35,
+        "value_change": -1327155.73
+      },
+      {
+        "closing_value": 7655000.0,
+        "confidence_summary": {
+          "by_confidence": [
+            {
+              "count": 7,
+              "id": "high",
+              "percent_of_total": 0.653821,
+              "synthetic_data": true,
+              "value": 5005000.0
+            },
+            {
+              "count": 5,
+              "id": "medium",
+              "percent_of_total": 0.346179,
+              "synthetic_data": true,
+              "value": 2650000.0
+            }
+          ]
+        },
+        "current_value": 7655000.0,
+        "economic_value_change": -821509.25,
+        "human_review_count": 0,
+        "human_review_value": 0.0,
+        "income_distributions": 1741.16,
+        "intended_role": "Durable core public equity exposure with quality and valuation discipline.",
+        "liquidity_profile": "liquid",
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "mandate": "Core Quality Equity",
+        "opening_value": 8671737.48,
+        "percent_of_total": 0.188107,
+        "position_count": 12,
+        "primary_themes": [
+          "growth/value",
+          "defensive ballast",
+          "manager overlap"
+        ],
+        "synthetic_data": true,
+        "transaction_flows": -196969.39,
+        "value_change": -1016737.48
+      },
+      {
+        "closing_value": 5300000.0,
+        "confidence_summary": {
+          "by_confidence": [
+            {
+              "count": 2,
+              "id": "high",
+              "percent_of_total": 0.101887,
+              "synthetic_data": true,
+              "value": 540000.0
+            },
+            {
+              "count": 1,
+              "id": "low",
+              "percent_of_total": 0.101887,
+              "synthetic_data": true,
+              "value": 540000.0
+            },
+            {
+              "count": 9,
+              "id": "medium",
+              "percent_of_total": 0.796226,
+              "synthetic_data": true,
+              "value": 4220000.0
+            }
+          ]
+        },
+        "current_value": 5300000.0,
+        "economic_value_change": -563964.57,
+        "human_review_count": 1,
+        "human_review_value": 540000.0,
+        "income_distributions": 70359.9,
+        "intended_role": "Income, credit, and rate-sensitive exposure for spending support.",
+        "liquidity_profile": "mixed_liquid",
+        "manager_id": "mgr_c_income_cash_generation",
+        "manager_name": "Manager C - Income and Cash Generation",
+        "mandate": "Income and Cash Generation",
+        "opening_value": 5793604.67,
+        "percent_of_total": 0.130237,
+        "position_count": 12,
+        "primary_themes": [
+          "cash generation",
+          "rates sensitivity",
+          "defensive ballast"
+        ],
+        "synthetic_data": true,
+        "transaction_flows": 0.0,
+        "value_change": -493604.67
+      },
+      {
+        "closing_value": 8265000.0,
+        "confidence_summary": {
+          "by_confidence": [
+            {
+              "count": 11,
+              "id": "low",
+              "percent_of_total": 0.888687,
+              "synthetic_data": true,
+              "value": 7345000.0
+            },
+            {
+              "count": 3,
+              "id": "unknown",
+              "percent_of_total": 0.111313,
+              "synthetic_data": true,
+              "value": 920000.0
+            }
+          ]
+        },
+        "current_value": 8265000.0,
+        "economic_value_change": -380482.72,
+        "human_review_count": 7,
+        "human_review_value": 4315000.0,
+        "income_distributions": 62142.43,
+        "intended_role": "Illiquid growth, real assets, private credit, and data center exposure.",
+        "liquidity_profile": "illiquid",
+        "manager_id": "mgr_d_private_real_assets",
+        "manager_name": "Manager D - Private Markets / Real Assets",
+        "mandate": "Private Markets / Real Assets",
+        "opening_value": 8586760.71,
+        "percent_of_total": 0.203096,
+        "position_count": 14,
+        "primary_themes": [
+          "private-market liquidity",
+          "opaque/private marks",
+          "data center power demand"
+        ],
+        "synthetic_data": true,
+        "transaction_flows": -3420.42,
+        "value_change": -321760.71
+      },
+      {
+        "closing_value": 5715000.0,
+        "confidence_summary": {
+          "by_confidence": [
+            {
+              "count": 5,
+              "id": "high",
+              "percent_of_total": 0.60105,
+              "synthetic_data": true,
+              "value": 3435000.0
+            },
+            {
+              "count": 5,
+              "id": "medium",
+              "percent_of_total": 0.39895,
+              "synthetic_data": true,
+              "value": 2280000.0
+            }
+          ]
+        },
+        "current_value": 5715000.0,
+        "economic_value_change": -248026.57,
+        "human_review_count": 0,
+        "human_review_value": 0.0,
+        "income_distributions": 39737.01,
+        "intended_role": "Liquidity, capital preservation, and spending buffer.",
+        "liquidity_profile": "daily_liquidity",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "mandate": "Liquidity Reserve / Defensive Ballast",
+        "opening_value": 5998252.63,
+        "percent_of_total": 0.140435,
+        "position_count": 10,
+        "primary_themes": [
+          "defensive ballast",
+          "USD exposure",
+          "rates sensitivity"
+        ],
+        "synthetic_data": true,
+        "transaction_flows": -74963.07,
+        "value_change": -283252.63
+      },
+      {
+        "closing_value": 3645000.0,
+        "confidence_summary": {
+          "by_confidence": [
+            {
+              "count": 2,
+              "id": "low",
+              "percent_of_total": 0.100137,
+              "synthetic_data": true,
+              "value": 365000.0
+            },
+            {
+              "count": 9,
+              "id": "medium",
+              "percent_of_total": 0.809328,
+              "synthetic_data": true,
+              "value": 2950000.0
+            },
+            {
+              "count": 1,
+              "id": "unknown",
+              "percent_of_total": 0.090535,
+              "synthetic_data": true,
+              "value": 330000.0
+            }
+          ]
+        },
+        "current_value": 3645000.0,
+        "economic_value_change": -302419.65,
+        "human_review_count": 3,
+        "human_review_value": 695000.0,
+        "income_distributions": 0.0,
+        "intended_role": "Macro hedges, currency exposure, commodities, crypto, and option-like risk controls.",
+        "liquidity_profile": "mixed_liquid",
+        "manager_id": "mgr_f_opportunistic_macro",
+        "manager_name": "Manager F - Opportunistic Macro / Hedge",
+        "mandate": "Opportunistic Macro / Hedge",
+        "opening_value": 4019466.42,
+        "percent_of_total": 0.089569,
+        "position_count": 12,
+        "primary_themes": [
+          "energy bottlenecks",
+          "inflation sensitivity",
+          "crypto risk",
+          "USD exposure"
+        ],
+        "synthetic_data": true,
+        "transaction_flows": -72046.77,
+        "value_change": -374466.42
+      }
+    ],
+    "value_change_by_manager": [
+      {
+        "closing_value": 10115000.0,
+        "economic_value_change": -1052296.71,
+        "fees": 0.0,
+        "id": "mgr_a_growth_ai_infrastructure",
+        "income_distributions": 2004.33,
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "mandate": "Growth / AI Infrastructure",
+        "opening_value": 11442155.73,
+        "synthetic_data": true,
+        "transaction_flows": -276863.35,
+        "value_change": -1327155.73
+      },
+      {
+        "closing_value": 7655000.0,
+        "economic_value_change": -821509.25,
+        "fees": 0.0,
+        "id": "mgr_b_core_quality_equity",
+        "income_distributions": 1741.16,
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "mandate": "Core Quality Equity",
+        "opening_value": 8671737.48,
+        "synthetic_data": true,
+        "transaction_flows": -196969.39,
+        "value_change": -1016737.48
+      },
+      {
+        "closing_value": 5300000.0,
+        "economic_value_change": -563964.57,
+        "fees": 0.0,
+        "id": "mgr_c_income_cash_generation",
+        "income_distributions": 70359.9,
+        "manager_id": "mgr_c_income_cash_generation",
+        "manager_name": "Manager C - Income and Cash Generation",
+        "mandate": "Income and Cash Generation",
+        "opening_value": 5793604.67,
+        "synthetic_data": true,
+        "transaction_flows": 0.0,
+        "value_change": -493604.67
+      },
+      {
+        "closing_value": 8265000.0,
+        "economic_value_change": -380482.72,
+        "fees": 0.0,
+        "id": "mgr_d_private_real_assets",
+        "income_distributions": 62142.43,
+        "manager_id": "mgr_d_private_real_assets",
+        "manager_name": "Manager D - Private Markets / Real Assets",
+        "mandate": "Private Markets / Real Assets",
+        "opening_value": 8586760.71,
+        "synthetic_data": true,
+        "transaction_flows": -3420.42,
+        "value_change": -321760.71
+      },
+      {
+        "closing_value": 5715000.0,
+        "economic_value_change": -248026.57,
+        "fees": 0.0,
+        "id": "mgr_e_liquidity_defensive",
+        "income_distributions": 39737.01,
+        "manager_id": "mgr_e_liquidity_defensive",
+        "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "mandate": "Liquidity Reserve / Defensive Ballast",
+        "opening_value": 5998252.63,
+        "synthetic_data": true,
+        "transaction_flows": -74963.07,
+        "value_change": -283252.63
+      },
+      {
+        "closing_value": 3645000.0,
+        "economic_value_change": -302419.65,
+        "fees": 0.0,
+        "id": "mgr_f_opportunistic_macro",
+        "income_distributions": 0.0,
+        "manager_id": "mgr_f_opportunistic_macro",
+        "manager_name": "Manager F - Opportunistic Macro / Hedge",
+        "mandate": "Opportunistic Macro / Hedge",
+        "opening_value": 4019466.42,
+        "synthetic_data": true,
+        "transaction_flows": -72046.77,
+        "value_change": -374466.42
+      }
+    ]
+  },
+  "element_id": "manager_comparison",
+  "element_title": "Manager Comparison",
+  "evidence_rows": [
+    {
+      "closing_value": 10115000.0,
+      "confidence_summary": {
+        "by_confidence": [
+          {
+            "count": 5,
+            "id": "high",
+            "percent_of_total": 0.507662,
+            "synthetic_data": true,
+            "value": 5135000.0
+          },
+          {
+            "count": 1,
+            "id": "low",
+            "percent_of_total": 0.027187,
+            "synthetic_data": true,
+            "value": 275000.0
+          },
+          {
+            "count": 8,
+            "id": "medium",
+            "percent_of_total": 0.465151,
+            "synthetic_data": true,
+            "value": 4705000.0
+          }
+        ]
+      },
+      "current_value": 10115000.0,
+      "economic_value_change": -1052296.71,
+      "human_review_count": 1,
+      "human_review_value": 275000.0,
+      "income_distributions": 2004.33,
+      "intended_role": "High-conviction public growth and AI infrastructure exposure.",
+      "liquidity_profile": "mostly_liquid",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "manager_name": "Manager A - Growth / AI Infrastructure",
+      "mandate": "Growth / AI Infrastructure",
+      "opening_value": 11442155.73,
+      "percent_of_total": 0.248556,
+      "position_count": 14,
+      "primary_themes": [
+        "AI infrastructure",
+        "semiconductors",
+        "data center power demand",
+        "growth/value"
+      ],
+      "row_type": "manager_comparison",
+      "synthetic_data": true,
+      "transaction_flows": -276863.35,
+      "value_change": -1327155.73
+    },
+    {
+      "closing_value": 7655000.0,
+      "confidence_summary": {
+        "by_confidence": [
+          {
+            "count": 7,
+            "id": "high",
+            "percent_of_total": 0.653821,
+            "synthetic_data": true,
+            "value": 5005000.0
+          },
+          {
+            "count": 5,
+            "id": "medium",
+            "percent_of_total": 0.346179,
+            "synthetic_data": true,
+            "value": 2650000.0
+          }
+        ]
+      },
+      "current_value": 7655000.0,
+      "economic_value_change": -821509.25,
+      "human_review_count": 0,
+      "human_review_value": 0.0,
+      "income_distributions": 1741.16,
+      "intended_role": "Durable core public equity exposure with quality and valuation discipline.",
+      "liquidity_profile": "liquid",
+      "manager_id": "mgr_b_core_quality_equity",
+      "manager_name": "Manager B - Core Quality Equity",
+      "mandate": "Core Quality Equity",
+      "opening_value": 8671737.48,
+      "percent_of_total": 0.188107,
+      "position_count": 12,
+      "primary_themes": [
+        "growth/value",
+        "defensive ballast",
+        "manager overlap"
+      ],
+      "row_type": "manager_comparison",
+      "synthetic_data": true,
+      "transaction_flows": -196969.39,
+      "value_change": -1016737.48
+    },
+    {
+      "closing_value": 5300000.0,
+      "confidence_summary": {
+        "by_confidence": [
+          {
+            "count": 2,
+            "id": "high",
+            "percent_of_total": 0.101887,
+            "synthetic_data": true,
+            "value": 540000.0
+          },
+          {
+            "count": 1,
+            "id": "low",
+            "percent_of_total": 0.101887,
+            "synthetic_data": true,
+            "value": 540000.0
+          },
+          {
+            "count": 9,
+            "id": "medium",
+            "percent_of_total": 0.796226,
+            "synthetic_data": true,
+            "value": 4220000.0
+          }
+        ]
+      },
+      "current_value": 5300000.0,
+      "economic_value_change": -563964.57,
+      "human_review_count": 1,
+      "human_review_value": 540000.0,
+      "income_distributions": 70359.9,
+      "intended_role": "Income, credit, and rate-sensitive exposure for spending support.",
+      "liquidity_profile": "mixed_liquid",
+      "manager_id": "mgr_c_income_cash_generation",
+      "manager_name": "Manager C - Income and Cash Generation",
+      "mandate": "Income and Cash Generation",
+      "opening_value": 5793604.67,
+      "percent_of_total": 0.130237,
+      "position_count": 12,
+      "primary_themes": [
+        "cash generation",
+        "rates sensitivity",
+        "defensive ballast"
+      ],
+      "row_type": "manager_comparison",
+      "synthetic_data": true,
+      "transaction_flows": 0.0,
+      "value_change": -493604.67
+    },
+    {
+      "closing_value": 8265000.0,
+      "confidence_summary": {
+        "by_confidence": [
+          {
+            "count": 11,
+            "id": "low",
+            "percent_of_total": 0.888687,
+            "synthetic_data": true,
+            "value": 7345000.0
+          },
+          {
+            "count": 3,
+            "id": "unknown",
+            "percent_of_total": 0.111313,
+            "synthetic_data": true,
+            "value": 920000.0
+          }
+        ]
+      },
+      "current_value": 8265000.0,
+      "economic_value_change": -380482.72,
+      "human_review_count": 7,
+      "human_review_value": 4315000.0,
+      "income_distributions": 62142.43,
+      "intended_role": "Illiquid growth, real assets, private credit, and data center exposure.",
+      "liquidity_profile": "illiquid",
+      "manager_id": "mgr_d_private_real_assets",
+      "manager_name": "Manager D - Private Markets / Real Assets",
+      "mandate": "Private Markets / Real Assets",
+      "opening_value": 8586760.71,
+      "percent_of_total": 0.203096,
+      "position_count": 14,
+      "primary_themes": [
+        "private-market liquidity",
+        "opaque/private marks",
+        "data center power demand"
+      ],
+      "row_type": "manager_comparison",
+      "synthetic_data": true,
+      "transaction_flows": -3420.42,
+      "value_change": -321760.71
+    },
+    {
+      "closing_value": 5715000.0,
+      "confidence_summary": {
+        "by_confidence": [
+          {
+            "count": 5,
+            "id": "high",
+            "percent_of_total": 0.60105,
+            "synthetic_data": true,
+            "value": 3435000.0
+          },
+          {
+            "count": 5,
+            "id": "medium",
+            "percent_of_total": 0.39895,
+            "synthetic_data": true,
+            "value": 2280000.0
+          }
+        ]
+      },
+      "current_value": 5715000.0,
+      "economic_value_change": -248026.57,
+      "human_review_count": 0,
+      "human_review_value": 0.0,
+      "income_distributions": 39737.01,
+      "intended_role": "Liquidity, capital preservation, and spending buffer.",
+      "liquidity_profile": "daily_liquidity",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+      "mandate": "Liquidity Reserve / Defensive Ballast",
+      "opening_value": 5998252.63,
+      "percent_of_total": 0.140435,
+      "position_count": 10,
+      "primary_themes": [
+        "defensive ballast",
+        "USD exposure",
+        "rates sensitivity"
+      ],
+      "row_type": "manager_comparison",
+      "synthetic_data": true,
+      "transaction_flows": -74963.07,
+      "value_change": -283252.63
+    },
+    {
+      "closing_value": 3645000.0,
+      "confidence_summary": {
+        "by_confidence": [
+          {
+            "count": 2,
+            "id": "low",
+            "percent_of_total": 0.100137,
+            "synthetic_data": true,
+            "value": 365000.0
+          },
+          {
+            "count": 9,
+            "id": "medium",
+            "percent_of_total": 0.809328,
+            "synthetic_data": true,
+            "value": 2950000.0
+          },
+          {
+            "count": 1,
+            "id": "unknown",
+            "percent_of_total": 0.090535,
+            "synthetic_data": true,
+            "value": 330000.0
+          }
+        ]
+      },
+      "current_value": 3645000.0,
+      "economic_value_change": -302419.65,
+      "human_review_count": 3,
+      "human_review_value": 695000.0,
+      "income_distributions": 0.0,
+      "intended_role": "Macro hedges, currency exposure, commodities, crypto, and option-like risk controls.",
+      "liquidity_profile": "mixed_liquid",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "manager_name": "Manager F - Opportunistic Macro / Hedge",
+      "mandate": "Opportunistic Macro / Hedge",
+      "opening_value": 4019466.42,
+      "percent_of_total": 0.089569,
+      "position_count": 12,
+      "primary_themes": [
+        "energy bottlenecks",
+        "inflation sensitivity",
+        "crypto risk",
+        "USD exposure"
+      ],
+      "row_type": "manager_comparison",
+      "synthetic_data": true,
+      "transaction_flows": -72046.77,
+      "value_change": -374466.42
+    }
+  ],
+  "generated_at": "2026-06-30T00:00:00Z",
+  "headline": "Manager Comparison",
+  "human_review_items": [
+    {
+      "confidence": "low",
+      "instrument_id": "instr_ai_infra_call_spread_note",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "position_id": "pos_a_ai_infra_call_spread_note",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 275000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_private_credit_income_fund",
+      "manager_id": "mgr_c_income_cash_generation",
+      "position_id": "pos_c_private_credit_income_fund",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 540000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_northstar_ai_growth_fund",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_northstar_ai_growth_fund",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 1260000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_venture_ai_infrastructure_fund",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_venture_ai_infrastructure_fund",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 740000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_data_center_development_jv",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_data_center_development_jv",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 940000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_power_campus_preferred",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_power_campus_preferred",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 455000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_data_center_land_option",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_data_center_land_option",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 185000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_opaque_manager_level_private_book",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_opaque_manager_level_private_book",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 610000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_private_mark_placeholder",
+      "manager_id": "mgr_d_private_real_assets",
+      "position_id": "pos_d_private_mark_placeholder",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 125000.0
+    },
+    {
+      "confidence": "unknown",
+      "instrument_id": "instr_macro_overlay_manager_book",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_macro_overlay_manager_book",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 330000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_rates_volatility_collar",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_rates_volatility_collar",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 210000.0
+    },
+    {
+      "confidence": "low",
+      "instrument_id": "instr_ai_chip_downside_put_spread",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "position_id": "pos_f_ai_chip_downside_put_spread",
+      "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+      "synthetic_data": true,
+      "valuation_tier": "human_review_required",
+      "value": 155000.0
+    }
+  ],
+  "input_parameters": {
+    "branch": "Advisor Review",
+    "metric": "Current value and period value change",
+    "placement": "Manager review",
+    "scope": "All managers compared"
+  },
+  "key_metrics": [
+    {
+      "formatted_value": "6",
+      "label": "Managers",
+      "synthetic_data": true,
+      "unit": "count",
+      "value": 6
+    },
+    {
+      "formatted_value": "$10,115,000.00",
+      "label": "Largest manager value",
+      "synthetic_data": true,
+      "unit": "USD",
+      "value": 10115000.0
+    },
+    {
+      "formatted_value": "-$3,146,699.47",
+      "label": "Period economic value change",
+      "synthetic_data": true,
+      "unit": "USD",
+      "value": -3146699.47
+    },
+    {
+      "formatted_value": "4",
+      "label": "Managers with human-review items",
+      "synthetic_data": true,
+      "unit": "count",
+      "value": 4
+    }
+  ],
+  "render_type": "markdown_html_fragment",
+  "renderer_version": "report_element_rendering.v1",
+  "schema_version": "report_element_view_payload.v1",
+  "source_input_path": "data/simulation/report_element_inputs/manager_comparison.json",
+  "summary_text": "The synthetic comparison includes 6 managers. The largest current manager value is $10,115,000.00; rows show mandate, current value, period value change, themes, and confidence notes without ranking managers as recommendations.",
+  "synthetic_data": true,
+  "template_category": "manager",
+  "validation": {
+    "errors": [],
+    "renderer_version": "report_element_rendering.v1",
+    "status": "valid",
+    "validated_at": "2026-06-30T00:00:00Z",
+    "warnings": []
+  },
+  "view_type": "report_element_view"
+}
