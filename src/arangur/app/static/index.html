@@ -849,12 +849,12 @@
 
     <section class="set-panel local-actions-panel" aria-labelledby="local-actions-title">
       <h2 id="local-actions-title">Current local set</h2>
-      <p class="helper">Preview or move the current browser-local set. Nothing here saves to the backend.</p>
+      <p class="helper">Preview, copy, download, or restore the current browser-local set. Nothing here saves to the backend.</p>
       <div class="button-row">
         <button id="preview-client-set-button" class="secondary-button" type="button">Preview Client Briefing Set</button>
         <button id="preview-advisor-set-button" class="secondary-button" type="button">Preview Advisor Review Set</button>
-        <button id="copy-spec-set-button" class="secondary-button" type="button">Copy current spec set</button>
-        <button id="download-spec-set-button" class="secondary-button" type="button">Download current spec set</button>
+        <button id="copy-spec-set-button" class="secondary-button" type="button">Copy local set JSON</button>
+        <button id="download-spec-set-button" class="secondary-button" type="button">Download local set JSON</button>
       </div>
       <p id="spec-set-status" class="status"></p>
       <details id="serialized-spec-details" class="technical-details">
@@ -864,11 +864,11 @@
       <details id="restore-spec-details" class="technical-details">
         <summary>Restore local spec set</summary>
         <div class="field">
-          <label for="restore-spec-input">Paste exported spec-set data</label>
+          <label for="restore-spec-input">Paste exported local set JSON</label>
           <textarea id="restore-spec-input" class="restore-input" aria-label="Paste exported spec set"></textarea>
         </div>
         <div class="button-row">
-          <button id="restore-spec-set-button" class="secondary-button" type="button">Restore spec set</button>
+          <button id="restore-spec-set-button" class="secondary-button" type="button">Restore local set</button>
         </div>
         <p id="restore-spec-status" class="status"></p>
       </details>
@@ -1824,14 +1824,14 @@
 
     async function copyCurrentSpecSet() {
       if (!hasAnyLocalSpecs()) {
-        els.specSetStatus.textContent = "Add at least one element before copying the local spec set.";
+        els.specSetStatus.textContent = "Add at least one element before copying local set JSON.";
         return;
       }
       const text = localSpecSetText();
       if (navigator.clipboard && navigator.clipboard.writeText) {
         try {
           await navigator.clipboard.writeText(text);
-          els.specSetStatus.textContent = `Copied local spec set with ${localSpecCountText()}.`;
+          els.specSetStatus.textContent = `Copied local set JSON with ${localSpecCountText()}.`;
           return;
         } catch (error) {
           els.specSetStatus.textContent = "Clipboard copy was blocked. Use the technical local export details panel.";
@@ -1843,7 +1843,7 @@
 
     function downloadCurrentSpecSet() {
       if (!hasAnyLocalSpecs()) {
-        els.specSetStatus.textContent = "Add at least one element before downloading the local spec set.";
+        els.specSetStatus.textContent = "Add at least one element before downloading local set JSON.";
         return;
       }
       const blob = new Blob([localSpecSetText()], { type: "application/json" });
@@ -1855,7 +1855,7 @@
       link.click();
       link.remove();
       URL.revokeObjectURL(url);
-      els.specSetStatus.textContent = `Downloaded local spec set with ${localSpecCountText()}.`;
+      els.specSetStatus.textContent = `Downloaded local set JSON with ${localSpecCountText()}.`;
     }
 
     function restoreCurrentSpecSet() {
@@ -1863,7 +1863,7 @@
       try {
         payload = JSON.parse(els.restoreSpecInput.value || "");
       } catch (error) {
-        els.restoreSpecStatus.textContent = "Paste valid local spec-set JSON, then try restore again.";
+        els.restoreSpecStatus.textContent = "Paste valid local set JSON, then try restore again.";
         return;
       }
       const validation = validateLocalSpecSetPayload(payload);
@@ -1882,13 +1882,13 @@
 
     function validateLocalSpecSetPayload(payload) {
       if (!payload || typeof payload !== "object") {
-        return { ready: false, text: "The pasted local spec set must be a JSON object." };
+        return { ready: false, text: "The pasted local set must be a JSON object." };
       }
       if (payload.schema_version !== LOCAL_SPEC_SET_SCHEMA_VERSION) {
-        return { ready: false, text: "This paste uses a different local spec-set version." };
+        return { ready: false, text: "This paste uses a different local set version." };
       }
       if (!Array.isArray(payload.client_briefing_set) || !Array.isArray(payload.advisor_review_set)) {
-        return { ready: false, text: "The pasted local spec set needs both Client and Advisor lists." };
+        return { ready: false, text: "The pasted local set needs both Client and Advisor lists." };
       }
       return { ready: true, text: "Ready to restore." };
     }
@@ -1966,29 +1966,29 @@
       const context = clientContextSummary();
       if (!list.length) {
         return {
-        ready: false,
+          ready: false,
+          title,
+          context,
+          itemCount: 0,
+          screenHtml: "",
+          standaloneHtml: "",
+          text: ""
+        };
+      }
+      const items = await Promise.all(list.map((spec, index) => renderCurrentSetPreviewItem(spec, index, targetSet)));
+      const bodyHtml = items.map((item) => item.html).join("");
+      const purpose = previewPurposeForKind(kind);
+      const screenHtml = renderCurrentPreviewDocumentHtml(purpose, context, bodyHtml);
+      return {
+        ready: true,
         title,
         context,
-        itemCount: 0,
-        screenHtml: "",
-        standaloneHtml: "",
-        text: ""
+        itemCount: list.length,
+        screenHtml,
+        standaloneHtml: buildStandalonePreviewHtml(title, purpose, context, bodyHtml),
+        text: buildCurrentPreviewText(title, purpose, context, items)
       };
     }
-    const items = await Promise.all(list.map((spec, index) => renderCurrentSetPreviewItem(spec, index, targetSet)));
-    const bodyHtml = items.map((item) => item.html).join("");
-    const purpose = previewPurposeForKind(kind);
-    const screenHtml = renderCurrentPreviewDocumentHtml(purpose, context, bodyHtml);
-    return {
-      ready: true,
-      title,
-      context,
-      itemCount: list.length,
-      screenHtml,
-      standaloneHtml: buildStandalonePreviewHtml(title, purpose, context, bodyHtml),
-      text: buildCurrentPreviewText(title, purpose, context, items)
-    };
-  }
 
     async function renderCurrentSetPreviewItem(spec, index, targetSet) {
       const title = `${index + 1}. ${spec.title || "Untitled element"}`;
