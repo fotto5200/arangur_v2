@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI
@@ -11,6 +13,7 @@ from fastapi.staticfiles import StaticFiles
 
 from .routes import router as api_router
 from .run_service import reports_demo_dir, simulation_data_dir
+from .persistence import initialize_schema_if_needed
 from .settings import APP_NAME, AppSettings, load_settings
 
 
@@ -20,10 +23,17 @@ INDEX_PATH = STATIC_DIR / "index.html"
 
 def create_app(settings: AppSettings | None = None) -> FastAPI:
     resolved_settings = settings or load_settings()
+
+    @asynccontextmanager
+    async def lifespan(_: FastAPI) -> AsyncIterator[None]:
+        initialize_schema_if_needed(resolved_settings)
+        yield
+
     app = FastAPI(
         title="Arangur v2 Demo App",
         description="Private-demo FastAPI shell for the synthetic Arangur v2 workflow.",
         version="0.1.0",
+        lifespan=lifespan,
     )
     app.state.settings = resolved_settings
 

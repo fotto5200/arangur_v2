@@ -188,7 +188,7 @@ Open `reports/demo/index.html` in a browser to browse the native demo and Plaid-
 
 ## Run The FastAPI App
 
-The first deployable-app shell exposes health, source/workflow discovery, synchronous local workflow runs, local run browsing, static generated report artifacts, and optional briefing spec-set save/load endpoints. Default local mode remains file-backed and synthetic-only; optional Postgres persistence is available for private-demo metadata when configured. The app does not use Docker, live Plaid, external APIs, real client data, or production authentication yet.
+The first deployable-app shell exposes health, source/workflow discovery, synchronous local workflow runs, local run browsing, static generated report artifacts, and optional briefing spec-set save/load endpoints. Default local mode remains file-backed and synthetic-only; optional Postgres persistence is available for private-demo metadata when configured. Local development does not require Docker, live Plaid, external APIs, real client data, or production authentication.
 
 ```powershell
 python -m uvicorn arangur.app.main:app --reload --app-dir src
@@ -205,6 +205,37 @@ Then open:
 - `http://127.0.0.1:8000/api/runs`
 - `http://127.0.0.1:8000/reports/demo/index.html`
 - `http://127.0.0.1:8000/`
+
+## Run The Local Docker Private Demo Stack
+
+The local private-demo stack runs the FastAPI app plus an internal Postgres container. It is for local/private-demo smoke testing only. Do not put real secrets, real client data, live Plaid data, or live market data in this stack.
+
+Use Windows cmd-friendly commands from the repo root:
+
+```cmd
+copy .env.private-demo.example .env.private-demo
+docker compose --env-file .env.private-demo up --build
+```
+
+Then check:
+
+```cmd
+curl.exe http://127.0.0.1:8000/api/health
+```
+
+Open `http://127.0.0.1:8000/app/` to use the browser composer. To stop the stack:
+
+```cmd
+docker compose --env-file .env.private-demo down
+```
+
+To reset the local demo database volume:
+
+```cmd
+docker compose --env-file .env.private-demo down -v
+```
+
+Compose sets `DB_ENGINE=postgres` and `DATABASE_URL` for the app container. The app safely creates the existing workflow-run and briefing spec-set tables with `CREATE TABLE IF NOT EXISTS` on startup. The browser Developer / QA backend save/load controls can exercise Postgres-backed briefing spec-set save/load in this local stack. See `docs/deployment/private_demo_docker.md` for the full smoke checklist and an API-level save/list example.
 
 ## Run The Report Element Spec Composer
 
@@ -273,7 +304,7 @@ python -m uvicorn arangur.app.main:app --reload --app-dir src
 
 With `DB_ENGINE=none`, no database is required. Workflow runs still generate local artifacts and `/api/runs` scans `reports/demo/**/report_package.json`. `/api/briefing-spec-sets` returns an empty saved-set list and save attempts return a not-configured message after validating the browser-local payload.
 
-The first private-demo persistence skeleton can use Postgres when a later Docker/private-demo batch provides the database:
+The private-demo persistence skeleton can use Postgres through the local Docker stack or another explicitly configured Postgres instance:
 
 ```cmd
 set DB_ENGINE=postgres
@@ -281,7 +312,7 @@ set DATABASE_URL=postgresql://arangur_demo:password@postgres:5432/arangur_privat
 python -m uvicorn arangur.app.main:app --reload --app-dir src
 ```
 
-When `DB_ENGINE=postgres` and `DATABASE_URL` are set, the app creates minimal `workflow_run`, `report_artifact`, `run_event`, `briefing_spec_set`, and `briefing_spec_item` tables if missing. Workflow runs persist run metadata plus artifact links after local report generation. Briefing spec-set save/load persists draft browser-composer payloads and derived item summaries. Postgres is not required for ordinary local tests, and Docker/private-demo packaging remains a later setup step.
+When `DB_ENGINE=postgres` and `DATABASE_URL` are set, the app creates minimal `workflow_run`, `report_artifact`, `run_event`, `briefing_spec_set`, and `briefing_spec_item` tables if missing. Workflow runs persist run metadata plus artifact links after local report generation. Briefing spec-set save/load persists draft browser-composer payloads and derived item summaries. Postgres is not required for ordinary local tests.
 
 ## Design Roadmaps
 
@@ -314,6 +345,7 @@ Future scenario, data-coverage, and deployable private-demo work is captured in:
 - `docs/contracts/report_element_template_catalog_contract.md`
 - `docs/decisions/0003_three_surface_simulation_kernel.md`
 - `docs/deployment/private_demo_stack_plan.md`
+- `docs/deployment/private_demo_docker.md`
 - `docs/decisions/0002_copy_education_private_demo_stack.md`
 - `docs/architecture/scenario_engine_roadmap.md`
 - `docs/architecture/data_availability_workstream.md`

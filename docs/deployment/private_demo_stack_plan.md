@@ -4,7 +4,7 @@
 
 Arangur v2 should copy the Education private-demo deployment pattern for its first deployable demo instead of inventing a separate stack. The goal is a small, understandable private deployment that can run on a Lightsail Ubuntu VM behind Caddy and Cloudflare, while still using only synthetic/mock Arangur data.
 
-This is a design plan only. It does not add Docker, FastAPI, Postgres, or frontend implementation files.
+This started as a design plan. The local Docker/private-demo implementation now lives in `Dockerfile`, `docker-compose.yml`, `.env.private-demo.example`, and `docs/deployment/private_demo_docker.md`. Lightsail, Caddy, Cloudflare, DNS, and production hardening remain future work.
 
 ## Stack To Copy
 
