@@ -68,16 +68,23 @@
     }
 
     body.app-route-home .builder-surface,
+    body.app-route-home #workflow-mode-region,
     body.app-route-home #current-set-preview-region,
     body.app-route-builder .home-surface,
+    body.app-route-builder #workflow-mode-region,
     body.app-route-builder #current-set-preview-region,
     body.app-route-preview .home-surface,
-    body.app-route-preview .builder-surface {
+    body.app-route-preview .builder-surface,
+    body.app-route-preview #workflow-mode-region,
+    body.app-route-workflow-mode .home-surface,
+    body.app-route-workflow-mode .builder-surface,
+    body.app-route-workflow-mode #current-set-preview-region {
       display: none !important;
     }
 
     body.app-route-builder .builder-surface,
-    body.app-route-preview #current-set-preview-region {
+    body.app-route-preview #current-set-preview-region,
+    body.app-route-workflow-mode #workflow-mode-region {
       display: grid !important;
     }
 
@@ -1029,9 +1036,9 @@
           <div class="home-flow-title">
             <p class="helper">Existing</p>
             <h2 id="existing-workflows-title">Work with an existing workflow</h2>
-            <p class="helper">Open, copy, or delete browser-local saved workflows from this list.</p>
+            <p class="helper">Open a browser-local saved workflow to edit its design, or copy/delete saved drafts.</p>
           </div>
-          <div id="home-saved-workflow-list" class="saved-workflow-list" aria-label="Saved workflows for open, copy, or delete"></div>
+          <div id="home-saved-workflow-list" class="saved-workflow-list" aria-label="Saved workflows for edit, copy, or delete"></div>
           <p id="home-saved-workflow-status" class="status"></p>
         </section>
 
@@ -1039,23 +1046,25 @@
           <div class="home-flow-title">
             <p class="helper">Populate</p>
             <h2 id="populate-workflow-title">Populate a workflow with data</h2>
-            <p class="helper">This is staged until dated report generation exists.</p>
+            <p class="helper">Choose a saved workflow, bind it to the current demo data snapshot, and preview it locally.</p>
           </div>
           <ol class="home-staged-steps">
-            <li><strong>Choose a saved workflow.</strong> Use Work with an existing workflow to open a browser-local workflow.</li>
-            <li><strong>Choose data.</strong> Current demo data snapshot is available for preview.</li>
-            <li><strong>Preview now.</strong> Full dated report generation is not implemented yet. Use Preview from the builder for the current demo.</li>
+            <li><strong>Choose a saved workflow.</strong> This path keeps the workflow design unchanged.</li>
+            <li><strong>Use current demo data.</strong> The synthetic Northstar demo snapshot is available for preview.</li>
+            <li><strong>Preview now.</strong> Full dated report generation and persistence are not implemented yet.</li>
           </ol>
-          <button id="home-populate-existing-button" class="secondary-button" type="button">Work with an existing workflow</button>
+          <div id="home-populate-workflow-list" class="saved-workflow-list" aria-label="Saved workflows for demo data population"></div>
+          <p id="home-populate-workflow-status" class="status"></p>
         </section>
 
         <section id="home-present-panel" class="home-detail-panel hidden" aria-labelledby="present-report-title">
           <div class="home-flow-title">
             <p class="helper">Present</p>
             <h2 id="present-report-title">Present / view reports</h2>
-            <p class="helper">Generated report presentation is a next workflow. For now, open a workflow and use Preview Client Briefing or Preview Advisor Review from the builder.</p>
+            <p class="helper">Choose a saved workflow and open a clean Presentation view using the current demo preview renderer.</p>
           </div>
-          <button id="home-present-existing-button" class="secondary-button" type="button">Work with an existing workflow</button>
+          <div id="home-present-workflow-list" class="saved-workflow-list" aria-label="Saved workflows for presentation view"></div>
+          <p id="home-present-workflow-status" class="status"></p>
         </section>
 
         <details class="developer-tools-panel">
@@ -1250,6 +1259,23 @@
       </details>
     </div>
 
+    <section id="workflow-mode-region" class="set-panel current-set-preview-panel" aria-labelledby="workflow-mode-title">
+      <div class="preview-shell-header">
+        <div class="preview-shell-title">
+          <p id="workflow-mode-kicker" class="preview-section-label">Workflow mode</p>
+          <h2 id="workflow-mode-title">Workflow</h2>
+          <p id="workflow-mode-summary" class="meta"></p>
+        </div>
+        <div class="button-row">
+          <button id="workflow-mode-back-button" class="secondary-button" type="button">Back to Workflows</button>
+          <button id="workflow-mode-edit-button" class="secondary-button" type="button">Edit workflow</button>
+        </div>
+      </div>
+      <div id="workflow-mode-actions" class="preview-export-actions" aria-label="Workflow mode actions"></div>
+      <div id="workflow-mode-body" class="current-set-preview-body"></div>
+      <p id="workflow-mode-status" class="status"></p>
+    </section>
+
     <section id="current-set-preview-region" class="set-panel current-set-preview-panel hidden" aria-labelledby="current-set-preview-title">
       <div class="preview-shell-header">
         <div class="preview-shell-title">
@@ -1289,12 +1315,30 @@
     };
     const ROUTE_HASHES = {
       home: "#home",
+      "workflow/create": "#workflow/create",
+      "workflow/existing": "#workflow/existing",
+      "workflow/populate": "#workflow/populate",
+      "workflow/present": "#workflow/present",
       builder: "#builder",
+      populate: "#populate",
+      presentation: "#presentation",
       advanced: "#advanced",
       "preview/client": "#preview/client",
       "preview/advisor": "#preview/advisor"
     };
-    const ROUTE_BODY_CLASSES = ["app-route-home", "app-route-builder", "app-route-preview"];
+    const HOME_MODE_ROUTES = {
+      "workflow/create": "create",
+      "workflow/existing": "existing",
+      "workflow/populate": "populate",
+      "workflow/present": "present"
+    };
+    const HOME_MODE_ROUTE_BY_MODE = {
+      create: "workflow/create",
+      existing: "workflow/existing",
+      populate: "workflow/populate",
+      present: "workflow/present"
+    };
+    const ROUTE_BODY_CLASSES = ["app-route-home", "app-route-builder", "app-route-preview", "app-route-workflow-mode"];
     const DEMO_SELECTED_ENTITY_OPTIONS = {
       managers: [
         "Manager A - Growth / AI Infrastructure",
@@ -1518,6 +1562,10 @@
       currentPreviewReady: false,
       route: "home",
       homeMode: null,
+      workflowModeIntent: null,
+      workflowModeWorkflowId: null,
+      workflowModeWorkflowName: "",
+      workflowModePreviewKind: null,
       currentWorkflowId: null,
       currentWorkflowName: "",
       workflowDirty: false,
@@ -1540,11 +1588,13 @@
       homePresentPanel: document.getElementById("home-present-panel"),
       homeBuildClient: document.getElementById("home-build-client-button"),
       homeBuildAdvisor: document.getElementById("home-build-advisor-button"),
-      homePopulateExisting: document.getElementById("home-populate-existing-button"),
-      homePresentExisting: document.getElementById("home-present-existing-button"),
       homeAdvancedTools: document.getElementById("home-advanced-tools-button"),
       homeSavedWorkflowList: document.getElementById("home-saved-workflow-list"),
       homeSavedWorkflowStatus: document.getElementById("home-saved-workflow-status"),
+      homePopulateWorkflowList: document.getElementById("home-populate-workflow-list"),
+      homePopulateWorkflowStatus: document.getElementById("home-populate-workflow-status"),
+      homePresentWorkflowList: document.getElementById("home-present-workflow-list"),
+      homePresentWorkflowStatus: document.getElementById("home-present-workflow-status"),
       builderSurface: document.getElementById("builder-surface"),
       builderHome: document.getElementById("builder-home-button"),
       workflowNameInput: document.getElementById("workflow-name-input"),
@@ -1593,6 +1643,15 @@
       backendSpecStatus: document.getElementById("backend-spec-status"),
       savedSpecSetsList: document.getElementById("saved-spec-sets-list"),
       advancedTools: document.getElementById("advanced-tools"),
+      workflowModeRegion: document.getElementById("workflow-mode-region"),
+      workflowModeKicker: document.getElementById("workflow-mode-kicker"),
+      workflowModeTitle: document.getElementById("workflow-mode-title"),
+      workflowModeSummary: document.getElementById("workflow-mode-summary"),
+      workflowModeActions: document.getElementById("workflow-mode-actions"),
+      workflowModeBody: document.getElementById("workflow-mode-body"),
+      workflowModeStatus: document.getElementById("workflow-mode-status"),
+      workflowModeBack: document.getElementById("workflow-mode-back-button"),
+      workflowModeEdit: document.getElementById("workflow-mode-edit-button"),
       currentSetPreviewRegion: document.getElementById("current-set-preview-region"),
       currentSetPreviewTitle: document.getElementById("current-set-preview-title"),
       currentSetPreviewSummary: document.getElementById("current-set-preview-summary"),
@@ -1670,12 +1729,13 @@
       const normalized = normalizeRoute(route);
       state.route = normalized;
       document.body.classList.remove(...ROUTE_BODY_CLASSES);
-      if (normalized === "home") {
+      if (normalized === "home" || HOME_MODE_ROUTES[normalized]) {
         document.body.classList.add("app-route-home");
         hideCurrentSetPreview({ skipScroll: true });
         closeElementPreview();
         setBrowseAllOpen(false);
         if (els.advancedTools) els.advancedTools.open = false;
+        setHomeMode(HOME_MODE_ROUTES[normalized] || null);
         return;
       }
       if (normalized === "builder" || normalized === "advanced") {
@@ -1684,6 +1744,18 @@
         if (els.advancedTools) els.advancedTools.open = normalized === "advanced";
         if (normalized === "advanced" && els.advancedTools && !options.skipScroll) {
           setTimeout(() => els.advancedTools.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
+        }
+        return;
+      }
+      if (normalized === "populate" || normalized === "presentation") {
+        document.body.classList.add("app-route-workflow-mode");
+        hideCurrentSetPreview({ skipScroll: true });
+        closeElementPreview();
+        setBrowseAllOpen(false);
+        state.workflowModeIntent = normalized === "presentation" ? "present" : "populate";
+        renderWorkflowModeSurface();
+        if (normalized === "presentation" && state.workflowModeWorkflowId) {
+          await renderWorkflowModePreview(preferredPreviewKindForCurrentWorkflow());
         }
         return;
       }
@@ -1712,7 +1784,7 @@
       els.homePrimaryActions.querySelectorAll("[data-home-mode]").forEach((button) => {
         button.classList.toggle("is-active", button.dataset.homeMode === normalized);
       });
-      if (normalized === "existing") renderSavedWorkflows();
+      if (normalized) renderSavedWorkflows();
     }
 
     function startNewWorkflow(targetSet) {
@@ -1734,7 +1806,9 @@
       try {
         const raw = window.localStorage ? window.localStorage.getItem(LOCAL_WORKFLOW_STORAGE_KEY) : null;
         const payload = raw ? JSON.parse(raw) : null;
-        state.savedWorkflows = Array.isArray(payload && payload.workflows) ? payload.workflows : [];
+        state.savedWorkflows = Array.isArray(payload && payload.workflows)
+          ? payload.workflows.map(normalizeSavedWorkflowRecord).filter(Boolean)
+          : [];
       } catch (error) {
         state.savedWorkflows = [];
       }
@@ -1755,6 +1829,41 @@
       }
     }
 
+    function normalizeSavedWorkflowRecord(workflow) {
+      if (!workflow || typeof workflow !== "object") return null;
+      const payload = workflow.payload && typeof workflow.payload === "object" ? workflow.payload : {};
+      const workflowId = workflow.workflow_id || workflow.id || newLocalId("workflow");
+      const displayName = readableWorkflowName(
+        workflow.display_name || payload.workflow_name || workflow.name || "Untitled Briefing Workflow"
+      );
+      return {
+        ...workflow,
+        id: workflowId,
+        workflow_id: workflowId,
+        storage_key: workflow.storage_key || `${LOCAL_WORKFLOW_STORAGE_KEY}:${workflowId}`,
+        display_name: displayName,
+        name: displayName,
+        payload: {
+          ...payload,
+          workflow_name: displayName
+        }
+      };
+    }
+
+    function readableWorkflowName(value) {
+      return String(value == null ? "" : value).trim().replace(/\s+/g, " ");
+    }
+
+    function workflowRecordId(workflow) {
+      return workflow ? (workflow.workflow_id || workflow.id || "") : "";
+    }
+
+    function workflowDisplayName(workflow) {
+      return readableWorkflowName(
+        workflow && (workflow.display_name || (workflow.payload || {}).workflow_name || workflow.name)
+      ) || "Untitled Briefing Workflow";
+    }
+
     function renderWorkflowChrome() {
       const name = state.currentWorkflowName || "";
       els.workflowNameInput.value = name;
@@ -1765,25 +1874,62 @@
     }
 
     function renderSavedWorkflows() {
+      renderSavedWorkflowContainer(els.homeSavedWorkflowList, els.homeSavedWorkflowStatus, "existing");
+      renderSavedWorkflowContainer(els.homePopulateWorkflowList, els.homePopulateWorkflowStatus, "populate");
+      renderSavedWorkflowContainer(els.homePresentWorkflowList, els.homePresentWorkflowStatus, "present");
+    }
+
+    function renderSavedWorkflowContainer(listEl, statusEl, intent) {
+      if (!listEl || !statusEl) return;
       if (!state.savedWorkflows.length) {
-        els.homeSavedWorkflowList.innerHTML = '<p class="empty">No saved workflows yet. Create a new workflow first.</p>';
-        els.homeSavedWorkflowStatus.textContent = "";
+        listEl.innerHTML = `<p class="empty">${escapeHtml(emptySavedWorkflowMessage(intent))}</p>`;
+        statusEl.textContent = "";
         return;
       }
-      els.homeSavedWorkflowList.innerHTML = state.savedWorkflows.map((workflow) => `
-        <div class="saved-workflow-row" data-workflow-id="${escapeAttr(workflow.id)}">
+      listEl.innerHTML = state.savedWorkflows.map((workflow) => {
+        const workflowId = workflowRecordId(workflow);
+        const displayName = workflowDisplayName(workflow);
+        return `
+        <div class="saved-workflow-row" data-workflow-id="${escapeAttr(workflowId)}">
           <div>
-            <strong>${escapeHtml(workflow.name)}</strong>
+            <strong>${escapeHtml(displayName)}</strong>
             <p class="meta">${escapeHtml(savedWorkflowMeta(workflow))}</p>
           </div>
-          <div class="saved-workflow-actions">
-            <button class="tiny-button" type="button" data-workflow-action="open" data-workflow-id="${escapeAttr(workflow.id)}">Open</button>
-            <button class="tiny-button" type="button" data-workflow-action="copy" data-workflow-id="${escapeAttr(workflow.id)}">Copy Workflow</button>
-            <button class="tiny-button" type="button" data-workflow-action="delete" data-workflow-id="${escapeAttr(workflow.id)}">Delete</button>
-          </div>
+          ${savedWorkflowActionHtml(intent, workflowId)}
         </div>
-      `).join("");
-      els.homeSavedWorkflowStatus.textContent = `${state.savedWorkflows.length} named saved ${state.savedWorkflows.length === 1 ? "workflow" : "workflows"} in this browser.`;
+      `;
+      }).join("");
+      statusEl.textContent = `${state.savedWorkflows.length} named saved ${state.savedWorkflows.length === 1 ? "workflow" : "workflows"} in this browser.`;
+    }
+
+    function emptySavedWorkflowMessage(intent) {
+      if (intent === "populate") return "No saved workflows yet. Create and save a workflow before populating it.";
+      if (intent === "present") return "No saved workflows yet. Create and save a workflow before presenting it.";
+      return "No saved workflows yet. Create a new workflow first.";
+    }
+
+    function savedWorkflowActionHtml(intent, workflowId) {
+      if (intent === "populate") {
+        return `
+          <div class="saved-workflow-actions">
+            <button class="tiny-button" type="button" data-workflow-action="populate" data-workflow-id="${escapeAttr(workflowId)}">Populate</button>
+          </div>
+        `;
+      }
+      if (intent === "present") {
+        return `
+          <div class="saved-workflow-actions">
+            <button class="tiny-button" type="button" data-workflow-action="present" data-workflow-id="${escapeAttr(workflowId)}">View report</button>
+          </div>
+        `;
+      }
+      return `
+        <div class="saved-workflow-actions">
+          <button class="tiny-button" type="button" data-workflow-action="edit" data-workflow-id="${escapeAttr(workflowId)}">Open to edit</button>
+          <button class="tiny-button" type="button" data-workflow-action="copy" data-workflow-id="${escapeAttr(workflowId)}">Copy Workflow</button>
+          <button class="tiny-button" type="button" data-workflow-action="delete" data-workflow-id="${escapeAttr(workflowId)}">Delete</button>
+        </div>
+      `;
     }
 
     function savedWorkflowMeta(workflow) {
@@ -1794,7 +1940,7 @@
     }
 
     function saveCurrentWorkflow() {
-      const name = els.workflowNameInput.value.trim();
+      const name = readableWorkflowName(els.workflowNameInput.value);
       if (!name) {
         els.workflowSaveStatus.textContent = "Name this workflow before saving.";
         return;
@@ -1803,6 +1949,9 @@
       const id = state.currentWorkflowId || existingWorkflowIdForName(name) || newLocalId("workflow");
       const workflow = {
         id,
+        workflow_id: id,
+        storage_key: `${LOCAL_WORKFLOW_STORAGE_KEY}:${id}`,
+        display_name: name,
         name,
         saved_at: new Date().toISOString(),
         schema_version: LOCAL_WORKFLOW_SCHEMA_VERSION,
@@ -1828,51 +1977,57 @@
     }
 
     function copyCurrentWorkflow() {
-      const baseName = els.workflowNameInput.value.trim() || state.currentWorkflowName || "Untitled Briefing Workflow";
+      const baseName = readableWorkflowName(els.workflowNameInput.value || state.currentWorkflowName) || "Untitled Briefing Workflow";
       state.currentWorkflowId = null;
-      state.currentWorkflowName = uniqueWorkflowName(`Copy of ${baseName}`);
+      state.currentWorkflowName = uniqueWorkflowName(`${baseName} Copy`);
       state.workflowDirty = true;
       renderWorkflowChrome();
       saveCurrentWorkflow();
     }
 
     function openSavedWorkflow(workflowId) {
-      const workflow = state.savedWorkflows.find((candidate) => candidate.id === workflowId);
+      const workflow = findSavedWorkflow(workflowId);
       if (!workflow) return;
       applyWorkflowPayload(workflow.payload || {});
-      state.currentWorkflowId = workflow.id;
-      state.currentWorkflowName = workflow.name;
+      state.currentWorkflowId = workflowRecordId(workflow);
+      state.currentWorkflowName = workflowDisplayName(workflow);
       state.workflowDirty = false;
       renderWorkflowChrome();
-      els.homeSavedWorkflowStatus.textContent = `Opened saved workflow: ${workflow.name}.`;
+      els.homeSavedWorkflowStatus.textContent = `Opened saved workflow to edit: ${state.currentWorkflowName}.`;
       navigateToRoute("builder");
     }
 
     function duplicateSavedWorkflow(workflowId) {
-      const workflow = state.savedWorkflows.find((candidate) => candidate.id === workflowId);
+      const workflow = findSavedWorkflow(workflowId);
       if (!workflow) return;
+      const displayName = uniqueWorkflowName(`${workflowDisplayName(workflow)} Copy`);
+      const id = newLocalId("workflow");
       const copy = {
         ...workflow,
-        id: newLocalId("workflow"),
-        name: uniqueWorkflowName(`Copy of ${workflow.name}`),
+        id,
+        workflow_id: id,
+        storage_key: `${LOCAL_WORKFLOW_STORAGE_KEY}:${id}`,
+        display_name: displayName,
+        name: displayName,
         saved_at: new Date().toISOString(),
         payload: {
           ...(workflow.payload || {}),
           exported_at: new Date().toISOString()
         }
       };
-      copy.payload.workflow_name = copy.name;
+      copy.payload.workflow_name = copy.display_name;
       state.savedWorkflows.unshift(copy);
       const persisted = persistLocalNamedWorkflows();
       renderSavedWorkflows();
       els.homeSavedWorkflowStatus.textContent = persisted
-        ? `Copied workflow: ${copy.name}.`
+        ? `Copied workflow: ${copy.display_name}.`
         : "Copied workflow in this session, but this browser could not persist it.";
     }
 
     function deleteSavedWorkflow(workflowId) {
-      const workflow = state.savedWorkflows.find((candidate) => candidate.id === workflowId);
-      state.savedWorkflows = state.savedWorkflows.filter((candidate) => candidate.id !== workflowId);
+      const workflow = findSavedWorkflow(workflowId);
+      const displayName = workflowDisplayName(workflow);
+      state.savedWorkflows = state.savedWorkflows.filter((candidate) => workflowRecordId(candidate) !== workflowId);
       if (state.currentWorkflowId === workflowId) {
         state.currentWorkflowId = null;
         state.workflowDirty = true;
@@ -1881,7 +2036,7 @@
       renderSavedWorkflows();
       renderWorkflowChrome();
       els.homeSavedWorkflowStatus.textContent = persisted
-        ? (workflow ? `Deleted workflow: ${workflow.name}.` : "Deleted saved workflow.")
+        ? (workflow ? `Deleted workflow: ${displayName}.` : "Deleted saved workflow.")
         : "Updated this session, but this browser could not persist the saved workflow list.";
     }
 
@@ -1894,11 +2049,105 @@
       renderSets();
     }
 
+    function openWorkflowActionMode(workflowId, intent) {
+      const workflow = findSavedWorkflow(workflowId);
+      if (!workflow) return;
+      const displayName = workflowDisplayName(workflow);
+      applyWorkflowPayload(workflow.payload || {});
+      state.currentWorkflowId = workflowRecordId(workflow);
+      state.currentWorkflowName = displayName;
+      state.workflowDirty = false;
+      state.workflowModeIntent = intent;
+      state.workflowModeWorkflowId = state.currentWorkflowId;
+      state.workflowModeWorkflowName = displayName;
+      state.workflowModePreviewKind = preferredPreviewKindForCurrentWorkflow();
+      renderWorkflowChrome();
+      navigateToRoute(intent === "present" ? "presentation" : "populate");
+    }
+
+    function renderWorkflowModeSurface() {
+      const intent = state.workflowModeIntent;
+      const displayName = state.workflowModeWorkflowName || state.currentWorkflowName || "";
+      const hasWorkflow = Boolean(state.workflowModeWorkflowId && displayName);
+      els.workflowModeKicker.textContent = intent === "present" ? "Presentation view" : "Populate workflow";
+      els.workflowModeTitle.textContent = intent === "present" ? "Presentation view" : "Populate workflow with data";
+      els.workflowModeSummary.textContent = hasWorkflow
+        ? `${displayName} | ${clientContextSummary()}`
+        : "Choose a saved workflow first.";
+      els.workflowModeEdit.classList.toggle("hidden", !hasWorkflow);
+      els.workflowModeActions.innerHTML = "";
+      els.workflowModeStatus.textContent = "";
+      if (!hasWorkflow) {
+        els.workflowModeBody.innerHTML = `
+          <div class="preview-empty-state">
+            <p class="empty">${escapeHtml(intent === "present" ? "Choose a saved workflow before opening Presentation view." : "Choose a saved workflow before populating it with demo data.")}</p>
+          </div>
+        `;
+        return;
+      }
+      const kindButtons = workflowModePreviewButtons(intent);
+      els.workflowModeActions.innerHTML = `<div class="button-row">${kindButtons}</div>`;
+      const modeLabel = intent === "present" ? "Presentation view" : "Demo data population";
+      els.workflowModeBody.innerHTML = `
+        <div class="current-preview-document">
+          <header class="preview-header">
+            <p class="preview-section-label">${escapeHtml(modeLabel)}</p>
+            <h1>${escapeHtml(displayName)}</h1>
+            <p class="current-preview-context"><strong>Current demo data snapshot:</strong> ${escapeHtml(clientContextSummary())}</p>
+            <p class="current-preview-note">${escapeHtml(intent === "present"
+              ? "Open a clean report/presentation preview for this saved workflow. Builder controls, report element finder, JSON tools, and backend save/load controls are not shown here."
+              : "Preview this saved workflow against the current synthetic demo data. Full dated report generation and persistence are not implemented yet.")}</p>
+          </header>
+        </div>
+      `;
+    }
+
+    function workflowModePreviewButtons(intent) {
+      const buttons = [];
+      if (state.clientSet.length) {
+        buttons.push(`<button class="primary-button" type="button" data-workflow-mode-action="${intent === "present" ? "view-report" : "preview-demo"}" data-kind="client">${escapeHtml(intent === "present" ? "View report" : "Preview with current demo data")}</button>`);
+      }
+      if (state.advisorSet.length) {
+        const label = intent === "present" ? "View Advisor Review" : "Preview Advisor Review with current demo data";
+        buttons.push(`<button class="secondary-button" type="button" data-workflow-mode-action="${intent === "present" ? "view-report" : "preview-demo"}" data-kind="advisor">${escapeHtml(label)}</button>`);
+      }
+      if (!buttons.length) {
+        buttons.push('<button class="secondary-button" type="button" disabled>No saved elements to preview</button>');
+      }
+      return buttons.join("");
+    }
+
+    async function renderWorkflowModePreview(kind) {
+      const normalizedKind = kind === "advisor" ? "advisor" : "client";
+      const intent = state.workflowModeIntent;
+      const displayName = state.workflowModeWorkflowName || state.currentWorkflowName || "Saved workflow";
+      const artifact = await buildCurrentPreviewArtifact(normalizedKind);
+      state.workflowModePreviewKind = normalizedKind;
+      if (!artifact.ready) {
+        els.workflowModeBody.innerHTML = emptyCurrentPreviewHtml(normalizedKind);
+        els.workflowModeStatus.textContent = `No ${setLabelForKind(normalizedKind)} elements are saved in ${displayName}.`;
+        return false;
+      }
+      els.workflowModeBody.innerHTML = artifact.screenHtml;
+      els.workflowModeStatus.textContent = intent === "present"
+        ? `Presentation view for ${displayName}. This uses the current browser preview renderer and demo data; no production report was generated.`
+        : `Created a demo populated preview for ${displayName}. Full dated report generation and persistence are not implemented yet.`;
+      return true;
+    }
+
+    function preferredPreviewKindForCurrentWorkflow() {
+      if (state.clientSet.length) return "client";
+      if (state.advisorSet.length) return "advisor";
+      return "client";
+    }
+
     function handleSavedWorkflowAction(event) {
       const button = event.target.closest("[data-workflow-action]");
       if (!button) return;
       const workflowId = button.dataset.workflowId;
-      if (button.dataset.workflowAction === "open") openSavedWorkflow(workflowId);
+      if (button.dataset.workflowAction === "edit") openSavedWorkflow(workflowId);
+      if (button.dataset.workflowAction === "populate") openWorkflowActionMode(workflowId, "populate");
+      if (button.dataset.workflowAction === "present") openWorkflowActionMode(workflowId, "present");
       if (button.dataset.workflowAction === "copy") duplicateSavedWorkflow(workflowId);
       if (button.dataset.workflowAction === "delete") deleteSavedWorkflow(workflowId);
     }
@@ -1909,19 +2158,24 @@
     }
 
     function existingWorkflowIdForName(name) {
-      const key = normalize(name);
-      const workflow = state.savedWorkflows.find((candidate) => normalize(candidate.name) === key);
-      return workflow ? workflow.id : null;
+      const key = normalize(readableWorkflowName(name));
+      const workflow = state.savedWorkflows.find((candidate) => normalize(workflowDisplayName(candidate)) === key);
+      return workflow ? workflowRecordId(workflow) : null;
     }
 
     function uniqueWorkflowName(baseName) {
-      const existingNames = new Set(state.savedWorkflows.map((workflow) => normalize(workflow.name)));
-      if (!existingNames.has(normalize(baseName))) return baseName;
+      const readableBase = readableWorkflowName(baseName) || "Untitled Briefing Workflow";
+      const existingNames = new Set(state.savedWorkflows.map((workflow) => normalize(workflowDisplayName(workflow))));
+      if (!existingNames.has(normalize(readableBase))) return readableBase;
       let index = 2;
-      while (existingNames.has(normalize(`${baseName} ${index}`))) {
+      while (existingNames.has(normalize(`${readableBase} ${index}`))) {
         index += 1;
       }
-      return `${baseName} ${index}`;
+      return `${readableBase} ${index}`;
+    }
+
+    function findSavedWorkflow(workflowId) {
+      return state.savedWorkflows.find((candidate) => workflowRecordId(candidate) === workflowId);
     }
 
     function newLocalId(prefix) {
@@ -3722,12 +3976,10 @@
     els.homePrimaryActions.addEventListener("click", (event) => {
       const button = event.target.closest("[data-home-mode]");
       if (!button) return;
-      setHomeMode(button.dataset.homeMode);
+      navigateToRoute(HOME_MODE_ROUTE_BY_MODE[button.dataset.homeMode] || "home");
     });
     els.homeBuildClient.addEventListener("click", () => startNewWorkflow("Client Briefing Set"));
     els.homeBuildAdvisor.addEventListener("click", () => startNewWorkflow("Advisor Review Set"));
-    els.homePopulateExisting.addEventListener("click", () => setHomeMode("existing"));
-    els.homePresentExisting.addEventListener("click", () => setHomeMode("existing"));
     els.homeAdvancedTools.addEventListener("click", () => navigateToRoute("advanced"));
     els.builderHome.addEventListener("click", () => navigateToRoute("home"));
     els.workflowNameInput.addEventListener("input", () => {
@@ -3737,6 +3989,18 @@
     els.saveWorkflow.addEventListener("click", saveCurrentWorkflow);
     els.copyCurrentWorkflow.addEventListener("click", copyCurrentWorkflow);
     els.homeSavedWorkflowList.addEventListener("click", handleSavedWorkflowAction);
+    els.homePopulateWorkflowList.addEventListener("click", handleSavedWorkflowAction);
+    els.homePresentWorkflowList.addEventListener("click", handleSavedWorkflowAction);
+    els.workflowModeActions.addEventListener("click", async (event) => {
+      const button = event.target.closest("[data-workflow-mode-action]");
+      if (!button) return;
+      await renderWorkflowModePreview(button.dataset.kind);
+    });
+    els.workflowModeBack.addEventListener("click", () => {
+      const route = state.workflowModeIntent === "present" ? "workflow/present" : "workflow/populate";
+      navigateToRoute(route);
+    });
+    els.workflowModeEdit.addEventListener("click", () => navigateToRoute("builder"));
     els.targetClient.addEventListener("click", () => setTargetSet("Client Briefing Set"));
     els.targetAdvisor.addEventListener("click", () => setTargetSet("Advisor Review Set"));
     els.browseAll.addEventListener("click", toggleBrowseAll);
