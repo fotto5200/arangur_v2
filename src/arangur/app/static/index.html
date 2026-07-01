@@ -1096,7 +1096,9 @@
             <input id="workflow-name-input" type="text" placeholder="Northstar Standard Quarterly Review">
           </div>
           <div class="button-row">
-            <button id="save-workflow-button" class="primary-button" type="button">Save current workflow</button>
+            <button id="save-workflow-button" class="primary-button" type="button">Save</button>
+            <button id="rename-workflow-button" class="secondary-button" type="button">Rename</button>
+            <button id="save-as-workflow-button" class="secondary-button" type="button">Save As New</button>
             <button id="copy-current-workflow-button" class="secondary-button" type="button">Copy Workflow</button>
           </div>
         </div>
@@ -1568,6 +1570,7 @@
       workflowModePreviewKind: null,
       currentWorkflowId: null,
       currentWorkflowName: "",
+      workflowNameDraft: "",
       workflowDirty: false,
       savedWorkflows: [],
       savedSpecSets: [],
@@ -1599,6 +1602,8 @@
       builderHome: document.getElementById("builder-home-button"),
       workflowNameInput: document.getElementById("workflow-name-input"),
       saveWorkflow: document.getElementById("save-workflow-button"),
+      renameWorkflow: document.getElementById("rename-workflow-button"),
+      saveAsWorkflow: document.getElementById("save-as-workflow-button"),
       copyCurrentWorkflow: document.getElementById("copy-current-workflow-button"),
       currentWorkflowTitle: document.getElementById("current-workflow-title"),
       workflowDirtyStatus: document.getElementById("workflow-dirty-status"),
@@ -1790,6 +1795,7 @@
     function startNewWorkflow(targetSet) {
       state.currentWorkflowId = null;
       state.currentWorkflowName = "";
+      state.workflowNameDraft = "";
       state.workflowDirty = true;
       state.clientSet = [];
       state.advisorSet = [];
@@ -1836,6 +1842,7 @@
       const displayName = readableWorkflowName(
         workflow.display_name || payload.workflow_name || workflow.name || "Untitled Briefing Workflow"
       );
+      const timestamp = workflow.updated_at || workflow.saved_at || workflow.created_at || new Date().toISOString();
       return {
         ...workflow,
         id: workflowId,
@@ -1843,6 +1850,10 @@
         storage_key: workflow.storage_key || `${LOCAL_WORKFLOW_STORAGE_KEY}:${workflowId}`,
         display_name: displayName,
         name: displayName,
+        workflow_type: workflow.workflow_type || workflowTypeForPayload(payload),
+        created_at: workflow.created_at || workflow.saved_at || timestamp,
+        updated_at: timestamp,
+        saved_at: workflow.saved_at || timestamp,
         payload: {
           ...payload,
           workflow_name: displayName
@@ -1864,13 +1875,30 @@
       ) || "Untitled Briefing Workflow";
     }
 
+    function workflowTypeForPayload(payload) {
+      const clientCount = Array.isArray(payload && payload.client_briefing_set) ? payload.client_briefing_set.length : 0;
+      const advisorCount = Array.isArray(payload && payload.advisor_review_set) ? payload.advisor_review_set.length : 0;
+      if (clientCount && advisorCount) return "Client + Advisor Workflow";
+      if (advisorCount) return "Advisor Review Workflow";
+      return "Client Briefing Workflow";
+    }
+
+    function currentWorkflowType() {
+      const payload = buildLocalSpecSet();
+      const clientCount = Array.isArray(payload.client_briefing_set) ? payload.client_briefing_set.length : 0;
+      const advisorCount = Array.isArray(payload.advisor_review_set) ? payload.advisor_review_set.length : 0;
+      if (!clientCount && !advisorCount) return targetWorkflowLabel(state.targetSet);
+      return workflowTypeForPayload(payload);
+    }
+
     function renderWorkflowChrome() {
-      const name = state.currentWorkflowName || "";
-      els.workflowNameInput.value = name;
-      els.currentWorkflowTitle.textContent = name ? `Current Draft Workflow - ${name}` : "Current Draft Workflow";
+      const displayName = state.currentWorkflowName || "";
+      const draftName = state.workflowNameDraft;
+      els.workflowNameInput.value = draftName;
+      els.currentWorkflowTitle.textContent = displayName ? `Current Draft Workflow - ${displayName}` : "Current Draft Workflow";
       els.workflowDirtyStatus.textContent = state.workflowDirty
         ? "Unsaved current work"
-        : `Saved workflow${name ? `: ${name}` : ""}`;
+        : `Saved workflow${displayName ? `: ${displayName}` : ""}`;
     }
 
     function renderSavedWorkflows() {
@@ -1940,49 +1968,122 @@
     }
 
     function saveCurrentWorkflow() {
-      const name = readableWorkflowName(els.workflowNameInput.value);
-      if (!name) {
+      const draftName = readableWorkflowName(els.workflowNameInput.value);
+      if (state.currentWorkflowId) {
+        const workflow = findSavedWorkflow(state.currentWorkflowId);
+        if (!workflow) {
+          els.workflowSaveStatus.textContent = "This saved workflow is no longer in the browser list. Use Save As New to keep this draft.";
+          return;
+        }
+        const displayName = workflowDisplayName(workflow);
+        const persisted = upsertSavedWorkflowRecord(state.currentWorkflowId, displayName, workflow);
+        const hint = draftName && normalize(draftName) !== normalize(displayName)
+          ? " Name field changes require Rename or Save As New."
+          : "";
+        els.workflowSaveStatus.textContent = persisted
+          ? `Saved workflow: ${displayName}.${hint}`
+          : "Could not save named workflow in this browser. Use local workflow JSON export/download for now.";
+        return;
+      }
+      if (!draftName) {
         els.workflowSaveStatus.textContent = "Name this workflow before saving.";
         return;
       }
-      state.currentWorkflowName = name;
-      const id = state.currentWorkflowId || existingWorkflowIdForName(name) || newLocalId("workflow");
+      if (workflowDisplayNameExists(draftName)) {
+        els.workflowSaveStatus.textContent = `A saved workflow named "${draftName}" already exists. Open it, Rename it, or choose a different name for Save As New.`;
+        return;
+      }
+      const persisted = upsertSavedWorkflowRecord(newLocalId("workflow"), draftName, null);
+      els.workflowSaveStatus.textContent = persisted
+        ? `Saved new workflow: ${draftName}.`
+        : "Could not save named workflow in this browser. Use local workflow JSON export/download for now.";
+    }
+
+    function renameCurrentWorkflow() {
+      const newName = readableWorkflowName(els.workflowNameInput.value);
+      if (!state.currentWorkflowId) {
+        els.workflowSaveStatus.textContent = "Save this workflow first, or use Save As New to create a saved workflow with this name.";
+        return;
+      }
+      if (!newName) {
+        els.workflowSaveStatus.textContent = "Enter a workflow name before renaming.";
+        return;
+      }
+      const workflow = findSavedWorkflow(state.currentWorkflowId);
+      if (!workflow) {
+        els.workflowSaveStatus.textContent = "This saved workflow is no longer in the browser list. Use Save As New to keep this draft.";
+        return;
+      }
+      if (workflowDisplayNameExists(newName, { excludeWorkflowId: state.currentWorkflowId })) {
+        els.workflowSaveStatus.textContent = `A saved workflow named "${newName}" already exists. Rename requires a unique workflow name.`;
+        return;
+      }
+      const persisted = upsertSavedWorkflowRecord(state.currentWorkflowId, newName, workflow);
+      els.workflowSaveStatus.textContent = persisted
+        ? `Renamed workflow to: ${newName}.`
+        : "Could not rename this workflow in this browser. Use local workflow JSON export/download for now.";
+    }
+
+    function saveCurrentWorkflowAsNew() {
+      const name = readableWorkflowName(els.workflowNameInput.value);
+      if (!name) {
+        els.workflowSaveStatus.textContent = "Enter a workflow name before using Save As New.";
+        return;
+      }
+      if (workflowDisplayNameExists(name)) {
+        els.workflowSaveStatus.textContent = `A saved workflow named "${name}" already exists. Save As New requires a unique workflow name.`;
+        return;
+      }
+      const previousName = state.currentWorkflowName;
+      const persisted = upsertSavedWorkflowRecord(newLocalId("workflow"), name, null);
+      els.workflowSaveStatus.textContent = persisted
+        ? `Saved as new workflow: ${name}.${previousName ? ` Original workflow "${previousName}" remains saved.` : ""}`
+        : "Could not save this workflow as new in this browser. Use local workflow JSON export/download for now.";
+    }
+
+    function upsertSavedWorkflowRecord(id, displayName, existingWorkflow) {
+      const now = new Date().toISOString();
       const workflow = {
+        ...(existingWorkflow || {}),
         id,
         workflow_id: id,
         storage_key: `${LOCAL_WORKFLOW_STORAGE_KEY}:${id}`,
-        display_name: name,
-        name,
-        saved_at: new Date().toISOString(),
+        display_name: displayName,
+        name: displayName,
+        workflow_type: currentWorkflowType(),
+        created_at: (existingWorkflow && (existingWorkflow.created_at || existingWorkflow.saved_at)) || now,
+        updated_at: now,
+        saved_at: now,
         schema_version: LOCAL_WORKFLOW_SCHEMA_VERSION,
         payload: {
           ...buildLocalSpecSet(),
-          workflow_name: name
+          workflow_name: displayName
         }
       };
-      const existingIndex = state.savedWorkflows.findIndex((candidate) => candidate.id === id);
+      const existingIndex = state.savedWorkflows.findIndex((candidate) => workflowRecordId(candidate) === id);
       if (existingIndex >= 0) {
         state.savedWorkflows[existingIndex] = workflow;
       } else {
         state.savedWorkflows.unshift(workflow);
       }
       state.currentWorkflowId = id;
+      state.currentWorkflowName = displayName;
+      state.workflowNameDraft = displayName;
       const persisted = persistLocalNamedWorkflows();
       state.workflowDirty = !persisted;
       renderSavedWorkflows();
       renderWorkflowChrome();
-      els.workflowSaveStatus.textContent = persisted
-        ? `Saved workflow: ${name}.`
-        : "Could not save named workflow in this browser. Use local workflow JSON export/download for now.";
+      return persisted;
     }
 
     function copyCurrentWorkflow() {
-      const baseName = readableWorkflowName(els.workflowNameInput.value || state.currentWorkflowName) || "Untitled Briefing Workflow";
-      state.currentWorkflowId = null;
-      state.currentWorkflowName = uniqueWorkflowName(`${baseName} Copy`);
-      state.workflowDirty = true;
-      renderWorkflowChrome();
-      saveCurrentWorkflow();
+      const baseName = state.currentWorkflowName || readableWorkflowName(els.workflowNameInput.value) || "Untitled Briefing Workflow";
+      const copyName = uniqueWorkflowName(`${baseName} Copy`);
+      const originalName = state.currentWorkflowName;
+      const persisted = upsertSavedWorkflowRecord(newLocalId("workflow"), copyName, null);
+      els.workflowSaveStatus.textContent = persisted
+        ? `Copied workflow as: ${copyName}.${originalName ? ` Original workflow "${originalName}" remains saved.` : ""}`
+        : "Copied workflow in this session, but this browser could not persist it.";
     }
 
     function openSavedWorkflow(workflowId) {
@@ -1991,6 +2092,7 @@
       applyWorkflowPayload(workflow.payload || {});
       state.currentWorkflowId = workflowRecordId(workflow);
       state.currentWorkflowName = workflowDisplayName(workflow);
+      state.workflowNameDraft = state.currentWorkflowName;
       state.workflowDirty = false;
       renderWorkflowChrome();
       els.homeSavedWorkflowStatus.textContent = `Opened saved workflow to edit: ${state.currentWorkflowName}.`;
@@ -2002,6 +2104,7 @@
       if (!workflow) return;
       const displayName = uniqueWorkflowName(`${workflowDisplayName(workflow)} Copy`);
       const id = newLocalId("workflow");
+      const now = new Date().toISOString();
       const copy = {
         ...workflow,
         id,
@@ -2009,10 +2112,13 @@
         storage_key: `${LOCAL_WORKFLOW_STORAGE_KEY}:${id}`,
         display_name: displayName,
         name: displayName,
-        saved_at: new Date().toISOString(),
+        workflow_type: workflow.workflow_type || workflowTypeForPayload(workflow.payload || {}),
+        created_at: now,
+        updated_at: now,
+        saved_at: now,
         payload: {
           ...(workflow.payload || {}),
-          exported_at: new Date().toISOString()
+          exported_at: now
         }
       };
       copy.payload.workflow_name = copy.display_name;
@@ -2056,6 +2162,7 @@
       applyWorkflowPayload(workflow.payload || {});
       state.currentWorkflowId = workflowRecordId(workflow);
       state.currentWorkflowName = displayName;
+      state.workflowNameDraft = displayName;
       state.workflowDirty = false;
       state.workflowModeIntent = intent;
       state.workflowModeWorkflowId = state.currentWorkflowId;
@@ -2157,10 +2264,13 @@
       renderWorkflowChrome();
     }
 
-    function existingWorkflowIdForName(name) {
+    function workflowDisplayNameExists(name, options = {}) {
       const key = normalize(readableWorkflowName(name));
-      const workflow = state.savedWorkflows.find((candidate) => normalize(workflowDisplayName(candidate)) === key);
-      return workflow ? workflowRecordId(workflow) : null;
+      if (!key) return false;
+      return state.savedWorkflows.some((workflow) => {
+        if (options.excludeWorkflowId && workflowRecordId(workflow) === options.excludeWorkflowId) return false;
+        return normalize(workflowDisplayName(workflow)) === key;
+      });
     }
 
     function uniqueWorkflowName(baseName) {
@@ -3054,6 +3164,7 @@
       applyWorkflowPayload(payload);
       state.currentWorkflowId = null;
       state.currentWorkflowName = payload.workflow_name || "";
+      state.workflowNameDraft = state.currentWorkflowName;
       markWorkflowDirty();
       els.restoreSpecStatus.textContent = `Restored ${pluralizeSpec(state.clientSet.length, "Client element")} and ${pluralizeSpec(state.advisorSet.length, "Advisor element")}.`;
     }
@@ -3162,6 +3273,7 @@
         applyWorkflowPayload(specPayload);
         state.currentWorkflowId = null;
         state.currentWorkflowName = specPayload.workflow_name || "";
+        state.workflowNameDraft = state.currentWorkflowName;
         markWorkflowDirty();
         els.backendSpecStatus.textContent = `Restored backend draft with ${localSpecCountText()}.`;
       } catch (error) {
@@ -3983,10 +4095,12 @@
     els.homeAdvancedTools.addEventListener("click", () => navigateToRoute("advanced"));
     els.builderHome.addEventListener("click", () => navigateToRoute("home"));
     els.workflowNameInput.addEventListener("input", () => {
-      state.currentWorkflowName = els.workflowNameInput.value.trim();
+      state.workflowNameDraft = els.workflowNameInput.value;
       markWorkflowDirty();
     });
     els.saveWorkflow.addEventListener("click", saveCurrentWorkflow);
+    els.renameWorkflow.addEventListener("click", renameCurrentWorkflow);
+    els.saveAsWorkflow.addEventListener("click", saveCurrentWorkflowAsNew);
     els.copyCurrentWorkflow.addEventListener("click", copyCurrentWorkflow);
     els.homeSavedWorkflowList.addEventListener("click", handleSavedWorkflowAction);
     els.homePopulateWorkflowList.addEventListener("click", handleSavedWorkflowAction);
