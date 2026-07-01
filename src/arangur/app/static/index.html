@@ -117,7 +117,19 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .home-primary-actions {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .home-choice-button.is-active {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.14);
+    }
+
     .home-flow-section,
+    .home-detail-panel,
     .saved-workflow-panel,
     .workflow-management-panel,
     .developer-tools-panel {
@@ -135,6 +147,21 @@
     .home-flow-title {
       display: grid;
       gap: 4px;
+    }
+
+    .home-staged-steps {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .home-staged-steps li {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      list-style: none;
+      padding: 10px;
     }
 
     .workflow-name-grid {
@@ -944,6 +971,7 @@
       .finder-grid,
       .calculation-fields,
       .home-actions,
+      .home-primary-actions,
       .workflow-name-grid,
       .saved-workflow-row {
         grid-template-columns: 1fr;
@@ -975,49 +1003,59 @@
         <div class="panel-header">
           <p class="helper">Advisor Home</p>
           <h1 id="advisor-home-title">Manage briefing workflows</h1>
-          <p class="helper">Design reusable workflows, populate them with the current demo snapshot, and preview the briefing surfaces.</p>
+          <p class="helper">Choose one workflow step. Builder, preview, and technical tools stay one layer deeper.</p>
         </div>
 
-        <section class="home-flow-section" aria-labelledby="design-workflow-title">
+        <div id="home-primary-actions" class="home-primary-actions" aria-label="Advisor workflow choices">
+          <button id="home-create-workflow-button" class="secondary-button home-choice-button" type="button" data-home-mode="create">Create a new workflow</button>
+          <button id="home-existing-workflow-button" class="secondary-button home-choice-button" type="button" data-home-mode="existing">Work with an existing workflow</button>
+          <button id="home-populate-workflow-button" class="secondary-button home-choice-button" type="button" data-home-mode="populate">Populate a workflow with data</button>
+          <button id="home-present-reports-button" class="secondary-button home-choice-button" type="button" data-home-mode="present">Present / view reports</button>
+        </div>
+
+        <section id="home-create-panel" class="home-detail-panel hidden" aria-labelledby="create-workflow-title">
           <div class="home-flow-title">
-            <p class="helper">Design / Edit</p>
-            <h2 id="design-workflow-title">Design or edit briefing workflows</h2>
+            <p class="helper">Create</p>
+            <h2 id="create-workflow-title">Create a new workflow</h2>
+            <p class="helper">Start with the workflow type that matches the meeting surface.</p>
           </div>
           <div class="home-actions" aria-label="Design or edit workflow choices">
             <button id="home-build-client-button" class="primary-button" type="button">New Client Briefing Workflow</button>
             <button id="home-build-advisor-button" class="primary-button" type="button">New Advisor Review Workflow</button>
-            <button id="home-open-saved-button" class="secondary-button" type="button">Open saved workflow</button>
-            <button id="home-copy-workflow-button" class="secondary-button" type="button">Copy existing workflow</button>
           </div>
         </section>
 
-        <section class="home-flow-section" aria-labelledby="populate-workflow-title">
+        <section id="home-existing-panel" class="home-detail-panel hidden" aria-labelledby="existing-workflows-title">
+          <div class="home-flow-title">
+            <p class="helper">Existing</p>
+            <h2 id="existing-workflows-title">Work with an existing workflow</h2>
+            <p class="helper">Open, copy, or delete browser-local saved workflows from this list.</p>
+          </div>
+          <div id="home-saved-workflow-list" class="saved-workflow-list" aria-label="Saved workflows for open, copy, or delete"></div>
+          <p id="home-saved-workflow-status" class="status"></p>
+        </section>
+
+        <section id="home-populate-panel" class="home-detail-panel hidden" aria-labelledby="populate-workflow-title">
           <div class="home-flow-title">
             <p class="helper">Populate</p>
-            <h2 id="populate-workflow-title">Populate workflow with data</h2>
-            <p class="helper">Use a saved workflow with the current demo data snapshot. Report generation from saved workflows is a next workflow.</p>
+            <h2 id="populate-workflow-title">Populate a workflow with data</h2>
+            <p class="helper">This is staged until dated report generation exists.</p>
           </div>
+          <ol class="home-staged-steps">
+            <li><strong>Choose a saved workflow.</strong> Use Work with an existing workflow to open a browser-local workflow.</li>
+            <li><strong>Choose data.</strong> Current demo data snapshot is available for preview.</li>
+            <li><strong>Preview now.</strong> Full dated report generation is not implemented yet. Use Preview from the builder for the current demo.</li>
+          </ol>
+          <button id="home-populate-existing-button" class="secondary-button" type="button">Work with an existing workflow</button>
         </section>
 
-        <section class="home-flow-section" aria-labelledby="present-report-title">
+        <section id="home-present-panel" class="home-detail-panel hidden" aria-labelledby="present-report-title">
           <div class="home-flow-title">
             <p class="helper">Present</p>
-            <h2 id="present-report-title">Present or view reports</h2>
-            <p class="helper">Preview the current Client Briefing or Advisor Review. Generated report history is not implemented in this local demo.</p>
+            <h2 id="present-report-title">Present / view reports</h2>
+            <p class="helper">Generated report presentation is a next workflow. For now, open a workflow and use Preview Client Briefing or Preview Advisor Review from the builder.</p>
           </div>
-          <div class="button-row">
-            <button id="home-preview-client-button" class="secondary-button" type="button">Preview Client Briefing</button>
-            <button id="home-preview-advisor-button" class="secondary-button" type="button">Preview Advisor Review</button>
-          </div>
-        </section>
-
-        <section class="saved-workflow-panel" aria-labelledby="saved-workflows-title">
-          <div class="home-flow-title">
-            <p class="helper">Saved Workflows</p>
-            <h2 id="saved-workflows-title">Named saved workflows</h2>
-          </div>
-          <div id="home-saved-workflow-list" class="saved-workflow-list" aria-label="Named saved workflows"></div>
-          <p id="home-saved-workflow-status" class="status"></p>
+          <button id="home-present-existing-button" class="secondary-button" type="button">Work with an existing workflow</button>
         </section>
 
         <details class="developer-tools-panel">
@@ -1236,11 +1274,6 @@
     const LOCAL_SPEC_SET_SCHEMA_VERSION = "arangur.local_briefing_spec_set.v1";
     const LOCAL_WORKFLOW_STORAGE_KEY = "arangur.local_named_briefing_workflows.v1";
     const LOCAL_WORKFLOW_SCHEMA_VERSION = "arangur.local_named_briefing_workflows.v1";
-    const EXAMPLE_WORKFLOW_NAMES = [
-      "Northstar Standard Quarterly Review",
-      "Family Office Advisor Review Draft",
-      "Q3 Client Briefing Draft"
-    ];
     const CLIENT_CONTEXT = {
       client_family: "Northstar Family Office",
       portfolio_context: "Demo portfolio",
@@ -1349,9 +1382,17 @@
       portfolio_status: ["Whole portfolio"],
       concentration: ["Whole portfolio"],
       scenario_impact_by_manager: ["All managers compared"],
-      cash_generation_summary: ["Whole portfolio", "All managers compared"],
+      cash_generation_summary: ["Whole portfolio"],
       manager_comparison: ["All managers compared"],
       data_confidence_note: ["Whole portfolio"]
+    };
+    const PREVIEW_SCOPE_NOTES_BY_ELEMENT = {
+      portfolio_status: "This template currently previews at the whole-portfolio level only.",
+      concentration: "This template currently previews at the whole-portfolio concentration level only.",
+      scenario_impact_by_manager: "This template currently previews as an all-managers scenario comparison.",
+      cash_generation_summary: "This template currently previews at the whole-portfolio cash-summary level only.",
+      manager_comparison: "This template currently previews as an all-managers comparison.",
+      data_confidence_note: "This template currently previews at the whole-portfolio data-confidence level only."
     };
     const UNSUPPORTED_SELECTED_SCOPE_PREVIEW_MESSAGE = "Selected-scope preview is not available for this demo-rendered element. Choose a supported scope before adding this element.";
     const SCENARIO_OPTIONS = [
@@ -1476,6 +1517,7 @@
       currentPreviewKind: null,
       currentPreviewReady: false,
       route: "home",
+      homeMode: null,
       currentWorkflowId: null,
       currentWorkflowName: "",
       workflowDirty: false,
@@ -1487,12 +1529,19 @@
 
     const els = {
       advisorHome: document.getElementById("advisor-home"),
+      homePrimaryActions: document.getElementById("home-primary-actions"),
+      homeCreateWorkflow: document.getElementById("home-create-workflow-button"),
+      homeExistingWorkflow: document.getElementById("home-existing-workflow-button"),
+      homePopulateWorkflow: document.getElementById("home-populate-workflow-button"),
+      homePresentReports: document.getElementById("home-present-reports-button"),
+      homeCreatePanel: document.getElementById("home-create-panel"),
+      homeExistingPanel: document.getElementById("home-existing-panel"),
+      homePopulatePanel: document.getElementById("home-populate-panel"),
+      homePresentPanel: document.getElementById("home-present-panel"),
       homeBuildClient: document.getElementById("home-build-client-button"),
       homeBuildAdvisor: document.getElementById("home-build-advisor-button"),
-      homeOpenSaved: document.getElementById("home-open-saved-button"),
-      homeCopyWorkflow: document.getElementById("home-copy-workflow-button"),
-      homePreviewClient: document.getElementById("home-preview-client-button"),
-      homePreviewAdvisor: document.getElementById("home-preview-advisor-button"),
+      homePopulateExisting: document.getElementById("home-populate-existing-button"),
+      homePresentExisting: document.getElementById("home-present-existing-button"),
       homeAdvancedTools: document.getElementById("home-advanced-tools-button"),
       homeSavedWorkflowList: document.getElementById("home-saved-workflow-list"),
       homeSavedWorkflowStatus: document.getElementById("home-saved-workflow-status"),
@@ -1649,6 +1698,23 @@
       navigateToRoute("builder");
     }
 
+    function setHomeMode(mode) {
+      const normalized = ["create", "existing", "populate", "present"].includes(mode) ? mode : null;
+      state.homeMode = normalized;
+      [
+        ["create", els.homeCreatePanel],
+        ["existing", els.homeExistingPanel],
+        ["populate", els.homePopulatePanel],
+        ["present", els.homePresentPanel]
+      ].forEach(([panelMode, panel]) => {
+        if (panel) panel.classList.toggle("hidden", normalized !== panelMode);
+      });
+      els.homePrimaryActions.querySelectorAll("[data-home-mode]").forEach((button) => {
+        button.classList.toggle("is-active", button.dataset.homeMode === normalized);
+      });
+      if (normalized === "existing") renderSavedWorkflows();
+    }
+
     function startNewWorkflow(targetSet) {
       state.currentWorkflowId = null;
       state.currentWorkflowName = "";
@@ -1700,16 +1766,8 @@
 
     function renderSavedWorkflows() {
       if (!state.savedWorkflows.length) {
-        els.homeSavedWorkflowList.innerHTML = EXAMPLE_WORKFLOW_NAMES.map((name) => `
-          <div class="saved-workflow-row is-example">
-            <div>
-              <strong>${escapeHtml(name)}</strong>
-              <p class="meta">Example saved workflow name. Save a workflow to replace these examples.</p>
-            </div>
-            <span class="badge">Example</span>
-          </div>
-        `).join("");
-        els.homeSavedWorkflowStatus.textContent = "No named workflows saved in this browser yet.";
+        els.homeSavedWorkflowList.innerHTML = '<p class="empty">No saved workflows yet. Create a new workflow first.</p>';
+        els.homeSavedWorkflowStatus.textContent = "";
         return;
       }
       els.homeSavedWorkflowList.innerHTML = state.savedWorkflows.map((workflow) => `
@@ -2049,10 +2107,12 @@
       els.configPanel.classList.add("hidden");
       els.preview.classList.remove("hidden");
       const askFor = fieldSummary(template);
+      const scopeNote = previewScopeNote(template);
       els.preview.innerHTML = `
         <p>${escapeHtml(template.short_description)}</p>
         <p class="meta">${escapeHtml(usageNote(template))}</p>
         <p><strong>Will ask for:</strong> ${escapeHtml(askFor || "placement only")}</p>
+        ${scopeNote ? `<p class="meta">${escapeHtml(scopeNote)}</p>` : ""}
         <div class="button-row">
           <button id="use-template-button" class="primary-button" type="button">Use this element</button>
         </div>
@@ -2088,8 +2148,10 @@
       els.backToPreview.textContent = "Back to preview";
       const calculationFields = calculationFieldsFor(template);
       const placementFields = placementFieldsFor(template);
+      const scopeNote = previewScopeNote(template);
       els.form.innerHTML = `
         ${calculationFields.length ? `<div class="calculation-fields">${calculationFields.map(renderField).join("")}</div>` : '<p class="empty">This template only needs placement before adding.</p>'}
+        ${scopeNote ? `<p class="meta">${escapeHtml(scopeNote)}</p>` : ""}
         <div class="placement-strip">
           <p class="helper">Add to set as</p>
           <div class="calculation-fields">${placementFields.map(renderField).join("")}</div>
@@ -2291,6 +2353,16 @@
       if (!configured) return template.supported_scopes || [];
       const supported = template.supported_scopes || [];
       return configured.filter((scope) => containsNormalized(supported, scope));
+    }
+
+    function previewScopeNote(template) {
+      if (!template) return "";
+      const supported = template.supported_scopes || [];
+      const previewSupported = previewSupportedScopesForTemplate(template);
+      if (previewSupported.length && previewSupported.length < supported.length) {
+        return PREVIEW_SCOPE_NOTES_BY_ELEMENT[template.element_id] || "This template currently previews only for the shown scope choices.";
+      }
+      return "";
     }
 
     function previewScopeUnsupported(template, scope) {
@@ -3647,22 +3719,15 @@
       return escapeHtml(value);
     }
 
+    els.homePrimaryActions.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-home-mode]");
+      if (!button) return;
+      setHomeMode(button.dataset.homeMode);
+    });
     els.homeBuildClient.addEventListener("click", () => startNewWorkflow("Client Briefing Set"));
     els.homeBuildAdvisor.addEventListener("click", () => startNewWorkflow("Advisor Review Set"));
-    els.homeOpenSaved.addEventListener("click", () => {
-      els.homeSavedWorkflowStatus.textContent = state.savedWorkflows.length
-        ? "Choose a named saved workflow below."
-        : "No named workflows saved in this browser yet.";
-      els.homeSavedWorkflowList.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-    els.homeCopyWorkflow.addEventListener("click", () => {
-      els.homeSavedWorkflowStatus.textContent = state.savedWorkflows.length
-        ? "Choose Copy Workflow on a named saved workflow below."
-        : "Save a workflow before copying one.";
-      els.homeSavedWorkflowList.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-    els.homePreviewClient.addEventListener("click", () => navigateToRoute("preview/client"));
-    els.homePreviewAdvisor.addEventListener("click", () => navigateToRoute("preview/advisor"));
+    els.homePopulateExisting.addEventListener("click", () => setHomeMode("existing"));
+    els.homePresentExisting.addEventListener("click", () => setHomeMode("existing"));
     els.homeAdvancedTools.addEventListener("click", () => navigateToRoute("advanced"));
     els.builderHome.addEventListener("click", () => navigateToRoute("home"));
     els.workflowNameInput.addEventListener("input", () => {
