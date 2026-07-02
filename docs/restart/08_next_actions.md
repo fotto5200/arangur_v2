@@ -414,3 +414,12 @@
 - Non-goals: No generated report library UI, no generated report history, no Present/report library implementation, no backend database schema, no Docker/deployment changes, no new analytics, no simulation changes, no live data, no real client data, no external APIs, and no dependencies.
 - Acceptance criteria: Implemented baseline: `POST /api/generated-reports/demo-populate` accepts representative Client Briefing and Advisor Review browser workflow payloads, returns `generated_report_artifact.v1`, uses `Current synthetic demo snapshot` / `2026-06-30`, stays deterministic and Postgres-free, rejects invalid report types and missing sets, and the Populate UI can create/open a clean demo populated report artifact view without exposing raw artifact JSON.
 - Stop conditions: Further work should stop if it requires durable report history, production report library decisions, database schema changes, new analytics, simulation changes, real data, external API calls, production auth, or deployment changes.
+
+## Batch 22: Local Generated Report Presentation Shelf
+
+- Goal: Store Populate-created generated report artifacts in the browser and make Present / view reports minimally real.
+- Mode: Implemented product-path/UI batch.
+- Allowed scope: `src/arangur/app/static/index.html`, tests, generated artifact contract docs, restart docs, and README copy.
+- Non-goals: No backend generated report persistence, no database tables, no backend list endpoints, no full report library/history, no search/filter/version UI, no Docker/deployment changes, no live data, no real client data, no external APIs, and no dependencies.
+- Acceptance criteria: Implemented baseline: Populate saves successful `generated_report_artifact.v1` responses to browser `localStorage` under `arangur.local_generated_reports.v1`, keyed by artifact `report_id`; Present / view reports lists the local generated report shelf, opens a clean Generated report presentation view with source workflow, report type, generated/data-as-of metadata, Back to Home, Back to Reports, Print, Export HTML, and Copy text; deleting a shelf record does not delete the source saved workflow; the advisor path still avoids raw artifact JSON and does not call `/api/runs`.
+- Stop conditions: Further work should stop if it requires backend report history, production report library decisions, database schema changes, generated report versioning, real data, external API calls, production auth, or deployment changes.

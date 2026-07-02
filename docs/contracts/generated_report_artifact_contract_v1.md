@@ -2,9 +2,9 @@
 
 ## Purpose
 
-A generated report artifact is the first durable product object after an advisor-authored workflow is combined with a dated data snapshot. It is the object a later Presentation flow can open for client or advisor use.
+A generated report artifact is the first durable product object after an advisor-authored workflow is combined with a dated data snapshot. It is the object the private-demo Presentation flow can open for client or advisor use.
 
-This contract is intentionally small for the private demo. It defines the artifact shape and assembly behavior without creating a production report archive, report library, immutable audit system, or new UI surface.
+This contract is intentionally small for the private demo. It defines the artifact shape and assembly behavior without creating a production report archive, report library, immutable audit system, backend generated-report persistence, or full report-management UI.
 
 ## Relationship To Existing Objects
 
@@ -13,7 +13,7 @@ This contract is intentionally small for the private demo. It defines the artifa
 - Generated report artifact: dated, data-populated output produced from a workflow and data snapshot.
 - Presentation: opening a generated report artifact for client or advisor use.
 
-The current implementation can assemble deterministic demo artifacts from existing briefing-set preview fixtures and can populate a browser-local saved workflow through `POST /api/generated-reports/demo-populate`. The API returns the artifact JSON directly and does not persist it.
+The current implementation can assemble deterministic demo artifacts from existing briefing-set preview fixtures and can populate a browser-local saved workflow through `POST /api/generated-reports/demo-populate`. The API returns the artifact JSON directly and does not persist it to the backend.
 
 ## Demo Populate API
 
@@ -26,6 +26,12 @@ The current implementation can assemble deterministic demo artifacts from existi
 - `data_as_of`, optional; defaults to `2026-06-30`
 
 The endpoint validates the local workflow payload, uses only committed synthetic demo rendered views, maps unsupported or unrenderable sections to clean placeholders, and returns a `generated_report_artifact.v1` object. It does not require Postgres, create report history, write artifact files, add report-library records, call external APIs, or use real client or market data.
+
+## Browser-Local Presentation Shelf
+
+The static private-demo UI stores successful Populate responses in browser `localStorage` under `arangur.local_generated_reports.v1`. Shelf records are keyed by artifact `report_id`, carry compact display metadata plus the full returned artifact payload, and are used by Present / view reports to list, open, and delete browser-local generated report artifacts.
+
+Deleting a shelf record removes only that browser-local generated report record. It does not delete or mutate the source saved workflow. This shelf is not backend persistence, production report history, a report library, an immutable archive, cross-browser sync, or a production records system.
 
 ## Artifact Fields
 
@@ -83,8 +89,8 @@ Generated report artifacts in this repo currently use synthetic/demo data only. 
 
 - Production report history.
 - Report library UI.
-- Durable generated report persistence.
-- Present/view generated report library.
+- Backend durable generated report persistence.
+- Full generated-report search, filter, version, or history UI.
 - Live data snapshots.
 - Auth or permissions.
 - Immutable audit archive.
@@ -94,4 +100,4 @@ Generated report artifacts in this repo currently use synthetic/demo data only. 
 
 ## UI Principle
 
-Generated report artifacts are a product object, not a reason to expose debugging panels in the advisor path. The advisor UI should stay sparse: no new top-level home choices, no duplicate buttons, no generated-report dashboard, and no technical artifact inspection panels unless a later batch explicitly designs a small product-facing surface.
+Generated report artifacts are a product object, not a reason to expose debugging panels in the advisor path. The advisor UI should stay sparse: no new top-level home choices, no duplicate buttons, no generated-report dashboard, and no technical artifact inspection panels. The current Present shelf is intentionally minimal and product-facing: it lists browser-local artifacts created by Populate and opens the selected artifact in a clean presentation view.

@@ -1061,9 +1061,9 @@
           <div class="home-flow-title">
             <p class="helper">Present</p>
             <h2 id="present-report-title">Present / view reports</h2>
-            <p class="helper">Generated report presentation list is a next workflow. Use Populate workflow with data to create and open a demo populated report for now.</p>
+            <p class="helper">Open generated reports created from Populate. These artifacts are stored only in this browser for the private demo.</p>
           </div>
-          <div id="home-present-workflow-list" class="saved-workflow-list" aria-label="Saved workflows for presentation view"></div>
+          <div id="home-present-workflow-list" class="saved-workflow-list" aria-label="Browser-local generated reports for presentation view"></div>
           <p id="home-present-workflow-status" class="status"></p>
         </section>
 
@@ -1303,6 +1303,8 @@
     const LOCAL_SPEC_SET_SCHEMA_VERSION = "arangur.local_briefing_spec_set.v1";
     const LOCAL_WORKFLOW_STORAGE_KEY = "arangur.local_named_briefing_workflows.v1";
     const LOCAL_WORKFLOW_SCHEMA_VERSION = "arangur.local_named_briefing_workflows.v1";
+    const LOCAL_GENERATED_REPORT_STORAGE_KEY = "arangur.local_generated_reports.v1";
+    const LOCAL_GENERATED_REPORT_SCHEMA_VERSION = "arangur.local_generated_reports.v1";
     const CLIENT_CONTEXT = {
       client_family: "Northstar Family Office",
       portfolio_context: "Demo portfolio",
@@ -1572,11 +1574,13 @@
       workflowModeWorkflowName: "",
       workflowModePreviewKind: null,
       workflowModeArtifact: null,
+      currentGeneratedReportId: null,
       currentWorkflowId: null,
       currentWorkflowName: "",
       workflowNameDraft: "",
       workflowDirty: false,
       savedWorkflows: [],
+      generatedReports: [],
       savedSpecSets: [],
       clientSet: [],
       advisorSet: []
@@ -1763,9 +1767,6 @@
         setBrowseAllOpen(false);
         state.workflowModeIntent = normalized === "presentation" ? "present" : "populate";
         renderWorkflowModeSurface();
-        if (normalized === "presentation" && state.workflowModeWorkflowId) {
-          await renderWorkflowModePreview(preferredPreviewKindForCurrentWorkflow());
-        }
         return;
       }
       document.body.classList.add("app-route-preview");
@@ -1793,7 +1794,10 @@
       els.homePrimaryActions.querySelectorAll("[data-home-mode]").forEach((button) => {
         button.classList.toggle("is-active", button.dataset.homeMode === normalized);
       });
-      if (normalized) renderSavedWorkflows();
+      if (normalized) {
+        renderSavedWorkflows();
+        renderGeneratedReports();
+      }
     }
 
     function startNewWorkflow(targetSet) {
@@ -1825,6 +1829,19 @@
       renderSavedWorkflows();
     }
 
+    function loadLocalGeneratedReports() {
+      try {
+        const raw = window.localStorage ? window.localStorage.getItem(LOCAL_GENERATED_REPORT_STORAGE_KEY) : null;
+        const payload = raw ? JSON.parse(raw) : null;
+        state.generatedReports = Array.isArray(payload && payload.reports)
+          ? payload.reports.map(normalizeGeneratedReportRecord).filter(Boolean)
+          : [];
+      } catch (error) {
+        state.generatedReports = [];
+      }
+      renderGeneratedReports();
+    }
+
     function persistLocalNamedWorkflows() {
       try {
         if (!window.localStorage) return false;
@@ -1833,6 +1850,20 @@
           workflows: state.savedWorkflows
         };
         window.localStorage.setItem(LOCAL_WORKFLOW_STORAGE_KEY, JSON.stringify(payload));
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function persistLocalGeneratedReports() {
+      try {
+        if (!window.localStorage) return false;
+        const payload = {
+          schema_version: LOCAL_GENERATED_REPORT_SCHEMA_VERSION,
+          reports: state.generatedReports
+        };
+        window.localStorage.setItem(LOCAL_GENERATED_REPORT_STORAGE_KEY, JSON.stringify(payload));
         return true;
       } catch (error) {
         return false;
@@ -1908,7 +1939,10 @@
     function renderSavedWorkflows() {
       renderSavedWorkflowContainer(els.homeSavedWorkflowList, els.homeSavedWorkflowStatus, "existing");
       renderSavedWorkflowContainer(els.homePopulateWorkflowList, els.homePopulateWorkflowStatus, "populate");
-      renderSavedWorkflowContainer(els.homePresentWorkflowList, els.homePresentWorkflowStatus, "present");
+    }
+
+    function renderGeneratedReports() {
+      renderGeneratedReportContainer(els.homePresentWorkflowList, els.homePresentWorkflowStatus);
     }
 
     function renderSavedWorkflowContainer(listEl, statusEl, intent) {
@@ -1936,7 +1970,6 @@
 
     function emptySavedWorkflowMessage(intent) {
       if (intent === "populate") return "No saved workflows yet. Create and save a workflow before populating it.";
-      if (intent === "present") return "No saved workflows yet. Create and save a workflow before presenting it.";
       return "No saved workflows yet. Create a new workflow first.";
     }
 
@@ -1948,13 +1981,6 @@
           </div>
         `;
       }
-      if (intent === "present") {
-        return `
-          <div class="saved-workflow-actions">
-            <button class="tiny-button" type="button" data-workflow-action="present" data-workflow-id="${escapeAttr(workflowId)}">View report</button>
-          </div>
-        `;
-      }
       return `
         <div class="saved-workflow-actions">
           <button class="tiny-button" type="button" data-workflow-action="edit" data-workflow-id="${escapeAttr(workflowId)}">Open to edit</button>
@@ -1962,6 +1988,110 @@
           <button class="tiny-button" type="button" data-workflow-action="delete" data-workflow-id="${escapeAttr(workflowId)}">Delete</button>
         </div>
       `;
+    }
+
+    function normalizeGeneratedReportRecord(record) {
+      if (!record || typeof record !== "object") return null;
+      const artifact = record.artifact && typeof record.artifact === "object" ? record.artifact : record;
+      if (!artifact || typeof artifact !== "object") return null;
+      const reportId = String(artifact.report_id || record.report_id || "").trim();
+      if (!reportId) return null;
+      const reportType = artifact.report_type || record.report_type || "client_briefing";
+      const reportTitle = readableWorkflowName(artifact.report_title || record.report_title || "Demo populated report") || "Demo populated report";
+      const sourceWorkflowName = readableWorkflowName(
+        artifact.source_workflow_display_name || record.source_workflow_display_name || "Saved workflow"
+      ) || "Saved workflow";
+      const timestamp = record.updated_at || record.saved_at || artifact.generated_at || new Date().toISOString();
+      const normalizedArtifact = {
+        ...artifact,
+        report_id: reportId,
+        report_type: reportType,
+        report_title: reportTitle,
+        source_workflow_display_name: sourceWorkflowName
+      };
+      return {
+        schema_version: LOCAL_GENERATED_REPORT_SCHEMA_VERSION,
+        report_id: reportId,
+        storage_key: `${LOCAL_GENERATED_REPORT_STORAGE_KEY}:${reportId}`,
+        report_title: reportTitle,
+        report_type: reportType,
+        source_workflow_id: artifact.source_workflow_id || record.source_workflow_id || null,
+        source_workflow_display_name: sourceWorkflowName,
+        generated_at: artifact.generated_at || record.generated_at || "",
+        data_as_of: artifact.data_as_of || record.data_as_of || DEMO_DATA_AS_OF,
+        data_snapshot_label: artifact.data_snapshot_label || record.data_snapshot_label || DEMO_DATA_SNAPSHOT_LABEL,
+        render_status: artifact.render_status || record.render_status || "",
+        saved_at: record.saved_at || timestamp,
+        updated_at: timestamp,
+        artifact: normalizedArtifact
+      };
+    }
+
+    function generatedReportRecordFromArtifact(artifact) {
+      const now = new Date().toISOString();
+      return normalizeGeneratedReportRecord({
+        report_id: artifact && artifact.report_id,
+        saved_at: now,
+        updated_at: now,
+        artifact
+      });
+    }
+
+    function saveGeneratedReportArtifact(artifact) {
+      const record = generatedReportRecordFromArtifact(artifact);
+      if (!record) return false;
+      const existingIndex = state.generatedReports.findIndex((candidate) => candidate.report_id === record.report_id);
+      if (existingIndex >= 0) {
+        const existing = state.generatedReports[existingIndex];
+        state.generatedReports[existingIndex] = {
+          ...record,
+          saved_at: existing.saved_at || record.saved_at
+        };
+      } else {
+        state.generatedReports.unshift(record);
+      }
+      state.generatedReports.sort((left, right) => {
+        return String(right.updated_at || right.saved_at || "").localeCompare(String(left.updated_at || left.saved_at || ""));
+      });
+      state.currentGeneratedReportId = record.report_id;
+      const persisted = persistLocalGeneratedReports();
+      renderGeneratedReports();
+      return persisted;
+    }
+
+    function renderGeneratedReportContainer(listEl, statusEl) {
+      if (!listEl || !statusEl) return;
+      if (!state.generatedReports.length) {
+        listEl.innerHTML = '<p class="empty">No generated reports yet. Populate a workflow with demo data first.</p>';
+        statusEl.textContent = "";
+        return;
+      }
+      listEl.innerHTML = state.generatedReports.map((record) => {
+        return `
+        <div class="saved-workflow-row" data-report-id="${escapeAttr(record.report_id)}">
+          <div>
+            <strong>${escapeHtml(record.report_title || "Demo populated report")}</strong>
+            <p class="meta">${escapeHtml(generatedReportMeta(record))}</p>
+          </div>
+          <div class="saved-workflow-actions">
+            <button class="tiny-button" type="button" data-generated-report-action="open" data-report-id="${escapeAttr(record.report_id)}">Open report</button>
+            <button class="tiny-button" type="button" data-generated-report-action="delete" data-report-id="${escapeAttr(record.report_id)}">Delete</button>
+          </div>
+        </div>
+      `;
+      }).join("");
+      statusEl.textContent = `${state.generatedReports.length} generated ${state.generatedReports.length === 1 ? "report" : "reports"} stored only in this browser.`;
+    }
+
+    function generatedReportMeta(record) {
+      const parts = [
+        renderGeneratedReportTypeLabel(record),
+        `Source workflow: ${record.source_workflow_display_name || "Saved workflow"}`,
+        `Data as of ${record.data_as_of || DEMO_DATA_AS_OF}`,
+        record.data_snapshot_label || DEMO_DATA_SNAPSHOT_LABEL,
+        "private demo only"
+      ];
+      return parts.filter(Boolean).join(" | ");
     }
 
     function savedWorkflowMeta(workflow) {
@@ -2150,6 +2280,37 @@
         : "Updated this session, but this browser could not persist the saved workflow list.";
     }
 
+    function findGeneratedReport(reportId) {
+      return state.generatedReports.find((candidate) => candidate.report_id === reportId);
+    }
+
+    function openGeneratedReport(reportId) {
+      const record = findGeneratedReport(reportId);
+      if (!record) return;
+      state.currentGeneratedReportId = record.report_id;
+      state.workflowModeArtifact = record.artifact;
+      state.workflowModeIntent = "present";
+      state.workflowModeWorkflowId = record.source_workflow_id || null;
+      state.workflowModeWorkflowName = record.source_workflow_display_name || "";
+      state.workflowModePreviewKind = record.report_type === "advisor_review" ? "advisor" : "client";
+      navigateToRoute("presentation");
+    }
+
+    function deleteGeneratedReport(reportId) {
+      const report = findGeneratedReport(reportId);
+      const displayTitle = (report && report.report_title) || "generated report";
+      state.generatedReports = state.generatedReports.filter((candidate) => candidate.report_id !== reportId);
+      if (state.currentGeneratedReportId === reportId) {
+        state.currentGeneratedReportId = null;
+        state.workflowModeArtifact = null;
+      }
+      const persisted = persistLocalGeneratedReports();
+      renderGeneratedReports();
+      els.homePresentWorkflowStatus.textContent = persisted
+        ? `Deleted generated report: ${displayTitle}. Source workflow was not changed.`
+        : "Deleted the generated report in this session, but this browser could not persist the report shelf. Source workflow was not changed.";
+    }
+
     function applyWorkflowPayload(payload) {
       state.clientSet = restoreSpecList(payload.client_briefing_set, "Client Briefing Set");
       state.advisorSet = restoreSpecList(payload.advisor_review_set, "Advisor Review Set");
@@ -2173,55 +2334,80 @@
       state.workflowModeWorkflowName = displayName;
       state.workflowModePreviewKind = preferredPreviewKindForCurrentWorkflow();
       renderWorkflowChrome();
-      navigateToRoute(intent === "present" ? "presentation" : "populate");
+      navigateToRoute("populate");
     }
 
     function renderWorkflowModeSurface() {
       const intent = state.workflowModeIntent;
+      if (intent === "present") {
+        renderGeneratedReportPresentationSurface();
+        return;
+      }
       const displayName = state.workflowModeWorkflowName || state.currentWorkflowName || "";
       const hasWorkflow = Boolean(state.workflowModeWorkflowId && displayName);
-      els.workflowModeKicker.textContent = intent === "present" ? "Presentation view" : "Populate workflow";
-      els.workflowModeTitle.textContent = intent === "present" ? "Presentation view" : "Populate workflow with data";
+      els.workflowModeKicker.textContent = "Populate workflow";
+      els.workflowModeTitle.textContent = "Populate workflow with data";
       els.workflowModeSummary.textContent = hasWorkflow
         ? `${displayName} | ${clientContextSummary()}`
         : "Choose a saved workflow first.";
+      els.workflowModeEdit.textContent = "Back to Workflow";
       els.workflowModeEdit.classList.toggle("hidden", !hasWorkflow);
       els.workflowModeActions.innerHTML = "";
       els.workflowModeStatus.textContent = "";
       if (!hasWorkflow) {
         els.workflowModeBody.innerHTML = `
           <div class="preview-empty-state">
-            <p class="empty">${escapeHtml(intent === "present" ? "Choose a saved workflow before opening Presentation view." : "Choose a saved workflow before populating it with demo data.")}</p>
+            <p class="empty">Choose a saved workflow before populating it with demo data.</p>
           </div>
         `;
         return;
       }
-      const kindButtons = workflowModePreviewButtons(intent);
+      const kindButtons = workflowModePreviewButtons();
       els.workflowModeActions.innerHTML = `<div class="button-row">${kindButtons}</div>`;
-      const modeLabel = intent === "present" ? "Presentation view" : "Demo data population";
       state.workflowModeArtifact = null;
       els.workflowModeBody.innerHTML = `
         <div class="current-preview-document">
           <header class="preview-header">
-            <p class="preview-section-label">${escapeHtml(modeLabel)}</p>
+            <p class="preview-section-label">Demo data population</p>
             <h1>${escapeHtml(displayName)}</h1>
             <p class="current-preview-context"><strong>Current demo data snapshot:</strong> ${escapeHtml(DEMO_DATA_SNAPSHOT_LABEL)} | Data as of ${escapeHtml(DEMO_DATA_AS_OF)}</p>
-            <p class="current-preview-note">${escapeHtml(intent === "present"
-              ? "Generated report presentation list is a next workflow. Use Populate workflow with data to create and open a demo populated report for now."
-              : "Create a demo generated report artifact from this saved workflow and the current synthetic demo data. The artifact is local to this session and not saved to a report library.")}</p>
+            <p class="current-preview-note">Create a demo generated report artifact from this saved workflow and the current synthetic demo data. The artifact is saved only in this browser for Present / view reports and is not saved to a report library.</p>
           </header>
         </div>
       `;
     }
 
-    function workflowModePreviewButtons(intent) {
+    function renderGeneratedReportPresentationSurface() {
+      const artifact = state.workflowModeArtifact;
+      els.workflowModeKicker.textContent = "Presentation view";
+      els.workflowModeTitle.textContent = "Generated report presentation";
+      els.workflowModeEdit.textContent = "Back to Reports";
+      els.workflowModeEdit.classList.remove("hidden");
+      els.workflowModeActions.innerHTML = "";
+      els.workflowModeStatus.textContent = "";
+      if (!artifact) {
+        state.currentGeneratedReportId = null;
+        els.workflowModeSummary.textContent = "Choose a generated report from Present / view reports.";
+        els.workflowModeBody.innerHTML = `
+          <div class="preview-empty-state">
+            <p class="empty">Choose a generated report from Present / view reports.</p>
+          </div>
+        `;
+        return;
+      }
+      state.currentGeneratedReportId = artifact.report_id || state.currentGeneratedReportId;
+      els.workflowModeSummary.textContent = `${artifact.source_workflow_display_name || "Saved workflow"} | ${renderGeneratedReportTypeLabel(artifact)} | ${clientContextSummary()}`;
+      els.workflowModeBody.innerHTML = renderGeneratedReportArtifactHtml(artifact);
+      renderGeneratedReportArtifactActions();
+    }
+
+    function workflowModePreviewButtons() {
       const buttons = [];
       if (state.clientSet.length) {
-        buttons.push(`<button class="primary-button" type="button" data-workflow-mode-action="${intent === "present" ? "view-report" : "create-demo-report"}" data-kind="client">${escapeHtml(intent === "present" ? "View report" : "Create demo populated report")}</button>`);
+        buttons.push('<button class="primary-button" type="button" data-workflow-mode-action="create-demo-report" data-kind="client">Create demo populated report</button>');
       }
       if (state.advisorSet.length) {
-        const label = intent === "present" ? "View Advisor Review" : "Create Advisor Review demo populated report";
-        buttons.push(`<button class="secondary-button" type="button" data-workflow-mode-action="${intent === "present" ? "view-report" : "create-demo-report"}" data-kind="advisor">${escapeHtml(label)}</button>`);
+        buttons.push('<button class="secondary-button" type="button" data-workflow-mode-action="create-demo-report" data-kind="advisor">Create Advisor Review demo populated report</button>');
       }
       if (!buttons.length) {
         buttons.push('<button class="secondary-button" type="button" disabled>No saved elements to preview</button>');
@@ -2272,9 +2458,12 @@
           throw new Error(errorMessageFromPayload(artifact, "Could not create this demo populated report."));
         }
         state.workflowModeArtifact = artifact;
+        const persisted = saveGeneratedReportArtifact(artifact);
         els.workflowModeBody.innerHTML = renderGeneratedReportArtifactHtml(artifact);
         renderGeneratedReportArtifactActions();
-        els.workflowModeStatus.textContent = `Created a demo populated report for ${displayName}. It is local to this session and no report library record was saved.`;
+        els.workflowModeStatus.textContent = persisted
+          ? `Created a demo populated report for ${displayName}. Saved in this browser for Present / view reports.`
+          : `Created a demo populated report for ${displayName}, but this browser could not persist it for Present / view reports.`;
         return true;
       } catch (error) {
         state.workflowModeArtifact = null;
@@ -2305,12 +2494,18 @@
             <p class="preview-section-label">Demo populated report</p>
             <h1>${escapeHtml(artifact.report_title || "Demo populated report")}</h1>
             <p class="current-preview-context"><strong>Source workflow:</strong> ${escapeHtml(artifact.source_workflow_display_name || "Saved workflow")}</p>
+            <p class="current-preview-context"><strong>Report type:</strong> ${escapeHtml(renderGeneratedReportTypeLabel(artifact))}</p>
             <p class="current-preview-context"><strong>Generated:</strong> ${escapeHtml(artifact.generated_at || "")} | <strong>Data as of:</strong> ${escapeHtml(artifact.data_as_of || "")} | <strong>Snapshot:</strong> ${escapeHtml(artifact.data_snapshot_label || DEMO_DATA_SNAPSHOT_LABEL)}</p>
           </header>
           ${sections.map(renderGeneratedReportSectionHtml).join("")}
           <footer class="preview-footer-note">${escapeHtml(caveat)} ${escapeHtml(SYNTHETIC_PREVIEW_NOTICE)}</footer>
         </div>
       `;
+    }
+
+    function renderGeneratedReportTypeLabel(value) {
+      const reportType = typeof value === "string" ? value : (value && value.report_type);
+      return reportType === "advisor_review" ? "Advisor Review" : "Client Briefing";
     }
 
     function renderGeneratedReportSectionHtml(section) {
@@ -2379,9 +2574,16 @@
       const workflowId = button.dataset.workflowId;
       if (button.dataset.workflowAction === "edit") openSavedWorkflow(workflowId);
       if (button.dataset.workflowAction === "populate") openWorkflowActionMode(workflowId, "populate");
-      if (button.dataset.workflowAction === "present") openWorkflowActionMode(workflowId, "present");
       if (button.dataset.workflowAction === "copy") duplicateSavedWorkflow(workflowId);
       if (button.dataset.workflowAction === "delete") deleteSavedWorkflow(workflowId);
+    }
+
+    function handleGeneratedReportListAction(event) {
+      const button = event.target.closest("[data-generated-report-action]");
+      if (!button) return;
+      const reportId = button.dataset.reportId;
+      if (button.dataset.generatedReportAction === "open") openGeneratedReport(reportId);
+      if (button.dataset.generatedReportAction === "delete") deleteGeneratedReport(reportId);
     }
 
     function markWorkflowDirty() {
@@ -4229,7 +4431,7 @@
     els.copyCurrentWorkflow.addEventListener("click", copyCurrentWorkflow);
     els.homeSavedWorkflowList.addEventListener("click", handleSavedWorkflowAction);
     els.homePopulateWorkflowList.addEventListener("click", handleSavedWorkflowAction);
-    els.homePresentWorkflowList.addEventListener("click", handleSavedWorkflowAction);
+    els.homePresentWorkflowList.addEventListener("click", handleGeneratedReportListAction);
     els.workflowModeActions.addEventListener("click", async (event) => {
       const button = event.target.closest("[data-workflow-mode-action]");
       if (!button) return;
@@ -4243,7 +4445,9 @@
     els.workflowModeBack.addEventListener("click", () => {
       navigateToRoute("home");
     });
-    els.workflowModeEdit.addEventListener("click", () => navigateToRoute("builder"));
+    els.workflowModeEdit.addEventListener("click", () => {
+      navigateToRoute(state.workflowModeIntent === "present" ? "workflow/present" : "builder");
+    });
     els.targetClient.addEventListener("click", () => setTargetSet("Client Briefing Set"));
     els.targetAdvisor.addEventListener("click", () => setTargetSet("Advisor Review Set"));
     els.browseAll.addEventListener("click", toggleBrowseAll);
@@ -4306,6 +4510,7 @@
     renderSavedSpecSets();
     renderWorkflowChrome();
     loadLocalNamedWorkflows();
+    loadLocalGeneratedReports();
     initializeRoute();
     loadCatalog();
     loadPreviewArtifacts();

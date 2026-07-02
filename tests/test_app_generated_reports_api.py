@@ -117,7 +117,7 @@ class AppGeneratedReportsApiTests(unittest.TestCase):
         for marker in ("import requests", "import httpx", "from urllib", "plaid", "/api/runs"):
             self.assertNotIn(marker, module_text)
 
-    def test_static_ui_wires_populate_without_report_library_or_runs(self) -> None:
+    def test_static_ui_wires_populate_and_local_present_shelf_without_report_library_or_runs(self) -> None:
         response = self.client.get("/app/")
         self.assertEqual(200, response.status_code)
         html = response.text
@@ -125,7 +125,18 @@ class AppGeneratedReportsApiTests(unittest.TestCase):
         self.assertIn("Create demo populated report", html)
         self.assertIn("Current synthetic demo snapshot", html)
         self.assertIn("This section is not available in the demo populated report.", html)
-        self.assertIn("Generated report presentation list is a next workflow.", html)
+        self.assertIn("LOCAL_GENERATED_REPORT_STORAGE_KEY", html)
+        self.assertIn("arangur.local_generated_reports.v1", html)
+        self.assertIn("saveGeneratedReportArtifact", html)
+        self.assertIn("candidate.report_id === record.report_id", html)
+        self.assertIn("Open generated reports created from Populate.", html)
+        self.assertIn("No generated reports yet. Populate a workflow with demo data first.", html)
+        self.assertIn('data-generated-report-action="open"', html)
+        self.assertIn('data-generated-report-action="delete"', html)
+        self.assertIn("Generated report presentation", html)
+        self.assertIn("Back to Reports", html)
+        self.assertIn("Report type:", html)
+        self.assertIn("Source workflow was not changed.", html)
         self.assertIn("Back to Home", html)
         self.assertIn("Back to Workflow", html)
         self.assertNotIn("Generated report library", html)
