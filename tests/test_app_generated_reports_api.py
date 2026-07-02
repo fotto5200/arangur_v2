@@ -31,7 +31,7 @@ class AppGeneratedReportsApiTests(unittest.TestCase):
         self.assertIn("demo_client_briefing", payload["report_id"])
         self.assertEqual("workflow_demo_1", payload["source_workflow_id"])
         self.assertEqual("Northstar Quarterly Briefing", payload["source_workflow_display_name"])
-        self.assertTrue(payload["report_title"])
+        self.assertEqual("Northstar Quarterly Briefing - Client Briefing", payload["report_title"])
         self.assertEqual("2026-06-30T00:00:00Z", payload["generated_at"])
         self.assertEqual("2026-06-30", payload["data_as_of"])
         self.assertEqual("Current synthetic demo snapshot", payload["data_snapshot_label"])
@@ -48,6 +48,7 @@ class AppGeneratedReportsApiTests(unittest.TestCase):
         self.assertEqual(200, response.status_code)
         payload = response.json()
         self.assertEqual("advisor_review", payload["report_type"])
+        self.assertIn("Northstar Quarterly Briefing", payload["report_title"])
         self.assertIn("Advisor Review", payload["report_title"])
         self.assertGreaterEqual(len(payload["ordered_sections"]), 5)
         self.assertEqual("Advisor Prep Framing", payload["ordered_sections"][0]["title"])
@@ -118,6 +119,58 @@ class AppGeneratedReportsApiTests(unittest.TestCase):
         self.assertNotIn("traceback", artifact["text_content"].lower())
         self.assertNotIn("exception", artifact["text_content"].lower())
 
+    def test_demo_populate_endpoint_uses_selected_workflow_identity_and_sections(self) -> None:
+        payload = self._sample_payload("client_briefing")
+        payload["workflow_id"] = "workflow_20260702_report_2"
+        payload["workflow_display_name"] = "2026-07-02 Report 2"
+        payload["workflow_name"] = "Current Report 2026-06-30"
+        payload["client_briefing_set"] = [
+            {
+                "order": 1,
+                "local_spec_id": "local_client_cash",
+                "element_kind": "analytic",
+                "element_id": "cash_generation_summary",
+                "element_title": "Cash Generation Summary",
+                "target_set": "Client Briefing Set",
+                "target_branch": "Client Briefing",
+                "placement": "Cash and liquidity check",
+                "configured_parameters": {"scope": "Whole portfolio"},
+                "preview_available": True,
+                "matched_rendered_view": {
+                    "view_id": "cash_generation_summary",
+                    "element_title": "Cash Generation Summary",
+                    "html_fragment_url": "/simulation/report_element_views/cash_generation_summary.html",
+                    "markdown_fragment_url": "/simulation/report_element_views/cash_generation_summary.md",
+                },
+                "confidence_badge": "rendered_demo_view_available",
+            }
+        ]
+
+        response = self.client.post(GENERATED_REPORT_POPULATE_ENDPOINT, json=payload)
+
+        self.assertEqual(200, response.status_code)
+        artifact = response.json()
+        section_titles = [section["title"] for section in artifact["ordered_sections"]]
+        self.assertEqual("workflow_20260702_report_2", artifact["source_workflow_id"])
+        self.assertEqual("2026-07-02 Report 2", artifact["source_workflow_display_name"])
+        self.assertEqual("2026-07-02 Report 2 - Client Briefing", artifact["report_title"])
+        self.assertIn("Cash & Liquidity", section_titles)
+        self.assertNotIn("Portfolio Status", section_titles)
+        self.assertNotIn("Current Report 2026-06-30", artifact["report_title"])
+        self.assertEqual(1, artifact["metadata_json"]["source_workflow_item_count"])
+
+    def test_demo_populate_endpoint_creates_distinct_report_ids_for_repeated_population(self) -> None:
+        payload = self._sample_payload("client_briefing")
+
+        first = self.client.post(GENERATED_REPORT_POPULATE_ENDPOINT, json=payload)
+        second = self.client.post(GENERATED_REPORT_POPULATE_ENDPOINT, json=payload)
+
+        self.assertEqual(200, first.status_code)
+        self.assertEqual(200, second.status_code)
+        self.assertNotEqual(first.json()["report_id"], second.json()["report_id"])
+        self.assertTrue(first.json()["report_id"].startswith("demo_client_briefing_workflow_demo_1_20260630_"))
+        self.assertTrue(second.json()["report_id"].startswith("demo_client_briefing_workflow_demo_1_20260630_"))
+
     def test_generated_report_service_has_no_external_api_coupling(self) -> None:
         module_text = (SRC / "arangur" / "app" / "generated_reports.py").read_text(encoding="utf-8").lower()
         for marker in ("import requests", "import httpx", "from urllib", "plaid", "/api/runs"):
@@ -136,6 +189,13 @@ class AppGeneratedReportsApiTests(unittest.TestCase):
         self.assertIn("arangur.local_generated_reports.v1", html)
         self.assertIn("saveGeneratedReportArtifact", html)
         self.assertIn("candidate.report_id === record.report_id", html)
+        self.assertIn("findSavedWorkflow(state.workflowModeWorkflowId)", html)
+        self.assertIn("buildDemoPopulateRequest(normalizedKind, workflow)", html)
+        self.assertIn("listForKindFromPayload", html)
+        self.assertIn('populate_request_id: newLocalId("generated_report")', html)
+        self.assertIn("Source workflow:", html)
+        self.assertIn("That saved workflow could not be found. Return to Work with existing workflow and save it again.", html)
+        self.assertIn('artifact.schema_version !== "generated_report_artifact.v1"', html)
         self.assertIn("Open generated reports created from Populate.", html)
         self.assertIn("No generated reports yet. Populate a workflow with demo data first.", html)
         self.assertIn('data-generated-report-action="open"', html)
@@ -147,6 +207,7 @@ class AppGeneratedReportsApiTests(unittest.TestCase):
         self.assertIn("Back to Home", html)
         self.assertIn("Back to Workflow", html)
         self.assertNotIn("Generated report library", html)
+        self.assertNotIn("generated report debug", html.lower())
         self.assertNotIn("report library dashboard", html.lower())
         self.assertNotIn("/api/generated-reports/list", html)
         self.assertNotIn("/api/runs", html)

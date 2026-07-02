@@ -1878,6 +1878,8 @@
         workflow.display_name || payload.workflow_name || workflow.name || "Untitled Briefing Workflow"
       );
       const timestamp = workflow.updated_at || workflow.saved_at || workflow.created_at || new Date().toISOString();
+      const clientSet = Array.isArray(payload.client_briefing_set) ? payload.client_briefing_set : [];
+      const advisorSet = Array.isArray(payload.advisor_review_set) ? payload.advisor_review_set : [];
       return {
         ...workflow,
         id: workflowId,
@@ -1891,7 +1893,12 @@
         saved_at: workflow.saved_at || timestamp,
         payload: {
           ...payload,
-          workflow_name: displayName
+          workflow_name: displayName,
+          schema_version: payload.schema_version || LOCAL_SPEC_SET_SCHEMA_VERSION,
+          synthetic_data: payload.synthetic_data !== false,
+          client_context: payload.client_context && typeof payload.client_context === "object" ? payload.client_context : { ...CLIENT_CONTEXT },
+          client_briefing_set: clientSet,
+          advisor_review_set: advisorSet
         }
       };
     }
@@ -1994,6 +2001,8 @@
       if (!record || typeof record !== "object") return null;
       const artifact = record.artifact && typeof record.artifact === "object" ? record.artifact : record;
       if (!artifact || typeof artifact !== "object") return null;
+      if (artifact.schema_version && artifact.schema_version !== "generated_report_artifact.v1") return null;
+      if (!Array.isArray(artifact.ordered_sections) || !artifact.ordered_sections.length) return null;
       const reportId = String(artifact.report_id || record.report_id || "").trim();
       if (!reportId) return null;
       const reportType = artifact.report_type || record.report_type || "client_briefing";
@@ -2324,16 +2333,12 @@
       const workflow = findSavedWorkflow(workflowId);
       if (!workflow) return;
       const displayName = workflowDisplayName(workflow);
-      applyWorkflowPayload(workflow.payload || {});
-      state.currentWorkflowId = workflowRecordId(workflow);
-      state.currentWorkflowName = displayName;
-      state.workflowNameDraft = displayName;
-      state.workflowDirty = false;
       state.workflowModeIntent = intent;
-      state.workflowModeWorkflowId = state.currentWorkflowId;
+      state.workflowModeWorkflowId = workflowRecordId(workflow);
       state.workflowModeWorkflowName = displayName;
-      state.workflowModePreviewKind = preferredPreviewKindForCurrentWorkflow();
-      renderWorkflowChrome();
+      state.workflowModePreviewKind = preferredPreviewKindForPayload(workflow.payload || {});
+      state.workflowModeArtifact = null;
+      state.currentGeneratedReportId = null;
       navigateToRoute("populate");
     }
 
@@ -2343,12 +2348,14 @@
         renderGeneratedReportPresentationSurface();
         return;
       }
-      const displayName = state.workflowModeWorkflowName || state.currentWorkflowName || "";
-      const hasWorkflow = Boolean(state.workflowModeWorkflowId && displayName);
+      const workflow = state.workflowModeWorkflowId ? findSavedWorkflow(state.workflowModeWorkflowId) : null;
+      const displayName = workflow ? workflowDisplayName(workflow) : "";
+      const payload = workflow ? workflow.payload || {} : {};
+      const hasWorkflow = Boolean(workflow && state.workflowModeWorkflowId && displayName);
       els.workflowModeKicker.textContent = "Populate workflow";
       els.workflowModeTitle.textContent = "Populate workflow with data";
       els.workflowModeSummary.textContent = hasWorkflow
-        ? `${displayName} | ${clientContextSummary()}`
+        ? `${displayName} | ${selectedWorkflowSectionCountText(payload)} | ${clientContextSummary()}`
         : "Choose a saved workflow first.";
       els.workflowModeEdit.textContent = "Back to Workflow";
       els.workflowModeEdit.classList.toggle("hidden", !hasWorkflow);
@@ -2357,12 +2364,13 @@
       if (!hasWorkflow) {
         els.workflowModeBody.innerHTML = `
           <div class="preview-empty-state">
-            <p class="empty">Choose a saved workflow before populating it with demo data.</p>
+            <p class="empty">${state.workflowModeWorkflowId ? "That saved workflow could not be found. Return to Work with existing workflow and save it again." : "Choose a saved workflow before populating it with demo data."}</p>
           </div>
         `;
         return;
       }
-      const kindButtons = workflowModePreviewButtons();
+      state.workflowModeWorkflowName = displayName;
+      const kindButtons = workflowModePreviewButtons(payload);
       els.workflowModeActions.innerHTML = `<div class="button-row">${kindButtons}</div>`;
       state.workflowModeArtifact = null;
       els.workflowModeBody.innerHTML = `
@@ -2370,6 +2378,7 @@
           <header class="preview-header">
             <p class="preview-section-label">Demo data population</p>
             <h1>${escapeHtml(displayName)}</h1>
+            <p class="current-preview-context"><strong>Source workflow:</strong> ${escapeHtml(displayName)} | ${escapeHtml(selectedWorkflowSectionCountText(payload))}</p>
             <p class="current-preview-context"><strong>Current demo data snapshot:</strong> ${escapeHtml(DEMO_DATA_SNAPSHOT_LABEL)} | Data as of ${escapeHtml(DEMO_DATA_AS_OF)}</p>
             <p class="current-preview-note">Create a demo generated report artifact from this saved workflow and the current synthetic demo data. The artifact is saved only in this browser for Present / view reports and is not saved to a report library.</p>
           </header>
@@ -2401,12 +2410,14 @@
       renderGeneratedReportArtifactActions();
     }
 
-    function workflowModePreviewButtons() {
+    function workflowModePreviewButtons(payload = null) {
       const buttons = [];
-      if (state.clientSet.length) {
+      const clientSet = payload ? listForKindFromPayload("client", payload) : state.clientSet;
+      const advisorSet = payload ? listForKindFromPayload("advisor", payload) : state.advisorSet;
+      if (clientSet.length) {
         buttons.push('<button class="primary-button" type="button" data-workflow-mode-action="create-demo-report" data-kind="client">Create demo populated report</button>');
       }
-      if (state.advisorSet.length) {
+      if (advisorSet.length) {
         buttons.push('<button class="secondary-button" type="button" data-workflow-mode-action="create-demo-report" data-kind="advisor">Create Advisor Review demo populated report</button>');
       }
       if (!buttons.length) {
@@ -2438,8 +2449,19 @@
 
     async function createDemoPopulatedReport(kind) {
       const normalizedKind = kind === "advisor" ? "advisor" : "client";
-      const displayName = state.workflowModeWorkflowName || state.currentWorkflowName || "Saved workflow";
-      const list = listForKind(normalizedKind);
+      const workflow = state.workflowModeWorkflowId ? findSavedWorkflow(state.workflowModeWorkflowId) : null;
+      if (!workflow) {
+        state.workflowModeArtifact = null;
+        els.workflowModeBody.innerHTML = `
+          <div class="preview-empty-state">
+            <p class="empty">That saved workflow could not be found. Return to Work with existing workflow and save it again.</p>
+          </div>
+        `;
+        els.workflowModeStatus.textContent = "That saved workflow could not be found. Return to Work with existing workflow and save it again.";
+        return false;
+      }
+      const displayName = workflowDisplayName(workflow);
+      const list = listForKindFromPayload(normalizedKind, workflow.payload || {});
       state.workflowModePreviewKind = normalizedKind;
       if (!list.length) {
         els.workflowModeBody.innerHTML = emptyCurrentPreviewHtml(normalizedKind);
@@ -2451,7 +2473,7 @@
         const response = await fetch(GENERATED_REPORT_POPULATE_ENDPOINT, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(buildDemoPopulateRequest(normalizedKind))
+          body: JSON.stringify(buildDemoPopulateRequest(normalizedKind, workflow))
         });
         const artifact = await readJsonResponse(response);
         if (!response.ok) {
@@ -2472,14 +2494,25 @@
       }
     }
 
-    function buildDemoPopulateRequest(kind) {
+    function buildDemoPopulateRequest(kind, workflow) {
+      const payload = workflow && workflow.payload && typeof workflow.payload === "object" ? workflow.payload : {};
+      const displayName = workflowDisplayName(workflow);
+      const workflowId = workflowRecordId(workflow);
       return {
-        ...buildLocalSpecSet(),
-        workflow_id: state.workflowModeWorkflowId || state.currentWorkflowId || null,
-        workflow_display_name: state.workflowModeWorkflowName || state.currentWorkflowName || "Saved workflow",
+        ...payload,
+        schema_version: LOCAL_SPEC_SET_SCHEMA_VERSION,
+        exported_at: new Date().toISOString(),
+        synthetic_data: true,
+        client_context: payload.client_context && typeof payload.client_context === "object" ? payload.client_context : { ...CLIENT_CONTEXT },
+        client_briefing_set: listForKindFromPayload("client", payload),
+        advisor_review_set: listForKindFromPayload("advisor", payload),
+        workflow_id: workflowId || null,
+        workflow_display_name: displayName,
+        workflow_name: displayName,
         report_type: kind === "advisor" ? "advisor_review" : "client_briefing",
         data_snapshot_label: DEMO_DATA_SNAPSHOT_LABEL,
-        data_as_of: DEMO_DATA_AS_OF
+        data_as_of: DEMO_DATA_AS_OF,
+        populate_request_id: newLocalId("generated_report")
       };
     }
 
@@ -2566,6 +2599,17 @@
       if (state.clientSet.length) return "client";
       if (state.advisorSet.length) return "advisor";
       return "client";
+    }
+
+    function preferredPreviewKindForPayload(payload) {
+      if (listForKindFromPayload("client", payload).length) return "client";
+      if (listForKindFromPayload("advisor", payload).length) return "advisor";
+      return "client";
+    }
+
+    function selectedWorkflowSectionCountText(payload) {
+      const count = listForKindFromPayload("client", payload).length + listForKindFromPayload("advisor", payload).length;
+      return pluralizeSpec(count, "section");
     }
 
     function handleSavedWorkflowAction(event) {
@@ -4131,6 +4175,11 @@
       return kind === "client" ? state.clientSet : state.advisorSet;
     }
 
+    function listForKindFromPayload(kind, payload) {
+      const key = kind === "advisor" ? "advisor_review_set" : "client_briefing_set";
+      return Array.isArray(payload && payload[key]) ? payload[key] : [];
+    }
+
     function narrativeTypeConfig(type) {
       return narrativeTypeConfigForTarget(type, state.targetSet);
     }
@@ -4446,7 +4495,15 @@
       navigateToRoute("home");
     });
     els.workflowModeEdit.addEventListener("click", () => {
-      navigateToRoute(state.workflowModeIntent === "present" ? "workflow/present" : "builder");
+      if (state.workflowModeIntent === "present") {
+        navigateToRoute("workflow/present");
+        return;
+      }
+      if (state.workflowModeWorkflowId) {
+        openSavedWorkflow(state.workflowModeWorkflowId);
+        return;
+      }
+      navigateToRoute("builder");
     });
     els.targetClient.addEventListener("click", () => setTargetSet("Client Briefing Set"));
     els.targetAdvisor.addEventListener("click", () => setTargetSet("Advisor Review Set"));

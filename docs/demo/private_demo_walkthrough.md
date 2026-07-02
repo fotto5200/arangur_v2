@@ -48,13 +48,14 @@ start "" http://127.0.0.1:8000/app/
 7. Return to Advisor Home.
 8. Choose `Populate a workflow with data`.
 9. Select the saved workflow and use `Current synthetic demo snapshot`.
-10. Choose `Create demo populated report`.
-11. Confirm the generated report opens.
-12. Return Home.
-13. Choose `Present / view reports`.
-14. Open the generated report from the local report shelf.
-15. Confirm `Print`, `Export HTML`, and `Copy text` are present.
-16. Optional: create an `Advisor Review Workflow` and repeat the same abbreviated Populate and Present path.
+10. Confirm `Source workflow` shows the workflow you selected.
+11. Choose `Create demo populated report`.
+12. Confirm the generated report opens.
+13. Return Home.
+14. Choose `Present / view reports`.
+15. Open the generated report from the local report shelf.
+16. Confirm `Print`, `Export HTML`, and `Copy text` are present.
+17. Optional: create an `Advisor Review Workflow` and repeat the same abbreviated Populate and Present path.
 
 ## Stop The Stack
 
@@ -98,6 +99,7 @@ Mark each item pass/fail during the local demo rehearsal.
 ### Populate
 
 - [ ] Saved workflow can be selected.
+- [ ] Source workflow confirmation matches the selected saved workflow.
 - [ ] Current synthetic demo snapshot is clear.
 - [ ] Demo populated report is created.
 - [ ] Generated report opens.

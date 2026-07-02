@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import uuid
 from pathlib import Path
 from typing import Any
 
@@ -86,6 +87,7 @@ def build_demo_populated_report_artifact(
     )
     data_as_of = _clean_optional_string(payload.get("data_as_of")) or DEMO_DATA_AS_OF
     data_snapshot_label = _clean_optional_string(payload.get("data_snapshot_label")) or DEMO_DATA_SNAPSHOT_LABEL
+    populate_request_id = _clean_optional_string(payload.get("populate_request_id")) or uuid.uuid4().hex[:12]
     views = load_report_element_views(view_dir)
     preview_payload = _build_preview_payload(
         payload=payload,
@@ -102,7 +104,8 @@ def build_demo_populated_report_artifact(
         report_type=report_type,
         source_workflow_id=workflow_id,
         source_workflow_display_name=workflow_display_name,
-        report_id=_report_id(report_type, workflow_id, workflow_display_name, data_as_of),
+        report_id=_report_id(report_type, workflow_id, workflow_display_name, data_as_of, populate_request_id),
+        report_title=_report_title(report_type, workflow_display_name),
     )
     artifact["metadata_json"].update(
         {
@@ -111,6 +114,7 @@ def build_demo_populated_report_artifact(
             "data_snapshot_kind": "synthetic_demo",
             "endpoint": GENERATED_REPORT_POPULATE_ENDPOINT,
             "artifact_persistence": "ephemeral_local_demo",
+            "populate_request_id": populate_request_id,
         }
     )
     artifact["summary"].update(
@@ -310,9 +314,21 @@ def _confidence_summary(ordered_elements: list[dict[str, Any]]) -> dict[str, Any
     return {}
 
 
-def _report_id(report_type: str, workflow_id: str | None, workflow_display_name: str, data_as_of: str) -> str:
+def _report_id(
+    report_type: str,
+    workflow_id: str | None,
+    workflow_display_name: str,
+    data_as_of: str,
+    populate_request_id: str,
+) -> str:
     workflow_part = _slug(workflow_id or workflow_display_name)
-    return f"demo_{report_type}_{workflow_part}_{data_as_of.replace('-', '')}"
+    request_part = _slug(populate_request_id)
+    return f"demo_{report_type}_{workflow_part}_{data_as_of.replace('-', '')}_{request_part}"
+
+
+def _report_title(report_type: str, workflow_display_name: str) -> str:
+    report_label = "Advisor Review" if report_type == "advisor_review" else "Client Briefing"
+    return f"{workflow_display_name} - {report_label}"
 
 
 def _assert_json_serializable(payload: dict[str, Any]) -> None:

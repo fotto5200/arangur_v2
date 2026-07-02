@@ -102,6 +102,23 @@ class GeneratedReportArtifactTests(unittest.TestCase):
         self.assertIn("Confirm manager mandate fit", artifact["text_content"])
         self.assertIn("human-review data items", artifact["text_content"])
 
+    def test_populated_artifact_can_use_workflow_derived_title(self) -> None:
+        views = load_report_element_views(VIEW_DIR)
+        preview = build_default_client_briefing_set_preview(views)
+        artifact = build_generated_report_artifact_from_briefing_preview(
+            preview,
+            report_type="client_briefing",
+            source_workflow_id="workflow_20260702_report_2",
+            source_workflow_display_name="2026-07-02 Report 2",
+            report_id="demo_client_briefing_workflow_20260702_report_2_20260630_test",
+            report_title="2026-07-02 Report 2 - Client Briefing",
+        )
+        self.assertEqual("valid", artifact["validation"]["status"])
+        self.assertEqual("workflow_20260702_report_2", artifact["source_workflow_id"])
+        self.assertEqual("2026-07-02 Report 2", artifact["source_workflow_display_name"])
+        self.assertEqual("2026-07-02 Report 2 - Client Briefing", artifact["report_title"])
+        self.assertIn("2026-07-02 Report 2 - Client Briefing", artifact["html_content"])
+
     def test_sections_are_ordered_and_carry_source_element_fields(self) -> None:
         artifact = create_demo_generated_report_artifact("client_briefing", view_dir=VIEW_DIR)
         orders = [section["order_index"] for section in artifact["ordered_sections"]]

@@ -91,6 +91,7 @@ def build_generated_report_artifact_from_briefing_preview(
     source_workflow_id: str | None = None,
     source_workflow_display_name: str | None = None,
     report_id: str | None = None,
+    report_title: str | None = None,
     app_environment: str = "private_demo",
     runtime_mode: str = "private_demo",
 ) -> dict[str, Any]:
@@ -103,7 +104,7 @@ def build_generated_report_artifact_from_briefing_preview(
     context = preview_payload.get("client_or_portfolio_context", {})
     data_as_of = _clean_string(context.get("as_of_date")) or "unknown"
     data_snapshot_label = _clean_string(context.get("portfolio_label")) or "Synthetic demo data snapshot"
-    report_title = _report_title(resolved_report_type, data_as_of)
+    resolved_report_title = _clean_optional_string(report_title) or _report_title(resolved_report_type, data_as_of)
     resolved_report_id = report_id or f"demo_{resolved_report_type}_{data_as_of.replace('-', '')}"
     workflow_display_name = source_workflow_display_name or f"Default demo {REPORT_TYPE_TITLES[resolved_report_type]} Workflow"
 
@@ -130,8 +131,8 @@ def build_generated_report_artifact_from_briefing_preview(
     caveat_section = _caveat_section(artifact_caveats, len(sections) + 1)
     sections.append(caveat_section)
 
-    text_content = _render_artifact_text(report_title, preview_payload, sections, data_as_of, data_snapshot_label)
-    html_content = _render_artifact_html(report_title, preview_payload, sections, data_as_of, data_snapshot_label)
+    text_content = _render_artifact_text(resolved_report_title, preview_payload, sections, data_as_of, data_snapshot_label)
+    html_content = _render_artifact_html(resolved_report_title, preview_payload, sections, data_as_of, data_snapshot_label)
     artifact = {
         "schema_version": ARTIFACT_SCHEMA_VERSION,
         "builder_version": ARTIFACT_BUILDER_VERSION,
@@ -140,7 +141,7 @@ def build_generated_report_artifact_from_briefing_preview(
         "source_workflow_id": source_workflow_id,
         "source_workflow_display_name": workflow_display_name,
         "source_preview_id": preview_payload.get("preview_id"),
-        "report_title": report_title,
+        "report_title": resolved_report_title,
         "generated_at": preview_payload.get("generated_at") or GENERATED_AT,
         "data_as_of": data_as_of,
         "data_snapshot_label": data_snapshot_label,
