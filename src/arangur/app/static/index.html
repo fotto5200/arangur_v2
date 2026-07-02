@@ -1046,12 +1046,12 @@
           <div class="home-flow-title">
             <p class="helper">Populate</p>
             <h2 id="populate-workflow-title">Populate a workflow with data</h2>
-            <p class="helper">Choose a saved workflow, bind it to the current demo data snapshot, and preview it locally.</p>
+            <p class="helper">Choose a saved workflow, use the current synthetic demo data snapshot, and create a demo populated report.</p>
           </div>
           <ol class="home-staged-steps">
             <li><strong>Choose a saved workflow.</strong> This path keeps the workflow design unchanged.</li>
-            <li><strong>Use current demo data.</strong> The synthetic Northstar demo snapshot is available for preview.</li>
-            <li><strong>Preview now.</strong> Full dated report generation and persistence are not implemented yet.</li>
+            <li><strong>Use current demo data.</strong> Current synthetic demo snapshot is available for this demo.</li>
+            <li><strong>Create the report.</strong> The generated artifact opens here and is not saved to a report library.</li>
           </ol>
           <div id="home-populate-workflow-list" class="saved-workflow-list" aria-label="Saved workflows for demo data population"></div>
           <p id="home-populate-workflow-status" class="status"></p>
@@ -1061,7 +1061,7 @@
           <div class="home-flow-title">
             <p class="helper">Present</p>
             <h2 id="present-report-title">Present / view reports</h2>
-            <p class="helper">Choose a saved workflow and open a clean Presentation view using the current demo preview renderer.</p>
+            <p class="helper">Generated report presentation list is a next workflow. Use Populate workflow with data to create and open a demo populated report for now.</p>
           </div>
           <div id="home-present-workflow-list" class="saved-workflow-list" aria-label="Saved workflows for presentation view"></div>
           <p id="home-present-workflow-status" class="status"></p>
@@ -1269,8 +1269,8 @@
           <p id="workflow-mode-summary" class="meta"></p>
         </div>
         <div class="button-row">
-          <button id="workflow-mode-back-button" class="secondary-button" type="button">Back to Workflows</button>
-          <button id="workflow-mode-edit-button" class="secondary-button" type="button">Edit workflow</button>
+          <button id="workflow-mode-back-button" class="secondary-button" type="button">Back to Home</button>
+          <button id="workflow-mode-edit-button" class="secondary-button" type="button">Back to Workflow</button>
         </div>
       </div>
       <div id="workflow-mode-actions" class="preview-export-actions" aria-label="Workflow mode actions"></div>
@@ -1296,6 +1296,7 @@
   <script>
     const CATALOG_ENDPOINT = "/api/report-elements";
     const BRIEFING_SPEC_SETS_ENDPOINT = "/api/briefing-spec-sets";
+    const GENERATED_REPORT_POPULATE_ENDPOINT = "/api/generated-reports/demo-populate";
     const VIEW_SUMMARY_ENDPOINT = "/simulation/report_element_views/report_element_view_summary.json";
     const BRIEFING_PREVIEW_INDEX_ENDPOINT = "/simulation/briefing_set_previews/briefing_set_preview_index.json";
     const VIEW_FRAGMENT_BASE = "/simulation/report_element_views/";
@@ -1309,6 +1310,8 @@
       valuation_confidence: "Mixed",
       review_item_count: 1
     };
+    const DEMO_DATA_AS_OF = "2026-06-30";
+    const DEMO_DATA_SNAPSHOT_LABEL = "Current synthetic demo snapshot";
     const SYNTHETIC_PREVIEW_NOTICE = "Demo data. Not investment advice.";
     const SYNTHETIC_PREVIEW_SHORT_NOTICE = "Demo data. Not investment advice.";
     const TARGET_TO_BRANCH = {
@@ -1568,6 +1571,7 @@
       workflowModeWorkflowId: null,
       workflowModeWorkflowName: "",
       workflowModePreviewKind: null,
+      workflowModeArtifact: null,
       currentWorkflowId: null,
       currentWorkflowName: "",
       workflowNameDraft: "",
@@ -2195,15 +2199,16 @@
       const kindButtons = workflowModePreviewButtons(intent);
       els.workflowModeActions.innerHTML = `<div class="button-row">${kindButtons}</div>`;
       const modeLabel = intent === "present" ? "Presentation view" : "Demo data population";
+      state.workflowModeArtifact = null;
       els.workflowModeBody.innerHTML = `
         <div class="current-preview-document">
           <header class="preview-header">
             <p class="preview-section-label">${escapeHtml(modeLabel)}</p>
             <h1>${escapeHtml(displayName)}</h1>
-            <p class="current-preview-context"><strong>Current demo data snapshot:</strong> ${escapeHtml(clientContextSummary())}</p>
+            <p class="current-preview-context"><strong>Current demo data snapshot:</strong> ${escapeHtml(DEMO_DATA_SNAPSHOT_LABEL)} | Data as of ${escapeHtml(DEMO_DATA_AS_OF)}</p>
             <p class="current-preview-note">${escapeHtml(intent === "present"
-              ? "Open a clean report/presentation preview for this saved workflow. Builder controls, report element finder, JSON tools, and backend save/load controls are not shown here."
-              : "Preview this saved workflow against the current synthetic demo data. Full dated report generation and persistence are not implemented yet.")}</p>
+              ? "Generated report presentation list is a next workflow. Use Populate workflow with data to create and open a demo populated report for now."
+              : "Create a demo generated report artifact from this saved workflow and the current synthetic demo data. The artifact is local to this session and not saved to a report library.")}</p>
           </header>
         </div>
       `;
@@ -2212,11 +2217,11 @@
     function workflowModePreviewButtons(intent) {
       const buttons = [];
       if (state.clientSet.length) {
-        buttons.push(`<button class="primary-button" type="button" data-workflow-mode-action="${intent === "present" ? "view-report" : "preview-demo"}" data-kind="client">${escapeHtml(intent === "present" ? "View report" : "Preview with current demo data")}</button>`);
+        buttons.push(`<button class="primary-button" type="button" data-workflow-mode-action="${intent === "present" ? "view-report" : "create-demo-report"}" data-kind="client">${escapeHtml(intent === "present" ? "View report" : "Create demo populated report")}</button>`);
       }
       if (state.advisorSet.length) {
-        const label = intent === "present" ? "View Advisor Review" : "Preview Advisor Review with current demo data";
-        buttons.push(`<button class="secondary-button" type="button" data-workflow-mode-action="${intent === "present" ? "view-report" : "preview-demo"}" data-kind="advisor">${escapeHtml(label)}</button>`);
+        const label = intent === "present" ? "View Advisor Review" : "Create Advisor Review demo populated report";
+        buttons.push(`<button class="secondary-button" type="button" data-workflow-mode-action="${intent === "present" ? "view-report" : "create-demo-report"}" data-kind="advisor">${escapeHtml(label)}</button>`);
       }
       if (!buttons.length) {
         buttons.push('<button class="secondary-button" type="button" disabled>No saved elements to preview</button>');
@@ -2225,6 +2230,9 @@
     }
 
     async function renderWorkflowModePreview(kind) {
+      if (state.workflowModeIntent === "populate") {
+        return createDemoPopulatedReport(kind);
+      }
       const normalizedKind = kind === "advisor" ? "advisor" : "client";
       const intent = state.workflowModeIntent;
       const displayName = state.workflowModeWorkflowName || state.currentWorkflowName || "Saved workflow";
@@ -2240,6 +2248,123 @@
         ? `Presentation view for ${displayName}. This uses the current browser preview renderer and demo data; no production report was generated.`
         : `Created a demo populated preview for ${displayName}. Full dated report generation and persistence are not implemented yet.`;
       return true;
+    }
+
+    async function createDemoPopulatedReport(kind) {
+      const normalizedKind = kind === "advisor" ? "advisor" : "client";
+      const displayName = state.workflowModeWorkflowName || state.currentWorkflowName || "Saved workflow";
+      const list = listForKind(normalizedKind);
+      state.workflowModePreviewKind = normalizedKind;
+      if (!list.length) {
+        els.workflowModeBody.innerHTML = emptyCurrentPreviewHtml(normalizedKind);
+        els.workflowModeStatus.textContent = `No ${setLabelForKind(normalizedKind)} elements are saved in ${displayName}.`;
+        return false;
+      }
+      els.workflowModeStatus.textContent = "Creating demo populated report...";
+      try {
+        const response = await fetch(GENERATED_REPORT_POPULATE_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(buildDemoPopulateRequest(normalizedKind))
+        });
+        const artifact = await readJsonResponse(response);
+        if (!response.ok) {
+          throw new Error(errorMessageFromPayload(artifact, "Could not create this demo populated report."));
+        }
+        state.workflowModeArtifact = artifact;
+        els.workflowModeBody.innerHTML = renderGeneratedReportArtifactHtml(artifact);
+        renderGeneratedReportArtifactActions();
+        els.workflowModeStatus.textContent = `Created a demo populated report for ${displayName}. It is local to this session and no report library record was saved.`;
+        return true;
+      } catch (error) {
+        state.workflowModeArtifact = null;
+        els.workflowModeStatus.textContent = error.message || "Could not create this demo populated report.";
+        return false;
+      }
+    }
+
+    function buildDemoPopulateRequest(kind) {
+      return {
+        ...buildLocalSpecSet(),
+        workflow_id: state.workflowModeWorkflowId || state.currentWorkflowId || null,
+        workflow_display_name: state.workflowModeWorkflowName || state.currentWorkflowName || "Saved workflow",
+        report_type: kind === "advisor" ? "advisor_review" : "client_briefing",
+        data_snapshot_label: DEMO_DATA_SNAPSHOT_LABEL,
+        data_as_of: DEMO_DATA_AS_OF
+      };
+    }
+
+    function renderGeneratedReportArtifactHtml(artifact) {
+      const sections = Array.isArray(artifact.ordered_sections) ? artifact.ordered_sections : [];
+      const caveat = Array.isArray(artifact.caveats) && artifact.caveats.length
+        ? artifact.caveats[0]
+        : SYNTHETIC_PREVIEW_NOTICE;
+      return `
+        <div class="current-preview-document" data-artifact-schema="${escapeAttr(artifact.schema_version || "")}">
+          <header class="preview-header">
+            <p class="preview-section-label">Demo populated report</p>
+            <h1>${escapeHtml(artifact.report_title || "Demo populated report")}</h1>
+            <p class="current-preview-context"><strong>Source workflow:</strong> ${escapeHtml(artifact.source_workflow_display_name || "Saved workflow")}</p>
+            <p class="current-preview-context"><strong>Generated:</strong> ${escapeHtml(artifact.generated_at || "")} | <strong>Data as of:</strong> ${escapeHtml(artifact.data_as_of || "")} | <strong>Snapshot:</strong> ${escapeHtml(artifact.data_snapshot_label || DEMO_DATA_SNAPSHOT_LABEL)}</p>
+          </header>
+          ${sections.map(renderGeneratedReportSectionHtml).join("")}
+          <footer class="preview-footer-note">${escapeHtml(caveat)} ${escapeHtml(SYNTHETIC_PREVIEW_NOTICE)}</footer>
+        </div>
+      `;
+    }
+
+    function renderGeneratedReportSectionHtml(section) {
+      const status = section && section.status;
+      const title = (section && section.title) || "Report section";
+      if (status === "placeholder" || status === "unsupported" || (section && section.section_type === "unsupported")) {
+        return `
+          <section class="current-set-preview-item">
+            <h3>${escapeHtml(title)}</h3>
+            <div class="preview-placeholder">This section is not available in the demo populated report.</div>
+          </section>
+        `;
+      }
+      return `<section class="current-set-preview-item">${sanitizePreviewFragment((section && section.html) || "")}</section>`;
+    }
+
+    function renderGeneratedReportArtifactActions() {
+      els.workflowModeActions.innerHTML = `
+        <div class="button-row">
+          <button class="secondary-button" type="button" data-workflow-mode-action="print-generated-report">Print</button>
+          <button class="secondary-button" type="button" data-workflow-mode-action="download-generated-html">Export HTML</button>
+          <button class="secondary-button" type="button" data-workflow-mode-action="copy-generated-text">Copy text</button>
+        </div>
+      `;
+    }
+
+    async function handleGeneratedReportArtifactAction(action) {
+      const artifact = state.workflowModeArtifact;
+      if (!artifact) {
+        els.workflowModeStatus.textContent = "Create a demo populated report before using report actions.";
+        return;
+      }
+      if (action === "print-generated-report") {
+        window.print();
+        return;
+      }
+      if (action === "download-generated-html") {
+        downloadTextFile(artifact.html_content || renderGeneratedReportArtifactHtml(artifact), `${artifact.report_id || "demo_populated_report"}.html`, "text/html");
+        els.workflowModeStatus.textContent = "Exported demo populated report HTML.";
+        return;
+      }
+      if (action === "copy-generated-text") {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          try {
+            await navigator.clipboard.writeText(artifact.text_content || "");
+            els.workflowModeStatus.textContent = "Copied demo populated report text to clipboard.";
+            return;
+          } catch (error) {
+            els.workflowModeStatus.textContent = "Clipboard copy was blocked. Use Export HTML instead.";
+            return;
+          }
+        }
+        els.workflowModeStatus.textContent = "Clipboard copy is not available. Use Export HTML instead.";
+      }
     }
 
     function preferredPreviewKindForCurrentWorkflow() {
@@ -4108,11 +4233,15 @@
     els.workflowModeActions.addEventListener("click", async (event) => {
       const button = event.target.closest("[data-workflow-mode-action]");
       if (!button) return;
+      const action = button.dataset.workflowModeAction;
+      if (["print-generated-report", "download-generated-html", "copy-generated-text"].includes(action)) {
+        await handleGeneratedReportArtifactAction(action);
+        return;
+      }
       await renderWorkflowModePreview(button.dataset.kind);
     });
     els.workflowModeBack.addEventListener("click", () => {
-      const route = state.workflowModeIntent === "present" ? "workflow/present" : "workflow/populate";
-      navigateToRoute(route);
+      navigateToRoute("home");
     });
     els.workflowModeEdit.addEventListener("click", () => navigateToRoute("builder"));
     els.targetClient.addEventListener("click", () => setTargetSet("Client Briefing Set"));

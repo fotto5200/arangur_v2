@@ -79,6 +79,7 @@ def build_generated_report_artifact_from_briefing_preview(
     report_type: str | None = None,
     source_workflow_id: str | None = None,
     source_workflow_display_name: str | None = None,
+    report_id: str | None = None,
     app_environment: str = "private_demo",
     runtime_mode: str = "private_demo",
 ) -> dict[str, Any]:
@@ -92,7 +93,7 @@ def build_generated_report_artifact_from_briefing_preview(
     data_as_of = _clean_string(context.get("as_of_date")) or "unknown"
     data_snapshot_label = _clean_string(context.get("portfolio_label")) or "Synthetic demo data snapshot"
     report_title = _report_title(resolved_report_type, data_as_of)
-    report_id = f"demo_{resolved_report_type}_{data_as_of.replace('-', '')}"
+    resolved_report_id = report_id or f"demo_{resolved_report_type}_{data_as_of.replace('-', '')}"
     workflow_display_name = source_workflow_display_name or f"Default demo {REPORT_TYPE_TITLES[resolved_report_type]} Workflow"
 
     sections: list[dict[str, Any]] = []
@@ -119,7 +120,7 @@ def build_generated_report_artifact_from_briefing_preview(
     artifact = {
         "schema_version": ARTIFACT_SCHEMA_VERSION,
         "builder_version": ARTIFACT_BUILDER_VERSION,
-        "report_id": report_id,
+        "report_id": resolved_report_id,
         "report_type": resolved_report_type,
         "source_workflow_id": source_workflow_id,
         "source_workflow_display_name": workflow_display_name,
@@ -279,6 +280,7 @@ def write_demo_generated_report_artifacts(
 def _section_from_preview_element(element: dict[str, Any], order_index: int, report_type: str) -> dict[str, Any]:
     title = _clean_string(element.get("headline")) or _clean_string(element.get("element_title")) or "Unavailable section"
     section_id = f"{report_type}_{order_index:02d}_{_slug(element.get('element_key') or element.get('element_id') or title)}"
+    section_type = "narrative" if element.get("element_kind") == "narrative" else "report_element"
     if not _clean_string(element.get("headline")) or not _clean_string(element.get("summary_text")):
         text = "This section is not available in the demo generated report."
         return {
@@ -297,7 +299,7 @@ def _section_from_preview_element(element: dict[str, Any], order_index: int, rep
     return {
         "section_id": section_id,
         "title": title,
-        "section_type": "report_element",
+        "section_type": section_type,
         "order_index": order_index,
         "html": html_fragment,
         "text": text_fragment,

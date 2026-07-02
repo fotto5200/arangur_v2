@@ -16,6 +16,7 @@ from .briefing_spec_sets import (
     list_briefing_spec_sets,
     save_briefing_spec_set,
 )
+from .generated_reports import GeneratedReportError, build_demo_populated_report_artifact
 from .persistence import PersistenceError, persistence_enabled
 from .run_service import (
     RunServiceError,
@@ -132,6 +133,14 @@ def briefing_spec_set_detail(spec_set_id: str, http_request: Request) -> dict[st
     return detail
 
 
+@router.post("/generated-reports/demo-populate")
+def demo_populate_generated_report(payload: dict[str, Any]) -> dict[str, Any]:
+    try:
+        return build_demo_populated_report_artifact(payload)
+    except GeneratedReportError as exc:
+        raise _generated_report_http_error(exc) from exc
+
+
 @router.delete("/briefing-spec-sets/{spec_set_id}")
 def remove_briefing_spec_set(spec_set_id: str, http_request: Request) -> dict[str, Any]:
     settings = http_request.app.state.settings
@@ -221,5 +230,18 @@ def _persistence_http_error(exc: PersistenceError) -> HTTPException:
         detail={
             "code": "persistence_failed",
             "message": str(exc),
+        },
+    )
+
+
+def _generated_report_http_error(exc: GeneratedReportError) -> HTTPException:
+    status_code = 400
+    if exc.code == "generated_report_invalid":
+        status_code = 500
+    return HTTPException(
+        status_code=status_code,
+        detail={
+            "code": exc.code,
+            "message": exc.message,
         },
     )

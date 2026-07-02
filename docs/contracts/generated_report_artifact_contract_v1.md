@@ -13,7 +13,19 @@ This contract is intentionally small for the private demo. It defines the artifa
 - Generated report artifact: dated, data-populated output produced from a workflow and data snapshot.
 - Presentation: opening a generated report artifact for client or advisor use.
 
-The current implementation can assemble deterministic demo artifacts from existing briefing-set preview fixtures. Later batches can connect saved workflows and selected data snapshots to the same artifact shape.
+The current implementation can assemble deterministic demo artifacts from existing briefing-set preview fixtures and can populate a browser-local saved workflow through `POST /api/generated-reports/demo-populate`. The API returns the artifact JSON directly and does not persist it.
+
+## Demo Populate API
+
+`POST /api/generated-reports/demo-populate` accepts the browser-local workflow/spec-set payload shape plus:
+
+- `workflow_id`, optional
+- `workflow_display_name`
+- `report_type`: `client_briefing` or `advisor_review`
+- `data_snapshot_label`, optional; defaults to `Current synthetic demo snapshot`
+- `data_as_of`, optional; defaults to `2026-06-30`
+
+The endpoint validates the local workflow payload, uses only committed synthetic demo rendered views, maps unsupported or unrenderable sections to clean placeholders, and returns a `generated_report_artifact.v1` object. It does not require Postgres, create report history, write artifact files, add report-library records, call external APIs, or use real client or market data.
 
 ## Artifact Fields
 
@@ -71,8 +83,8 @@ Generated report artifacts in this repo currently use synthetic/demo data only. 
 
 - Production report history.
 - Report library UI.
-- Populate workflow UI.
-- Present/view reports UI.
+- Durable generated report persistence.
+- Present/view generated report library.
 - Live data snapshots.
 - Auth or permissions.
 - Immutable audit archive.
