@@ -212,18 +212,20 @@ The local private-demo stack runs the FastAPI app plus an internal Postgres cont
 
 Frank verified this local Docker runtime smoke on 2026-07-02: the app and Postgres came up locally, `/api/health` returned `status: ok`, health confirmed `app_env: private_demo`, `runtime_mode: private_demo`, `db_engine: postgres`, and `database_configured: true`, `/app/` loaded, and a Postgres-backed briefing spec-set POST/list smoke worked. This is still local/private-demo readiness only; it is not a public deployment, production authentication, real-client-data path, generated report history, Caddy/Lightsail/Cloudflare setup, or production report system.
 
-Use Windows cmd commands from the repo root:
+Start the stack from the repo root:
 
 ```cmd
 copy .env.private-demo.example .env.private-demo
 docker compose --env-file .env.private-demo up --build
 ```
 
-Then check:
+In another cmd, run the local preflight smoke script:
 
 ```cmd
-curl.exe http://127.0.0.1:8000/api/health
+scripts\private_demo_smoke.cmd
 ```
+
+The smoke script expects the stack to already be running. It uses `curl.exe` only, checks `/api/health`, `/app/`, `/api/report-elements`, and saves/lists a small synthetic briefing spec-set payload through `/api/briefing-spec-sets`. It does not use real client data, real market data, live Plaid, external APIs, or public deployment infrastructure.
 
 Open the browser composer:
 
@@ -231,21 +233,27 @@ Open the browser composer:
 start "" http://127.0.0.1:8000/app/
 ```
 
-To stop the stack:
+Stop the stack:
 
 ```cmd
 docker compose --env-file .env.private-demo down
 ```
 
+Or use the helper:
+
+```cmd
+scripts\private_demo_down.cmd
+```
+
 To reset the local demo database volume:
 
 ```cmd
-docker compose --env-file .env.private-demo down -v
+scripts\private_demo_down.cmd --reset
 ```
 
-If Docker reports that the daemon or Linux engine is unavailable, start Docker Desktop, wait until the Linux engine is running, and rerun the `docker compose` command. If port `8000` is already in use, stop the other local app or service before starting this stack. Never commit `.env.private-demo`; it is a local copy only.
+The reset helper asks for confirmation before running `docker compose --env-file .env.private-demo down -v`, which deletes the local Postgres demo volume. If Docker reports that the daemon or Linux engine is unavailable, start Docker Desktop, wait until the Linux engine is running, and rerun the `docker compose` command. If port `8000` is already in use, stop the other local app or service before starting this stack. If a curl smoke check fails, confirm the stack is still running and inspect logs with `docker compose --env-file .env.private-demo logs app`. Never commit `.env.private-demo`; it is a local copy only.
 
-Compose sets `DB_ENGINE=postgres` and `DATABASE_URL` for the app container. The app safely creates the existing workflow-run and briefing spec-set tables with `CREATE TABLE IF NOT EXISTS` on startup. The browser Developer / QA backend save/load controls can exercise Postgres-backed briefing spec-set save/load in this local stack. See `docs/deployment/private_demo_docker.md` for the full smoke checklist and an API-level save/list example.
+Compose sets `DB_ENGINE=postgres` and `DATABASE_URL` for the app container. The app safely creates the existing workflow-run and briefing spec-set tables with `CREATE TABLE IF NOT EXISTS` on startup. The browser Developer / QA backend save/load controls can exercise Postgres-backed briefing spec-set save/load in this local stack. See `docs/deployment/private_demo_docker.md` for the full smoke checklist and seed payload details.
 
 ## Run The Report Element Spec Composer
 

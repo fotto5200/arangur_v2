@@ -88,8 +88,11 @@ The local Docker/private-demo implementation added:
 - `.env.private-demo.example`
 - app settings support for `APP_ENV=private_demo`, `DB_ENGINE=postgres`, and `DATABASE_URL`
 - local smoke documentation in `docs/deployment/private_demo_docker.md`
+- `scripts\private_demo_smoke.cmd` for curl-only local preflight checks against a running stack
+- `scripts\fixtures\private_demo_seed_briefing_spec_set.json` for synthetic briefing spec-set POST/list smoke checks
+- `scripts\private_demo_down.cmd` for non-destructive stop plus explicit volume reset
 
-Future deployment or preflight batches may still add host-specific Compose overlays, seed/preflight commands, or deployment docs after product and ops decisions are explicit.
+Future deployment batches may still add host-specific Compose overlays or deployment docs after product and ops decisions are explicit. A workflow-run seed command that creates deterministic report runs through `/api/runs` remains a separate future batch.
 
 Do not commit:
 
@@ -177,7 +180,7 @@ The seed command must not:
 - Read secrets beyond normal app settings.
 - Require real client data.
 
-## Local Smoke-Test Commands
+## Local Preflight Smoke Commands
 
 The verified local smoke path uses Windows cmd commands from the repo root:
 
@@ -189,14 +192,12 @@ docker compose --env-file .env.private-demo up --build
 Then verify:
 
 ```cmd
-curl.exe http://127.0.0.1:8000/api/health
+scripts\private_demo_smoke.cmd
 start "" http://127.0.0.1:8000/app/
-curl.exe -X POST http://127.0.0.1:8000/api/briefing-spec-sets -H "Content-Type: application/json" -d "{\"schema_version\":\"arangur.local_briefing_spec_set.v1\",\"synthetic_data\":true,\"client_context\":{\"client_family\":\"Northstar Family Office\",\"portfolio_context\":\"Demo portfolio\"},\"client_briefing_set\":[],\"advisor_review_set\":[]}"
-curl.exe http://127.0.0.1:8000/api/briefing-spec-sets
 docker compose --env-file .env.private-demo down
 ```
 
-If Docker Desktop is not running its Linux engine, start Docker Desktop and wait for the engine before retrying. If port `8000` is already in use, stop the conflicting local process or use a temporary host-side port mapping and matching URL for smoke checks. To reset the local Postgres demo volume, run `docker compose --env-file .env.private-demo down -v`. Do not commit `.env.private-demo`.
+The smoke script expects the stack to already be running. It checks health, the static app, report-element catalog discovery, and briefing spec-set POST/list through real app HTTP paths using only synthetic/demo payload data. If Docker Desktop is not running its Linux engine, start Docker Desktop and wait for the engine before retrying. If port `8000` is already in use, stop the conflicting local process or use a temporary host-side port mapping and matching URL for smoke checks. To reset the local Postgres demo volume, run `scripts\private_demo_down.cmd --reset`. Do not commit `.env.private-demo`.
 
 For the Lightsail host through Caddy:
 
@@ -282,5 +283,7 @@ Recommended sequence:
 4. Postgres persistence skeleton.
 5. Browser UI shell.
 6. Docker Compose private-demo stack.
-7. Seed/preflight script.
+7. Local preflight smoke script and synthetic briefing spec-set seed payload.
 8. Lightsail/Caddy/Cloudflare deployment guide.
+
+The local preflight piece is implemented for a running Docker stack. A later workflow-run seed script can still be added when the desired deterministic run list and report-history expectations are confirmed.

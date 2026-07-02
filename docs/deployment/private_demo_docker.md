@@ -22,20 +22,30 @@ This verifies local/private-demo runtime readiness only. It does not mean public
 - `docker-compose.yml` defines the `app` and internal `postgres` services plus a named Postgres data volume.
 - `.env.private-demo.example` provides demo-only local values for Compose. Copy it before running the stack; do not commit a real `.env.private-demo`.
 
-## Start The Stack
+## Local Preflight Flow
 
-Use Windows cmd-friendly commands from the repo root:
+Start the stack with Windows cmd commands from the repo root:
 
 ```cmd
 copy .env.private-demo.example .env.private-demo
 docker compose --env-file .env.private-demo up --build
 ```
 
-Then check:
+In another cmd, run the smoke script:
 
 ```cmd
-curl.exe http://127.0.0.1:8000/api/health
+scripts\private_demo_smoke.cmd
 ```
+
+The smoke script expects the stack to already be running. It uses `curl.exe` only and checks:
+
+- `GET http://127.0.0.1:8000/api/health`
+- `GET http://127.0.0.1:8000/app/`
+- `GET http://127.0.0.1:8000/api/report-elements`
+- `POST http://127.0.0.1:8000/api/briefing-spec-sets`
+- `GET http://127.0.0.1:8000/api/briefing-spec-sets`
+
+The POST uses `scripts\fixtures\private_demo_seed_briefing_spec_set.json`, a synthetic/demo-only payload with one Client Briefing Set item and one Advisor Review Set item. The smoke script does not require `jq` or any non-standard command-line tools.
 
 Open the app:
 
@@ -43,13 +53,23 @@ Open the app:
 start "" http://127.0.0.1:8000/app/
 ```
 
-List any saved briefing spec sets:
+Stop the stack:
 
 ```cmd
-curl.exe http://127.0.0.1:8000/api/briefing-spec-sets
+docker compose --env-file .env.private-demo down
 ```
 
-If Docker reports that the daemon or Linux engine is unavailable, start Docker Desktop, confirm the Linux engine is running, and rerun the `docker compose` command. If `8000` is already occupied by another local app, stop that app before starting this stack or temporarily adjust the host-side Compose port and use the matching URL for smoke checks.
+Or use:
+
+```cmd
+scripts\private_demo_down.cmd
+```
+
+If Docker reports that the daemon or Linux engine is unavailable, start Docker Desktop, confirm the Linux engine is running, and rerun the `docker compose` command. If `8000` is already occupied by another local app, stop that app before starting this stack or temporarily adjust the host-side Compose port and use the matching URL for smoke checks. If a curl smoke check fails, confirm the stack is still running and inspect app logs:
+
+```cmd
+docker compose --env-file .env.private-demo logs app
+```
 
 ## Stop Or Reset
 
@@ -60,32 +80,33 @@ docker compose --env-file .env.private-demo down
 To remove the local Postgres demo volume:
 
 ```cmd
-docker compose --env-file .env.private-demo down -v
+scripts\private_demo_down.cmd --reset
 ```
 
-The `down -v` command deletes the local private-demo Postgres volume and all saved demo metadata in it. Use it only when you want a fresh local database.
+The reset helper asks for confirmation before running `docker compose --env-file .env.private-demo down -v`. That command deletes the local private-demo Postgres volume and all saved demo metadata in it. Use it only when you want a fresh local database.
 
 ## Postgres Behavior
 
 Compose sets `DB_ENGINE=postgres` and points `DATABASE_URL` at the internal `postgres` service. On app startup, the existing safe schema initialization path runs `CREATE TABLE IF NOT EXISTS` for workflow-run tables and briefing spec-set tables. The default non-Docker local path remains `DB_ENGINE=none` and does not require Docker or Postgres.
 
-The browser Developer / QA backend save/load controls exercise `/api/briefing-spec-sets` against Postgres when the stack is running. A simple API-level save/list check is:
-
-```cmd
-curl.exe -X POST http://127.0.0.1:8000/api/briefing-spec-sets -H "Content-Type: application/json" -d "{\"schema_version\":\"arangur.local_briefing_spec_set.v1\",\"synthetic_data\":true,\"client_context\":{\"client_family\":\"Northstar Family Office\",\"portfolio_context\":\"Demo portfolio\"},\"client_briefing_set\":[],\"advisor_review_set\":[]}"
-curl.exe http://127.0.0.1:8000/api/briefing-spec-sets
-```
-
-You can also run the optional curl-only smoke helper after the stack is up:
+The browser Developer / QA backend save/load controls exercise `/api/briefing-spec-sets` against Postgres when the stack is running. The checked-in smoke script performs an API-level save/list check with the synthetic seed payload:
 
 ```cmd
 scripts\private_demo_smoke.cmd
+```
+
+The underlying POST can be run directly if needed:
+
+```cmd
+curl.exe -X POST http://127.0.0.1:8000/api/briefing-spec-sets -H "Content-Type: application/json" --data-binary "@scripts\fixtures\private_demo_seed_briefing_spec_set.json"
+curl.exe http://127.0.0.1:8000/api/briefing-spec-sets
 ```
 
 ## Boundaries
 
 - Local/private-demo only.
 - Synthetic/mock data only.
+- The smoke seed payload is demo metadata only, not generated report history.
 - No production authentication claims.
 - No generated report history yet.
 - No live Plaid, live market data, external APIs, DNS, Caddy, Cloudflare, or Lightsail setup.

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 import sys
 import unittest
@@ -11,6 +12,7 @@ SRC = ROOT / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
+from arangur.app.briefing_spec_sets import validate_briefing_spec_set_payload
 from arangur.app.settings import load_settings
 
 
@@ -77,6 +79,54 @@ class PrivateDemoDockerPackagingTests(unittest.TestCase):
         self.assertNotIn("data/", dockerignore)
         self.assertNotIn("reports/", dockerignore)
 
+    def test_private_demo_smoke_script_checks_local_stack_surfaces(self) -> None:
+        script_path = ROOT / "scripts" / "private_demo_smoke.cmd"
+        self.assertTrue(script_path.exists())
+        script = script_path.read_text(encoding="utf-8")
+        self.assertIn("curl.exe", script)
+        self.assertIn("/api/health", script)
+        self.assertIn("/app/", script)
+        self.assertIn("/api/report-elements", script)
+        self.assertIn("-X POST", script)
+        self.assertIn("/api/briefing-spec-sets", script)
+        self.assertIn("private_demo_seed_briefing_spec_set.json", script)
+        self.assertIn("already be running", script)
+        self.assertNotIn("docker compose --env-file .env.private-demo up", script)
+        self._assert_no_real_secret_markers(script)
+
+    def test_private_demo_seed_payload_is_valid_synthetic_demo_only(self) -> None:
+        payload_path = ROOT / "scripts" / "fixtures" / "private_demo_seed_briefing_spec_set.json"
+        self.assertTrue(payload_path.exists())
+        payload_text = payload_path.read_text(encoding="utf-8")
+        self._assert_no_real_secret_markers(payload_text)
+        payload = json.loads(payload_text)
+        validation = validate_briefing_spec_set_payload(payload)
+        self.assertEqual("arangur.local_briefing_spec_set.v1", validation["schema_version"])
+        self.assertTrue(validation["synthetic_data"])
+        self.assertEqual(1, validation["client_briefing_set_count"])
+        self.assertEqual(1, validation["advisor_review_set_count"])
+        self.assertIn("Demo", validation["client_name"])
+
+    def test_private_demo_down_helper_keeps_volume_reset_explicit(self) -> None:
+        script_path = ROOT / "scripts" / "private_demo_down.cmd"
+        self.assertTrue(script_path.exists())
+        script = script_path.read_text(encoding="utf-8")
+        self.assertIn("docker compose --env-file .env.private-demo down", script)
+        self.assertIn("--reset", script)
+        self.assertIn("down -v", script)
+        self.assertIn("WARNING", script)
+        self.assertIn("choice", script)
+        self._assert_no_real_secret_markers(script)
+
+    def test_readme_and_private_demo_docs_reference_smoke_script(self) -> None:
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        docker_doc = (ROOT / "docs" / "deployment" / "private_demo_docker.md").read_text(encoding="utf-8")
+        for text in (readme, docker_doc):
+            self.assertIn("scripts\\private_demo_smoke.cmd", text)
+            self.assertIn("expects the stack", text)
+            self.assertIn("synthetic", text.lower())
+            self.assertIn("real client data", text.lower())
+
     def _parse_env(self, env_text: str) -> dict[str, str]:
         parsed: dict[str, str] = {}
         for line in env_text.splitlines():
@@ -86,6 +136,13 @@ class PrivateDemoDockerPackagingTests(unittest.TestCase):
             key, value = stripped.split("=", 1)
             parsed[key] = value
         return parsed
+
+    def _assert_no_real_secret_markers(self, text: str) -> None:
+        self.assertNotRegex(text, re.compile(r"sk-[A-Za-z0-9]"))
+        self.assertNotIn("BEGIN PRIVATE KEY", text)
+        self.assertNotIn("access_token=", text.lower())
+        self.assertNotIn("client_secret", text.lower())
+        self.assertNotIn("api_key", text.lower())
 
 
 if __name__ == "__main__":

@@ -1,0 +1,52 @@
+{
+  "schema_version": "arangur.local_briefing_spec_set.v1",
+  "title": "Private Demo Smoke Briefing Spec Set",
+  "synthetic_data": true,
+  "source": "private_demo_smoke",
+  "status": "draft",
+  "client_context": {
+    "client_family": "Northstar Demo Family Office",
+    "portfolio_context": "Synthetic multi-manager demo portfolio",
+    "as_of_label": "Demo snapshot"
+  },
+  "client_briefing_set": [
+    {
+      "element_kind": "analytic",
+      "element_id": "portfolio_status",
+      "element_title": "Portfolio Status",
+      "target_branch": "Client Briefing",
+      "target_set": "Client Briefing Set",
+      "placement": "Opening portfolio overview",
+      "configured_parameters": {
+        "scope": "whole_portfolio",
+        "display": "summary"
+      },
+      "matched_rendered_view": {
+        "view_id": "portfolio_status"
+      },
+      "preview_available": true,
+      "confidence_badge": "Demo fixture"
+    }
+  ],
+  "advisor_review_set": [
+    {
+      "element_kind": "analytic",
+      "element_id": "manager_comparison",
+      "element_title": "Manager Comparison",
+      "target_branch": "Advisor Review",
+      "target_set": "Advisor Review Set",
+      "placement": "Advisor review section",
+      "advisor_internal_purpose": "Review manager role overlap in the synthetic demo portfolio.",
+      "configured_parameters": {
+        "scope": "whole_portfolio",
+        "lens": "manager",
+        "display": "table"
+      },
+      "matched_rendered_view": {
+        "view_id": "manager_comparison"
+      },
+      "preview_available": true,
+      "confidence_badge": "Demo fixture"
+    }
+  ]
+}
