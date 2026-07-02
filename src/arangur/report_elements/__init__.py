@@ -17,6 +17,12 @@ from .briefing_set_preview import (
     validate_briefing_set_preview,
     write_demo_briefing_set_previews,
 )
+from .generated_report_artifact import (
+    build_generated_report_artifact_from_briefing_preview,
+    create_demo_generated_report_artifact,
+    validate_generated_report_artifact,
+    write_demo_generated_report_artifacts,
+)
 from .input_mapping import (
     build_all_demo_report_element_inputs,
     build_report_element_input,
@@ -37,7 +43,9 @@ __all__ = [
     "build_all_demo_report_element_inputs",
     "build_default_advisor_review_set_preview",
     "build_default_client_briefing_set_preview",
+    "build_generated_report_artifact_from_briefing_preview",
     "build_report_element_input",
+    "create_demo_generated_report_artifact",
     "filter_templates",
     "get_template",
     "list_templates",
@@ -51,9 +59,11 @@ __all__ = [
     "render_report_element_markdown",
     "render_report_element_view",
     "validate_briefing_set_preview",
+    "validate_generated_report_artifact",
     "validate_report_element_input",
     "validate_report_element_view",
     "validate_template_catalog",
     "write_demo_briefing_set_previews",
+    "write_demo_generated_report_artifacts",
     "write_demo_report_element_inputs",
 ]
