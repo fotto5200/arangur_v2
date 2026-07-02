@@ -127,6 +127,27 @@ class PrivateDemoDockerPackagingTests(unittest.TestCase):
             self.assertIn("synthetic", text.lower())
             self.assertIn("real client data", text.lower())
 
+    def test_private_demo_walkthrough_exists_and_is_linked(self) -> None:
+        walkthrough_path = ROOT / "docs" / "demo" / "private_demo_walkthrough.md"
+        self.assertTrue(walkthrough_path.exists())
+        walkthrough = walkthrough_path.read_text(encoding="utf-8")
+        self.assertIn("copy .env.private-demo.example .env.private-demo", walkthrough)
+        self.assertIn("docker compose --env-file .env.private-demo up --build", walkthrough)
+        self.assertIn("scripts\\private_demo_smoke.cmd", walkthrough)
+        self.assertIn("Advisor Home", walkthrough)
+        self.assertIn("Populate a workflow with data", walkthrough)
+        self.assertIn("Present / view reports", walkthrough)
+        self.assertIn("generated report", walkthrough.lower())
+        self.assertIn("no real client data", walkthrough.lower())
+        self.assertIn("QA Checklist", walkthrough)
+        self.assertIn("Docker stack starts", walkthrough)
+        self._assert_no_real_secret_markers(walkthrough)
+
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        docker_doc = (ROOT / "docs" / "deployment" / "private_demo_docker.md").read_text(encoding="utf-8")
+        for text in (readme, docker_doc):
+            self.assertIn("docs/demo/private_demo_walkthrough.md", text)
+
     def _parse_env(self, env_text: str) -> dict[str, str]:
         parsed: dict[str, str] = {}
         for line in env_text.splitlines():

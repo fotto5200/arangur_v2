@@ -227,6 +227,8 @@ scripts\private_demo_smoke.cmd
 
 The smoke script expects the stack to already be running. It uses `curl.exe` only, checks `/api/health`, `/app/`, `/api/report-elements`, and saves/lists a small synthetic briefing spec-set payload through `/api/briefing-spec-sets`. It does not use real client data, real market data, live Plaid, external APIs, or public deployment infrastructure.
 
+For the operator click-through and pass/fail checklist, see `docs/demo/private_demo_walkthrough.md`.
+
 Open the browser composer:
 
 ```cmd

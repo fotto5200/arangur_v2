@@ -47,6 +47,8 @@ The smoke script expects the stack to already be running. It uses `curl.exe` onl
 
 The POST uses `scripts\fixtures\private_demo_seed_briefing_spec_set.json`, a synthetic/demo-only payload with one Client Briefing Set item and one Advisor Review Set item. The smoke script does not require `jq` or any non-standard command-line tools.
 
+For the end-to-end demo-operator click-through and pass/fail QA checklist, see `docs/demo/private_demo_walkthrough.md`.
+
 Open the app:
 
 ```cmd
