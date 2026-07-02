@@ -6,6 +6,8 @@ Arangur v2 should copy the Education private-demo deployment pattern for its fir
 
 This started as a design plan. The local Docker/private-demo implementation now lives in `Dockerfile`, `docker-compose.yml`, `.env.private-demo.example`, and `docs/deployment/private_demo_docker.md`. Lightsail, Caddy, Cloudflare, DNS, and production hardening remain future work.
 
+Frank verified the local Docker runtime smoke on 2026-07-02: the app and internal Postgres service came up with Compose, `/api/health` returned `status: ok`, health confirmed `app_env: private_demo`, `runtime_mode: private_demo`, `db_engine: postgres`, and `database_configured: true`, `/app/` loaded, and a Postgres-backed briefing spec-set POST/list smoke worked. This verification is local/private-demo only; it does not complete public deployment, production authentication, generated report history, real-client-data readiness, or Caddy/Lightsail/Cloudflare setup.
+
 ## Stack To Copy
 
 Use:
@@ -77,16 +79,17 @@ Persistence:
 
 - Docker named volume for Postgres data.
 
-## Planned Files
+## Implemented Local Files
 
-Future implementation should add:
+The local Docker/private-demo implementation added:
 
 - `Dockerfile`
 - `docker-compose.yml`
-- `docker-compose.private-demo.example.yml`
 - `.env.private-demo.example`
-- app entrypoint and settings modules
-- seed/preflight command or script
+- app settings support for `APP_ENV=private_demo`, `DB_ENGINE=postgres`, and `DATABASE_URL`
+- local smoke documentation in `docs/deployment/private_demo_docker.md`
+
+Future deployment or preflight batches may still add host-specific Compose overlays, seed/preflight commands, or deployment docs after product and ops decisions are explicit.
 
 Do not commit:
 
@@ -174,20 +177,26 @@ The seed command must not:
 - Read secrets beyond normal app settings.
 - Require real client data.
 
-## Smoke-Test Commands
+## Local Smoke-Test Commands
 
-Future implementation should support local/private-demo smoke checks such as:
+The verified local smoke path uses Windows cmd commands from the repo root:
 
-```powershell
-docker compose -f docker-compose.yml -f docker-compose.private-demo.example.yml config
-docker compose -f docker-compose.yml -f docker-compose.private-demo.example.yml up --build
+```cmd
+copy .env.private-demo.example .env.private-demo
+docker compose --env-file .env.private-demo up --build
 ```
 
 Then verify:
 
-```powershell
-curl http://localhost:8000/api/health
+```cmd
+curl.exe http://127.0.0.1:8000/api/health
+start "" http://127.0.0.1:8000/app/
+curl.exe -X POST http://127.0.0.1:8000/api/briefing-spec-sets -H "Content-Type: application/json" -d "{\"schema_version\":\"arangur.local_briefing_spec_set.v1\",\"synthetic_data\":true,\"client_context\":{\"client_family\":\"Northstar Family Office\",\"portfolio_context\":\"Demo portfolio\"},\"client_briefing_set\":[],\"advisor_review_set\":[]}"
+curl.exe http://127.0.0.1:8000/api/briefing-spec-sets
+docker compose --env-file .env.private-demo down
 ```
+
+If Docker Desktop is not running its Linux engine, start Docker Desktop and wait for the engine before retrying. If port `8000` is already in use, stop the conflicting local process or use a temporary host-side port mapping and matching URL for smoke checks. To reset the local Postgres demo volume, run `docker compose --env-file .env.private-demo down -v`. Do not commit `.env.private-demo`.
 
 For the Lightsail host through Caddy:
 

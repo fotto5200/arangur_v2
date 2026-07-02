@@ -210,7 +210,9 @@ Then open:
 
 The local private-demo stack runs the FastAPI app plus an internal Postgres container. It is for local/private-demo smoke testing only. Do not put real secrets, real client data, live Plaid data, or live market data in this stack.
 
-Use Windows cmd-friendly commands from the repo root:
+Frank verified this local Docker runtime smoke on 2026-07-02: the app and Postgres came up locally, `/api/health` returned `status: ok`, health confirmed `app_env: private_demo`, `runtime_mode: private_demo`, `db_engine: postgres`, and `database_configured: true`, `/app/` loaded, and a Postgres-backed briefing spec-set POST/list smoke worked. This is still local/private-demo readiness only; it is not a public deployment, production authentication, real-client-data path, generated report history, Caddy/Lightsail/Cloudflare setup, or production report system.
+
+Use Windows cmd commands from the repo root:
 
 ```cmd
 copy .env.private-demo.example .env.private-demo
@@ -223,7 +225,13 @@ Then check:
 curl.exe http://127.0.0.1:8000/api/health
 ```
 
-Open `http://127.0.0.1:8000/app/` to use the browser composer. To stop the stack:
+Open the browser composer:
+
+```cmd
+start "" http://127.0.0.1:8000/app/
+```
+
+To stop the stack:
 
 ```cmd
 docker compose --env-file .env.private-demo down
@@ -234,6 +242,8 @@ To reset the local demo database volume:
 ```cmd
 docker compose --env-file .env.private-demo down -v
 ```
+
+If Docker reports that the daemon or Linux engine is unavailable, start Docker Desktop, wait until the Linux engine is running, and rerun the `docker compose` command. If port `8000` is already in use, stop the other local app or service before starting this stack. Never commit `.env.private-demo`; it is a local copy only.
 
 Compose sets `DB_ENGINE=postgres` and `DATABASE_URL` for the app container. The app safely creates the existing workflow-run and briefing spec-set tables with `CREATE TABLE IF NOT EXISTS` on startup. The browser Developer / QA backend save/load controls can exercise Postgres-backed briefing spec-set save/load in this local stack. See `docs/deployment/private_demo_docker.md` for the full smoke checklist and an API-level save/list example.
 
