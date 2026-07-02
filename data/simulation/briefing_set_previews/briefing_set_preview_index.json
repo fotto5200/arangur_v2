@@ -16,10 +16,11 @@
   "preview_count": 2,
   "previews": [
     {
-      "element_count": 4,
+      "element_count": 5,
       "html_file": "client_briefing_set_preview.html",
       "included_element_ids": [
         "portfolio_status",
+        "cash_generation_summary",
         "concentration",
         "scenario_impact_by_manager",
         "data_confidence_note"
@@ -43,10 +44,10 @@
       "html_file": "advisor_review_set_preview.html",
       "included_element_ids": [
         "manager_comparison",
-        "cash_generation_summary",
+        "data_confidence_note",
         "concentration",
         "scenario_impact_by_manager",
-        "data_confidence_note"
+        "cash_generation_summary"
       ],
       "json_file": "advisor_review_set_preview.json",
       "markdown_file": "advisor_review_set_preview.md",

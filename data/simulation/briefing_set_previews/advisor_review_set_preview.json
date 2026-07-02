@@ -8,9 +8,9 @@
   "caveats": [
     "Synthetic demo data only.",
     "Briefing-set preview only; not a persisted briefing set, chart, production report, or investment recommendation.",
-    "Advisor review set preview only; not a persisted briefing set, client report, or recommendation.",
+    "Advisor review preview only; not a production report, recommendation, or advice.",
     "Human-review items and confidence labels are synthetic readiness signals.",
-    "Scenario content is deterministic synthetic analysis and not a forecast."
+    "Scenario output is deterministic synthetic analysis and not a forecast."
   ],
   "client_or_portfolio_context": {
     "as_of_date": "2026-06-30",
@@ -97,10 +97,10 @@
   "generated_at": "2026-06-30T00:00:00Z",
   "included_element_ids": [
     "manager_comparison",
-    "cash_generation_summary",
+    "data_confidence_note",
     "concentration",
     "scenario_impact_by_manager",
-    "data_confidence_note"
+    "cash_generation_summary"
   ],
   "ordered_elements": [
     {
@@ -287,9 +287,9 @@
         "Synthetic demo data only.",
         "Rendered report-element fragment only; not a full client briefing, chart, or production report.",
         "Payload is a structured input for later rendering; it is not a generated report, chart, browser view, or client-ready briefing.",
-        "Cash generation is a simplified synthetic summary from transactions and valuation outputs.",
-        "This payload separates flows, income/distributions, fees, and current cash-like positions without statement-grade cash accounting.",
-        "Rendered cash generation is simplified synthetic cash accounting, not a statement-grade cash reconciliation."
+        "Synthetic simplified valuation fixture only; no UI or report generation output is produced.",
+        "Data confidence rows summarize synthetic valuation treatments, stale/private marks, proxy usage, and human-review flags.",
+        "Confidence describes synthetic source readiness and valuation treatment, not investment quality."
       ],
       "confidence_summary": {
         "by_confidence": [
@@ -364,12 +364,12 @@
         "label": "medium",
         "synthetic_data": true
       },
-      "element_id": "cash_generation_summary",
-      "element_key": "cash_generation_summary",
-      "element_title": "Cash Generation Summary",
-      "element_view_path": "data/simulation/report_element_views/cash_generation_summary.view.json",
-      "headline": "Cash Generation Summary: $2,460,000.00 cash-like value",
-      "html_fragment_path": "data/simulation/report_element_views/cash_generation_summary.html",
+      "element_id": "data_confidence_note",
+      "element_key": "data_confidence_note",
+      "element_title": "Data Confidence Note",
+      "element_view_path": "data/simulation/report_element_views/data_confidence_note.view.json",
+      "headline": "Data Confidence Note: medium",
+      "html_fragment_path": "data/simulation/report_element_views/data_confidence_note.html",
       "human_review_count": 12,
       "human_review_items": [
         {
@@ -425,45 +425,45 @@
       ],
       "key_metrics": [
         {
-          "formatted_value": "$2,460,000.00",
-          "label": "Current cash-like value",
+          "formatted_value": "medium",
+          "label": "Confidence label",
           "synthetic_data": true,
-          "unit": "USD",
-          "value": 2460000.0
+          "unit": "label",
+          "value": "medium"
         },
         {
-          "formatted_value": "$175,984.83",
-          "label": "Period income/distributions",
-          "synthetic_data": true,
-          "unit": "USD",
-          "value": 175984.83
-        },
-        {
-          "formatted_value": "-$804,263.00",
-          "label": "Period transaction flows",
-          "synthetic_data": true,
-          "unit": "USD",
-          "value": -804263.0
-        },
-        {
-          "formatted_value": "-$42,000.00",
-          "label": "Period fees",
-          "synthetic_data": true,
-          "unit": "USD",
-          "value": -42000.0
-        },
-        {
-          "formatted_value": "6",
-          "label": "Cash-like positions",
+          "formatted_value": "12",
+          "label": "Human-review positions",
           "synthetic_data": true,
           "unit": "count",
-          "value": 6
+          "value": 12
+        },
+        {
+          "formatted_value": "$5,825,000.00",
+          "label": "Human-review value",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": 5825000.0
+        },
+        {
+          "formatted_value": "$19,425,000.00",
+          "label": "Direct or cash value",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": 19425000.0
+        },
+        {
+          "formatted_value": "$15,445,000.00",
+          "label": "Proxy or stale/private value",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": 15445000.0
         }
       ],
-      "markdown_fragment_path": "data/simulation/report_element_views/cash_generation_summary.md",
+      "markdown_fragment_path": "data/simulation/report_element_views/data_confidence_note.md",
       "order": 2,
-      "placement": "Cash and liquidity review",
-      "summary_text": "Across the synthetic period from 2026-04-01 to 2026-06-30, the portfolio has $2,460,000.00 in cash-like value, $175,984.83 of income/distributions, and -$804,263.00 of transaction flows. Cash accounting remains simplified and synthetic.",
+      "placement": "Data readiness review",
+      "summary_text": "Current synthetic data confidence is labeled medium. Human review covers 12 positions representing $5,825,000.00; valuation treatment rows make direct, cash, proxy, stale/private, and human-review buckets visible before later preview or publication.",
       "synthetic_data": true
     },
     {
@@ -857,9 +857,9 @@
         "Synthetic demo data only.",
         "Rendered report-element fragment only; not a full client briefing, chart, or production report.",
         "Payload is a structured input for later rendering; it is not a generated report, chart, browser view, or client-ready briefing.",
-        "Synthetic simplified valuation fixture only; no UI or report generation output is produced.",
-        "Data confidence rows summarize synthetic valuation treatments, stale/private marks, proxy usage, and human-review flags.",
-        "Confidence describes synthetic source readiness and valuation treatment, not investment quality."
+        "Cash generation is a simplified synthetic summary from transactions and valuation outputs.",
+        "This payload separates flows, income/distributions, fees, and current cash-like positions without statement-grade cash accounting.",
+        "Rendered cash generation is simplified synthetic cash accounting, not a statement-grade cash reconciliation."
       ],
       "confidence_summary": {
         "by_confidence": [
@@ -934,12 +934,12 @@
         "label": "medium",
         "synthetic_data": true
       },
-      "element_id": "data_confidence_note",
-      "element_key": "data_confidence_note",
-      "element_title": "Data Confidence Note",
-      "element_view_path": "data/simulation/report_element_views/data_confidence_note.view.json",
-      "headline": "Data Confidence Note: medium",
-      "html_fragment_path": "data/simulation/report_element_views/data_confidence_note.html",
+      "element_id": "cash_generation_summary",
+      "element_key": "cash_generation_summary",
+      "element_title": "Cash Generation Summary",
+      "element_view_path": "data/simulation/report_element_views/cash_generation_summary.view.json",
+      "headline": "Cash Generation Summary: $2,460,000.00 cash-like value",
+      "html_fragment_path": "data/simulation/report_element_views/cash_generation_summary.html",
       "human_review_count": 12,
       "human_review_items": [
         {
@@ -995,52 +995,52 @@
       ],
       "key_metrics": [
         {
-          "formatted_value": "medium",
-          "label": "Confidence label",
+          "formatted_value": "$2,460,000.00",
+          "label": "Current cash-like value",
           "synthetic_data": true,
-          "unit": "label",
-          "value": "medium"
+          "unit": "USD",
+          "value": 2460000.0
         },
         {
-          "formatted_value": "12",
-          "label": "Human-review positions",
+          "formatted_value": "$175,984.83",
+          "label": "Period income/distributions",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": 175984.83
+        },
+        {
+          "formatted_value": "-$804,263.00",
+          "label": "Period transaction flows",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": -804263.0
+        },
+        {
+          "formatted_value": "-$42,000.00",
+          "label": "Period fees",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": -42000.0
+        },
+        {
+          "formatted_value": "6",
+          "label": "Cash-like positions",
           "synthetic_data": true,
           "unit": "count",
-          "value": 12
-        },
-        {
-          "formatted_value": "$5,825,000.00",
-          "label": "Human-review value",
-          "synthetic_data": true,
-          "unit": "USD",
-          "value": 5825000.0
-        },
-        {
-          "formatted_value": "$19,425,000.00",
-          "label": "Direct or cash value",
-          "synthetic_data": true,
-          "unit": "USD",
-          "value": 19425000.0
-        },
-        {
-          "formatted_value": "$15,445,000.00",
-          "label": "Proxy or stale/private value",
-          "synthetic_data": true,
-          "unit": "USD",
-          "value": 15445000.0
+          "value": 6
         }
       ],
-      "markdown_fragment_path": "data/simulation/report_element_views/data_confidence_note.md",
+      "markdown_fragment_path": "data/simulation/report_element_views/cash_generation_summary.md",
       "order": 5,
-      "placement": "Data readiness review",
-      "summary_text": "Current synthetic data confidence is labeled medium. Human review covers 12 positions representing $5,825,000.00; valuation treatment rows make direct, cash, proxy, stale/private, and human-review buckets visible before later preview or publication.",
+      "placement": "Cash and liquidity follow-up",
+      "summary_text": "Across the synthetic period from 2026-04-01 to 2026-06-30, the portfolio has $2,460,000.00 in cash-like value, $175,984.83 of income/distributions, and -$804,263.00 of transaction flows. Cash accounting remains simplified and synthetic.",
       "synthetic_data": true
     }
   ],
   "preview_id": "advisor_review_set_preview",
-  "preview_summary": "The advisor review preview starts with manager comparison, checks cash generation, reviews sector and industry concentration, stress-tests the AI/chip selloff scenario, and finishes with data confidence and human-review readiness.",
+  "preview_summary": "The advisor review starts with manager role fit, checks data readiness, reviews concentration and scenario sensitivity, and closes with cash/liquidity support before any point is promoted to client material.",
   "preview_type": "advisor_review_set",
-  "purpose": "Review manager roles, cash behavior, sector and industry concentration, scenario exposure, and data confidence before deciding what belongs in client material.",
+  "purpose": "Prepare the advisor to decide what is meeting-ready by reviewing manager roles, data readiness, concentration, scenario sensitivity, and cash/liquidity support.",
   "review_notes": [
     "Advisor/internal preview emphasizes diagnostics, confidence, and human-review items.",
     "Scenario output should remain a deterministic risk prompt, not a probability estimate."

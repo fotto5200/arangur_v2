@@ -47,7 +47,7 @@ class BriefingSetPreviewTests(unittest.TestCase):
         validation = validate_briefing_set_preview(preview, markdown, fragment_html)
         self.assertEqual("valid", validation["status"])
         self.assertEqual("client_briefing_set", preview["preview_type"])
-        self.assertEqual(4, len(preview["ordered_elements"]))
+        self.assertEqual(5, len(preview["ordered_elements"]))
 
     def test_advisor_preview_can_be_built_and_validates(self) -> None:
         preview = self.advisor_preview
@@ -85,13 +85,21 @@ class BriefingSetPreviewTests(unittest.TestCase):
         ids = [element["element_id"] for element in self.client_preview["ordered_elements"]]
         titles = [element["element_title"] for element in self.client_preview["ordered_elements"]]
         self.assertEqual(
-            ["portfolio_status", "concentration", "scenario_impact_by_manager", "data_confidence_note"],
+            [
+                "portfolio_status",
+                "cash_generation_summary",
+                "concentration",
+                "scenario_impact_by_manager",
+                "data_confidence_note",
+            ],
             ids,
         )
         self.assertIn("Portfolio Status", titles)
+        self.assertIn("Cash Generation Summary", titles)
         self.assertIn("Concentration", titles)
         self.assertIn("Scenario Impact by Manager", titles)
         self.assertIn("Data Confidence Note", titles)
+        self.assertIn("cash and liquidity", self.client_preview["preview_summary"].lower())
 
     def test_advisor_preview_includes_expected_elements(self) -> None:
         ids = [element["element_id"] for element in self.advisor_preview["ordered_elements"]]
@@ -99,10 +107,10 @@ class BriefingSetPreviewTests(unittest.TestCase):
         self.assertEqual(
             [
                 "manager_comparison",
-                "cash_generation_summary",
+                "data_confidence_note",
                 "concentration",
                 "scenario_impact_by_manager",
-                "data_confidence_note",
+                "cash_generation_summary",
             ],
             ids,
         )
@@ -111,6 +119,7 @@ class BriefingSetPreviewTests(unittest.TestCase):
         self.assertIn("Concentration", titles)
         self.assertIn("Scenario Impact by Manager", titles)
         self.assertIn("Data Confidence Note", titles)
+        self.assertIn("meeting-ready", self.advisor_preview["purpose"])
 
     def test_client_preview_body_avoids_raw_artifact_clutter(self) -> None:
         markdown = render_briefing_set_preview_markdown(self.client_preview)

@@ -23,17 +23,18 @@ DEFAULT_OUTPUT_DIR = Path("data/simulation/briefing_set_previews")
 
 CLIENT_PREVIEW_SEQUENCE = [
     ("portfolio_status", "Opening status"),
-    ("concentration_theme", "Client discussion prompt"),
-    ("scenario_impact_by_manager_ai_chip_selloff", "Scenario appendix"),
-    ("data_confidence_note", "Support note"),
+    ("cash_generation_summary", "Cash and liquidity check"),
+    ("concentration_theme", "Concentration discussion"),
+    ("scenario_impact_by_manager_ai_chip_selloff", "Scenario discussion"),
+    ("data_confidence_note", "Confidence note"),
 ]
 
 ADVISOR_PREVIEW_SEQUENCE = [
     ("manager_comparison", "Manager review"),
-    ("cash_generation_summary", "Cash and liquidity review"),
+    ("data_confidence_note", "Data readiness review"),
     ("concentration_sector_industry", "Exposure diagnostic"),
     ("scenario_impact_by_manager_ai_chip_selloff", "Scenario diagnostic"),
-    ("data_confidence_note", "Data readiness review"),
+    ("cash_generation_summary", "Cash and liquidity follow-up"),
 ]
 
 PREVIEW_BODY_PATH_MARKERS = {
@@ -96,7 +97,7 @@ def build_default_client_briefing_set_preview(
         preview_id="client_briefing_set_preview",
         preview_type="client_briefing_set",
         title="Client Briefing Set Preview",
-        purpose="Answer the portfolio status, concentration, scenario risk, and data-readiness questions in a concise client-facing sequence.",
+        purpose="Support a concise client conversation about current portfolio status, cash and liquidity, concentration, scenario sensitivity, and data confidence.",
         audience="Client Briefing Set",
         ordered_elements=ordered_elements,
         source_views=views,
@@ -108,8 +109,8 @@ def build_default_client_briefing_set_preview(
         }
     )
     preview["preview_summary"] = (
-        "The synthetic portfolio preview opens with current status, highlights theme concentration, "
-        "shows the AI/chip selloff scenario as a caveated risk prompt, and closes with data confidence."
+        "The synthetic client briefing opens with the current portfolio picture, connects cash and liquidity to the meeting, "
+        "then uses concentration, scenario sensitivity, and data confidence as concise discussion prompts."
     )
     preview["advisor_notes"] = []
     preview["review_notes"] = [
@@ -118,8 +119,8 @@ def build_default_client_briefing_set_preview(
     ]
     preview["caveats"] = _common_caveats(
         [
-            "Client briefing set preview only; not a full client-ready report, recommendation, or production output.",
-            "Scenario content is deterministic synthetic analysis and not a forecast.",
+            "Client briefing preview only; not a production report, recommendation, or advice.",
+            "Scenario output is deterministic synthetic analysis and not a forecast.",
         ]
     )
     preview["validation"] = validate_briefing_set_preview(preview)
@@ -137,7 +138,7 @@ def build_default_advisor_review_set_preview(
         preview_id="advisor_review_set_preview",
         preview_type="advisor_review_set",
         title="Advisor Review Set Preview",
-        purpose="Review manager roles, cash behavior, sector and industry concentration, scenario exposure, and data confidence before deciding what belongs in client material.",
+        purpose="Prepare the advisor to decide what is meeting-ready by reviewing manager roles, data readiness, concentration, scenario sensitivity, and cash/liquidity support.",
         audience="Advisor Review Set",
         ordered_elements=ordered_elements,
         source_views=views,
@@ -149,8 +150,8 @@ def build_default_advisor_review_set_preview(
         }
     )
     preview["preview_summary"] = (
-        "The advisor review preview starts with manager comparison, checks cash generation, reviews sector and industry concentration, "
-        "stress-tests the AI/chip selloff scenario, and finishes with data confidence and human-review readiness."
+        "The advisor review starts with manager role fit, checks data readiness, reviews concentration and scenario sensitivity, "
+        "and closes with cash/liquidity support before any point is promoted to client material."
     )
     preview["advisor_notes"] = [
         "Review mandate fit before promoting manager-level content to a client briefing.",
@@ -163,9 +164,9 @@ def build_default_advisor_review_set_preview(
     ]
     preview["caveats"] = _common_caveats(
         [
-            "Advisor review set preview only; not a persisted briefing set, client report, or recommendation.",
+            "Advisor review preview only; not a production report, recommendation, or advice.",
             "Human-review items and confidence labels are synthetic readiness signals.",
-            "Scenario content is deterministic synthetic analysis and not a forecast.",
+            "Scenario output is deterministic synthetic analysis and not a forecast.",
         ]
     )
     preview["validation"] = validate_briefing_set_preview(preview)

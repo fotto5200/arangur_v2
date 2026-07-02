@@ -37,6 +37,10 @@ class AppGeneratedReportsApiTests(unittest.TestCase):
         self.assertEqual("Current synthetic demo snapshot", payload["data_snapshot_label"])
         self.assertTrue(payload["synthetic_data"])
         self.assertTrue(payload["ordered_sections"])
+        self.assertEqual("Conversation Framing", payload["ordered_sections"][0]["title"])
+        self.assertIn("concise client conversation aid", payload["text_content"])
+        self.assertIn("Discussion Prompts", payload["text_content"])
+        self.assertEqual(1, len(payload["caveats"]))
         self.assertEqual("valid", payload["validation"]["status"])
 
     def test_demo_populate_endpoint_accepts_advisor_review_workflow(self) -> None:
@@ -45,8 +49,10 @@ class AppGeneratedReportsApiTests(unittest.TestCase):
         payload = response.json()
         self.assertEqual("advisor_review", payload["report_type"])
         self.assertIn("Advisor Review", payload["report_title"])
-        self.assertGreaterEqual(len(payload["ordered_sections"]), 2)
+        self.assertGreaterEqual(len(payload["ordered_sections"]), 5)
+        self.assertEqual("Advisor Prep Framing", payload["ordered_sections"][0]["title"])
         self.assertIn("Manager Comparison", payload["text_content"])
+        self.assertIn("internal advisor prep and risk/readiness review", payload["text_content"])
         self.assertTrue(payload["metadata_json"]["source_workflow_item_count"])
         self.assertEqual("ephemeral_local_demo", payload["metadata_json"]["artifact_persistence"])
 
@@ -125,6 +131,7 @@ class AppGeneratedReportsApiTests(unittest.TestCase):
         self.assertIn("Create demo populated report", html)
         self.assertIn("Current synthetic demo snapshot", html)
         self.assertIn("This section is not available in the demo populated report.", html)
+        self.assertIn("Demo populated report", html)
         self.assertIn("LOCAL_GENERATED_REPORT_STORAGE_KEY", html)
         self.assertIn("arangur.local_generated_reports.v1", html)
         self.assertIn("saveGeneratedReportArtifact", html)

@@ -25,13 +25,15 @@ REPORT_TYPE_TO_SET = {
         "set_key": "client_briefing_set",
         "preview_type": "client_briefing_set",
         "audience": "Client Briefing Set",
-        "purpose": "Client briefing generated from a saved browser workflow and the current synthetic demo data snapshot.",
+        "purpose": "Concise client briefing generated from a saved browser workflow and the current synthetic demo data snapshot.",
+        "summary": "A concise client conversation aid for portfolio status, cash and liquidity, concentration, scenario sensitivity, and data confidence.",
     },
     "advisor_review": {
         "set_key": "advisor_review_set",
         "preview_type": "advisor_review_set",
         "audience": "Advisor Review Set",
-        "purpose": "Advisor review generated from a saved browser workflow and the current synthetic demo data snapshot.",
+        "purpose": "Internal advisor preparation review generated from a saved browser workflow and the current synthetic demo data snapshot.",
+        "summary": "An internal advisor prep and risk/readiness review for manager roles, data confidence, concentration, scenario sensitivity, and liquidity support.",
     },
 }
 
@@ -154,10 +156,7 @@ def _build_preview_payload(
             "audience": config["audience"],
             "synthetic_data": True,
         },
-        "preview_summary": (
-            f"{workflow_display_name} populated with the current synthetic demo data snapshot. "
-            "Generated report artifacts remain local demo objects, not a report library."
-        ),
+        "preview_summary": f"{workflow_display_name}: {config['summary']}",
         "ordered_elements": ordered_elements,
         "included_element_ids": [
             element.get("element_id")
@@ -169,8 +168,7 @@ def _build_preview_payload(
         "advisor_notes": [],
         "review_notes": [],
         "caveats": [
-            "Synthetic demo data only.",
-            "Demo generated report artifact only; not a production report, recommendation, or report history record.",
+            "Synthetic demo only; not investment advice, a recommendation, or a production report.",
             "No real client data, live market data, external APIs, or external account data are used.",
         ],
         "confidence_summary": _confidence_summary(ordered_elements),

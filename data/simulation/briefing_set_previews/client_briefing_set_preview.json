@@ -4,8 +4,8 @@
   "caveats": [
     "Synthetic demo data only.",
     "Briefing-set preview only; not a persisted briefing set, chart, production report, or investment recommendation.",
-    "Client briefing set preview only; not a full client-ready report, recommendation, or production output.",
-    "Scenario content is deterministic synthetic analysis and not a forecast."
+    "Client briefing preview only; not a production report, recommendation, or advice.",
+    "Scenario output is deterministic synthetic analysis and not a forecast."
   ],
   "client_or_portfolio_context": {
     "as_of_date": "2026-06-30",
@@ -92,6 +92,7 @@
   "generated_at": "2026-06-30T00:00:00Z",
   "included_element_ids": [
     "portfolio_status",
+    "cash_generation_summary",
     "concentration",
     "scenario_impact_by_manager",
     "data_confidence_note"
@@ -295,6 +296,191 @@
         "Synthetic demo data only.",
         "Rendered report-element fragment only; not a full client briefing, chart, or production report.",
         "Payload is a structured input for later rendering; it is not a generated report, chart, browser view, or client-ready briefing.",
+        "Cash generation is a simplified synthetic summary from transactions and valuation outputs.",
+        "This payload separates flows, income/distributions, fees, and current cash-like positions without statement-grade cash accounting.",
+        "Rendered cash generation is simplified synthetic cash accounting, not a statement-grade cash reconciliation."
+      ],
+      "confidence_summary": {
+        "by_confidence": [
+          {
+            "count": 19,
+            "id": "high",
+            "percent_of_total": 0.346849,
+            "synthetic_data": true,
+            "value": 14115000.0
+          },
+          {
+            "count": 15,
+            "id": "low",
+            "percent_of_total": 0.209485,
+            "synthetic_data": true,
+            "value": 8525000.0
+          },
+          {
+            "count": 36,
+            "id": "medium",
+            "percent_of_total": 0.41295,
+            "synthetic_data": true,
+            "value": 16805000.0
+          },
+          {
+            "count": 4,
+            "id": "unknown",
+            "percent_of_total": 0.030716,
+            "synthetic_data": true,
+            "value": 1250000.0
+          }
+        ],
+        "by_valuation_tier": [
+          {
+            "count": 6,
+            "id": "cash_face_value",
+            "percent_of_total": 0.06045,
+            "synthetic_data": true,
+            "value": 2460000.0
+          },
+          {
+            "count": 26,
+            "id": "direct_price_or_mark",
+            "percent_of_total": 0.416882,
+            "synthetic_data": true,
+            "value": 16965000.0
+          },
+          {
+            "count": 12,
+            "id": "human_review_required",
+            "percent_of_total": 0.143138,
+            "synthetic_data": true,
+            "value": 5825000.0
+          },
+          {
+            "count": 23,
+            "id": "proxy_valuation",
+            "percent_of_total": 0.282467,
+            "synthetic_data": true,
+            "value": 11495000.0
+          },
+          {
+            "count": 7,
+            "id": "stale_or_manager_mark",
+            "percent_of_total": 0.097064,
+            "synthetic_data": true,
+            "value": 3950000.0
+          }
+        ],
+        "human_review_count": 12,
+        "human_review_value": 5825000.0,
+        "label": "medium",
+        "synthetic_data": true
+      },
+      "element_id": "cash_generation_summary",
+      "element_key": "cash_generation_summary",
+      "element_title": "Cash Generation Summary",
+      "element_view_path": "data/simulation/report_element_views/cash_generation_summary.view.json",
+      "headline": "Cash Generation Summary: $2,460,000.00 cash-like value",
+      "html_fragment_path": "data/simulation/report_element_views/cash_generation_summary.html",
+      "human_review_count": 12,
+      "human_review_items": [
+        {
+          "confidence": "low",
+          "instrument_id": "instr_ai_infra_call_spread_note",
+          "manager_id": "mgr_a_growth_ai_infrastructure",
+          "position_id": "pos_a_ai_infra_call_spread_note",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 275000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_private_credit_income_fund",
+          "manager_id": "mgr_c_income_cash_generation",
+          "position_id": "pos_c_private_credit_income_fund",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 540000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_northstar_ai_growth_fund",
+          "manager_id": "mgr_d_private_real_assets",
+          "position_id": "pos_d_northstar_ai_growth_fund",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 1260000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_venture_ai_infrastructure_fund",
+          "manager_id": "mgr_d_private_real_assets",
+          "position_id": "pos_d_venture_ai_infrastructure_fund",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 740000.0
+        },
+        {
+          "confidence": "low",
+          "instrument_id": "instr_data_center_development_jv",
+          "manager_id": "mgr_d_private_real_assets",
+          "position_id": "pos_d_data_center_development_jv",
+          "reason": "Human-review or low-confidence valuation treatment in simplified synthetic valuation.",
+          "synthetic_data": true,
+          "valuation_tier": "human_review_required",
+          "value": 940000.0
+        }
+      ],
+      "key_metrics": [
+        {
+          "formatted_value": "$2,460,000.00",
+          "label": "Current cash-like value",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": 2460000.0
+        },
+        {
+          "formatted_value": "$175,984.83",
+          "label": "Period income/distributions",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": 175984.83
+        },
+        {
+          "formatted_value": "-$804,263.00",
+          "label": "Period transaction flows",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": -804263.0
+        },
+        {
+          "formatted_value": "-$42,000.00",
+          "label": "Period fees",
+          "synthetic_data": true,
+          "unit": "USD",
+          "value": -42000.0
+        },
+        {
+          "formatted_value": "6",
+          "label": "Cash-like positions",
+          "synthetic_data": true,
+          "unit": "count",
+          "value": 6
+        }
+      ],
+      "markdown_fragment_path": "data/simulation/report_element_views/cash_generation_summary.md",
+      "order": 2,
+      "placement": "Cash and liquidity check",
+      "summary_text": "Across the synthetic period from 2026-04-01 to 2026-06-30, the portfolio has $2,460,000.00 in cash-like value, $175,984.83 of income/distributions, and -$804,263.00 of transaction flows. Cash accounting remains simplified and synthetic.",
+      "synthetic_data": true
+    },
+    {
+      "as_of_date": "2026-06-30",
+      "caveats": [
+        "Synthetic demo data only.",
+        "Rendered report-element fragment only; not a full client briefing, chart, or production report.",
+        "Payload is a structured input for later rendering; it is not a generated report, chart, browser view, or client-ready briefing.",
         "Concentration rows are grouped from synthetic current valuation records.",
         "Theme exposure is split equally across each position's assigned themes.",
         "Overlap exposure is inferred from repeated synthetic display names across managers.",
@@ -477,8 +663,8 @@
         }
       ],
       "markdown_fragment_path": "data/simulation/report_element_views/concentration_theme.md",
-      "order": 2,
-      "placement": "Client discussion prompt",
+      "order": 3,
+      "placement": "Concentration discussion",
       "summary_text": "The Theme lens shows growth/value as the largest concentration bucket at $6,375,000.00 (15.67%). The view keeps top buckets and holdings visible as discussion prompts rather than recommendations.",
       "synthetic_data": true
     },
@@ -669,8 +855,8 @@
         }
       ],
       "markdown_fragment_path": "data/simulation/report_element_views/scenario_impact_by_manager_ai_chip_selloff.md",
-      "order": 3,
-      "placement": "Scenario appendix",
+      "order": 4,
+      "placement": "Scenario discussion",
       "summary_text": "The AI/chip selloff scenario shows a deterministic synthetic portfolio impact of -$6,446,707.66 (-15.84%) over 3 months. Manager-level impacts are shown for review; this scenario is not a forecast or probability estimate.",
       "synthetic_data": true
     },
@@ -854,16 +1040,16 @@
         }
       ],
       "markdown_fragment_path": "data/simulation/report_element_views/data_confidence_note.md",
-      "order": 4,
-      "placement": "Support note",
+      "order": 5,
+      "placement": "Confidence note",
       "summary_text": "Current synthetic data confidence is labeled medium. Human review covers 12 positions representing $5,825,000.00; valuation treatment rows make direct, cash, proxy, stale/private, and human-review buckets visible before later preview or publication.",
       "synthetic_data": true
     }
   ],
   "preview_id": "client_briefing_set_preview",
-  "preview_summary": "The synthetic portfolio preview opens with current status, highlights theme concentration, shows the AI/chip selloff scenario as a caveated risk prompt, and closes with data confidence.",
+  "preview_summary": "The synthetic client briefing opens with the current portfolio picture, connects cash and liquidity to the meeting, then uses concentration, scenario sensitivity, and data confidence as concise discussion prompts.",
   "preview_type": "client_briefing_set",
-  "purpose": "Answer the portfolio status, concentration, scenario risk, and data-readiness questions in a concise client-facing sequence.",
+  "purpose": "Support a concise client conversation about current portfolio status, cash and liquidity, concentration, scenario sensitivity, and data confidence.",
   "review_notes": [
     "Keep client-facing wording concise and caveated.",
     "Use the data confidence note as support material when verification questions arise."

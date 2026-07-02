@@ -2498,7 +2498,7 @@
             <p class="current-preview-context"><strong>Generated:</strong> ${escapeHtml(artifact.generated_at || "")} | <strong>Data as of:</strong> ${escapeHtml(artifact.data_as_of || "")} | <strong>Snapshot:</strong> ${escapeHtml(artifact.data_snapshot_label || DEMO_DATA_SNAPSHOT_LABEL)}</p>
           </header>
           ${sections.map(renderGeneratedReportSectionHtml).join("")}
-          <footer class="preview-footer-note">${escapeHtml(caveat)} ${escapeHtml(SYNTHETIC_PREVIEW_NOTICE)}</footer>
+          <footer class="preview-footer-note">${escapeHtml(caveat)}</footer>
         </div>
       `;
     }

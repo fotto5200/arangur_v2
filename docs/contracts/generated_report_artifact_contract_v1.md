@@ -33,6 +33,10 @@ The static private-demo UI stores successful Populate responses in browser `loca
 
 Deleting a shelf record removes only that browser-local generated report record. It does not delete or mutate the source saved workflow. This shelf is not backend persistence, production report history, a report library, an immutable archive, cross-browser sync, or a production records system.
 
+## Demo Content Shape
+
+Generated demo artifacts should read as coherent advisor product content, not as exposed renderer fragments. Client Briefing artifacts use concise conversation framing, ordered analytic sections, short discussion prompts, and a restrained demo note. Advisor Review artifacts use internal prep framing, diagnostic/readiness sections, follow-up prompts, and the same restrained demo boundary. This is content assembly over existing synthetic rendered fragments, not new analytics or production report generation.
+
 ## Artifact Fields
 
 - `schema_version`: `generated_report_artifact.v1`.
