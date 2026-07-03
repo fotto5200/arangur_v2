@@ -2,7 +2,7 @@
 
 This walkthrough is for a local private-demo operator. It uses only synthetic demo data and the browser-local workflow/report path. It is not a public deployment runbook and is not a production reporting process.
 
-Manual checkpoint: Frank passed this local private-demo browser rehearsal after commit `524a99b` on 2026-07-03. The copied-workflow Populate path used the correct selected workflow, generated reports preserved the authored workflow sequence, automatic framing/closing sections were not inserted, and Present / view reports opened the generated report.
+Manual checkpoint: Frank passed this local private-demo browser rehearsal after commit `524a99b` on 2026-07-03. The copied-workflow Populate path used the correct selected workflow, generated reports preserved the authored workflow sequence, automatic framing/closing sections were not inserted, and Present / view reports opened the generated report. For a clean rehearsal, clear old local generated reports from Developer / QA tools if prior shelf records make testing hard to read.
 
 ## Start The Stack
 
