@@ -221,6 +221,7 @@ def _preview_element_from_spec(
 
 def _narrative_preview_element(item: dict[str, Any], order: int) -> dict[str, Any]:
     fields = _safe_dict(item.get("narrative_fields"))
+    narrative_type = _clean_optional_string(item.get("narrative_type"))
     title = (
         _clean_optional_string(fields.get("title_text"))
         or _clean_optional_string(fields.get("heading"))
@@ -231,13 +232,14 @@ def _narrative_preview_element(item: dict[str, Any], order: int) -> dict[str, An
         _clean_optional_string(fields.get("body_text"))
         or _clean_optional_string(fields.get("prompt_text"))
         or _clean_optional_string(fields.get("note_text"))
-        or _clean_optional_string(item.get("placement"))
-        or "Advisor-authored narrative text for the demo populated report."
+        or ""
     )
     return {
         "order": order,
         "element_key": _clean_optional_string(item.get("local_spec_id")) or f"narrative_{order}",
         "element_kind": "narrative",
+        "narrative_type": narrative_type,
+        "narrative_fields": fields,
         "element_id": _clean_optional_string(item.get("element_id")),
         "element_title": _clean_optional_string(item.get("element_title")) or title,
         "placement": _clean_string(item.get("placement")),

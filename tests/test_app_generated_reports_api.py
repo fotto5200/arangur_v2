@@ -37,10 +37,11 @@ class AppGeneratedReportsApiTests(unittest.TestCase):
         self.assertEqual("Current synthetic demo snapshot", payload["data_snapshot_label"])
         self.assertTrue(payload["synthetic_data"])
         self.assertTrue(payload["ordered_sections"])
-        self.assertEqual("Conversation Framing", payload["ordered_sections"][0]["title"])
-        self.assertIn("concise client conversation aid", payload["text_content"])
-        self.assertIn("Discussion Prompts", payload["text_content"])
+        self.assertEqual(["Portfolio Status"], [section["title"] for section in payload["ordered_sections"]])
+        self.assertNotIn("Conversation Framing", payload["text_content"])
+        self.assertNotIn("Discussion Prompts", payload["text_content"])
         self.assertEqual(1, len(payload["caveats"]))
+        self.assertEqual("advisor_authored_workflow", payload["metadata_json"]["body_section_source"])
         self.assertEqual("valid", payload["validation"]["status"])
 
     def test_demo_populate_endpoint_accepts_advisor_review_workflow(self) -> None:
@@ -50,10 +51,11 @@ class AppGeneratedReportsApiTests(unittest.TestCase):
         self.assertEqual("advisor_review", payload["report_type"])
         self.assertIn("Northstar Quarterly Briefing", payload["report_title"])
         self.assertIn("Advisor Review", payload["report_title"])
-        self.assertGreaterEqual(len(payload["ordered_sections"]), 5)
-        self.assertEqual("Advisor Prep Framing", payload["ordered_sections"][0]["title"])
+        self.assertEqual(["Manager Comparison", "Working note"], [section["title"] for section in payload["ordered_sections"]])
+        self.assertNotIn("Advisor Prep Framing", payload["text_content"])
+        self.assertNotIn("Internal Follow-Ups", payload["text_content"])
         self.assertIn("Manager Comparison", payload["text_content"])
-        self.assertIn("internal advisor prep and risk/readiness review", payload["text_content"])
+        self.assertIn("Ask about liquidity needs.", payload["text_content"])
         self.assertTrue(payload["metadata_json"]["source_workflow_item_count"])
         self.assertEqual("ephemeral_local_demo", payload["metadata_json"]["artifact_persistence"])
 
@@ -154,10 +156,91 @@ class AppGeneratedReportsApiTests(unittest.TestCase):
         self.assertEqual("workflow_20260702_report_2", artifact["source_workflow_id"])
         self.assertEqual("2026-07-02 Report 2", artifact["source_workflow_display_name"])
         self.assertEqual("2026-07-02 Report 2 - Client Briefing", artifact["report_title"])
-        self.assertIn("Cash & Liquidity", section_titles)
+        self.assertEqual(["Cash Generation Summary"], section_titles)
+        self.assertNotIn("Cash & Liquidity", section_titles)
         self.assertNotIn("Portfolio Status", section_titles)
         self.assertNotIn("Current Report 2026-06-30", artifact["report_title"])
         self.assertEqual(1, artifact["metadata_json"]["source_workflow_item_count"])
+
+    def test_demo_populate_endpoint_preserves_authored_sequence_titles_and_detail(self) -> None:
+        payload = self._sample_payload("client_briefing")
+        payload["workflow_display_name"] = "New Report as of July 3rd, 2026 Copy"
+        payload["client_briefing_set"] = [
+            {
+                "order": 1,
+                "local_spec_id": "local_title_1",
+                "element_kind": "narrative",
+                "element_id": None,
+                "element_title": "Section title",
+                "target_set": "Client Briefing Set",
+                "target_branch": "Client Briefing",
+                "placement": "Section title",
+                "configured_parameters": {},
+                "preview_available": False,
+                "matched_rendered_view": None,
+                "confidence_badge": "narrative_local_only",
+                "narrative_type": "section_title",
+                "narrative_fields": {"title_text": "July 3rd Trial 1"},
+            },
+            {
+                "order": 2,
+                "local_spec_id": "local_cash",
+                "element_kind": "analytic",
+                "element_id": "cash_generation_summary",
+                "element_title": "Cash Generation Summary",
+                "target_set": "Client Briefing Set",
+                "target_branch": "Client Briefing",
+                "placement": "Cash generation",
+                "configured_parameters": {"scope": "Whole portfolio"},
+                "preview_available": True,
+                "matched_rendered_view": {"view_id": "cash_generation_summary"},
+            },
+            {
+                "order": 3,
+                "local_spec_id": "local_title_2",
+                "element_kind": "narrative",
+                "element_id": None,
+                "element_title": "Section title",
+                "target_set": "Client Briefing Set",
+                "target_branch": "Client Briefing",
+                "placement": "Section title",
+                "configured_parameters": {},
+                "preview_available": False,
+                "matched_rendered_view": None,
+                "confidence_badge": "narrative_local_only",
+                "narrative_type": "section_title",
+                "narrative_fields": {"title_text": "Between Two Elements"},
+            },
+            {
+                "order": 4,
+                "local_spec_id": "local_concentration",
+                "element_kind": "analytic",
+                "element_id": "concentration",
+                "element_title": "Concentration Report",
+                "target_set": "Client Briefing Set",
+                "target_branch": "Client Briefing",
+                "placement": "Concentration",
+                "configured_parameters": {"scope": "Whole portfolio", "lens": "Theme"},
+                "preview_available": True,
+                "matched_rendered_view": {"view_id": "concentration_theme"},
+            },
+        ]
+
+        response = self.client.post(GENERATED_REPORT_POPULATE_ENDPOINT, json=payload)
+
+        self.assertEqual(200, response.status_code)
+        artifact = response.json()
+        self.assertEqual(
+            ["July 3rd Trial 1", "Cash Generation Summary", "Between Two Elements", "Concentration Report"],
+            [section["title"] for section in artifact["ordered_sections"]],
+        )
+        self.assertNotIn("Conversation Framing", artifact["text_content"])
+        self.assertNotIn("Discussion Prompts", artifact["text_content"])
+        self.assertNotIn("Concentration Watch", artifact["text_content"])
+        self.assertIn("Manager A - Growth / AI Infrastructure", artifact["text_content"])
+        self.assertIn("<th>Manager Name</th>", artifact["html_content"])
+        self.assertIn("Northstar AI Growth Fund LP", artifact["text_content"])
+        self.assertEqual(4, artifact["metadata_json"]["section_count"])
 
     def test_demo_populate_endpoint_creates_distinct_report_ids_for_repeated_population(self) -> None:
         payload = self._sample_payload("client_briefing")
@@ -183,7 +266,7 @@ class AppGeneratedReportsApiTests(unittest.TestCase):
         self.assertIn('GENERATED_REPORT_POPULATE_ENDPOINT = "/api/generated-reports/demo-populate"', html)
         self.assertIn("Create demo populated report", html)
         self.assertIn("Current synthetic demo snapshot", html)
-        self.assertIn("This section is not available in the demo populated report.", html)
+        self.assertIn("This section is not available in the demo generated report.", html)
         self.assertIn("Demo populated report", html)
         self.assertIn("LOCAL_GENERATED_REPORT_STORAGE_KEY", html)
         self.assertIn("arangur.local_generated_reports.v1", html)
@@ -197,7 +280,10 @@ class AppGeneratedReportsApiTests(unittest.TestCase):
         self.assertIn("That saved workflow could not be found. Return to Work with existing workflow and save it again.", html)
         self.assertIn('artifact.schema_version !== "generated_report_artifact.v1"', html)
         self.assertIn("Open generated reports created from Populate.", html)
-        self.assertIn("No generated reports yet. Populate a workflow with demo data first.", html)
+        self.assertIn("No generated reports yet. Generated reports are created from saved workflows when you populate them with demo data.", html)
+        self.assertIn("Generated: ${record.updated_at || record.saved_at || record.generated_at || \"\"}", html)
+        self.assertIn("Clear local generated reports", html)
+        self.assertIn("clearLocalGeneratedReports", html)
         self.assertIn('data-generated-report-action="open"', html)
         self.assertIn('data-generated-report-action="delete"', html)
         self.assertIn("Generated report presentation", html)

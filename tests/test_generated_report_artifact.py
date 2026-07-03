@@ -45,30 +45,29 @@ class GeneratedReportArtifactTests(unittest.TestCase):
         self.assertEqual("private_demo", artifact["runtime_mode"])
         self.assertEqual("demo_partial", artifact["render_status"])
         self.assertTrue(artifact["ordered_sections"])
-        self.assertEqual("Conversation Framing", artifact["ordered_sections"][0]["title"])
-        self.assertIn("concise client conversation aid", artifact["text_content"])
+        self.assertEqual("Portfolio Status", artifact["ordered_sections"][0]["title"])
+        self.assertNotIn("Conversation Framing", artifact["text_content"])
+        self.assertNotIn("Discussion Prompts", artifact["text_content"])
         self.assertTrue(artifact["text_content"].strip())
         self.assertTrue(artifact["html_content"].strip())
         self.assertIn("metadata_json", artifact)
+        self.assertEqual("advisor_authored_workflow", artifact["metadata_json"]["body_section_source"])
 
-    def test_client_briefing_artifact_reads_as_coherent_conversation_aid(self) -> None:
+    def test_client_briefing_artifact_preserves_default_preview_sequence_without_auto_framing(self) -> None:
         artifact = create_demo_generated_report_artifact("client_briefing", view_dir=VIEW_DIR)
         titles = [section["title"] for section in artifact["ordered_sections"]]
         self.assertEqual(
             [
-                "Conversation Framing",
                 "Portfolio Status",
-                "Cash & Liquidity",
-                "Concentration Watch",
-                "Scenario Sensitivity",
-                "Data Confidence",
-                "Discussion Prompts",
-                "Demo Note",
+                "Cash Generation Summary",
+                "Concentration",
+                "Scenario Impact by Manager",
+                "Data Confidence Note",
             ],
             titles,
         )
-        self.assertIn("what changed", artifact["text_content"].lower())
-        self.assertIn("cash and liquidity", artifact["text_content"].lower())
+        self.assertIn("Manager A - Growth / AI Infrastructure", artifact["text_content"])
+        self.assertIn("<h3>Evidence</h3>", artifact["html_content"])
         self.assertIn("Scenario output is deterministic synthetic analysis, not a forecast.", artifact["caveats"][0])
         self.assertNotIn("report library", artifact["text_content"].lower())
 
@@ -78,29 +77,26 @@ class GeneratedReportArtifactTests(unittest.TestCase):
         self.assertEqual(first, second)
         self.assertEqual("advisor_review", first["report_type"])
         self.assertEqual("demo_advisor_review_20260630", first["report_id"])
-        self.assertGreaterEqual(len(first["ordered_sections"]), 8)
+        self.assertEqual(5, len(first["ordered_sections"]))
         self.assertIn("Manager Comparison", first["text_content"])
         self.assertIn("Data Confidence", first["text_content"])
 
-    def test_advisor_review_artifact_reads_as_internal_prep_review(self) -> None:
+    def test_advisor_review_artifact_preserves_default_preview_sequence_without_auto_framing(self) -> None:
         artifact = create_demo_generated_report_artifact("advisor_review", view_dir=VIEW_DIR)
         titles = [section["title"] for section in artifact["ordered_sections"]]
         self.assertEqual(
             [
-                "Advisor Prep Framing",
-                "Manager Role Review",
-                "Data Confidence",
-                "Concentration Diagnostic",
-                "Scenario Sensitivity",
-                "Cash & Liquidity",
-                "Internal Follow-Ups",
-                "Demo Note",
+                "Manager Comparison",
+                "Data Confidence Note",
+                "Concentration",
+                "Scenario Impact by Manager",
+                "Cash Generation Summary",
             ],
             titles,
         )
-        self.assertIn("internal prep and risk/readiness review", artifact["text_content"])
-        self.assertIn("Confirm manager mandate fit", artifact["text_content"])
-        self.assertIn("human-review data items", artifact["text_content"])
+        self.assertNotIn("Advisor Prep Framing", artifact["text_content"])
+        self.assertNotIn("Internal Follow-Ups", artifact["text_content"])
+        self.assertIn("Human-review count", artifact["text_content"])
 
     def test_populated_artifact_can_use_workflow_derived_title(self) -> None:
         views = load_report_element_views(VIEW_DIR)
@@ -132,10 +128,31 @@ class GeneratedReportArtifactTests(unittest.TestCase):
             self.assertTrue(section["html"].strip())
             self.assertTrue(section["text"].strip())
 
-    def test_narrative_sections_render_without_metadata_wrappers(self) -> None:
-        artifact = create_demo_generated_report_artifact("client_briefing", view_dir=VIEW_DIR)
+    def test_advisor_authored_narrative_sections_render_without_metadata_wrappers(self) -> None:
+        views = load_report_element_views(VIEW_DIR)
+        preview = build_default_client_briefing_set_preview(views)
+        preview["ordered_elements"] = [
+            {
+                "order": 1,
+                "element_key": "local_section_title",
+                "element_kind": "narrative",
+                "element_id": None,
+                "element_title": "Section title",
+                "headline": "July 3rd Trial 1",
+                "summary_text": "",
+                "key_metrics": [],
+                "confidence_summary": {},
+                "caveats": [],
+                "synthetic_data": True,
+            },
+            preview["ordered_elements"][0],
+        ]
+        preview["included_element_ids"] = ["portfolio_status"]
+        artifact = build_generated_report_artifact_from_briefing_preview(preview, report_type="client_briefing")
         narrative_sections = [section for section in artifact["ordered_sections"] if section["section_type"] == "narrative"]
-        self.assertGreaterEqual(len(narrative_sections), 2)
+        self.assertEqual(1, len(narrative_sections))
+        self.assertEqual("July 3rd Trial 1", narrative_sections[0]["title"])
+        self.assertEqual("July 3rd Trial 1", narrative_sections[0]["text"])
         for section in narrative_sections:
             combined = f"{section['html']} {section['text']}"
             self.assertNotIn("data-source-element-id", combined)
@@ -143,11 +160,11 @@ class GeneratedReportArtifactTests(unittest.TestCase):
             self.assertNotIn("element_kind", combined)
             self.assertIn("<h2>", section["html"])
 
-    def test_caveat_sections_are_represented_without_developer_error_language(self) -> None:
+    def test_artifact_caveats_are_footer_metadata_not_body_sections(self) -> None:
         artifact = create_demo_generated_report_artifact("client_briefing", view_dir=VIEW_DIR)
         caveat_sections = [section for section in artifact["ordered_sections"] if section["section_type"] == "caveat"]
-        self.assertEqual(1, len(caveat_sections))
-        combined = f"{caveat_sections[0]['html']} {caveat_sections[0]['text']}".lower()
+        self.assertEqual(0, len(caveat_sections))
+        combined = f"{artifact['html_content']} {artifact['text_content']}".lower()
         self.assertIn("synthetic demo only", combined)
         self.assertLessEqual(len(artifact["caveats"]), 1)
         for marker in ("traceback", "exception", "stack trace", "debug artifact"):

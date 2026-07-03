@@ -113,8 +113,9 @@ Mark each item pass/fail during the local demo rehearsal.
 
 ### Content
 
-- [ ] Client Briefing reads like a client conversation aid.
-- [ ] Advisor Review reads like internal prep.
+- [ ] Generated report body follows the saved workflow sequence.
+- [ ] Advisor-authored narrative titles/text appear exactly where added.
+- [ ] Selected report element titles are not replaced by alternate generated-report titles.
 - [ ] Caveats are restrained.
 - [ ] Unsupported sections use nontechnical language.
 

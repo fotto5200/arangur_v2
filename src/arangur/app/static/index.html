@@ -1074,6 +1074,7 @@
             <a class="tiny-button" href="/simulation/briefing_set_previews/client_briefing_set_preview.html" target="_blank" rel="noopener">Open QA Client reference</a>
             <a class="tiny-button" href="/simulation/briefing_set_previews/advisor_review_set_preview.html" target="_blank" rel="noopener">Open QA Advisor reference</a>
             <button id="home-advanced-tools-button" class="secondary-button" type="button">Open Developer / QA tools</button>
+            <button id="clear-generated-reports-button" class="secondary-button" type="button">Clear local generated reports</button>
           </div>
         </details>
       </section>
@@ -1600,6 +1601,7 @@
       homeBuildClient: document.getElementById("home-build-client-button"),
       homeBuildAdvisor: document.getElementById("home-build-advisor-button"),
       homeAdvancedTools: document.getElementById("home-advanced-tools-button"),
+      clearGeneratedReports: document.getElementById("clear-generated-reports-button"),
       homeSavedWorkflowList: document.getElementById("home-saved-workflow-list"),
       homeSavedWorkflowStatus: document.getElementById("home-saved-workflow-status"),
       homePopulateWorkflowList: document.getElementById("home-populate-workflow-list"),
@@ -2071,7 +2073,7 @@
     function renderGeneratedReportContainer(listEl, statusEl) {
       if (!listEl || !statusEl) return;
       if (!state.generatedReports.length) {
-        listEl.innerHTML = '<p class="empty">No generated reports yet. Populate a workflow with demo data first.</p>';
+        listEl.innerHTML = '<p class="empty">No generated reports yet. Generated reports are created from saved workflows when you populate them with demo data.</p>';
         statusEl.textContent = "";
         return;
       }
@@ -2094,10 +2096,10 @@
 
     function generatedReportMeta(record) {
       const parts = [
-        renderGeneratedReportTypeLabel(record),
         `Source workflow: ${record.source_workflow_display_name || "Saved workflow"}`,
-        `Data as of ${record.data_as_of || DEMO_DATA_AS_OF}`,
+        `Generated: ${record.updated_at || record.saved_at || record.generated_at || ""}`,
         record.data_snapshot_label || DEMO_DATA_SNAPSHOT_LABEL,
+        `Data as of ${record.data_as_of || DEMO_DATA_AS_OF}`,
         "private demo only"
       ];
       return parts.filter(Boolean).join(" | ");
@@ -2318,6 +2320,20 @@
       els.homePresentWorkflowStatus.textContent = persisted
         ? `Deleted generated report: ${displayTitle}. Source workflow was not changed.`
         : "Deleted the generated report in this session, but this browser could not persist the report shelf. Source workflow was not changed.";
+    }
+
+    function clearLocalGeneratedReports() {
+      const count = state.generatedReports.length;
+      state.generatedReports = [];
+      state.currentGeneratedReportId = null;
+      if (state.workflowModeIntent === "present") {
+        state.workflowModeArtifact = null;
+      }
+      const persisted = persistLocalGeneratedReports();
+      renderGeneratedReports();
+      els.homePresentWorkflowStatus.textContent = persisted
+        ? `Cleared ${pluralizeSpec(count, "local generated report")}. Saved workflows were not changed.`
+        : "Cleared generated reports in this session, but this browser could not persist the empty report shelf. Saved workflows were not changed.";
     }
 
     function applyWorkflowPayload(payload) {
@@ -2548,7 +2564,7 @@
         return `
           <section class="current-set-preview-item">
             <h3>${escapeHtml(title)}</h3>
-            <div class="preview-placeholder">This section is not available in the demo populated report.</div>
+            <div class="preview-placeholder">This section is not available in the demo generated report.</div>
           </section>
         `;
       }
@@ -4469,6 +4485,7 @@
     els.homeBuildClient.addEventListener("click", () => startNewWorkflow("Client Briefing Set"));
     els.homeBuildAdvisor.addEventListener("click", () => startNewWorkflow("Advisor Review Set"));
     els.homeAdvancedTools.addEventListener("click", () => navigateToRoute("advanced"));
+    els.clearGeneratedReports.addEventListener("click", clearLocalGeneratedReports);
     els.builderHome.addEventListener("click", () => navigateToRoute("home"));
     els.workflowNameInput.addEventListener("input", () => {
       state.workflowNameDraft = els.workflowNameInput.value;

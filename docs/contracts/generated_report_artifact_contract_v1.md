@@ -25,17 +25,19 @@ The current implementation can assemble deterministic demo artifacts from existi
 - `data_snapshot_label`, optional; defaults to `Current synthetic demo snapshot`
 - `data_as_of`, optional; defaults to `2026-06-30`
 
-The endpoint validates the local workflow payload, uses only committed synthetic demo rendered views, maps unsupported or unrenderable sections to clean placeholders, and returns a `generated_report_artifact.v1` object. It does not require Postgres, create report history, write artifact files, add report-library records, call external APIs, or use real client or market data.
+The endpoint validates the local workflow payload, uses only committed synthetic demo rendered views, maps unsupported or unrenderable sections to clean placeholders, and returns a `generated_report_artifact.v1` object. For matched analytic sections, generated reports reuse rendered fragment detail comparable to Preview rather than substituting summary-only generated-report sections. It does not require Postgres, create report history, write artifact files, add report-library records, call external APIs, or use real client or market data.
 
 ## Browser-Local Presentation Shelf
 
-The static private-demo UI stores successful Populate responses in browser `localStorage` under `arangur.local_generated_reports.v1`. Shelf records are keyed by artifact `report_id`, carry compact display metadata plus the full returned artifact payload, and are used by Present / view reports to list, open, and delete browser-local generated report artifacts.
+The static private-demo UI stores successful Populate responses in browser `localStorage` under `arangur.local_generated_reports.v1`. Shelf records are keyed by artifact `report_id`, carry compact display metadata plus the full returned artifact payload, and are used by Present / view reports to list, open, and delete browser-local generated report artifacts. Shelf rows show the generated report title, source workflow name, local generated timestamp, and data snapshot label so repeated generated reports from the same source workflow remain distinguishable.
 
 Deleting a shelf record removes only that browser-local generated report record. It does not delete or mutate the source saved workflow. This shelf is not backend persistence, production report history, a report library, an immutable archive, cross-browser sync, or a production records system.
 
 ## Demo Content Shape
 
-Generated demo artifacts should read as coherent advisor product content, not as exposed renderer fragments. Client Briefing artifacts use concise conversation framing, ordered analytic sections, short discussion prompts, and a restrained demo note. Advisor Review artifacts use internal prep framing, diagnostic/readiness sections, follow-up prompts, and the same restrained demo boundary. This is content assembly over existing synthetic rendered fragments, not new analytics or production report generation.
+Generated demo artifacts render the selected advisor-authored workflow body. They preserve the ordered workflow items, narrative section-title text, narrative body text, selected report-element titles, and matched rendered fragment detail available in Preview. Generated artifacts must not add framing, closing prompts, follow-up sections, or other narrative body sections that were not present in the saved workflow.
+
+Report-level metadata remains separate from body sections. The artifact may carry title, source workflow, generated timestamp, data snapshot, data-as-of date, and a concise synthetic-demo caveat in top-level fields, header text, or footer text. That metadata is not represented as `ordered_sections`.
 
 ## Artifact Fields
 
@@ -52,7 +54,7 @@ Generated demo artifacts should read as coherent advisor product content, not as
 - `data_snapshot_label`: human-readable data snapshot label.
 - `synthetic_data`: must be `true` for demo artifacts.
 - `app_environment` / `runtime_mode`: optional runtime framing for private-demo output.
-- `ordered_sections`: ordered section records.
+- `ordered_sections`: ordered advisor-authored workflow body section records.
 - `unsupported_sections`: compact list of sections rendered as placeholders or unsupported.
 - `caveats`: artifact-level caveats.
 - `render_status`: `complete`, `partial`, or `demo_partial`.

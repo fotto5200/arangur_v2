@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import html
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -29,17 +30,6 @@ PREVIEW_TO_REPORT_TYPE = {
 REPORT_TYPE_TITLES = {
     "client_briefing": "Client Briefing",
     "advisor_review": "Advisor Review",
-}
-ANALYTIC_SECTION_TITLES = {
-    "portfolio_status": "Portfolio Status",
-    "cash_generation_summary": "Cash & Liquidity",
-    "concentration": {
-        "client_briefing": "Concentration Watch",
-        "advisor_review": "Concentration Diagnostic",
-    },
-    "scenario_impact_by_manager": "Scenario Sensitivity",
-    "data_confidence_note": "Data Confidence",
-    "manager_comparison": "Manager Role Review",
 }
 SECTION_TYPES = {"narrative", "report_element", "unsupported", "caveat"}
 SECTION_STATUSES = {"rendered", "placeholder", "omitted", "unsupported"}
@@ -110,7 +100,6 @@ def build_generated_report_artifact_from_briefing_preview(
 
     sections: list[dict[str, Any]] = []
     unsupported_sections: list[dict[str, Any]] = []
-    sections.append(_narrative_section(resolved_report_type, 1, "opening", *_opening_framing(resolved_report_type)))
     for element in preview_payload.get("ordered_elements", []):
         section = _section_from_preview_element(element, len(sections) + 1, resolved_report_type)
         sections.append(section)
@@ -125,14 +114,10 @@ def build_generated_report_artifact_from_briefing_preview(
                 }
             )
 
-    sections.append(_narrative_section(resolved_report_type, len(sections) + 1, "discussion_prompts", *_closing_prompts(resolved_report_type)))
-
     artifact_caveats = _artifact_caveats(preview_payload.get("caveats", []))
-    caveat_section = _caveat_section(artifact_caveats, len(sections) + 1)
-    sections.append(caveat_section)
 
-    text_content = _render_artifact_text(resolved_report_title, preview_payload, sections, data_as_of, data_snapshot_label)
-    html_content = _render_artifact_html(resolved_report_title, preview_payload, sections, data_as_of, data_snapshot_label)
+    text_content = _render_artifact_text(resolved_report_title, preview_payload, sections, data_as_of, data_snapshot_label, artifact_caveats)
+    html_content = _render_artifact_html(resolved_report_title, preview_payload, sections, data_as_of, data_snapshot_label, artifact_caveats)
     artifact = {
         "schema_version": ARTIFACT_SCHEMA_VERSION,
         "builder_version": ARTIFACT_BUILDER_VERSION,
@@ -158,6 +143,7 @@ def build_generated_report_artifact_from_briefing_preview(
             "source_preview_type": preview_payload.get("preview_type"),
             "included_element_ids": list(preview_payload.get("included_element_ids", [])),
             "section_count": len(sections),
+            "body_section_source": "advisor_authored_workflow",
             "unsupported_section_count": len(unsupported_sections),
             "confidence_summary": preview_payload.get("confidence_summary", {}),
             "demo_caveat": artifact_caveats[0],
@@ -297,6 +283,8 @@ def _section_from_preview_element(element: dict[str, Any], order_index: int, rep
     title = _section_title_from_element(element, report_type)
     section_id = f"{report_type}_{order_index:02d}_{_slug(element.get('element_key') or element.get('element_id') or title)}"
     section_type = "narrative" if element.get("element_kind") == "narrative" else "report_element"
+    if section_type == "narrative":
+        return _narrative_section_from_preview_element(element, order_index, report_type, section_id, title)
     if not _clean_string(element.get("headline")) or not _clean_string(element.get("summary_text")):
         text = "This section is not available in the demo generated report."
         return {
@@ -325,50 +313,6 @@ def _section_from_preview_element(element: dict[str, Any], order_index: int, rep
     }
 
 
-def _narrative_section(report_type: str, order_index: int, slug: str, title: str, body: str) -> dict[str, Any]:
-    section_id = f"{report_type}_{order_index:02d}_{slug}"
-    return {
-        "section_id": section_id,
-        "title": title,
-        "section_type": "narrative",
-        "order_index": order_index,
-        "html": (
-            f'<section data-section-id="{html.escape(section_id, quote=True)}">'
-            f"<h2>{html.escape(title)}</h2>"
-            f"<p>{html.escape(body)}</p>"
-            "</section>"
-        ),
-        "text": f"{title}\n{body}",
-        "source_element_id": None,
-        "source_element_title": None,
-        "status": "rendered",
-    }
-
-
-def _opening_framing(report_type: str) -> tuple[str, str]:
-    if report_type == "advisor_review":
-        return (
-            "Advisor Prep Framing",
-            "Use this internal prep and risk/readiness review to decide which manager, concentration, scenario, and data-confidence points are ready for the client conversation.",
-        )
-    return (
-        "Conversation Framing",
-        "Use this concise client conversation aid to anchor the meeting in current portfolio status, cash and liquidity, concentration, scenario sensitivity, and data confidence.",
-    )
-
-
-def _closing_prompts(report_type: str) -> tuple[str, str]:
-    if report_type == "advisor_review":
-        return (
-            "Internal Follow-Ups",
-            "Confirm manager mandate fit, resolve human-review data items, and choose which concentration or scenario points should be promoted to client-facing material.",
-        )
-    return (
-        "Discussion Prompts",
-        "Use the briefing to ask what changed, whether cash and liquidity still fit near-term needs, and which concentration or scenario questions deserve follow-up.",
-    )
-
-
 def _artifact_caveats(caveats: list[Any]) -> list[str]:
     cleaned = [_clean_string(caveat) for caveat in caveats if _clean_string(caveat)]
     scenario_note = next((caveat for caveat in cleaned if "not a forecast" in caveat.lower()), "")
@@ -379,27 +323,58 @@ def _artifact_caveats(caveats: list[Any]) -> list[str]:
     return [caveat]
 
 
-def _caveat_section(caveats: list[Any], order_index: int) -> dict[str, Any]:
-    cleaned = [_clean_string(caveat) for caveat in caveats if _clean_string(caveat)]
-    if not cleaned:
-        cleaned = ["Synthetic demo only; not investment advice, a recommendation, or a production report."]
-    body = " ".join(cleaned)
-    text = f"Demo Note\n{body}"
+def _narrative_section_from_preview_element(
+    element: dict[str, Any],
+    order_index: int,
+    report_type: str,
+    section_id: str,
+    title: str,
+) -> dict[str, Any]:
+    body = _clean_string(element.get("summary_text"))
+    if body:
+        html_fragment = (
+            f'<section data-section-id="{html.escape(section_id, quote=True)}">'
+            f"<h2>{html.escape(title)}</h2>"
+            f"<p>{html.escape(body)}</p>"
+            "</section>"
+        )
+        text_fragment = f"{title}\n{body}"
+    else:
+        html_fragment = (
+            f'<section data-section-id="{html.escape(section_id, quote=True)}">'
+            f"<h2>{html.escape(title)}</h2>"
+            "</section>"
+        )
+        text_fragment = title
     return {
-        "section_id": "demo_caveats",
-        "title": "Demo Note",
-        "section_type": "caveat",
+        "section_id": section_id,
+        "title": title,
+        "section_type": "narrative",
         "order_index": order_index,
-        "html": f"<section data-section-id=\"demo_caveats\"><h2>Demo Note</h2><p><small>{html.escape(body)}</small></p></section>",
-        "text": text,
-        "source_element_id": None,
-        "source_element_title": None,
+        "html": html_fragment,
+        "text": text_fragment,
+        "source_element_id": _clean_optional_string(element.get("element_id")),
+        "source_element_title": _clean_optional_string(element.get("element_title")),
         "status": "rendered",
     }
 
 
 def _html_for_element_section(element: dict[str, Any], section_id: str, section_title: str) -> str:
     headline = _clean_string(element.get("headline"))
+    fragment = _clean_string(element.get("html_fragment")) or _read_fragment(element.get("html_fragment_path"))
+    if fragment:
+        fragment_body = _demote_first_h2(_strip_outer_section(fragment), section_title)
+        return "\n".join(
+            [
+                (
+                    f'<section data-section-id="{html.escape(section_id, quote=True)}" '
+                    f'data-source-element-id="{html.escape(str(element.get("element_id") or ""), quote=True)}">'
+                ),
+                f"<h2>{html.escape(section_title)}</h2>",
+                fragment_body,
+                "</section>",
+            ]
+        )
     parts = [
         (
             f'<section data-section-id="{html.escape(section_id, quote=True)}" '
@@ -430,6 +405,10 @@ def _html_for_element_section(element: dict[str, Any], section_id: str, section_
 
 def _text_for_element_section(element: dict[str, Any], section_title: str) -> str:
     headline = _clean_string(element.get("headline"))
+    fragment = _clean_string(element.get("text_fragment")) or _read_fragment(element.get("markdown_fragment_path"))
+    if fragment:
+        fragment_text = _demote_leading_markdown_heading(fragment, section_title)
+        return "\n".join(line for line in [section_title, fragment_text] if _clean_string(line))
     lines = [section_title]
     if headline and headline != section_title:
         lines.append(headline)
@@ -448,12 +427,6 @@ def _text_for_element_section(element: dict[str, Any], section_title: str) -> st
 def _section_title_from_element(element: dict[str, Any], report_type: str) -> str:
     if element.get("element_kind") == "narrative":
         return _clean_string(element.get("headline")) or _clean_string(element.get("element_title")) or "Narrative"
-    element_id = _clean_string(element.get("element_id"))
-    title = ANALYTIC_SECTION_TITLES.get(element_id)
-    if isinstance(title, dict):
-        return title.get(report_type) or next(iter(title.values()))
-    if isinstance(title, str):
-        return title
     return _clean_string(element.get("element_title")) or _clean_string(element.get("headline")) or "Report Section"
 
 
@@ -463,17 +436,20 @@ def _render_artifact_text(
     sections: list[dict[str, Any]],
     data_as_of: str,
     data_snapshot_label: str,
+    artifact_caveats: list[str],
 ) -> str:
+    source_workflow = _clean_string(preview_payload.get("source_workflow_display_name")) or "Saved workflow"
     lines = [
         report_title,
+        f"Source workflow: {source_workflow}",
         f"{data_snapshot_label} | Data as of {data_as_of}",
         f"Generated {preview_payload.get('generated_at') or GENERATED_AT}",
-        "",
-        _clean_string(preview_payload.get("preview_summary") or preview_payload.get("purpose")),
         "",
     ]
     for section in sections:
         lines.extend([section["text"], ""])
+    if artifact_caveats:
+        lines.extend([f"Demo caveat: {artifact_caveats[0]}", ""])
     return "\n".join(lines).strip() + "\n"
 
 
@@ -483,7 +459,9 @@ def _render_artifact_html(
     sections: list[dict[str, Any]],
     data_as_of: str,
     data_snapshot_label: str,
+    artifact_caveats: list[str],
 ) -> str:
+    source_workflow = _clean_string(preview_payload.get("source_workflow_display_name")) or "Saved workflow"
     parts = [
         "<!doctype html>",
         '<html lang="en">',
@@ -495,13 +473,15 @@ def _render_artifact_html(
         '<main data-artifact-schema="generated_report_artifact.v1">',
         f"<h1>{html.escape(report_title)}</h1>",
         "<p>"
+        f"Source workflow: {html.escape(source_workflow)} | "
         f"{html.escape(data_snapshot_label)} | "
         f"Data as of {html.escape(data_as_of)} | "
         f"Generated {html.escape(str(preview_payload.get('generated_at') or GENERATED_AT))}"
         "</p>",
-        f"<p>{html.escape(_clean_string(preview_payload.get('preview_summary') or preview_payload.get('purpose')))}</p>",
     ]
     parts.extend(section["html"] for section in sections)
+    if artifact_caveats:
+        parts.append(f"<footer><p><small>{html.escape(artifact_caveats[0])}</small></p></footer>")
     parts.extend(["</main>", "</body>", "</html>"])
     return "\n".join(parts) + "\n"
 
@@ -549,6 +529,48 @@ def _slug(value: Any) -> str:
             cleaned.append("_")
             previous_dash = True
     return "".join(cleaned).strip("_") or "section"
+
+
+def _read_fragment(path_value: Any) -> str:
+    path_text = _clean_string(path_value)
+    if not path_text:
+        return ""
+    try:
+        path = Path(path_text)
+        if path.exists() and path.is_file():
+            return path.read_text(encoding="utf-8").strip()
+    except OSError:
+        return ""
+    return ""
+
+
+def _strip_outer_section(fragment: str) -> str:
+    match = re.match(r"^\s*<section\b[^>]*>(.*)</section>\s*$", fragment, flags=re.DOTALL | re.IGNORECASE)
+    return match.group(1).strip() if match else fragment.strip()
+
+
+def _demote_first_h2(fragment: str, section_title: str) -> str:
+    def replacement(match: re.Match[str]) -> str:
+        heading = _clean_string(re.sub(r"<[^>]+>", "", html.unescape(match.group(1))))
+        if _clean_string(heading).lower() == _clean_string(section_title).lower():
+            return ""
+        return f"<p><strong>{match.group(1)}</strong></p>"
+
+    return re.sub(r"<h2>(.*?)</h2>", replacement, fragment, count=1, flags=re.DOTALL | re.IGNORECASE).strip()
+
+
+def _demote_leading_markdown_heading(fragment: str, section_title: str) -> str:
+    lines = fragment.strip().splitlines()
+    if not lines:
+        return ""
+    first = lines[0].strip()
+    if first.startswith("## "):
+        heading = first[3:].strip()
+        rest = lines[1:]
+        if heading and heading.lower() != _clean_string(section_title).lower():
+            return "\n".join([heading, *rest]).strip()
+        return "\n".join(rest).strip()
+    return fragment.strip()
 
 
 def _clean_string(value: Any) -> str:
