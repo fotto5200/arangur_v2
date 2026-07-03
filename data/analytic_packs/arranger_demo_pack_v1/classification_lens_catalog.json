@@ -1,0 +1,76 @@
+{
+  "schema_version": "analytic_pack_component.v1",
+  "pack_id": "arranger_demo_pack_v1",
+  "component_type": "classification_lens_catalog",
+  "catalog_version": "2026-07-03-demo-v1",
+  "synthetic_demo_pack": true,
+  "lenses": [
+    {
+      "lens_id": "theme",
+      "display_name": "Theme",
+      "description": "Groups positions by approved Arranger themes.",
+      "allowed_scope": [
+        "Whole portfolio",
+        "Selected manager",
+        "Selected account",
+        "Selected sleeve / mandate"
+      ],
+      "categories": [
+        "AI Infrastructure",
+        "Rate Sensitivity",
+        "Private Market Liquidity",
+        "Energy Security"
+      ]
+    },
+    {
+      "lens_id": "manager_role_mandate",
+      "display_name": "Manager Role / Mandate",
+      "description": "Groups positions by the intended manager or mandate role.",
+      "allowed_scope": [
+        "All managers compared",
+        "Selected manager",
+        "Selected sleeve / mandate"
+      ],
+      "categories": [
+        "Growth / AI Infrastructure",
+        "Core Quality Equity",
+        "Private Markets",
+        "Macro Overlay"
+      ]
+    },
+    {
+      "lens_id": "liquidity_bucket",
+      "display_name": "Liquidity Bucket",
+      "description": "Groups positions by liquidity and valuation-readiness treatment.",
+      "allowed_scope": [
+        "Whole portfolio",
+        "Selected manager",
+        "Selected account",
+        "Selected sleeve / mandate"
+      ],
+      "categories": [
+        "Daily liquidity",
+        "Monthly or quarterly liquidity",
+        "Private or stale mark",
+        "Human review required"
+      ]
+    },
+    {
+      "lens_id": "data_confidence",
+      "display_name": "Data Confidence",
+      "description": "Groups records by source-readiness and valuation confidence.",
+      "allowed_scope": [
+        "Whole portfolio",
+        "Selected manager",
+        "Selected account",
+        "Selected sleeve / mandate"
+      ],
+      "categories": [
+        "High",
+        "Medium",
+        "Low",
+        "Unknown"
+      ]
+    }
+  ]
+}

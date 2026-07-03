@@ -349,9 +349,11 @@ Future scenario, data-coverage, and deployable private-demo work is captured in:
 - `docs/ui_reporting/report_element_finder_composer_current_model_v1.md`
 - `docs/ui_reporting/client_briefing_page_model_v1.md`
 - `docs/ui_reporting/manager_role_review_v1.md`
+- `docs/architecture/arranger_control_plane_boundary_v1.md`
 - `docs/architecture/simulation_kernel_three_surface_model_v1.md`
 - `docs/architecture/deployable_demo_app_architecture.md`
 - `docs/architecture/persistence_model_plan.md`
+- `docs/contracts/analytic_pack_contract_v1.md`
 - `docs/contracts/simulation_kernel_contracts_v1.md`
 - `docs/contracts/synthetic_position_universe_contract_v1.md`
 - `docs/contracts/synthetic_market_state_contract_v1.md`

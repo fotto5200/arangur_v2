@@ -1,0 +1,24 @@
+{
+  "schema_version": "analytic_pack_manifest.v1",
+  "pack_id": "arranger_demo_pack_v1",
+  "pack_version": "2026-07-03-demo-v1",
+  "display_name": "Arranger Demo Analytic Pack v1",
+  "description": "Minimal synthetic fixture pack that demonstrates the Arranger publish / Arangur consume boundary.",
+  "created_by": "Arranger internal control plane",
+  "created_at": "2026-07-03T00:00:00Z",
+  "approved_at": "2026-07-03T00:00:00Z",
+  "synthetic_demo_pack": true,
+  "component_paths": {
+    "theme_catalog": "theme_catalog.json",
+    "classification_lens_catalog": "classification_lens_catalog.json",
+    "scenario_catalog": "scenario_catalog.json",
+    "scenario_shock_pack": "scenario_shock_pack.json",
+    "data_confidence_rule_catalog": "data_confidence_rule_catalog.json",
+    "report_analytic_capability_map": "report_analytic_capability_map.json"
+  },
+  "notes": [
+    "Synthetic demo pack only; not a production analytic pack.",
+    "Defines contract shape and example ids without implementing scenario math.",
+    "Published pack artifact for Arangur consumption, not advisor-facing control-plane UI."
+  ]
+}

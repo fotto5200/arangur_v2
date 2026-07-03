@@ -1,0 +1,57 @@
+{
+  "schema_version": "analytic_pack_component.v1",
+  "pack_id": "arranger_demo_pack_v1",
+  "component_type": "theme_catalog",
+  "catalog_version": "2026-07-03-demo-v1",
+  "synthetic_demo_pack": true,
+  "themes": [
+    {
+      "theme_id": "ai_infrastructure",
+      "display_name": "AI Infrastructure",
+      "description": "Exposure tied to AI compute, semiconductors, data centers, and enabling infrastructure.",
+      "exposure_direction_notes": "Higher exposure may increase sensitivity to AI capex cycles and semiconductor supply shocks.",
+      "example_position_tags": [
+        "AI infrastructure",
+        "semiconductors",
+        "data center power demand"
+      ],
+      "advisor_description": "Use when explaining how much of the portfolio is connected to the AI buildout."
+    },
+    {
+      "theme_id": "rate_sensitivity",
+      "display_name": "Rate Sensitivity",
+      "description": "Exposure likely to react to changes in rates, duration, credit spreads, or financing conditions.",
+      "exposure_direction_notes": "Higher exposure may matter more in rate-shock and refinancing-stress discussions.",
+      "example_position_tags": [
+        "rates sensitivity",
+        "fixed income",
+        "inflation sensitivity"
+      ],
+      "advisor_description": "Use when framing where the portfolio may be most exposed to rate moves."
+    },
+    {
+      "theme_id": "private_market_liquidity",
+      "display_name": "Private Market Liquidity",
+      "description": "Exposure to private, opaque, stale-marked, or slower-liquidity assets.",
+      "exposure_direction_notes": "Higher exposure may reduce near-term flexibility and increase reliance on confidence caveats.",
+      "example_position_tags": [
+        "private-market liquidity",
+        "opaque/private marks",
+        "data confidence / valuation issue"
+      ],
+      "advisor_description": "Use when discussing liquidity, valuation confidence, or private-market stress."
+    },
+    {
+      "theme_id": "energy_security",
+      "display_name": "Energy Security",
+      "description": "Exposure tied to power, energy supply, real assets, and energy bottlenecks.",
+      "exposure_direction_notes": "Higher exposure may matter in energy-shock or infrastructure-resilience conversations.",
+      "example_position_tags": [
+        "energy bottlenecks",
+        "data center power demand",
+        "commodities_energy"
+      ],
+      "advisor_description": "Use when connecting energy supply conditions to portfolio exposures."
+    }
+  ]
+}

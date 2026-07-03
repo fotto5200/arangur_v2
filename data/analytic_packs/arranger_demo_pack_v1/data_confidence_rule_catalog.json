@@ -1,0 +1,40 @@
+{
+  "schema_version": "analytic_pack_component.v1",
+  "pack_id": "arranger_demo_pack_v1",
+  "component_type": "data_confidence_rule_catalog",
+  "catalog_version": "2026-07-03-demo-v1",
+  "synthetic_demo_pack": true,
+  "rules": [
+    {
+      "rule_id": "human_review_required",
+      "display_name": "Human Review Required",
+      "applies_to": [
+        "valuation",
+        "scenario_mapping",
+        "classification"
+      ],
+      "confidence_effect": "lowers confidence until reviewed",
+      "advisor_language": "Some records need human review before the result should be treated as meeting-ready."
+    },
+    {
+      "rule_id": "proxy_valuation",
+      "display_name": "Proxy Valuation",
+      "applies_to": [
+        "valuation",
+        "scenario_mapping"
+      ],
+      "confidence_effect": "medium confidence when proxy treatment is documented",
+      "advisor_language": "Proxy-based values are usable for demo discussion but should be labeled as approximations."
+    },
+    {
+      "rule_id": "stale_or_private_mark",
+      "display_name": "Stale Or Private Mark",
+      "applies_to": [
+        "private_assets",
+        "opaque_manager_level_assets"
+      ],
+      "confidence_effect": "low or unknown confidence depending on recency",
+      "advisor_language": "Private or stale marks should be called out when they affect the report conclusion."
+    }
+  ]
+}

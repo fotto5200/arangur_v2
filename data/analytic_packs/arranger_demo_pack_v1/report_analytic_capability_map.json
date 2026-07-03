@@ -1,0 +1,164 @@
+{
+  "schema_version": "analytic_pack_component.v1",
+  "pack_id": "arranger_demo_pack_v1",
+  "component_type": "report_analytic_capability_map",
+  "map_version": "2026-07-03-demo-v1",
+  "synthetic_demo_pack": true,
+  "capabilities": [
+    {
+      "report_element_id": "portfolio_status",
+      "supported_themes": [],
+      "supported_scenarios": [],
+      "supported_lenses": [
+        "asset_class",
+        "liquidity_bucket",
+        "data_confidence"
+      ],
+      "supported_scopes": [
+        "Whole portfolio"
+      ],
+      "required_inputs": [
+        "simplified_valuation_summary",
+        "synthetic_position_universe_summary"
+      ],
+      "unsupported_reason_if_any": null
+    },
+    {
+      "report_element_id": "concentration",
+      "supported_themes": [
+        "ai_infrastructure",
+        "rate_sensitivity",
+        "private_market_liquidity",
+        "energy_security"
+      ],
+      "supported_scenarios": [
+        "ai_chip_selloff",
+        "taiwan_disruption"
+      ],
+      "supported_lenses": [
+        "theme",
+        "asset_class",
+        "liquidity_bucket",
+        "manager_role_mandate"
+      ],
+      "supported_scopes": [
+        "Whole portfolio",
+        "Selected manager",
+        "Selected account",
+        "Selected sleeve / mandate"
+      ],
+      "required_inputs": [
+        "synthetic_position_universe_summary",
+        "simplified_valuation_summary"
+      ],
+      "unsupported_reason_if_any": null
+    },
+    {
+      "report_element_id": "scenario_impact_by_manager",
+      "supported_themes": [
+        "ai_infrastructure",
+        "rate_sensitivity",
+        "private_market_liquidity",
+        "energy_security"
+      ],
+      "supported_scenarios": [
+        "ai_chip_selloff",
+        "rate_shock",
+        "private_market_liquidity_freeze",
+        "taiwan_disruption"
+      ],
+      "supported_lenses": [
+        "theme",
+        "manager_role_mandate",
+        "asset_class",
+        "liquidity_bucket"
+      ],
+      "supported_scopes": [
+        "All managers compared",
+        "Selected manager",
+        "Selected sleeve / mandate",
+        "Whole portfolio"
+      ],
+      "required_inputs": [
+        "synthetic_scenario_market_states",
+        "scenario_revaluation_results",
+        "simplified_valuation_summary"
+      ],
+      "unsupported_reason_if_any": null
+    },
+    {
+      "report_element_id": "cash_generation_summary",
+      "supported_themes": [
+        "rate_sensitivity",
+        "private_market_liquidity"
+      ],
+      "supported_scenarios": [
+        "rate_shock",
+        "private_market_liquidity_freeze"
+      ],
+      "supported_lenses": [
+        "liquidity_bucket",
+        "manager_role_mandate"
+      ],
+      "supported_scopes": [
+        "Whole portfolio",
+        "All managers compared"
+      ],
+      "required_inputs": [
+        "simplified_valuation_summary",
+        "synthetic_position_universe_summary"
+      ],
+      "unsupported_reason_if_any": null
+    },
+    {
+      "report_element_id": "manager_comparison",
+      "supported_themes": [
+        "ai_infrastructure",
+        "rate_sensitivity",
+        "private_market_liquidity",
+        "energy_security"
+      ],
+      "supported_scenarios": [],
+      "supported_lenses": [
+        "theme",
+        "manager_role_mandate",
+        "liquidity_bucket",
+        "data_confidence"
+      ],
+      "supported_scopes": [
+        "All managers compared",
+        "Selected manager",
+        "Selected sleeve / mandate"
+      ],
+      "required_inputs": [
+        "synthetic_position_universe_summary",
+        "simplified_valuation_summary"
+      ],
+      "unsupported_reason_if_any": null
+    },
+    {
+      "report_element_id": "data_confidence_note",
+      "supported_themes": [
+        "private_market_liquidity"
+      ],
+      "supported_scenarios": [
+        "private_market_liquidity_freeze"
+      ],
+      "supported_lenses": [
+        "data_confidence",
+        "liquidity_bucket"
+      ],
+      "supported_scopes": [
+        "Whole portfolio",
+        "Selected manager",
+        "Selected account",
+        "Selected sleeve / mandate"
+      ],
+      "required_inputs": [
+        "simplified_valuation_summary",
+        "synthetic_position_universe_summary"
+      ],
+      "unsupported_reason_if_any": null
+    }
+  ]
+}

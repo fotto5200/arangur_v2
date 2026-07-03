@@ -1,0 +1,97 @@
+{
+  "schema_version": "analytic_pack_component.v1",
+  "pack_id": "arranger_demo_pack_v1",
+  "component_type": "scenario_catalog",
+  "catalog_version": "2026-07-03-demo-v1",
+  "synthetic_demo_pack": true,
+  "scenarios": [
+    {
+      "scenario_id": "ai_chip_selloff",
+      "display_name": "AI / Chip Selloff",
+      "short_description": "A synthetic stress to AI infrastructure, semiconductor, and growth-tech exposures.",
+      "advisor_story": "Use to discuss which managers and themes are most tied to a pullback in the AI buildout.",
+      "primary_drivers": [
+        "ai_infrastructure_semiconductor",
+        "us_growth_tech_equity",
+        "volatility_proxy"
+      ],
+      "supported_horizons": [
+        "instantaneous_demo_shock"
+      ],
+      "supported_report_elements": [
+        "scenario_impact_by_manager",
+        "concentration"
+      ],
+      "caveats": [
+        "Deterministic synthetic stress, not a forecast.",
+        "No probability is assigned."
+      ]
+    },
+    {
+      "scenario_id": "rate_shock",
+      "display_name": "Rate Shock",
+      "short_description": "A synthetic stress to duration, credit, and rate-sensitive assets.",
+      "advisor_story": "Use to frame how rate-sensitive exposures and managers behave under a sharp rate move.",
+      "primary_drivers": [
+        "long_duration_bond_price",
+        "short_duration_bond_price",
+        "credit_spread_proxy"
+      ],
+      "supported_horizons": [
+        "instantaneous_demo_shock"
+      ],
+      "supported_report_elements": [
+        "scenario_impact_by_manager",
+        "cash_generation_summary"
+      ],
+      "caveats": [
+        "Deterministic synthetic stress, not a forecast.",
+        "Does not model yield-curve construction."
+      ]
+    },
+    {
+      "scenario_id": "private_market_liquidity_freeze",
+      "display_name": "Private Market Liquidity Freeze",
+      "short_description": "A synthetic stress to private-market liquidity and opaque/stale marks.",
+      "advisor_story": "Use to discuss liquidity flexibility and confidence caveats around private holdings.",
+      "primary_drivers": [
+        "private_market_liquidity",
+        "credit_spread_proxy",
+        "volatility_proxy"
+      ],
+      "supported_horizons": [
+        "instantaneous_demo_shock"
+      ],
+      "supported_report_elements": [
+        "scenario_impact_by_manager",
+        "data_confidence_note"
+      ],
+      "caveats": [
+        "Deterministic synthetic stress, not a forecast.",
+        "Private-market marks may require human review."
+      ]
+    },
+    {
+      "scenario_id": "taiwan_disruption",
+      "display_name": "Taiwan Disruption",
+      "short_description": "A synthetic geopolitical supply-chain disruption scenario.",
+      "advisor_story": "Use to connect semiconductor supply-chain risk to technology and infrastructure exposures.",
+      "primary_drivers": [
+        "ai_infrastructure_semiconductor",
+        "us_growth_tech_equity",
+        "energy_oil"
+      ],
+      "supported_horizons": [
+        "instantaneous_demo_shock"
+      ],
+      "supported_report_elements": [
+        "scenario_impact_by_manager",
+        "concentration"
+      ],
+      "caveats": [
+        "Deterministic synthetic stress, not a forecast.",
+        "No geopolitical probability is assigned."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "schema_version": "analytic_pack_component.v1",
+  "pack_id": "arranger_demo_pack_v1",
+  "component_type": "scenario_shock_pack",
+  "shock_pack_version": "2026-07-03-demo-v1",
+  "synthetic_demo_pack": true,
+  "scenario_shocks": [
+    {
+      "scenario_id": "ai_chip_selloff",
+      "shock_id": "ai_chip_selloff_demo_shock_v1",
+      "variable_shocks": {
+        "ai_infrastructure_semiconductor": -0.24,
+        "us_growth_tech_equity": -0.16,
+        "volatility_proxy": 0.35
+      },
+      "qualitative_assumptions": [
+        "AI compute and semiconductor exposures sell off together.",
+        "Volatility rises during the stress."
+      ],
+      "confidence_level": "medium",
+      "caveats": [
+        "Synthetic demo shock only."
+      ]
+    },
+    {
+      "scenario_id": "rate_shock",
+      "shock_id": "rate_shock_demo_shock_v1",
+      "variable_shocks": {
+        "long_duration_bond_price": -0.12,
+        "short_duration_bond_price": -0.03,
+        "credit_spread_proxy": 0.10
+      },
+      "qualitative_assumptions": [
+        "Long-duration assets are more rate-sensitive than short-duration assets.",
+        "Credit spreads widen alongside the rate move."
+      ],
+      "confidence_level": "medium",
+      "caveats": [
+        "Synthetic demo shock only.",
+        "Does not model full curve dynamics."
+      ]
+    },
+    {
+      "scenario_id": "private_market_liquidity_freeze",
+      "shock_id": "private_market_liquidity_freeze_demo_shock_v1",
+      "variable_shocks": {
+        "private_market_liquidity": -0.18,
+        "credit_spread_proxy": 0.08,
+        "volatility_proxy": 0.25
+      },
+      "qualitative_assumptions": [
+        "Private and opaque marks receive lower confidence during the stress.",
+        "Liquidity-sensitive assets become harder to reposition."
+      ],
+      "confidence_level": "low",
+      "caveats": [
+        "Synthetic demo shock only.",
+        "Private-market treatments require human review."
+      ]
+    },
+    {
+      "scenario_id": "taiwan_disruption",
+      "shock_id": "taiwan_disruption_demo_shock_v1",
+      "variable_shocks": {
+        "ai_infrastructure_semiconductor": -0.20,
+        "us_growth_tech_equity": -0.10,
+        "energy_oil": 0.12
+      },
+      "qualitative_assumptions": [
+        "Semiconductor supply-chain pressure affects AI infrastructure exposures.",
+        "Energy prices rise modestly during the disruption."
+      ],
+      "confidence_level": "low",
+      "caveats": [
+        "Synthetic demo shock only.",
+        "No geopolitical probability is assigned."
+      ]
+    }
+  ]
+}

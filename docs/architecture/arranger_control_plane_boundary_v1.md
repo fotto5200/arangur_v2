@@ -1,0 +1,82 @@
+# Arranger Control Plane Boundary v1
+
+## Purpose
+
+This document defines the boundary between the internal Arranger analytic control plane and the advisor-facing Arangur app.
+
+The product direction is publish/consume:
+
+- Arranger Internal Analytic Studio / Control Plane publishes approved analytic packs.
+- Calculation and application code applies those approved packs to portfolio data.
+- Arangur Advisor App consumes the approved packs and lets advisors select curated choices while building workflows and reports.
+
+The control plane is internal Arranger capability. It is not advisor-facing UI, not a third Advisor Home menu item, and not a new public product surface inside Arangur.
+
+## A. Arranger Internal Analytic Studio / Control Plane
+
+The control plane is where Arranger defines, reviews, versions, and approves analytic choices before they are published as product artifacts.
+
+Internal control-plane responsibilities include:
+
+- Theme catalogs, such as AI Infrastructure, Rate Sensitivity, Private Market Liquidity, and Energy Security.
+- Classification lens catalogs, such as theme, asset class, manager role / mandate, liquidity bucket, and data confidence.
+- Scenario catalogs, including advisor-readable scenario names, supported horizons, driver narratives, caveats, and supported report elements.
+- Scenario shock packs, including deterministic driver shocks, qualitative assumptions, confidence labels, and caveats.
+- Covariance, factor, and key-rate assumptions later, after the contract boundary is stable.
+- Data confidence rules that explain when data is high, medium, low, unknown, stale, proxy-based, or human-review required.
+- Report analytic capability maps that say which report elements can consume which themes, lenses, scenarios, scopes, and inputs.
+- Approved analytic pack manifests that bind component versions into a publishable pack.
+
+Control-plane outputs are approved analytic packs. They are product artifacts with ids, versions, authorship, approval metadata, component paths, caveats, and compatibility expectations.
+
+Advisors should not define covariance matrices, key-rate scenarios, scenario shock vectors, theme taxonomies, classification rules, or analytic model assumptions in Arangur. Advisors select from approved choices.
+
+## B. Calculation / Application Layer
+
+The calculation/application layer applies approved analytic packs to a specific portfolio and data snapshot.
+
+Application responsibilities include:
+
+- Theme exposure calculations using approved theme definitions and position classifications.
+- Manager overlap views using approved manager-role and theme/lens definitions.
+- Scenario impact calculations using approved scenario catalogs and shock packs.
+- Data confidence summaries using approved confidence rules.
+- Cross-scenario resilience views using approved scenario sets and capability maps.
+
+This layer can be implemented locally for the demo and can use internal cloud compute later. Using cloud compute internally does not make the control plane part of the advisor app.
+
+The application layer should treat analytic packs as read-only published inputs. It may validate compatibility, apply pack components, and return portfolio-specific outputs, but it should not mutate or invent approved pack definitions.
+
+## C. Arangur Advisor App
+
+The Arangur Advisor App is the advisor/client-facing workflow and reporting surface.
+
+Advisor-app responsibilities include:
+
+- Consuming approved analytic packs.
+- Letting advisors choose from published scenarios, themes, lenses, scopes, and report elements.
+- Building saved workflows and generated report artifacts.
+- Presenting populated reports using advisor-authored workflow order and approved analytic outputs.
+
+The advisor app does not expose control-plane construction tools. It should not include an Arranger Studio panel, taxonomy editor, shock-vector editor, covariance editor, or model-assumption editor.
+
+## Product Boundary
+
+Approved analytic packs are the handoff between Arranger and Arangur:
+
+- Arranger publishes the pack.
+- Arangur consumes the pack.
+- Advisors select from the pack.
+- Portfolio-specific calculation applies the pack.
+- Generated reports present results and caveats.
+
+This boundary keeps product behavior simple. It lets Arranger improve analytic content internally without turning the advisor app into an analytic-model-building console.
+
+## Deliberately Out Of Scope For This Boundary
+
+- Advisor-facing control-plane UI.
+- Arranger Studio UI implementation.
+- Backend endpoints for analytic pack management.
+- Scenario math, covariance engines, PCA, key-rate engines, or live market-data integration.
+- Docker, deployment, AWS, Lightsail, Caddy, Cloudflare, DNS, or production-auth changes.
+- Real client data or external API calls.
