@@ -25,7 +25,7 @@ The current implementation can assemble deterministic demo artifacts from existi
 - `data_snapshot_label`, optional; defaults to `Current synthetic demo snapshot`
 - `data_as_of`, optional; defaults to `2026-06-30`
 
-The endpoint validates the local workflow payload, uses only committed synthetic demo rendered views, maps unsupported or unrenderable sections to clean placeholders, and returns a `generated_report_artifact.v1` object. For matched analytic sections, generated reports reuse rendered fragment detail comparable to Preview rather than substituting summary-only generated-report sections. It does not require Postgres, create report history, write artifact files, add report-library records, call external APIs, or use real client or market data.
+The endpoint validates the local workflow payload, uses only committed synthetic demo rendered views, maps unsupported or unrenderable sections to clean placeholders, and returns a `generated_report_artifact.v1` object. For matched analytic sections, generated reports recompute the view match from saved configured parameters and reuse rendered fragment detail comparable to Preview rather than substituting summary-only generated-report sections. Supported Arranger Demo Analytic Pack choices can resolve to analytic-derived fragments; unsupported choices remain placeholders. It does not require Postgres, create report history, write artifact files, add report-library records, call external APIs, or use real client or market data.
 
 ## Browser-Local Presentation Shelf
 

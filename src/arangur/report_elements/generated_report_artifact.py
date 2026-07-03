@@ -361,20 +361,21 @@ def _narrative_section_from_preview_element(
 
 def _html_for_element_section(element: dict[str, Any], section_id: str, section_title: str) -> str:
     headline = _clean_string(element.get("headline"))
+    selection_summary = _clean_string(element.get("selection_summary"))
     fragment = _clean_string(element.get("html_fragment")) or _read_fragment(element.get("html_fragment_path"))
     if fragment:
         fragment_body = _demote_first_h2(_strip_outer_section(fragment), section_title)
-        return "\n".join(
-            [
-                (
-                    f'<section data-section-id="{html.escape(section_id, quote=True)}" '
-                    f'data-source-element-id="{html.escape(str(element.get("element_id") or ""), quote=True)}">'
-                ),
-                f"<h2>{html.escape(section_title)}</h2>",
-                fragment_body,
-                "</section>",
-            ]
-        )
+        parts = [
+            (
+                f'<section data-section-id="{html.escape(section_id, quote=True)}" '
+                f'data-source-element-id="{html.escape(str(element.get("element_id") or ""), quote=True)}">'
+            ),
+            f"<h2>{html.escape(section_title)}</h2>",
+        ]
+        if selection_summary:
+            parts.append(f"<p><small>{html.escape(selection_summary)}</small></p>")
+        parts.extend([fragment_body, "</section>"])
+        return "\n".join(parts)
     parts = [
         (
             f'<section data-section-id="{html.escape(section_id, quote=True)}" '
@@ -384,6 +385,8 @@ def _html_for_element_section(element: dict[str, Any], section_id: str, section_
     ]
     if headline and headline != section_title:
         parts.append(f"<p><strong>{html.escape(headline)}</strong></p>")
+    if selection_summary:
+        parts.append(f"<p><small>{html.escape(selection_summary)}</small></p>")
     parts.append(f"<p>{html.escape(str(element.get('summary_text')))}</p>")
     metrics = element.get("key_metrics", [])
     if metrics:
@@ -405,13 +408,16 @@ def _html_for_element_section(element: dict[str, Any], section_id: str, section_
 
 def _text_for_element_section(element: dict[str, Any], section_title: str) -> str:
     headline = _clean_string(element.get("headline"))
+    selection_summary = _clean_string(element.get("selection_summary"))
     fragment = _clean_string(element.get("text_fragment")) or _read_fragment(element.get("markdown_fragment_path"))
     if fragment:
         fragment_text = _demote_leading_markdown_heading(fragment, section_title)
-        return "\n".join(line for line in [section_title, fragment_text] if _clean_string(line))
+        return "\n".join(line for line in [section_title, selection_summary, fragment_text] if _clean_string(line))
     lines = [section_title]
     if headline and headline != section_title:
         lines.append(headline)
+    if selection_summary:
+        lines.append(selection_summary)
     lines.append(str(element.get("summary_text")))
     metrics = element.get("key_metrics", [])
     if metrics:

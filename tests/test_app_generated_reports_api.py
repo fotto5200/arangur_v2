@@ -55,9 +55,135 @@ class AppGeneratedReportsApiTests(unittest.TestCase):
         self.assertNotIn("Advisor Prep Framing", payload["text_content"])
         self.assertNotIn("Internal Follow-Ups", payload["text_content"])
         self.assertIn("Manager Comparison", payload["text_content"])
+        self.assertIn("Manager Comparison: Theme Overlap", payload["text_content"])
         self.assertIn("Ask about liquidity needs.", payload["text_content"])
         self.assertTrue(payload["metadata_json"]["source_workflow_item_count"])
         self.assertEqual("ephemeral_local_demo", payload["metadata_json"]["artifact_persistence"])
+
+    def test_demo_populate_endpoint_resolves_pack_configured_elements_to_analytic_views(self) -> None:
+        payload = self._sample_payload("advisor_review")
+        payload["advisor_review_set"] = [
+            {
+                "order": 1,
+                "local_spec_id": "local_portfolio_analytics",
+                "element_kind": "analytic",
+                "element_id": "portfolio_status",
+                "element_title": "Portfolio Status",
+                "target_set": "Advisor Review Set",
+                "target_branch": "Advisor Review",
+                "placement": "Main advisor review",
+                "configured_parameters": {"scope": "Whole portfolio"},
+                "matched_rendered_view": {"view_id": "portfolio_status"},
+            },
+            {
+                "order": 2,
+                "local_spec_id": "local_concentration_analytics",
+                "element_kind": "analytic",
+                "element_id": "concentration",
+                "element_title": "Concentration",
+                "target_set": "Advisor Review Set",
+                "target_branch": "Advisor Review",
+                "placement": "Risk review",
+                "configured_parameters": {
+                    "scope": "Whole portfolio",
+                    "lens": "Strategic Theme",
+                    "theme_focus": "AI Infrastructure",
+                },
+                "matched_rendered_view": {"view_id": "concentration_theme"},
+            },
+            {
+                "order": 3,
+                "local_spec_id": "local_manager_analytics",
+                "element_kind": "analytic",
+                "element_id": "manager_comparison",
+                "element_title": "Manager Comparison",
+                "target_set": "Advisor Review Set",
+                "target_branch": "Advisor Review",
+                "placement": "Manager review",
+                "configured_parameters": {
+                    "scope": "All managers compared",
+                    "lens": "Strategic Theme",
+                    "theme_focus": "AI Infrastructure",
+                },
+                "matched_rendered_view": {"view_id": "manager_comparison"},
+            },
+            {
+                "order": 4,
+                "local_spec_id": "local_scenario_analytics",
+                "element_kind": "analytic",
+                "element_id": "scenario_impact_by_manager",
+                "element_title": "Scenario Impact by Manager",
+                "target_set": "Advisor Review Set",
+                "target_branch": "Advisor Review",
+                "placement": "Scenario appendix",
+                "configured_parameters": {"scope": "All managers compared", "scenario_id": "AI / Chip Selloff"},
+                "matched_rendered_view": {"view_id": "scenario_impact_by_manager_ai_chip_selloff"},
+            },
+            {
+                "order": 5,
+                "local_spec_id": "local_confidence_analytics",
+                "element_kind": "analytic",
+                "element_id": "data_confidence_note",
+                "element_title": "Data Confidence Note",
+                "target_set": "Advisor Review Set",
+                "target_branch": "Advisor Review",
+                "placement": "Advisor analytical appendix",
+                "configured_parameters": {
+                    "scope": "Whole portfolio",
+                    "lens": "Data Confidence",
+                    "confidence_focus": "Human Review Required",
+                },
+                "matched_rendered_view": {"view_id": "data_confidence_note"},
+            },
+        ]
+
+        response = self.client.post(GENERATED_REPORT_POPULATE_ENDPOINT, json=payload)
+
+        self.assertEqual(200, response.status_code)
+        artifact = response.json()
+        self.assertEqual(
+            [
+                "Portfolio Status",
+                "Concentration",
+                "Manager Comparison",
+                "Scenario Impact by Manager",
+                "Data Confidence Note",
+            ],
+            [section["title"] for section in artifact["ordered_sections"]],
+        )
+        self.assertIn("Portfolio Analytic Status", artifact["text_content"])
+        self.assertIn("Concentration: Approved Themes", artifact["text_content"])
+        self.assertIn("Manager Comparison: Theme Overlap", artifact["text_content"])
+        self.assertIn("AI / Chip Selloff Analytic Impact", artifact["text_content"])
+        self.assertIn("Data Confidence Note: mixed", artifact["text_content"])
+        self.assertIn("Theme focus: AI Infrastructure", artifact["text_content"])
+        self.assertIn("not theme-filtered yet", artifact["text_content"])
+        self.assertIn("Confidence focus: Human Review Required", artifact["text_content"])
+
+    def test_demo_populate_endpoint_keeps_unsupported_pack_scenarios_as_placeholders(self) -> None:
+        payload = self._sample_payload("advisor_review")
+        payload["advisor_review_set"] = [
+            {
+                "order": 1,
+                "local_spec_id": "local_rate_shock",
+                "element_kind": "analytic",
+                "element_id": "scenario_impact_by_manager",
+                "element_title": "Scenario Impact by Manager",
+                "target_set": "Advisor Review Set",
+                "target_branch": "Advisor Review",
+                "placement": "Scenario appendix",
+                "configured_parameters": {"scope": "All managers compared", "scenario_id": "Rate Shock"},
+                "matched_rendered_view": {"view_id": "scenario_impact_by_manager_ai_chip_selloff"},
+            }
+        ]
+
+        response = self.client.post(GENERATED_REPORT_POPULATE_ENDPOINT, json=payload)
+
+        self.assertEqual(200, response.status_code)
+        artifact = response.json()
+        self.assertEqual("placeholder", artifact["ordered_sections"][0]["status"])
+        self.assertIn("not available in the demo generated report", artifact["text_content"])
+        self.assertNotIn("AI / Chip Selloff Analytic Impact", artifact["text_content"])
 
     def test_demo_populate_endpoint_rejects_invalid_report_type(self) -> None:
         payload = self._sample_payload("client_briefing")
@@ -237,9 +363,9 @@ class AppGeneratedReportsApiTests(unittest.TestCase):
         self.assertNotIn("Conversation Framing", artifact["text_content"])
         self.assertNotIn("Discussion Prompts", artifact["text_content"])
         self.assertNotIn("Concentration Watch", artifact["text_content"])
-        self.assertIn("Manager A - Growth / AI Infrastructure", artifact["text_content"])
-        self.assertIn("<th>Manager Name</th>", artifact["html_content"])
-        self.assertIn("Northstar AI Growth Fund LP", artifact["text_content"])
+        self.assertIn("Concentration: Approved Themes", artifact["text_content"])
+        self.assertIn("AI Infrastructure", artifact["text_content"])
+        self.assertIn("<th>Theme Display Name</th>", artifact["html_content"])
         self.assertEqual(4, artifact["metadata_json"]["section_count"])
 
     def test_demo_populate_endpoint_creates_distinct_report_ids_for_repeated_population(self) -> None:
@@ -292,6 +418,15 @@ class AppGeneratedReportsApiTests(unittest.TestCase):
         self.assertIn("Source workflow was not changed.", html)
         self.assertIn("Back to Home", html)
         self.assertIn("Back to Workflow", html)
+        self.assertIn('ANALYTIC_VIEW_SUMMARY_ENDPOINT = "/simulation/report_element_views/report_element_analytic_view_summary.json"', html)
+        self.assertIn("portfolio_status_analytics", html)
+        self.assertIn("concentration_theme_analytics", html)
+        self.assertIn("manager_comparison_analytics", html)
+        self.assertIn("scenario_impact_by_theme_manager_analytics", html)
+        self.assertIn("data_confidence_note_analytics", html)
+        self.assertIn("Theme focus", html)
+        self.assertIn("Confidence focus", html)
+        self.assertIn("Demo view shows the full approved-theme analytic view; it is not theme-filtered yet.", html)
         self.assertNotIn("Generated report library", html)
         self.assertNotIn("generated report debug", html.lower())
         self.assertNotIn("report library dashboard", html.lower())

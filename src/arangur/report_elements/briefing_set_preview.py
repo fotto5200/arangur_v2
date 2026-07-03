@@ -72,8 +72,7 @@ def load_report_element_views(view_dir: str | Path = DEFAULT_VIEW_DIR) -> dict[s
     """Load rendered report-element views and attach local fragment paths."""
 
     root = Path(view_dir)
-    summary_path = root / "report_element_view_summary.json"
-    ordered_files = _ordered_view_files(root, summary_path)
+    ordered_files = _ordered_view_files(root)
     views: dict[str, dict[str, Any]] = {}
     for view_path in ordered_files:
         view = _load_json(view_path)
@@ -614,18 +613,27 @@ def _render_index_html(index_payload: dict[str, Any]) -> str:
     return "\n".join(parts) + "\n"
 
 
-def _ordered_view_files(root: Path, summary_path: Path) -> list[Path]:
-    if summary_path.exists():
+def _ordered_view_files(root: Path) -> list[Path]:
+    summary_names = (
+        "report_element_view_summary.json",
+        "report_element_analytic_view_summary.json",
+    )
+    ordered: list[Path] = []
+    seen: set[Path] = set()
+    for summary_name in summary_names:
+        summary_path = root / summary_name
+        if not summary_path.exists():
+            continue
         summary = _load_json(summary_path)
-        ordered = []
         for row in summary.get("rendered_files", []):
             view_file = row.get("view_file")
             if view_file:
                 path = root / view_file
-                if path.exists():
+                if path.exists() and path not in seen:
                     ordered.append(path)
-        if ordered:
-            return ordered
+                    seen.add(path)
+    if ordered:
+        return ordered
     return sorted(root.glob("*.view.json"))
 
 

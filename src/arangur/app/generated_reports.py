@@ -8,6 +8,10 @@ from pathlib import Path
 from typing import Any
 
 from arangur.report_elements.briefing_set_preview import GENERATED_AT, load_report_element_views
+from arangur.report_elements.analytic_view_matching import (
+    advisor_selection_summary,
+    matched_view_key_for_parameters,
+)
 from arangur.report_elements.generated_report_artifact import (
     build_generated_report_artifact_from_briefing_preview,
     validate_generated_report_artifact,
@@ -20,6 +24,14 @@ GENERATED_REPORT_POPULATE_ENDPOINT = "/api/generated-reports/demo-populate"
 DEMO_DATA_AS_OF = "2026-06-30"
 DEMO_DATA_SNAPSHOT_LABEL = "Current synthetic demo snapshot"
 DEFAULT_VIEW_DIR = Path("data/simulation/report_element_views")
+KNOWN_REPORT_ELEMENT_IDS = {
+    "portfolio_status",
+    "concentration",
+    "scenario_impact_by_manager",
+    "cash_generation_summary",
+    "manager_comparison",
+    "data_confidence_note",
+}
 
 REPORT_TYPE_TO_SET = {
     "client_briefing": {
@@ -193,16 +205,21 @@ def _preview_element_from_spec(
     if item.get("element_kind") == "narrative":
         return _narrative_preview_element(item, order)
 
-    view_key = _matched_view_key(item) or _view_key_for_spec_item(item)
+    computed_view_key = _view_key_for_spec_item(item)
+    view_key = computed_view_key
+    if view_key is None and _clean_string(item.get("element_id")) not in KNOWN_REPORT_ELEMENT_IDS:
+        view_key = _matched_view_key(item)
     view = views.get(view_key or "")
     if not view:
         return _unsupported_preview_element(item, order)
+    selection_summary = advisor_selection_summary(_safe_dict(item.get("configured_parameters")))
     return {
         "order": order,
         "element_key": view_key,
         "element_id": _clean_optional_string(item.get("element_id")) or view.get("element_id"),
         "element_title": _clean_optional_string(item.get("element_title")) or view.get("element_title"),
         "placement": _clean_string(item.get("placement")),
+        "selection_summary": selection_summary,
         "element_view_path": view.get("_view_file_path"),
         "markdown_fragment_path": view.get("_markdown_fragment_path"),
         "html_fragment_path": view.get("_html_fragment_path"),
@@ -258,12 +275,14 @@ def _narrative_preview_element(item: dict[str, Any], order: int) -> dict[str, An
 
 def _unsupported_preview_element(item: dict[str, Any], order: int) -> dict[str, Any]:
     title = _clean_optional_string(item.get("element_title")) or _clean_optional_string(item.get("element_id")) or "Unavailable section"
+    selection_summary = advisor_selection_summary(_safe_dict(item.get("configured_parameters")))
     return {
         "order": order,
         "element_key": _clean_optional_string(item.get("local_spec_id")) or _slug(title),
         "element_id": _clean_optional_string(item.get("element_id")),
         "element_title": title,
         "placement": _clean_string(item.get("placement")),
+        "selection_summary": selection_summary,
         "headline": title,
         "summary_text": "",
         "key_metrics": [],
@@ -287,23 +306,7 @@ def _matched_view_key(item: dict[str, Any]) -> str | None:
 def _view_key_for_spec_item(item: dict[str, Any]) -> str | None:
     element_id = _clean_string(item.get("element_id"))
     params = _safe_dict(item.get("configured_parameters"))
-    scope = _normalize(params.get("scope"))
-    if element_id in {"portfolio_status", "cash_generation_summary", "manager_comparison", "data_confidence_note"}:
-        if scope.startswith("selected "):
-            return None
-        return element_id
-    if element_id == "concentration":
-        lens = _normalize(params.get("lens"))
-        if "theme" in lens:
-            return "concentration_theme"
-        if "sector" in lens or "industry" in lens:
-            return "concentration_sector_industry"
-        return None
-    if element_id == "scenario_impact_by_manager":
-        scenario = _normalize(params.get("scenario_id")).replace("/", " ")
-        if "ai chip selloff" in scenario or "ai_chip_selloff" in scenario:
-            return "scenario_impact_by_manager_ai_chip_selloff"
-    return None
+    return matched_view_key_for_parameters(element_id, params)
 
 
 def _confidence_summary(ordered_elements: list[dict[str, Any]]) -> dict[str, Any]:

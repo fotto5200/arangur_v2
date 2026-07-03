@@ -1299,6 +1299,7 @@
     const BRIEFING_SPEC_SETS_ENDPOINT = "/api/briefing-spec-sets";
     const GENERATED_REPORT_POPULATE_ENDPOINT = "/api/generated-reports/demo-populate";
     const VIEW_SUMMARY_ENDPOINT = "/simulation/report_element_views/report_element_view_summary.json";
+    const ANALYTIC_VIEW_SUMMARY_ENDPOINT = "/simulation/report_element_views/report_element_analytic_view_summary.json";
     const BRIEFING_PREVIEW_INDEX_ENDPOINT = "/simulation/briefing_set_previews/briefing_set_preview_index.json";
     const VIEW_FRAGMENT_BASE = "/simulation/report_element_views/";
     const LOCAL_SPEC_SET_SCHEMA_VERSION = "arangur.local_briefing_spec_set.v1";
@@ -1447,14 +1448,50 @@
       data_confidence_note: "This template currently previews at the whole-portfolio data-confidence level only."
     };
     const UNSUPPORTED_SELECTED_SCOPE_PREVIEW_MESSAGE = "Selected-scope preview is not available for this demo-rendered element. Choose a supported scope before adding this element.";
+    const APPROVED_ANALYTIC_THEME_OPTIONS = [
+      "All approved themes",
+      "AI Infrastructure",
+      "Rate Sensitivity",
+      "Private Market Liquidity",
+      "Energy Security",
+      "Credit Stress",
+      "Dollar Exposure",
+      "China/Taiwan Supply Chain",
+      "Real Asset Inflation Hedge",
+      "Data Center Infrastructure",
+      "Consumer Demand Sensitivity",
+      "Duration Exposure",
+      "Defensive Cash Flow"
+    ];
+    const APPROVED_ANALYTIC_LENS_OPTIONS = [
+      "Strategic Theme",
+      "Manager Role / Mandate",
+      "Liquidity Profile",
+      "Data Confidence"
+    ];
     const SCENARIO_OPTIONS = [
-      "AI/chip selloff",
-      "Rate shock",
-      "Energy shock",
-      "Taiwan disruption",
-      "Private-market liquidity freeze"
+      "AI / Chip Selloff",
+      "Rate Shock",
+      "Energy Shock",
+      "Private-Market Liquidity Freeze",
+      "Taiwan Disruption"
+    ];
+    const CONFIDENCE_FOCUS_OPTIONS = [
+      "All confidence buckets",
+      "Human Review Required",
+      "Proxy Valuation",
+      "Stale Or Manager Mark",
+      "Missing Lookthrough"
     ];
     const PARAMETER_UI = {
+      theme_focus: {
+        label: "Theme focus",
+        options: APPROVED_ANALYTIC_THEME_OPTIONS
+      },
+      confidence_focus: {
+        label: "Confidence focus",
+        options: CONFIDENCE_FOCUS_OPTIONS
+      },
       lookback_period: {
         label: "Period",
         options: ["Last six months", "YTD", "Trailing 12 months"]
@@ -2680,14 +2717,13 @@
     }
 
     async function loadRenderedViewSummary() {
-      try {
-        const response = await fetch(VIEW_SUMMARY_ENDPOINT);
-        if (!response.ok) {
-          throw new Error(`Rendered view summary request failed: ${response.status}`);
-        }
-        const payload = await response.json();
-        const renderedFiles = Array.isArray(payload.rendered_files) ? payload.rendered_files : [];
-        state.renderedViewsByKey = renderedFiles.reduce((views, file) => {
+      const summaries = await Promise.all([
+        fetchRenderedViewSummary(VIEW_SUMMARY_ENDPOINT),
+        fetchRenderedViewSummary(ANALYTIC_VIEW_SUMMARY_ENDPOINT)
+      ]);
+      state.renderedViewsByKey = summaries
+        .flatMap((payload) => Array.isArray(payload.rendered_files) ? payload.rendered_files : [])
+        .reduce((views, file) => {
           const key = viewKeyFromFile(file.view_file || file.html_file || "");
           if (key && file.html_file) {
             views[key] = {
@@ -2699,8 +2735,17 @@
           }
           return views;
         }, {});
+    }
+
+    async function fetchRenderedViewSummary(endpoint) {
+      try {
+        const response = await fetch(endpoint);
+        if (!response.ok) {
+          throw new Error(`Rendered view summary request failed: ${response.status}`);
+        }
+        return await response.json();
       } catch (error) {
-        state.renderedViewsByKey = {};
+        return {};
       }
     }
 
@@ -3066,20 +3111,20 @@
         fields.push({
           key: "scenario_id",
           label: "Scenario",
-          options: ["Choose scenario"].concat(SCENARIO_OPTIONS)
+          options: ["Choose scenario"].concat(scenarioOptionsForTemplate(template))
         });
       } else if (template.scenario_requirement === "optional" && shouldShowScenarioOverlay(template)) {
         fields.push({
           key: "scenario_id",
           label: "Scenario overlay",
-          options: ["None"].concat(SCENARIO_OPTIONS)
+          options: ["None"].concat(scenarioOptionsForTemplate(template))
         });
       }
       meaningfulOptionalParameters(template).forEach((parameter) => {
         fields.push({
           key: parameter,
           label: PARAMETER_UI[parameter].label,
-          options: PARAMETER_UI[parameter].options
+          options: parameterOptionsForTemplate(template, parameter)
         });
       });
       return fields;
@@ -3849,6 +3894,8 @@
       const selectedEntity = selectedEntitySummary(spec.parameters || {});
       const selectedEntityHtml = selectedEntity ? `<p class="meta">${escapeHtml(selectedEntity.text)}</p>` : "";
       const selectedEntityText = selectedEntity ? selectedEntity.text : "";
+      const selectionSummary = analyticSelectionSummary(spec.parameters || {});
+      const selectionSummaryHtml = selectionSummary ? `<p class="meta">${escapeHtml(selectionSummary)}</p>` : "";
       const match = previewMatchForSpec(spec);
       if (!match) {
         const placeholder = "This section is not available in the demo preview.";
@@ -3857,20 +3904,22 @@
             <section class="current-set-preview-item">
               <h3>${escapeHtml(displayTitle)}</h3>
               ${selectedEntityHtml}
+              ${selectionSummaryHtml}
               <div class="preview-placeholder">${escapeHtml(placeholder)}</div>
             </section>
           `,
-          text: [displayTitle, selectedEntityText, placeholder].filter(Boolean).join("\n")
+          text: [displayTitle, selectedEntityText, selectionSummary, placeholder].filter(Boolean).join("\n")
         };
       }
       try {
         const response = await fetch(match.htmlUrl);
         if (!response.ok) throw new Error(`Preview request failed: ${response.status}`);
         const fragment = sanitizePreviewFragment(await response.text());
-        const contextHtml = selectedEntity ? `
+        const contextHtml = selectedEntity || selectionSummary ? `
           <div class="preview-item-context">
             <h3>${escapeHtml(displayTitle)}</h3>
             ${selectedEntityHtml}
+            ${selectionSummaryHtml}
           </div>
         ` : "";
         return {
@@ -3880,7 +3929,7 @@
               ${fragment}
             </section>
           `,
-          text: [selectedEntity ? displayTitle : "", selectedEntityText, htmlFragmentText(fragment)].filter(Boolean).join("\n")
+          text: [selectedEntity || selectionSummary ? displayTitle : "", selectedEntityText, selectionSummary, htmlFragmentText(fragment)].filter(Boolean).join("\n")
         };
       } catch (error) {
         const placeholder = "This section is not available in the demo preview.";
@@ -3889,10 +3938,11 @@
             <section class="current-set-preview-item">
               <h3>${escapeHtml(displayTitle)}</h3>
               ${selectedEntityHtml}
+              ${selectionSummaryHtml}
               <div class="preview-placeholder">${escapeHtml(placeholder)}</div>
             </section>
           `,
-          text: [displayTitle, selectedEntityText, placeholder].filter(Boolean).join("\n")
+          text: [displayTitle, selectedEntityText, selectionSummary, placeholder].filter(Boolean).join("\n")
         };
       }
     }
@@ -4248,7 +4298,7 @@
       if (template.scenario_requirement === "required") defaults.scenario_id = "Choose scenario";
       if (template.scenario_requirement === "optional" && shouldShowScenarioOverlay(template)) defaults.scenario_id = "None";
       meaningfulOptionalParameters(template).forEach((parameter) => {
-        defaults[parameter] = firstValue(PARAMETER_UI[parameter].options);
+        defaults[parameter] = firstValue(parameterOptionsForTemplate(template, parameter));
       });
       if (targetBranch() === "Advisor Review" && (template.advisor_internal_purposes || []).length) {
         defaults.internal_purpose = firstValue(template.advisor_internal_purposes);
@@ -4273,11 +4323,11 @@
     function meaningfulOptionalParameters(template) {
       const preferred = {
         portfolio_status: ["comparison_period"],
-        concentration: ["threshold_percent"],
+        concentration: ["theme_focus", "threshold_percent"],
         scenario_impact_by_manager: ["horizon"],
         cash_generation_summary: ["lookback_period"],
-        manager_comparison: ["comparison_group"],
-        data_confidence_note: ["confidence_threshold"]
+        manager_comparison: ["theme_focus", "comparison_group"],
+        data_confidence_note: ["confidence_focus"]
       };
       if (preferred[template.element_id]) {
         return preferred[template.element_id].filter((parameter) => PARAMETER_UI[parameter]);
@@ -4307,7 +4357,9 @@
       const selectedEntity = selectedEntitySummary(parameters);
       if (selectedEntity) pieces.push(selectedEntity.text);
       if (parameters.lens) pieces.push(parameters.lens);
+      if (parameters.theme_focus) pieces.push(parameters.theme_focus);
       if (parameters.scenario_id) pieces.push(parameters.scenario_id);
+      if (parameters.confidence_focus) pieces.push(parameters.confidence_focus);
       if (parameters.lookback_period) pieces.push(parameters.lookback_period);
       if (parameters.threshold_percent) pieces.push(parameters.threshold_percent);
       if (parameters.fixed_metric) pieces.push(parameters.fixed_metric);
@@ -4333,6 +4385,22 @@
       return selectedEntity ? `${title} - ${selectedEntity.value}` : title;
     }
 
+    function analyticSelectionSummary(parameters) {
+      parameters = parameters || {};
+      const pieces = [];
+      if (parameters.scope) pieces.push(`Scope: ${parameters.scope}`);
+      if (parameters.lens) pieces.push(`Lens: ${parameters.lens}`);
+      if (parameters.theme_focus) pieces.push(`Theme focus: ${parameters.theme_focus}`);
+      if (parameters.scenario_id) pieces.push(`Scenario: ${parameters.scenario_id}`);
+      if (parameters.confidence_focus) pieces.push(`Confidence focus: ${parameters.confidence_focus}`);
+      if (!pieces.length) return "";
+      let summary = `Selected configuration: ${pieces.join("; ")}`;
+      if (parameters.theme_focus && normalize(parameters.theme_focus) !== "all approved themes") {
+        summary += ". Demo view shows the full approved-theme analytic view; it is not theme-filtered yet.";
+      }
+      return summary;
+    }
+
     function previewMatchForSpec(spec) {
       if (!spec || spec.element_kind !== "analytic") return null;
       if (specUsesUnsupportedPreviewScope(spec)) return null;
@@ -4343,24 +4411,36 @@
 
     function renderedViewKeyForSpec(spec) {
       const parameters = spec.parameters || {};
-      if (spec.element_id === "portfolio_status") return "portfolio_status";
+      if (spec.element_id === "portfolio_status") return "portfolio_status_analytics";
       if (spec.element_id === "cash_generation_summary") return "cash_generation_summary";
-      if (spec.element_id === "manager_comparison") return "manager_comparison";
-      if (spec.element_id === "data_confidence_note") return "data_confidence_note";
+      if (spec.element_id === "manager_comparison") {
+        const lens = normalize(parameters.lens);
+        if (!lens || approvedAnalyticLens(lens) || lens.includes("theme") || lens.includes("mandate")) {
+          return "manager_comparison_analytics";
+        }
+        return "manager_comparison";
+      }
+      if (spec.element_id === "data_confidence_note") return "data_confidence_note_analytics";
       if (spec.element_id === "concentration") {
         const lens = normalize(parameters.lens);
-        if (lens.includes("theme")) return "concentration_theme";
+        if (lens === "theme" || lens === "approved theme" || lens === "strategic theme" || lens.includes("theme")) {
+          return "concentration_theme_analytics";
+        }
         if (lens.includes("sector") || lens.includes("industry")) return "concentration_sector_industry";
         return null;
       }
       if (spec.element_id === "scenario_impact_by_manager") {
-        const scenario = normalize(parameters.scenario_id).replace(/\//g, " ");
-        if (scenario.includes("ai chip selloff") || scenario.includes("ai_chip_selloff")) {
-          return "scenario_impact_by_manager_ai_chip_selloff";
+        const scenario = normalize(parameters.scenario_id);
+        if (scenario === "ai / chip selloff" || scenario === "ai/chip selloff" || scenario === "ai chip selloff" || scenario === "ai_chip_selloff") {
+          return "scenario_impact_by_theme_manager_analytics";
         }
         return null;
       }
       return null;
+    }
+
+    function approvedAnalyticLens(lens) {
+      return APPROVED_ANALYTIC_LENS_OPTIONS.map(normalize).includes(normalize(lens));
     }
 
     function viewKeyFromFile(filename) {
@@ -4396,12 +4476,36 @@
     }
 
     function safeLensOptions(template) {
-      return (template.supported_lenses || []).filter((lens) => lens !== "Manager");
+      const packOptions = approvedAnalyticOptions(template, "lens_options");
+      const options = packOptions.length ? packOptions : (template.supported_lenses || []);
+      return options.filter((lens) => lens !== "Manager");
+    }
+
+    function scenarioOptionsForTemplate(template) {
+      const options = approvedAnalyticOptions(template, "scenario_options");
+      return options.length ? options : SCENARIO_OPTIONS;
+    }
+
+    function parameterOptionsForTemplate(template, parameter) {
+      if (parameter === "theme_focus") {
+        const options = approvedAnalyticOptions(template, "theme_focus_options");
+        return options.length ? options : APPROVED_ANALYTIC_THEME_OPTIONS;
+      }
+      if (parameter === "confidence_focus") {
+        const options = approvedAnalyticOptions(template, "confidence_focus_options");
+        return options.length ? options : CONFIDENCE_FOCUS_OPTIONS;
+      }
+      return (PARAMETER_UI[parameter] && PARAMETER_UI[parameter].options) || [];
+    }
+
+    function approvedAnalyticOptions(template, key) {
+      const pack = template && template.approved_analytic_pack;
+      return pack && Array.isArray(pack[key]) ? pack[key] : [];
     }
 
     function lensLabel(template) {
       if (template.category === "manager") return "Manager role / mandate lens";
-      if (template.category === "data_readiness") return "Data issue lens";
+      if (template.category === "data_readiness") return "Data confidence lens";
       return "Lens";
     }
 

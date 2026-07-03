@@ -233,7 +233,7 @@ The generated proof outputs live under `data/simulation/analytics/`:
 - `cross_scenario_resilience_summary.json`
 - `analytics_output_index.json`
 
-These outputs are deterministic synthetic analytics artifacts. The current repo also maps them into separate analytic report-element input payloads and rendered view fragments under `data/simulation/report_element_inputs/` and `data/simulation/report_element_views/` for Concentration, Manager Comparison, Scenario Impact by Manager, Data Confidence Note, and Portfolio Status. They are still not wired into advisor UI choices, generated reports, backend APIs, production storage, or live data flows.
+These outputs are deterministic synthetic analytics artifacts. The current repo also maps them into separate analytic report-element input payloads and rendered view fragments under `data/simulation/report_element_inputs/` and `data/simulation/report_element_views/` for Concentration, Manager Comparison, Scenario Impact by Manager, Data Confidence Note, and Portfolio Status. The local Advisor workflow now consumes the approved pack through curated template choices and committed analytic-derived fragments in Preview, Populate, and Present. This remains local/demo consumption only; it is not a backend pack-management API, production storage system, live data flow, or advisor-facing control-plane editor.
 
 ## Deliberately Not Implemented In v1
 

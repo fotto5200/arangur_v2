@@ -34,10 +34,13 @@ class BriefingSetPreviewTests(unittest.TestCase):
         cls.advisor_preview = build_default_advisor_review_set_preview(cls.views)
 
     def test_rendered_element_views_load(self) -> None:
-        self.assertEqual(7, len(self.views))
+        self.assertEqual(12, len(self.views))
         self.assertIn("portfolio_status", self.views)
+        self.assertIn("portfolio_status_analytics", self.views)
         self.assertIn("concentration_theme", self.views)
+        self.assertIn("concentration_theme_analytics", self.views)
         self.assertIn("scenario_impact_by_manager_ai_chip_selloff", self.views)
+        self.assertIn("scenario_impact_by_theme_manager_analytics", self.views)
         self.assertTrue(all(view["validation"]["status"] == "valid" for view in self.views.values()))
 
     def test_client_preview_can_be_built_and_validates(self) -> None:

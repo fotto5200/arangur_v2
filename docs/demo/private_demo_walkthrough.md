@@ -46,6 +46,7 @@ start "" http://127.0.0.1:8000/app/
 3. Create a `Client Briefing Workflow`.
 4. Give the workflow a readable name with spaces.
 5. Add a small sequence of report elements and narrative sections.
+   - For an analytic-content rehearsal, include one approved-pack element such as Concentration with `Strategic Theme` / `AI Infrastructure`, Manager Comparison with `Strategic Theme`, Scenario Impact by Manager with `AI / Chip Selloff`, or Data Confidence Note with `Data Confidence`.
 6. Save the workflow.
 7. Return to Advisor Home.
 8. Choose `Populate a workflow with data`.
@@ -97,6 +98,7 @@ Mark each item pass/fail during the local demo rehearsal.
 - [ ] Save, open, copy, and delete are understandable.
 - [ ] Builder does not feel like a technical console.
 - [ ] Scope choices do not imply unsupported previews.
+- [ ] Approved analytic choices appear as curated themes, scenarios, lenses, and confidence focus labels, not control-plane construction fields.
 
 ### Populate
 
@@ -120,6 +122,7 @@ Mark each item pass/fail during the local demo rehearsal.
 - [ ] Selected report element titles are not replaced by alternate generated-report titles.
 - [ ] Caveats are restrained.
 - [ ] Unsupported sections use nontechnical language.
+- [ ] Supported analytic elements render analytic-derived content in Preview and the populated report; unsupported scenario choices remain clean placeholders.
 
 ## Current Limitations
 

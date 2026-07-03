@@ -63,6 +63,15 @@
         "Currency",
         "Liquidity bucket"
       ],
+      "approved_analytic_pack": {
+        "pack_id": "arranger_demo_pack_v1",
+        "input_variant": "analytic_pack_v1",
+        "lens_options": [
+          "Strategic Theme",
+          "Liquidity Profile",
+          "Data Confidence"
+        ]
+      },
       "scenario_requirement": "not_applicable",
       "fixed_or_default_display": "Summary card",
       "supported_display_forms": [
@@ -146,6 +155,7 @@
         "metric"
       ],
       "optional_parameters": [
+        "theme_focus",
         "threshold_percent",
         "comparison_period",
         "scenario_id"
@@ -158,6 +168,7 @@
         "P&L"
       ],
       "supported_lenses": [
+        "Strategic Theme",
         "Sector",
         "Theme",
         "Asset class",
@@ -165,8 +176,42 @@
         "Currency",
         "Liquidity bucket",
         "Value/growth",
-        "Manager role / mandate"
+        "Manager role / mandate",
+        "Liquidity Profile",
+        "Data Confidence"
       ],
+      "approved_analytic_pack": {
+        "pack_id": "arranger_demo_pack_v1",
+        "input_variant": "analytic_pack_v1",
+        "lens_options": [
+          "Strategic Theme",
+          "Manager Role / Mandate",
+          "Liquidity Profile",
+          "Data Confidence"
+        ],
+        "theme_focus_options": [
+          "All approved themes",
+          "AI Infrastructure",
+          "Rate Sensitivity",
+          "Private Market Liquidity",
+          "Energy Security",
+          "Credit Stress",
+          "Dollar Exposure",
+          "China/Taiwan Supply Chain",
+          "Real Asset Inflation Hedge",
+          "Data Center Infrastructure",
+          "Consumer Demand Sensitivity",
+          "Duration Exposure",
+          "Defensive Cash Flow"
+        ],
+        "scenario_options": [
+          "AI / Chip Selloff",
+          "Rate Shock",
+          "Energy Shock",
+          "Private-Market Liquidity Freeze",
+          "Taiwan Disruption"
+        ]
+      },
       "scenario_requirement": "optional",
       "fixed_or_default_display": "Table",
       "supported_display_forms": [
@@ -261,11 +306,31 @@
         "Exposure"
       ],
       "supported_lenses": [
+        "Strategic Theme",
         "Manager role / mandate",
         "Theme",
         "Asset class",
-        "Liquidity bucket"
+        "Liquidity bucket",
+        "Liquidity Profile",
+        "Data Confidence"
       ],
+      "approved_analytic_pack": {
+        "pack_id": "arranger_demo_pack_v1",
+        "input_variant": "analytic_pack_v1",
+        "lens_options": [
+          "Strategic Theme",
+          "Manager Role / Mandate",
+          "Liquidity Profile",
+          "Data Confidence"
+        ],
+        "scenario_options": [
+          "AI / Chip Selloff",
+          "Rate Shock",
+          "Energy Shock",
+          "Private-Market Liquidity Freeze",
+          "Taiwan Disruption"
+        ]
+      },
       "scenario_requirement": "required",
       "fixed_or_default_display": "Table",
       "supported_display_forms": [
@@ -447,10 +512,11 @@
         "branch",
         "placement",
         "scope",
+        "lens",
         "metric"
       ],
       "optional_parameters": [
-        "lens",
+        "theme_focus",
         "comparison_group",
         "mandate_note"
       ],
@@ -464,12 +530,40 @@
         "Data confidence"
       ],
       "supported_lenses": [
+        "Strategic Theme",
         "Manager role / mandate",
         "Theme",
         "Asset class",
         "Cash-generation role",
-        "Liquidity bucket"
+        "Liquidity bucket",
+        "Liquidity Profile",
+        "Data Confidence"
       ],
+      "approved_analytic_pack": {
+        "pack_id": "arranger_demo_pack_v1",
+        "input_variant": "analytic_pack_v1",
+        "lens_options": [
+          "Strategic Theme",
+          "Manager Role / Mandate",
+          "Liquidity Profile",
+          "Data Confidence"
+        ],
+        "theme_focus_options": [
+          "All approved themes",
+          "AI Infrastructure",
+          "Rate Sensitivity",
+          "Private Market Liquidity",
+          "Energy Security",
+          "Credit Stress",
+          "Dollar Exposure",
+          "China/Taiwan Supply Chain",
+          "Real Asset Inflation Hedge",
+          "Data Center Infrastructure",
+          "Consumer Demand Sensitivity",
+          "Duration Exposure",
+          "Defensive Cash Flow"
+        ]
+      },
       "scenario_requirement": "not_applicable",
       "fixed_or_default_display": "Grid",
       "supported_display_forms": [
@@ -549,11 +643,11 @@
       "required_parameters": [
         "branch",
         "placement",
-        "scope"
+        "scope",
+        "lens"
       ],
       "optional_parameters": [
-        "lens",
-        "confidence_threshold",
+        "confidence_focus",
         "human_review_only"
       ],
       "fixed_metric": "Data confidence",
@@ -562,11 +656,30 @@
         "Human-review count"
       ],
       "supported_lenses": [
+        "Data Confidence",
         "Data issue",
         "Instrument type",
         "Asset class",
-        "Liquidity bucket"
+        "Liquidity bucket",
+        "Liquidity Profile",
+        "Manager Role / Mandate"
       ],
+      "approved_analytic_pack": {
+        "pack_id": "arranger_demo_pack_v1",
+        "input_variant": "analytic_pack_v1",
+        "lens_options": [
+          "Data Confidence",
+          "Liquidity Profile",
+          "Manager Role / Mandate"
+        ],
+        "confidence_focus_options": [
+          "All confidence buckets",
+          "Human Review Required",
+          "Proxy Valuation",
+          "Stale Or Manager Mark",
+          "Missing Lookthrough"
+        ]
+      },
       "scenario_requirement": "not_applicable",
       "fixed_or_default_display": "Narrative note",
       "supported_display_forms": [

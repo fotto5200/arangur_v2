@@ -82,8 +82,9 @@ The current repo includes a synthetic proof of this boundary:
 - `data/simulation/analytics/` stores deterministic proof outputs for theme exposure, manager/theme overlap, scenario impact by manager/theme, data confidence, and cross-scenario resilience.
 - `src/arangur/report_elements/analytic_input_mapping.py` maps those proof outputs into separate analytic report-element input payloads.
 - `src/arangur/report_elements/rendering.py` renders those analytic payloads into view JSON plus Markdown/HTML fragments for the current supported report elements.
+- `src/arangur/report_elements/analytic_view_matching.py`, the static Advisor app, and the demo Populate service now consume those approved choices and fragments for supported workflow specs.
 
-These proof outputs and fragments remain internal/local analytic artifacts. They are not wired into advisor UI or generated reports yet.
+These proof outputs and fragments remain synthetic/local analytic artifacts. They are now consumed by the existing local Advisor workflow path, but the control-plane construction machinery remains internal and is not exposed as advisor-facing UI.
 
 ## Deliberately Out Of Scope For This Boundary
 
