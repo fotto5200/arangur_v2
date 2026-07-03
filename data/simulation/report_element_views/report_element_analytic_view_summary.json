@@ -1,0 +1,153 @@
+{
+  "caveat": "Report-element view fragments only; no full client briefing, charts, browser UI integration, persistence, live data, or external APIs are produced.",
+  "generated_at": "2026-06-30T00:00:00Z",
+  "html_fragment_count": 5,
+  "input_dir": "data/simulation/report_element_inputs",
+  "markdown_fragment_count": 5,
+  "output_dir": "data/simulation/report_element_views",
+  "output_files": [
+    "concentration_theme_analytics.view.json",
+    "concentration_theme_analytics.md",
+    "concentration_theme_analytics.html",
+    "manager_comparison_analytics.view.json",
+    "manager_comparison_analytics.md",
+    "manager_comparison_analytics.html",
+    "scenario_impact_by_theme_manager_analytics.view.json",
+    "scenario_impact_by_theme_manager_analytics.md",
+    "scenario_impact_by_theme_manager_analytics.html",
+    "data_confidence_note_analytics.view.json",
+    "data_confidence_note_analytics.md",
+    "data_confidence_note_analytics.html",
+    "portfolio_status_analytics.view.json",
+    "portfolio_status_analytics.md",
+    "portfolio_status_analytics.html",
+    "report_element_analytic_view_summary.json"
+  ],
+  "rendered_elements": [
+    "concentration",
+    "manager_comparison",
+    "scenario_impact_by_manager",
+    "data_confidence_note",
+    "portfolio_status"
+  ],
+  "rendered_files": [
+    {
+      "element_id": "concentration",
+      "element_title": "Concentration",
+      "html_file": "concentration_theme_analytics.html",
+      "input_file": "concentration_theme_analytics.json",
+      "markdown_file": "concentration_theme_analytics.md",
+      "validation": {
+        "errors": [],
+        "renderer_version": "report_element_rendering.v1",
+        "status": "valid",
+        "validated_at": "2026-06-30T00:00:00Z",
+        "warnings": []
+      },
+      "view_file": "concentration_theme_analytics.view.json"
+    },
+    {
+      "element_id": "manager_comparison",
+      "element_title": "Manager Comparison",
+      "html_file": "manager_comparison_analytics.html",
+      "input_file": "manager_comparison_analytics.json",
+      "markdown_file": "manager_comparison_analytics.md",
+      "validation": {
+        "errors": [],
+        "renderer_version": "report_element_rendering.v1",
+        "status": "valid",
+        "validated_at": "2026-06-30T00:00:00Z",
+        "warnings": []
+      },
+      "view_file": "manager_comparison_analytics.view.json"
+    },
+    {
+      "element_id": "scenario_impact_by_manager",
+      "element_title": "Scenario Impact by Manager",
+      "html_file": "scenario_impact_by_theme_manager_analytics.html",
+      "input_file": "scenario_impact_by_theme_manager_analytics.json",
+      "markdown_file": "scenario_impact_by_theme_manager_analytics.md",
+      "validation": {
+        "errors": [],
+        "renderer_version": "report_element_rendering.v1",
+        "status": "valid",
+        "validated_at": "2026-06-30T00:00:00Z",
+        "warnings": []
+      },
+      "view_file": "scenario_impact_by_theme_manager_analytics.view.json"
+    },
+    {
+      "element_id": "data_confidence_note",
+      "element_title": "Data Confidence Note",
+      "html_file": "data_confidence_note_analytics.html",
+      "input_file": "data_confidence_note_analytics.json",
+      "markdown_file": "data_confidence_note_analytics.md",
+      "validation": {
+        "errors": [],
+        "renderer_version": "report_element_rendering.v1",
+        "status": "valid",
+        "validated_at": "2026-06-30T00:00:00Z",
+        "warnings": []
+      },
+      "view_file": "data_confidence_note_analytics.view.json"
+    },
+    {
+      "element_id": "portfolio_status",
+      "element_title": "Portfolio Status",
+      "html_file": "portfolio_status_analytics.html",
+      "input_file": "portfolio_status_analytics.json",
+      "markdown_file": "portfolio_status_analytics.md",
+      "validation": {
+        "errors": [],
+        "renderer_version": "report_element_rendering.v1",
+        "status": "valid",
+        "validated_at": "2026-06-30T00:00:00Z",
+        "warnings": []
+      },
+      "view_file": "portfolio_status_analytics.view.json"
+    }
+  ],
+  "renderer_version": "report_element_rendering.v1",
+  "schema_version": "report_element_view_summary.v1",
+  "summary_kind": "analytic_report_element_views",
+  "synthetic_data": true,
+  "validation_results": {
+    "concentration_theme_analytics.view.json": {
+      "errors": [],
+      "renderer_version": "report_element_rendering.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "data_confidence_note_analytics.view.json": {
+      "errors": [],
+      "renderer_version": "report_element_rendering.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "manager_comparison_analytics.view.json": {
+      "errors": [],
+      "renderer_version": "report_element_rendering.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "portfolio_status_analytics.view.json": {
+      "errors": [],
+      "renderer_version": "report_element_rendering.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "scenario_impact_by_theme_manager_analytics.view.json": {
+      "errors": [],
+      "renderer_version": "report_element_rendering.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    }
+  },
+  "validation_status": "valid",
+  "view_count": 5
+}

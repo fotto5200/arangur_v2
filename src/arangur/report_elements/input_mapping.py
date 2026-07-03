@@ -252,7 +252,10 @@ def validate_report_element_input(payload: dict[str, Any]) -> dict[str, Any]:
         if "scenario" not in payload:
             _add_issue(errors, "SCENARIO_REQUIRED", "scenario", "Scenario impact payloads must include scenario metadata")
         _require_table(tables, "manager_impacts", errors)
-        _require_table(tables, "top_position_impacts", errors)
+        if payload.get("input_variant") == "analytic_pack_v1":
+            _require_table(tables, "theme_impacts", errors)
+        else:
+            _require_table(tables, "top_position_impacts", errors)
     elif element_id == "cash_generation_summary":
         if "period" not in payload:
             _add_issue(errors, "PERIOD_REQUIRED", "period", "Cash generation payloads must include period metadata")

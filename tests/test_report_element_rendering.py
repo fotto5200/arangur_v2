@@ -27,11 +27,7 @@ INPUT_DIR = ROOT / "data" / "simulation" / "report_element_inputs"
 class ReportElementRenderingTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.input_payloads = {
-            path.name: json.loads(path.read_text(encoding="utf-8"))
-            for path in sorted(INPUT_DIR.glob("*.json"))
-            if path.name != "report_element_input_summary.json"
-        }
+        cls.input_payloads = _load_demo_input_payloads()
         cls.views = {
             filename: render_report_element_view(payload, source_input_path=INPUT_DIR / filename)
             for filename, payload in cls.input_payloads.items()
@@ -78,7 +74,7 @@ class ReportElementRenderingTests(unittest.TestCase):
     def test_scenario_impact_view_includes_ai_chip_selloff_and_not_forecast_caveat(self) -> None:
         view = self.views["scenario_impact_by_manager_ai_chip_selloff.json"]
         markdown = render_report_element_markdown(view)
-        self.assertIn("AI/chip selloff", view["summary_text"])
+        self.assertIn("AI / Chip Selloff", view["summary_text"])
         self.assertIn("not a forecast", markdown.lower())
         self.assertIn("AI / Chip Selloff", view["headline"])
         metrics = {metric["label"]: metric for metric in view["key_metrics"]}
@@ -121,6 +117,16 @@ class ReportElementRenderingTests(unittest.TestCase):
                 self.assertNotIn("data/simulation", fragment_text)
                 self.assertNotIn(".json", fragment_text)
                 self.assertTrue(view["source_input_path"].endswith(filename))
+
+
+def _load_demo_input_payloads() -> dict[str, dict[str, object]]:
+    summary = json.loads((INPUT_DIR / "report_element_input_summary.json").read_text(encoding="utf-8"))
+    payloads: dict[str, dict[str, object]] = {}
+    for filename in summary["output_files"]:
+        if filename == "report_element_input_summary.json":
+            continue
+        payloads[filename] = json.loads((INPUT_DIR / filename).read_text(encoding="utf-8"))
+    return payloads
 
 
 if __name__ == "__main__":

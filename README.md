@@ -174,7 +174,7 @@ The client preview uses Portfolio Status, Concentration by Theme, Scenario Impac
 
 ## Generate Arranger Demo Analytic Pack Outputs
 
-The first Arranger analytic pack proof applies `data/analytic_packs/arranger_demo_pack_v1/` to the existing synthetic portfolio, scenario, and valuation fixtures. It writes deterministic local-only analytics outputs and does not change advisor UI, report-element inputs, generated reports, Docker, deployment, live data, or dependencies.
+The first Arranger analytic pack proof applies `data/analytic_packs/arranger_demo_pack_v1/` to the existing synthetic portfolio, scenario, and valuation fixtures. It writes deterministic local-only analytics outputs. The proof generator itself does not change advisor UI, generated reports, Docker, deployment, live data, or dependencies.
 
 ```cmd
 set PYTHONPATH=src
@@ -189,6 +189,26 @@ This writes:
 - `data/simulation/analytics/data_confidence_map.json`
 - `data/simulation/analytics/cross_scenario_resilience_summary.json`
 - `data/simulation/analytics/analytics_output_index.json`
+
+## Map Analytic Outputs To Report Element Views
+
+The analytic report-element mapper turns those proof outputs into separate renderer-ready payloads for Concentration, Manager Comparison, Scenario Impact by Manager, Data Confidence Note, and Portfolio Status. It intentionally does not add advisor UI, generated-report wiring, backend endpoints, charts, live data, or dependencies.
+
+```powershell
+python src\arangur\report_elements\analytic_input_mapping.py
+```
+
+To render the analytic payloads:
+
+```cmd
+set PYTHONPATH=src
+python -c "from arangur.report_elements.rendering import render_all_analytic_report_element_views; render_all_analytic_report_element_views()"
+```
+
+This writes separate analytic summaries alongside the existing legacy report-element fixtures:
+
+- `data/simulation/report_element_inputs/report_element_analytic_input_summary.json`
+- `data/simulation/report_element_views/report_element_analytic_view_summary.json`
 
 ## Local Report Index
 

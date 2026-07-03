@@ -1,0 +1,531 @@
+{
+  "as_of_date": "2026-06-30",
+  "caveats": [
+    "Synthetic demo data only.",
+    "Rendered report-element fragment only; not a full client briefing, chart, or production report.",
+    "Structured report-element input only; no advisor UI, generated report history, live data, external API, or production storage is produced.",
+    "Synthetic demo analytics only; not investment advice or a production exposure engine.",
+    "Theme exposure is based on approved pack mappings over existing synthetic position tags and metadata.",
+    "Cross-scenario resilience is a simple deterministic summary across existing synthetic scenario outputs.",
+    "Repeated vulnerability counts are based on top affected themes/managers per scenario, not a probability model.",
+    "Portfolio status uses synthetic analytic proof outputs as local demo evidence only.",
+    "Cross-scenario resilience is a simple deterministic summary, not a probability model.",
+    "Analytic portfolio status is synthetic local evidence, not a client statement or production report."
+  ],
+  "confidence_summary": {
+    "by_confidence": [
+      {
+        "advisor_language": "High-confidence records are the cleanest source for demo analytics, while still synthetic and not statement-grade.",
+        "affected_manager_names": [
+          "Manager B - Core Quality Equity",
+          "Manager A - Growth / AI Infrastructure",
+          "Manager E - Liquidity Reserve / Defensive Ballast"
+        ],
+        "affected_theme_names": [
+          "Defensive Cash Flow",
+          "AI Infrastructure",
+          "China/Taiwan Supply Chain"
+        ],
+        "count": 33,
+        "display_name": "High",
+        "id": "high",
+        "percent_of_total": 0.524266,
+        "synthetic_data": true,
+        "value": 21335000.0
+      },
+      {
+        "advisor_language": "Proxy-based values are usable for demo discussion but should be labeled as approximations.",
+        "affected_manager_names": [
+          "Manager A - Growth / AI Infrastructure",
+          "Manager D - Private Markets / Real Assets",
+          "Manager C - Income and Cash Generation"
+        ],
+        "affected_theme_names": [
+          "Defensive Cash Flow",
+          "Consumer Demand Sensitivity",
+          "Data Center Infrastructure"
+        ],
+        "count": 29,
+        "display_name": "Medium",
+        "id": "medium",
+        "percent_of_total": 0.332596,
+        "synthetic_data": true,
+        "value": 13535000.0
+      },
+      {
+        "advisor_language": "Private, stale, or manager-level marks should be called out when they affect the report conclusion.",
+        "affected_manager_names": [],
+        "affected_theme_names": [],
+        "count": 0,
+        "display_name": "Low",
+        "id": "low",
+        "percent_of_total": 0.0,
+        "synthetic_data": true,
+        "value": 0.0
+      },
+      {
+        "advisor_language": "Some records need human review before the result should be treated as meeting-ready.",
+        "affected_manager_names": [
+          "Manager D - Private Markets / Real Assets",
+          "Manager F - Opportunistic Macro / Hedge",
+          "Manager C - Income and Cash Generation"
+        ],
+        "affected_theme_names": [
+          "Private Market Liquidity",
+          "Credit Stress",
+          "Data Center Infrastructure"
+        ],
+        "count": 12,
+        "display_name": "Review Required",
+        "id": "review_required",
+        "percent_of_total": 0.143138,
+        "synthetic_data": true,
+        "value": 5825000.0
+      },
+      {
+        "advisor_language": "Unknown-confidence records should be reviewed before client-facing use.",
+        "affected_manager_names": [],
+        "affected_theme_names": [],
+        "count": 0,
+        "display_name": "Unknown",
+        "id": "unknown",
+        "percent_of_total": 0.0,
+        "synthetic_data": true,
+        "value": 0.0
+      }
+    ],
+    "human_review_count": 12,
+    "human_review_value": 5825000.0,
+    "label": "mixed",
+    "synthetic_data": true
+  },
+  "detail_tables": {
+    "confidence_rows": [
+      {
+        "advisor_language": "High-confidence records are the cleanest source for demo analytics, while still synthetic and not statement-grade.",
+        "affected_manager_names": [
+          "Manager B - Core Quality Equity",
+          "Manager A - Growth / AI Infrastructure",
+          "Manager E - Liquidity Reserve / Defensive Ballast"
+        ],
+        "affected_theme_names": [
+          "Defensive Cash Flow",
+          "AI Infrastructure",
+          "China/Taiwan Supply Chain"
+        ],
+        "count": 33,
+        "display_name": "High",
+        "id": "high",
+        "percent_of_total": 0.524266,
+        "synthetic_data": true,
+        "value": 21335000.0
+      },
+      {
+        "advisor_language": "Proxy-based values are usable for demo discussion but should be labeled as approximations.",
+        "affected_manager_names": [
+          "Manager A - Growth / AI Infrastructure",
+          "Manager D - Private Markets / Real Assets",
+          "Manager C - Income and Cash Generation"
+        ],
+        "affected_theme_names": [
+          "Defensive Cash Flow",
+          "Consumer Demand Sensitivity",
+          "Data Center Infrastructure"
+        ],
+        "count": 29,
+        "display_name": "Medium",
+        "id": "medium",
+        "percent_of_total": 0.332596,
+        "synthetic_data": true,
+        "value": 13535000.0
+      },
+      {
+        "advisor_language": "Private, stale, or manager-level marks should be called out when they affect the report conclusion.",
+        "affected_manager_names": [],
+        "affected_theme_names": [],
+        "count": 0,
+        "display_name": "Low",
+        "id": "low",
+        "percent_of_total": 0.0,
+        "synthetic_data": true,
+        "value": 0.0
+      },
+      {
+        "advisor_language": "Some records need human review before the result should be treated as meeting-ready.",
+        "affected_manager_names": [
+          "Manager D - Private Markets / Real Assets",
+          "Manager F - Opportunistic Macro / Hedge",
+          "Manager C - Income and Cash Generation"
+        ],
+        "affected_theme_names": [
+          "Private Market Liquidity",
+          "Credit Stress",
+          "Data Center Infrastructure"
+        ],
+        "count": 12,
+        "display_name": "Review Required",
+        "id": "review_required",
+        "percent_of_total": 0.143138,
+        "synthetic_data": true,
+        "value": 5825000.0
+      },
+      {
+        "advisor_language": "Unknown-confidence records should be reviewed before client-facing use.",
+        "affected_manager_names": [],
+        "affected_theme_names": [],
+        "count": 0,
+        "display_name": "Unknown",
+        "id": "unknown",
+        "percent_of_total": 0.0,
+        "synthetic_data": true,
+        "value": 0.0
+      }
+    ],
+    "resilience_rows": [
+      {
+        "id": "most_vulnerable_scenario",
+        "scenario_display_name": "AI / Chip Selloff",
+        "scenario_id": "ai_chip_selloff",
+        "synthetic_data": true,
+        "total_impact": -6446707.66,
+        "total_impact_percent": -0.158415
+      },
+      {
+        "id": "most_resilient_scenario",
+        "scenario_display_name": "Energy Shock",
+        "scenario_id": "energy_shock",
+        "synthetic_data": true,
+        "total_impact": -798950.11,
+        "total_impact_percent": -0.019633
+      },
+      {
+        "id": "consumer_demand_sensitivity",
+        "row_type": "repeated_vulnerable_theme",
+        "scenario_count": 4,
+        "synthetic_data": true,
+        "theme_display_name": "Consumer Demand Sensitivity"
+      },
+      {
+        "id": "defensive_cash_flow",
+        "row_type": "repeated_vulnerable_theme",
+        "scenario_count": 4,
+        "synthetic_data": true,
+        "theme_display_name": "Defensive Cash Flow"
+      },
+      {
+        "id": "ai_infrastructure",
+        "row_type": "repeated_vulnerable_theme",
+        "scenario_count": 3,
+        "synthetic_data": true,
+        "theme_display_name": "AI Infrastructure"
+      },
+      {
+        "id": "private_market_liquidity",
+        "row_type": "repeated_vulnerable_theme",
+        "scenario_count": 2,
+        "synthetic_data": true,
+        "theme_display_name": "Private Market Liquidity"
+      }
+    ],
+    "status_rows": [
+      {
+        "display_name": "Synthetic portfolio value",
+        "id": "total_portfolio_value",
+        "status_text": "Current synthetic demo snapshot",
+        "synthetic_data": true,
+        "value": 40695000.0
+      },
+      {
+        "display_name": "Defensive Cash Flow",
+        "id": "top_theme",
+        "percent_of_total": 0.8302,
+        "status_text": "Largest approved theme exposure",
+        "synthetic_data": true,
+        "value": 33785000.0
+      },
+      {
+        "display_name": "AI / Chip Selloff",
+        "id": "most_vulnerable_scenario",
+        "percent_of_total": -0.158415,
+        "status_text": "Largest deterministic scenario drawdown",
+        "synthetic_data": true,
+        "value": -6446707.66
+      },
+      {
+        "display_name": "Review-required exposure",
+        "id": "review_required_value",
+        "status_text": "Call out before meeting-ready use",
+        "synthetic_data": true,
+        "value": 5825000.0
+      }
+    ],
+    "theme_values": [
+      {
+        "display_name": "Defensive Cash Flow",
+        "id": "defensive_cash_flow",
+        "percent_of_total": 0.8302,
+        "position_count": 60,
+        "synthetic_data": true,
+        "value": 33785000.0
+      },
+      {
+        "display_name": "Consumer Demand Sensitivity",
+        "id": "consumer_demand_sensitivity",
+        "percent_of_total": 0.708072,
+        "position_count": 48,
+        "synthetic_data": true,
+        "value": 28815000.0
+      },
+      {
+        "display_name": "AI Infrastructure",
+        "id": "ai_infrastructure",
+        "percent_of_total": 0.701069,
+        "position_count": 48,
+        "synthetic_data": true,
+        "value": 28530000.0
+      },
+      {
+        "display_name": "China/Taiwan Supply Chain",
+        "id": "china_taiwan_supply_chain",
+        "percent_of_total": 0.689888,
+        "position_count": 47,
+        "synthetic_data": true,
+        "value": 28075000.0
+      },
+      {
+        "display_name": "Data Center Infrastructure",
+        "id": "data_center_infrastructure",
+        "percent_of_total": 0.567392,
+        "position_count": 37,
+        "synthetic_data": true,
+        "value": 23090000.0
+      },
+      {
+        "display_name": "Credit Stress",
+        "id": "credit_stress",
+        "percent_of_total": 0.39796,
+        "position_count": 28,
+        "synthetic_data": true,
+        "value": 16195000.0
+      },
+      {
+        "display_name": "Rate Sensitivity",
+        "id": "rate_sensitivity",
+        "percent_of_total": 0.314658,
+        "position_count": 24,
+        "synthetic_data": true,
+        "value": 12805000.0
+      },
+      {
+        "display_name": "Duration Exposure",
+        "id": "duration_exposure",
+        "percent_of_total": 0.259737,
+        "position_count": 20,
+        "synthetic_data": true,
+        "value": 10570000.0
+      },
+      {
+        "display_name": "Private Market Liquidity",
+        "id": "private_market_liquidity",
+        "percent_of_total": 0.248311,
+        "position_count": 19,
+        "synthetic_data": true,
+        "value": 10105000.0
+      },
+      {
+        "display_name": "Energy Security",
+        "id": "energy_security",
+        "percent_of_total": 0.203588,
+        "position_count": 19,
+        "synthetic_data": true,
+        "value": 8285000.0
+      },
+      {
+        "display_name": "Real Asset Inflation Hedge",
+        "id": "real_asset_inflation_hedge",
+        "percent_of_total": 0.201499,
+        "position_count": 19,
+        "synthetic_data": true,
+        "value": 8200000.0
+      },
+      {
+        "display_name": "Dollar Exposure",
+        "id": "dollar_exposure",
+        "percent_of_total": 0.163042,
+        "position_count": 14,
+        "synthetic_data": true,
+        "value": 6635000.0
+      }
+    ]
+  },
+  "element_id": "portfolio_status",
+  "element_title": "Portfolio Status",
+  "evidence_rows": [
+    {
+      "display_name": "Synthetic portfolio value",
+      "id": "total_portfolio_value",
+      "row_type": "analytic_status",
+      "status_text": "Current synthetic demo snapshot",
+      "synthetic_data": true,
+      "value": 40695000.0
+    },
+    {
+      "display_name": "Defensive Cash Flow",
+      "id": "top_theme",
+      "percent_of_total": 0.8302,
+      "row_type": "analytic_status",
+      "status_text": "Largest approved theme exposure",
+      "synthetic_data": true,
+      "value": 33785000.0
+    },
+    {
+      "display_name": "AI / Chip Selloff",
+      "id": "most_vulnerable_scenario",
+      "percent_of_total": -0.158415,
+      "row_type": "analytic_status",
+      "status_text": "Largest deterministic scenario drawdown",
+      "synthetic_data": true,
+      "value": -6446707.66
+    },
+    {
+      "display_name": "Review-required exposure",
+      "id": "review_required_value",
+      "row_type": "analytic_status",
+      "status_text": "Call out before meeting-ready use",
+      "synthetic_data": true,
+      "value": 5825000.0
+    }
+  ],
+  "generated_at": "2026-06-30T00:00:00Z",
+  "headline": "Portfolio Analytic Status: $40,695,000.00",
+  "human_review_items": [
+    {
+      "display_name": "Manager D - Private Markets / Real Assets",
+      "id": "mgr_d_private_real_assets",
+      "percent_of_total": 0.740773,
+      "row_type": "manager_review",
+      "synthetic_data": true,
+      "value": 4315000.0
+    },
+    {
+      "display_name": "Manager F - Opportunistic Macro / Hedge",
+      "id": "mgr_f_opportunistic_macro",
+      "percent_of_total": 0.119313,
+      "row_type": "manager_review",
+      "synthetic_data": true,
+      "value": 695000.0
+    },
+    {
+      "display_name": "Manager C - Income and Cash Generation",
+      "id": "mgr_c_income_cash_generation",
+      "percent_of_total": 0.092704,
+      "row_type": "manager_review",
+      "synthetic_data": true,
+      "value": 540000.0
+    },
+    {
+      "display_name": "Manager A - Growth / AI Infrastructure",
+      "id": "mgr_a_growth_ai_infrastructure",
+      "percent_of_total": 0.04721,
+      "row_type": "manager_review",
+      "synthetic_data": true,
+      "value": 275000.0
+    },
+    {
+      "display_name": "Private Market Liquidity",
+      "id": "private_market_liquidity",
+      "percent_of_total": 0.890129,
+      "row_type": "theme_review",
+      "synthetic_data": true,
+      "value": 5185000.0
+    },
+    {
+      "display_name": "Credit Stress",
+      "id": "credit_stress",
+      "percent_of_total": 0.848069,
+      "row_type": "theme_review",
+      "synthetic_data": true,
+      "value": 4940000.0
+    },
+    {
+      "display_name": "Data Center Infrastructure",
+      "id": "data_center_infrastructure",
+      "percent_of_total": 0.688412,
+      "row_type": "theme_review",
+      "synthetic_data": true,
+      "value": 4010000.0
+    },
+    {
+      "display_name": "AI Infrastructure",
+      "id": "ai_infrastructure",
+      "percent_of_total": 0.656652,
+      "row_type": "theme_review",
+      "synthetic_data": true,
+      "value": 3825000.0
+    }
+  ],
+  "input_parameters": {
+    "branch": "Client Briefing",
+    "lens": "Analytic readiness",
+    "placement": "Main body",
+    "scope": "Whole portfolio"
+  },
+  "input_variant": "analytic_pack_v1",
+  "key_metrics": [
+    {
+      "formatted_value": "$40,695,000.00",
+      "label": "Total portfolio value",
+      "synthetic_data": true,
+      "unit": "USD",
+      "value": 40695000.0
+    },
+    {
+      "formatted_value": "$33,785,000.00",
+      "label": "Top theme value",
+      "synthetic_data": true,
+      "unit": "USD",
+      "value": 33785000.0
+    },
+    {
+      "formatted_value": "83.02%",
+      "label": "Top theme percent",
+      "synthetic_data": true,
+      "unit": "ratio",
+      "value": 0.8302
+    },
+    {
+      "formatted_value": "-$6,446,707.66",
+      "label": "Most vulnerable scenario impact",
+      "synthetic_data": true,
+      "unit": "USD",
+      "value": -6446707.66
+    },
+    {
+      "formatted_value": "$5,825,000.00",
+      "label": "Human-review value",
+      "synthetic_data": true,
+      "unit": "USD",
+      "value": 5825000.0
+    }
+  ],
+  "render_type": "markdown_html_fragment",
+  "renderer_version": "report_element_rendering.v1",
+  "schema_version": "report_element_view_payload.v1",
+  "source_analytic_pack": {
+    "pack_id": "arranger_demo_pack_v1",
+    "pack_version": "2026-07-03-demo-v1",
+    "synthetic_data": true
+  },
+  "source_input_path": "data/simulation/report_element_inputs/portfolio_status_analytics.json",
+  "summary_text": "As of 2026-06-30, the synthetic portfolio analytic view shows $40,695,000.00 of current value. The largest approved theme is Defensive Cash Flow; the largest deterministic scenario drawdown is AI / Chip Selloff. This is local demo evidence for report composition, not production reporting.",
+  "synthetic_data": true,
+  "template_category": "status",
+  "validation": {
+    "errors": [],
+    "renderer_version": "report_element_rendering.v1",
+    "status": "valid",
+    "validated_at": "2026-06-30T00:00:00Z",
+    "warnings": []
+  },
+  "view_type": "report_element_view"
+}

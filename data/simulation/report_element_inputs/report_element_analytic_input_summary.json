@@ -1,0 +1,78 @@
+{
+  "as_of_date": "2026-06-30",
+  "caveat": "Analytic report-element inputs only; no advisor UI, generated report history, live data, external APIs, or production storage is produced.",
+  "element_ids": [
+    "concentration",
+    "manager_comparison",
+    "scenario_impact_by_manager",
+    "data_confidence_note",
+    "portfolio_status"
+  ],
+  "generated_at": "2026-07-03T00:00:00Z",
+  "input_variant": "analytic_pack_v1",
+  "mapper_version": "report_element_analytic_input_mapping.v1",
+  "output_dir": "data/simulation/report_element_inputs",
+  "output_files": [
+    "concentration_theme_analytics.json",
+    "manager_comparison_analytics.json",
+    "scenario_impact_by_theme_manager_analytics.json",
+    "data_confidence_note_analytics.json",
+    "portfolio_status_analytics.json",
+    "report_element_analytic_input_summary.json"
+  ],
+  "payload_count": 5,
+  "portfolio_id": "portfolio_northstar_family_office",
+  "schema_version": "report_element_analytic_input_summary.v1",
+  "source_analytic_pack": {
+    "pack_id": "arranger_demo_pack_v1",
+    "pack_version": "2026-07-03-demo-v1",
+    "synthetic_data": true
+  },
+  "source_files_used": {
+    "analytics_output_index": "data/simulation/analytics/analytics_output_index.json",
+    "cross_scenario_resilience_summary": "data/simulation/analytics/cross_scenario_resilience_summary.json",
+    "data_confidence_map": "data/simulation/analytics/data_confidence_map.json",
+    "manager_theme_overlap_summary": "data/simulation/analytics/manager_theme_overlap_summary.json",
+    "scenario_impact_by_theme_manager": "data/simulation/analytics/scenario_impact_by_theme_manager.json",
+    "theme_exposure_summary": "data/simulation/analytics/theme_exposure_summary.json"
+  },
+  "synthetic_data": true,
+  "validation_results": {
+    "concentration_theme_analytics.json": {
+      "errors": [],
+      "mapper_version": "report_element_input_mapping.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "data_confidence_note_analytics.json": {
+      "errors": [],
+      "mapper_version": "report_element_input_mapping.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "manager_comparison_analytics.json": {
+      "errors": [],
+      "mapper_version": "report_element_input_mapping.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "portfolio_status_analytics.json": {
+      "errors": [],
+      "mapper_version": "report_element_input_mapping.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    },
+    "scenario_impact_by_theme_manager_analytics.json": {
+      "errors": [],
+      "mapper_version": "report_element_input_mapping.v1",
+      "status": "valid",
+      "validated_at": "2026-06-30T00:00:00Z",
+      "warnings": []
+    }
+  },
+  "validation_status": "valid"
+}

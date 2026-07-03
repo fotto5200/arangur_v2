@@ -1,0 +1,1467 @@
+{
+  "as_of_date": "2026-06-30",
+  "caveats": [
+    "Synthetic demo data only.",
+    "Rendered report-element fragment only; not a full client briefing, chart, or production report.",
+    "Structured report-element input only; no advisor UI, generated report history, live data, external API, or production storage is produced.",
+    "Synthetic demo analytics only; not investment advice or a production exposure engine.",
+    "Theme exposure is based on approved pack mappings over existing synthetic position tags and metadata.",
+    "Overlap is a deterministic discussion prompt, not a recommendation or manager ranking.",
+    "Theme matches use synthetic position metadata and approved demo pack mappings.",
+    "Theme exposure is gross thematic exposure from approved synthetic pack mappings; themes can overlap and should not be summed.",
+    "Overlap rows are discussion prompts for concentration review, not manager rankings or recommendations.",
+    "Theme concentration uses gross overlapping exposure and is a discussion prompt, not a recommendation."
+  ],
+  "confidence_summary": {
+    "by_confidence": [
+      {
+        "advisor_language": "High-confidence records are the cleanest source for demo analytics, while still synthetic and not statement-grade.",
+        "affected_manager_names": [
+          "Manager B - Core Quality Equity",
+          "Manager A - Growth / AI Infrastructure",
+          "Manager E - Liquidity Reserve / Defensive Ballast"
+        ],
+        "affected_theme_names": [
+          "Defensive Cash Flow",
+          "AI Infrastructure",
+          "China/Taiwan Supply Chain"
+        ],
+        "count": 33,
+        "display_name": "High",
+        "id": "high",
+        "percent_of_total": 0.524266,
+        "synthetic_data": true,
+        "value": 21335000.0
+      },
+      {
+        "advisor_language": "Proxy-based values are usable for demo discussion but should be labeled as approximations.",
+        "affected_manager_names": [
+          "Manager A - Growth / AI Infrastructure",
+          "Manager D - Private Markets / Real Assets",
+          "Manager C - Income and Cash Generation"
+        ],
+        "affected_theme_names": [
+          "Defensive Cash Flow",
+          "Consumer Demand Sensitivity",
+          "Data Center Infrastructure"
+        ],
+        "count": 29,
+        "display_name": "Medium",
+        "id": "medium",
+        "percent_of_total": 0.332596,
+        "synthetic_data": true,
+        "value": 13535000.0
+      },
+      {
+        "advisor_language": "Private, stale, or manager-level marks should be called out when they affect the report conclusion.",
+        "affected_manager_names": [],
+        "affected_theme_names": [],
+        "count": 0,
+        "display_name": "Low",
+        "id": "low",
+        "percent_of_total": 0.0,
+        "synthetic_data": true,
+        "value": 0.0
+      },
+      {
+        "advisor_language": "Some records need human review before the result should be treated as meeting-ready.",
+        "affected_manager_names": [
+          "Manager D - Private Markets / Real Assets",
+          "Manager F - Opportunistic Macro / Hedge",
+          "Manager C - Income and Cash Generation"
+        ],
+        "affected_theme_names": [
+          "Private Market Liquidity",
+          "Credit Stress",
+          "Data Center Infrastructure"
+        ],
+        "count": 12,
+        "display_name": "Review Required",
+        "id": "review_required",
+        "percent_of_total": 0.143138,
+        "synthetic_data": true,
+        "value": 5825000.0
+      },
+      {
+        "advisor_language": "Unknown-confidence records should be reviewed before client-facing use.",
+        "affected_manager_names": [],
+        "affected_theme_names": [],
+        "count": 0,
+        "display_name": "Unknown",
+        "id": "unknown",
+        "percent_of_total": 0.0,
+        "synthetic_data": true,
+        "value": 0.0
+      }
+    ],
+    "human_review_count": 12,
+    "human_review_value": 5825000.0,
+    "label": "mixed",
+    "synthetic_data": true
+  },
+  "detail_tables": {
+    "evidence_rows": [
+      {
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "overlap_level": "high",
+        "percent_of_theme": 0.291254,
+        "synthetic_data": true,
+        "theme_display_name": "Defensive Cash Flow",
+        "theme_id": "defensive_cash_flow",
+        "value": 9840000.0
+      },
+      {
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "overlap_level": "high",
+        "percent_of_theme": 0.22658,
+        "synthetic_data": true,
+        "theme_display_name": "Defensive Cash Flow",
+        "theme_id": "defensive_cash_flow",
+        "value": 7655000.0
+      },
+      {
+        "manager_id": "mgr_e_liquidity_defensive",
+        "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "overlap_level": "high",
+        "percent_of_theme": 0.169158,
+        "synthetic_data": true,
+        "theme_display_name": "Defensive Cash Flow",
+        "theme_id": "defensive_cash_flow",
+        "value": 5715000.0
+      },
+      {
+        "manager_id": "mgr_c_income_cash_generation",
+        "manager_name": "Manager C - Income and Cash Generation",
+        "overlap_level": "high",
+        "percent_of_theme": 0.156874,
+        "synthetic_data": true,
+        "theme_display_name": "Defensive Cash Flow",
+        "theme_id": "defensive_cash_flow",
+        "value": 5300000.0
+      },
+      {
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "overlap_level": "high",
+        "percent_of_theme": 0.340274,
+        "synthetic_data": true,
+        "theme_display_name": "Consumer Demand Sensitivity",
+        "theme_id": "consumer_demand_sensitivity",
+        "value": 9805000.0
+      },
+      {
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "overlap_level": "high",
+        "percent_of_theme": 0.258025,
+        "synthetic_data": true,
+        "theme_display_name": "Consumer Demand Sensitivity",
+        "theme_id": "consumer_demand_sensitivity",
+        "value": 7435000.0
+      },
+      {
+        "manager_id": "mgr_d_private_real_assets",
+        "manager_name": "Manager D - Private Markets / Real Assets",
+        "overlap_level": "high",
+        "percent_of_theme": 0.132396,
+        "synthetic_data": true,
+        "theme_display_name": "Consumer Demand Sensitivity",
+        "theme_id": "consumer_demand_sensitivity",
+        "value": 3815000.0
+      },
+      {
+        "manager_id": "mgr_c_income_cash_generation",
+        "manager_name": "Manager C - Income and Cash Generation",
+        "overlap_level": "high",
+        "percent_of_theme": 0.124588,
+        "synthetic_data": true,
+        "theme_display_name": "Consumer Demand Sensitivity",
+        "theme_id": "consumer_demand_sensitivity",
+        "value": 3590000.0
+      },
+      {
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "overlap_level": "high",
+        "percent_of_theme": 0.343673,
+        "synthetic_data": true,
+        "theme_display_name": "AI Infrastructure",
+        "theme_id": "ai_infrastructure",
+        "value": 9805000.0
+      },
+      {
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "overlap_level": "high",
+        "percent_of_theme": 0.260603,
+        "synthetic_data": true,
+        "theme_display_name": "AI Infrastructure",
+        "theme_id": "ai_infrastructure",
+        "value": 7435000.0
+      },
+      {
+        "manager_id": "mgr_d_private_real_assets",
+        "manager_name": "Manager D - Private Markets / Real Assets",
+        "overlap_level": "high",
+        "percent_of_theme": 0.132667,
+        "synthetic_data": true,
+        "theme_display_name": "AI Infrastructure",
+        "theme_id": "ai_infrastructure",
+        "value": 3785000.0
+      },
+      {
+        "manager_id": "mgr_c_income_cash_generation",
+        "manager_name": "Manager C - Income and Cash Generation",
+        "overlap_level": "high",
+        "percent_of_theme": 0.125832,
+        "synthetic_data": true,
+        "theme_display_name": "AI Infrastructure",
+        "theme_id": "ai_infrastructure",
+        "value": 3590000.0
+      },
+      {
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "overlap_level": "high",
+        "percent_of_theme": 0.349243,
+        "synthetic_data": true,
+        "theme_display_name": "China/Taiwan Supply Chain",
+        "theme_id": "china_taiwan_supply_chain",
+        "value": 9805000.0
+      },
+      {
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "overlap_level": "high",
+        "percent_of_theme": 0.264826,
+        "synthetic_data": true,
+        "theme_display_name": "China/Taiwan Supply Chain",
+        "theme_id": "china_taiwan_supply_chain",
+        "value": 7435000.0
+      },
+      {
+        "manager_id": "mgr_c_income_cash_generation",
+        "manager_name": "Manager C - Income and Cash Generation",
+        "overlap_level": "high",
+        "percent_of_theme": 0.127872,
+        "synthetic_data": true,
+        "theme_display_name": "China/Taiwan Supply Chain",
+        "theme_id": "china_taiwan_supply_chain",
+        "value": 3590000.0
+      },
+      {
+        "manager_id": "mgr_d_private_real_assets",
+        "manager_name": "Manager D - Private Markets / Real Assets",
+        "overlap_level": "high",
+        "percent_of_theme": 0.118611,
+        "synthetic_data": true,
+        "theme_display_name": "China/Taiwan Supply Chain",
+        "theme_id": "china_taiwan_supply_chain",
+        "value": 3330000.0
+      },
+      {
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "overlap_level": "high",
+        "percent_of_theme": 0.424643,
+        "synthetic_data": true,
+        "theme_display_name": "Data Center Infrastructure",
+        "theme_id": "data_center_infrastructure",
+        "value": 9805000.0
+      },
+      {
+        "manager_id": "mgr_d_private_real_assets",
+        "manager_name": "Manager D - Private Markets / Real Assets",
+        "overlap_level": "high",
+        "percent_of_theme": 0.249892,
+        "synthetic_data": true,
+        "theme_display_name": "Data Center Infrastructure",
+        "theme_id": "data_center_infrastructure",
+        "value": 5770000.0
+      },
+      {
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "overlap_level": "high",
+        "percent_of_theme": 0.249026,
+        "synthetic_data": true,
+        "theme_display_name": "Data Center Infrastructure",
+        "theme_id": "data_center_infrastructure",
+        "value": 5750000.0
+      },
+      {
+        "manager_id": "mgr_c_income_cash_generation",
+        "manager_name": "Manager C - Income and Cash Generation",
+        "overlap_level": "high",
+        "percent_of_theme": 0.039411,
+        "synthetic_data": true,
+        "theme_display_name": "Data Center Infrastructure",
+        "theme_id": "data_center_infrastructure",
+        "value": 910000.0
+      },
+      {
+        "manager_id": "mgr_d_private_real_assets",
+        "manager_name": "Manager D - Private Markets / Real Assets",
+        "overlap_level": "high",
+        "percent_of_theme": 0.473603,
+        "synthetic_data": true,
+        "theme_display_name": "Credit Stress",
+        "theme_id": "credit_stress",
+        "value": 7670000.0
+      },
+      {
+        "manager_id": "mgr_c_income_cash_generation",
+        "manager_name": "Manager C - Income and Cash Generation",
+        "overlap_level": "high",
+        "percent_of_theme": 0.274776,
+        "synthetic_data": true,
+        "theme_display_name": "Credit Stress",
+        "theme_id": "credit_stress",
+        "value": 4450000.0
+      },
+      {
+        "manager_id": "mgr_e_liquidity_defensive",
+        "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "overlap_level": "high",
+        "percent_of_theme": 0.182155,
+        "synthetic_data": true,
+        "theme_display_name": "Credit Stress",
+        "theme_id": "credit_stress",
+        "value": 2950000.0
+      },
+      {
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "overlap_level": "high",
+        "percent_of_theme": 0.030565,
+        "synthetic_data": true,
+        "theme_display_name": "Credit Stress",
+        "theme_id": "credit_stress",
+        "value": 495000.0
+      },
+      {
+        "manager_id": "mgr_c_income_cash_generation",
+        "manager_name": "Manager C - Income and Cash Generation",
+        "overlap_level": "high",
+        "percent_of_theme": 0.34752,
+        "synthetic_data": true,
+        "theme_display_name": "Rate Sensitivity",
+        "theme_id": "rate_sensitivity",
+        "value": 4450000.0
+      },
+      {
+        "manager_id": "mgr_e_liquidity_defensive",
+        "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "overlap_level": "high",
+        "percent_of_theme": 0.327216,
+        "synthetic_data": true,
+        "theme_display_name": "Rate Sensitivity",
+        "theme_id": "rate_sensitivity",
+        "value": 4190000.0
+      },
+      {
+        "manager_id": "mgr_d_private_real_assets",
+        "manager_name": "Manager D - Private Markets / Real Assets",
+        "overlap_level": "high",
+        "percent_of_theme": 0.237407,
+        "synthetic_data": true,
+        "theme_display_name": "Rate Sensitivity",
+        "theme_id": "rate_sensitivity",
+        "value": 3040000.0
+      },
+      {
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "overlap_level": "high",
+        "percent_of_theme": 0.038657,
+        "synthetic_data": true,
+        "theme_display_name": "Rate Sensitivity",
+        "theme_id": "rate_sensitivity",
+        "value": 495000.0
+      },
+      {
+        "manager_id": "mgr_c_income_cash_generation",
+        "manager_name": "Manager C - Income and Cash Generation",
+        "overlap_level": "high",
+        "percent_of_theme": 0.369915,
+        "synthetic_data": true,
+        "theme_display_name": "Duration Exposure",
+        "theme_id": "duration_exposure",
+        "value": 3910000.0
+      },
+      {
+        "manager_id": "mgr_e_liquidity_defensive",
+        "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "overlap_level": "high",
+        "percent_of_theme": 0.279092,
+        "synthetic_data": true,
+        "theme_display_name": "Duration Exposure",
+        "theme_id": "duration_exposure",
+        "value": 2950000.0
+      },
+      {
+        "manager_id": "mgr_d_private_real_assets",
+        "manager_name": "Manager D - Private Markets / Real Assets",
+        "overlap_level": "high",
+        "percent_of_theme": 0.24456,
+        "synthetic_data": true,
+        "theme_display_name": "Duration Exposure",
+        "theme_id": "duration_exposure",
+        "value": 2585000.0
+      },
+      {
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "overlap_level": "high",
+        "percent_of_theme": 0.046831,
+        "synthetic_data": true,
+        "theme_display_name": "Duration Exposure",
+        "theme_id": "duration_exposure",
+        "value": 495000.0
+      },
+      {
+        "manager_id": "mgr_d_private_real_assets",
+        "manager_name": "Manager D - Private Markets / Real Assets",
+        "overlap_level": "high",
+        "percent_of_theme": 0.817912,
+        "synthetic_data": true,
+        "theme_display_name": "Private Market Liquidity",
+        "theme_id": "private_market_liquidity",
+        "value": 8265000.0
+      },
+      {
+        "manager_id": "mgr_c_income_cash_generation",
+        "manager_name": "Manager C - Income and Cash Generation",
+        "overlap_level": "high",
+        "percent_of_theme": 0.107867,
+        "synthetic_data": true,
+        "theme_display_name": "Private Market Liquidity",
+        "theme_id": "private_market_liquidity",
+        "value": 1090000.0
+      },
+      {
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "overlap_level": "high",
+        "percent_of_theme": 0.041564,
+        "synthetic_data": true,
+        "theme_display_name": "Private Market Liquidity",
+        "theme_id": "private_market_liquidity",
+        "value": 420000.0
+      },
+      {
+        "manager_id": "mgr_f_opportunistic_macro",
+        "manager_name": "Manager F - Opportunistic Macro / Hedge",
+        "overlap_level": "high",
+        "percent_of_theme": 0.032657,
+        "synthetic_data": true,
+        "theme_display_name": "Private Market Liquidity",
+        "theme_id": "private_market_liquidity",
+        "value": 330000.0
+      },
+      {
+        "manager_id": "mgr_d_private_real_assets",
+        "manager_name": "Manager D - Private Markets / Real Assets",
+        "overlap_level": "high",
+        "percent_of_theme": 0.544357,
+        "synthetic_data": true,
+        "theme_display_name": "Energy Security",
+        "theme_id": "energy_security",
+        "value": 4510000.0
+      },
+      {
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "overlap_level": "high",
+        "percent_of_theme": 0.199155,
+        "synthetic_data": true,
+        "theme_display_name": "Energy Security",
+        "theme_id": "energy_security",
+        "value": 1650000.0
+      },
+      {
+        "manager_id": "mgr_f_opportunistic_macro",
+        "manager_name": "Manager F - Opportunistic Macro / Hedge",
+        "overlap_level": "high",
+        "percent_of_theme": 0.145444,
+        "synthetic_data": true,
+        "theme_display_name": "Energy Security",
+        "theme_id": "energy_security",
+        "value": 1205000.0
+      },
+      {
+        "manager_id": "mgr_c_income_cash_generation",
+        "manager_name": "Manager C - Income and Cash Generation",
+        "overlap_level": "high",
+        "percent_of_theme": 0.074834,
+        "synthetic_data": true,
+        "theme_display_name": "Energy Security",
+        "theme_id": "energy_security",
+        "value": 620000.0
+      },
+      {
+        "manager_id": "mgr_d_private_real_assets",
+        "manager_name": "Manager D - Private Markets / Real Assets",
+        "overlap_level": "high",
+        "percent_of_theme": 0.459756,
+        "synthetic_data": true,
+        "theme_display_name": "Real Asset Inflation Hedge",
+        "theme_id": "real_asset_inflation_hedge",
+        "value": 3770000.0
+      },
+      {
+        "manager_id": "mgr_c_income_cash_generation",
+        "manager_name": "Manager C - Income and Cash Generation",
+        "overlap_level": "high",
+        "percent_of_theme": 0.163415,
+        "synthetic_data": true,
+        "theme_display_name": "Real Asset Inflation Hedge",
+        "theme_id": "real_asset_inflation_hedge",
+        "value": 1340000.0
+      },
+      {
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "overlap_level": "high",
+        "percent_of_theme": 0.15122,
+        "synthetic_data": true,
+        "theme_display_name": "Real Asset Inflation Hedge",
+        "theme_id": "real_asset_inflation_hedge",
+        "value": 1240000.0
+      },
+      {
+        "manager_id": "mgr_f_opportunistic_macro",
+        "manager_name": "Manager F - Opportunistic Macro / Hedge",
+        "overlap_level": "high",
+        "percent_of_theme": 0.146951,
+        "synthetic_data": true,
+        "theme_display_name": "Real Asset Inflation Hedge",
+        "theme_id": "real_asset_inflation_hedge",
+        "value": 1205000.0
+      },
+      {
+        "manager_id": "mgr_e_liquidity_defensive",
+        "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "overlap_level": "high",
+        "percent_of_theme": 0.620196,
+        "synthetic_data": true,
+        "theme_display_name": "Dollar Exposure",
+        "theme_id": "dollar_exposure",
+        "value": 4115000.0
+      },
+      {
+        "manager_id": "mgr_f_opportunistic_macro",
+        "manager_name": "Manager F - Opportunistic Macro / Hedge",
+        "overlap_level": "high",
+        "percent_of_theme": 0.214017,
+        "synthetic_data": true,
+        "theme_display_name": "Dollar Exposure",
+        "theme_id": "dollar_exposure",
+        "value": 1420000.0
+      },
+      {
+        "manager_id": "mgr_b_core_quality_equity",
+        "manager_name": "Manager B - Core Quality Equity",
+        "overlap_level": "high",
+        "percent_of_theme": 0.091937,
+        "synthetic_data": true,
+        "theme_display_name": "Dollar Exposure",
+        "theme_id": "dollar_exposure",
+        "value": 610000.0
+      },
+      {
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "overlap_level": "high",
+        "percent_of_theme": 0.046722,
+        "synthetic_data": true,
+        "theme_display_name": "Dollar Exposure",
+        "theme_id": "dollar_exposure",
+        "value": 310000.0
+      }
+    ],
+    "grouped_rows": [
+      {
+        "advisor_interpretation": "Defensive Cash Flow appears across 6 managers and should be treated as a hidden concentration discussion.",
+        "confidence_notes": [
+          "3 positions: review required",
+          "24 positions: medium",
+          "33 positions: high"
+        ],
+        "display_name": "Defensive Cash Flow",
+        "id": "defensive_cash_flow",
+        "manager_count": 6,
+        "overlap_level": "high",
+        "percent_of_total": 0.8302,
+        "position_count": 60,
+        "synthetic_data": true,
+        "theme_display_name": "Defensive Cash Flow",
+        "theme_id": "defensive_cash_flow",
+        "top_manager_names": [
+          "Manager A - Growth / AI Infrastructure",
+          "Manager B - Core Quality Equity",
+          "Manager E - Liquidity Reserve / Defensive Ballast"
+        ],
+        "value": 33785000.0
+      },
+      {
+        "advisor_interpretation": "Consumer Demand Sensitivity appears across 6 managers and should be treated as a hidden concentration discussion.",
+        "confidence_notes": [
+          "5 positions: review required",
+          "18 positions: medium",
+          "25 positions: high"
+        ],
+        "display_name": "Consumer Demand Sensitivity",
+        "id": "consumer_demand_sensitivity",
+        "manager_count": 6,
+        "overlap_level": "high",
+        "percent_of_total": 0.708072,
+        "position_count": 48,
+        "synthetic_data": true,
+        "theme_display_name": "Consumer Demand Sensitivity",
+        "theme_id": "consumer_demand_sensitivity",
+        "top_manager_names": [
+          "Manager A - Growth / AI Infrastructure",
+          "Manager B - Core Quality Equity",
+          "Manager D - Private Markets / Real Assets"
+        ],
+        "value": 28815000.0
+      },
+      {
+        "advisor_interpretation": "AI Infrastructure appears across 6 managers and should be treated as a hidden concentration discussion.",
+        "confidence_notes": [
+          "6 positions: review required",
+          "17 positions: medium",
+          "25 positions: high"
+        ],
+        "display_name": "AI Infrastructure",
+        "id": "ai_infrastructure",
+        "manager_count": 6,
+        "overlap_level": "high",
+        "percent_of_total": 0.701069,
+        "position_count": 48,
+        "synthetic_data": true,
+        "theme_display_name": "AI Infrastructure",
+        "theme_id": "ai_infrastructure",
+        "top_manager_names": [
+          "Manager A - Growth / AI Infrastructure",
+          "Manager B - Core Quality Equity",
+          "Manager D - Private Markets / Real Assets"
+        ],
+        "value": 28530000.0
+      },
+      {
+        "advisor_interpretation": "China/Taiwan Supply Chain appears across 6 managers and should be treated as a hidden concentration discussion.",
+        "confidence_notes": [
+          "5 positions: review required",
+          "17 positions: medium",
+          "25 positions: high"
+        ],
+        "display_name": "China/Taiwan Supply Chain",
+        "id": "china_taiwan_supply_chain",
+        "manager_count": 6,
+        "overlap_level": "high",
+        "percent_of_total": 0.689888,
+        "position_count": 47,
+        "synthetic_data": true,
+        "theme_display_name": "China/Taiwan Supply Chain",
+        "theme_id": "china_taiwan_supply_chain",
+        "top_manager_names": [
+          "Manager A - Growth / AI Infrastructure",
+          "Manager B - Core Quality Equity",
+          "Manager C - Income and Cash Generation"
+        ],
+        "value": 28075000.0
+      },
+      {
+        "advisor_interpretation": "Data Center Infrastructure appears across 5 managers and should be treated as a hidden concentration discussion.",
+        "confidence_notes": [
+          "7 positions: review required",
+          "17 positions: medium",
+          "13 positions: high"
+        ],
+        "display_name": "Data Center Infrastructure",
+        "id": "data_center_infrastructure",
+        "manager_count": 5,
+        "overlap_level": "high",
+        "percent_of_total": 0.567392,
+        "position_count": 37,
+        "synthetic_data": true,
+        "theme_display_name": "Data Center Infrastructure",
+        "theme_id": "data_center_infrastructure",
+        "top_manager_names": [
+          "Manager A - Growth / AI Infrastructure",
+          "Manager D - Private Markets / Real Assets",
+          "Manager B - Core Quality Equity"
+        ],
+        "value": 23090000.0
+      },
+      {
+        "advisor_interpretation": "Credit Stress appears across 6 managers and should be treated as a hidden concentration discussion.",
+        "confidence_notes": [
+          "8 positions: review required",
+          "14 positions: medium",
+          "6 positions: high"
+        ],
+        "display_name": "Credit Stress",
+        "id": "credit_stress",
+        "manager_count": 6,
+        "overlap_level": "high",
+        "percent_of_total": 0.39796,
+        "position_count": 28,
+        "synthetic_data": true,
+        "theme_display_name": "Credit Stress",
+        "theme_id": "credit_stress",
+        "top_manager_names": [
+          "Manager D - Private Markets / Real Assets",
+          "Manager C - Income and Cash Generation",
+          "Manager E - Liquidity Reserve / Defensive Ballast"
+        ],
+        "value": 16195000.0
+      },
+      {
+        "advisor_interpretation": "Rate Sensitivity appears across 6 managers and should be treated as a hidden concentration discussion.",
+        "confidence_notes": [
+          "4 positions: review required",
+          "12 positions: medium",
+          "8 positions: high"
+        ],
+        "display_name": "Rate Sensitivity",
+        "id": "rate_sensitivity",
+        "manager_count": 6,
+        "overlap_level": "high",
+        "percent_of_total": 0.314658,
+        "position_count": 24,
+        "synthetic_data": true,
+        "theme_display_name": "Rate Sensitivity",
+        "theme_id": "rate_sensitivity",
+        "top_manager_names": [
+          "Manager C - Income and Cash Generation",
+          "Manager E - Liquidity Reserve / Defensive Ballast",
+          "Manager D - Private Markets / Real Assets"
+        ],
+        "value": 12805000.0
+      },
+      {
+        "advisor_interpretation": "Duration Exposure appears across 6 managers and should be treated as a hidden concentration discussion.",
+        "confidence_notes": [
+          "2 positions: review required",
+          "12 positions: medium",
+          "6 positions: high"
+        ],
+        "display_name": "Duration Exposure",
+        "id": "duration_exposure",
+        "manager_count": 6,
+        "overlap_level": "high",
+        "percent_of_total": 0.259737,
+        "position_count": 20,
+        "synthetic_data": true,
+        "theme_display_name": "Duration Exposure",
+        "theme_id": "duration_exposure",
+        "top_manager_names": [
+          "Manager C - Income and Cash Generation",
+          "Manager E - Liquidity Reserve / Defensive Ballast",
+          "Manager D - Private Markets / Real Assets"
+        ],
+        "value": 10570000.0
+      },
+      {
+        "advisor_interpretation": "Private Market Liquidity appears across 4 managers and should be treated as a hidden concentration discussion.",
+        "confidence_notes": [
+          "9 positions: review required",
+          "10 positions: medium"
+        ],
+        "display_name": "Private Market Liquidity",
+        "id": "private_market_liquidity",
+        "manager_count": 4,
+        "overlap_level": "high",
+        "percent_of_total": 0.248311,
+        "position_count": 19,
+        "synthetic_data": true,
+        "theme_display_name": "Private Market Liquidity",
+        "theme_id": "private_market_liquidity",
+        "top_manager_names": [
+          "Manager D - Private Markets / Real Assets",
+          "Manager C - Income and Cash Generation",
+          "Manager A - Growth / AI Infrastructure"
+        ],
+        "value": 10105000.0
+      },
+      {
+        "advisor_interpretation": "Energy Security appears across 5 managers and should be treated as a hidden concentration discussion.",
+        "confidence_notes": [
+          "4 positions: review required",
+          "11 positions: medium",
+          "4 positions: high"
+        ],
+        "display_name": "Energy Security",
+        "id": "energy_security",
+        "manager_count": 5,
+        "overlap_level": "high",
+        "percent_of_total": 0.203588,
+        "position_count": 19,
+        "synthetic_data": true,
+        "theme_display_name": "Energy Security",
+        "theme_id": "energy_security",
+        "top_manager_names": [
+          "Manager D - Private Markets / Real Assets",
+          "Manager A - Growth / AI Infrastructure",
+          "Manager F - Opportunistic Macro / Hedge"
+        ],
+        "value": 8285000.0
+      },
+      {
+        "advisor_interpretation": "Real Asset Inflation Hedge appears across 5 managers and should be treated as a hidden concentration discussion.",
+        "confidence_notes": [
+          "3 positions: review required",
+          "10 positions: medium",
+          "6 positions: high"
+        ],
+        "display_name": "Real Asset Inflation Hedge",
+        "id": "real_asset_inflation_hedge",
+        "manager_count": 5,
+        "overlap_level": "high",
+        "percent_of_total": 0.201499,
+        "position_count": 19,
+        "synthetic_data": true,
+        "theme_display_name": "Real Asset Inflation Hedge",
+        "theme_id": "real_asset_inflation_hedge",
+        "top_manager_names": [
+          "Manager D - Private Markets / Real Assets",
+          "Manager C - Income and Cash Generation",
+          "Manager A - Growth / AI Infrastructure"
+        ],
+        "value": 8200000.0
+      },
+      {
+        "advisor_interpretation": "Dollar Exposure appears across 5 managers and should be treated as a hidden concentration discussion.",
+        "confidence_notes": [
+          "1 positions: review required",
+          "2 positions: medium",
+          "11 positions: high"
+        ],
+        "display_name": "Dollar Exposure",
+        "id": "dollar_exposure",
+        "manager_count": 5,
+        "overlap_level": "high",
+        "percent_of_total": 0.163042,
+        "position_count": 14,
+        "synthetic_data": true,
+        "theme_display_name": "Dollar Exposure",
+        "theme_id": "dollar_exposure",
+        "top_manager_names": [
+          "Manager E - Liquidity Reserve / Defensive Ballast",
+          "Manager F - Opportunistic Macro / Hedge",
+          "Manager B - Core Quality Equity"
+        ],
+        "value": 6635000.0
+      }
+    ],
+    "overlap_rows": [
+      {
+        "advisor_interpretation": "Defensive Cash Flow appears across 6 managers and should be treated as a hidden concentration discussion.",
+        "manager_count": 6,
+        "overlap_level": "high",
+        "percent_of_total": 0.8302,
+        "synthetic_data": true,
+        "theme_display_name": "Defensive Cash Flow",
+        "theme_id": "defensive_cash_flow",
+        "value": 33785000.0
+      },
+      {
+        "advisor_interpretation": "Consumer Demand Sensitivity appears across 6 managers and should be treated as a hidden concentration discussion.",
+        "manager_count": 6,
+        "overlap_level": "high",
+        "percent_of_total": 0.708072,
+        "synthetic_data": true,
+        "theme_display_name": "Consumer Demand Sensitivity",
+        "theme_id": "consumer_demand_sensitivity",
+        "value": 28815000.0
+      },
+      {
+        "advisor_interpretation": "AI Infrastructure appears across 6 managers and should be treated as a hidden concentration discussion.",
+        "manager_count": 6,
+        "overlap_level": "high",
+        "percent_of_total": 0.701069,
+        "synthetic_data": true,
+        "theme_display_name": "AI Infrastructure",
+        "theme_id": "ai_infrastructure",
+        "value": 28530000.0
+      },
+      {
+        "advisor_interpretation": "China/Taiwan Supply Chain appears across 6 managers and should be treated as a hidden concentration discussion.",
+        "manager_count": 6,
+        "overlap_level": "high",
+        "percent_of_total": 0.689888,
+        "synthetic_data": true,
+        "theme_display_name": "China/Taiwan Supply Chain",
+        "theme_id": "china_taiwan_supply_chain",
+        "value": 28075000.0
+      },
+      {
+        "advisor_interpretation": "Data Center Infrastructure appears across 5 managers and should be treated as a hidden concentration discussion.",
+        "manager_count": 5,
+        "overlap_level": "high",
+        "percent_of_total": 0.567392,
+        "synthetic_data": true,
+        "theme_display_name": "Data Center Infrastructure",
+        "theme_id": "data_center_infrastructure",
+        "value": 23090000.0
+      },
+      {
+        "advisor_interpretation": "Credit Stress appears across 6 managers and should be treated as a hidden concentration discussion.",
+        "manager_count": 6,
+        "overlap_level": "high",
+        "percent_of_total": 0.39796,
+        "synthetic_data": true,
+        "theme_display_name": "Credit Stress",
+        "theme_id": "credit_stress",
+        "value": 16195000.0
+      },
+      {
+        "advisor_interpretation": "Rate Sensitivity appears across 6 managers and should be treated as a hidden concentration discussion.",
+        "manager_count": 6,
+        "overlap_level": "high",
+        "percent_of_total": 0.314658,
+        "synthetic_data": true,
+        "theme_display_name": "Rate Sensitivity",
+        "theme_id": "rate_sensitivity",
+        "value": 12805000.0
+      },
+      {
+        "advisor_interpretation": "Duration Exposure appears across 6 managers and should be treated as a hidden concentration discussion.",
+        "manager_count": 6,
+        "overlap_level": "high",
+        "percent_of_total": 0.259737,
+        "synthetic_data": true,
+        "theme_display_name": "Duration Exposure",
+        "theme_id": "duration_exposure",
+        "value": 10570000.0
+      },
+      {
+        "advisor_interpretation": "Private Market Liquidity appears across 4 managers and should be treated as a hidden concentration discussion.",
+        "manager_count": 4,
+        "overlap_level": "high",
+        "percent_of_total": 0.248311,
+        "synthetic_data": true,
+        "theme_display_name": "Private Market Liquidity",
+        "theme_id": "private_market_liquidity",
+        "value": 10105000.0
+      },
+      {
+        "advisor_interpretation": "Energy Security appears across 5 managers and should be treated as a hidden concentration discussion.",
+        "manager_count": 5,
+        "overlap_level": "high",
+        "percent_of_total": 0.203588,
+        "synthetic_data": true,
+        "theme_display_name": "Energy Security",
+        "theme_id": "energy_security",
+        "value": 8285000.0
+      },
+      {
+        "advisor_interpretation": "Real Asset Inflation Hedge appears across 5 managers and should be treated as a hidden concentration discussion.",
+        "manager_count": 5,
+        "overlap_level": "high",
+        "percent_of_total": 0.201499,
+        "synthetic_data": true,
+        "theme_display_name": "Real Asset Inflation Hedge",
+        "theme_id": "real_asset_inflation_hedge",
+        "value": 8200000.0
+      },
+      {
+        "advisor_interpretation": "Dollar Exposure appears across 5 managers and should be treated as a hidden concentration discussion.",
+        "manager_count": 5,
+        "overlap_level": "high",
+        "percent_of_total": 0.163042,
+        "synthetic_data": true,
+        "theme_display_name": "Dollar Exposure",
+        "theme_id": "dollar_exposure",
+        "value": 6635000.0
+      }
+    ],
+    "top_holdings": [
+      {
+        "confidence": "high",
+        "display_name": "AI Compute Leader",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "percent_of_total": 0.04546,
+        "position_id": "pos_a_ai_compute_leader",
+        "synthetic_data": true,
+        "theme_display_name": "Defensive Cash Flow",
+        "theme_id": "defensive_cash_flow",
+        "value": 1850000.0
+      },
+      {
+        "confidence": "high",
+        "display_name": "AI Compute Leader",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "percent_of_total": 0.04546,
+        "position_id": "pos_a_ai_compute_leader",
+        "synthetic_data": true,
+        "theme_display_name": "Consumer Demand Sensitivity",
+        "theme_id": "consumer_demand_sensitivity",
+        "value": 1850000.0
+      },
+      {
+        "confidence": "high",
+        "display_name": "AI Compute Leader",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "percent_of_total": 0.04546,
+        "position_id": "pos_a_ai_compute_leader",
+        "synthetic_data": true,
+        "theme_display_name": "AI Infrastructure",
+        "theme_id": "ai_infrastructure",
+        "value": 1850000.0
+      },
+      {
+        "confidence": "high",
+        "display_name": "AI Compute Leader",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "percent_of_total": 0.04546,
+        "position_id": "pos_a_ai_compute_leader",
+        "synthetic_data": true,
+        "theme_display_name": "China/Taiwan Supply Chain",
+        "theme_id": "china_taiwan_supply_chain",
+        "value": 1850000.0
+      },
+      {
+        "confidence": "high",
+        "display_name": "AI Compute Leader",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "percent_of_total": 0.04546,
+        "position_id": "pos_a_ai_compute_leader",
+        "synthetic_data": true,
+        "theme_display_name": "Data Center Infrastructure",
+        "theme_id": "data_center_infrastructure",
+        "value": 1850000.0
+      },
+      {
+        "confidence": "high",
+        "display_name": "Cloud Platform Compounder",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "percent_of_total": 0.036368,
+        "position_id": "pos_a_cloud_platform_compounder",
+        "synthetic_data": true,
+        "theme_display_name": "Defensive Cash Flow",
+        "theme_id": "defensive_cash_flow",
+        "value": 1480000.0
+      },
+      {
+        "confidence": "high",
+        "display_name": "Cloud Platform Compounder",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "percent_of_total": 0.036368,
+        "position_id": "pos_a_cloud_platform_compounder",
+        "synthetic_data": true,
+        "theme_display_name": "Consumer Demand Sensitivity",
+        "theme_id": "consumer_demand_sensitivity",
+        "value": 1480000.0
+      },
+      {
+        "confidence": "high",
+        "display_name": "Cloud Platform Compounder",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "percent_of_total": 0.036368,
+        "position_id": "pos_a_cloud_platform_compounder",
+        "synthetic_data": true,
+        "theme_display_name": "AI Infrastructure",
+        "theme_id": "ai_infrastructure",
+        "value": 1480000.0
+      },
+      {
+        "confidence": "high",
+        "display_name": "Cloud Platform Compounder",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "percent_of_total": 0.036368,
+        "position_id": "pos_a_cloud_platform_compounder",
+        "synthetic_data": true,
+        "theme_display_name": "China/Taiwan Supply Chain",
+        "theme_id": "china_taiwan_supply_chain",
+        "value": 1480000.0
+      },
+      {
+        "confidence": "high",
+        "display_name": "Cloud Platform Compounder",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "manager_name": "Manager A - Growth / AI Infrastructure",
+        "percent_of_total": 0.036368,
+        "position_id": "pos_a_cloud_platform_compounder",
+        "synthetic_data": true,
+        "theme_display_name": "Data Center Infrastructure",
+        "theme_id": "data_center_infrastructure",
+        "value": 1480000.0
+      },
+      {
+        "confidence": "high",
+        "display_name": "Treasury Bill Ladder",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "percent_of_total": 0.032928,
+        "position_id": "pos_e_treasury_bill_ladder",
+        "synthetic_data": true,
+        "theme_display_name": "Defensive Cash Flow",
+        "theme_id": "defensive_cash_flow",
+        "value": 1340000.0
+      },
+      {
+        "confidence": "high",
+        "display_name": "Treasury Bill Ladder",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "manager_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "percent_of_total": 0.032928,
+        "position_id": "pos_e_treasury_bill_ladder",
+        "synthetic_data": true,
+        "theme_display_name": "Credit Stress",
+        "theme_id": "credit_stress",
+        "value": 1340000.0
+      }
+    ]
+  },
+  "element_id": "concentration",
+  "element_title": "Concentration",
+  "evidence_rows": [
+    {
+      "advisor_interpretation": "Defensive Cash Flow appears across 6 managers and should be treated as a hidden concentration discussion.",
+      "confidence_notes": [
+        "3 positions: review required",
+        "24 positions: medium",
+        "33 positions: high"
+      ],
+      "display_name": "Defensive Cash Flow",
+      "id": "defensive_cash_flow",
+      "manager_count": 6,
+      "overlap_level": "high",
+      "percent_of_total": 0.8302,
+      "position_count": 60,
+      "row_type": "theme_concentration",
+      "synthetic_data": true,
+      "theme_display_name": "Defensive Cash Flow",
+      "theme_id": "defensive_cash_flow",
+      "top_manager_names": [
+        "Manager A - Growth / AI Infrastructure",
+        "Manager B - Core Quality Equity",
+        "Manager E - Liquidity Reserve / Defensive Ballast"
+      ],
+      "value": 33785000.0
+    },
+    {
+      "advisor_interpretation": "Consumer Demand Sensitivity appears across 6 managers and should be treated as a hidden concentration discussion.",
+      "confidence_notes": [
+        "5 positions: review required",
+        "18 positions: medium",
+        "25 positions: high"
+      ],
+      "display_name": "Consumer Demand Sensitivity",
+      "id": "consumer_demand_sensitivity",
+      "manager_count": 6,
+      "overlap_level": "high",
+      "percent_of_total": 0.708072,
+      "position_count": 48,
+      "row_type": "theme_concentration",
+      "synthetic_data": true,
+      "theme_display_name": "Consumer Demand Sensitivity",
+      "theme_id": "consumer_demand_sensitivity",
+      "top_manager_names": [
+        "Manager A - Growth / AI Infrastructure",
+        "Manager B - Core Quality Equity",
+        "Manager D - Private Markets / Real Assets"
+      ],
+      "value": 28815000.0
+    },
+    {
+      "advisor_interpretation": "AI Infrastructure appears across 6 managers and should be treated as a hidden concentration discussion.",
+      "confidence_notes": [
+        "6 positions: review required",
+        "17 positions: medium",
+        "25 positions: high"
+      ],
+      "display_name": "AI Infrastructure",
+      "id": "ai_infrastructure",
+      "manager_count": 6,
+      "overlap_level": "high",
+      "percent_of_total": 0.701069,
+      "position_count": 48,
+      "row_type": "theme_concentration",
+      "synthetic_data": true,
+      "theme_display_name": "AI Infrastructure",
+      "theme_id": "ai_infrastructure",
+      "top_manager_names": [
+        "Manager A - Growth / AI Infrastructure",
+        "Manager B - Core Quality Equity",
+        "Manager D - Private Markets / Real Assets"
+      ],
+      "value": 28530000.0
+    },
+    {
+      "advisor_interpretation": "China/Taiwan Supply Chain appears across 6 managers and should be treated as a hidden concentration discussion.",
+      "confidence_notes": [
+        "5 positions: review required",
+        "17 positions: medium",
+        "25 positions: high"
+      ],
+      "display_name": "China/Taiwan Supply Chain",
+      "id": "china_taiwan_supply_chain",
+      "manager_count": 6,
+      "overlap_level": "high",
+      "percent_of_total": 0.689888,
+      "position_count": 47,
+      "row_type": "theme_concentration",
+      "synthetic_data": true,
+      "theme_display_name": "China/Taiwan Supply Chain",
+      "theme_id": "china_taiwan_supply_chain",
+      "top_manager_names": [
+        "Manager A - Growth / AI Infrastructure",
+        "Manager B - Core Quality Equity",
+        "Manager C - Income and Cash Generation"
+      ],
+      "value": 28075000.0
+    },
+    {
+      "advisor_interpretation": "Data Center Infrastructure appears across 5 managers and should be treated as a hidden concentration discussion.",
+      "confidence_notes": [
+        "7 positions: review required",
+        "17 positions: medium",
+        "13 positions: high"
+      ],
+      "display_name": "Data Center Infrastructure",
+      "id": "data_center_infrastructure",
+      "manager_count": 5,
+      "overlap_level": "high",
+      "percent_of_total": 0.567392,
+      "position_count": 37,
+      "row_type": "theme_concentration",
+      "synthetic_data": true,
+      "theme_display_name": "Data Center Infrastructure",
+      "theme_id": "data_center_infrastructure",
+      "top_manager_names": [
+        "Manager A - Growth / AI Infrastructure",
+        "Manager D - Private Markets / Real Assets",
+        "Manager B - Core Quality Equity"
+      ],
+      "value": 23090000.0
+    },
+    {
+      "advisor_interpretation": "Credit Stress appears across 6 managers and should be treated as a hidden concentration discussion.",
+      "confidence_notes": [
+        "8 positions: review required",
+        "14 positions: medium",
+        "6 positions: high"
+      ],
+      "display_name": "Credit Stress",
+      "id": "credit_stress",
+      "manager_count": 6,
+      "overlap_level": "high",
+      "percent_of_total": 0.39796,
+      "position_count": 28,
+      "row_type": "theme_concentration",
+      "synthetic_data": true,
+      "theme_display_name": "Credit Stress",
+      "theme_id": "credit_stress",
+      "top_manager_names": [
+        "Manager D - Private Markets / Real Assets",
+        "Manager C - Income and Cash Generation",
+        "Manager E - Liquidity Reserve / Defensive Ballast"
+      ],
+      "value": 16195000.0
+    },
+    {
+      "advisor_interpretation": "Rate Sensitivity appears across 6 managers and should be treated as a hidden concentration discussion.",
+      "confidence_notes": [
+        "4 positions: review required",
+        "12 positions: medium",
+        "8 positions: high"
+      ],
+      "display_name": "Rate Sensitivity",
+      "id": "rate_sensitivity",
+      "manager_count": 6,
+      "overlap_level": "high",
+      "percent_of_total": 0.314658,
+      "position_count": 24,
+      "row_type": "theme_concentration",
+      "synthetic_data": true,
+      "theme_display_name": "Rate Sensitivity",
+      "theme_id": "rate_sensitivity",
+      "top_manager_names": [
+        "Manager C - Income and Cash Generation",
+        "Manager E - Liquidity Reserve / Defensive Ballast",
+        "Manager D - Private Markets / Real Assets"
+      ],
+      "value": 12805000.0
+    },
+    {
+      "advisor_interpretation": "Duration Exposure appears across 6 managers and should be treated as a hidden concentration discussion.",
+      "confidence_notes": [
+        "2 positions: review required",
+        "12 positions: medium",
+        "6 positions: high"
+      ],
+      "display_name": "Duration Exposure",
+      "id": "duration_exposure",
+      "manager_count": 6,
+      "overlap_level": "high",
+      "percent_of_total": 0.259737,
+      "position_count": 20,
+      "row_type": "theme_concentration",
+      "synthetic_data": true,
+      "theme_display_name": "Duration Exposure",
+      "theme_id": "duration_exposure",
+      "top_manager_names": [
+        "Manager C - Income and Cash Generation",
+        "Manager E - Liquidity Reserve / Defensive Ballast",
+        "Manager D - Private Markets / Real Assets"
+      ],
+      "value": 10570000.0
+    }
+  ],
+  "generated_at": "2026-06-30T00:00:00Z",
+  "headline": "Concentration: Approved Themes",
+  "human_review_items": [
+    {
+      "display_name": "Manager D - Private Markets / Real Assets",
+      "id": "mgr_d_private_real_assets",
+      "percent_of_total": 0.740773,
+      "row_type": "manager_review",
+      "synthetic_data": true,
+      "value": 4315000.0
+    },
+    {
+      "display_name": "Manager F - Opportunistic Macro / Hedge",
+      "id": "mgr_f_opportunistic_macro",
+      "percent_of_total": 0.119313,
+      "row_type": "manager_review",
+      "synthetic_data": true,
+      "value": 695000.0
+    },
+    {
+      "display_name": "Manager C - Income and Cash Generation",
+      "id": "mgr_c_income_cash_generation",
+      "percent_of_total": 0.092704,
+      "row_type": "manager_review",
+      "synthetic_data": true,
+      "value": 540000.0
+    },
+    {
+      "display_name": "Manager A - Growth / AI Infrastructure",
+      "id": "mgr_a_growth_ai_infrastructure",
+      "percent_of_total": 0.04721,
+      "row_type": "manager_review",
+      "synthetic_data": true,
+      "value": 275000.0
+    },
+    {
+      "display_name": "Private Market Liquidity",
+      "id": "private_market_liquidity",
+      "percent_of_total": 0.890129,
+      "row_type": "theme_review",
+      "synthetic_data": true,
+      "value": 5185000.0
+    },
+    {
+      "display_name": "Credit Stress",
+      "id": "credit_stress",
+      "percent_of_total": 0.848069,
+      "row_type": "theme_review",
+      "synthetic_data": true,
+      "value": 4940000.0
+    },
+    {
+      "display_name": "Data Center Infrastructure",
+      "id": "data_center_infrastructure",
+      "percent_of_total": 0.688412,
+      "row_type": "theme_review",
+      "synthetic_data": true,
+      "value": 4010000.0
+    },
+    {
+      "display_name": "AI Infrastructure",
+      "id": "ai_infrastructure",
+      "percent_of_total": 0.656652,
+      "row_type": "theme_review",
+      "synthetic_data": true,
+      "value": 3825000.0
+    }
+  ],
+  "input_parameters": {
+    "branch": "Advisor Review",
+    "lens": "Approved theme",
+    "metric": "Gross thematic exposure",
+    "placement": "Risk review",
+    "scope": "Whole portfolio"
+  },
+  "input_variant": "analytic_pack_v1",
+  "key_metrics": [
+    {
+      "formatted_value": "Approved theme",
+      "label": "Lens",
+      "synthetic_data": true,
+      "unit": "label",
+      "value": "Approved theme"
+    },
+    {
+      "formatted_value": "12",
+      "label": "Theme count",
+      "synthetic_data": true,
+      "unit": "count",
+      "value": 12
+    },
+    {
+      "formatted_value": "Defensive Cash Flow",
+      "label": "Largest theme",
+      "synthetic_data": true,
+      "unit": "label",
+      "value": "Defensive Cash Flow"
+    },
+    {
+      "formatted_value": "$33,785,000.00",
+      "label": "Largest theme value",
+      "synthetic_data": true,
+      "unit": "USD",
+      "value": 33785000.0
+    },
+    {
+      "formatted_value": "83.02%",
+      "label": "Largest theme percent",
+      "synthetic_data": true,
+      "unit": "ratio",
+      "value": 0.8302
+    },
+    {
+      "formatted_value": "12",
+      "label": "High-overlap themes",
+      "synthetic_data": true,
+      "unit": "count",
+      "value": 12
+    }
+  ],
+  "render_type": "markdown_html_fragment",
+  "renderer_version": "report_element_rendering.v1",
+  "schema_version": "report_element_view_payload.v1",
+  "source_analytic_pack": {
+    "pack_id": "arranger_demo_pack_v1",
+    "pack_version": "2026-07-03-demo-v1",
+    "synthetic_data": true
+  },
+  "source_input_path": "data/simulation/report_element_inputs/concentration_theme_analytics.json",
+  "summary_text": "Approved theme exposure shows Defensive Cash Flow as the largest current concentration at $33,785,000.00 (83.02%). 12 approved themes are flagged as high-overlap manager discussions, using synthetic local analytics only.",
+  "synthetic_data": true,
+  "template_category": "exposure",
+  "validation": {
+    "errors": [],
+    "renderer_version": "report_element_rendering.v1",
+    "status": "valid",
+    "validated_at": "2026-06-30T00:00:00Z",
+    "warnings": []
+  },
+  "view_type": "report_element_view"
+}

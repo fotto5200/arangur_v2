@@ -80,8 +80,10 @@ The current repo includes a synthetic proof of this boundary:
 - `src/arangur/analytics/analytic_pack_loader.py` loads and validates that pack.
 - `src/arangur/analytics/apply_demo_pack.py` applies the pack to existing synthetic portfolio, scenario, and valuation fixtures.
 - `data/simulation/analytics/` stores deterministic proof outputs for theme exposure, manager/theme overlap, scenario impact by manager/theme, data confidence, and cross-scenario resilience.
+- `src/arangur/report_elements/analytic_input_mapping.py` maps those proof outputs into separate analytic report-element input payloads.
+- `src/arangur/report_elements/rendering.py` renders those analytic payloads into view JSON plus Markdown/HTML fragments for the current supported report elements.
 
-These proof outputs remain internal/local analytic artifacts. They are not wired into advisor UI or generated reports yet.
+These proof outputs and fragments remain internal/local analytic artifacts. They are not wired into advisor UI or generated reports yet.
 
 ## Deliberately Out Of Scope For This Boundary
 

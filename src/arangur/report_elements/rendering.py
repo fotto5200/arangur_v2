@@ -17,6 +17,7 @@ VIEW_SCHEMA_VERSION = "report_element_view_payload.v1"
 SUMMARY_SCHEMA_VERSION = "report_element_view_summary.v1"
 RENDERER_VERSION = "report_element_rendering.v1"
 GENERATED_AT = "2026-06-30T00:00:00Z"
+ANALYTIC_INPUT_VARIANT = "analytic_pack_v1"
 
 DEFAULT_INPUT_DIR = Path("data/simulation/report_element_inputs")
 DEFAULT_OUTPUT_DIR = Path("data/simulation/report_element_views")
@@ -137,9 +138,41 @@ def render_all_demo_report_element_views(
 ) -> dict[str, Any]:
     """Render all committed demo report-element input payloads."""
 
+    return _render_report_element_views(
+        input_dir=input_dir,
+        output_dir=output_dir,
+        input_summary_filename="report_element_input_summary.json",
+        output_summary_filename="report_element_view_summary.json",
+        summary_kind="demo_report_element_views",
+    )
+
+
+def render_all_analytic_report_element_views(
+    input_dir: str | Path = DEFAULT_INPUT_DIR,
+    output_dir: str | Path = DEFAULT_OUTPUT_DIR,
+) -> dict[str, Any]:
+    """Render all committed analytic report-element input payloads."""
+
+    return _render_report_element_views(
+        input_dir=input_dir,
+        output_dir=output_dir,
+        input_summary_filename="report_element_analytic_input_summary.json",
+        output_summary_filename="report_element_analytic_view_summary.json",
+        summary_kind="analytic_report_element_views",
+    )
+
+
+def _render_report_element_views(
+    *,
+    input_dir: str | Path,
+    output_dir: str | Path,
+    input_summary_filename: str,
+    output_summary_filename: str,
+    summary_kind: str,
+) -> dict[str, Any]:
     input_path = Path(input_dir)
     output_path = Path(output_dir)
-    input_files = _ordered_input_files(input_path)
+    input_files = _ordered_input_files(input_path, input_summary_filename)
     output_path.mkdir(parents=True, exist_ok=True)
 
     rendered: list[dict[str, Any]] = []
@@ -171,8 +204,15 @@ def render_all_demo_report_element_views(
             }
         )
 
-    summary = _build_summary(input_path, output_path, rendered, output_files)
-    _write_json(output_path / "report_element_view_summary.json", summary)
+    summary = _build_summary(
+        input_path,
+        output_path,
+        rendered,
+        output_files,
+        output_summary_filename=output_summary_filename,
+        summary_kind=summary_kind,
+    )
+    _write_json(output_path / output_summary_filename, summary)
     return {"views": rendered, "summary": summary}
 
 
@@ -252,6 +292,10 @@ def validate_report_element_view(
 
 
 def _render_portfolio_status(input_payload: dict[str, Any], view: dict[str, Any]) -> None:
+    if _is_analytic_input(input_payload):
+        _render_portfolio_status_analytics(input_payload, view)
+        return
+
     metrics = input_payload.get("headline_metrics", {})
     tables = input_payload.get("tables", {})
     total = metrics.get("total_portfolio_value", {})
@@ -291,6 +335,10 @@ def _render_portfolio_status(input_payload: dict[str, Any], view: dict[str, Any]
 
 
 def _render_concentration(input_payload: dict[str, Any], view: dict[str, Any]) -> None:
+    if _is_analytic_input(input_payload):
+        _render_concentration_analytics(input_payload, view)
+        return
+
     metrics = input_payload.get("headline_metrics", {})
     tables = input_payload.get("tables", {})
     lens = _metric_value(metrics.get("lens")) or input_payload.get("parameters_used", {}).get("lens") or "selected"
@@ -329,6 +377,10 @@ def _render_concentration(input_payload: dict[str, Any], view: dict[str, Any]) -
 
 
 def _render_scenario_impact_by_manager(input_payload: dict[str, Any], view: dict[str, Any]) -> None:
+    if _is_analytic_input(input_payload):
+        _render_scenario_impact_by_manager_analytics(input_payload, view)
+        return
+
     metrics = input_payload.get("headline_metrics", {})
     tables = input_payload.get("tables", {})
     scenario = input_payload.get("scenario", {})
@@ -342,7 +394,7 @@ def _render_scenario_impact_by_manager(input_payload: dict[str, Any], view: dict
     )
     view["headline"] = f"{display_name} impact: {impact}"
     view["summary_text"] = (
-        f"The AI/chip selloff scenario shows a deterministic synthetic portfolio impact of {impact} "
+        f"The {display_name} scenario shows a deterministic synthetic portfolio impact of {impact} "
         f"({impact_percent}) over {scenario.get('horizon', 'the selected horizon')}. "
         "Manager-level impacts are shown for review; this scenario is not a forecast or probability estimate."
     )
@@ -409,6 +461,10 @@ def _render_cash_generation_summary(input_payload: dict[str, Any], view: dict[st
 
 
 def _render_manager_comparison(input_payload: dict[str, Any], view: dict[str, Any]) -> None:
+    if _is_analytic_input(input_payload):
+        _render_manager_comparison_analytics(input_payload, view)
+        return
+
     metrics = input_payload.get("headline_metrics", {})
     tables = input_payload.get("tables", {})
     manager_rows = tables.get("manager_rows", [])
@@ -441,6 +497,10 @@ def _render_manager_comparison(input_payload: dict[str, Any], view: dict[str, An
 
 
 def _render_data_confidence_note(input_payload: dict[str, Any], view: dict[str, Any]) -> None:
+    if _is_analytic_input(input_payload):
+        _render_data_confidence_note_analytics(input_payload, view)
+        return
+
     metrics = input_payload.get("headline_metrics", {})
     tables = input_payload.get("tables", {})
     label = _metric_value(metrics.get("confidence_label")) or _confidence_label(input_payload)
@@ -470,6 +530,193 @@ def _render_data_confidence_note(input_payload: dict[str, Any], view: dict[str, 
         "valuation_treatment_rows": treatment_rows,
         "data_issue_rows": tables.get("data_issue_rows", []),
         "market_state_treatment_rows": tables.get("market_state_treatment_rows", []),
+    }
+    view["caveats"] = _view_caveats(
+        input_payload,
+        ["Confidence describes synthetic source readiness and valuation treatment, not investment quality."],
+    )
+
+
+def _render_portfolio_status_analytics(input_payload: dict[str, Any], view: dict[str, Any]) -> None:
+    metrics = input_payload.get("headline_metrics", {})
+    tables = input_payload.get("tables", {})
+    total = _format_metric(metrics.get("total_portfolio_value"))
+    top_theme = tables.get("theme_values", [{}])[0]
+    vulnerable = next((row for row in tables.get("resilience_rows", []) if row.get("id") == "most_vulnerable_scenario"), {})
+    view["headline"] = f"Portfolio Analytic Status: {total}"
+    view["summary_text"] = (
+        f"As of {input_payload.get('as_of_date')}, the synthetic portfolio analytic view shows {total} "
+        f"of current value. The largest approved theme is {top_theme.get('display_name', 'unavailable')}; "
+        f"the largest deterministic scenario drawdown is {vulnerable.get('scenario_display_name', 'unavailable')}. "
+        "This is local demo evidence for report composition, not production reporting."
+    )
+    view["key_metrics"] = _metrics_from_headlines(
+        metrics,
+        [
+            ("total_portfolio_value", "Total portfolio value"),
+            ("top_theme_value", "Top theme value"),
+            ("top_theme_percent", "Top theme percent"),
+            ("most_vulnerable_scenario_impact", "Most vulnerable scenario impact"),
+            ("human_review_value", "Human-review value"),
+        ],
+    )
+    view["evidence_rows"] = _normalize_rows(tables.get("status_rows", []), row_type="analytic_status")
+    view["detail_tables"] = {
+        "status_rows": tables.get("status_rows", []),
+        "theme_values": tables.get("theme_values", []),
+        "resilience_rows": tables.get("resilience_rows", []),
+        "confidence_rows": tables.get("confidence_rows", []),
+    }
+    view["caveats"] = _view_caveats(
+        input_payload,
+        ["Analytic portfolio status is synthetic local evidence, not a client statement or production report."],
+    )
+
+
+def _render_concentration_analytics(input_payload: dict[str, Any], view: dict[str, Any]) -> None:
+    metrics = input_payload.get("headline_metrics", {})
+    tables = input_payload.get("tables", {})
+    largest_group = _metric_value(metrics.get("largest_group")) or "unavailable"
+    largest_value = _format_metric(metrics.get("largest_group_value"))
+    largest_percent = _format_metric(metrics.get("largest_group_percent"))
+    high_overlap_count = _format_metric(metrics.get("high_overlap_theme_count"))
+    grouped_rows = tables.get("grouped_rows", [])[:8]
+    view["headline"] = "Concentration: Approved Themes"
+    view["summary_text"] = (
+        f"Approved theme exposure shows {largest_group} as the largest current concentration at "
+        f"{largest_value} ({largest_percent}). {high_overlap_count} approved themes are flagged as high-overlap "
+        "manager discussions, using synthetic local analytics only."
+    )
+    view["key_metrics"] = _metrics_from_headlines(
+        metrics,
+        [
+            ("lens", "Lens"),
+            ("group_count", "Theme count"),
+            ("largest_group", "Largest theme"),
+            ("largest_group_value", "Largest theme value"),
+            ("largest_group_percent", "Largest theme percent"),
+            ("high_overlap_theme_count", "High-overlap themes"),
+        ],
+    )
+    view["evidence_rows"] = _normalize_rows(grouped_rows, row_type="theme_concentration")
+    view["detail_tables"] = {
+        "grouped_rows": tables.get("grouped_rows", []),
+        "top_holdings": tables.get("top_holdings", []),
+        "overlap_rows": tables.get("overlap_rows", []),
+        "evidence_rows": tables.get("evidence_rows", []),
+    }
+    view["caveats"] = _view_caveats(
+        input_payload,
+        ["Theme concentration uses gross overlapping exposure and is a discussion prompt, not a recommendation."],
+    )
+
+
+def _render_scenario_impact_by_manager_analytics(input_payload: dict[str, Any], view: dict[str, Any]) -> None:
+    metrics = input_payload.get("headline_metrics", {})
+    tables = input_payload.get("tables", {})
+    scenario = input_payload.get("scenario", {})
+    display_name = scenario.get("display_name") or "Selected scenario"
+    impact = _format_metric(metrics.get("total_scenario_impact"))
+    impact_percent = _format_metric(metrics.get("total_scenario_impact_percent"))
+    manager_rows = tables.get("manager_impacts", [])
+    theme_rows = tables.get("theme_impacts", [])[:6]
+    view["headline"] = f"{display_name} Analytic Impact: {impact}"
+    view["summary_text"] = (
+        f"The {display_name} scenario shows a deterministic synthetic portfolio impact of {impact} "
+        f"({impact_percent}). Manager and approved-theme impacts are shown together so the advisor can review "
+        "where the stress concentrates; this scenario is not a forecast or probability estimate."
+    )
+    view["key_metrics"] = _metrics_from_headlines(
+        metrics,
+        [
+            ("base_total_value", "Base value"),
+            ("scenario_total_value", "Scenario value"),
+            ("total_scenario_impact", "Total scenario impact"),
+            ("total_scenario_impact_percent", "Total scenario impact percent"),
+            ("manager_count", "Manager rows"),
+            ("theme_count", "Theme rows"),
+        ],
+    )
+    view["key_metrics"].append(_simple_metric("Scenario", display_name))
+    view["evidence_rows"] = _normalize_rows(manager_rows, row_type="manager_scenario_impact") + _normalize_rows(theme_rows, row_type="theme_scenario_impact")
+    view["detail_tables"] = {
+        "manager_impacts": tables.get("manager_impacts", []),
+        "theme_impacts": tables.get("theme_impacts", []),
+        "repeated_vulnerable_themes": tables.get("repeated_vulnerable_themes", []),
+        "repeated_vulnerable_managers": tables.get("repeated_vulnerable_managers", []),
+        "repeated_defensive_themes": tables.get("repeated_defensive_themes", []),
+        "repeated_defensive_managers": tables.get("repeated_defensive_managers", []),
+    }
+    view["scenario"] = scenario
+    view["caveats"] = _view_caveats(
+        input_payload,
+        ["Deterministic synthetic scenario output only; not a forecast, probability estimate, guarantee, or manager recommendation."],
+    )
+
+
+def _render_manager_comparison_analytics(input_payload: dict[str, Any], view: dict[str, Any]) -> None:
+    metrics = input_payload.get("headline_metrics", {})
+    tables = input_payload.get("tables", {})
+    manager_rows = tables.get("manager_rows", [])
+    largest_value = _format_metric(metrics.get("largest_manager_theme_exposure"))
+    manager_count = _format_metric(metrics.get("manager_count"))
+    review_count = _format_metric(metrics.get("review_required_manager_count"))
+    view["headline"] = "Manager Comparison: Theme Overlap"
+    view["summary_text"] = (
+        f"The analytic comparison includes {manager_count} managers. The largest gross approved-theme exposure is "
+        f"{largest_value}, and {review_count} managers carry review-required exposure flags. Rows support discussion "
+        "of overlap and confidence, not manager rankings."
+    )
+    view["key_metrics"] = _metrics_from_headlines(
+        metrics,
+        [
+            ("manager_count", "Managers"),
+            ("largest_manager_theme_exposure", "Largest gross theme exposure"),
+            ("high_overlap_theme_count", "Max high-overlap themes"),
+            ("review_required_manager_count", "Managers with review-required exposure"),
+        ],
+    )
+    view["evidence_rows"] = _normalize_rows(manager_rows, row_type="analytic_manager_comparison")
+    view["detail_tables"] = {
+        "manager_rows": manager_rows,
+        "manager_confidence_rows": tables.get("manager_confidence_rows", []),
+        "overlap_rows": tables.get("overlap_rows", []),
+    }
+    view["caveats"] = _view_caveats(
+        input_payload,
+        ["Analytic manager comparison uses synthetic overlap evidence; it is not a recommendation or ranking."],
+    )
+
+
+def _render_data_confidence_note_analytics(input_payload: dict[str, Any], view: dict[str, Any]) -> None:
+    metrics = input_payload.get("headline_metrics", {})
+    tables = input_payload.get("tables", {})
+    label = _metric_value(metrics.get("confidence_label")) or _confidence_label(input_payload)
+    human_count = _format_metric(metrics.get("human_review_count"))
+    human_value = _format_metric(metrics.get("human_review_value"))
+    confidence_rows = tables.get("confidence_rows", [])
+    view["headline"] = f"Data Confidence Note: {label}"
+    view["summary_text"] = (
+        f"Synthetic source readiness is labeled {label}. Human review covers {human_count} positions "
+        f"representing {human_value}; the analytic rows separate high, medium, review-required, low, and unknown "
+        "confidence before report use."
+    )
+    view["key_metrics"] = _metrics_from_headlines(
+        metrics,
+        [
+            ("confidence_label", "Confidence label"),
+            ("human_review_count", "Human-review positions"),
+            ("human_review_value", "Human-review value"),
+            ("direct_or_cash_value", "High-confidence value"),
+            ("proxy_or_stale_value", "Other confidence value"),
+        ],
+    )
+    view["evidence_rows"] = _normalize_rows(confidence_rows, row_type="confidence_bucket")
+    view["detail_tables"] = {
+        "confidence_rows": confidence_rows,
+        "valuation_treatment_rows": tables.get("valuation_treatment_rows", []),
+        "review_rows": tables.get("review_rows", []),
+        "theme_confidence_rows": tables.get("theme_confidence_rows", []),
     }
     view["caveats"] = _view_caveats(
         input_payload,
@@ -509,6 +756,8 @@ def _base_view(input_payload: dict[str, Any], source_input_path: str | Path | No
         "human_review_items": input_payload.get("human_review_items", []),
         "source_input_path": _normalize_path(source_input_path) if source_input_path else None,
         "input_parameters": input_payload.get("parameters_used", {}),
+        "input_variant": input_payload.get("input_variant"),
+        "source_analytic_pack": input_payload.get("source_analytic_pack"),
         "synthetic_data": True,
     }
 
@@ -519,20 +768,20 @@ def _ensure_view(input_payload: dict[str, Any]) -> dict[str, Any]:
     return render_report_element_view(input_payload)
 
 
-def _ordered_input_files(input_path: Path) -> list[Path]:
-    summary_path = input_path / "report_element_input_summary.json"
+def _ordered_input_files(input_path: Path, summary_filename: str) -> list[Path]:
+    summary_path = input_path / summary_filename
     if summary_path.exists():
         summary = _load_json(summary_path)
         ordered = []
         for filename in summary.get("output_files", []):
-            if filename == "report_element_input_summary.json":
+            if filename == summary_filename:
                 continue
             path = input_path / filename
             if path.exists():
                 ordered.append(path)
         if ordered:
             return ordered
-    return sorted(path for path in input_path.glob("*.json") if path.name != "report_element_input_summary.json")
+    return sorted(path for path in input_path.glob("*.json") if path.name != summary_filename)
 
 
 def _build_summary(
@@ -540,6 +789,9 @@ def _build_summary(
     output_path: Path,
     rendered: list[dict[str, Any]],
     output_files: list[str],
+    *,
+    output_summary_filename: str,
+    summary_kind: str,
 ) -> dict[str, Any]:
     validation_results = {row["view_file"]: row["validation"] for row in rendered}
     statuses = {result["status"] for result in validation_results.values()}
@@ -547,6 +799,7 @@ def _build_summary(
         "schema_version": SUMMARY_SCHEMA_VERSION,
         "generated_at": GENERATED_AT,
         "renderer_version": RENDERER_VERSION,
+        "summary_kind": summary_kind,
         "synthetic_data": True,
         "input_dir": _normalize_path(input_path),
         "output_dir": _normalize_path(output_path),
@@ -554,7 +807,7 @@ def _build_summary(
         "markdown_fragment_count": len(rendered),
         "html_fragment_count": len(rendered),
         "rendered_elements": [row["element_id"] for row in rendered],
-        "output_files": output_files + ["report_element_view_summary.json"],
+        "output_files": output_files + [output_summary_filename],
         "rendered_files": rendered,
         "validation_status": "valid" if statuses == {"valid"} else "invalid",
         "validation_results": validation_results,
@@ -663,6 +916,10 @@ def _view_caveats(input_payload: dict[str, Any], extra: list[str]) -> list[str]:
     return caveats
 
 
+def _is_analytic_input(input_payload: dict[str, Any]) -> bool:
+    return input_payload.get("input_variant") == ANALYTIC_INPUT_VARIANT
+
+
 def _confidence_label(input_payload: dict[str, Any]) -> str:
     confidence = input_payload.get("confidence_summary", {})
     return str(confidence.get("label") or "unknown")
@@ -670,6 +927,17 @@ def _confidence_label(input_payload: dict[str, Any]) -> str:
 
 def _evidence_columns(view: dict[str, Any]) -> list[str]:
     element_id = view.get("element_id")
+    if view.get("input_variant") == ANALYTIC_INPUT_VARIANT:
+        if element_id == "portfolio_status":
+            return ["id", "display_name", "value", "percent_of_total", "status_text"]
+        if element_id == "concentration":
+            return ["theme_display_name", "value", "percent_of_total", "overlap_level", "manager_count"]
+        if element_id == "scenario_impact_by_manager":
+            return ["row_type", "manager_name", "theme_display_name", "base_value", "scenario_impact", "scenario_impact_percent"]
+        if element_id == "manager_comparison":
+            return ["manager_name", "theme_exposure_value", "shared_theme_count", "high_overlap_theme_count", "review_required_value"]
+        if element_id == "data_confidence_note":
+            return ["id", "count", "value", "percent_of_total", "advisor_language"]
     if element_id == "portfolio_status":
         return ["manager_name", "value", "percent_of_total"]
     if element_id == "concentration":
@@ -764,7 +1032,7 @@ def _column_label(column: str) -> str:
 def _format_cell(value: Any, column: str) -> str:
     if value is None:
         return ""
-    if column.endswith("percent") or column == "percent_of_total":
+    if column.endswith("percent") or column == "percent_of_total" or column.startswith("percent_"):
         return _format_percent(float(value))
     if column.endswith("value") or "impact" in column or column in {"transaction_flows", "income_distributions", "fees", "current_cash_like_value"}:
         if isinstance(value, (int, float)):

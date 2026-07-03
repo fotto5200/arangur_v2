@@ -1,0 +1,777 @@
+{
+  "as_of_date": "2026-06-30",
+  "caveats": [
+    "Synthetic demo data only.",
+    "Structured report-element input only; no advisor UI, generated report history, live data, external API, or production storage is produced.",
+    "Confidence summarizes source readiness and valuation treatment, not investment quality.",
+    "Review-required records are separated before ordinary low/medium/high buckets.",
+    "Confidence describes synthetic source readiness and valuation treatment, not investment quality.",
+    "Review-required rows are separated before ordinary low, medium, and high buckets."
+  ],
+  "confidence_summary": {
+    "by_confidence": [
+      {
+        "advisor_language": "High-confidence records are the cleanest source for demo analytics, while still synthetic and not statement-grade.",
+        "affected_manager_names": [
+          "Manager B - Core Quality Equity",
+          "Manager A - Growth / AI Infrastructure",
+          "Manager E - Liquidity Reserve / Defensive Ballast"
+        ],
+        "affected_theme_names": [
+          "Defensive Cash Flow",
+          "AI Infrastructure",
+          "China/Taiwan Supply Chain"
+        ],
+        "count": 33,
+        "display_name": "High",
+        "id": "high",
+        "percent_of_total": 0.524266,
+        "synthetic_data": true,
+        "value": 21335000.0
+      },
+      {
+        "advisor_language": "Proxy-based values are usable for demo discussion but should be labeled as approximations.",
+        "affected_manager_names": [
+          "Manager A - Growth / AI Infrastructure",
+          "Manager D - Private Markets / Real Assets",
+          "Manager C - Income and Cash Generation"
+        ],
+        "affected_theme_names": [
+          "Defensive Cash Flow",
+          "Consumer Demand Sensitivity",
+          "Data Center Infrastructure"
+        ],
+        "count": 29,
+        "display_name": "Medium",
+        "id": "medium",
+        "percent_of_total": 0.332596,
+        "synthetic_data": true,
+        "value": 13535000.0
+      },
+      {
+        "advisor_language": "Private, stale, or manager-level marks should be called out when they affect the report conclusion.",
+        "affected_manager_names": [],
+        "affected_theme_names": [],
+        "count": 0,
+        "display_name": "Low",
+        "id": "low",
+        "percent_of_total": 0.0,
+        "synthetic_data": true,
+        "value": 0.0
+      },
+      {
+        "advisor_language": "Some records need human review before the result should be treated as meeting-ready.",
+        "affected_manager_names": [
+          "Manager D - Private Markets / Real Assets",
+          "Manager F - Opportunistic Macro / Hedge",
+          "Manager C - Income and Cash Generation"
+        ],
+        "affected_theme_names": [
+          "Private Market Liquidity",
+          "Credit Stress",
+          "Data Center Infrastructure"
+        ],
+        "count": 12,
+        "display_name": "Review Required",
+        "id": "review_required",
+        "percent_of_total": 0.143138,
+        "synthetic_data": true,
+        "value": 5825000.0
+      },
+      {
+        "advisor_language": "Unknown-confidence records should be reviewed before client-facing use.",
+        "affected_manager_names": [],
+        "affected_theme_names": [],
+        "count": 0,
+        "display_name": "Unknown",
+        "id": "unknown",
+        "percent_of_total": 0.0,
+        "synthetic_data": true,
+        "value": 0.0
+      }
+    ],
+    "human_review_count": 12,
+    "human_review_value": 5825000.0,
+    "label": "mixed",
+    "synthetic_data": true
+  },
+  "element_id": "data_confidence_note",
+  "element_title": "Data Confidence Note",
+  "evidence_items": [
+    {
+      "advisor_language": "High-confidence records are the cleanest source for demo analytics, while still synthetic and not statement-grade.",
+      "affected_manager_names": [
+        "Manager B - Core Quality Equity",
+        "Manager A - Growth / AI Infrastructure",
+        "Manager E - Liquidity Reserve / Defensive Ballast"
+      ],
+      "affected_theme_names": [
+        "Defensive Cash Flow",
+        "AI Infrastructure",
+        "China/Taiwan Supply Chain"
+      ],
+      "count": 33,
+      "display_name": "High",
+      "id": "high",
+      "percent_of_total": 0.524266,
+      "synthetic_data": true,
+      "value": 21335000.0
+    },
+    {
+      "advisor_language": "Proxy-based values are usable for demo discussion but should be labeled as approximations.",
+      "affected_manager_names": [
+        "Manager A - Growth / AI Infrastructure",
+        "Manager D - Private Markets / Real Assets",
+        "Manager C - Income and Cash Generation"
+      ],
+      "affected_theme_names": [
+        "Defensive Cash Flow",
+        "Consumer Demand Sensitivity",
+        "Data Center Infrastructure"
+      ],
+      "count": 29,
+      "display_name": "Medium",
+      "id": "medium",
+      "percent_of_total": 0.332596,
+      "synthetic_data": true,
+      "value": 13535000.0
+    },
+    {
+      "advisor_language": "Private, stale, or manager-level marks should be called out when they affect the report conclusion.",
+      "affected_manager_names": [],
+      "affected_theme_names": [],
+      "count": 0,
+      "display_name": "Low",
+      "id": "low",
+      "percent_of_total": 0.0,
+      "synthetic_data": true,
+      "value": 0.0
+    },
+    {
+      "advisor_language": "Some records need human review before the result should be treated as meeting-ready.",
+      "affected_manager_names": [
+        "Manager D - Private Markets / Real Assets",
+        "Manager F - Opportunistic Macro / Hedge",
+        "Manager C - Income and Cash Generation"
+      ],
+      "affected_theme_names": [
+        "Private Market Liquidity",
+        "Credit Stress",
+        "Data Center Infrastructure"
+      ],
+      "count": 12,
+      "display_name": "Review Required",
+      "id": "review_required",
+      "percent_of_total": 0.143138,
+      "synthetic_data": true,
+      "value": 5825000.0
+    },
+    {
+      "advisor_language": "Unknown-confidence records should be reviewed before client-facing use.",
+      "affected_manager_names": [],
+      "affected_theme_names": [],
+      "count": 0,
+      "display_name": "Unknown",
+      "id": "unknown",
+      "percent_of_total": 0.0,
+      "synthetic_data": true,
+      "value": 0.0
+    }
+  ],
+  "generated_at": "2026-07-03T00:00:00Z",
+  "headline_metrics": {
+    "confidence_label": {
+      "unit": "label",
+      "value": "mixed"
+    },
+    "direct_or_cash_value": {
+      "unit": "USD",
+      "value": 21335000.0
+    },
+    "human_review_count": {
+      "unit": "count",
+      "value": 12
+    },
+    "human_review_value": {
+      "unit": "USD",
+      "value": 5825000.0
+    },
+    "proxy_or_stale_value": {
+      "unit": "USD",
+      "value": 19360000.0
+    }
+  },
+  "human_review_items": [
+    {
+      "display_name": "Manager D - Private Markets / Real Assets",
+      "id": "mgr_d_private_real_assets",
+      "percent_of_total": 0.740773,
+      "row_type": "manager_review",
+      "synthetic_data": true,
+      "value": 4315000.0
+    },
+    {
+      "display_name": "Manager F - Opportunistic Macro / Hedge",
+      "id": "mgr_f_opportunistic_macro",
+      "percent_of_total": 0.119313,
+      "row_type": "manager_review",
+      "synthetic_data": true,
+      "value": 695000.0
+    },
+    {
+      "display_name": "Manager C - Income and Cash Generation",
+      "id": "mgr_c_income_cash_generation",
+      "percent_of_total": 0.092704,
+      "row_type": "manager_review",
+      "synthetic_data": true,
+      "value": 540000.0
+    },
+    {
+      "display_name": "Manager A - Growth / AI Infrastructure",
+      "id": "mgr_a_growth_ai_infrastructure",
+      "percent_of_total": 0.04721,
+      "row_type": "manager_review",
+      "synthetic_data": true,
+      "value": 275000.0
+    },
+    {
+      "display_name": "Private Market Liquidity",
+      "id": "private_market_liquidity",
+      "percent_of_total": 0.890129,
+      "row_type": "theme_review",
+      "synthetic_data": true,
+      "value": 5185000.0
+    },
+    {
+      "display_name": "Credit Stress",
+      "id": "credit_stress",
+      "percent_of_total": 0.848069,
+      "row_type": "theme_review",
+      "synthetic_data": true,
+      "value": 4940000.0
+    },
+    {
+      "display_name": "Data Center Infrastructure",
+      "id": "data_center_infrastructure",
+      "percent_of_total": 0.688412,
+      "row_type": "theme_review",
+      "synthetic_data": true,
+      "value": 4010000.0
+    },
+    {
+      "display_name": "AI Infrastructure",
+      "id": "ai_infrastructure",
+      "percent_of_total": 0.656652,
+      "row_type": "theme_review",
+      "synthetic_data": true,
+      "value": 3825000.0
+    }
+  ],
+  "input_variant": "analytic_pack_v1",
+  "mapper_version": "report_element_analytic_input_mapping.v1",
+  "parameters_used": {
+    "branch": "Client Briefing",
+    "lens": "Source readiness",
+    "placement": "Appendix",
+    "scope": "Whole portfolio"
+  },
+  "placement": "Appendix",
+  "portfolio_id": "portfolio_northstar_family_office",
+  "reporting_currency": "USD",
+  "schema_version": "report_element_input_payload.v1",
+  "source_analytic_pack": {
+    "pack_id": "arranger_demo_pack_v1",
+    "pack_version": "2026-07-03-demo-v1",
+    "synthetic_data": true
+  },
+  "source_data": {
+    "analytic_pack": {
+      "output_index_path": "data/simulation/analytics/analytics_output_index.json",
+      "pack_id": "arranger_demo_pack_v1",
+      "pack_version": "2026-07-03-demo-v1",
+      "synthetic_data": true
+    },
+    "analytics_outputs": [
+      {
+        "output_name": "theme_exposure_summary",
+        "path": "data/simulation/analytics/theme_exposure_summary.json",
+        "schema_version": "analytics_theme_exposure_summary.v1",
+        "synthetic_data": true
+      },
+      {
+        "output_name": "manager_theme_overlap_summary",
+        "path": "data/simulation/analytics/manager_theme_overlap_summary.json",
+        "schema_version": "analytics_manager_theme_overlap_summary.v1",
+        "synthetic_data": true
+      },
+      {
+        "output_name": "scenario_impact_by_theme_manager",
+        "path": "data/simulation/analytics/scenario_impact_by_theme_manager.json",
+        "schema_version": "analytics_scenario_impact_by_theme_manager.v1",
+        "synthetic_data": true
+      },
+      {
+        "output_name": "data_confidence_map",
+        "path": "data/simulation/analytics/data_confidence_map.json",
+        "schema_version": "analytics_data_confidence_map.v1",
+        "synthetic_data": true
+      },
+      {
+        "output_name": "cross_scenario_resilience_summary",
+        "path": "data/simulation/analytics/cross_scenario_resilience_summary.json",
+        "schema_version": "analytics_cross_scenario_resilience_summary.v1",
+        "synthetic_data": true
+      }
+    ],
+    "market_state": {
+      "path": "data/simulation/synthetic_market_state_history.json",
+      "synthetic_data": true
+    },
+    "position_universe": {
+      "path": "data/simulation/synthetic_position_universe.json",
+      "synthetic_data": true
+    },
+    "scenario_results": {
+      "path": "data/simulation/scenario_revaluation_results.json",
+      "synthetic_data": true
+    },
+    "valuation_history": {
+      "daily_portfolio_path": "data/simulation/daily_portfolio_valuation_history.json",
+      "daily_position_path": "data/simulation/daily_position_valuation_history.json",
+      "summary_path": "data/simulation/simplified_valuation_summary.json",
+      "synthetic_data": true
+    }
+  },
+  "synthetic_data": true,
+  "tables": {
+    "confidence_rows": [
+      {
+        "advisor_language": "High-confidence records are the cleanest source for demo analytics, while still synthetic and not statement-grade.",
+        "affected_manager_names": [
+          "Manager B - Core Quality Equity",
+          "Manager A - Growth / AI Infrastructure",
+          "Manager E - Liquidity Reserve / Defensive Ballast"
+        ],
+        "affected_theme_names": [
+          "Defensive Cash Flow",
+          "AI Infrastructure",
+          "China/Taiwan Supply Chain"
+        ],
+        "count": 33,
+        "display_name": "High",
+        "id": "high",
+        "percent_of_total": 0.524266,
+        "synthetic_data": true,
+        "value": 21335000.0
+      },
+      {
+        "advisor_language": "Proxy-based values are usable for demo discussion but should be labeled as approximations.",
+        "affected_manager_names": [
+          "Manager A - Growth / AI Infrastructure",
+          "Manager D - Private Markets / Real Assets",
+          "Manager C - Income and Cash Generation"
+        ],
+        "affected_theme_names": [
+          "Defensive Cash Flow",
+          "Consumer Demand Sensitivity",
+          "Data Center Infrastructure"
+        ],
+        "count": 29,
+        "display_name": "Medium",
+        "id": "medium",
+        "percent_of_total": 0.332596,
+        "synthetic_data": true,
+        "value": 13535000.0
+      },
+      {
+        "advisor_language": "Private, stale, or manager-level marks should be called out when they affect the report conclusion.",
+        "affected_manager_names": [],
+        "affected_theme_names": [],
+        "count": 0,
+        "display_name": "Low",
+        "id": "low",
+        "percent_of_total": 0.0,
+        "synthetic_data": true,
+        "value": 0.0
+      },
+      {
+        "advisor_language": "Some records need human review before the result should be treated as meeting-ready.",
+        "affected_manager_names": [
+          "Manager D - Private Markets / Real Assets",
+          "Manager F - Opportunistic Macro / Hedge",
+          "Manager C - Income and Cash Generation"
+        ],
+        "affected_theme_names": [
+          "Private Market Liquidity",
+          "Credit Stress",
+          "Data Center Infrastructure"
+        ],
+        "count": 12,
+        "display_name": "Review Required",
+        "id": "review_required",
+        "percent_of_total": 0.143138,
+        "synthetic_data": true,
+        "value": 5825000.0
+      },
+      {
+        "advisor_language": "Unknown-confidence records should be reviewed before client-facing use.",
+        "affected_manager_names": [],
+        "affected_theme_names": [],
+        "count": 0,
+        "display_name": "Unknown",
+        "id": "unknown",
+        "percent_of_total": 0.0,
+        "synthetic_data": true,
+        "value": 0.0
+      }
+    ],
+    "review_rows": [
+      {
+        "display_name": "Manager D - Private Markets / Real Assets",
+        "id": "mgr_d_private_real_assets",
+        "percent_of_total": 0.740773,
+        "row_type": "manager_review",
+        "synthetic_data": true,
+        "value": 4315000.0
+      },
+      {
+        "display_name": "Manager F - Opportunistic Macro / Hedge",
+        "id": "mgr_f_opportunistic_macro",
+        "percent_of_total": 0.119313,
+        "row_type": "manager_review",
+        "synthetic_data": true,
+        "value": 695000.0
+      },
+      {
+        "display_name": "Manager C - Income and Cash Generation",
+        "id": "mgr_c_income_cash_generation",
+        "percent_of_total": 0.092704,
+        "row_type": "manager_review",
+        "synthetic_data": true,
+        "value": 540000.0
+      },
+      {
+        "display_name": "Manager A - Growth / AI Infrastructure",
+        "id": "mgr_a_growth_ai_infrastructure",
+        "percent_of_total": 0.04721,
+        "row_type": "manager_review",
+        "synthetic_data": true,
+        "value": 275000.0
+      },
+      {
+        "display_name": "Private Market Liquidity",
+        "id": "private_market_liquidity",
+        "percent_of_total": 0.890129,
+        "row_type": "theme_review",
+        "synthetic_data": true,
+        "value": 5185000.0
+      },
+      {
+        "display_name": "Credit Stress",
+        "id": "credit_stress",
+        "percent_of_total": 0.848069,
+        "row_type": "theme_review",
+        "synthetic_data": true,
+        "value": 4940000.0
+      },
+      {
+        "display_name": "Data Center Infrastructure",
+        "id": "data_center_infrastructure",
+        "percent_of_total": 0.688412,
+        "row_type": "theme_review",
+        "synthetic_data": true,
+        "value": 4010000.0
+      },
+      {
+        "display_name": "AI Infrastructure",
+        "id": "ai_infrastructure",
+        "percent_of_total": 0.656652,
+        "row_type": "theme_review",
+        "synthetic_data": true,
+        "value": 3825000.0
+      },
+      {
+        "display_name": "Consumer Demand Sensitivity",
+        "id": "consumer_demand_sensitivity",
+        "percent_of_total": 0.583691,
+        "row_type": "theme_review",
+        "synthetic_data": true,
+        "value": 3400000.0
+      },
+      {
+        "display_name": "China/Taiwan Supply Chain",
+        "id": "china_taiwan_supply_chain",
+        "percent_of_total": 0.578541,
+        "row_type": "theme_review",
+        "synthetic_data": true,
+        "value": 3370000.0
+      },
+      {
+        "display_name": "Energy Security",
+        "id": "energy_security",
+        "percent_of_total": 0.398283,
+        "row_type": "theme_review",
+        "synthetic_data": true,
+        "value": 2320000.0
+      },
+      {
+        "display_name": "Real Asset Inflation Hedge",
+        "id": "real_asset_inflation_hedge",
+        "percent_of_total": 0.271245,
+        "row_type": "theme_review",
+        "synthetic_data": true,
+        "value": 1580000.0
+      }
+    ],
+    "theme_confidence_rows": [
+      {
+        "confidence_bucket": "high",
+        "percent_of_bucket": 1.0,
+        "synthetic_data": true,
+        "theme_display_name": "Defensive Cash Flow",
+        "theme_id": "defensive_cash_flow",
+        "value": 21335000.0
+      },
+      {
+        "confidence_bucket": "high",
+        "percent_of_bucket": 0.805718,
+        "synthetic_data": true,
+        "theme_display_name": "AI Infrastructure",
+        "theme_id": "ai_infrastructure",
+        "value": 17190000.0
+      },
+      {
+        "confidence_bucket": "high",
+        "percent_of_bucket": 0.805718,
+        "synthetic_data": true,
+        "theme_display_name": "China/Taiwan Supply Chain",
+        "theme_id": "china_taiwan_supply_chain",
+        "value": 17190000.0
+      },
+      {
+        "confidence_bucket": "high",
+        "percent_of_bucket": 0.805718,
+        "synthetic_data": true,
+        "theme_display_name": "Consumer Demand Sensitivity",
+        "theme_id": "consumer_demand_sensitivity",
+        "value": 17190000.0
+      },
+      {
+        "confidence_bucket": "high",
+        "percent_of_bucket": 0.510195,
+        "synthetic_data": true,
+        "theme_display_name": "Data Center Infrastructure",
+        "theme_id": "data_center_infrastructure",
+        "value": 10885000.0
+      },
+      {
+        "confidence_bucket": "high",
+        "percent_of_bucket": 0.26951,
+        "synthetic_data": true,
+        "theme_display_name": "Rate Sensitivity",
+        "theme_id": "rate_sensitivity",
+        "value": 5750000.0
+      },
+      {
+        "confidence_bucket": "high",
+        "percent_of_bucket": 0.258964,
+        "synthetic_data": true,
+        "theme_display_name": "Dollar Exposure",
+        "theme_id": "dollar_exposure",
+        "value": 5525000.0
+      },
+      {
+        "confidence_bucket": "high",
+        "percent_of_bucket": 0.21139,
+        "synthetic_data": true,
+        "theme_display_name": "Credit Stress",
+        "theme_id": "credit_stress",
+        "value": 4510000.0
+      },
+      {
+        "confidence_bucket": "medium",
+        "percent_of_bucket": 0.830809,
+        "synthetic_data": true,
+        "theme_display_name": "Defensive Cash Flow",
+        "theme_id": "defensive_cash_flow",
+        "value": 11245000.0
+      },
+      {
+        "confidence_bucket": "medium",
+        "percent_of_bucket": 0.607684,
+        "synthetic_data": true,
+        "theme_display_name": "Consumer Demand Sensitivity",
+        "theme_id": "consumer_demand_sensitivity",
+        "value": 8225000.0
+      },
+      {
+        "confidence_bucket": "medium",
+        "percent_of_bucket": 0.605467,
+        "synthetic_data": true,
+        "theme_display_name": "Data Center Infrastructure",
+        "theme_id": "data_center_infrastructure",
+        "value": 8195000.0
+      },
+      {
+        "confidence_bucket": "medium",
+        "percent_of_bucket": 0.555227,
+        "synthetic_data": true,
+        "theme_display_name": "AI Infrastructure",
+        "theme_id": "ai_infrastructure",
+        "value": 7515000.0
+      },
+      {
+        "confidence_bucket": "medium",
+        "percent_of_bucket": 0.555227,
+        "synthetic_data": true,
+        "theme_display_name": "China/Taiwan Supply Chain",
+        "theme_id": "china_taiwan_supply_chain",
+        "value": 7515000.0
+      },
+      {
+        "confidence_bucket": "medium",
+        "percent_of_bucket": 0.498338,
+        "synthetic_data": true,
+        "theme_display_name": "Credit Stress",
+        "theme_id": "credit_stress",
+        "value": 6745000.0
+      },
+      {
+        "confidence_bucket": "medium",
+        "percent_of_bucket": 0.418545,
+        "synthetic_data": true,
+        "theme_display_name": "Duration Exposure",
+        "theme_id": "duration_exposure",
+        "value": 5665000.0
+      },
+      {
+        "confidence_bucket": "medium",
+        "percent_of_bucket": 0.418545,
+        "synthetic_data": true,
+        "theme_display_name": "Rate Sensitivity",
+        "theme_id": "rate_sensitivity",
+        "value": 5665000.0
+      },
+      {
+        "confidence_bucket": "review_required",
+        "percent_of_bucket": 0.890129,
+        "synthetic_data": true,
+        "theme_display_name": "Private Market Liquidity",
+        "theme_id": "private_market_liquidity",
+        "value": 5185000.0
+      },
+      {
+        "confidence_bucket": "review_required",
+        "percent_of_bucket": 0.848069,
+        "synthetic_data": true,
+        "theme_display_name": "Credit Stress",
+        "theme_id": "credit_stress",
+        "value": 4940000.0
+      },
+      {
+        "confidence_bucket": "review_required",
+        "percent_of_bucket": 0.688412,
+        "synthetic_data": true,
+        "theme_display_name": "Data Center Infrastructure",
+        "theme_id": "data_center_infrastructure",
+        "value": 4010000.0
+      },
+      {
+        "confidence_bucket": "review_required",
+        "percent_of_bucket": 0.656652,
+        "synthetic_data": true,
+        "theme_display_name": "AI Infrastructure",
+        "theme_id": "ai_infrastructure",
+        "value": 3825000.0
+      },
+      {
+        "confidence_bucket": "review_required",
+        "percent_of_bucket": 0.583691,
+        "synthetic_data": true,
+        "theme_display_name": "Consumer Demand Sensitivity",
+        "theme_id": "consumer_demand_sensitivity",
+        "value": 3400000.0
+      },
+      {
+        "confidence_bucket": "review_required",
+        "percent_of_bucket": 0.578541,
+        "synthetic_data": true,
+        "theme_display_name": "China/Taiwan Supply Chain",
+        "theme_id": "china_taiwan_supply_chain",
+        "value": 3370000.0
+      },
+      {
+        "confidence_bucket": "review_required",
+        "percent_of_bucket": 0.398283,
+        "synthetic_data": true,
+        "theme_display_name": "Energy Security",
+        "theme_id": "energy_security",
+        "value": 2320000.0
+      },
+      {
+        "confidence_bucket": "review_required",
+        "percent_of_bucket": 0.271245,
+        "synthetic_data": true,
+        "theme_display_name": "Real Asset Inflation Hedge",
+        "theme_id": "real_asset_inflation_hedge",
+        "value": 1580000.0
+      }
+    ],
+    "valuation_treatment_rows": [
+      {
+        "count": 33,
+        "display_name": "High",
+        "id": "high",
+        "percent_of_total": 0.524266,
+        "synthetic_data": true,
+        "treatment_note": "High-confidence records are the cleanest source for demo analytics, while still synthetic and not statement-grade.",
+        "value": 21335000.0
+      },
+      {
+        "count": 29,
+        "display_name": "Medium",
+        "id": "medium",
+        "percent_of_total": 0.332596,
+        "synthetic_data": true,
+        "treatment_note": "Proxy-based values are usable for demo discussion but should be labeled as approximations.",
+        "value": 13535000.0
+      },
+      {
+        "count": 0,
+        "display_name": "Low",
+        "id": "low",
+        "percent_of_total": 0.0,
+        "synthetic_data": true,
+        "treatment_note": "Private, stale, or manager-level marks should be called out when they affect the report conclusion.",
+        "value": 0.0
+      },
+      {
+        "count": 12,
+        "display_name": "Review Required",
+        "id": "review_required",
+        "percent_of_total": 0.143138,
+        "synthetic_data": true,
+        "treatment_note": "Some records need human review before the result should be treated as meeting-ready.",
+        "value": 5825000.0
+      },
+      {
+        "count": 0,
+        "display_name": "Unknown",
+        "id": "unknown",
+        "percent_of_total": 0.0,
+        "synthetic_data": true,
+        "treatment_note": "Unknown-confidence records should be reviewed before client-facing use.",
+        "value": 0.0
+      }
+    ]
+  },
+  "target_branch": "Client Briefing",
+  "template_category": "data_readiness",
+  "validation": {
+    "errors": [],
+    "mapper_version": "report_element_input_mapping.v1",
+    "status": "valid",
+    "validated_at": "2026-06-30T00:00:00Z",
+    "warnings": []
+  }
+}

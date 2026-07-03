@@ -233,7 +233,7 @@ The generated proof outputs live under `data/simulation/analytics/`:
 - `cross_scenario_resilience_summary.json`
 - `analytics_output_index.json`
 
-These outputs are deterministic synthetic analytics artifacts. They are not yet mapped into report-element input payloads, generated reports, advisor UI, backend APIs, or production storage.
+These outputs are deterministic synthetic analytics artifacts. The current repo also maps them into separate analytic report-element input payloads and rendered view fragments under `data/simulation/report_element_inputs/` and `data/simulation/report_element_views/` for Concentration, Manager Comparison, Scenario Impact by Manager, Data Confidence Note, and Portfolio Status. They are still not wired into advisor UI choices, generated reports, backend APIs, production storage, or live data flows.
 
 ## Deliberately Not Implemented In v1
 
