@@ -1,0 +1,47 @@
+{
+  "caveats": [
+    "Synthetic proof outputs only; not wired into report-element inputs or advisor UI in this tranche.",
+    "No external APIs, live data, Docker, Postgres, or production services are required."
+  ],
+  "data_as_of": "2026-06-30",
+  "generated_at": "2026-07-03T00:00:00Z",
+  "output_count": 5,
+  "outputs": [
+    {
+      "output_name": "theme_exposure_summary",
+      "path": "data/simulation/analytics/theme_exposure_summary.json",
+      "schema_version": "analytics_theme_exposure_summary.v1"
+    },
+    {
+      "output_name": "manager_theme_overlap_summary",
+      "path": "data/simulation/analytics/manager_theme_overlap_summary.json",
+      "schema_version": "analytics_manager_theme_overlap_summary.v1"
+    },
+    {
+      "output_name": "scenario_impact_by_theme_manager",
+      "path": "data/simulation/analytics/scenario_impact_by_theme_manager.json",
+      "schema_version": "analytics_scenario_impact_by_theme_manager.v1"
+    },
+    {
+      "output_name": "data_confidence_map",
+      "path": "data/simulation/analytics/data_confidence_map.json",
+      "schema_version": "analytics_data_confidence_map.v1"
+    },
+    {
+      "output_name": "cross_scenario_resilience_summary",
+      "path": "data/simulation/analytics/cross_scenario_resilience_summary.json",
+      "schema_version": "analytics_cross_scenario_resilience_summary.v1"
+    }
+  ],
+  "pack_id": "arranger_demo_pack_v1",
+  "pack_version": "2026-07-03-demo-v1",
+  "portfolio_id": "portfolio_northstar_family_office",
+  "schema_version": "analytics_output_index.v1",
+  "source_inputs": [
+    "data/analytic_packs/arranger_demo_pack_v1/pack_manifest.json",
+    "data/simulation/synthetic_position_universe.json",
+    "data/simulation/scenario_revaluation_results.json",
+    "data/simulation/simplified_valuation_summary.json"
+  ],
+  "synthetic_data": true
+}

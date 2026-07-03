@@ -8,14 +8,54 @@
     {
       "theme_id": "ai_infrastructure",
       "display_name": "AI Infrastructure",
-      "description": "Exposure tied to AI compute, semiconductors, data centers, and enabling infrastructure.",
-      "exposure_direction_notes": "Higher exposure may increase sensitivity to AI capex cycles and semiconductor supply shocks.",
+      "description": "Exposure tied to AI compute, semiconductors, cloud platforms, data centers, and enabling infrastructure.",
+      "exposure_direction_notes": "Higher exposure may increase sensitivity to AI capex cycles, semiconductor supply, and growth-tech drawdowns.",
       "example_position_tags": [
         "AI infrastructure",
         "semiconductors",
-        "data center power demand"
+        "ai_chip_growth",
+        "cloud_ai"
       ],
-      "advisor_description": "Use when explaining how much of the portfolio is connected to the AI buildout."
+      "advisor_description": "Use when explaining how much of the portfolio is connected to the AI buildout.",
+      "short_description": "AI compute, cloud, semiconductor, and infrastructure exposure.",
+      "relevant_drivers": [
+        "ai_infrastructure_semiconductor",
+        "us_growth_tech_equity",
+        "volatility_proxy"
+      ],
+      "likely_affected_portfolio_areas": [
+        "Manager A growth sleeve",
+        "Core quality equity overlap",
+        "Data center private assets"
+      ],
+      "source_theme_names": [
+        "AI infrastructure",
+        "semiconductors"
+      ],
+      "source_story_tags": [
+        "ai_chip_growth"
+      ],
+      "source_scenario_hints": [
+        "ai_compute",
+        "cloud_ai",
+        "semiconductor_beta",
+        "hardware_beta",
+        "software_beta",
+        "ai_adoption"
+      ],
+      "source_asset_classes": [
+        "public_equity",
+        "etf",
+        "data_center_investment"
+      ],
+      "source_classification_values": [
+        "semiconductors",
+        "cloud infrastructure",
+        "technology"
+      ],
+      "caveats": [
+        "Synthetic mapping only; not a security-level research taxonomy."
+      ]
     },
     {
       "theme_id": "rate_sensitivity",
@@ -24,10 +64,42 @@
       "exposure_direction_notes": "Higher exposure may matter more in rate-shock and refinancing-stress discussions.",
       "example_position_tags": [
         "rates sensitivity",
-        "fixed income",
-        "inflation sensitivity"
+        "rates_duration",
+        "short_rates"
       ],
-      "advisor_description": "Use when framing where the portfolio may be most exposed to rate moves."
+      "advisor_description": "Use when framing where the portfolio may be most exposed to rate moves.",
+      "short_description": "Rate, curve, duration, and financing sensitivity.",
+      "relevant_drivers": [
+        "long_duration_bond_price",
+        "short_duration_bond_price",
+        "rate_proxy",
+        "credit_spread_proxy"
+      ],
+      "likely_affected_portfolio_areas": [
+        "Income manager",
+        "Liquidity reserve",
+        "Private credit"
+      ],
+      "source_theme_names": [
+        "rates sensitivity"
+      ],
+      "source_story_tags": [],
+      "source_scenario_hints": [
+        "rates_duration",
+        "short_rates",
+        "credit_spreads"
+      ],
+      "source_asset_classes": [
+        "fixed_income",
+        "private_credit"
+      ],
+      "source_classification_values": [
+        "fixed_income",
+        "private_credit"
+      ],
+      "caveats": [
+        "Does not model full yield-curve construction."
+      ]
     },
     {
       "theme_id": "private_market_liquidity",
@@ -37,9 +109,45 @@
       "example_position_tags": [
         "private-market liquidity",
         "opaque/private marks",
-        "data confidence / valuation issue"
+        "private_liquidity"
       ],
-      "advisor_description": "Use when discussing liquidity, valuation confidence, or private-market stress."
+      "advisor_description": "Use when discussing liquidity, valuation confidence, or private-market stress.",
+      "short_description": "Private-market, opaque, stale-mark, and liquidity-stress exposure.",
+      "relevant_drivers": [
+        "private_market_liquidity",
+        "credit_spread_proxy",
+        "liquidity_discount_proxy"
+      ],
+      "likely_affected_portfolio_areas": [
+        "Private markets manager",
+        "Private credit sleeve",
+        "Opaque manager-level books"
+      ],
+      "source_theme_names": [
+        "private-market liquidity",
+        "opaque/private marks"
+      ],
+      "source_story_tags": [],
+      "source_scenario_hints": [
+        "private_liquidity",
+        "private_credit",
+        "human_review"
+      ],
+      "source_asset_classes": [
+        "private_equity",
+        "private_credit",
+        "real_estate",
+        "opaque_manager_level"
+      ],
+      "source_classification_values": [
+        "private_equity",
+        "private_credit",
+        "opaque_manager_level",
+        "illiquid"
+      ],
+      "caveats": [
+        "Private marks may be stale or proxy-based in the synthetic fixtures."
+      ]
     },
     {
       "theme_id": "energy_security",
@@ -48,10 +156,396 @@
       "exposure_direction_notes": "Higher exposure may matter in energy-shock or infrastructure-resilience conversations.",
       "example_position_tags": [
         "energy bottlenecks",
-        "data center power demand",
+        "energy",
+        "power_grid"
+      ],
+      "advisor_description": "Use when connecting energy supply conditions to portfolio exposures.",
+      "short_description": "Energy supply, power, and infrastructure bottleneck exposure.",
+      "relevant_drivers": [
+        "energy_oil",
+        "real_assets_infrastructure",
+        "commodity_price"
+      ],
+      "likely_affected_portfolio_areas": [
+        "Macro hedge manager",
+        "Real assets",
+        "Data-center power exposure"
+      ],
+      "source_theme_names": [
+        "energy bottlenecks",
+        "data center power demand"
+      ],
+      "source_story_tags": [],
+      "source_scenario_hints": [
+        "energy",
+        "power_grid",
+        "data_center_power"
+      ],
+      "source_asset_classes": [
+        "commodities_energy",
+        "real_estate",
+        "data_center_investment"
+      ],
+      "source_classification_values": [
+        "commodities_energy",
+        "energy",
+        "real assets"
+      ],
+      "caveats": [
+        "Energy-security mapping is synthetic and not commodity research."
+      ]
+    },
+    {
+      "theme_id": "credit_stress",
+      "display_name": "Credit Stress",
+      "description": "Exposure tied to credit spread widening, refinancing stress, and private-credit marks.",
+      "exposure_direction_notes": "Higher exposure may pressure fixed income, private credit, and lower-liquidity credit holdings.",
+      "example_position_tags": [
+        "credit_spreads",
+        "private_credit",
+        "fixed_income"
+      ],
+      "advisor_description": "Use when asking whether credit risk is concentrated across income and private-market allocations.",
+      "short_description": "Credit spread and refinancing sensitivity.",
+      "relevant_drivers": [
+        "credit_spread_proxy",
+        "private_market_liquidity",
+        "volatility_proxy"
+      ],
+      "likely_affected_portfolio_areas": [
+        "Income manager",
+        "Private credit holdings",
+        "Macro hedges"
+      ],
+      "source_theme_names": [
+        "rates sensitivity",
+        "private-market liquidity"
+      ],
+      "source_story_tags": [],
+      "source_scenario_hints": [
+        "credit_spreads",
+        "private_credit",
+        "rates_duration"
+      ],
+      "source_asset_classes": [
+        "fixed_income",
+        "private_credit"
+      ],
+      "source_classification_values": [
+        "fixed_income",
+        "private_credit"
+      ],
+      "caveats": [
+        "Credit stress is inferred from synthetic tags and scenario hints."
+      ]
+    },
+    {
+      "theme_id": "dollar_exposure",
+      "display_name": "Dollar Exposure",
+      "description": "Exposure tied to USD cash, USD-denominated assets, and currency-sensitive hedges.",
+      "exposure_direction_notes": "Higher exposure may matter when discussing currency strength, cash reserves, and USD funding conditions.",
+      "example_position_tags": [
+        "USD exposure",
+        "fx"
+      ],
+      "advisor_description": "Use when separating USD liquidity and currency effects from broader asset allocation.",
+      "short_description": "USD cash, currency, and dollar-sensitive exposure.",
+      "relevant_drivers": [
+        "usd_fx_broad",
+        "fx_rate",
+        "money_market_nav"
+      ],
+      "likely_affected_portfolio_areas": [
+        "Liquidity reserve",
+        "Macro overlay",
+        "USD cash balances"
+      ],
+      "source_theme_names": [
+        "USD exposure"
+      ],
+      "source_story_tags": [],
+      "source_scenario_hints": [
+        "cash"
+      ],
+      "source_asset_classes": [
+        "cash_money_market",
+        "fx"
+      ],
+      "source_classification_values": [
+        "fx"
+      ],
+      "caveats": [
+        "Currency exposure is simplified in the synthetic fixture."
+      ]
+    },
+    {
+      "theme_id": "china_taiwan_supply_chain",
+      "display_name": "China/Taiwan Supply Chain",
+      "description": "Exposure tied to Asia supply-chain, semiconductor, and geopolitical disruption sensitivity.",
+      "exposure_direction_notes": "Higher exposure may matter in semiconductor supply-chain and Taiwan-disruption conversations.",
+      "example_position_tags": [
+        "asia_supply_chain",
+        "semiconductors",
+        "semiconductor_beta"
+      ],
+      "advisor_description": "Use when connecting supply-chain disruption risk to technology and AI infrastructure exposure.",
+      "short_description": "Semiconductor and Asia supply-chain sensitivity.",
+      "relevant_drivers": [
+        "ai_infrastructure_semiconductor",
+        "us_growth_tech_equity",
+        "energy_oil"
+      ],
+      "likely_affected_portfolio_areas": [
+        "AI infrastructure names",
+        "Semiconductor ETFs",
+        "Technology growth exposure"
+      ],
+      "source_theme_names": [
+        "semiconductors",
+        "AI infrastructure"
+      ],
+      "source_story_tags": [
+        "ai_chip_growth"
+      ],
+      "source_scenario_hints": [
+        "asia_supply_chain",
+        "semiconductor_beta",
+        "hardware_beta"
+      ],
+      "source_asset_classes": [
+        "public_equity",
+        "etf"
+      ],
+      "source_classification_values": [
+        "semiconductors",
+        "Asia",
+        "technology"
+      ],
+      "caveats": [
+        "No geopolitical probability is assigned."
+      ]
+    },
+    {
+      "theme_id": "real_asset_inflation_hedge",
+      "display_name": "Real Asset Inflation Hedge",
+      "description": "Exposure tied to inflation-linked, commodity, real-estate, and infrastructure-like assets.",
+      "exposure_direction_notes": "Higher exposure may create partial ballast in inflation or energy scenarios, with liquidity caveats.",
+      "example_position_tags": [
+        "inflation sensitivity",
+        "real_assets",
         "commodities_energy"
       ],
-      "advisor_description": "Use when connecting energy supply conditions to portfolio exposures."
+      "advisor_description": "Use when discussing whether the portfolio has assets that may offset inflation pressure.",
+      "short_description": "Real-asset, commodity, and inflation-sensitive exposure.",
+      "relevant_drivers": [
+        "energy_oil",
+        "real_assets_infrastructure",
+        "commodity_price"
+      ],
+      "likely_affected_portfolio_areas": [
+        "Real assets",
+        "Energy exposure",
+        "Private markets"
+      ],
+      "source_theme_names": [
+        "inflation sensitivity",
+        "energy bottlenecks"
+      ],
+      "source_story_tags": [],
+      "source_scenario_hints": [
+        "inflation",
+        "real_assets",
+        "energy"
+      ],
+      "source_asset_classes": [
+        "real_estate",
+        "commodities_energy",
+        "data_center_investment"
+      ],
+      "source_classification_values": [
+        "real_estate",
+        "commodities_energy",
+        "real assets"
+      ],
+      "caveats": [
+        "Inflation-hedge behavior is simplified and scenario-dependent."
+      ]
+    },
+    {
+      "theme_id": "data_center_infrastructure",
+      "display_name": "Data Center Infrastructure",
+      "description": "Exposure tied to data centers, power campuses, cooling, grid upgrades, and AI infrastructure buildout.",
+      "exposure_direction_notes": "Higher exposure may link AI demand to power, real-asset, and private-market risks.",
+      "example_position_tags": [
+        "data center power demand",
+        "data_center_power",
+        "data_center_investment"
+      ],
+      "advisor_description": "Use when distinguishing direct AI software/chip exposure from physical infrastructure exposure.",
+      "short_description": "Data-center, power-campus, and grid-enablement exposure.",
+      "relevant_drivers": [
+        "ai_infrastructure_semiconductor",
+        "real_assets_infrastructure",
+        "energy_oil"
+      ],
+      "likely_affected_portfolio_areas": [
+        "Private real assets",
+        "AI infrastructure manager",
+        "Power-campus investments"
+      ],
+      "source_theme_names": [
+        "data center power demand",
+        "AI infrastructure"
+      ],
+      "source_story_tags": [],
+      "source_scenario_hints": [
+        "data_center_power",
+        "power_grid",
+        "ai_compute"
+      ],
+      "source_asset_classes": [
+        "data_center_investment",
+        "real_estate",
+        "public_equity"
+      ],
+      "source_classification_values": [
+        "data_center_investment",
+        "cloud infrastructure",
+        "technology"
+      ],
+      "caveats": [
+        "Synthetic demo does not model project-level development risk."
+      ]
+    },
+    {
+      "theme_id": "consumer_demand_sensitivity",
+      "display_name": "Consumer Demand Sensitivity",
+      "description": "Exposure that may depend on household demand, broad equity beta, or consumer spending conditions.",
+      "exposure_direction_notes": "Higher exposure may matter in growth slowdowns or demand-sensitive stress discussions.",
+      "example_position_tags": [
+        "consumer_spending",
+        "broad_equity",
+        "quality_growth"
+      ],
+      "advisor_description": "Use when separating economically sensitive public equity exposure from defensive ballast.",
+      "short_description": "Demand-sensitive equity and growth exposure.",
+      "relevant_drivers": [
+        "us_large_cap_equity",
+        "us_growth_tech_equity",
+        "volatility_proxy"
+      ],
+      "likely_affected_portfolio_areas": [
+        "Core quality equity",
+        "Broad public equity",
+        "Growth holdings"
+      ],
+      "source_theme_names": [
+        "growth/value"
+      ],
+      "source_story_tags": [],
+      "source_scenario_hints": [
+        "consumer_spending",
+        "broad_equity",
+        "quality_growth",
+        "quality_factor"
+      ],
+      "source_asset_classes": [
+        "public_equity",
+        "etf"
+      ],
+      "source_classification_values": [
+        "public_equity",
+        "growth",
+        "technology"
+      ],
+      "caveats": [
+        "Consumer-demand mapping is a synthetic proxy, not a macro forecast."
+      ]
+    },
+    {
+      "theme_id": "duration_exposure",
+      "display_name": "Duration Exposure",
+      "description": "Exposure to long-duration bonds, rate-sensitive equity, and duration-like private assets.",
+      "exposure_direction_notes": "Higher exposure may amplify losses in upward-rate scenarios and help explain rate-shock sensitivity.",
+      "example_position_tags": [
+        "rates_duration",
+        "long_duration_bond_price",
+        "bond_price_proxy"
+      ],
+      "advisor_description": "Use when identifying whether rate sensitivity is specifically duration-driven.",
+      "short_description": "Long-duration and bond-price sensitivity.",
+      "relevant_drivers": [
+        "long_duration_bond_price",
+        "duration_bucket_price",
+        "rate_proxy"
+      ],
+      "likely_affected_portfolio_areas": [
+        "Income manager",
+        "Long-duration fixed income",
+        "Rate-sensitive alternatives"
+      ],
+      "source_theme_names": [
+        "rates sensitivity"
+      ],
+      "source_story_tags": [],
+      "source_scenario_hints": [
+        "rates_duration",
+        "bond_price_proxy"
+      ],
+      "source_asset_classes": [
+        "fixed_income"
+      ],
+      "source_classification_values": [
+        "fixed_income"
+      ],
+      "caveats": [
+        "Duration is inferred from synthetic scenario hints rather than key-rate analytics."
+      ]
+    },
+    {
+      "theme_id": "defensive_cash_flow",
+      "display_name": "Defensive Cash Flow",
+      "description": "Exposure tied to cash, defensive ballast, coupons, distributions, and spending-support assets.",
+      "exposure_direction_notes": "Higher exposure may help offset stress but should be separated from guaranteed income claims.",
+      "example_position_tags": [
+        "defensive ballast",
+        "cash generation",
+        "cash"
+      ],
+      "advisor_description": "Use when discussing liquidity, cash generation, and stabilizing portfolio roles.",
+      "short_description": "Cash, income, and defensive ballast exposure.",
+      "relevant_drivers": [
+        "money_market_nav",
+        "short_duration_bond_price",
+        "cash_treatment"
+      ],
+      "likely_affected_portfolio_areas": [
+        "Liquidity reserve",
+        "Income manager",
+        "Short-duration holdings"
+      ],
+      "source_theme_names": [
+        "defensive ballast",
+        "cash generation"
+      ],
+      "source_story_tags": [],
+      "source_scenario_hints": [
+        "cash",
+        "short_rates",
+        "low_vol"
+      ],
+      "source_asset_classes": [
+        "cash_money_market",
+        "fixed_income"
+      ],
+      "source_classification_values": [
+        "cash_money_market",
+        "liquid",
+        "daily_liquidity"
+      ],
+      "caveats": [
+        "Cash generation is not a guaranteed income stream."
+      ]
     }
   ]
 }

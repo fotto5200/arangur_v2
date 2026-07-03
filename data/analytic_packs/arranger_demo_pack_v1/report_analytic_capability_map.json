@@ -7,19 +7,25 @@
   "capabilities": [
     {
       "report_element_id": "portfolio_status",
-      "supported_themes": [],
+      "supported_themes": [
+        "defensive_cash_flow",
+        "private_market_liquidity",
+        "dollar_exposure"
+      ],
       "supported_scenarios": [],
       "supported_lenses": [
-        "asset_class",
-        "liquidity_bucket",
+        "liquidity_profile",
         "data_confidence"
       ],
       "supported_scopes": [
-        "Whole portfolio"
+        "Whole portfolio",
+        "Selected account",
+        "Selected sleeve / mandate"
       ],
       "required_inputs": [
         "simplified_valuation_summary",
-        "synthetic_position_universe_summary"
+        "synthetic_position_universe_summary",
+        "theme_exposure_summary"
       ],
       "unsupported_reason_if_any": null
     },
@@ -29,17 +35,27 @@
         "ai_infrastructure",
         "rate_sensitivity",
         "private_market_liquidity",
-        "energy_security"
+        "energy_security",
+        "credit_stress",
+        "dollar_exposure",
+        "china_taiwan_supply_chain",
+        "real_asset_inflation_hedge",
+        "data_center_infrastructure",
+        "consumer_demand_sensitivity",
+        "duration_exposure",
+        "defensive_cash_flow"
       ],
       "supported_scenarios": [
         "ai_chip_selloff",
+        "energy_shock",
+        "private_market_liquidity_freeze",
         "taiwan_disruption"
       ],
       "supported_lenses": [
-        "theme",
-        "asset_class",
-        "liquidity_bucket",
-        "manager_role_mandate"
+        "strategic_theme",
+        "manager_role_mandate",
+        "liquidity_profile",
+        "data_confidence"
       ],
       "supported_scopes": [
         "Whole portfolio",
@@ -49,7 +65,9 @@
       ],
       "required_inputs": [
         "synthetic_position_universe_summary",
-        "simplified_valuation_summary"
+        "simplified_valuation_summary",
+        "theme_exposure_summary",
+        "manager_theme_overlap_summary"
       ],
       "unsupported_reason_if_any": null
     },
@@ -59,19 +77,26 @@
         "ai_infrastructure",
         "rate_sensitivity",
         "private_market_liquidity",
-        "energy_security"
+        "energy_security",
+        "credit_stress",
+        "china_taiwan_supply_chain",
+        "real_asset_inflation_hedge",
+        "data_center_infrastructure",
+        "duration_exposure",
+        "defensive_cash_flow"
       ],
       "supported_scenarios": [
         "ai_chip_selloff",
         "rate_shock",
+        "energy_shock",
         "private_market_liquidity_freeze",
         "taiwan_disruption"
       ],
       "supported_lenses": [
-        "theme",
+        "strategic_theme",
         "manager_role_mandate",
-        "asset_class",
-        "liquidity_bucket"
+        "liquidity_profile",
+        "data_confidence"
       ],
       "supported_scopes": [
         "All managers compared",
@@ -82,7 +107,8 @@
       "required_inputs": [
         "synthetic_scenario_market_states",
         "scenario_revaluation_results",
-        "simplified_valuation_summary"
+        "simplified_valuation_summary",
+        "scenario_impact_by_theme_manager"
       ],
       "unsupported_reason_if_any": null
     },
@@ -90,15 +116,20 @@
       "report_element_id": "cash_generation_summary",
       "supported_themes": [
         "rate_sensitivity",
-        "private_market_liquidity"
+        "private_market_liquidity",
+        "credit_stress",
+        "dollar_exposure",
+        "duration_exposure",
+        "defensive_cash_flow"
       ],
       "supported_scenarios": [
         "rate_shock",
         "private_market_liquidity_freeze"
       ],
       "supported_lenses": [
-        "liquidity_bucket",
-        "manager_role_mandate"
+        "liquidity_profile",
+        "manager_role_mandate",
+        "data_confidence"
       ],
       "supported_scopes": [
         "Whole portfolio",
@@ -106,7 +137,9 @@
       ],
       "required_inputs": [
         "simplified_valuation_summary",
-        "synthetic_position_universe_summary"
+        "synthetic_position_universe_summary",
+        "theme_exposure_summary",
+        "data_confidence_map"
       ],
       "unsupported_reason_if_any": null
     },
@@ -116,13 +149,27 @@
         "ai_infrastructure",
         "rate_sensitivity",
         "private_market_liquidity",
-        "energy_security"
+        "energy_security",
+        "credit_stress",
+        "dollar_exposure",
+        "china_taiwan_supply_chain",
+        "real_asset_inflation_hedge",
+        "data_center_infrastructure",
+        "consumer_demand_sensitivity",
+        "duration_exposure",
+        "defensive_cash_flow"
       ],
-      "supported_scenarios": [],
+      "supported_scenarios": [
+        "ai_chip_selloff",
+        "rate_shock",
+        "energy_shock",
+        "private_market_liquidity_freeze",
+        "taiwan_disruption"
+      ],
       "supported_lenses": [
-        "theme",
+        "strategic_theme",
         "manager_role_mandate",
-        "liquidity_bucket",
+        "liquidity_profile",
         "data_confidence"
       ],
       "supported_scopes": [
@@ -132,21 +179,29 @@
       ],
       "required_inputs": [
         "synthetic_position_universe_summary",
-        "simplified_valuation_summary"
+        "simplified_valuation_summary",
+        "manager_theme_overlap_summary",
+        "cross_scenario_resilience_summary"
       ],
       "unsupported_reason_if_any": null
     },
     {
       "report_element_id": "data_confidence_note",
       "supported_themes": [
-        "private_market_liquidity"
+        "private_market_liquidity",
+        "credit_stress",
+        "data_center_infrastructure",
+        "duration_exposure",
+        "defensive_cash_flow"
       ],
       "supported_scenarios": [
+        "rate_shock",
         "private_market_liquidity_freeze"
       ],
       "supported_lenses": [
         "data_confidence",
-        "liquidity_bucket"
+        "liquidity_profile",
+        "manager_role_mandate"
       ],
       "supported_scopes": [
         "Whole portfolio",
@@ -156,7 +211,8 @@
       ],
       "required_inputs": [
         "simplified_valuation_summary",
-        "synthetic_position_universe_summary"
+        "synthetic_position_universe_summary",
+        "data_confidence_map"
       ],
       "unsupported_reason_if_any": null
     }

@@ -72,6 +72,17 @@ Approved analytic packs are the handoff between Arranger and Arangur:
 
 This boundary keeps product behavior simple. It lets Arranger improve analytic content internally without turning the advisor app into an analytic-model-building console.
 
+## Current Demo Proof
+
+The current repo includes a synthetic proof of this boundary:
+
+- `data/analytic_packs/arranger_demo_pack_v1/` is the approved pack fixture.
+- `src/arangur/analytics/analytic_pack_loader.py` loads and validates that pack.
+- `src/arangur/analytics/apply_demo_pack.py` applies the pack to existing synthetic portfolio, scenario, and valuation fixtures.
+- `data/simulation/analytics/` stores deterministic proof outputs for theme exposure, manager/theme overlap, scenario impact by manager/theme, data confidence, and cross-scenario resilience.
+
+These proof outputs remain internal/local analytic artifacts. They are not wired into advisor UI or generated reports yet.
+
 ## Deliberately Out Of Scope For This Boundary
 
 - Advisor-facing control-plane UI.

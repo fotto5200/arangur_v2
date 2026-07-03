@@ -1,0 +1,120 @@
+{
+  "caveats": [
+    "Cross-scenario resilience is a simple deterministic summary across existing synthetic scenario outputs.",
+    "Repeated vulnerability counts are based on top affected themes/managers per scenario, not a probability model."
+  ],
+  "data_as_of": "2026-06-30",
+  "generated_at": "2026-07-03T00:00:00Z",
+  "key_advisor_discussion_points": [
+    "Most vulnerable scenario in the synthetic set: AI / Chip Selloff.",
+    "Most resilient scenario in the synthetic set: Energy Shock.",
+    "Repeated vulnerable theme to review: Consumer Demand Sensitivity.",
+    "Repeated vulnerable manager to review: Manager A - Growth / AI Infrastructure.",
+    "Use these as advisor discussion prompts, not as probabilities or recommendations."
+  ],
+  "most_resilient_scenario": {
+    "scenario_display_name": "Energy Shock",
+    "scenario_id": "energy_shock",
+    "total_impact": -798950.11,
+    "total_impact_percent": -0.019633
+  },
+  "most_vulnerable_scenario": {
+    "scenario_display_name": "AI / Chip Selloff",
+    "scenario_id": "ai_chip_selloff",
+    "total_impact": -6446707.66,
+    "total_impact_percent": -0.158415
+  },
+  "pack_id": "arranger_demo_pack_v1",
+  "pack_version": "2026-07-03-demo-v1",
+  "portfolio_id": "portfolio_northstar_family_office",
+  "repeated_defensive_managers": [
+    {
+      "manager_display_name": "Manager F - Opportunistic Macro / Hedge",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "scenario_count": 5
+    },
+    {
+      "manager_display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "scenario_count": 4
+    },
+    {
+      "manager_display_name": "Manager D - Private Markets / Real Assets",
+      "manager_id": "mgr_d_private_real_assets",
+      "scenario_count": 2
+    },
+    {
+      "manager_display_name": "Manager C - Income and Cash Generation",
+      "manager_id": "mgr_c_income_cash_generation",
+      "scenario_count": 2
+    }
+  ],
+  "repeated_defensive_themes": [
+    {
+      "scenario_count": 5,
+      "theme_display_name": "Dollar Exposure",
+      "theme_id": "dollar_exposure"
+    },
+    {
+      "scenario_count": 4,
+      "theme_display_name": "Real Asset Inflation Hedge",
+      "theme_id": "real_asset_inflation_hedge"
+    },
+    {
+      "scenario_count": 3,
+      "theme_display_name": "Duration Exposure",
+      "theme_id": "duration_exposure"
+    },
+    {
+      "scenario_count": 2,
+      "theme_display_name": "Energy Security",
+      "theme_id": "energy_security"
+    }
+  ],
+  "repeated_vulnerable_managers": [
+    {
+      "manager_display_name": "Manager A - Growth / AI Infrastructure",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "scenario_count": 5
+    },
+    {
+      "manager_display_name": "Manager B - Core Quality Equity",
+      "manager_id": "mgr_b_core_quality_equity",
+      "scenario_count": 4
+    },
+    {
+      "manager_display_name": "Manager C - Income and Cash Generation",
+      "manager_id": "mgr_c_income_cash_generation",
+      "scenario_count": 3
+    },
+    {
+      "manager_display_name": "Manager D - Private Markets / Real Assets",
+      "manager_id": "mgr_d_private_real_assets",
+      "scenario_count": 3
+    }
+  ],
+  "repeated_vulnerable_themes": [
+    {
+      "scenario_count": 4,
+      "theme_display_name": "Consumer Demand Sensitivity",
+      "theme_id": "consumer_demand_sensitivity"
+    },
+    {
+      "scenario_count": 4,
+      "theme_display_name": "Defensive Cash Flow",
+      "theme_id": "defensive_cash_flow"
+    },
+    {
+      "scenario_count": 3,
+      "theme_display_name": "AI Infrastructure",
+      "theme_id": "ai_infrastructure"
+    },
+    {
+      "scenario_count": 2,
+      "theme_display_name": "Private Market Liquidity",
+      "theme_id": "private_market_liquidity"
+    }
+  ],
+  "schema_version": "analytics_cross_scenario_resilience_summary.v1",
+  "synthetic_data": true
+}

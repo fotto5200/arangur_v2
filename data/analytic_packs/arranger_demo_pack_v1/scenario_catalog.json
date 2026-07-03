@@ -20,7 +20,13 @@
       ],
       "supported_report_elements": [
         "scenario_impact_by_manager",
-        "concentration"
+        "concentration",
+        "manager_comparison"
+      ],
+      "likely_affected_portfolio_areas": [
+        "AI Infrastructure",
+        "China/Taiwan Supply Chain",
+        "Data Center Infrastructure"
       ],
       "caveats": [
         "Deterministic synthetic stress, not a forecast.",
@@ -30,7 +36,7 @@
     {
       "scenario_id": "rate_shock",
       "display_name": "Rate Shock",
-      "short_description": "A synthetic stress to duration, credit, and rate-sensitive assets.",
+      "short_description": "A synthetic upward-rate shock reflected through bond-price proxies and credit stress.",
       "advisor_story": "Use to frame how rate-sensitive exposures and managers behave under a sharp rate move.",
       "primary_drivers": [
         "long_duration_bond_price",
@@ -42,17 +48,52 @@
       ],
       "supported_report_elements": [
         "scenario_impact_by_manager",
-        "cash_generation_summary"
+        "cash_generation_summary",
+        "data_confidence_note"
+      ],
+      "likely_affected_portfolio_areas": [
+        "Rate Sensitivity",
+        "Duration Exposure",
+        "Credit Stress",
+        "Defensive Cash Flow"
       ],
       "caveats": [
         "Deterministic synthetic stress, not a forecast.",
-        "Does not model yield-curve construction."
+        "Does not model yield-curve construction or key-rate duration."
+      ]
+    },
+    {
+      "scenario_id": "energy_shock",
+      "display_name": "Energy Shock",
+      "short_description": "A synthetic energy and power bottleneck shock with inflation-sensitive pressure.",
+      "advisor_story": "Use to discuss whether real assets, energy exposure, and data-center infrastructure change portfolio behavior.",
+      "primary_drivers": [
+        "energy_oil",
+        "real_assets_infrastructure",
+        "usd_fx_broad"
+      ],
+      "supported_horizons": [
+        "instantaneous_demo_shock"
+      ],
+      "supported_report_elements": [
+        "scenario_impact_by_manager",
+        "concentration",
+        "manager_comparison"
+      ],
+      "likely_affected_portfolio_areas": [
+        "Energy Security",
+        "Real Asset Inflation Hedge",
+        "Data Center Infrastructure"
+      ],
+      "caveats": [
+        "Deterministic synthetic stress, not a forecast.",
+        "Energy mapping is simplified and does not model commodity futures curves."
       ]
     },
     {
       "scenario_id": "private_market_liquidity_freeze",
-      "display_name": "Private Market Liquidity Freeze",
-      "short_description": "A synthetic stress to private-market liquidity and opaque/stale marks.",
+      "display_name": "Private-Market Liquidity Freeze",
+      "short_description": "A synthetic stress to private-market liquidity, credit spreads, stale marks, and opaque manager books.",
       "advisor_story": "Use to discuss liquidity flexibility and confidence caveats around private holdings.",
       "primary_drivers": [
         "private_market_liquidity",
@@ -64,7 +105,13 @@
       ],
       "supported_report_elements": [
         "scenario_impact_by_manager",
-        "data_confidence_note"
+        "data_confidence_note",
+        "cash_generation_summary"
+      ],
+      "likely_affected_portfolio_areas": [
+        "Private Market Liquidity",
+        "Credit Stress",
+        "Data Confidence"
       ],
       "caveats": [
         "Deterministic synthetic stress, not a forecast.",
@@ -74,8 +121,8 @@
     {
       "scenario_id": "taiwan_disruption",
       "display_name": "Taiwan Disruption",
-      "short_description": "A synthetic geopolitical supply-chain disruption scenario.",
-      "advisor_story": "Use to connect semiconductor supply-chain risk to technology and infrastructure exposures.",
+      "short_description": "A synthetic geopolitical semiconductor and supply-chain disruption scenario.",
+      "advisor_story": "Use to connect semiconductor supply-chain risk to technology, AI infrastructure, and energy-sensitive exposure.",
       "primary_drivers": [
         "ai_infrastructure_semiconductor",
         "us_growth_tech_equity",
@@ -86,7 +133,13 @@
       ],
       "supported_report_elements": [
         "scenario_impact_by_manager",
-        "concentration"
+        "concentration",
+        "manager_comparison"
+      ],
+      "likely_affected_portfolio_areas": [
+        "China/Taiwan Supply Chain",
+        "AI Infrastructure",
+        "Energy Security"
       ],
       "caveats": [
         "Deterministic synthetic stress, not a forecast.",

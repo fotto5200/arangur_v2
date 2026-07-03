@@ -218,6 +218,23 @@ At minimum, a contract validation pass should verify:
 - Synthetic demo packs mark `synthetic_demo_pack` as `true`.
 - Component paths do not point outside the pack directory.
 
+The current repo includes a lightweight standard-library validator at `src/arangur/analytics/analytic_pack_loader.py`. It validates the demo fixture pack, checks pack cross-references, and can summarize component counts without adding a JSON Schema dependency.
+
+## Current Demo Application
+
+The first application of this contract is `data/analytic_packs/arranger_demo_pack_v1/`. It is applied to the existing synthetic portfolio and scenario fixtures by `src/arangur/analytics/apply_demo_pack.py`.
+
+The generated proof outputs live under `data/simulation/analytics/`:
+
+- `theme_exposure_summary.json`
+- `manager_theme_overlap_summary.json`
+- `scenario_impact_by_theme_manager.json`
+- `data_confidence_map.json`
+- `cross_scenario_resilience_summary.json`
+- `analytics_output_index.json`
+
+These outputs are deterministic synthetic analytics artifacts. They are not yet mapped into report-element input payloads, generated reports, advisor UI, backend APIs, or production storage.
+
 ## Deliberately Not Implemented In v1
 
 - Advisor-facing control-plane UI.

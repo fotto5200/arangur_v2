@@ -6,9 +6,9 @@
   "synthetic_demo_pack": true,
   "lenses": [
     {
-      "lens_id": "theme",
-      "display_name": "Theme",
-      "description": "Groups positions by approved Arranger themes.",
+      "lens_id": "strategic_theme",
+      "display_name": "Strategic Theme",
+      "description": "Groups positions by approved Arranger themes used in exposure, overlap, and scenario discussion.",
       "allowed_scope": [
         "Whole portfolio",
         "Selected manager",
@@ -19,7 +19,15 @@
         "AI Infrastructure",
         "Rate Sensitivity",
         "Private Market Liquidity",
-        "Energy Security"
+        "Energy Security",
+        "Credit Stress",
+        "Dollar Exposure",
+        "China/Taiwan Supply Chain",
+        "Real Asset Inflation Hedge",
+        "Data Center Infrastructure",
+        "Consumer Demand Sensitivity",
+        "Duration Exposure",
+        "Defensive Cash Flow"
       ]
     },
     {
@@ -34,13 +42,15 @@
       "categories": [
         "Growth / AI Infrastructure",
         "Core Quality Equity",
-        "Private Markets",
-        "Macro Overlay"
+        "Income and Cash Generation",
+        "Private Markets / Real Assets",
+        "Liquidity Reserve / Defensive Ballast",
+        "Opportunistic Macro / Hedge"
       ]
     },
     {
-      "lens_id": "liquidity_bucket",
-      "display_name": "Liquidity Bucket",
+      "lens_id": "liquidity_profile",
+      "display_name": "Liquidity Profile",
       "description": "Groups positions by liquidity and valuation-readiness treatment.",
       "allowed_scope": [
         "Whole portfolio",
@@ -50,9 +60,10 @@
       ],
       "categories": [
         "Daily liquidity",
-        "Monthly or quarterly liquidity",
-        "Private or stale mark",
-        "Human review required"
+        "Mostly liquid",
+        "Mixed liquidity",
+        "Illiquid",
+        "Private or stale mark"
       ]
     },
     {
@@ -69,6 +80,7 @@
         "High",
         "Medium",
         "Low",
+        "Review Required",
         "Unknown"
       ]
     }

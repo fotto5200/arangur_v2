@@ -11,15 +11,20 @@
       "variable_shocks": {
         "ai_infrastructure_semiconductor": -0.24,
         "us_growth_tech_equity": -0.16,
+        "us_large_cap_equity": -0.08,
+        "credit_spread_proxy": 0.08,
+        "private_market_liquidity": -0.06,
         "volatility_proxy": 0.35
       },
       "qualitative_assumptions": [
         "AI compute and semiconductor exposures sell off together.",
-        "Volatility rises during the stress."
+        "Broader growth equity weakens with a smaller shock.",
+        "Volatility and credit spread pressure rise during the stress."
       ],
       "confidence_level": "medium",
       "caveats": [
-        "Synthetic demo shock only."
+        "Synthetic demo shock only.",
+        "No probability is assigned."
       ]
     },
     {
@@ -28,11 +33,14 @@
       "variable_shocks": {
         "long_duration_bond_price": -0.12,
         "short_duration_bond_price": -0.03,
-        "credit_spread_proxy": 0.10
+        "credit_spread_proxy": 0.10,
+        "private_market_liquidity": -0.04,
+        "volatility_proxy": 0.18
       },
       "qualitative_assumptions": [
         "Long-duration assets are more rate-sensitive than short-duration assets.",
-        "Credit spreads widen alongside the rate move."
+        "Credit spreads widen alongside the rate move.",
+        "Private-market liquidity weakens modestly."
       ],
       "confidence_level": "medium",
       "caveats": [
@@ -41,16 +49,40 @@
       ]
     },
     {
+      "scenario_id": "energy_shock",
+      "shock_id": "energy_shock_demo_shock_v1",
+      "variable_shocks": {
+        "energy_oil": 0.22,
+        "real_assets_infrastructure": 0.04,
+        "ai_infrastructure_semiconductor": -0.08,
+        "us_large_cap_equity": -0.04,
+        "volatility_proxy": 0.15
+      },
+      "qualitative_assumptions": [
+        "Energy prices rise and power bottlenecks pressure AI infrastructure.",
+        "Real assets provide partial ballast but do not eliminate drawdown.",
+        "Equity beta weakens modestly."
+      ],
+      "confidence_level": "medium",
+      "caveats": [
+        "Synthetic demo shock only.",
+        "Does not model commodity curve or physical power-market detail."
+      ]
+    },
+    {
       "scenario_id": "private_market_liquidity_freeze",
       "shock_id": "private_market_liquidity_freeze_demo_shock_v1",
       "variable_shocks": {
         "private_market_liquidity": -0.18,
         "credit_spread_proxy": 0.08,
+        "long_duration_bond_price": -0.05,
+        "real_assets_infrastructure": -0.04,
         "volatility_proxy": 0.25
       },
       "qualitative_assumptions": [
         "Private and opaque marks receive lower confidence during the stress.",
-        "Liquidity-sensitive assets become harder to reposition."
+        "Liquidity-sensitive assets become harder to reposition.",
+        "Credit spreads widen while stale marks require caveats."
       ],
       "confidence_level": "low",
       "caveats": [
@@ -64,11 +96,15 @@
       "variable_shocks": {
         "ai_infrastructure_semiconductor": -0.20,
         "us_growth_tech_equity": -0.10,
-        "energy_oil": 0.12
+        "energy_oil": 0.12,
+        "private_market_liquidity": -0.06,
+        "bitcoin_crypto": -0.10,
+        "usd_fx_broad": 0.04
       },
       "qualitative_assumptions": [
         "Semiconductor supply-chain pressure affects AI infrastructure exposures.",
-        "Energy prices rise modestly during the disruption."
+        "Energy prices rise modestly during the disruption.",
+        "Risk appetite weakens across growth and private-market exposures."
       ],
       "confidence_level": "low",
       "caveats": [

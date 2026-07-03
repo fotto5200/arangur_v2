@@ -1,0 +1,874 @@
+{
+  "caveats": [
+    "Uses existing deterministic scenario_revaluation_results.json; this module does not implement a new scenario engine.",
+    "Theme-level impact allocates position impacts across approved pack theme mappings and is approximate."
+  ],
+  "data_as_of": "2026-06-30",
+  "generated_at": "2026-07-03T00:00:00Z",
+  "pack_id": "arranger_demo_pack_v1",
+  "pack_version": "2026-07-03-demo-v1",
+  "portfolio_id": "portfolio_northstar_family_office",
+  "scenario_count": 5,
+  "scenarios": [
+    {
+      "advisor_story": "Use to discuss which managers and themes are most tied to a pullback in the AI buildout.",
+      "base_total_value": 40695000.0,
+      "caveats": [
+        "Deterministic synthetic stress, not a forecast.",
+        "No probability is assigned.",
+        "Deterministic synthetic scenario revaluation, not a forecast.",
+        "Scenario results are simplified economic revaluations and are not connected to report generation in this batch."
+      ],
+      "confidence": "medium",
+      "scenario_display_name": "AI / Chip Selloff",
+      "scenario_id": "ai_chip_selloff",
+      "scenario_status": "available_from_existing_synthetic_revaluation",
+      "scenario_total_value": 34248292.34,
+      "theme_impacts": [
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 5428582.07,
+          "scenario_impact": -1111016.84,
+          "scenario_impact_percent": -0.204661,
+          "scenario_value": 4317565.23,
+          "theme_display_name": "Consumer Demand Sensitivity",
+          "theme_id": "consumer_demand_sensitivity"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 5134713.02,
+          "scenario_impact": -1089952.69,
+          "scenario_impact_percent": -0.212271,
+          "scenario_value": 4044760.33,
+          "theme_display_name": "AI Infrastructure",
+          "theme_id": "ai_infrastructure"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 7116201.12,
+          "scenario_impact": -1084378.96,
+          "scenario_impact_percent": -0.152382,
+          "scenario_value": 6031822.16,
+          "theme_display_name": "Defensive Cash Flow",
+          "theme_id": "defensive_cash_flow"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 5077838.02,
+          "scenario_impact": -1081623.72,
+          "scenario_impact_percent": -0.213009,
+          "scenario_value": 3996214.3,
+          "theme_display_name": "China/Taiwan Supply Chain",
+          "theme_id": "china_taiwan_supply_chain"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 4092522.55,
+          "scenario_impact": -827513.71,
+          "scenario_impact_percent": -0.202201,
+          "scenario_value": 3265008.83,
+          "theme_display_name": "Data Center Infrastructure",
+          "theme_id": "data_center_infrastructure"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2914683.26,
+          "scenario_impact": -300243.89,
+          "scenario_impact_percent": -0.103011,
+          "scenario_value": 2614439.37,
+          "theme_display_name": "Credit Stress",
+          "theme_id": "credit_stress"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2106326.12,
+          "scenario_impact": -251791.99,
+          "scenario_impact_percent": -0.119541,
+          "scenario_value": 1854534.13,
+          "theme_display_name": "Private Market Liquidity",
+          "theme_id": "private_market_liquidity"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2304088.02,
+          "scenario_impact": -163469.99,
+          "scenario_impact_percent": -0.070948,
+          "scenario_value": 2140618.03,
+          "theme_display_name": "Rate Sensitivity",
+          "theme_id": "rate_sensitivity"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 1253199.13,
+          "scenario_impact": -157674.8,
+          "scenario_impact_percent": -0.125818,
+          "scenario_value": 1095524.33,
+          "theme_display_name": "Energy Security",
+          "theme_id": "energy_security"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 1238151.52,
+          "scenario_impact": -147603.76,
+          "scenario_impact_percent": -0.119213,
+          "scenario_value": 1090547.75,
+          "theme_display_name": "Real Asset Inflation Hedge",
+          "theme_id": "real_asset_inflation_hedge"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 1698879.69,
+          "scenario_impact": -145112.15,
+          "scenario_impact_percent": -0.085416,
+          "scenario_value": 1553767.53,
+          "theme_display_name": "Duration Exposure",
+          "theme_id": "duration_exposure"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2329815.48,
+          "scenario_impact": -86325.14,
+          "scenario_impact_percent": -0.037052,
+          "scenario_value": 2243490.34,
+          "theme_display_name": "Dollar Exposure",
+          "theme_id": "dollar_exposure"
+        }
+      ],
+      "top_negative_managers": [
+        {
+          "base_value": 10115000.0,
+          "manager_display_name": "Manager A - Growth / AI Infrastructure",
+          "manager_id": "mgr_a_growth_ai_infrastructure",
+          "scenario_impact": -2408684.51,
+          "scenario_impact_percent": -0.23813
+        },
+        {
+          "base_value": 7655000.0,
+          "manager_display_name": "Manager B - Core Quality Equity",
+          "manager_id": "mgr_b_core_quality_equity",
+          "scenario_impact": -1833264.1,
+          "scenario_impact_percent": -0.239486
+        },
+        {
+          "base_value": 5300000.0,
+          "manager_display_name": "Manager C - Income and Cash Generation",
+          "manager_id": "mgr_c_income_cash_generation",
+          "scenario_impact": -789653.01,
+          "scenario_impact_percent": -0.148991
+        }
+      ],
+      "top_positive_or_defensive_managers": [
+        {
+          "base_value": 3645000.0,
+          "manager_display_name": "Manager F - Opportunistic Macro / Hedge",
+          "manager_id": "mgr_f_opportunistic_macro",
+          "scenario_impact": -224751.02,
+          "scenario_impact_percent": -0.06166
+        },
+        {
+          "base_value": 5715000.0,
+          "manager_display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "manager_id": "mgr_e_liquidity_defensive",
+          "scenario_impact": -449693.39,
+          "scenario_impact_percent": -0.078687
+        },
+        {
+          "base_value": 8265000.0,
+          "manager_display_name": "Manager D - Private Markets / Real Assets",
+          "manager_id": "mgr_d_private_real_assets",
+          "scenario_impact": -740661.63,
+          "scenario_impact_percent": -0.089614
+        }
+      ],
+      "total_impact": -6446707.66,
+      "total_impact_percent": -0.158415
+    },
+    {
+      "advisor_story": "Use to frame how rate-sensitive exposures and managers behave under a sharp rate move.",
+      "base_total_value": 40695000.0,
+      "caveats": [
+        "Deterministic synthetic stress, not a forecast.",
+        "Does not model yield-curve construction or key-rate duration.",
+        "Deterministic synthetic scenario revaluation, not a forecast.",
+        "Scenario results are simplified economic revaluations and are not connected to report generation in this batch."
+      ],
+      "confidence": "medium",
+      "scenario_display_name": "Rate Shock",
+      "scenario_id": "rate_shock",
+      "scenario_status": "available_from_existing_synthetic_revaluation",
+      "scenario_total_value": 38901560.87,
+      "theme_impacts": [
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 7116201.12,
+          "scenario_impact": -277176.21,
+          "scenario_impact_percent": -0.03895,
+          "scenario_value": 6839024.91,
+          "theme_display_name": "Defensive Cash Flow",
+          "theme_id": "defensive_cash_flow"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2914683.26,
+          "scenario_impact": -228223.12,
+          "scenario_impact_percent": -0.078301,
+          "scenario_value": 2686460.14,
+          "theme_display_name": "Credit Stress",
+          "theme_id": "credit_stress"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2106326.12,
+          "scenario_impact": -206487.36,
+          "scenario_impact_percent": -0.098032,
+          "scenario_value": 1899838.75,
+          "theme_display_name": "Private Market Liquidity",
+          "theme_id": "private_market_liquidity"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 5428582.07,
+          "scenario_impact": -194119.08,
+          "scenario_impact_percent": -0.035759,
+          "scenario_value": 5234462.99,
+          "theme_display_name": "Consumer Demand Sensitivity",
+          "theme_id": "consumer_demand_sensitivity"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 5134713.02,
+          "scenario_impact": -178319.01,
+          "scenario_impact_percent": -0.034728,
+          "scenario_value": 4956394.01,
+          "theme_display_name": "AI Infrastructure",
+          "theme_id": "ai_infrastructure"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 5077838.02,
+          "scenario_impact": -177276.19,
+          "scenario_impact_percent": -0.034912,
+          "scenario_value": 4900561.83,
+          "theme_display_name": "China/Taiwan Supply Chain",
+          "theme_id": "china_taiwan_supply_chain"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 4092522.55,
+          "scenario_impact": -143179.1,
+          "scenario_impact_percent": -0.034986,
+          "scenario_value": 3949343.45,
+          "theme_display_name": "Data Center Infrastructure",
+          "theme_id": "data_center_infrastructure"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2304088.02,
+          "scenario_impact": -129062.02,
+          "scenario_impact_percent": -0.056014,
+          "scenario_value": 2175026.0,
+          "theme_display_name": "Rate Sensitivity",
+          "theme_id": "rate_sensitivity"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 1698879.69,
+          "scenario_impact": -113883.8,
+          "scenario_impact_percent": -0.067035,
+          "scenario_value": 1584995.89,
+          "theme_display_name": "Duration Exposure",
+          "theme_id": "duration_exposure"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2329815.48,
+          "scenario_impact": -75650.47,
+          "scenario_impact_percent": -0.032471,
+          "scenario_value": 2254165.01,
+          "theme_display_name": "Dollar Exposure",
+          "theme_id": "dollar_exposure"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 1238151.52,
+          "scenario_impact": -36061.61,
+          "scenario_impact_percent": -0.029125,
+          "scenario_value": 1202089.91,
+          "theme_display_name": "Real Asset Inflation Hedge",
+          "theme_id": "real_asset_inflation_hedge"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 1253199.13,
+          "scenario_impact": -34001.16,
+          "scenario_impact_percent": -0.027131,
+          "scenario_value": 1219197.98,
+          "theme_display_name": "Energy Security",
+          "theme_id": "energy_security"
+        }
+      ],
+      "top_negative_managers": [
+        {
+          "base_value": 8265000.0,
+          "manager_display_name": "Manager D - Private Markets / Real Assets",
+          "manager_id": "mgr_d_private_real_assets",
+          "scenario_impact": -492494.61,
+          "scenario_impact_percent": -0.059588
+        },
+        {
+          "base_value": 10115000.0,
+          "manager_display_name": "Manager A - Growth / AI Infrastructure",
+          "manager_id": "mgr_a_growth_ai_infrastructure",
+          "scenario_impact": -368005.38,
+          "scenario_impact_percent": -0.036382
+        },
+        {
+          "base_value": 5300000.0,
+          "manager_display_name": "Manager C - Income and Cash Generation",
+          "manager_id": "mgr_c_income_cash_generation",
+          "scenario_impact": -294250.28,
+          "scenario_impact_percent": -0.055519
+        }
+      ],
+      "top_positive_or_defensive_managers": [
+        {
+          "base_value": 3645000.0,
+          "manager_display_name": "Manager F - Opportunistic Macro / Hedge",
+          "manager_id": "mgr_f_opportunistic_macro",
+          "scenario_impact": -71602.1,
+          "scenario_impact_percent": -0.019644
+        },
+        {
+          "base_value": 5715000.0,
+          "manager_display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "manager_id": "mgr_e_liquidity_defensive",
+          "scenario_impact": -275721.81,
+          "scenario_impact_percent": -0.048245
+        },
+        {
+          "base_value": 7655000.0,
+          "manager_display_name": "Manager B - Core Quality Equity",
+          "manager_id": "mgr_b_core_quality_equity",
+          "scenario_impact": -291364.95,
+          "scenario_impact_percent": -0.038062
+        }
+      ],
+      "total_impact": -1793439.13,
+      "total_impact_percent": -0.04407
+    },
+    {
+      "advisor_story": "Use to discuss whether real assets, energy exposure, and data-center infrastructure change portfolio behavior.",
+      "base_total_value": 40695000.0,
+      "caveats": [
+        "Deterministic synthetic stress, not a forecast.",
+        "Energy mapping is simplified and does not model commodity futures curves.",
+        "Deterministic synthetic scenario revaluation, not a forecast.",
+        "Scenario results are simplified economic revaluations and are not connected to report generation in this batch."
+      ],
+      "confidence": "medium",
+      "scenario_display_name": "Energy Shock",
+      "scenario_id": "energy_shock",
+      "scenario_status": "available_from_existing_synthetic_revaluation",
+      "scenario_total_value": 39896049.89,
+      "theme_impacts": [
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 5134713.02,
+          "scenario_impact": -218221.15,
+          "scenario_impact_percent": -0.042499,
+          "scenario_value": 4916491.88,
+          "theme_display_name": "AI Infrastructure",
+          "theme_id": "ai_infrastructure"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 5428582.07,
+          "scenario_impact": -216517.62,
+          "scenario_impact_percent": -0.039885,
+          "scenario_value": 5212064.45,
+          "theme_display_name": "Consumer Demand Sensitivity",
+          "theme_id": "consumer_demand_sensitivity"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 5077838.02,
+          "scenario_impact": -215096.2,
+          "scenario_impact_percent": -0.04236,
+          "scenario_value": 4862741.82,
+          "theme_display_name": "China/Taiwan Supply Chain",
+          "theme_id": "china_taiwan_supply_chain"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 7116201.12,
+          "scenario_impact": -177292.04,
+          "scenario_impact_percent": -0.024914,
+          "scenario_value": 6938909.08,
+          "theme_display_name": "Defensive Cash Flow",
+          "theme_id": "defensive_cash_flow"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 4092522.55,
+          "scenario_impact": -131476.22,
+          "scenario_impact_percent": -0.032126,
+          "scenario_value": 3961046.32,
+          "theme_display_name": "Data Center Infrastructure",
+          "theme_id": "data_center_infrastructure"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2914683.26,
+          "scenario_impact": -19178.85,
+          "scenario_impact_percent": -0.00658,
+          "scenario_value": 2895504.41,
+          "theme_display_name": "Credit Stress",
+          "theme_id": "credit_stress"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2304088.02,
+          "scenario_impact": -2532.27,
+          "scenario_impact_percent": -0.001099,
+          "scenario_value": 2301555.75,
+          "theme_display_name": "Rate Sensitivity",
+          "theme_id": "rate_sensitivity"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 1698879.69,
+          "scenario_impact": -298.43,
+          "scenario_impact_percent": -0.000176,
+          "scenario_value": 1698581.26,
+          "theme_display_name": "Duration Exposure",
+          "theme_id": "duration_exposure"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2106326.12,
+          "scenario_impact": 3303.71,
+          "scenario_impact_percent": 0.001568,
+          "scenario_value": 2109629.83,
+          "theme_display_name": "Private Market Liquidity",
+          "theme_id": "private_market_liquidity"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2329815.48,
+          "scenario_impact": 33702.54,
+          "scenario_impact_percent": 0.014466,
+          "scenario_value": 2363518.01,
+          "theme_display_name": "Dollar Exposure",
+          "theme_id": "dollar_exposure"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 1238151.52,
+          "scenario_impact": 72301.61,
+          "scenario_impact_percent": 0.058395,
+          "scenario_value": 1310453.13,
+          "theme_display_name": "Real Asset Inflation Hedge",
+          "theme_id": "real_asset_inflation_hedge"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 1253199.13,
+          "scenario_impact": 72354.81,
+          "scenario_impact_percent": 0.057736,
+          "scenario_value": 1325553.94,
+          "theme_display_name": "Energy Security",
+          "theme_id": "energy_security"
+        }
+      ],
+      "top_negative_managers": [
+        {
+          "base_value": 10115000.0,
+          "manager_display_name": "Manager A - Growth / AI Infrastructure",
+          "manager_id": "mgr_a_growth_ai_infrastructure",
+          "scenario_impact": -486066.87,
+          "scenario_impact_percent": -0.048054
+        },
+        {
+          "base_value": 7655000.0,
+          "manager_display_name": "Manager B - Core Quality Equity",
+          "manager_id": "mgr_b_core_quality_equity",
+          "scenario_impact": -380017.57,
+          "scenario_impact_percent": -0.049643
+        },
+        {
+          "base_value": 5300000.0,
+          "manager_display_name": "Manager C - Income and Cash Generation",
+          "manager_id": "mgr_c_income_cash_generation",
+          "scenario_impact": -150092.0,
+          "scenario_impact_percent": -0.028319
+        }
+      ],
+      "top_positive_or_defensive_managers": [
+        {
+          "base_value": 3645000.0,
+          "manager_display_name": "Manager F - Opportunistic Macro / Hedge",
+          "manager_id": "mgr_f_opportunistic_macro",
+          "scenario_impact": 192391.52,
+          "scenario_impact_percent": 0.052782
+        },
+        {
+          "base_value": 8265000.0,
+          "manager_display_name": "Manager D - Private Markets / Real Assets",
+          "manager_id": "mgr_d_private_real_assets",
+          "scenario_impact": 116629.38,
+          "scenario_impact_percent": 0.014111
+        }
+      ],
+      "total_impact": -798950.11,
+      "total_impact_percent": -0.019633
+    },
+    {
+      "advisor_story": "Use to discuss liquidity flexibility and confidence caveats around private holdings.",
+      "base_total_value": 40695000.0,
+      "caveats": [
+        "Deterministic synthetic stress, not a forecast.",
+        "Private-market marks may require human review.",
+        "Deterministic synthetic scenario revaluation, not a forecast.",
+        "Scenario results are simplified economic revaluations and are not connected to report generation in this batch."
+      ],
+      "confidence": "medium",
+      "scenario_display_name": "Private-Market Liquidity Freeze",
+      "scenario_id": "private_market_liquidity_freeze",
+      "scenario_status": "available_from_existing_synthetic_revaluation",
+      "scenario_total_value": 38097858.27,
+      "theme_impacts": [
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2106326.12,
+          "scenario_impact": -392118.77,
+          "scenario_impact_percent": -0.186162,
+          "scenario_value": 1714207.35,
+          "theme_display_name": "Private Market Liquidity",
+          "theme_id": "private_market_liquidity"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 5428582.07,
+          "scenario_impact": -344402.46,
+          "scenario_impact_percent": -0.063442,
+          "scenario_value": 5084179.62,
+          "theme_display_name": "Consumer Demand Sensitivity",
+          "theme_id": "consumer_demand_sensitivity"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 7116201.12,
+          "scenario_impact": -339160.1,
+          "scenario_impact_percent": -0.04766,
+          "scenario_value": 6777041.02,
+          "theme_display_name": "Defensive Cash Flow",
+          "theme_id": "defensive_cash_flow"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 5134713.02,
+          "scenario_impact": -309862.44,
+          "scenario_impact_percent": -0.060347,
+          "scenario_value": 4824850.58,
+          "theme_display_name": "AI Infrastructure",
+          "theme_id": "ai_infrastructure"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 5077838.02,
+          "scenario_impact": -307904.32,
+          "scenario_impact_percent": -0.060637,
+          "scenario_value": 4769933.71,
+          "theme_display_name": "China/Taiwan Supply Chain",
+          "theme_id": "china_taiwan_supply_chain"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2914683.26,
+          "scenario_impact": -294547.87,
+          "scenario_impact_percent": -0.101057,
+          "scenario_value": 2620135.39,
+          "theme_display_name": "Credit Stress",
+          "theme_id": "credit_stress"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 4092522.55,
+          "scenario_impact": -215737.35,
+          "scenario_impact_percent": -0.052715,
+          "scenario_value": 3876785.19,
+          "theme_display_name": "Data Center Infrastructure",
+          "theme_id": "data_center_infrastructure"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2304088.02,
+          "scenario_impact": -101441.37,
+          "scenario_impact_percent": -0.044027,
+          "scenario_value": 2202646.66,
+          "theme_display_name": "Rate Sensitivity",
+          "theme_id": "rate_sensitivity"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 1253199.13,
+          "scenario_impact": -76951.2,
+          "scenario_impact_percent": -0.061404,
+          "scenario_value": 1176247.93,
+          "theme_display_name": "Energy Security",
+          "theme_id": "energy_security"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2329815.48,
+          "scenario_impact": -76266.02,
+          "scenario_impact_percent": -0.032735,
+          "scenario_value": 2253549.45,
+          "theme_display_name": "Dollar Exposure",
+          "theme_id": "dollar_exposure"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 1698879.69,
+          "scenario_impact": -74208.15,
+          "scenario_impact_percent": -0.043681,
+          "scenario_value": 1624671.54,
+          "theme_display_name": "Duration Exposure",
+          "theme_id": "duration_exposure"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 1238151.52,
+          "scenario_impact": -64541.69,
+          "scenario_impact_percent": -0.052127,
+          "scenario_value": 1173609.82,
+          "theme_display_name": "Real Asset Inflation Hedge",
+          "theme_id": "real_asset_inflation_hedge"
+        }
+      ],
+      "top_negative_managers": [
+        {
+          "base_value": 8265000.0,
+          "manager_display_name": "Manager D - Private Markets / Real Assets",
+          "manager_id": "mgr_d_private_real_assets",
+          "scenario_impact": -1014092.52,
+          "scenario_impact_percent": -0.122697
+        },
+        {
+          "base_value": 10115000.0,
+          "manager_display_name": "Manager A - Growth / AI Infrastructure",
+          "manager_id": "mgr_a_growth_ai_infrastructure",
+          "scenario_impact": -478277.22,
+          "scenario_impact_percent": -0.047284
+        },
+        {
+          "base_value": 7655000.0,
+          "manager_display_name": "Manager B - Core Quality Equity",
+          "manager_id": "mgr_b_core_quality_equity",
+          "scenario_impact": -446005.75,
+          "scenario_impact_percent": -0.058263
+        }
+      ],
+      "top_positive_or_defensive_managers": [
+        {
+          "base_value": 5715000.0,
+          "manager_display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "manager_id": "mgr_e_liquidity_defensive",
+          "scenario_impact": -140662.63,
+          "scenario_impact_percent": -0.024613
+        },
+        {
+          "base_value": 3645000.0,
+          "manager_display_name": "Manager F - Opportunistic Macro / Hedge",
+          "manager_id": "mgr_f_opportunistic_macro",
+          "scenario_impact": -165384.92,
+          "scenario_impact_percent": -0.045373
+        },
+        {
+          "base_value": 5300000.0,
+          "manager_display_name": "Manager C - Income and Cash Generation",
+          "manager_id": "mgr_c_income_cash_generation",
+          "scenario_impact": -352718.69,
+          "scenario_impact_percent": -0.066551
+        }
+      ],
+      "total_impact": -2597141.73,
+      "total_impact_percent": -0.06382
+    },
+    {
+      "advisor_story": "Use to connect semiconductor supply-chain risk to technology, AI infrastructure, and energy-sensitive exposure.",
+      "base_total_value": 40695000.0,
+      "caveats": [
+        "Deterministic synthetic stress, not a forecast.",
+        "No geopolitical probability is assigned.",
+        "Deterministic synthetic scenario revaluation, not a forecast.",
+        "Scenario results are simplified economic revaluations and are not connected to report generation in this batch."
+      ],
+      "confidence": "medium",
+      "scenario_display_name": "Taiwan Disruption",
+      "scenario_id": "taiwan_disruption",
+      "scenario_status": "available_from_existing_synthetic_revaluation",
+      "scenario_total_value": 36117545.85,
+      "theme_impacts": [
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 5428582.07,
+          "scenario_impact": -863028.12,
+          "scenario_impact_percent": -0.158979,
+          "scenario_value": 4565553.95,
+          "theme_display_name": "Consumer Demand Sensitivity",
+          "theme_id": "consumer_demand_sensitivity"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 5134713.02,
+          "scenario_impact": -786567.65,
+          "scenario_impact_percent": -0.153186,
+          "scenario_value": 4348145.37,
+          "theme_display_name": "AI Infrastructure",
+          "theme_id": "ai_infrastructure"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 7116201.12,
+          "scenario_impact": -783001.37,
+          "scenario_impact_percent": -0.110031,
+          "scenario_value": 6333199.75,
+          "theme_display_name": "Defensive Cash Flow",
+          "theme_id": "defensive_cash_flow"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 5077838.02,
+          "scenario_impact": -776185.4,
+          "scenario_impact_percent": -0.152857,
+          "scenario_value": 4301652.62,
+          "theme_display_name": "China/Taiwan Supply Chain",
+          "theme_id": "china_taiwan_supply_chain"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 4092522.55,
+          "scenario_impact": -657228.79,
+          "scenario_impact_percent": -0.160593,
+          "scenario_value": 3435293.76,
+          "theme_display_name": "Data Center Infrastructure",
+          "theme_id": "data_center_infrastructure"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2106326.12,
+          "scenario_impact": -225292.38,
+          "scenario_impact_percent": -0.10696,
+          "scenario_value": 1881033.74,
+          "theme_display_name": "Private Market Liquidity",
+          "theme_id": "private_market_liquidity"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2914683.26,
+          "scenario_impact": -214679.67,
+          "scenario_impact_percent": -0.073655,
+          "scenario_value": 2700003.59,
+          "theme_display_name": "Credit Stress",
+          "theme_id": "credit_stress"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 1253199.13,
+          "scenario_impact": -98184.87,
+          "scenario_impact_percent": -0.078347,
+          "scenario_value": 1155014.26,
+          "theme_display_name": "Energy Security",
+          "theme_id": "energy_security"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 1238151.52,
+          "scenario_impact": -82656.83,
+          "scenario_impact_percent": -0.066758,
+          "scenario_value": 1155494.69,
+          "theme_display_name": "Real Asset Inflation Hedge",
+          "theme_id": "real_asset_inflation_hedge"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2304088.02,
+          "scenario_impact": -71955.5,
+          "scenario_impact_percent": -0.031229,
+          "scenario_value": 2232132.53,
+          "theme_display_name": "Rate Sensitivity",
+          "theme_id": "rate_sensitivity"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 1698879.69,
+          "scenario_impact": -60171.23,
+          "scenario_impact_percent": -0.035418,
+          "scenario_value": 1638708.46,
+          "theme_display_name": "Duration Exposure",
+          "theme_id": "duration_exposure"
+        },
+        {
+          "allocation_method": "equal_split_across_approved_pack_theme_matches",
+          "base_value": 2329815.48,
+          "scenario_impact": 41497.66,
+          "scenario_impact_percent": 0.017812,
+          "scenario_value": 2371313.14,
+          "theme_display_name": "Dollar Exposure",
+          "theme_id": "dollar_exposure"
+        }
+      ],
+      "top_negative_managers": [
+        {
+          "base_value": 10115000.0,
+          "manager_display_name": "Manager A - Growth / AI Infrastructure",
+          "manager_id": "mgr_a_growth_ai_infrastructure",
+          "scenario_impact": -1839158.59,
+          "scenario_impact_percent": -0.181825
+        },
+        {
+          "base_value": 7655000.0,
+          "manager_display_name": "Manager B - Core Quality Equity",
+          "manager_id": "mgr_b_core_quality_equity",
+          "scenario_impact": -1347147.25,
+          "scenario_impact_percent": -0.175983
+        },
+        {
+          "base_value": 8265000.0,
+          "manager_display_name": "Manager D - Private Markets / Real Assets",
+          "manager_id": "mgr_d_private_real_assets",
+          "scenario_impact": -680110.9,
+          "scenario_impact_percent": -0.082288
+        }
+      ],
+      "top_positive_or_defensive_managers": [
+        {
+          "base_value": 3645000.0,
+          "manager_display_name": "Manager F - Opportunistic Macro / Hedge",
+          "manager_id": "mgr_f_opportunistic_macro",
+          "scenario_impact": -90312.63,
+          "scenario_impact_percent": -0.024777
+        },
+        {
+          "base_value": 5715000.0,
+          "manager_display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "manager_id": "mgr_e_liquidity_defensive",
+          "scenario_impact": -209811.91,
+          "scenario_impact_percent": -0.036712
+        },
+        {
+          "base_value": 5300000.0,
+          "manager_display_name": "Manager C - Income and Cash Generation",
+          "manager_id": "mgr_c_income_cash_generation",
+          "scenario_impact": -410912.87,
+          "scenario_impact_percent": -0.077531
+        }
+      ],
+      "total_impact": -4577454.15,
+      "total_impact_percent": -0.112482
+    }
+  ],
+  "schema_version": "analytics_scenario_impact_by_theme_manager.v1",
+  "synthetic_data": true
+}

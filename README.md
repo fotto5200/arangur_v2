@@ -172,6 +172,24 @@ This writes:
 
 The client preview uses Portfolio Status, Concentration by Theme, Scenario Impact by Manager, and Data Confidence Note. The advisor preview uses Manager Comparison, Cash Generation Summary, Concentration by Sector/Industry, Scenario Impact by Manager, and Data Confidence Note.
 
+## Generate Arranger Demo Analytic Pack Outputs
+
+The first Arranger analytic pack proof applies `data/analytic_packs/arranger_demo_pack_v1/` to the existing synthetic portfolio, scenario, and valuation fixtures. It writes deterministic local-only analytics outputs and does not change advisor UI, report-element inputs, generated reports, Docker, deployment, live data, or dependencies.
+
+```cmd
+set PYTHONPATH=src
+python -m arangur.analytics.apply_demo_pack
+```
+
+This writes:
+
+- `data/simulation/analytics/theme_exposure_summary.json`
+- `data/simulation/analytics/manager_theme_overlap_summary.json`
+- `data/simulation/analytics/scenario_impact_by_theme_manager.json`
+- `data/simulation/analytics/data_confidence_map.json`
+- `data/simulation/analytics/cross_scenario_resilience_summary.json`
+- `data/simulation/analytics/analytics_output_index.json`
+
 ## Local Report Index
 
 Both demo runner commands refresh a shared static report index:

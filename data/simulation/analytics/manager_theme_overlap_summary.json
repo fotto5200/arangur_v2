@@ -1,0 +1,820 @@
+{
+  "caveats": [
+    "Overlap is a deterministic discussion prompt, not a recommendation or manager ranking.",
+    "Theme matches use synthetic position metadata and approved demo pack mappings."
+  ],
+  "data_as_of": "2026-06-30",
+  "generated_at": "2026-07-03T00:00:00Z",
+  "overlap_count": 12,
+  "pack_id": "arranger_demo_pack_v1",
+  "pack_version": "2026-07-03-demo-v1",
+  "portfolio_id": "portfolio_northstar_family_office",
+  "schema_version": "analytics_manager_theme_overlap_summary.v1",
+  "synthetic_data": true,
+  "themes": [
+    {
+      "advisor_interpretation": "Defensive Cash Flow appears across 6 managers and should be treated as a hidden concentration discussion.",
+      "aggregate_exposure": 33785000.0,
+      "evidence_rows": [
+        {
+          "display_name": "Manager A - Growth / AI Infrastructure",
+          "exposure_value": 9840000.0,
+          "id": "mgr_a_growth_ai_infrastructure",
+          "percent_of_theme": 0.291254
+        },
+        {
+          "display_name": "Manager B - Core Quality Equity",
+          "exposure_value": 7655000.0,
+          "id": "mgr_b_core_quality_equity",
+          "percent_of_theme": 0.22658
+        },
+        {
+          "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "exposure_value": 5715000.0,
+          "id": "mgr_e_liquidity_defensive",
+          "percent_of_theme": 0.169158
+        },
+        {
+          "display_name": "Manager C - Income and Cash Generation",
+          "exposure_value": 5300000.0,
+          "id": "mgr_c_income_cash_generation",
+          "percent_of_theme": 0.156874
+        },
+        {
+          "display_name": "Manager D - Private Markets / Real Assets",
+          "exposure_value": 2815000.0,
+          "id": "mgr_d_private_real_assets",
+          "percent_of_theme": 0.083321
+        },
+        {
+          "display_name": "Manager F - Opportunistic Macro / Hedge",
+          "exposure_value": 2460000.0,
+          "id": "mgr_f_opportunistic_macro",
+          "percent_of_theme": 0.072813
+        }
+      ],
+      "managers_with_exposure": [
+        {
+          "manager_display_name": "Manager A - Growth / AI Infrastructure",
+          "manager_id": "mgr_a_growth_ai_infrastructure"
+        },
+        {
+          "manager_display_name": "Manager B - Core Quality Equity",
+          "manager_id": "mgr_b_core_quality_equity"
+        },
+        {
+          "manager_display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "manager_id": "mgr_e_liquidity_defensive"
+        },
+        {
+          "manager_display_name": "Manager C - Income and Cash Generation",
+          "manager_id": "mgr_c_income_cash_generation"
+        },
+        {
+          "manager_display_name": "Manager D - Private Markets / Real Assets",
+          "manager_id": "mgr_d_private_real_assets"
+        },
+        {
+          "manager_display_name": "Manager F - Opportunistic Macro / Hedge",
+          "manager_id": "mgr_f_opportunistic_macro"
+        }
+      ],
+      "overlap_level": "high",
+      "percent_of_portfolio": 0.8302,
+      "theme_display_name": "Defensive Cash Flow",
+      "theme_id": "defensive_cash_flow"
+    },
+    {
+      "advisor_interpretation": "Consumer Demand Sensitivity appears across 6 managers and should be treated as a hidden concentration discussion.",
+      "aggregate_exposure": 28815000.0,
+      "evidence_rows": [
+        {
+          "display_name": "Manager A - Growth / AI Infrastructure",
+          "exposure_value": 9805000.0,
+          "id": "mgr_a_growth_ai_infrastructure",
+          "percent_of_theme": 0.340274
+        },
+        {
+          "display_name": "Manager B - Core Quality Equity",
+          "exposure_value": 7435000.0,
+          "id": "mgr_b_core_quality_equity",
+          "percent_of_theme": 0.258025
+        },
+        {
+          "display_name": "Manager D - Private Markets / Real Assets",
+          "exposure_value": 3815000.0,
+          "id": "mgr_d_private_real_assets",
+          "percent_of_theme": 0.132396
+        },
+        {
+          "display_name": "Manager C - Income and Cash Generation",
+          "exposure_value": 3590000.0,
+          "id": "mgr_c_income_cash_generation",
+          "percent_of_theme": 0.124588
+        },
+        {
+          "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "exposure_value": 2280000.0,
+          "id": "mgr_e_liquidity_defensive",
+          "percent_of_theme": 0.079125
+        },
+        {
+          "display_name": "Manager F - Opportunistic Macro / Hedge",
+          "exposure_value": 1890000.0,
+          "id": "mgr_f_opportunistic_macro",
+          "percent_of_theme": 0.065591
+        }
+      ],
+      "managers_with_exposure": [
+        {
+          "manager_display_name": "Manager A - Growth / AI Infrastructure",
+          "manager_id": "mgr_a_growth_ai_infrastructure"
+        },
+        {
+          "manager_display_name": "Manager B - Core Quality Equity",
+          "manager_id": "mgr_b_core_quality_equity"
+        },
+        {
+          "manager_display_name": "Manager D - Private Markets / Real Assets",
+          "manager_id": "mgr_d_private_real_assets"
+        },
+        {
+          "manager_display_name": "Manager C - Income and Cash Generation",
+          "manager_id": "mgr_c_income_cash_generation"
+        },
+        {
+          "manager_display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "manager_id": "mgr_e_liquidity_defensive"
+        },
+        {
+          "manager_display_name": "Manager F - Opportunistic Macro / Hedge",
+          "manager_id": "mgr_f_opportunistic_macro"
+        }
+      ],
+      "overlap_level": "high",
+      "percent_of_portfolio": 0.708072,
+      "theme_display_name": "Consumer Demand Sensitivity",
+      "theme_id": "consumer_demand_sensitivity"
+    },
+    {
+      "advisor_interpretation": "AI Infrastructure appears across 6 managers and should be treated as a hidden concentration discussion.",
+      "aggregate_exposure": 28530000.0,
+      "evidence_rows": [
+        {
+          "display_name": "Manager A - Growth / AI Infrastructure",
+          "exposure_value": 9805000.0,
+          "id": "mgr_a_growth_ai_infrastructure",
+          "percent_of_theme": 0.343673
+        },
+        {
+          "display_name": "Manager B - Core Quality Equity",
+          "exposure_value": 7435000.0,
+          "id": "mgr_b_core_quality_equity",
+          "percent_of_theme": 0.260603
+        },
+        {
+          "display_name": "Manager D - Private Markets / Real Assets",
+          "exposure_value": 3785000.0,
+          "id": "mgr_d_private_real_assets",
+          "percent_of_theme": 0.132667
+        },
+        {
+          "display_name": "Manager C - Income and Cash Generation",
+          "exposure_value": 3590000.0,
+          "id": "mgr_c_income_cash_generation",
+          "percent_of_theme": 0.125832
+        },
+        {
+          "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "exposure_value": 2280000.0,
+          "id": "mgr_e_liquidity_defensive",
+          "percent_of_theme": 0.079916
+        },
+        {
+          "display_name": "Manager F - Opportunistic Macro / Hedge",
+          "exposure_value": 1635000.0,
+          "id": "mgr_f_opportunistic_macro",
+          "percent_of_theme": 0.057308
+        }
+      ],
+      "managers_with_exposure": [
+        {
+          "manager_display_name": "Manager A - Growth / AI Infrastructure",
+          "manager_id": "mgr_a_growth_ai_infrastructure"
+        },
+        {
+          "manager_display_name": "Manager B - Core Quality Equity",
+          "manager_id": "mgr_b_core_quality_equity"
+        },
+        {
+          "manager_display_name": "Manager D - Private Markets / Real Assets",
+          "manager_id": "mgr_d_private_real_assets"
+        },
+        {
+          "manager_display_name": "Manager C - Income and Cash Generation",
+          "manager_id": "mgr_c_income_cash_generation"
+        },
+        {
+          "manager_display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "manager_id": "mgr_e_liquidity_defensive"
+        },
+        {
+          "manager_display_name": "Manager F - Opportunistic Macro / Hedge",
+          "manager_id": "mgr_f_opportunistic_macro"
+        }
+      ],
+      "overlap_level": "high",
+      "percent_of_portfolio": 0.701069,
+      "theme_display_name": "AI Infrastructure",
+      "theme_id": "ai_infrastructure"
+    },
+    {
+      "advisor_interpretation": "China/Taiwan Supply Chain appears across 6 managers and should be treated as a hidden concentration discussion.",
+      "aggregate_exposure": 28075000.0,
+      "evidence_rows": [
+        {
+          "display_name": "Manager A - Growth / AI Infrastructure",
+          "exposure_value": 9805000.0,
+          "id": "mgr_a_growth_ai_infrastructure",
+          "percent_of_theme": 0.349243
+        },
+        {
+          "display_name": "Manager B - Core Quality Equity",
+          "exposure_value": 7435000.0,
+          "id": "mgr_b_core_quality_equity",
+          "percent_of_theme": 0.264826
+        },
+        {
+          "display_name": "Manager C - Income and Cash Generation",
+          "exposure_value": 3590000.0,
+          "id": "mgr_c_income_cash_generation",
+          "percent_of_theme": 0.127872
+        },
+        {
+          "display_name": "Manager D - Private Markets / Real Assets",
+          "exposure_value": 3330000.0,
+          "id": "mgr_d_private_real_assets",
+          "percent_of_theme": 0.118611
+        },
+        {
+          "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "exposure_value": 2280000.0,
+          "id": "mgr_e_liquidity_defensive",
+          "percent_of_theme": 0.081211
+        },
+        {
+          "display_name": "Manager F - Opportunistic Macro / Hedge",
+          "exposure_value": 1635000.0,
+          "id": "mgr_f_opportunistic_macro",
+          "percent_of_theme": 0.058237
+        }
+      ],
+      "managers_with_exposure": [
+        {
+          "manager_display_name": "Manager A - Growth / AI Infrastructure",
+          "manager_id": "mgr_a_growth_ai_infrastructure"
+        },
+        {
+          "manager_display_name": "Manager B - Core Quality Equity",
+          "manager_id": "mgr_b_core_quality_equity"
+        },
+        {
+          "manager_display_name": "Manager C - Income and Cash Generation",
+          "manager_id": "mgr_c_income_cash_generation"
+        },
+        {
+          "manager_display_name": "Manager D - Private Markets / Real Assets",
+          "manager_id": "mgr_d_private_real_assets"
+        },
+        {
+          "manager_display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "manager_id": "mgr_e_liquidity_defensive"
+        },
+        {
+          "manager_display_name": "Manager F - Opportunistic Macro / Hedge",
+          "manager_id": "mgr_f_opportunistic_macro"
+        }
+      ],
+      "overlap_level": "high",
+      "percent_of_portfolio": 0.689888,
+      "theme_display_name": "China/Taiwan Supply Chain",
+      "theme_id": "china_taiwan_supply_chain"
+    },
+    {
+      "advisor_interpretation": "Data Center Infrastructure appears across 5 managers and should be treated as a hidden concentration discussion.",
+      "aggregate_exposure": 23090000.0,
+      "evidence_rows": [
+        {
+          "display_name": "Manager A - Growth / AI Infrastructure",
+          "exposure_value": 9805000.0,
+          "id": "mgr_a_growth_ai_infrastructure",
+          "percent_of_theme": 0.424643
+        },
+        {
+          "display_name": "Manager D - Private Markets / Real Assets",
+          "exposure_value": 5770000.0,
+          "id": "mgr_d_private_real_assets",
+          "percent_of_theme": 0.249892
+        },
+        {
+          "display_name": "Manager B - Core Quality Equity",
+          "exposure_value": 5750000.0,
+          "id": "mgr_b_core_quality_equity",
+          "percent_of_theme": 0.249026
+        },
+        {
+          "display_name": "Manager C - Income and Cash Generation",
+          "exposure_value": 910000.0,
+          "id": "mgr_c_income_cash_generation",
+          "percent_of_theme": 0.039411
+        },
+        {
+          "display_name": "Manager F - Opportunistic Macro / Hedge",
+          "exposure_value": 855000.0,
+          "id": "mgr_f_opportunistic_macro",
+          "percent_of_theme": 0.037029
+        }
+      ],
+      "managers_with_exposure": [
+        {
+          "manager_display_name": "Manager A - Growth / AI Infrastructure",
+          "manager_id": "mgr_a_growth_ai_infrastructure"
+        },
+        {
+          "manager_display_name": "Manager D - Private Markets / Real Assets",
+          "manager_id": "mgr_d_private_real_assets"
+        },
+        {
+          "manager_display_name": "Manager B - Core Quality Equity",
+          "manager_id": "mgr_b_core_quality_equity"
+        },
+        {
+          "manager_display_name": "Manager C - Income and Cash Generation",
+          "manager_id": "mgr_c_income_cash_generation"
+        },
+        {
+          "manager_display_name": "Manager F - Opportunistic Macro / Hedge",
+          "manager_id": "mgr_f_opportunistic_macro"
+        }
+      ],
+      "overlap_level": "high",
+      "percent_of_portfolio": 0.567392,
+      "theme_display_name": "Data Center Infrastructure",
+      "theme_id": "data_center_infrastructure"
+    },
+    {
+      "advisor_interpretation": "Credit Stress appears across 6 managers and should be treated as a hidden concentration discussion.",
+      "aggregate_exposure": 16195000.0,
+      "evidence_rows": [
+        {
+          "display_name": "Manager D - Private Markets / Real Assets",
+          "exposure_value": 7670000.0,
+          "id": "mgr_d_private_real_assets",
+          "percent_of_theme": 0.473603
+        },
+        {
+          "display_name": "Manager C - Income and Cash Generation",
+          "exposure_value": 4450000.0,
+          "id": "mgr_c_income_cash_generation",
+          "percent_of_theme": 0.274776
+        },
+        {
+          "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "exposure_value": 2950000.0,
+          "id": "mgr_e_liquidity_defensive",
+          "percent_of_theme": 0.182155
+        },
+        {
+          "display_name": "Manager B - Core Quality Equity",
+          "exposure_value": 495000.0,
+          "id": "mgr_b_core_quality_equity",
+          "percent_of_theme": 0.030565
+        },
+        {
+          "display_name": "Manager A - Growth / AI Infrastructure",
+          "exposure_value": 420000.0,
+          "id": "mgr_a_growth_ai_infrastructure",
+          "percent_of_theme": 0.025934
+        },
+        {
+          "display_name": "Manager F - Opportunistic Macro / Hedge",
+          "exposure_value": 210000.0,
+          "id": "mgr_f_opportunistic_macro",
+          "percent_of_theme": 0.012967
+        }
+      ],
+      "managers_with_exposure": [
+        {
+          "manager_display_name": "Manager D - Private Markets / Real Assets",
+          "manager_id": "mgr_d_private_real_assets"
+        },
+        {
+          "manager_display_name": "Manager C - Income and Cash Generation",
+          "manager_id": "mgr_c_income_cash_generation"
+        },
+        {
+          "manager_display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "manager_id": "mgr_e_liquidity_defensive"
+        },
+        {
+          "manager_display_name": "Manager B - Core Quality Equity",
+          "manager_id": "mgr_b_core_quality_equity"
+        },
+        {
+          "manager_display_name": "Manager A - Growth / AI Infrastructure",
+          "manager_id": "mgr_a_growth_ai_infrastructure"
+        },
+        {
+          "manager_display_name": "Manager F - Opportunistic Macro / Hedge",
+          "manager_id": "mgr_f_opportunistic_macro"
+        }
+      ],
+      "overlap_level": "high",
+      "percent_of_portfolio": 0.39796,
+      "theme_display_name": "Credit Stress",
+      "theme_id": "credit_stress"
+    },
+    {
+      "advisor_interpretation": "Rate Sensitivity appears across 6 managers and should be treated as a hidden concentration discussion.",
+      "aggregate_exposure": 12805000.0,
+      "evidence_rows": [
+        {
+          "display_name": "Manager C - Income and Cash Generation",
+          "exposure_value": 4450000.0,
+          "id": "mgr_c_income_cash_generation",
+          "percent_of_theme": 0.34752
+        },
+        {
+          "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "exposure_value": 4190000.0,
+          "id": "mgr_e_liquidity_defensive",
+          "percent_of_theme": 0.327216
+        },
+        {
+          "display_name": "Manager D - Private Markets / Real Assets",
+          "exposure_value": 3040000.0,
+          "id": "mgr_d_private_real_assets",
+          "percent_of_theme": 0.237407
+        },
+        {
+          "display_name": "Manager B - Core Quality Equity",
+          "exposure_value": 495000.0,
+          "id": "mgr_b_core_quality_equity",
+          "percent_of_theme": 0.038657
+        },
+        {
+          "display_name": "Manager A - Growth / AI Infrastructure",
+          "exposure_value": 420000.0,
+          "id": "mgr_a_growth_ai_infrastructure",
+          "percent_of_theme": 0.0328
+        },
+        {
+          "display_name": "Manager F - Opportunistic Macro / Hedge",
+          "exposure_value": 210000.0,
+          "id": "mgr_f_opportunistic_macro",
+          "percent_of_theme": 0.0164
+        }
+      ],
+      "managers_with_exposure": [
+        {
+          "manager_display_name": "Manager C - Income and Cash Generation",
+          "manager_id": "mgr_c_income_cash_generation"
+        },
+        {
+          "manager_display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "manager_id": "mgr_e_liquidity_defensive"
+        },
+        {
+          "manager_display_name": "Manager D - Private Markets / Real Assets",
+          "manager_id": "mgr_d_private_real_assets"
+        },
+        {
+          "manager_display_name": "Manager B - Core Quality Equity",
+          "manager_id": "mgr_b_core_quality_equity"
+        },
+        {
+          "manager_display_name": "Manager A - Growth / AI Infrastructure",
+          "manager_id": "mgr_a_growth_ai_infrastructure"
+        },
+        {
+          "manager_display_name": "Manager F - Opportunistic Macro / Hedge",
+          "manager_id": "mgr_f_opportunistic_macro"
+        }
+      ],
+      "overlap_level": "high",
+      "percent_of_portfolio": 0.314658,
+      "theme_display_name": "Rate Sensitivity",
+      "theme_id": "rate_sensitivity"
+    },
+    {
+      "advisor_interpretation": "Duration Exposure appears across 6 managers and should be treated as a hidden concentration discussion.",
+      "aggregate_exposure": 10570000.0,
+      "evidence_rows": [
+        {
+          "display_name": "Manager C - Income and Cash Generation",
+          "exposure_value": 3910000.0,
+          "id": "mgr_c_income_cash_generation",
+          "percent_of_theme": 0.369915
+        },
+        {
+          "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "exposure_value": 2950000.0,
+          "id": "mgr_e_liquidity_defensive",
+          "percent_of_theme": 0.279092
+        },
+        {
+          "display_name": "Manager D - Private Markets / Real Assets",
+          "exposure_value": 2585000.0,
+          "id": "mgr_d_private_real_assets",
+          "percent_of_theme": 0.24456
+        },
+        {
+          "display_name": "Manager B - Core Quality Equity",
+          "exposure_value": 495000.0,
+          "id": "mgr_b_core_quality_equity",
+          "percent_of_theme": 0.046831
+        },
+        {
+          "display_name": "Manager A - Growth / AI Infrastructure",
+          "exposure_value": 420000.0,
+          "id": "mgr_a_growth_ai_infrastructure",
+          "percent_of_theme": 0.039735
+        },
+        {
+          "display_name": "Manager F - Opportunistic Macro / Hedge",
+          "exposure_value": 210000.0,
+          "id": "mgr_f_opportunistic_macro",
+          "percent_of_theme": 0.019868
+        }
+      ],
+      "managers_with_exposure": [
+        {
+          "manager_display_name": "Manager C - Income and Cash Generation",
+          "manager_id": "mgr_c_income_cash_generation"
+        },
+        {
+          "manager_display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "manager_id": "mgr_e_liquidity_defensive"
+        },
+        {
+          "manager_display_name": "Manager D - Private Markets / Real Assets",
+          "manager_id": "mgr_d_private_real_assets"
+        },
+        {
+          "manager_display_name": "Manager B - Core Quality Equity",
+          "manager_id": "mgr_b_core_quality_equity"
+        },
+        {
+          "manager_display_name": "Manager A - Growth / AI Infrastructure",
+          "manager_id": "mgr_a_growth_ai_infrastructure"
+        },
+        {
+          "manager_display_name": "Manager F - Opportunistic Macro / Hedge",
+          "manager_id": "mgr_f_opportunistic_macro"
+        }
+      ],
+      "overlap_level": "high",
+      "percent_of_portfolio": 0.259737,
+      "theme_display_name": "Duration Exposure",
+      "theme_id": "duration_exposure"
+    },
+    {
+      "advisor_interpretation": "Private Market Liquidity appears across 4 managers and should be treated as a hidden concentration discussion.",
+      "aggregate_exposure": 10105000.0,
+      "evidence_rows": [
+        {
+          "display_name": "Manager D - Private Markets / Real Assets",
+          "exposure_value": 8265000.0,
+          "id": "mgr_d_private_real_assets",
+          "percent_of_theme": 0.817912
+        },
+        {
+          "display_name": "Manager C - Income and Cash Generation",
+          "exposure_value": 1090000.0,
+          "id": "mgr_c_income_cash_generation",
+          "percent_of_theme": 0.107867
+        },
+        {
+          "display_name": "Manager A - Growth / AI Infrastructure",
+          "exposure_value": 420000.0,
+          "id": "mgr_a_growth_ai_infrastructure",
+          "percent_of_theme": 0.041564
+        },
+        {
+          "display_name": "Manager F - Opportunistic Macro / Hedge",
+          "exposure_value": 330000.0,
+          "id": "mgr_f_opportunistic_macro",
+          "percent_of_theme": 0.032657
+        }
+      ],
+      "managers_with_exposure": [
+        {
+          "manager_display_name": "Manager D - Private Markets / Real Assets",
+          "manager_id": "mgr_d_private_real_assets"
+        },
+        {
+          "manager_display_name": "Manager C - Income and Cash Generation",
+          "manager_id": "mgr_c_income_cash_generation"
+        },
+        {
+          "manager_display_name": "Manager A - Growth / AI Infrastructure",
+          "manager_id": "mgr_a_growth_ai_infrastructure"
+        },
+        {
+          "manager_display_name": "Manager F - Opportunistic Macro / Hedge",
+          "manager_id": "mgr_f_opportunistic_macro"
+        }
+      ],
+      "overlap_level": "high",
+      "percent_of_portfolio": 0.248311,
+      "theme_display_name": "Private Market Liquidity",
+      "theme_id": "private_market_liquidity"
+    },
+    {
+      "advisor_interpretation": "Energy Security appears across 5 managers and should be treated as a hidden concentration discussion.",
+      "aggregate_exposure": 8285000.0,
+      "evidence_rows": [
+        {
+          "display_name": "Manager D - Private Markets / Real Assets",
+          "exposure_value": 4510000.0,
+          "id": "mgr_d_private_real_assets",
+          "percent_of_theme": 0.544357
+        },
+        {
+          "display_name": "Manager A - Growth / AI Infrastructure",
+          "exposure_value": 1650000.0,
+          "id": "mgr_a_growth_ai_infrastructure",
+          "percent_of_theme": 0.199155
+        },
+        {
+          "display_name": "Manager F - Opportunistic Macro / Hedge",
+          "exposure_value": 1205000.0,
+          "id": "mgr_f_opportunistic_macro",
+          "percent_of_theme": 0.145444
+        },
+        {
+          "display_name": "Manager C - Income and Cash Generation",
+          "exposure_value": 620000.0,
+          "id": "mgr_c_income_cash_generation",
+          "percent_of_theme": 0.074834
+        },
+        {
+          "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "exposure_value": 300000.0,
+          "id": "mgr_e_liquidity_defensive",
+          "percent_of_theme": 0.03621
+        }
+      ],
+      "managers_with_exposure": [
+        {
+          "manager_display_name": "Manager D - Private Markets / Real Assets",
+          "manager_id": "mgr_d_private_real_assets"
+        },
+        {
+          "manager_display_name": "Manager A - Growth / AI Infrastructure",
+          "manager_id": "mgr_a_growth_ai_infrastructure"
+        },
+        {
+          "manager_display_name": "Manager F - Opportunistic Macro / Hedge",
+          "manager_id": "mgr_f_opportunistic_macro"
+        },
+        {
+          "manager_display_name": "Manager C - Income and Cash Generation",
+          "manager_id": "mgr_c_income_cash_generation"
+        },
+        {
+          "manager_display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "manager_id": "mgr_e_liquidity_defensive"
+        }
+      ],
+      "overlap_level": "high",
+      "percent_of_portfolio": 0.203588,
+      "theme_display_name": "Energy Security",
+      "theme_id": "energy_security"
+    },
+    {
+      "advisor_interpretation": "Real Asset Inflation Hedge appears across 5 managers and should be treated as a hidden concentration discussion.",
+      "aggregate_exposure": 8200000.0,
+      "evidence_rows": [
+        {
+          "display_name": "Manager D - Private Markets / Real Assets",
+          "exposure_value": 3770000.0,
+          "id": "mgr_d_private_real_assets",
+          "percent_of_theme": 0.459756
+        },
+        {
+          "display_name": "Manager C - Income and Cash Generation",
+          "exposure_value": 1340000.0,
+          "id": "mgr_c_income_cash_generation",
+          "percent_of_theme": 0.163415
+        },
+        {
+          "display_name": "Manager A - Growth / AI Infrastructure",
+          "exposure_value": 1240000.0,
+          "id": "mgr_a_growth_ai_infrastructure",
+          "percent_of_theme": 0.15122
+        },
+        {
+          "display_name": "Manager F - Opportunistic Macro / Hedge",
+          "exposure_value": 1205000.0,
+          "id": "mgr_f_opportunistic_macro",
+          "percent_of_theme": 0.146951
+        },
+        {
+          "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "exposure_value": 645000.0,
+          "id": "mgr_e_liquidity_defensive",
+          "percent_of_theme": 0.078659
+        }
+      ],
+      "managers_with_exposure": [
+        {
+          "manager_display_name": "Manager D - Private Markets / Real Assets",
+          "manager_id": "mgr_d_private_real_assets"
+        },
+        {
+          "manager_display_name": "Manager C - Income and Cash Generation",
+          "manager_id": "mgr_c_income_cash_generation"
+        },
+        {
+          "manager_display_name": "Manager A - Growth / AI Infrastructure",
+          "manager_id": "mgr_a_growth_ai_infrastructure"
+        },
+        {
+          "manager_display_name": "Manager F - Opportunistic Macro / Hedge",
+          "manager_id": "mgr_f_opportunistic_macro"
+        },
+        {
+          "manager_display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "manager_id": "mgr_e_liquidity_defensive"
+        }
+      ],
+      "overlap_level": "high",
+      "percent_of_portfolio": 0.201499,
+      "theme_display_name": "Real Asset Inflation Hedge",
+      "theme_id": "real_asset_inflation_hedge"
+    },
+    {
+      "advisor_interpretation": "Dollar Exposure appears across 5 managers and should be treated as a hidden concentration discussion.",
+      "aggregate_exposure": 6635000.0,
+      "evidence_rows": [
+        {
+          "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "exposure_value": 4115000.0,
+          "id": "mgr_e_liquidity_defensive",
+          "percent_of_theme": 0.620196
+        },
+        {
+          "display_name": "Manager F - Opportunistic Macro / Hedge",
+          "exposure_value": 1420000.0,
+          "id": "mgr_f_opportunistic_macro",
+          "percent_of_theme": 0.214017
+        },
+        {
+          "display_name": "Manager B - Core Quality Equity",
+          "exposure_value": 610000.0,
+          "id": "mgr_b_core_quality_equity",
+          "percent_of_theme": 0.091937
+        },
+        {
+          "display_name": "Manager A - Growth / AI Infrastructure",
+          "exposure_value": 310000.0,
+          "id": "mgr_a_growth_ai_infrastructure",
+          "percent_of_theme": 0.046722
+        },
+        {
+          "display_name": "Manager C - Income and Cash Generation",
+          "exposure_value": 180000.0,
+          "id": "mgr_c_income_cash_generation",
+          "percent_of_theme": 0.027129
+        }
+      ],
+      "managers_with_exposure": [
+        {
+          "manager_display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "manager_id": "mgr_e_liquidity_defensive"
+        },
+        {
+          "manager_display_name": "Manager F - Opportunistic Macro / Hedge",
+          "manager_id": "mgr_f_opportunistic_macro"
+        },
+        {
+          "manager_display_name": "Manager B - Core Quality Equity",
+          "manager_id": "mgr_b_core_quality_equity"
+        },
+        {
+          "manager_display_name": "Manager A - Growth / AI Infrastructure",
+          "manager_id": "mgr_a_growth_ai_infrastructure"
+        },
+        {
+          "manager_display_name": "Manager C - Income and Cash Generation",
+          "manager_id": "mgr_c_income_cash_generation"
+        }
+      ],
+      "overlap_level": "high",
+      "percent_of_portfolio": 0.163042,
+      "theme_display_name": "Dollar Exposure",
+      "theme_id": "dollar_exposure"
+    }
+  ]
+}
