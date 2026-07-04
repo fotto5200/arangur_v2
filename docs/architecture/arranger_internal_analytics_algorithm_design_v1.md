@@ -275,6 +275,8 @@ Theme/classification rules:
 - Theme mapping supports explanation, grouping, hidden concentration review, and advisor/client discussion.
 - Theme mapping should preserve unresolved or review-required classifications rather than forcing every position into a clean story.
 
+Thesis-specific lenses are a stricter post-valuation classification layer. `docs/architecture/thesis_lens_position_mapping_design_v1.md` defines complete thesis lenses such as AI Adoption, Deglobalization, and Geopolitical Bloc, where each in-scope position maps to exactly one primary bucket per lens plus optional non-additive secondary flags. Those thesis buckets classify already-valued positions and impacts; they do not price positions, construct scenario market states, or replace valuation-input coverage rules. Position-to-market-input coverage mapping and scenario-basis construction remain separate internal design areas.
+
 Position assignment shape:
 
 ```json
@@ -838,13 +840,14 @@ Next implementation should pause additional advisor UI/report-consumption work u
 
 Recommended next tranche:
 
-1. Design and implement a full revaluation scenario-engine skeleton using existing synthetic market-state and valuation fixtures.
-2. Define `base_market_state` and `scenario_market_state` input contracts.
-3. Add a generic `value_position(position, market_state, valuation_context)` boundary.
-4. Produce position-level base/scenario/impact records.
-5. Aggregate those records by manager, account, sleeve, theme, and confidence.
-6. Publish a revaluation bundle manifest.
-7. Only then map the richer bundle back into report-element inputs/views.
+1. Complete the remaining position-to-market-input / valuation coverage mapping design, including substitute inputs, approved mark policies, and coverage confidence by asset class.
+2. Then design and implement a full revaluation scenario-engine skeleton using existing synthetic market-state and valuation fixtures.
+3. Define `base_market_state` and `scenario_market_state` input contracts.
+4. Add a generic `value_position(position, market_state, valuation_context)` boundary.
+5. Produce position-level base/scenario/impact records.
+6. Aggregate those records by manager, account, sleeve, theme, thesis lens bucket, and confidence.
+7. Publish a revaluation bundle manifest.
+8. Only then map the richer bundle back into report-element inputs/views.
 
 Do not add advisor controls, new report views, deployment docs, live data, or external APIs as part of this methodology-alignment step.
 

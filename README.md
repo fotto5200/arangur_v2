@@ -396,6 +396,9 @@ Future scenario, data-coverage, and deployable private-demo work is captured in:
 - `docs/ui_reporting/client_briefing_page_model_v1.md`
 - `docs/ui_reporting/manager_role_review_v1.md`
 - `docs/architecture/arranger_control_plane_boundary_v1.md`
+- `docs/architecture/arranger_internal_analytics_algorithm_design_v1.md`
+- `docs/architecture/key_market_state_scenario_basis_design_v1.md`
+- `docs/architecture/thesis_lens_position_mapping_design_v1.md`
 - `docs/architecture/simulation_kernel_three_surface_model_v1.md`
 - `docs/architecture/deployable_demo_app_architecture.md`
 - `docs/architecture/persistence_model_plan.md`
