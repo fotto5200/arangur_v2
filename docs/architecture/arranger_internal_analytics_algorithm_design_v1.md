@@ -1,300 +1,279 @@
 # Arranger Internal Analytics Algorithm Design v1
 
-## 1. Purpose And Boundary
+## 1. Purpose And Controlling Methodology
 
-This document defines the first algorithmic design for the Arranger Internal Analytic Studio / Control Plane. It is a design packet, not an implementation. It does not change app behavior, advisor UI, backend endpoints, Docker, deployment, live data, or dependencies.
+This document defines the controlling internal analytic methodology for Arranger scenario analytics. It is architecture/design documentation only. It does not implement production code, change app behavior, modify UI, create report views, generate analytics outputs, add backend endpoints, change Docker/deployment configuration, fetch market data, use real client data, or add dependencies.
 
-The boundary is:
+The controlling product methodology is full portfolio revaluation under two internally consistent market states:
 
-- Arranger Internal Analytic Studio / Control Plane owns analytic construction: scenario design, driver shocks, covariance/key-rate methodology, theme taxonomy, classification rules, proxy policy, data-confidence policy, and approved report capability maps.
-- Arangur Advisor App consumes approved analytic packs and analytics bundles. It lets advisors select approved scenarios, themes, lenses, scopes, and report elements.
-- Advisors do not create market-state vectors, key-rate shock curves, covariance matrices, PCA/factor models, scenario shock vectors, theme taxonomies, classification rules, proxy rules, or confidence rules.
+```text
+base_market_state
+-> value every position
+-> base_portfolio_value
 
-Three decision layers must stay separate:
+scenario_market_state
+-> value every position
+-> scenario_portfolio_value
+
+impact = scenario_portfolio_value - base_portfolio_value
+```
+
+Scenario impact is not defined as a direct exposure formula. Key-rate moves, driver perturbations, covariance assumptions, interpolation rules, look-through policies, and instrument-specific approximations may be internal inputs to a valuation model, but they are not the product explanation and they are not advisor-facing controls.
+
+Core implications:
+
+- Arranger defines approved scenarios by constructing complete scenario market states.
+- Scenario market states are generated from approved key-rate or driver perturbations expanded into complete market input surfaces.
+- Every position is valued under the base market state and under the scenario market state.
+- Differences are aggregated and attributed after valuation.
+- Themes classify and explain positions and impacts after valuation; they do not price positions.
+- Coverage, substitute inputs, and confidence describe limits in full revaluation capability; they do not replace the methodology.
+- Arangur Advisor App consumes approved outputs and does not expose control-plane or valuation-construction machinery.
+
+## 2. Boundary
+
+Three layers must stay separate:
 
 | Layer | Owner | Examples | Advisor-facing? |
 | --- | --- | --- | --- |
-| Pre-authored by Arranger | Control plane | Theme catalog, classification lenses, scenario catalog, deterministic shock vectors, covariance model metadata, confidence rules, report capability map | Only approved labels, stories, caveats, and supported choices |
-| Calculated at portfolio run | Internal analytics module | Position-theme assignments, proxy assignments, confidence scores, scenario impacts, overlap/resilience summaries, run manifest | Only summarized through approved report elements |
+| Pre-authored by Arranger | Internal control plane | Scenario catalog, market-state transformation rules, key-rate expansion policy, theme taxonomy, classification rules, confidence rules, report capability map | Only approved labels, stories, caveats, and supported choices |
+| Calculated at portfolio run | Internal analytics engine | Base valuation, scenario valuation, position impacts, attribution summaries, confidence/coverage map, run manifest | Only summarized through approved report elements |
 | Selected by advisor | Arangur Advisor App | Approved scenario, theme focus, lens, scope, report element sequence, narrative sections | Yes |
 
-Current repo baseline:
+Advisor-facing Arangur must not expose:
 
-- `data/analytic_packs/arranger_demo_pack_v1/` contains the current synthetic approved pack.
-- `src/arangur/analytics/apply_demo_pack.py` is a deterministic proof mapper over committed synthetic fixtures.
-- `data/simulation/analytics/` contains local-only proof outputs.
+- model-building tools;
+- raw covariance matrices or propagation controls;
+- key-rate construction controls;
+- valuation internals;
+- shock-vector editing;
+- substitute-input or coverage-rule editors;
+- theme taxonomy editors.
 
-This document describes the intended internal algorithms behind that proof layer. It preserves the current publish-consume boundary: the Advisor App consumes outputs, not construction tools.
+Advisor-facing Arangur may expose:
 
-## 2. Key-Rate / Scenario Construction Algorithm
+- approved scenario names and descriptions;
+- approved theme/lens choices;
+- report-ready impacts and explanations;
+- confidence labels, coverage caveats, and review language.
 
-### 2.1 Market State Vector
+## 3. Full Market State
 
-A market state vector is the internal representation of scenario-relevant drivers at a point in time. It should be explicit, versioned, and unit-aware.
+A full market state is the central input to valuation. It is not merely a list of named shocks. It is the complete set of market inputs required to value the portfolio for a valuation date.
 
-Required fields:
+Required top-level fields:
 
 - `market_state_id`
-- `as_of_date`
-- `horizon`
-- `driver_values`
-- `driver_units`
-- `driver_confidence`
-- `driver_sources`
-- `driver_covariance_group`
-- `synthetic_or_live_data_flag`
-- `model_version`
+- `valuation_date`
+- `as_of_timestamp`
+- `base_or_scenario`
+- `scenario_id`, nullable for base state
+- `source_pack_id`
+- `source_pack_version`
+- `data_confidence`
+- `source_metadata`
+- `market_inputs`
+- `consistency_checks`
+- `caveats`
 
-Typical drivers:
+Market inputs should include, as applicable:
 
-- Rates: overnight, 2Y, 5Y, 10Y, 30Y, real rates, breakevens.
-- Credit: IG spread, HY spread, private credit spread proxy.
-- Equities: broad equity, growth/tech, semiconductors, quality/defensive, small cap.
-- FX: broad USD, EUR/USD, JPY/USD.
-- Commodities/real assets: oil, gas, power, copper, broad commodities, real estate cap-rate proxy.
-- Volatility/liquidity: equity volatility, rates volatility, private-market liquidity, secondary-market discount.
-- Thematic drivers: AI infrastructure/semiconductor, data center power, Taiwan supply-chain disruption.
+- yield curves;
+- credit curves;
+- discount curves;
+- inflation curves;
+- FX spot and forward rates;
+- equity and index levels;
+- commodity levels;
+- volatility surfaces;
+- private-market marks and approved mark policies;
+- calendars and settlement assumptions;
+- corporate-action assumptions;
+- instrument reference data needed for valuation;
+- data confidence and source metadata for each input family.
 
-```python
-def build_market_state_vector(as_of_date, market_inputs, driver_catalog):
-    state = {
-        "as_of_date": as_of_date,
-        "driver_values": {},
-        "driver_units": {},
-        "driver_confidence": {},
-        "driver_sources": {},
-        "missing_drivers": [],
-    }
+Example shape:
 
-    for driver in driver_catalog:
-        observation = market_inputs.get(driver.driver_id)
-        if observation is None:
-            state["missing_drivers"].append(driver.driver_id)
-            state["driver_confidence"][driver.driver_id] = "missing"
-            continue
-
-        state["driver_values"][driver.driver_id] = normalize_unit(
-            observation.value,
-            observation.unit,
-            driver.required_unit,
-        )
-        state["driver_units"][driver.driver_id] = driver.required_unit
-        state["driver_confidence"][driver.driver_id] = score_driver_confidence(observation)
-        state["driver_sources"][driver.driver_id] = observation.source_id
-
-    validate_required_drivers(state, driver_catalog)
-    return state
+```json
+{
+  "market_state_id": "market_state_base_2026_06_30",
+  "valuation_date": "2026-06-30",
+  "base_or_scenario": "base",
+  "scenario_id": null,
+  "market_inputs": {
+    "yield_curves": {},
+    "credit_curves": {},
+    "discount_curves": {},
+    "inflation_curves": {},
+    "fx_rates": {},
+    "equity_index_levels": {},
+    "commodity_levels": {},
+    "volatility_surfaces": {},
+    "private_market_marks": {},
+    "calendars": {}
+  },
+  "data_confidence": {
+    "overall": "synthetic_demo",
+    "input_family_confidence": {}
+  }
+}
 ```
 
-### 2.2 Scenario Construction Levels
+## 4. Scenario Market State
 
-#### A. Simple Deterministic v1
+A scenario is a method for producing a complete alternate market state from the base market state. It is not a direct position impact formula.
 
-The simple v1 engine publishes curated shock vectors across named drivers. It does not need a live covariance engine. It is useful for local demo, early product review, and deterministic report fragments.
+Scenario construction:
 
-Inputs:
+1. Start from a validated base market state.
+2. Load an approved scenario definition from an approved analytic pack.
+3. Apply approved key-rate or driver perturbations.
+4. Expand sparse perturbations into complete required curves, surfaces, levels, marks, and policies.
+5. Validate market-state consistency.
+6. Publish the scenario market state, or a complete enough market-state change set plus reconstruction instructions.
 
-- Approved scenario catalog.
-- Approved shock vectors.
-- Driver catalog and units.
-- Optional qualitative assumptions.
-- Plausibility constraints.
+Required scenario market-state fields:
 
-Outputs:
-
-- Scenario market state deltas by driver.
-- Scenario metadata and caveats.
-- Supported report element mapping.
-
-Properties:
-
-- Deterministic.
-- Reviewable by Frank and Arranger.
-- Easy to version and reproduce.
-- Does not claim probability, forecast, VaR, or live-market calibration.
-
-```python
-def define_scenario_driver_shocks(scenario_id, scenario_catalog, shock_pack):
-    scenario = scenario_catalog.require(scenario_id)
-    shock = shock_pack.require_for_scenario(scenario_id)
-
-    driver_shocks = {}
-    for driver_id, shock_spec in shock.variable_shocks.items():
-        driver_shocks[driver_id] = {
-            "delta": shock_spec.delta,
-            "unit": shock_spec.unit,
-            "direction": shock_spec.direction,
-            "confidence": shock.confidence_level,
-            "source": "curated_arranger_pack",
-        }
-
-    return {
-        "scenario_id": scenario_id,
-        "horizon": scenario.default_horizon,
-        "driver_shocks": driver_shocks,
-        "qualitative_assumptions": shock.qualitative_assumptions,
-        "caveats": scenario.caveats + shock.caveats,
-    }
-```
-
-#### B. Full Covariance / Key-Rate v2
-
-The full v2 engine adds conditional propagation. It starts with one or more anchored shocks, then uses a covariance/correlation model, PCA model, or factor model to propagate related driver moves.
-
-Inputs:
-
-- Market state vector.
-- Driver covariance or correlation matrix.
-- Factor/PCA model and loadings, if used.
-- Scenario anchor shocks.
-- Driver bounds and plausibility constraints.
-- Historical stress library, if approved.
-
-Outputs:
-
-- Representative shocked market state.
-- Conditional propagated shocks.
-- Optional scenario cloud/distribution.
-- Summary statistics: median, p10/p90, worst plausible path, factor attribution.
-- Published scenario pack with only approved representative path/statistics.
-
-Key principle: the Advisor App still receives approved scenario choices and report-ready outputs, not the covariance matrix or model controls.
-
-```python
-def propagate_shocks_through_covariance(base_state, anchor_shocks, covariance_model):
-    driver_ids = covariance_model.driver_ids
-    known = vectorize(anchor_shocks, driver_ids)
-    unknown_driver_ids = [d for d in driver_ids if d not in anchor_shocks]
-
-    conditional_mean = condition_multivariate_normal(
-        mean=covariance_model.mean_vector,
-        covariance=covariance_model.covariance_matrix,
-        observed=known,
-        observed_driver_ids=list(anchor_shocks.keys()),
-        target_driver_ids=unknown_driver_ids,
-    )
-
-    propagated = dict(anchor_shocks)
-    for driver_id, delta in zip(unknown_driver_ids, conditional_mean):
-        propagated[driver_id] = {
-            "delta": delta,
-            "unit": covariance_model.driver_units[driver_id],
-            "direction": sign_label(delta),
-            "confidence": covariance_model.driver_confidence[driver_id],
-            "source": "conditional_covariance_propagation",
-        }
-
-    return propagated
-```
-
-```python
-def validate_scenario_plausibility(base_state, shocked_state, constraints):
-    issues = []
-
-    for rule in constraints.driver_bounds:
-        value = shocked_state.driver_values.get(rule.driver_id)
-        if value is not None and not rule.min_value <= value <= rule.max_value:
-            issues.append(("driver_bound", rule.driver_id, value))
-
-    for rule in constraints.curve_shape_rules:
-        curve = extract_curve(shocked_state, rule.curve_driver_ids)
-        if not rule.accepts(curve):
-            issues.append(("curve_shape", rule.rule_id, curve))
-
-    for rule in constraints.cross_driver_rules:
-        if not rule.accepts(shocked_state.driver_values):
-            issues.append(("cross_driver", rule.rule_id, rule.description))
-
-    status = "valid" if not issues else "review_required"
-    return {"status": status, "issues": issues}
-```
-
-```python
-def publish_scenario_pack(base_state, scenario, propagated_shocks, validation):
-    if validation["status"] != "valid":
-        require_internal_approval(validation["issues"])
-
-    representative_state = apply_driver_shocks(base_state, propagated_shocks)
-    return {
-        "scenario_id": scenario.scenario_id,
-        "display_name": scenario.display_name,
-        "horizon": scenario.horizon,
-        "driver_shocks": propagated_shocks,
-        "representative_market_state": representative_state,
-        "construction_method": scenario.construction_method,
-        "model_version": scenario.model_version,
-        "approval_status": "approved_for_pack",
-        "advisor_story": scenario.advisor_story,
-        "caveats": scenario.caveats,
-    }
-```
-
-### 2.3 Shock Constraints
-
-Every scenario should carry constraints before publication:
-
-- Unit constraints: bps for rates/spreads, percent returns for risk assets, index-level percent moves for proxies.
-- Sign constraints: e.g. rate shock should not lower all key rates unless explicitly named as a rally.
-- Curve constraints: parallel, steepener, flattener, twist, or custom key-rate move.
-- Cross-driver constraints: e.g. AI/chip selloff should usually include higher volatility; energy shock should usually include oil/power moves.
-- Magnitude constraints: driver-level min/max and aggregate scenario severity.
-- Horizon constraints: short shock, 3-month, 12-month, or structural.
-- Confidence constraints: low-confidence propagated drivers require caveats or exclusion from advisor-facing claims.
-
-## 3. Scenario Catalog Design
-
-Required scenario fields:
-
+- `scenario_market_state_id`
 - `scenario_id`
-- `display_name`
-- `scenario_family`
-- `short_description`
-- `advisor_story`
-- `default_horizon`
-- `supported_horizons`
-- `primary_drivers`
-- `anchor_shocks`
-- `propagated_drivers`
-- `shock_units`
-- `affected_themes`
-- `expected_direction_by_theme`
-- `supported_report_elements`
-- `confidence_level`
+- `scenario_display_name`
+- `base_market_state_id`
+- `valuation_date`
+- `scenario_horizon`
 - `construction_method`
-- `plausibility_constraints`
+- `approved_perturbations`
+- `expanded_market_inputs`
+- `consistency_checks`
+- `data_confidence`
 - `caveats`
 - `approval_status`
-- `pack_version`
 
-Recommended initial scenario library:
+The scenario catalog should define advisor-readable scenarios, but the valuation engine should consume full market states.
 
-| Scenario | Scenario ID | Primary anchors | Typical propagated drivers | Notes |
-| --- | --- | --- | --- | --- |
-| AI / Chip Selloff | `ai_chip_selloff` | Semiconductor/AI infrastructure equity, growth tech, volatility | Broad equity, credit spreads, private liquidity | Existing demo scenario. Highlights hidden AI and semiconductor concentration. |
-| Rate Shock | `rate_shock` | 2Y/10Y/30Y rates, long-duration bond price | Credit spreads, private liquidity, volatility | Existing demo scenario. v2 should move key rates directly before price effects. |
-| Curve Steepening | `curve_steepening` | 2Y down/flat, 10Y and 30Y up | Banks, duration, real estate cap-rate proxy | Adds key-rate curve shape beyond simple parallel shock. |
-| Energy Shock | `energy_shock` | Oil, gas/power, energy equities | Inflation breakevens, USD, broad equity, real assets | Existing demo scenario. Useful for inflation and infrastructure themes. |
-| Private Liquidity Freeze | `private_market_liquidity_freeze` | Private liquidity discount, secondary-market bid, credit spread | Volatility, stale marks, private equity/credit valuation haircuts | Existing demo scenario. Low confidence by design. |
-| Taiwan Disruption | `taiwan_disruption` | Semiconductor supply chain, Taiwan/geopolitical risk | AI infrastructure, energy, USD, private liquidity | Existing demo scenario. Requires careful caveats. |
-| Credit Spread Widening | `credit_spread_widening` | IG/HY/private credit spreads | Broad equity, rates, private liquidity | Needed for credit and income manager review. |
-| Inflation Persistence | `inflation_persistence` | Breakevens, real rates, commodities, wage/price proxy | Rates, real assets, consumer demand, duration | Useful for real assets and spending sensitivity. |
+Recommended scenario library:
 
-## 4. Theme / Classification Schema Design
+| Scenario | Scenario ID | Construction focus | Notes |
+| --- | --- | --- | --- |
+| AI / Chip Selloff | `ai_chip_selloff` | Build alternate equity/index, volatility, credit, private-liquidity, and related input surfaces | Existing demo scenario. |
+| Rate Shock | `rate_shock` | Build full shocked yield, discount, and spread curves | Existing demo scenario should be reframed around full curves. |
+| Curve Steepening | `curve_steepening` | Build full yield/discount curves from key-tenor perturbations | Adds explicit curve-shape scenario support. |
+| Energy Shock | `energy_shock` | Build commodity, inflation, FX, equity, and real-asset inputs | Existing demo scenario. |
+| Private Liquidity Freeze | `private_market_liquidity_freeze` | Build private-market mark policy, secondary-discount, credit, and liquidity inputs | Should carry conservative confidence/review language. |
+| Taiwan Disruption | `taiwan_disruption` | Build semiconductor, supply-chain, energy, FX, and volatility inputs | Existing demo scenario. |
+| Credit Spread Widening | `credit_spread_widening` | Build full public/private credit curves and related liquidity inputs | Needed for income and credit manager review. |
+| Inflation Persistence | `inflation_persistence` | Build inflation, real-rate, commodity, and related nominal-rate inputs | Useful for real assets and spending-sensitivity discussion. |
 
-Definitions:
+## 5. Key-Rate Expansion
 
-- Theme taxonomy: Arranger-approved non-exclusive investment themes, such as AI Infrastructure, Rate Sensitivity, Private Market Liquidity, Energy Security, Credit Stress, Dollar Exposure, China/Taiwan Supply Chain, Real Asset Inflation Hedge, Data Center Infrastructure, Consumer Demand Sensitivity, Duration Exposure, and Defensive Cash Flow.
-- Classification lens: A way to view the portfolio. Examples: Strategic Theme, Manager Role / Mandate, Liquidity Profile, Data Confidence.
-- Report lens: A report-element-specific use of a classification lens. Example: Manager Comparison may use Manager Role / Mandate, while Data Confidence Note uses Data Confidence.
-- Advisor-facing category: The label exposed in the Advisor App, chosen from approved pack metadata.
-- Internal mapping rule: Deterministic or reviewed rule that assigns positions to themes/categories based on identifiers, issuer, sector, asset class, manager mandate, look-through, tags, or overrides.
+Key-rate shocks are compact scenario-construction inputs used to build full shocked curves. They are not final valuation outputs and are not advisor-facing controls.
 
-Mutual exclusivity:
+Key-rate expansion must define:
 
-- Strategic themes are non-exclusive. One position can have multiple themes.
-- Some report allocation views need weights that sum to 1. These should use `theme_weight` assignments.
-- Some lenses are mutually exclusive by design. Example: a position should have one primary liquidity bucket.
-- Some lenses allow multiple tags. Example: a manager can be both growth equity and AI infrastructure specialist.
+- key tenor points, such as 3M, 1Y, 2Y, 5Y, 10Y, and 30Y;
+- curve family, such as Treasury, discount, real-rate, inflation, municipal, IG, HY, or private credit;
+- interpolation policy between key tenors;
+- extrapolation policy beyond key tenors;
+- compounding/day-count conventions where needed;
+- curve consistency rules;
+- supported shapes: parallel, steepener, flattener, twist, and custom key-rate scenarios;
+- validation tolerances;
+- source and confidence metadata.
+
+Distinction:
+
+- Key-rate perturbation: compact Arranger-approved input.
+- Full shocked curve: complete valuation input generated from the perturbation.
+- Scenario market state: complete set of shocked curves, surfaces, levels, marks, policies, and metadata.
+
+Key-rate expansion should never be used as a stand-alone explanation of portfolio impact. The portfolio impact comes from valuing positions with the full shocked market state.
+
+## 6. Full Position Valuation
+
+Every position should be valued through the same generic interface:
+
+```python
+def value_position(position, market_state, valuation_context):
+    model = valuation_context.model_registry.select(position)
+    required_inputs = model.required_market_inputs(position)
+    coverage = check_market_input_coverage(required_inputs, market_state)
+
+    if not coverage.can_value:
+        return approved_coverage_treatment(position, market_state, coverage, valuation_context)
+
+    value_result = model.value(
+        position=position,
+        market_inputs=market_state.market_inputs,
+        valuation_date=market_state.valuation_date,
+        assumptions=valuation_context.assumptions_for(position),
+    )
+
+    return {
+        "position_id": position.position_id,
+        "market_state_id": market_state.market_state_id,
+        "value": value_result.value,
+        "valuation_model_id": model.model_id,
+        "coverage_status": "valued",
+        "confidence": score_valuation_confidence(position, market_state, coverage, value_result),
+        "caveats": value_result.caveats,
+        "required_inputs": required_inputs,
+        "used_inputs": value_result.used_inputs,
+    }
+```
+
+Examples:
+
+- Bond: value expected cash flows using the scenario discount/yield curves, spread curves, calendar, settlement, and instrument terms.
+- Option or structured product: reprice under scenario underlyings, rates, volatility surfaces, calendars, and product terms.
+- ETF or fund: use look-through holdings when available; otherwise apply an approved valuation policy with explicit coverage limits.
+- Private or opaque asset: use approved mark policy, manager mark treatment, appraisal policy, or review-required treatment with explicit limitations.
+- Cash: use face value, currency, settlement date, and cash/yield treatment as applicable.
+
+Instrument-specific internal calculations may use whatever mathematics the selected valuation model requires. Those calculations are implementation details. The product methodology remains: value the position under the base market state, value it under the scenario market state, compare the results.
+
+## 7. Portfolio Revaluation
+
+Portfolio revaluation is the only scenario impact methodology.
+
+```text
+base_portfolio_value = sum(value_position(position, base_market_state))
+scenario_portfolio_value = sum(value_position(position, scenario_market_state))
+impact = scenario_portfolio_value - base_portfolio_value
+impact_percent = impact / base_portfolio_value
+```
+
+Required run outputs:
+
+- position base values;
+- position scenario values;
+- position impacts;
+- base portfolio value;
+- scenario portfolio value;
+- portfolio impact;
+- coverage status by position;
+- confidence/caveats by position;
+- attribution summaries after valuation.
+
+Attribution happens after valuation:
+
+- by position;
+- by manager;
+- by account;
+- by sleeve;
+- by theme;
+- by scenario;
+- by confidence bucket.
+
+## 8. Themes And Classification
+
+Themes classify positions and impacts after valuation. They do not price positions and do not substitute for valuation.
+
+Theme/classification rules:
+
+- Theme taxonomy is Arranger-approved and versioned.
+- A position can belong to multiple themes.
+- Theme weights are attribution/reporting weights, not valuation weights.
+- Theme mapping supports explanation, grouping, hidden concentration review, and advisor/client discussion.
+- Theme mapping should preserve unresolved or review-required classifications rather than forcing every position into a clean story.
 
 Position assignment shape:
 
@@ -309,695 +288,571 @@ Position assignment shape:
     {"theme_id": "data_center_infrastructure", "weight": 0.15}
   ],
   "classification_confidence": "high",
-  "assignment_sources": ["ticker_rule", "sector_rule", "manual_review"],
+  "assignment_sources": ["identifier_rule", "issuer_rule", "manual_review"],
   "review_status": "approved"
 }
 ```
 
-Unresolved positions must stay explicit:
-
-- `primary_theme_id = null`
-- `theme_weights = []`
-- `classification_confidence = low`
-- `review_status = review_required`
-- `review_reason` explains what is missing.
-
-## 5. Position-To-Theme Mapping Algorithm
-
-Inputs:
-
-- Normalized position: id, display name, ticker, CUSIP/ISIN if available, issuer, manager, sleeve, account, asset class, instrument type, sector, industry, geography, currency, market value, tags, scenario hints, valuation tier, confidence flags.
-- Theme catalog.
-- Mapping rules.
-- Manual overrides.
-- Optional look-through holdings or manager exposure file.
-
-Precedence:
-
-1. Manual override approved by Arranger.
-2. Exact identifier/ticker/issuer rule.
-3. Fund or index look-through rule.
-4. Sector/industry/geography rule.
-5. Manager/sleeve/mandate rule.
-6. Text/tag/scenario-hint rule.
-7. Fallback to unresolved review.
+Theme impact attribution should consume the revaluation result:
 
 ```python
-def classify_position_to_themes(position, theme_catalog, mapping_rules):
-    candidates = []
+def classify_impacts_by_theme(revaluation_results, theme_assignments):
+    theme_rows = {}
 
-    candidates += apply_manual_overrides(position, mapping_rules.manual_overrides)
-    candidates += apply_ticker_or_issuer_rules(position, mapping_rules.identifier_rules)
-    candidates += apply_fund_lookthrough_rules(position, mapping_rules.lookthrough_rules)
-    candidates += apply_sector_industry_rules(position, mapping_rules.sector_rules)
-    candidates += apply_manager_sleeve_rules(position, mapping_rules.manager_rules)
-    candidates += apply_tag_rules(position, mapping_rules.tag_rules)
+    for position_result in revaluation_results.position_results:
+        assignment = theme_assignments.get(position_result.position_id)
+        if assignment is None or not assignment.theme_weights:
+            add_unclassified_review_row(theme_rows, position_result)
+            continue
 
-    candidates = remove_invalid_theme_ids(candidates, theme_catalog)
-    if not candidates:
-        return route_unclassified_positions_to_review(position)
+        for theme_weight in assignment.theme_weights:
+            contribution = position_result.impact * theme_weight.weight
+            base_value = position_result.base_value * theme_weight.weight
+            scenario_value = position_result.scenario_value * theme_weight.weight
+            add_theme_contribution(
+                theme_rows,
+                theme_id=theme_weight.theme_id,
+                base_value=base_value,
+                scenario_value=scenario_value,
+                impact=contribution,
+                confidence=position_result.confidence,
+                coverage_status=position_result.coverage_status,
+            )
 
-    weighted = assign_theme_weights(position, candidates)
-    confidence = calculate_assignment_confidence(position, weighted)
-
-    return {
-        "position_id": position.position_id,
-        "primary_theme_id": weighted[0].theme_id,
-        "secondary_theme_ids": [item.theme_id for item in weighted[1:]],
-        "theme_weights": [item.to_dict() for item in weighted],
-        "classification_confidence": confidence,
-        "assignment_sources": unique_sources(weighted),
-        "review_status": "approved" if confidence != "low" else "review_recommended",
-    }
+    return summarize_theme_rows(theme_rows)
 ```
 
-```python
-def apply_manual_overrides(position, overrides):
-    override = overrides.get(position.position_id) or overrides.get(position.instrument_id)
-    if override is None:
-        return []
+## 9. Coverage, Substitute Inputs, And Confidence
 
-    return [
-        CandidateTheme(
-            theme_id=item.theme_id,
-            raw_weight=item.weight,
-            source="manual_override",
-            confidence="high",
-            rationale=override.rationale,
-        )
-        for item in override.theme_assignments
-    ]
-```
+The design should use coverage and confidence language rather than alternate impact-formula language.
 
-```python
-def apply_ticker_or_issuer_rules(position, identifier_rules):
-    keys = [
-        position.ticker,
-        position.issuer_id,
-        position.instrument_id,
-        position.cusip,
-        position.isin,
-    ]
-    candidates = []
-    for key in keys:
-        if key and key in identifier_rules:
-            candidates += identifier_rules[key].theme_candidates
-    return candidates
-```
+Preferred terms:
 
-```python
-def apply_sector_industry_rules(position, sector_rules):
-    rule_keys = [
-        (position.asset_class, position.sector, position.industry),
-        (position.asset_class, position.sector, None),
-        (position.asset_class, None, None),
-    ]
-    for key in rule_keys:
-        if key in sector_rules:
-            return sector_rules[key].theme_candidates
-    return []
-```
+- valuation coverage;
+- approved valuation policy;
+- substitute market input;
+- look-through limitation;
+- review-required treatment;
+- confidence tier;
+- caveat.
 
-```python
-def apply_manager_sleeve_rules(position, manager_rules):
-    keys = [
-        (position.manager_id, position.sleeve_id),
-        (position.manager_id, position.mandate_id),
-        (position.manager_id, None),
-    ]
-    candidates = []
-    for key in keys:
-        if key in manager_rules:
-            candidates += manager_rules[key].theme_candidates
-    return candidates
-```
+Coverage policy:
 
-```python
-def assign_theme_weights(position, candidates):
-    manual = [c for c in candidates if c.source == "manual_override"]
-    source = manual if manual else candidates
+- If full revaluation is available, value the position under both market states.
+- If an input is missing but a defensible substitute market input is approved, use the approved policy and mark confidence appropriately.
+- If look-through is unavailable for a fund, use the approved fund valuation policy and describe the limitation.
+- If a private or opaque asset cannot be defensibly valued under the scenario state, use the approved mark/review treatment and route to review as needed.
+- Do not pretend that an approximation has the same status as full revaluation.
 
-    scored = []
-    for candidate in source:
-        score = candidate.raw_weight or score_candidate_strength(position, candidate)
-        scored.append((candidate.theme_id, score, candidate.source, candidate.confidence))
+Coverage status values:
 
-    by_theme = combine_duplicate_theme_scores(scored)
-    total = sum(max(item.score, 0.0) for item in by_theme)
-    if total <= 0:
-        return []
-
-    weighted = [
-        ThemeWeight(
-            theme_id=item.theme_id,
-            weight=item.score / total,
-            source=item.source,
-            confidence=item.confidence,
-        )
-        for item in by_theme
-    ]
-    return sorted(weighted, key=lambda item: item.weight, reverse=True)
-```
-
-```python
-def calculate_assignment_confidence(position, weighted_assignments):
-    if not weighted_assignments:
-        return "low"
-
-    source_scores = {
-        "manual_override": 1.00,
-        "identifier_rule": 0.95,
-        "issuer_rule": 0.90,
-        "lookthrough_rule": 0.85,
-        "sector_rule": 0.70,
-        "manager_rule": 0.60,
-        "tag_rule": 0.55,
-    }
-    weighted_score = sum(
-        assignment.weight * source_scores.get(assignment.source, 0.40)
-        for assignment in weighted_assignments
-    )
-
-    if position.valuation_tier in {"human_review_required", "stale_or_manager_mark"}:
-        weighted_score -= 0.15
-    if position.asset_class in {"opaque_manager_level", "private_equity", "private_credit"}:
-        weighted_score -= 0.10
-
-    if weighted_score >= 0.80:
-        return "high"
-    if weighted_score >= 0.55:
-        return "medium"
-    return "low"
-```
-
-```python
-def route_unclassified_positions_to_review(position):
-    return {
-        "position_id": position.position_id,
-        "primary_theme_id": None,
-        "secondary_theme_ids": [],
-        "theme_weights": [],
-        "classification_confidence": "low",
-        "assignment_sources": [],
-        "review_status": "review_required",
-        "review_reason": "No approved mapping rule matched this position.",
-    }
-```
-
-Examples:
-
-- Nvidia-like public equity: exact ticker/issuer rule maps primarily to AI Infrastructure, secondarily to China/Taiwan Supply Chain and Data Center Infrastructure. Confidence should be high if market value and identifier data are direct.
-- AI chip ETF: ETF look-through maps to AI Infrastructure and China/Taiwan Supply Chain, with medium confidence unless holdings are current and complete.
-- Opaque private fund: manager mandate maps to Private Market Liquidity and possibly Data Center Infrastructure, with low or medium classification confidence depending on look-through. Position should keep a caveat and may route to review.
-- Manager-level private book: manager/sleeve rule can assign high-level themes, but `review_status` should remain review_required if holdings are absent.
-
-## 6. Proxy Assignment Algorithm
-
-Proxy assignment estimates exposures when direct valuation or scenario sensitivity is unavailable. It must be explicit and caveated.
-
-Proxy hierarchy:
-
-1. Direct instrument pricing and sensitivity.
-2. Public ticker comparable.
-3. ETF or index proxy.
-4. Factor proxy.
-5. Manager mandate proxy.
-6. Sector/geography proxy.
-7. Stale/private mark proxy.
-8. Unacceptable proxy, route to review.
-
-Proxy quality inputs:
-
-- Asset-class match.
-- Economic exposure match.
-- Geography/currency match.
-- Liquidity/horizon match.
-- Data freshness.
-- Look-through coverage.
-- Manager mandate specificity.
-- Scenario driver coverage.
-- Historical fit, if available.
-- Human override status.
-
-```python
-def choose_proxy_for_position(position, proxy_catalog, scenario_driver_ids):
-    if has_direct_sensitivity(position, scenario_driver_ids):
-        return direct_proxy(position)
-
-    candidates = []
-    candidates += public_ticker_comparables(position, proxy_catalog)
-    candidates += etf_or_index_proxies(position, proxy_catalog)
-    candidates += factor_proxies(position, proxy_catalog)
-    candidates += manager_mandate_proxies(position, proxy_catalog)
-    candidates += sector_geography_proxies(position, proxy_catalog)
-    candidates += stale_private_mark_proxies(position, proxy_catalog)
-
-    scored = [
-        score_proxy_quality(position, candidate, scenario_driver_ids)
-        for candidate in candidates
-    ]
-    scored = [candidate for candidate in scored if candidate.score >= proxy_catalog.minimum_score]
-
-    if not scored:
-        return unacceptable_proxy(position, "No proxy met minimum quality threshold.")
-
-    best = max(scored, key=lambda candidate: candidate.score)
-    if best.requires_human_review:
-        best.review_status = "review_required"
-    return best
-```
-
-```python
-def score_proxy_quality(position, proxy, scenario_driver_ids):
-    score = 0.0
-    score += 0.25 * match_asset_class(position, proxy)
-    score += 0.25 * match_economic_exposure(position, proxy)
-    score += 0.15 * match_geography_currency(position, proxy)
-    score += 0.15 * match_scenario_driver_coverage(proxy, scenario_driver_ids)
-    score += 0.10 * score_data_freshness(proxy)
-    score += 0.10 * score_lookthrough_coverage(position, proxy)
-
-    if position.valuation_tier == "stale_or_manager_mark":
-        score -= 0.10
-    if position.asset_class == "opaque_manager_level":
-        score -= 0.20
-    if proxy.source == "manual_override":
-        score += 0.10
-
-    tier = "high" if score >= 0.80 else "medium" if score >= 0.55 else "low"
-    return proxy.with_score(score=score, quality_tier=tier)
-```
-
-```python
-def apply_proxy_exposure(position, proxy, shock_vector):
-    if proxy.quality_tier == "unacceptable":
-        return {
-            "position_id": position.position_id,
-            "scenario_impact": None,
-            "confidence": "review_required",
-            "caveat": generate_proxy_caveat(position, proxy),
-        }
-
-    beta = proxy.beta_to_driver or 1.0
-    driver_delta = shock_vector.get(proxy.driver_id, 0.0)
-    impact_percent = beta * driver_delta
-
-    return {
-        "position_id": position.position_id,
-        "proxy_id": proxy.proxy_id,
-        "driver_id": proxy.driver_id,
-        "impact_percent": impact_percent,
-        "scenario_impact": position.market_value * impact_percent,
-        "confidence": proxy.quality_tier,
-        "caveat": generate_proxy_caveat(position, proxy),
-    }
-```
-
-```python
-def generate_proxy_caveat(position, proxy):
-    if proxy.quality_tier == "high":
-        return "Direct or close proxy used for scenario sensitivity."
-    if proxy.quality_tier == "medium":
-        return "Scenario sensitivity uses a proxy; interpretation should focus on direction and relative exposure."
-    if proxy.quality_tier == "low":
-        return "Scenario sensitivity is approximate because the position lacks direct or close look-through data."
-    return "No acceptable proxy is available; this position should be reviewed before relying on scenario impact."
-```
-
-Unacceptable proxy triggers:
-
-- No economic relationship to scenario drivers.
-- Missing market value or notional.
-- Unclear long/short exposure.
-- Option-like payoff without approved approximation.
-- Opaque manager-level book with no mandate or look-through.
-- Stale private mark with no review or policy-approved proxy.
-
-## 7. Data Confidence / Opacity Algorithm
-
-Data confidence is an analytic output, not a cosmetic label. It controls caveats, review routing, and whether report elements may present results as directional only.
-
-Inputs:
-
-- Valuation source.
-- Data freshness.
-- Identifier completeness.
-- Position type and asset class.
-- Direct vs proxy valuation.
-- Proxy quality.
-- Classification confidence.
-- Scenario driver coverage.
-- Human review flag.
-- Stale/private mark status.
-- Look-through coverage.
-
-Outputs:
-
-- `high`
-- `medium`
-- `low`
+- `valued`
+- `valued_with_substitute_input`
+- `valued_with_approved_policy`
+- `held_at_mark_with_caveat`
 - `review_required`
+- `not_valued`
+
+Confidence tiers:
+
+- `high`: direct or complete valuation inputs are available and internally consistent.
+- `medium`: valued with approved substitute input or incomplete but usable look-through.
+- `low`: valuation relies on stale, private, or incomplete policy inputs and should be used directionally.
+- `review_required`: position needs human review before relying on point impact.
 
 ```python
-def score_position_confidence(position, classification, proxy_assignment):
-    score = 1.0
+def score_position_confidence(position, base_value_result, scenario_value_result, coverage_policy):
+    statuses = {
+        base_value_result.coverage_status,
+        scenario_value_result.coverage_status,
+    }
 
-    if position.valuation_tier == "direct_price_or_mark":
-        score -= 0.00
-    elif position.valuation_tier == "cash_face_value":
-        score -= 0.05
-    elif position.valuation_tier == "proxy_valuation":
-        score -= 0.20
-    elif position.valuation_tier == "stale_or_manager_mark":
-        score -= 0.35
-    elif position.valuation_tier == "human_review_required":
-        score -= 0.50
-    else:
-        score -= 0.40
-
-    if position.is_stale:
-        score -= 0.15
-    if position.human_review_required:
-        score -= 0.30
-    if classification.classification_confidence == "medium":
-        score -= 0.10
-    if classification.classification_confidence == "low":
-        score -= 0.25
-    if proxy_assignment.quality_tier == "medium":
-        score -= 0.10
-    if proxy_assignment.quality_tier == "low":
-        score -= 0.25
-    if proxy_assignment.quality_tier == "unacceptable":
+    if "review_required" in statuses or "not_valued" in statuses:
         return "review_required"
-
-    if position.human_review_required or score < 0.35:
-        return "review_required"
-    if score >= 0.80:
-        return "high"
-    if score >= 0.55:
+    if "held_at_mark_with_caveat" in statuses:
+        return "low"
+    if "valued_with_approved_policy" in statuses:
+        return "medium" if coverage_policy.is_strong(position) else "low"
+    if "valued_with_substitute_input" in statuses:
         return "medium"
-    return "low"
+    return "high"
 ```
 
 ```python
-def aggregate_confidence_by_theme(position_confidence_rows, theme_assignments):
-    buckets_by_theme = {}
+def generate_coverage_caveat(position, base_value_result, scenario_value_result):
+    status = worst_coverage_status(base_value_result, scenario_value_result)
 
-    for row in position_confidence_rows:
-        assignments = theme_assignments[row.position_id].theme_weights
-        for assignment in assignments:
-            exposure = row.market_value * assignment.weight
-            bucket = row.confidence_bucket
-            buckets_by_theme.setdefault(assignment.theme_id, Counter())
-            buckets_by_theme[assignment.theme_id][bucket] += exposure
+    if status == "valued":
+        return "Position was valued under both base and scenario market states."
+    if status == "valued_with_substitute_input":
+        return "Position was valued with an approved substitute market input; use the result directionally."
+    if status == "valued_with_approved_policy":
+        return "Position was valued with an approved policy because complete look-through was unavailable."
+    if status == "held_at_mark_with_caveat":
+        return "Position was held at an approved mark treatment; scenario impact may understate true exposure."
+    return "Position requires review before relying on scenario impact."
+```
+
+## 10. Required Pseudocode
+
+### `build_base_market_state()`
+
+```python
+def build_base_market_state(valuation_date, market_sources, market_state_schema):
+    market_inputs = {}
+    confidence = {}
+    caveats = []
+
+    for input_family in market_state_schema.required_input_families:
+        raw_inputs = market_sources.load(input_family, valuation_date)
+        normalized = normalize_market_inputs(input_family, raw_inputs)
+        validation = validate_input_family(input_family, normalized)
+
+        market_inputs[input_family.id] = normalized
+        confidence[input_family.id] = validation.confidence
+        caveats.extend(validation.caveats)
+
+    base_state = {
+        "market_state_id": make_market_state_id("base", valuation_date),
+        "valuation_date": valuation_date,
+        "base_or_scenario": "base",
+        "scenario_id": None,
+        "market_inputs": market_inputs,
+        "data_confidence": confidence,
+        "caveats": caveats,
+    }
+    validate_market_state_consistency(base_state)
+    return base_state
+```
+
+### `build_scenario_market_state()`
+
+```python
+def build_scenario_market_state(base_market_state, scenario_definition, construction_policy):
+    scenario_inputs = deep_copy_market_inputs(base_market_state["market_inputs"])
+
+    expanded_changes = {}
+    for perturbation in scenario_definition.approved_perturbations:
+        if perturbation.kind == "key_rate":
+            expanded = expand_key_rate_shocks(
+                base_curve=scenario_inputs[perturbation.curve_family],
+                key_rate_shocks=perturbation.key_rate_shocks,
+                expansion_policy=construction_policy.curve_policy_for(perturbation.curve_family),
+            )
+            expanded_changes[perturbation.curve_family] = expanded
+        else:
+            expanded = expand_non_curve_perturbation(
+                base_inputs=scenario_inputs,
+                perturbation=perturbation,
+                construction_policy=construction_policy,
+            )
+            expanded_changes[perturbation.input_family] = expanded
+
+    scenario_inputs = apply_expanded_market_changes(scenario_inputs, expanded_changes)
+
+    scenario_state = {
+        "market_state_id": make_market_state_id("scenario", scenario_definition.scenario_id, base_market_state["valuation_date"]),
+        "valuation_date": base_market_state["valuation_date"],
+        "base_or_scenario": "scenario",
+        "scenario_id": scenario_definition.scenario_id,
+        "base_market_state_id": base_market_state["market_state_id"],
+        "market_inputs": scenario_inputs,
+        "construction_method": scenario_definition.construction_method,
+        "approved_perturbations": scenario_definition.approved_perturbations,
+        "expanded_changes": expanded_changes,
+        "data_confidence": merge_confidence(base_market_state, expanded_changes),
+        "caveats": list(scenario_definition.caveats),
+    }
+    validate_market_state_consistency(scenario_state)
+    return scenario_state
+```
+
+### `expand_key_rate_shocks()`
+
+```python
+def expand_key_rate_shocks(base_curve, key_rate_shocks, expansion_policy):
+    shocked_points = {}
+
+    for tenor, base_rate in base_curve.key_tenor_points.items():
+        perturbation = key_rate_shocks.get(tenor, 0.0)
+        shocked_points[tenor] = base_rate + perturbation
+
+    full_curve = interpolate_curve(
+        key_points=shocked_points,
+        interpolation_method=expansion_policy.interpolation_method,
+        output_tenors=expansion_policy.required_output_tenors,
+    )
+
+    full_curve = extrapolate_curve(
+        curve=full_curve,
+        extrapolation_method=expansion_policy.extrapolation_method,
+        min_tenor=expansion_policy.min_tenor,
+        max_tenor=expansion_policy.max_tenor,
+    )
+
+    curve_validation = validate_curve_shape(
+        curve=full_curve,
+        base_curve=base_curve,
+        consistency_rules=expansion_policy.consistency_rules,
+    )
 
     return {
-        theme_id: summarize_confidence_counter(counter)
-        for theme_id, counter in buckets_by_theme.items()
+        "curve": full_curve,
+        "source_key_rate_shocks": key_rate_shocks,
+        "interpolation_policy": expansion_policy.interpolation_method,
+        "extrapolation_policy": expansion_policy.extrapolation_method,
+        "validation": curve_validation,
     }
 ```
 
-```python
-def aggregate_confidence_by_manager(position_confidence_rows):
-    buckets_by_manager = {}
+### `validate_market_state_consistency()`
 
-    for row in position_confidence_rows:
-        counter = buckets_by_manager.setdefault(row.manager_id, Counter())
-        counter[row.confidence_bucket] += row.market_value
+```python
+def validate_market_state_consistency(market_state):
+    issues = []
+
+    issues.extend(validate_required_input_families(market_state["market_inputs"]))
+    issues.extend(validate_curve_families(market_state["market_inputs"].get("yield_curves", {})))
+    issues.extend(validate_discount_curve_links(market_state["market_inputs"]))
+    issues.extend(validate_fx_triangle_consistency(market_state["market_inputs"].get("fx_rates", {})))
+    issues.extend(validate_surface_dimensions(market_state["market_inputs"].get("volatility_surfaces", {})))
+    issues.extend(validate_private_mark_policies(market_state["market_inputs"].get("private_market_marks", {})))
+    issues.extend(validate_calendar_and_settlement_inputs(market_state["market_inputs"].get("calendars", {})))
+
+    if issues:
+        market_state["consistency_checks"] = {"status": "review_required", "issues": issues}
+        raise MarketStateConsistencyError(issues)
+
+    market_state["consistency_checks"] = {"status": "valid", "issues": []}
+    return market_state
+```
+
+### `value_position()`
+
+```python
+def value_position(position, market_state, valuation_context):
+    model = valuation_context.model_registry.select(position)
+    required_inputs = model.required_market_inputs(position)
+    coverage = check_market_input_coverage(required_inputs, market_state)
+
+    if not coverage.can_value:
+        return approved_coverage_treatment(
+            position=position,
+            market_state=market_state,
+            coverage=coverage,
+            valuation_context=valuation_context,
+        )
+
+    result = model.value(
+        position=position,
+        market_inputs=market_state["market_inputs"],
+        valuation_date=market_state["valuation_date"],
+        assumptions=valuation_context.assumptions_for(position),
+    )
 
     return {
-        manager_id: summarize_confidence_counter(counter)
-        for manager_id, counter in buckets_by_manager.items()
+        "position_id": position.position_id,
+        "market_state_id": market_state["market_state_id"],
+        "value": result.value,
+        "coverage_status": "valued",
+        "valuation_model_id": model.model_id,
+        "confidence": result.confidence,
+        "caveats": result.caveats,
+        "used_inputs": result.used_inputs,
     }
 ```
 
+### `run_full_portfolio_revaluation()`
+
 ```python
-def generate_advisor_confidence_language(confidence_summary):
-    if confidence_summary.review_required_percent >= 0.15:
-        return "A meaningful share of this view depends on positions that need review before relying on exact scenario impact."
-    if confidence_summary.low_percent >= 0.20:
-        return "Several positions use approximate or stale inputs; use the result directionally."
-    if confidence_summary.medium_percent >= 0.30:
-        return "Some exposure uses proxy or manager-level inputs; compare relative exposure more than point estimates."
-    return "Most exposure in this view is supported by direct or high-confidence inputs."
+def run_full_portfolio_revaluation(portfolio, base_market_state, scenario_market_state, valuation_context):
+    position_results = []
+
+    for position in portfolio.positions:
+        base_result = value_position(position, base_market_state, valuation_context)
+        scenario_result = value_position(position, scenario_market_state, valuation_context)
+
+        confidence = score_position_confidence(
+            position,
+            base_value_result=base_result,
+            scenario_value_result=scenario_result,
+            coverage_policy=valuation_context.coverage_policy,
+        )
+
+        impact = scenario_result["value"] - base_result["value"]
+        position_results.append({
+            "position_id": position.position_id,
+            "manager_id": position.manager_id,
+            "account_id": position.account_id,
+            "sleeve_id": position.sleeve_id,
+            "base_value": base_result["value"],
+            "scenario_value": scenario_result["value"],
+            "impact": impact,
+            "impact_percent": safe_divide(impact, base_result["value"]),
+            "base_coverage_status": base_result["coverage_status"],
+            "scenario_coverage_status": scenario_result["coverage_status"],
+            "confidence": confidence,
+            "caveats": merge_caveats(base_result, scenario_result),
+        })
+
+    base_total = sum(row["base_value"] for row in position_results)
+    scenario_total = sum(row["scenario_value"] for row in position_results)
+
+    return {
+        "base_market_state_id": base_market_state["market_state_id"],
+        "scenario_market_state_id": scenario_market_state["market_state_id"],
+        "base_portfolio_value": base_total,
+        "scenario_portfolio_value": scenario_total,
+        "impact": scenario_total - base_total,
+        "impact_percent": safe_divide(scenario_total - base_total, base_total),
+        "position_results": position_results,
+    }
 ```
 
-## 8. Portfolio Analytics Run Algorithm
-
-The internal analytics run consumes an approved pack and a portfolio snapshot, then publishes an analytics bundle.
-
-Pipeline:
-
-1. Load approved pack.
-2. Validate pack shape, references, version, and approval status.
-3. Load portfolio snapshot.
-4. Normalize positions.
-5. Build or load market state vector.
-6. Classify positions to themes/lenses.
-7. Assign proxies.
-8. Score confidence and opacity.
-9. Apply scenarios.
-10. Aggregate results by theme, manager, lens, and scenario.
-11. Generate caveat and advisor-language fields.
-12. Publish output bundle and manifest.
+### `aggregate_revaluation_results()`
 
 ```python
-def run_internal_analytics(pack_id, portfolio_snapshot, market_inputs, options):
+def aggregate_revaluation_results(revaluation_results, grouping_dimensions):
+    summaries = {}
+
+    for dimension in grouping_dimensions:
+        grouped = group_by(revaluation_results["position_results"], dimension)
+        summaries[dimension] = []
+
+        for group_id, rows in grouped.items():
+            base_value = sum(row["base_value"] for row in rows)
+            scenario_value = sum(row["scenario_value"] for row in rows)
+            impact = scenario_value - base_value
+            summaries[dimension].append({
+                "group_id": group_id,
+                "base_value": base_value,
+                "scenario_value": scenario_value,
+                "impact": impact,
+                "impact_percent": safe_divide(impact, base_value),
+                "confidence_mix": summarize_confidence(rows),
+                "coverage_mix": summarize_coverage(rows),
+                "top_positions": top_positions_by_absolute_impact(rows),
+            })
+
+    return summaries
+```
+
+### `publish_revaluation_bundle()`
+
+```python
+def publish_revaluation_bundle(pack, portfolio, base_market_state, scenario_market_state, revaluation_results, attribution):
+    bundle = {
+        "analytics_run_manifest": {
+            "schema_version": "analytics_run_manifest.v1",
+            "pack_id": pack.pack_id,
+            "pack_version": pack.pack_version,
+            "portfolio_id": portfolio.portfolio_id,
+            "valuation_date": base_market_state["valuation_date"],
+            "base_market_state_id": base_market_state["market_state_id"],
+            "scenario_market_state_id": scenario_market_state["market_state_id"],
+            "methodology": "full_portfolio_revaluation",
+            "synthetic_data": portfolio.synthetic_data,
+        },
+        "position_revaluation_results": revaluation_results["position_results"],
+        "portfolio_revaluation_summary": {
+            "base_portfolio_value": revaluation_results["base_portfolio_value"],
+            "scenario_portfolio_value": revaluation_results["scenario_portfolio_value"],
+            "impact": revaluation_results["impact"],
+            "impact_percent": revaluation_results["impact_percent"],
+        },
+        "scenario_impact_by_theme_manager": attribution["theme_manager"],
+        "data_confidence_map": attribution["confidence"],
+        "cross_scenario_resilience_summary": attribution.get("cross_scenario_resilience"),
+    }
+    validate_revaluation_bundle(bundle)
+    return bundle
+```
+
+## 11. Portfolio Analytics Run
+
+End-to-end internal flow:
+
+```python
+def run_internal_analytics(pack_id, portfolio_snapshot, market_sources, options):
     pack = load_approved_pack(pack_id)
-    validate_pack_for_run(pack, portfolio_snapshot)
+    portfolio = normalize_portfolio_snapshot(portfolio_snapshot)
+    valuation_context = build_valuation_context(pack, portfolio, options)
 
-    positions = normalize_portfolio_positions(portfolio_snapshot)
-    market_state = build_market_state_vector(
-        options.as_of_date,
-        market_inputs,
-        pack.driver_catalog,
+    base_market_state = build_base_market_state(
+        valuation_date=options.valuation_date,
+        market_sources=market_sources,
+        market_state_schema=pack.market_state_schema,
     )
 
-    theme_assignments = {}
-    proxy_assignments = {}
-    confidence_rows = {}
-
-    for position in positions:
-        classification = classify_position_to_themes(
-            position,
-            pack.theme_catalog,
-            pack.mapping_rules,
-        )
-        proxy = choose_proxy_for_position(
-            position,
-            pack.proxy_catalog,
-            pack.all_scenario_driver_ids,
-        )
-        confidence = score_position_confidence(position, classification, proxy)
-
-        theme_assignments[position.position_id] = classification
-        proxy_assignments[position.position_id] = proxy
-        confidence_rows[position.position_id] = confidence
-
-    scenario_results = []
-    for scenario in pack.scenario_catalog:
-        shocks = define_scenario_driver_shocks(
-            scenario.scenario_id,
-            pack.scenario_catalog,
-            pack.scenario_shock_pack,
-        )
-        if options.use_covariance_propagation:
-            shocks = propagate_shocks_through_covariance(
-                market_state,
-                shocks["driver_shocks"],
-                pack.covariance_model,
-            )
-        validation = validate_scenario_plausibility(
-            market_state,
-            apply_driver_shocks(market_state, shocks),
-            scenario.plausibility_constraints,
-        )
-        scenario_results.append(
-            calculate_scenario_impacts(
-                positions,
-                shocks,
-                proxy_assignments,
-                confidence_rows,
-                validation,
-            )
-        )
-
-    return publish_analytics_bundle(
-        pack=pack,
-        portfolio_snapshot=portfolio_snapshot,
-        market_state=market_state,
-        theme_assignments=theme_assignments,
-        proxy_assignments=proxy_assignments,
-        confidence_rows=confidence_rows,
-        scenario_results=scenario_results,
+    theme_assignments = classify_positions_to_themes(
+        positions=portfolio.positions,
+        theme_catalog=pack.theme_catalog,
+        mapping_rules=pack.classification_rules,
     )
+
+    bundles = []
+    for scenario_definition in pack.scenario_catalog:
+        scenario_market_state = build_scenario_market_state(
+            base_market_state=base_market_state,
+            scenario_definition=scenario_definition,
+            construction_policy=pack.market_state_construction_policy,
+        )
+
+        revaluation_results = run_full_portfolio_revaluation(
+            portfolio=portfolio,
+            base_market_state=base_market_state,
+            scenario_market_state=scenario_market_state,
+            valuation_context=valuation_context,
+        )
+
+        grouped = aggregate_revaluation_results(
+            revaluation_results,
+            grouping_dimensions=["manager_id", "account_id", "sleeve_id"],
+        )
+        theme_rows = classify_impacts_by_theme(revaluation_results, theme_assignments)
+        confidence_rows = build_data_confidence_map(revaluation_results, theme_assignments)
+
+        bundles.append(publish_revaluation_bundle(
+            pack=pack,
+            portfolio=portfolio,
+            base_market_state=base_market_state,
+            scenario_market_state=scenario_market_state,
+            revaluation_results=revaluation_results,
+            attribution={
+                "grouped": grouped,
+                "theme_manager": theme_rows,
+                "confidence": confidence_rows,
+            },
+        ))
+
+    return publish_multi_scenario_index(bundles)
 ```
 
-```python
-def publish_analytics_bundle(
-    pack,
-    portfolio_snapshot,
-    market_state,
-    theme_assignments,
-    proxy_assignments,
-    confidence_rows,
-    scenario_results,
-):
-    outputs = {
-        "position_theme_assignments": build_position_theme_assignments(theme_assignments),
-        "theme_exposure_summary": build_theme_exposure_summary(theme_assignments, confidence_rows),
-        "manager_theme_overlap_summary": build_manager_theme_overlap_summary(theme_assignments),
-        "scenario_impact_by_theme_manager": build_scenario_impact_summary(scenario_results, theme_assignments),
-        "data_confidence_map": build_data_confidence_map(confidence_rows, theme_assignments),
-        "cross_scenario_resilience_summary": build_cross_scenario_resilience_summary(scenario_results),
-    }
+## 12. Published Output Bundle
 
-    outputs["analytics_run_manifest"] = {
-        "schema_version": "analytics_run_manifest.v1",
-        "pack_id": pack.pack_id,
-        "pack_version": pack.pack_version,
-        "portfolio_id": portfolio_snapshot.portfolio_id,
-        "as_of_date": market_state.as_of_date,
-        "output_names": sorted(outputs.keys()),
-        "source_inputs": list_source_input_ids(pack, portfolio_snapshot, market_state),
-        "model_versions": collect_model_versions(pack),
-        "synthetic_data": portfolio_snapshot.synthetic_data,
-        "approval_status": "internal_analytics_output",
-    }
-    return outputs
-```
+The future internal revaluation bundle should include:
 
-## 9. Published Output Bundle
+- `analytics_run_manifest.json`
+- `base_market_state_summary.json`
+- `scenario_market_state_summary.json`
+- `position_revaluation_results.json`
+- `portfolio_revaluation_summary.json`
+- `scenario_impact_by_theme_manager.json`
+- `data_confidence_map.json`
+- `cross_scenario_resilience_summary.json`
 
-These are the internal analytics outputs Arangur can consume. The Advisor App should consume them through report-element input mapping and rendered views.
+### `position_revaluation_results.json`
 
-### `position_theme_assignments.json`
+Purpose: records base value, scenario value, impact, coverage, confidence, and caveats for each position.
 
-Purpose: records position-to-theme and lens assignments; provides provenance for exposure summaries.
+Required fields:
 
-Required fields: `schema_version`, `pack_id`, `pack_version`, `portfolio_id`, `as_of_date`, `positions`, `assignment_method`, `review_required_count`.
+- `position_id`
+- `base_market_state_id`
+- `scenario_market_state_id`
+- `base_value`
+- `scenario_value`
+- `impact`
+- `impact_percent`
+- `base_coverage_status`
+- `scenario_coverage_status`
+- `confidence`
+- `caveats`
 
-Position fields: `position_id`, `manager_id`, `instrument_id`, `market_value`, `primary_theme_id`, `secondary_theme_ids`, `theme_weights`, `classification_confidence`, `assignment_sources`, `review_status`, `review_reason`.
+Not included: advisor-editable model controls, raw credentials, or unapproved market data.
 
-Consumer report elements: Concentration, Manager Comparison, Portfolio Status.
+### `portfolio_revaluation_summary.json`
 
-Not included: raw model controls, raw covariance matrix, secret source credentials, advisor-editable taxonomy.
+Purpose: records the total base value, total scenario value, total impact, and confidence/coverage summary.
 
-### `theme_exposure_summary.json`
+Required fields:
 
-Purpose: summarizes exposure by approved theme; separates gross thematic exposure from allocation-weighted exposure.
-
-Required fields: `themes`, `total_market_value`, `theme_count`, `gross_overlap_warning`, `confidence_notes`.
-
-Theme fields: `theme_id`, `theme_display_name`, `market_value`, `percent_of_portfolio`, `top_managers`, `top_positions`, `confidence_mix`, `advisor_description`, `caveats`.
-
-Consumer report elements: Concentration, Portfolio Status.
-
-Not included: claims that overlapping themes sum to 100%, unapproved theme names.
-
-### `manager_theme_overlap_summary.json`
-
-Purpose: shows where multiple managers carry similar approved themes; supports hidden concentration discussion.
-
-Required fields: `themes`, `manager_count`, `overlap_level`, `advisor_interpretation`.
-
-Consumer report elements: Manager Comparison, Concentration.
-
-Not included: manager rankings beyond the approved demo metrics, recommendations to hire/fire managers.
+- `base_portfolio_value`
+- `scenario_portfolio_value`
+- `impact`
+- `impact_percent`
+- `confidence_mix`
+- `coverage_mix`
+- `review_required_count`
 
 ### `scenario_impact_by_theme_manager.json`
 
-Purpose: shows scenario impact by theme and manager; connects approved scenario choices to reportable exposure.
+Purpose: aggregates already-valued position impacts by approved theme and manager.
 
-Required fields: `scenarios`, `scenario_id`, `scenario_display_name`, `scenario_status`, `total_impact`, `total_impact_percent`, `theme_impacts`, `top_negative_managers`, `top_positive_or_defensive_managers`, `confidence`, `caveats`.
+Required fields:
 
-Consumer report elements: Scenario Impact by Manager, Manager Comparison, Portfolio Status.
-
-Not included: probability of scenario occurrence unless explicitly approved, live forecast language, advisor-authored shock controls.
+- `scenario_id`
+- `scenario_display_name`
+- `theme_impacts`
+- `manager_impacts`
+- `theme_manager_intersections`
+- `confidence_mix`
+- `coverage_caveats`
 
 ### `data_confidence_map.json`
 
-Purpose: tracks confidence, opacity, and review requirements; drives caveats in report elements.
+Purpose: identifies valuation coverage limitations, substitute inputs, review-required positions, and advisor-safe caveat language.
 
-Required fields: `confidence_buckets`, `affected_themes`, `affected_managers`, `review_required_positions`, `advisor_language`.
+Required fields:
 
-Consumer report elements: Data Confidence Note, Portfolio Status, Concentration, Manager Comparison.
+- `confidence_buckets`
+- `coverage_status_buckets`
+- `review_required_positions`
+- `affected_themes`
+- `affected_managers`
+- `advisor_language`
 
-Not included: sensitive data-source credentials, raw vendor responses, unapproved compliance claims.
+## 13. Advisor-Facing Consumption Rules
 
-### `cross_scenario_resilience_summary.json`
+The Advisor App consumes approved outputs. It does not construct scenarios or valuations.
 
-Purpose: summarizes repeated vulnerabilities and defensive themes across approved scenarios; gives the advisor a structured discussion guide.
+Advisor sees:
 
-Required fields: `most_vulnerable_scenario`, `most_resilient_scenario`, `repeated_vulnerable_themes`, `repeated_defensive_themes`, `repeated_vulnerable_managers`, `repeated_defensive_managers`, `discussion_points`, `caveats`.
+- approved scenario names;
+- approved themes and lenses;
+- report-ready base/scenario impact summaries;
+- confidence labels;
+- caveats and review-required notes;
+- advisor-authored workflow sequence.
 
-Consumer report elements: Portfolio Status, Manager Comparison, Scenario Impact by Manager.
+Advisor does not see:
 
-Not included: optimization recommendations, trading instructions, probabilistic risk distribution unless v2 publishes approved statistics.
+- model-building tools;
+- raw covariance matrices;
+- key-rate construction controls;
+- valuation model internals;
+- shock-vector editing;
+- substitute-input rule editors;
+- raw analytics JSON in the main product path.
 
-### `analytics_run_manifest.json`
+Report language should say, in product terms:
 
-Purpose: makes the run reproducible; records pack version, model versions, inputs, outputs, and synthetic/live status.
+- "The portfolio was revalued under the approved scenario market state."
+- "Impact is the difference between scenario value and base value."
+- "Theme and manager views attribute that impact after valuation."
+- "Coverage notes identify where valuation inputs are incomplete or review is required."
 
-Required fields: `schema_version`, `run_id`, `pack_id`, `pack_version`, `portfolio_id`, `as_of_date`, `generated_at`, `source_inputs`, `output_files`, `model_versions`, `synthetic_data`, `validation_status`, `caveats`.
+## 14. Implementation Sequencing Recommendation
 
-Consumer report elements: not usually rendered directly; used by input mapping, debugging, audit, and restart docs.
+Next implementation should pause additional advisor UI/report-consumption work until the internal methodology is aligned in code.
 
-Not included: secrets, external credentials, unapproved raw client data.
+Recommended next tranche:
 
-## 10. Advisor-Facing Consumption Rules
+1. Design and implement a full revaluation scenario-engine skeleton using existing synthetic market-state and valuation fixtures.
+2. Define `base_market_state` and `scenario_market_state` input contracts.
+3. Add a generic `value_position(position, market_state, valuation_context)` boundary.
+4. Produce position-level base/scenario/impact records.
+5. Aggregate those records by manager, account, sleeve, theme, and confidence.
+6. Publish a revaluation bundle manifest.
+7. Only then map the richer bundle back into report-element inputs/views.
 
-The Advisor App must obey these rules:
+Do not add advisor controls, new report views, deployment docs, live data, or external APIs as part of this methodology-alignment step.
 
-- Show only approved scenario, theme, lens, and confidence labels.
-- Do not expose shock vectors, covariance controls, PCA controls, proxy scoring knobs, or mapping-rule editors.
-- Do not let unsupported choices pretend to be supported. Use placeholders when no committed output exists.
-- Do not sum overlapping gross themes as if mutually exclusive.
-- Do not hide low-confidence or review-required exposure.
-- Keep scenario language directional unless the output explicitly supports point estimates.
-- Preserve advisor-authored workflow order in Preview, Populate, and Present.
-- Keep source workflow, generated timestamp, data snapshot, and synthetic-demo caveats as metadata/header/footer content.
-- Use rendered report elements as the user-facing surface. Do not expose raw analytics JSON in the advisor path.
+## 15. Open Questions For Frank
 
-## 11. Implementation Sequencing Recommendation
-
-A. Manifest + explicit assignment output
-
-- Add `analytics_run_manifest.json`.
-- Add `position_theme_assignments.json`.
-- Keep existing proof outputs stable.
-- Validate pack/run/output references.
-
-B. Deterministic position-to-theme mapping
-
-- Convert the current implicit theme matching into explicit assignment records.
-- Add provenance fields and review routing.
-- Keep v1 deterministic and synthetic-only.
-
-C. Scenario application summary/provenance
-
-- Preserve current deterministic scenario revaluation consumption.
-- Add scenario construction metadata, shock provenance, and plausibility status.
-- Do not introduce covariance/key-rate v2 yet unless Frank explicitly prioritizes it.
-
-D. Proxy/confidence algorithms
-
-- Add explicit proxy assignments.
-- Add confidence scoring and aggregation policy.
-- Connect caveat generation to confidence tiers.
-
-E. Return report consumption/rendering
-
-- Map the richer bundle into the existing report-element input/rendering path.
-- Keep the advisor path simple: approved choices, supported previews, clean placeholders.
-- Only after this, revisit richer scenario library or full covariance/key-rate v2.
-
-## 12. Open Questions For Frank
-
-1. Which themes must be product-grade first: AI/semis, rates/duration, private liquidity, credit, inflation, energy, or data confidence?
-2. Should private funds default to manager-mandate mapping until look-through exists, or should they always require review before theme exposure is shown?
-3. Which scenario additions matter first beyond the current five: Curve Steepening, Credit Spread Widening, or Inflation Persistence?
-4. What confidence threshold should block client-facing point estimates and force directional language only?
-5. Should proxy methodology be visible only as caveats, or should advisor reports show a small proxy-quality table?
-6. For v1, is deterministic curated scenario output enough, or should the next algorithm tranche start preparing key-rate/covariance model metadata?
-7. Should analytics bundles remain committed local synthetic fixtures for now, or become run-generated local artifacts before deployment planning resumes?
+1. Which asset classes need first-class valuation treatment in the initial skeleton: public equity, fixed income, cash, funds, options/structured products, private funds, or opaque manager books?
+2. For private or opaque positions, when should the engine hold an approved mark with caveat versus mark the position review-required?
+3. Which scenario should be the first full revaluation proof: AI / Chip Selloff, Rate Shock, or Private Liquidity Freeze?
+4. What confidence threshold should block client-facing point impacts and force directional language only?
+5. Should report elements show a compact coverage table, or only concise caveat language?
+6. Should the next local fixture continue using committed synthetic market states, or should the scenario engine generate scenario market states at run time from approved pack rules?

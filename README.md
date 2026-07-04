@@ -214,7 +214,7 @@ The Builder exposes only curated approved-pack choices, such as approved themes,
 
 For the canonical local analytic demo story and restoreable browser-local workflow fixture, see `docs/demo/analytic_report_demo_story_v1.md` and `docs/demo/analytic_demo_workflow_fixture.json`.
 
-For the internal algorithm design behind future analytic-pack implementation, see `docs/architecture/arranger_internal_analytics_algorithm_design_v1.md`.
+For the internal full portfolio revaluation methodology behind future analytic-pack implementation, see `docs/architecture/arranger_internal_analytics_algorithm_design_v1.md`.
 
 ## Local Report Index
 

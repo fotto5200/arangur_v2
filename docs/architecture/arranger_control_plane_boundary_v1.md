@@ -21,8 +21,8 @@ Internal control-plane responsibilities include:
 - Theme catalogs, such as AI Infrastructure, Rate Sensitivity, Private Market Liquidity, and Energy Security.
 - Classification lens catalogs, such as theme, asset class, manager role / mandate, liquidity bucket, and data confidence.
 - Scenario catalogs, including advisor-readable scenario names, supported horizons, driver narratives, caveats, and supported report elements.
-- Scenario shock packs, including deterministic driver shocks, qualitative assumptions, confidence labels, and caveats.
-- Covariance, factor, and key-rate assumptions later, after the contract boundary is stable.
+- Scenario market-state construction policies, including approved key-rate/driver perturbations, expansion rules, qualitative assumptions, confidence labels, and caveats.
+- Covariance, factor, and key-rate assumptions later, only as internal inputs for constructing coherent scenario market states.
 - Data confidence rules that explain when data is high, medium, low, unknown, stale, proxy-based, or human-review required.
 - Report analytic capability maps that say which report elements can consume which themes, lenses, scenarios, scopes, and inputs.
 - Approved analytic pack manifests that bind component versions into a publishable pack.
@@ -39,7 +39,8 @@ Application responsibilities include:
 
 - Theme exposure calculations using approved theme definitions and position classifications.
 - Manager overlap views using approved manager-role and theme/lens definitions.
-- Scenario impact calculations using approved scenario catalogs and shock packs.
+- Scenario impact calculations by full portfolio revaluation: value every position under the base market state, value every position under the approved scenario market state, and calculate impact as scenario value minus base value.
+- Post-valuation attribution of impacts by position, manager, account, sleeve, theme, scenario, and confidence bucket.
 - Data confidence summaries using approved confidence rules.
 - Cross-scenario resilience views using approved scenario sets and capability maps.
 
@@ -85,6 +86,8 @@ The current repo includes a synthetic proof of this boundary:
 - `src/arangur/report_elements/analytic_view_matching.py`, the static Advisor app, and the demo Populate service now consume those approved choices and fragments for supported workflow specs.
 
 These proof outputs and fragments remain synthetic/local analytic artifacts. They are now consumed by the existing local Advisor workflow path, but the control-plane construction machinery remains internal and is not exposed as advisor-facing UI.
+
+The controlling scenario methodology going forward is full portfolio revaluation under complete market states. Existing synthetic proof outputs should be treated as local artifacts to be realigned behind a full revaluation scenario-engine skeleton before additional advisor-facing analytics work expands.
 
 ## Deliberately Out Of Scope For This Boundary
 

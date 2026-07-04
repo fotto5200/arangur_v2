@@ -2,7 +2,9 @@
 
 ## Purpose
 
-An analytic pack is a published Arranger product artifact. It bundles approved themes, classification lenses, scenarios, shock assumptions, data confidence rules, and report-element capability mappings so Arangur can consume them without exposing internal control-plane construction tools.
+An analytic pack is a published Arranger product artifact. It bundles approved themes, classification lenses, scenarios, market-state transformation assumptions, data confidence rules, and report-element capability mappings so Arangur can consume them without exposing internal control-plane construction tools.
+
+The controlling scenario methodology is full portfolio revaluation. Approved pack scenarios describe how to construct a complete scenario market state from a base market state. Scenario impact should come from valuing every position under the base market state, valuing every position under the scenario market state, and aggregating the differences after valuation.
 
 The first contract is intentionally small. It defines component shape and validation expectations for synthetic demo fixtures. It does not implement scenario math, portfolio calculation, a pack-management API, or an Arranger Studio UI.
 
@@ -103,7 +105,7 @@ Deliberately not included: a user-editable classification UI, look-through machi
 
 ## Scenario Catalog
 
-Purpose: defines approved advisor-readable scenario choices.
+Purpose: defines approved advisor-readable scenario choices and the internal market-state construction method behind each choice.
 
 Required fields for each scenario:
 
@@ -123,15 +125,15 @@ Example ids/names:
 - `private_market_liquidity_freeze` / `Private Market Liquidity Freeze`
 - `taiwan_disruption` / `Taiwan Disruption`
 
-Versioning expectations: scenario ids should stay stable when the advisor-facing story is the same. Driver or shock changes should be published through a new pack or component version.
+Versioning expectations: scenario ids should stay stable when the advisor-facing story is the same. Market-state construction, perturbation, expansion, or caveat changes should be published through a new pack or component version.
 
-Relationship to report elements: Scenario Impact by Manager requires a scenario. Other elements may optionally reference scenarios if their template supports them.
+Relationship to report elements: Scenario Impact by Manager requires a scenario and a revaluation bundle produced from that scenario's complete market state. Other elements may optionally reference scenarios if their template supports them.
 
 Deliberately not included: probabilities, forecasts, investment recommendations, or live market-data inputs.
 
 ## Scenario Shock Pack
 
-Purpose: defines approved deterministic shock assumptions for each published scenario.
+Purpose: defines approved deterministic perturbation assumptions for each published scenario. These are inputs to scenario market-state construction, not direct position impact formulas.
 
 Required fields for each shock:
 
@@ -151,11 +153,11 @@ Versioning expectations: shock ids should change when variable shocks or qualita
 
 Relationship to report elements: scenario-aware report elements consume scenario ids and calculation outputs derived from these shocks; they should not expose raw shock construction controls to advisors.
 
-Deliberately not included: covariance engines, PCA, key-rate math, Monte Carlo paths, or production valuation logic.
+Deliberately not included: production valuation logic, live market data, or advisor-facing controls for editing market-state construction. Covariance, PCA, key-rate, or related methods may later exist only as internal inputs for expanding approved perturbations into complete scenario market states.
 
 ## Data Confidence Rule Catalog
 
-Purpose: defines approved language and rule intent for source readiness and confidence treatment.
+Purpose: defines approved language and rule intent for valuation coverage, source readiness, substitute-input policy, and confidence treatment.
 
 Required fields for each rule:
 
@@ -224,6 +226,8 @@ The current repo includes a lightweight standard-library validator at `src/arang
 
 The first application of this contract is `data/analytic_packs/arranger_demo_pack_v1/`. It is applied to the existing synthetic portfolio and scenario fixtures by `src/arangur/analytics/apply_demo_pack.py`.
 
+The current proof outputs are deterministic synthetic artifacts. The corrected controlling design now requires future scenario impact outputs to be backed by full revaluation bundles: base market state valuation, scenario market state valuation, position-level differences, and post-valuation attribution by manager/theme/confidence. Themes remain attribution/reporting layers, not valuation substitutes. Confidence records should identify revaluation coverage limitations, substitute-input use, stale/private mark treatment, and review-required positions.
+
 The generated proof outputs live under `data/simulation/analytics/`:
 
 - `theme_exposure_summary.json`
@@ -241,5 +245,5 @@ These outputs are deterministic synthetic analytics artifacts. The current repo 
 - Arranger Studio UI.
 - Pack authoring workflow.
 - Backend pack-management endpoints.
-- Scenario math, covariance/PCA/key-rate engines, or simulation-kernel changes.
+- Full revaluation scenario-engine implementation, covariance/PCA/key-rate expansion runtime, or simulation-kernel changes.
 - Live Plaid, live market data, external APIs, real client data, secrets, or deployment configuration.
