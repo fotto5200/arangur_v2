@@ -2,7 +2,7 @@
   "as_of_date": "2026-06-30",
   "caveats": [
     "Synthetic demo data only.",
-    "Structured report-element input only; no advisor UI, generated report history, live data, external API, or production storage is produced.",
+    "Structured report-element input fixture only; no live data, external API, production storage, or production reporting is produced.",
     "Synthetic demo analytics only; not investment advice or a production exposure engine.",
     "Theme exposure is based on approved pack mappings over existing synthetic position tags and metadata.",
     "Overlap is a deterministic discussion prompt, not a recommendation or manager ranking.",

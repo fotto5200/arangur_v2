@@ -84,6 +84,11 @@ def render_report_element_markdown(input_payload: dict[str, Any]) -> str:
         _markdown_text(view["summary_text"]),
         "",
     ]
+    takeaways = _advisor_takeaways(view)
+    if takeaways:
+        lines.extend(["### Advisor Takeaway", ""])
+        lines.extend(f"- {_markdown_text(takeaway)}" for takeaway in takeaways)
+        lines.append("")
     lines.extend(_markdown_metric_table(view.get("key_metrics", [])))
     evidence_rows = view.get("evidence_rows", [])
     if evidence_rows:
@@ -109,6 +114,13 @@ def render_report_element_html(input_payload: dict[str, Any]) -> str:
         f"<h2>{html.escape(str(view['headline']))}</h2>",
         f"<p>{html.escape(str(view['summary_text']))}</p>",
     ]
+    takeaways = _advisor_takeaways(view)
+    if takeaways:
+        parts.append("<h3>Advisor takeaway</h3>")
+        parts.append("<ul>")
+        for takeaway in takeaways:
+            parts.append(f"<li>{html.escape(str(takeaway))}</li>")
+        parts.append("</ul>")
     metrics = view.get("key_metrics", [])
     if metrics:
         parts.append("<h3>Key metrics</h3>")
@@ -543,13 +555,22 @@ def _render_portfolio_status_analytics(input_payload: dict[str, Any], view: dict
     total = _format_metric(metrics.get("total_portfolio_value"))
     top_theme = tables.get("theme_values", [{}])[0]
     vulnerable = next((row for row in tables.get("resilience_rows", []) if row.get("id") == "most_vulnerable_scenario"), {})
+    resilient = next((row for row in tables.get("resilience_rows", []) if row.get("id") == "most_resilient_scenario"), {})
+    repeated_theme = next((row for row in tables.get("resilience_rows", []) if row.get("row_type") == "repeated_vulnerable_theme"), {})
+    human_review_value = _format_metric(metrics.get("human_review_value"))
     view["headline"] = f"Portfolio Analytic Status: {total}"
     view["summary_text"] = (
         f"As of {input_payload.get('as_of_date')}, the synthetic portfolio analytic view shows {total} "
-        f"of current value. The largest approved theme is {top_theme.get('display_name', 'unavailable')}; "
-        f"the largest deterministic scenario drawdown is {vulnerable.get('scenario_display_name', 'unavailable')}. "
-        "This is local demo evidence for report composition, not production reporting."
+        f"of current value. {top_theme.get('display_name', 'unavailable')} is the largest approved-theme exposure, "
+        f"while {vulnerable.get('scenario_display_name', 'unavailable')} is the largest deterministic drawdown. "
+        f"{resilient.get('scenario_display_name', 'Energy Shock')} is the least severe scenario in this proof set, "
+        f"and {repeated_theme.get('theme_display_name', 'a repeated theme')} repeats across vulnerable scenarios."
     )
+    view["advisor_takeaways"] = [
+        "Treat the opening as a posture check: manager diversification still leaves large approved-theme overlap to discuss.",
+        f"Prioritize {vulnerable.get('scenario_display_name', 'the most vulnerable scenario')} and repeated vulnerable themes before the client conversation.",
+        f"Confirm {human_review_value} of review-required exposure before using the conclusions as meeting-ready material.",
+    ]
     view["key_metrics"] = _metrics_from_headlines(
         metrics,
         [
@@ -581,12 +602,19 @@ def _render_concentration_analytics(input_payload: dict[str, Any], view: dict[st
     largest_percent = _format_metric(metrics.get("largest_group_percent"))
     high_overlap_count = _format_metric(metrics.get("high_overlap_theme_count"))
     grouped_rows = tables.get("grouped_rows", [])[:8]
+    largest_manager_count = grouped_rows[0].get("manager_count", "multiple") if grouped_rows else "multiple"
+    ai_row = next((row for row in tables.get("grouped_rows", []) if row.get("theme_display_name") == "AI Infrastructure"), {})
     view["headline"] = "Concentration: Approved Themes"
     view["summary_text"] = (
         f"Approved theme exposure shows {largest_group} as the largest current concentration at "
-        f"{largest_value} ({largest_percent}). {high_overlap_count} approved themes are flagged as high-overlap "
-        "manager discussions, using synthetic local analytics only."
+        f"{largest_value} ({largest_percent}) across {largest_manager_count} managers. {high_overlap_count} approved themes "
+        "are flagged as high-overlap discussions, so the report surfaces hidden concentration rather than only named manager buckets."
     )
+    view["advisor_takeaways"] = [
+        f"Use {largest_group} as the first hidden-concentration question because it appears across the manager lineup.",
+        f"AI Infrastructure is also material at {_format_money(float(ai_row.get('value', 0.0))) if ai_row else 'a material level'} and should be discussed as overlap, not just a growth sleeve.",
+        "Ask whether the client expects these managers to diversify the same approved themes or intentionally reinforce them.",
+    ]
     view["key_metrics"] = _metrics_from_headlines(
         metrics,
         [
@@ -620,12 +648,23 @@ def _render_scenario_impact_by_manager_analytics(input_payload: dict[str, Any], 
     impact_percent = _format_metric(metrics.get("total_scenario_impact_percent"))
     manager_rows = tables.get("manager_impacts", [])
     theme_rows = tables.get("theme_impacts", [])[:6]
+    vulnerable_manager = next((row for row in manager_rows if row.get("row_type") == "top_negative_manager"), {})
+    defensive_manager = next((row for row in manager_rows if row.get("row_type") == "defensive_manager"), {})
+    vulnerable_theme = theme_rows[0] if theme_rows else {}
+    repeated_theme = next(iter(tables.get("repeated_vulnerable_themes", [])), {})
+    repeated_manager = next(iter(tables.get("repeated_vulnerable_managers", [])), {})
     view["headline"] = f"{display_name} Analytic Impact: {impact}"
     view["summary_text"] = (
         f"The {display_name} scenario shows a deterministic synthetic portfolio impact of {impact} "
-        f"({impact_percent}). Manager and approved-theme impacts are shown together so the advisor can review "
-        "where the stress concentrates; this scenario is not a forecast or probability estimate."
+        f"({impact_percent}). {vulnerable_manager.get('manager_name', 'The most affected manager')} and "
+        f"{vulnerable_theme.get('theme_display_name', 'the most affected theme')} carry the largest visible stress points, "
+        "while manager and theme rows together show where the client conversation should focus. This scenario is not a forecast or probability estimate."
     )
+    view["advisor_takeaways"] = [
+        f"Discuss {vulnerable_manager.get('manager_name', 'the most affected manager')} first, then connect the impact to {vulnerable_theme.get('theme_display_name', 'the most affected theme')}.",
+        f"Compare against {defensive_manager.get('manager_name', 'the more defensive managers')} to explain where the portfolio has relative ballast.",
+        f"Follow up on repeated vulnerability: {repeated_theme.get('theme_display_name', 'repeated vulnerable themes')} and {repeated_manager.get('manager_display_name', 'repeated vulnerable managers')} recur across the scenario set.",
+    ]
     view["key_metrics"] = _metrics_from_headlines(
         metrics,
         [
@@ -661,12 +700,20 @@ def _render_manager_comparison_analytics(input_payload: dict[str, Any], view: di
     largest_value = _format_metric(metrics.get("largest_manager_theme_exposure"))
     manager_count = _format_metric(metrics.get("manager_count"))
     review_count = _format_metric(metrics.get("review_required_manager_count"))
+    highest_overlap = manager_rows[0] if manager_rows else {}
+    second_overlap = manager_rows[1] if len(manager_rows) > 1 else {}
+    distinctive = manager_rows[-1] if manager_rows else {}
     view["headline"] = "Manager Comparison: Theme Overlap"
     view["summary_text"] = (
         f"The analytic comparison includes {manager_count} managers. The largest gross approved-theme exposure is "
-        f"{largest_value}, and {review_count} managers carry review-required exposure flags. Rows support discussion "
-        "of overlap and confidence, not manager rankings."
+        f"{largest_value}, led by {highest_overlap.get('manager_name', 'the highest-overlap manager')}. {review_count} managers "
+        "carry review-required exposure flags, so nominal manager diversification and data readiness should be reviewed together."
     )
+    view["advisor_takeaways"] = [
+        f"Compare {highest_overlap.get('manager_name', 'the highest-overlap manager')} with {second_overlap.get('manager_name', 'the next highest-overlap manager')} before assuming the lineup is diversified by theme.",
+        f"{distinctive.get('manager_name', 'The lowest-overlap manager')} is the clearest contrast point for explaining distinctive exposure.",
+        "Use this as an overlap map for manager due diligence, not as a manager ranking.",
+    ]
     view["key_metrics"] = _metrics_from_headlines(
         metrics,
         [
@@ -695,12 +742,19 @@ def _render_data_confidence_note_analytics(input_payload: dict[str, Any], view: 
     human_count = _format_metric(metrics.get("human_review_count"))
     human_value = _format_metric(metrics.get("human_review_value"))
     confidence_rows = tables.get("confidence_rows", [])
+    high_row = next((row for row in confidence_rows if row.get("id") == "high"), {})
+    medium_row = next((row for row in confidence_rows if row.get("id") == "medium"), {})
     view["headline"] = f"Data Confidence Note: {label}"
     view["summary_text"] = (
-        f"Synthetic source readiness is labeled {label}. Human review covers {human_count} positions "
-        f"representing {human_value}; the analytic rows separate high, medium, review-required, low, and unknown "
-        "confidence before report use."
+        f"Synthetic source readiness is labeled {label}. High-confidence records cover "
+        f"{_format_money(float(high_row.get('value', 0.0))) if high_row else 'the cleanest bucket'}, while human review covers "
+        f"{human_count} positions representing {human_value}. The rows separate meeting-ready evidence from proxy and review-required inputs."
     )
+    view["advisor_takeaways"] = [
+        f"Use high-confidence exposure as the cleanest support for the demo conversation ({_format_percent(float(high_row.get('percent_of_total', 0.0))) if high_row else 'available where marked high confidence'} of the portfolio).",
+        f"Review {human_value} in human-review items before treating the report as meeting-ready.",
+        f"Label medium-confidence exposure as approximate; it represents {_format_money(float(medium_row.get('value', 0.0))) if medium_row else 'the proxy-based bucket'} in this synthetic view.",
+    ]
     view["key_metrics"] = _metrics_from_headlines(
         metrics,
         [
@@ -795,6 +849,12 @@ def _build_summary(
 ) -> dict[str, Any]:
     validation_results = {row["view_file"]: row["validation"] for row in rendered}
     statuses = {result["status"] for result in validation_results.values()}
+    caveat = "Report-element view fragments only; no full client briefing, charts, browser UI integration, persistence, live data, or external APIs are produced."
+    if summary_kind == "analytic_report_element_views":
+        caveat = (
+            "Analytic report-element fragments are committed synthetic demo fragments for local Preview, "
+            "Populate, and Present flows; no live data, external APIs, persistence, or production reporting is produced."
+        )
     return {
         "schema_version": SUMMARY_SCHEMA_VERSION,
         "generated_at": GENERATED_AT,
@@ -811,7 +871,7 @@ def _build_summary(
         "rendered_files": rendered,
         "validation_status": "valid" if statuses == {"valid"} else "invalid",
         "validation_results": validation_results,
-        "caveat": "Report-element view fragments only; no full client briefing, charts, browser UI integration, persistence, live data, or external APIs are produced.",
+        "caveat": caveat,
     }
 
 
@@ -902,7 +962,24 @@ def _normalize_rows(rows: Any, row_type: str) -> list[dict[str, Any]]:
     return normalized
 
 
+def _advisor_takeaways(view: dict[str, Any]) -> list[str]:
+    takeaways = view.get("advisor_takeaways") or view.get("advisor_takeaway") or []
+    if isinstance(takeaways, str):
+        takeaways = [takeaways]
+    if not isinstance(takeaways, list):
+        return []
+    return [str(takeaway).strip() for takeaway in takeaways if str(takeaway).strip()]
+
+
 def _view_caveats(input_payload: dict[str, Any], extra: list[str]) -> list[str]:
+    if _is_analytic_input(input_payload):
+        return _unique_strings(
+            [
+                "Synthetic demo data only.",
+                "Report fragment for local demo use; not investment advice, a recommendation, or a production report.",
+                *extra,
+            ]
+        )
     caveats = [
         "Synthetic demo data only.",
         "Rendered report-element fragment only; not a full client briefing, chart, or production report.",
@@ -914,6 +991,15 @@ def _view_caveats(input_payload: dict[str, Any], extra: list[str]) -> list[str]:
         if caveat not in caveats:
             caveats.append(caveat)
     return caveats
+
+
+def _unique_strings(values: list[Any]) -> list[str]:
+    unique: list[str] = []
+    for value in values:
+        cleaned = str(value).strip()
+        if cleaned and cleaned not in unique:
+            unique.append(cleaned)
+    return unique
 
 
 def _is_analytic_input(input_payload: dict[str, Any]) -> bool:

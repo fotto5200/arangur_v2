@@ -1,15 +1,13 @@
 {
+  "advisor_takeaways": [
+    "Treat the opening as a posture check: manager diversification still leaves large approved-theme overlap to discuss.",
+    "Prioritize AI / Chip Selloff and repeated vulnerable themes before the client conversation.",
+    "Confirm $5,825,000.00 of review-required exposure before using the conclusions as meeting-ready material."
+  ],
   "as_of_date": "2026-06-30",
   "caveats": [
     "Synthetic demo data only.",
-    "Rendered report-element fragment only; not a full client briefing, chart, or production report.",
-    "Structured report-element input only; no advisor UI, generated report history, live data, external API, or production storage is produced.",
-    "Synthetic demo analytics only; not investment advice or a production exposure engine.",
-    "Theme exposure is based on approved pack mappings over existing synthetic position tags and metadata.",
-    "Cross-scenario resilience is a simple deterministic summary across existing synthetic scenario outputs.",
-    "Repeated vulnerability counts are based on top affected themes/managers per scenario, not a probability model.",
-    "Portfolio status uses synthetic analytic proof outputs as local demo evidence only.",
-    "Cross-scenario resilience is a simple deterministic summary, not a probability model.",
+    "Report fragment for local demo use; not investment advice, a recommendation, or a production report.",
     "Analytic portfolio status is synthetic local evidence, not a client statement or production report."
   ],
   "confidence_summary": {
@@ -517,7 +515,7 @@
     "synthetic_data": true
   },
   "source_input_path": "data/simulation/report_element_inputs/portfolio_status_analytics.json",
-  "summary_text": "As of 2026-06-30, the synthetic portfolio analytic view shows $40,695,000.00 of current value. The largest approved theme is Defensive Cash Flow; the largest deterministic scenario drawdown is AI / Chip Selloff. This is local demo evidence for report composition, not production reporting.",
+  "summary_text": "As of 2026-06-30, the synthetic portfolio analytic view shows $40,695,000.00 of current value. Defensive Cash Flow is the largest approved-theme exposure, while AI / Chip Selloff is the largest deterministic drawdown. Energy Shock is the least severe scenario in this proof set, and Consumer Demand Sensitivity repeats across vulnerable scenarios.",
   "synthetic_data": true,
   "template_category": "status",
   "validation": {

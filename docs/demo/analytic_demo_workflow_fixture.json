@@ -1,0 +1,278 @@
+{
+  "client_briefing_set": [
+    {
+      "confidence_badge": "narrative_local_only",
+      "configured_parameters": {},
+      "element_id": null,
+      "element_kind": "narrative",
+      "element_title": "Section title",
+      "local_spec_id": "analytic_demo_client_intro",
+      "matched_rendered_view": null,
+      "narrative_fields": {
+        "title_text": "Portfolio posture and hidden overlap"
+      },
+      "narrative_type": "section_title",
+      "order": 1,
+      "placement": "Section title",
+      "preview_available": false,
+      "target_branch": "Client Briefing",
+      "target_set": "Client Briefing Set"
+    },
+    {
+      "confidence_badge": "rendered_demo_view_available",
+      "configured_parameters": {
+        "scope": "Whole portfolio"
+      },
+      "element_id": "portfolio_status",
+      "element_kind": "analytic",
+      "element_title": "Portfolio Status / Resilience Snapshot",
+      "local_spec_id": "analytic_demo_client_portfolio_status",
+      "matched_rendered_view": {
+        "element_title": "Portfolio Status",
+        "html_fragment_url": "/simulation/report_element_views/portfolio_status_analytics.html",
+        "markdown_fragment_url": "/simulation/report_element_views/portfolio_status_analytics.md",
+        "view_id": "portfolio_status_analytics"
+      },
+      "order": 2,
+      "placement": "Opening status",
+      "preview_available": true,
+      "target_branch": "Client Briefing",
+      "target_set": "Client Briefing Set"
+    },
+    {
+      "confidence_badge": "rendered_demo_view_available",
+      "configured_parameters": {
+        "lens": "Strategic Theme",
+        "scope": "Whole portfolio",
+        "theme_focus": "AI Infrastructure"
+      },
+      "element_id": "concentration",
+      "element_kind": "analytic",
+      "element_title": "Theme Concentration / Hidden Overlap",
+      "local_spec_id": "analytic_demo_client_concentration",
+      "matched_rendered_view": {
+        "element_title": "Concentration",
+        "html_fragment_url": "/simulation/report_element_views/concentration_theme_analytics.html",
+        "markdown_fragment_url": "/simulation/report_element_views/concentration_theme_analytics.md",
+        "view_id": "concentration_theme_analytics"
+      },
+      "order": 3,
+      "placement": "Concentration discussion",
+      "preview_available": true,
+      "target_branch": "Client Briefing",
+      "target_set": "Client Briefing Set"
+    },
+    {
+      "confidence_badge": "rendered_demo_view_available",
+      "configured_parameters": {
+        "scenario_id": "AI / Chip Selloff",
+        "scope": "All managers compared"
+      },
+      "element_id": "scenario_impact_by_manager",
+      "element_kind": "analytic",
+      "element_title": "Scenario Impact by Manager and Theme",
+      "local_spec_id": "analytic_demo_client_scenario",
+      "matched_rendered_view": {
+        "element_title": "Scenario Impact by Manager",
+        "html_fragment_url": "/simulation/report_element_views/scenario_impact_by_theme_manager_analytics.html",
+        "markdown_fragment_url": "/simulation/report_element_views/scenario_impact_by_theme_manager_analytics.md",
+        "view_id": "scenario_impact_by_theme_manager_analytics"
+      },
+      "order": 4,
+      "placement": "Scenario discussion",
+      "preview_available": true,
+      "target_branch": "Client Briefing",
+      "target_set": "Client Briefing Set"
+    },
+    {
+      "confidence_badge": "rendered_demo_view_available",
+      "configured_parameters": {
+        "confidence_focus": "Human Review Required",
+        "lens": "Data Confidence",
+        "scope": "Whole portfolio"
+      },
+      "element_id": "data_confidence_note",
+      "element_kind": "analytic",
+      "element_title": "Data Confidence Note",
+      "local_spec_id": "analytic_demo_client_confidence",
+      "matched_rendered_view": {
+        "element_title": "Data Confidence Note",
+        "html_fragment_url": "/simulation/report_element_views/data_confidence_note_analytics.html",
+        "markdown_fragment_url": "/simulation/report_element_views/data_confidence_note_analytics.md",
+        "view_id": "data_confidence_note_analytics"
+      },
+      "order": 5,
+      "placement": "Appendix",
+      "preview_available": true,
+      "target_branch": "Client Briefing",
+      "target_set": "Client Briefing Set"
+    },
+    {
+      "confidence_badge": "narrative_local_only",
+      "configured_parameters": {},
+      "element_id": null,
+      "element_kind": "narrative",
+      "element_title": "Discussion prompt",
+      "local_spec_id": "analytic_demo_client_prompt",
+      "matched_rendered_view": null,
+      "narrative_fields": {
+        "prompt_text": "Which overlap should we explain first in the client conversation?"
+      },
+      "narrative_type": "discussion_prompt",
+      "order": 6,
+      "placement": "Discussion prompt",
+      "preview_available": false,
+      "target_branch": "Client Briefing",
+      "target_set": "Client Briefing Set"
+    }
+  ],
+  "client_context": {
+    "client_family": "Northstar Family Office",
+    "data_status": "Synthetic demo data loaded",
+    "portfolio_context": "Demo multi-manager portfolio",
+    "review_item_count": 12,
+    "valuation_confidence": "Mixed"
+  },
+  "data_as_of": "2026-06-30",
+  "data_snapshot_label": "Current synthetic demo snapshot",
+  "exported_at": "2026-07-04T00:00:00Z",
+  "report_type": "client_briefing",
+  "schema_version": "arangur.local_briefing_spec_set.v1",
+  "synthetic_data": true,
+  "title": "Northstar Analytic Demo Workflow",
+  "workflow_display_name": "Northstar Analytic Demo Workflow",
+  "workflow_id": "workflow_analytic_demo_pack_v1",
+  "workflow_name": "Northstar Analytic Demo Workflow",
+  "advisor_review_set": [
+    {
+      "confidence_badge": "narrative_local_only",
+      "configured_parameters": {},
+      "element_id": null,
+      "element_kind": "narrative",
+      "element_title": "Section title",
+      "local_spec_id": "analytic_demo_advisor_intro",
+      "matched_rendered_view": null,
+      "narrative_fields": {
+        "title_text": "Advisor analytic review"
+      },
+      "narrative_type": "section_title",
+      "order": 1,
+      "placement": "Section title",
+      "preview_available": false,
+      "target_branch": "Advisor Review",
+      "target_set": "Advisor Review Set"
+    },
+    {
+      "advisor_internal_purpose": "Compare manager overlap before the client discussion.",
+      "confidence_badge": "rendered_demo_view_available",
+      "configured_parameters": {
+        "lens": "Strategic Theme",
+        "scope": "All managers compared",
+        "theme_focus": "AI Infrastructure"
+      },
+      "element_id": "manager_comparison",
+      "element_kind": "analytic",
+      "element_title": "Manager Comparison / Overlap",
+      "local_spec_id": "analytic_demo_advisor_manager_overlap",
+      "matched_rendered_view": {
+        "element_title": "Manager Comparison",
+        "html_fragment_url": "/simulation/report_element_views/manager_comparison_analytics.html",
+        "markdown_fragment_url": "/simulation/report_element_views/manager_comparison_analytics.md",
+        "view_id": "manager_comparison_analytics"
+      },
+      "order": 2,
+      "placement": "Manager review",
+      "preview_available": true,
+      "target_branch": "Advisor Review",
+      "target_set": "Advisor Review Set"
+    },
+    {
+      "advisor_internal_purpose": "Separate reliable support from opaque or review-required exposure.",
+      "confidence_badge": "rendered_demo_view_available",
+      "configured_parameters": {
+        "confidence_focus": "Human Review Required",
+        "lens": "Data Confidence",
+        "scope": "Whole portfolio"
+      },
+      "element_id": "data_confidence_note",
+      "element_kind": "analytic",
+      "element_title": "Data Confidence / Opaque Exposure",
+      "local_spec_id": "analytic_demo_advisor_confidence",
+      "matched_rendered_view": {
+        "element_title": "Data Confidence Note",
+        "html_fragment_url": "/simulation/report_element_views/data_confidence_note_analytics.html",
+        "markdown_fragment_url": "/simulation/report_element_views/data_confidence_note_analytics.md",
+        "view_id": "data_confidence_note_analytics"
+      },
+      "order": 3,
+      "placement": "Data readiness review",
+      "preview_available": true,
+      "target_branch": "Advisor Review",
+      "target_set": "Advisor Review Set"
+    },
+    {
+      "advisor_internal_purpose": "Identify the most visible manager and theme stress points.",
+      "confidence_badge": "rendered_demo_view_available",
+      "configured_parameters": {
+        "scenario_id": "AI / Chip Selloff",
+        "scope": "All managers compared"
+      },
+      "element_id": "scenario_impact_by_manager",
+      "element_kind": "analytic",
+      "element_title": "Scenario Vulnerability",
+      "local_spec_id": "analytic_demo_advisor_scenario",
+      "matched_rendered_view": {
+        "element_title": "Scenario Impact by Manager",
+        "html_fragment_url": "/simulation/report_element_views/scenario_impact_by_theme_manager_analytics.html",
+        "markdown_fragment_url": "/simulation/report_element_views/scenario_impact_by_theme_manager_analytics.md",
+        "view_id": "scenario_impact_by_theme_manager_analytics"
+      },
+      "order": 4,
+      "placement": "Scenario diagnostic",
+      "preview_available": true,
+      "target_branch": "Advisor Review",
+      "target_set": "Advisor Review Set"
+    },
+    {
+      "advisor_internal_purpose": "Use the portfolio status view as the cross-scenario resilience snapshot.",
+      "confidence_badge": "rendered_demo_view_available",
+      "configured_parameters": {
+        "scope": "Whole portfolio"
+      },
+      "element_id": "portfolio_status",
+      "element_kind": "analytic",
+      "element_title": "Cross-Scenario Resilience",
+      "local_spec_id": "analytic_demo_advisor_resilience",
+      "matched_rendered_view": {
+        "element_title": "Portfolio Status",
+        "html_fragment_url": "/simulation/report_element_views/portfolio_status_analytics.html",
+        "markdown_fragment_url": "/simulation/report_element_views/portfolio_status_analytics.md",
+        "view_id": "portfolio_status_analytics"
+      },
+      "order": 5,
+      "placement": "Resilience review",
+      "preview_available": true,
+      "target_branch": "Advisor Review",
+      "target_set": "Advisor Review Set"
+    },
+    {
+      "advisor_internal_purpose": "Capture internal follow-up before the client discussion.",
+      "confidence_badge": "narrative_local_only",
+      "configured_parameters": {},
+      "element_id": null,
+      "element_kind": "narrative",
+      "element_title": "Internal follow-up notes",
+      "local_spec_id": "analytic_demo_advisor_note",
+      "matched_rendered_view": null,
+      "narrative_fields": {
+        "note_text": "Confirm review-required exposure and decide whether to lead with hidden theme overlap or scenario vulnerability."
+      },
+      "narrative_type": "working_note",
+      "order": 6,
+      "placement": "Advisor working notes",
+      "preview_available": false,
+      "target_branch": "Advisor Review",
+      "target_set": "Advisor Review Set"
+    }
+  ]
+}

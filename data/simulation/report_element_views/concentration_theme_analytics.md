@@ -1,6 +1,12 @@
 ## Concentration: Approved Themes
 
-Approved theme exposure shows Defensive Cash Flow as the largest current concentration at $33,785,000.00 (83.02%). 12 approved themes are flagged as high-overlap manager discussions, using synthetic local analytics only.
+Approved theme exposure shows Defensive Cash Flow as the largest current concentration at $33,785,000.00 (83.02%) across 6 managers. 12 approved themes are flagged as high-overlap discussions, so the report surfaces hidden concentration rather than only named manager buckets.
+
+### Advisor Takeaway
+
+- Use Defensive Cash Flow as the first hidden-concentration question because it appears across the manager lineup.
+- AI Infrastructure is also material at $28,530,000.00 and should be discussed as overlap, not just a growth sleeve.
+- Ask whether the client expects these managers to diversify the same approved themes or intentionally reinforce them.
 
 ### Key Metrics
 
@@ -35,12 +41,5 @@ Approved theme exposure shows Defensive Cash Flow as the largest current concent
 ### Caveats
 
 - Synthetic demo data only.
-- Rendered report-element fragment only; not a full client briefing, chart, or production report.
-- Structured report-element input only; no advisor UI, generated report history, live data, external API, or production storage is produced.
-- Synthetic demo analytics only; not investment advice or a production exposure engine.
-- Theme exposure is based on approved pack mappings over existing synthetic position tags and metadata.
-- Overlap is a deterministic discussion prompt, not a recommendation or manager ranking.
-- Theme matches use synthetic position metadata and approved demo pack mappings.
-- Theme exposure is gross thematic exposure from approved synthetic pack mappings; themes can overlap and should not be summed.
-- Overlap rows are discussion prompts for concentration review, not manager rankings or recommendations.
+- Report fragment for local demo use; not investment advice, a recommendation, or a production report.
 - Theme concentration uses gross overlapping exposure and is a discussion prompt, not a recommendation.

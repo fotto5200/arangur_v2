@@ -1,6 +1,12 @@
 ## AI / Chip Selloff Analytic Impact: -$6,446,707.66
 
-The AI / Chip Selloff scenario shows a deterministic synthetic portfolio impact of -$6,446,707.66 (-15.84%). Manager and approved-theme impacts are shown together so the advisor can review where the stress concentrates; this scenario is not a forecast or probability estimate.
+The AI / Chip Selloff scenario shows a deterministic synthetic portfolio impact of -$6,446,707.66 (-15.84%). Manager A - Growth / AI Infrastructure and Consumer Demand Sensitivity carry the largest visible stress points, while manager and theme rows together show where the client conversation should focus. This scenario is not a forecast or probability estimate.
+
+### Advisor Takeaway
+
+- Discuss Manager A - Growth / AI Infrastructure first, then connect the impact to Consumer Demand Sensitivity.
+- Compare against Manager F - Opportunistic Macro / Hedge to explain where the portfolio has relative ballast.
+- Follow up on repeated vulnerability: Consumer Demand Sensitivity and Manager A - Growth / AI Infrastructure recur across the scenario set.
 
 ### Key Metrics
 
@@ -40,11 +46,5 @@ The AI / Chip Selloff scenario shows a deterministic synthetic portfolio impact 
 ### Caveats
 
 - Synthetic demo data only.
-- Rendered report-element fragment only; not a full client briefing, chart, or production report.
-- Structured report-element input only; no advisor UI, generated report history, live data, external API, or production storage is produced.
-- Uses existing deterministic scenario source; this module does not implement a new scenario engine.
-- Theme-level impact allocates position impacts across approved pack theme mappings and is approximate.
-- Cross-scenario resilience is a simple deterministic summary across existing synthetic scenario outputs.
-- Repeated vulnerability counts are based on top affected themes/managers per scenario, not a probability model.
+- Report fragment for local demo use; not investment advice, a recommendation, or a production report.
 - Deterministic synthetic scenario output only; not a forecast, probability estimate, guarantee, or manager recommendation.
-- Theme-level impact allocates position impacts across approved theme matches and is approximate.

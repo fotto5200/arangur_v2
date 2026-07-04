@@ -1,6 +1,6 @@
 {
   "as_of_date": "2026-06-30",
-  "caveat": "Analytic report-element inputs only; no advisor UI, generated report history, live data, external APIs, or production storage is produced.",
+  "caveat": "Analytic report-element inputs feed local rendered views and browser-local Preview, Populate, and Present flows only; no live data, external APIs, production storage, or production reporting is produced.",
   "element_ids": [
     "concentration",
     "manager_comparison",

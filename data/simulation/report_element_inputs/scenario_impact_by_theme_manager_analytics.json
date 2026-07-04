@@ -2,7 +2,7 @@
   "as_of_date": "2026-06-30",
   "caveats": [
     "Synthetic demo data only.",
-    "Structured report-element input only; no advisor UI, generated report history, live data, external API, or production storage is produced.",
+    "Structured report-element input fixture only; no live data, external API, production storage, or production reporting is produced.",
     "Uses existing deterministic scenario source; this module does not implement a new scenario engine.",
     "Theme-level impact allocates position impacts across approved pack theme mappings and is approximate.",
     "Cross-scenario resilience is a simple deterministic summary across existing synthetic scenario outputs.",

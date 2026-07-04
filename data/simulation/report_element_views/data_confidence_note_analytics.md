@@ -1,6 +1,12 @@
 ## Data Confidence Note: mixed
 
-Synthetic source readiness is labeled mixed. Human review covers 12 positions representing $5,825,000.00; the analytic rows separate high, medium, review-required, low, and unknown confidence before report use.
+Synthetic source readiness is labeled mixed. High-confidence records cover $21,335,000.00, while human review covers 12 positions representing $5,825,000.00. The rows separate meeting-ready evidence from proxy and review-required inputs.
+
+### Advisor Takeaway
+
+- Use high-confidence exposure as the cleanest support for the demo conversation (52.43% of the portfolio).
+- Review $5,825,000.00 in human-review items before treating the report as meeting-ready.
+- Label medium-confidence exposure as approximate; it represents $13,535,000.00 in this synthetic view.
 
 ### Key Metrics
 
@@ -31,9 +37,5 @@ Synthetic source readiness is labeled mixed. Human review covers 12 positions re
 ### Caveats
 
 - Synthetic demo data only.
-- Rendered report-element fragment only; not a full client briefing, chart, or production report.
-- Structured report-element input only; no advisor UI, generated report history, live data, external API, or production storage is produced.
-- Confidence summarizes source readiness and valuation treatment, not investment quality.
-- Review-required records are separated before ordinary low/medium/high buckets.
+- Report fragment for local demo use; not investment advice, a recommendation, or a production report.
 - Confidence describes synthetic source readiness and valuation treatment, not investment quality.
-- Review-required rows are separated before ordinary low, medium, and high buckets.

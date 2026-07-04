@@ -42,6 +42,10 @@ class ReportElementAnalyticRenderingTests(unittest.TestCase):
                 validation = validate_report_element_view(view, markdown, fragment_html)
                 self.assertEqual("valid", validation["status"])
                 self.assertEqual("analytic_pack_v1", view["input_variant"])
+                self.assertTrue(view["advisor_takeaways"])
+                self.assertIn("### Advisor Takeaway", markdown)
+                self.assertIn("Advisor takeaway", fragment_html)
+                self.assertLessEqual(len(view["caveats"]), 4)
                 self.assertTrue(markdown.strip())
                 self.assertTrue(fragment_html.strip())
 
@@ -66,6 +70,7 @@ class ReportElementAnalyticRenderingTests(unittest.TestCase):
         markdown = render_report_element_markdown(view)
         self.assertIn("AI / Chip Selloff", view["headline"])
         self.assertIn("not a forecast", markdown.lower())
+        self.assertIn("repeated vulnerability", markdown.lower())
         self.assertTrue(view["detail_tables"]["manager_impacts"])
         self.assertTrue(view["detail_tables"]["theme_impacts"])
         self.assertIn("Consumer Demand Sensitivity", json.dumps(view["detail_tables"]["theme_impacts"]))
@@ -75,7 +80,29 @@ class ReportElementAnalyticRenderingTests(unittest.TestCase):
         metrics = {metric["label"]: metric for metric in view["key_metrics"]}
         self.assertEqual("Approved theme", metrics["Lens"]["formatted_value"])
         self.assertEqual("Defensive Cash Flow", metrics["Largest theme"]["formatted_value"])
+        markdown = render_report_element_markdown(view)
+        self.assertIn("hidden-concentration", markdown)
+        self.assertIn("AI Infrastructure", markdown)
         self.assertTrue(view["detail_tables"]["overlap_rows"])
+
+    def test_analytic_views_are_advisor_facing_without_control_plane_language(self) -> None:
+        forbidden = (
+            "control-plane",
+            "covariance",
+            "shock vector",
+            "raw analytic json",
+            "taxonomy editor",
+            "source_input_path",
+            "/api/runs",
+        )
+        for filename, view in self.views.items():
+            with self.subTest(filename=filename):
+                markdown = render_report_element_markdown(view).lower()
+                fragment_html = render_report_element_html(view).lower()
+                fragment_text = f"{markdown} {fragment_html}"
+                self.assertIn("synthetic demo", fragment_text)
+                for marker in forbidden:
+                    self.assertNotIn(marker, fragment_text)
 
     def test_analytic_fragments_do_not_expose_internal_paths(self) -> None:
         for filename, view in self.views.items():

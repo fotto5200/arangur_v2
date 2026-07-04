@@ -1,5 +1,5 @@
 {
-  "caveat": "Report-element view fragments only; no full client briefing, charts, browser UI integration, persistence, live data, or external APIs are produced.",
+  "caveat": "Analytic report-element fragments are committed synthetic demo fragments for local Preview, Populate, and Present flows; no live data, external APIs, persistence, or production reporting is produced.",
   "generated_at": "2026-06-30T00:00:00Z",
   "html_fragment_count": 5,
   "input_dir": "data/simulation/report_element_inputs",

@@ -853,7 +853,7 @@ def _confidence_label(confidence_rows: list[dict[str, Any]]) -> str:
 def _common_caveats(extra: list[str], *sources: dict[str, Any]) -> list[str]:
     caveats = [
         "Synthetic demo data only.",
-        "Structured report-element input only; no advisor UI, generated report history, live data, external API, or production storage is produced.",
+        "Structured report-element input fixture only; no live data, external API, production storage, or production reporting is produced.",
     ]
     for source in sources:
         for caveat in source.get("caveats", []):
@@ -910,7 +910,7 @@ def _build_output_summary(
         "portfolio_id": index["portfolio_id"],
         "validation_status": "valid" if statuses == {"valid"} else "invalid",
         "validation_results": validation_results,
-        "caveat": "Analytic report-element inputs only; no advisor UI, generated report history, live data, external APIs, or production storage is produced.",
+        "caveat": "Analytic report-element inputs feed local rendered views and browser-local Preview, Populate, and Present flows only; no live data, external APIs, production storage, or production reporting is produced.",
     }
 
 

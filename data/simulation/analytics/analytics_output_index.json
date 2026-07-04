@@ -1,7 +1,7 @@
 {
   "caveats": [
-    "Synthetic proof outputs only; not wired into report-element inputs or advisor UI in this tranche.",
-    "No external APIs, live data, Docker, Postgres, or production services are required."
+    "Synthetic proof outputs only; consumed by local report-element inputs and browser-local Preview, Populate, and Present flows.",
+    "No external APIs, live data, Docker, Postgres, production services, or production reporting are required."
   ],
   "data_as_of": "2026-06-30",
   "generated_at": "2026-07-03T00:00:00Z",

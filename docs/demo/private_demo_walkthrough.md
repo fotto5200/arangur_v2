@@ -4,6 +4,8 @@ This walkthrough is for a local private-demo operator. It uses only synthetic de
 
 Manual checkpoint: Frank passed this local private-demo browser rehearsal after commit `524a99b` on 2026-07-03. The copied-workflow Populate path used the correct selected workflow, generated reports preserved the authored workflow sequence, automatic framing/closing sections were not inserted, and Present / view reports opened the generated report. For a clean rehearsal, clear old local generated reports from Developer / QA tools if prior shelf records make testing hard to read.
 
+Analytic checkpoint: the latest analytic alignment path has a canonical local fixture at `docs/demo/analytic_demo_workflow_fixture.json`. Restoring that workflow should produce generated reports that match the advisor-authored workflow sequence and show analytic-derived Portfolio Status, Concentration, Scenario Impact, Manager Comparison, and Data Confidence content. If old local records confuse testing, clear local generated reports from Developer / QA before rehearsing.
+
 ## Start The Stack
 
 From Windows cmd at the repo root:
@@ -47,6 +49,7 @@ start "" http://127.0.0.1:8000/app/
 4. Give the workflow a readable name with spaces.
 5. Add a small sequence of report elements and narrative sections.
    - For an analytic-content rehearsal, include one approved-pack element such as Concentration with `Strategic Theme` / `AI Infrastructure`, Manager Comparison with `Strategic Theme`, Scenario Impact by Manager with `AI / Chip Selloff`, or Data Confidence Note with `Data Confidence`.
+   - Or restore `docs/demo/analytic_demo_workflow_fixture.json` from Developer / QA tools to run the canonical analytic demo sequence.
 6. Save the workflow.
 7. Return to Advisor Home.
 8. Choose `Populate a workflow with data`.

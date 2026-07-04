@@ -212,6 +212,8 @@ This writes separate analytic summaries alongside the existing legacy report-ele
 
 The Builder exposes only curated approved-pack choices, such as approved themes, scenarios, lenses, and confidence focus labels. Preview, Populate, and Present can use the analytic-derived fragments when the selected configuration has a committed demo view; unsupported combinations stay as clean demo placeholders.
 
+For the canonical local analytic demo story and restoreable browser-local workflow fixture, see `docs/demo/analytic_report_demo_story_v1.md` and `docs/demo/analytic_demo_workflow_fixture.json`.
+
 ## Local Report Index
 
 Both demo runner commands refresh a shared static report index:

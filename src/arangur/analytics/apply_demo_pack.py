@@ -371,8 +371,8 @@ def build_output_index(context: dict[str, Any], outputs: dict[str, dict[str, Any
             "data/simulation/simplified_valuation_summary.json",
         ],
         "caveats": [
-            "Synthetic proof outputs only; not wired into report-element inputs or advisor UI in this tranche.",
-            "No external APIs, live data, Docker, Postgres, or production services are required.",
+            "Synthetic proof outputs only; consumed by local report-element inputs and browser-local Preview, Populate, and Present flows.",
+            "No external APIs, live data, Docker, Postgres, production services, or production reporting are required.",
         ],
     }
 

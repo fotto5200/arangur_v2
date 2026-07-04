@@ -1,15 +1,13 @@
 {
+  "advisor_takeaways": [
+    "Compare Manager A - Growth / AI Infrastructure with Manager D - Private Markets / Real Assets before assuming the lineup is diversified by theme.",
+    "Manager F - Opportunistic Macro / Hedge is the clearest contrast point for explaining distinctive exposure.",
+    "Use this as an overlap map for manager due diligence, not as a manager ranking."
+  ],
   "as_of_date": "2026-06-30",
   "caveats": [
     "Synthetic demo data only.",
-    "Rendered report-element fragment only; not a full client briefing, chart, or production report.",
-    "Structured report-element input only; no advisor UI, generated report history, live data, external API, or production storage is produced.",
-    "Overlap is a deterministic discussion prompt, not a recommendation or manager ranking.",
-    "Theme matches use synthetic position metadata and approved demo pack mappings.",
-    "Confidence summarizes source readiness and valuation treatment, not investment quality.",
-    "Review-required records are separated before ordinary low/medium/high buckets.",
-    "Manager comparison uses synthetic theme overlap and confidence evidence; it is not a manager ranking.",
-    "Gross theme exposure can double count overlapping themes and should be read as a discussion lens.",
+    "Report fragment for local demo use; not investment advice, a recommendation, or a production report.",
     "Analytic manager comparison uses synthetic overlap evidence; it is not a recommendation or ranking."
   ],
   "confidence_summary": {
@@ -641,7 +639,7 @@
     "synthetic_data": true
   },
   "source_input_path": "data/simulation/report_element_inputs/manager_comparison_analytics.json",
-  "summary_text": "The analytic comparison includes 6 managers. The largest gross approved-theme exposure is $53,940,000.00, and 4 managers carry review-required exposure flags. Rows support discussion of overlap and confidence, not manager rankings.",
+  "summary_text": "The analytic comparison includes 6 managers. The largest gross approved-theme exposure is $53,940,000.00, led by Manager A - Growth / AI Infrastructure. 4 managers carry review-required exposure flags, so nominal manager diversification and data readiness should be reviewed together.",
   "synthetic_data": true,
   "template_category": "manager",
   "validation": {
