@@ -28,6 +28,8 @@ approved_thesis_lens
 
 Thesis lenses do not price positions, create scenario impacts, replace full revaluation, or substitute for position-to-market-input coverage mapping. They are a post-valuation attribution and explanation layer.
 
+`docs/architecture/position_valuation_coverage_mapping_design_v1.md` defines the separate layer that decides how positions map to instruments, pricing functions, required market inputs, valuation results, and caveats before thesis-bucket aggregation begins.
+
 ## 2. Core Concepts
 
 ### A. Thesis Lens
@@ -734,6 +736,8 @@ Relationship to generated reports:
 ## 11. Interaction With Full Revaluation
 
 Thesis lens mapping starts after valuation has produced position-level values and impacts.
+
+Position valuation coverage mapping happens before this step. It determines whether each position was valued directly, valued with substitute input, valued with approved policy, held at mark, routed to review, or not valued. Thesis buckets then aggregate those already-produced valuation results and preserve the coverage/confidence caveats.
 
 Workflow:
 

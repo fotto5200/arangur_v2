@@ -218,6 +218,8 @@ For the internal full portfolio revaluation methodology behind future analytic-p
 
 For the key market-state scenario basis design that constructs scenario market states before revaluation, see `docs/architecture/key_market_state_scenario_basis_design_v1.md`.
 
+For the position valuation coverage mapping design that routes positions to instruments, pricing functions, required market inputs, and coverage statuses, see `docs/architecture/position_valuation_coverage_mapping_design_v1.md`.
+
 ## Local Report Index
 
 Both demo runner commands refresh a shared static report index:
@@ -399,6 +401,7 @@ Future scenario, data-coverage, and deployable private-demo work is captured in:
 - `docs/architecture/arranger_internal_analytics_algorithm_design_v1.md`
 - `docs/architecture/key_market_state_scenario_basis_design_v1.md`
 - `docs/architecture/thesis_lens_position_mapping_design_v1.md`
+- `docs/architecture/position_valuation_coverage_mapping_design_v1.md`
 - `docs/architecture/simulation_kernel_three_surface_model_v1.md`
 - `docs/architecture/deployable_demo_app_architecture.md`
 - `docs/architecture/persistence_model_plan.md`

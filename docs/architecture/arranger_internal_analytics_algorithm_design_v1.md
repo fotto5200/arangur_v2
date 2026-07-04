@@ -25,6 +25,7 @@ Core implications:
 - Arranger defines approved scenarios by constructing complete scenario market states.
 - Scenario market states are generated from approved key-rate or driver perturbations expanded into complete market input surfaces.
 - Every position is valued under the base market state and under the scenario market state.
+- Every position maps to an instrument and a pricing function, or to an explicit coverage/review status.
 - Differences are aggregated and attributed after valuation.
 - Themes classify and explain positions and impacts after valuation; they do not price positions.
 - Coverage, substitute inputs, and confidence describe limits in full revaluation capability; they do not replace the methodology.
@@ -190,6 +191,8 @@ Key-rate expansion should never be used as a stand-alone explanation of portfoli
 ## 6. Full Position Valuation
 
 Every position should be valued through the same generic interface:
+
+`docs/architecture/position_valuation_coverage_mapping_design_v1.md` defines the detailed valuation coverage mapping layer behind this interface: positions map to instruments, pricing functions, required market inputs, valuation results, and explicit coverage statuses. Pricing functions consume full base or scenario market states. This mapping is separate from thesis classification, which happens after valuation.
 
 ```python
 def value_position(position, market_state, valuation_context):
@@ -840,8 +843,8 @@ Next implementation should pause additional advisor UI/report-consumption work u
 
 Recommended next tranche:
 
-1. Complete the remaining position-to-market-input / valuation coverage mapping design, including substitute inputs, approved mark policies, and coverage confidence by asset class.
-2. Then design and implement a full revaluation scenario-engine skeleton using existing synthetic market-state and valuation fixtures.
+1. If Frank approves implementation, design and implement a full revaluation scenario-engine skeleton using existing synthetic market-state and valuation fixtures.
+2. Define or fixture `instrument_catalog`, `position_catalog`, `pricing_function_registry`, and valuation coverage outputs.
 3. Define `base_market_state` and `scenario_market_state` input contracts.
 4. Add a generic `value_position(position, market_state, valuation_context)` boundary.
 5. Produce position-level base/scenario/impact records.
