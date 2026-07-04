@@ -127,7 +127,7 @@ Scenario construction:
 
 1. Start from a validated base market state.
 2. Load an approved scenario definition from an approved analytic pack.
-3. Apply approved key-rate or driver perturbations.
+3. Apply approved key-rate, driver, or broader key market-state scenario-basis perturbations.
 4. Expand sparse perturbations into complete required curves, surfaces, levels, marks, and policies.
 5. Validate market-state consistency.
 6. Publish the scenario market state, or a complete enough market-state change set plus reconstruction instructions.
@@ -165,7 +165,7 @@ Recommended scenario library:
 
 ## 5. Key-Rate Expansion
 
-Key-rate shocks are compact scenario-construction inputs used to build full shocked curves. They are not final valuation outputs and are not advisor-facing controls.
+Key-rate shocks are compact scenario-construction inputs used to build full shocked curves. They are one special case of the broader key market-state scenario basis construction defined in `docs/architecture/key_market_state_scenario_basis_design_v1.md`. They are not final valuation outputs and are not advisor-facing controls.
 
 Key-rate expansion must define:
 
@@ -185,7 +185,7 @@ Distinction:
 - Full shocked curve: complete valuation input generated from the perturbation.
 - Scenario market state: complete set of shocked curves, surfaces, levels, marks, policies, and metadata.
 
-Key-rate expansion should never be used as a stand-alone explanation of portfolio impact. The portfolio impact comes from valuing positions with the full shocked market state.
+Key-rate expansion should never be used as a stand-alone explanation of portfolio impact. Broader scenario basis completion likewise stops at scenario market-state construction. The portfolio impact comes from valuing positions with the full shocked market state.
 
 ## 6. Full Position Valuation
 

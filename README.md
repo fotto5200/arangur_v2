@@ -216,6 +216,8 @@ For the canonical local analytic demo story and restoreable browser-local workfl
 
 For the internal full portfolio revaluation methodology behind future analytic-pack implementation, see `docs/architecture/arranger_internal_analytics_algorithm_design_v1.md`.
 
+For the key market-state scenario basis design that constructs scenario market states before revaluation, see `docs/architecture/key_market_state_scenario_basis_design_v1.md`.
+
 ## Local Report Index
 
 Both demo runner commands refresh a shared static report index:
