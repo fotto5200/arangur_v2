@@ -201,6 +201,17 @@ python -m arangur.analytics.revaluation_runner
 
 This writes deterministic fixtures and outputs under `data/simulation/revaluation/`, including `position_valuation_results_base.json`, `position_valuation_results_ai_chip_selloff.json`, `position_value_comparison_ai_chip_selloff.json`, `portfolio_revaluation_summary_ai_chip_selloff.json`, `valuation_coverage_manifest.json`, and `revaluation_bundle_manifest.json`.
 
+## Generate Revaluation Attribution Outputs
+
+The attribution generator aggregates the full revaluation comparison rows into manager, account, sleeve, coverage, confidence, gross theme, and readiness outputs. It stays local-only and does not wire anything into advisor UI or report elements.
+
+```cmd
+set PYTHONPATH=src
+python -m arangur.analytics.revaluation_attribution
+```
+
+This writes deterministic attribution outputs under `data/simulation/revaluation/attribution/`.
+
 ## Map Analytic Outputs To Report Element Views
 
 The analytic report-element mapper turns those proof outputs into separate renderer-ready payloads for Concentration, Manager Comparison, Scenario Impact by Manager, Data Confidence Note, and Portfolio Status. The local Advisor workflow can now consume these committed analytic-derived fragments for supported configured specs without adding backend endpoints, charts, live data, or dependencies.

@@ -1,0 +1,27 @@
+{
+  "base_market_state_id": "market_state_base_2026-06-30",
+  "base_portfolio_value": 44858991.4,
+  "bucket_rows": [],
+  "caveats": [
+    "No fake thesis assignments were created in this tranche."
+  ],
+  "generated_at": "2026-07-05T00:00:00Z",
+  "methodology": "full_portfolio_revaluation_attribution",
+  "portfolio_impact": -9461334.2,
+  "portfolio_impact_percent": -0.210913,
+  "readiness_notes": [
+    "Thesis-bucket attribution requires one published primary bucket assignment per in-scope position.",
+    "Thesis lenses are post-valuation classification artifacts; they do not price positions or construct scenario market states.",
+    "No thesis-bucket totals are generated until approved assignments exist."
+  ],
+  "scenario_id": "ai_chip_selloff",
+  "scenario_market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+  "scenario_portfolio_value": 35397657.2,
+  "schema_version": "thesis_bucket_revaluation_attribution_readiness.v1",
+  "source_revaluation_bundle_id": "ai_chip_selloff:market_state_base_2026-06-30:market_state_scenario_ai_chip_selloff_2026-06-30",
+  "source_revaluation_manifest": "data/simulation/revaluation/revaluation_bundle_manifest.json",
+  "status": "requires_published_position_thesis_assignments",
+  "synthetic_data": true,
+  "thesis_assignment_artifacts_found": [],
+  "totals_generated": false
+}

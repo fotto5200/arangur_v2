@@ -1,0 +1,28 @@
+{
+  "available_full_revaluation_scenario_count": 1,
+  "available_scenario_ids": [
+    "ai_chip_selloff"
+  ],
+  "base_market_state_id": "market_state_base_2026-06-30",
+  "base_portfolio_value": 44858991.4,
+  "caveats": [
+    "Only AI / Chip Selloff has a committed full revaluation bundle in this checkpoint."
+  ],
+  "cross_scenario_rows": [],
+  "generated_at": "2026-07-05T00:00:00Z",
+  "methodology": "full_portfolio_revaluation_attribution",
+  "portfolio_impact": -9461334.2,
+  "portfolio_impact_percent": -0.210913,
+  "readiness_notes": [
+    "Cross-scenario revaluation resilience requires at least two scenario revaluation bundles.",
+    "Existing legacy proof outputs may remain useful as reference, but they are not mixed into this full-revaluation attribution set."
+  ],
+  "scenario_id": "ai_chip_selloff",
+  "scenario_market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+  "scenario_portfolio_value": 35397657.2,
+  "schema_version": "cross_scenario_revaluation_readiness.v1",
+  "source_revaluation_bundle_id": "ai_chip_selloff:market_state_base_2026-06-30:market_state_scenario_ai_chip_selloff_2026-06-30",
+  "source_revaluation_manifest": "data/simulation/revaluation/revaluation_bundle_manifest.json",
+  "status": "requires_additional_full_revaluation_scenario_bundles",
+  "synthetic_data": true
+}
