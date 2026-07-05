@@ -212,6 +212,21 @@ python -m arangur.analytics.revaluation_attribution
 
 This writes deterministic attribution outputs under `data/simulation/revaluation/attribution/`, including `cross_scenario_revaluation_summary.json` for the currently supported full-revaluation scenarios.
 
+## Generate Lean Revaluation Report Mockups
+
+The lean report-view generator turns the two-scenario full-revaluation outputs into compact report input fixtures, report view fixtures, and Markdown product-review mockups. It stays local-only and does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
+
+```cmd
+set PYTHONPATH=src
+python -m arangur.analytics.lean_report_views
+```
+
+This writes:
+
+- `data/simulation/report_element_inputs/lean_revaluation_v1/`
+- `data/simulation/report_element_views/lean_revaluation_v1/`
+- `docs/product/report_mockups/`
+
 ## Map Analytic Outputs To Report Element Views
 
 The analytic report-element mapper turns those proof outputs into separate renderer-ready payloads for Concentration, Manager Comparison, Scenario Impact by Manager, Data Confidence Note, and Portfolio Status. The local Advisor workflow can now consume these committed analytic-derived fragments for supported configured specs without adding backend endpoints, charts, live data, or dependencies.

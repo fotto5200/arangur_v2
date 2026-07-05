@@ -1,0 +1,62 @@
+{
+  "schema_version": "lean_revaluation_report_view_summary.v1",
+  "generator_version": "lean_revaluation_report_views.v1",
+  "generated_at": "2026-07-05T00:00:00Z",
+  "synthetic_data": true,
+  "report_count": 7,
+  "view_count": 7,
+  "mockup_count": 7,
+  "report_ids": [
+    "portfolio_status",
+    "aggregated_asset_allocation",
+    "manager_role_summary",
+    "concentration_review",
+    "scenario_downside_summary",
+    "coverage_confidence_warning",
+    "cash_flow_support_readiness"
+  ],
+  "view_files": [
+    "portfolio_status_view.json",
+    "aggregated_asset_allocation_view.json",
+    "manager_role_summary_view.json",
+    "concentration_review_view.json",
+    "scenario_downside_summary_view.json",
+    "coverage_confidence_warning_view.json",
+    "cash_flow_support_readiness_view.json"
+  ],
+  "mockup_files": [
+    "portfolio_status_mockup.md",
+    "aggregated_asset_allocation_mockup.md",
+    "manager_role_summary_mockup.md",
+    "concentration_review_mockup.md",
+    "scenario_downside_summary_mockup.md",
+    "coverage_confidence_warning_mockup.md",
+    "cash_flow_support_readiness_mockup.md"
+  ],
+  "mockups_generated_from_views": true,
+  "gated_reports": [
+    "cash_flow_support_readiness"
+  ],
+  "deferred_reports": [
+    "performance_vs_benchmark",
+    "performance_vs_plan",
+    "goal_liability_match",
+    "capital_preservation",
+    "thesis_lens_attribution",
+    "proposed_allocation_change",
+    "scenario_before_after_proposal",
+    "upside_downside_tradeoff",
+    "top_impacted_positions"
+  ],
+  "information_budget": {
+    "max_headline_sentences": 1,
+    "max_headline_metrics": 3,
+    "max_visible_table_rows": 5,
+    "max_caveats": 2,
+    "max_advisor_notes": 1,
+    "max_explanatory_paragraphs": 1,
+    "max_markdown_lines": 45,
+    "no_client_or_advisor_raw_ids": true,
+    "no_visible_internal_jargon": true
+  }
+}

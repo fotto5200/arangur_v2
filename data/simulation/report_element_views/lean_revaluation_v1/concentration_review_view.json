@@ -1,0 +1,97 @@
+{
+  "schema_version": "lean_revaluation_report_view.v1",
+  "generator_version": "lean_revaluation_report_views.v1",
+  "generated_at": "2026-07-05T00:00:00Z",
+  "synthetic_data": true,
+  "report_element_id": "concentration_review",
+  "status": "generated",
+  "display_title": "Concentration Review",
+  "master_question_family": "Risk / Downside Explanation",
+  "audience_tier": "advisor_review",
+  "one_sentence_job": "Identify the few concentration points worth discussing before showing scenario detail.",
+  "headline_sentence": "The main concentration is Public Equity at 40.9% of base value.",
+  "headline_metrics": [
+    {
+      "label": "Largest concentration",
+      "value": "Public Equity",
+      "formatted_value": "Public Equity"
+    },
+    {
+      "label": "Largest concentration share",
+      "value": 0.408927,
+      "formatted_value": "40.9%"
+    },
+    {
+      "label": "Review-required exposure",
+      "value": 5825000.0,
+      "formatted_value": "$5.8M"
+    }
+  ],
+  "table": {
+    "title": "Watch List",
+    "columns": [
+      "Area",
+      "Portfolio Share",
+      "What To Watch"
+    ],
+    "rows": [
+      {
+        "Area": "Public Equity",
+        "Portfolio Share": "40.9%",
+        "What To Watch": "Largest broad allocation before manager or position detail."
+      },
+      {
+        "Area": "Growth / AI Infrastructure",
+        "Portfolio Share": "31.8%",
+        "What To Watch": "Largest manager sleeve and largest scenario loss contributor."
+      },
+      {
+        "Area": "Review-required exposure",
+        "Portfolio Share": "13.0%",
+        "What To Watch": "Needs review before relying on point scenario impact."
+      },
+      {
+        "Area": "Held-at-mark exposure",
+        "Portfolio Share": "8.8%",
+        "What To Watch": "May understate stress exposure for private or opaque holdings."
+      }
+    ]
+  },
+  "caveats": [
+    "Concentration rows are intentionally grouped; individual holdings stay hidden by default."
+  ],
+  "advisor_note": "Open a position-level review only if that report shape is explicitly approved later.",
+  "explanatory_paragraph": null,
+  "internal_source_refs": [
+    "data/simulation/revaluation/position_valuation_results_base.json",
+    "data/simulation/revaluation/attribution/coverage_revaluation_attribution_ai_chip_selloff.json",
+    "data/simulation/revaluation/attribution/manager_revaluation_attribution_ai_chip_selloff.json",
+    "data/simulation/synthetic_position_universe.json"
+  ],
+  "information_budget_applied": {
+    "max_headline_sentences": 1,
+    "max_headline_metrics": 3,
+    "max_visible_table_rows": 5,
+    "max_caveats": 2,
+    "max_advisor_notes": 1,
+    "max_explanatory_paragraphs": 1,
+    "max_markdown_lines": 45,
+    "no_client_or_advisor_raw_ids": true,
+    "no_visible_internal_jargon": true,
+    "actual_headline_sentences": 1,
+    "actual_headline_metrics": 3,
+    "actual_visible_table_rows": 4,
+    "actual_caveats": 1,
+    "actual_advisor_notes": 1,
+    "actual_explanatory_paragraphs": 0
+  },
+  "visible_fields_rendered_by_mockup": [
+    "display_title",
+    "headline_sentence",
+    "headline_metrics",
+    "table",
+    "caveats",
+    "advisor_note",
+    "explanatory_paragraph"
+  ]
+}

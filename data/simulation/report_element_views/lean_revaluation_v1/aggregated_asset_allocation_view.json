@@ -1,0 +1,100 @@
+{
+  "schema_version": "lean_revaluation_report_view.v1",
+  "generator_version": "lean_revaluation_report_views.v1",
+  "generated_at": "2026-07-05T00:00:00Z",
+  "synthetic_data": true,
+  "report_element_id": "aggregated_asset_allocation",
+  "status": "generated",
+  "display_title": "Aggregated Asset Allocation",
+  "master_question_family": "Ownership / Exposure Explanation",
+  "audience_tier": "client_briefing",
+  "one_sentence_job": "Show the broad allocation mix without long position lists.",
+  "headline_sentence": "Public Equity is the largest allocation at $18.3M (40.9%).",
+  "headline_metrics": [
+    {
+      "label": "Largest allocation",
+      "value": "Public Equity",
+      "formatted_value": "Public Equity"
+    },
+    {
+      "label": "Largest allocation value",
+      "value": 18344051.08,
+      "formatted_value": "$18.3M"
+    },
+    {
+      "label": "Rows shown",
+      "value": 5,
+      "formatted_value": "5"
+    }
+  ],
+  "table": {
+    "title": "Allocation Mix",
+    "columns": [
+      "Allocation",
+      "Value",
+      "Portfolio Share"
+    ],
+    "rows": [
+      {
+        "Allocation": "Public Equity",
+        "Value": "$18.3M",
+        "Portfolio Share": "40.9%"
+      },
+      {
+        "Allocation": "Fixed Income",
+        "Value": "$6.3M",
+        "Portfolio Share": "14.1%"
+      },
+      {
+        "Allocation": "Funds / ETFs",
+        "Value": "$3.4M",
+        "Portfolio Share": "7.6%"
+      },
+      {
+        "Allocation": "Private Equity",
+        "Value": "$2.7M",
+        "Portfolio Share": "6.0%"
+      },
+      {
+        "Allocation": "Other",
+        "Value": "$14.1M",
+        "Portfolio Share": "31.5%"
+      }
+    ]
+  },
+  "caveats": [
+    "Small allocation buckets are grouped into Other when needed."
+  ],
+  "advisor_note": null,
+  "explanatory_paragraph": null,
+  "internal_source_refs": [
+    "data/simulation/revaluation/position_valuation_results_base.json",
+    "data/simulation/synthetic_position_universe.json"
+  ],
+  "information_budget_applied": {
+    "max_headline_sentences": 1,
+    "max_headline_metrics": 3,
+    "max_visible_table_rows": 5,
+    "max_caveats": 2,
+    "max_advisor_notes": 1,
+    "max_explanatory_paragraphs": 1,
+    "max_markdown_lines": 45,
+    "no_client_or_advisor_raw_ids": true,
+    "no_visible_internal_jargon": true,
+    "actual_headline_sentences": 1,
+    "actual_headline_metrics": 3,
+    "actual_visible_table_rows": 5,
+    "actual_caveats": 1,
+    "actual_advisor_notes": 0,
+    "actual_explanatory_paragraphs": 0
+  },
+  "visible_fields_rendered_by_mockup": [
+    "display_title",
+    "headline_sentence",
+    "headline_metrics",
+    "table",
+    "caveats",
+    "advisor_note",
+    "explanatory_paragraph"
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "schema_version": "lean_revaluation_report_view.v1",
+  "generator_version": "lean_revaluation_report_views.v1",
+  "generated_at": "2026-07-05T00:00:00Z",
+  "synthetic_data": true,
+  "report_element_id": "scenario_downside_summary",
+  "status": "generated",
+  "display_title": "Scenario Downside Summary",
+  "master_question_family": "Risk / Downside Explanation",
+  "audience_tier": "client_briefing",
+  "one_sentence_job": "Compare the current supported downside scenarios without a long attribution report.",
+  "headline_sentence": "AI / Chip Selloff is the larger downside case, reducing the portfolio value by $9.5M (-21.1%).",
+  "headline_metrics": [
+    {
+      "label": "Worst case shown",
+      "value": "AI / Chip Selloff",
+      "formatted_value": "AI / Chip Selloff"
+    },
+    {
+      "label": "Worst impact",
+      "value": -9461334.2,
+      "formatted_value": "-$9.5M"
+    },
+    {
+      "label": "Worst change",
+      "value": -0.210913,
+      "formatted_value": "-21.1%"
+    }
+  ],
+  "table": {
+    "title": "Scenario Results",
+    "columns": [
+      "Scenario",
+      "Portfolio Impact",
+      "Portfolio Change",
+      "Value After Scenario"
+    ],
+    "rows": [
+      {
+        "Scenario": "AI / Chip Selloff",
+        "Portfolio Impact": "-$9.5M",
+        "Portfolio Change": "-21.1%",
+        "Value After Scenario": "$35.4M"
+      },
+      {
+        "Scenario": "Rate Shock",
+        "Portfolio Impact": "-$4.8M",
+        "Portfolio Change": "-10.7%",
+        "Value After Scenario": "$40.1M"
+      }
+    ]
+  },
+  "caveats": [
+    "Scenarios are deterministic stress views, not forecasts.",
+    "Only the two currently supported scenarios are shown."
+  ],
+  "advisor_note": null,
+  "explanatory_paragraph": null,
+  "internal_source_refs": [
+    "data/simulation/revaluation/attribution/cross_scenario_revaluation_summary.json"
+  ],
+  "information_budget_applied": {
+    "max_headline_sentences": 1,
+    "max_headline_metrics": 3,
+    "max_visible_table_rows": 5,
+    "max_caveats": 2,
+    "max_advisor_notes": 1,
+    "max_explanatory_paragraphs": 1,
+    "max_markdown_lines": 45,
+    "no_client_or_advisor_raw_ids": true,
+    "no_visible_internal_jargon": true,
+    "actual_headline_sentences": 1,
+    "actual_headline_metrics": 3,
+    "actual_visible_table_rows": 2,
+    "actual_caveats": 2,
+    "actual_advisor_notes": 0,
+    "actual_explanatory_paragraphs": 0
+  },
+  "visible_fields_rendered_by_mockup": [
+    "display_title",
+    "headline_sentence",
+    "headline_metrics",
+    "table",
+    "caveats",
+    "advisor_note",
+    "explanatory_paragraph"
+  ]
+}

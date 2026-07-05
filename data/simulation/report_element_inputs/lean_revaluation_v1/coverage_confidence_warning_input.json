@@ -1,0 +1,106 @@
+{
+  "schema_version": "lean_revaluation_report_input.v1",
+  "generator_version": "lean_revaluation_report_views.v1",
+  "generated_at": "2026-07-05T00:00:00Z",
+  "synthetic_data": true,
+  "report_element_id": "coverage_confidence_warning",
+  "status": "generated",
+  "display_title": "Coverage and Confidence Warning",
+  "master_question_family": "Risk / Downside Explanation",
+  "audience_tier": "advisor_review",
+  "one_sentence_job": "Warn the advisor where the current scenario output should not be overread.",
+  "source_analytics": [
+    "data/simulation/revaluation/attribution/coverage_revaluation_attribution_ai_chip_selloff.json",
+    "data/simulation/revaluation/attribution/confidence_revaluation_attribution_ai_chip_selloff.json"
+  ],
+  "visible_fields": {
+    "headline_sentence": "Most positions are valued, but 12 positions representing $5.8M require review before relying on point scenario impact.",
+    "headline_metrics": [
+      {
+        "label": "Review-required positions",
+        "value": 12,
+        "formatted_value": "12"
+      },
+      {
+        "label": "Held at mark",
+        "value": 7,
+        "formatted_value": "7"
+      },
+      {
+        "label": "Not valued",
+        "value": 0,
+        "formatted_value": "0"
+      }
+    ],
+    "table": {
+      "title": "Coverage Summary",
+      "columns": [
+        "Coverage",
+        "Positions",
+        "Base Value",
+        "Advisor Meaning"
+      ],
+      "rows": [
+        {
+          "Coverage": "Valued",
+          "Positions": "51",
+          "Base Value": "$32.4M",
+          "Advisor Meaning": "Directly usable for current scenario summaries."
+        },
+        {
+          "Coverage": "Review Required",
+          "Positions": "12",
+          "Base Value": "$5.8M",
+          "Advisor Meaning": "Do not rely on point impact until reviewed."
+        },
+        {
+          "Coverage": "Held At Mark",
+          "Positions": "7",
+          "Base Value": "$4.0M",
+          "Advisor Meaning": "May understate true stress exposure."
+        },
+        {
+          "Coverage": "Approved Policy",
+          "Positions": "4",
+          "Base Value": "$2.7M",
+          "Advisor Meaning": "Usable with policy caveat."
+        }
+      ]
+    },
+    "caveats": [
+      "Review-required exposure should not be used for strong point-impact claims.",
+      "Held-at-mark exposure may understate true stress exposure."
+    ],
+    "advisor_note": "Resolve the review-required bucket before turning this into client-ready language.",
+    "explanatory_paragraph": null
+  },
+  "suppressed_fields": [
+    "position-level review list",
+    "model ids",
+    "raw coverage codes",
+    "internal valuation detail"
+  ],
+  "advisor_only_fields": [
+    "advisor_note"
+  ],
+  "internal_only_fields": [
+    "source_analytics",
+    "coverage bucket reconciliation"
+  ],
+  "information_budget": {
+    "max_headline_sentences": 1,
+    "max_headline_metrics": 3,
+    "max_visible_table_rows": 5,
+    "max_caveats": 2,
+    "max_advisor_notes": 1,
+    "max_explanatory_paragraphs": 1,
+    "max_markdown_lines": 45,
+    "no_client_or_advisor_raw_ids": true,
+    "no_visible_internal_jargon": true
+  },
+  "caveat_policy": {
+    "max_visible_caveats": 2,
+    "no_duplicate_caveats": true,
+    "coverage_limits_must_be_explicit_when_material": true
+  }
+}
