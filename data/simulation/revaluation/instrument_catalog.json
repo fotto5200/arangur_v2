@@ -1,0 +1,2733 @@
+{
+  "generated_at": "2026-07-05T00:00:00Z",
+  "instrument_count": 72,
+  "instruments": [
+    {
+      "counterparty": null,
+      "coverage_policy": "standard_public_equity_v1",
+      "currency": "USD",
+      "display_name": "Accelerator Design House",
+      "eligible_pricing_functions": [
+        "public_equity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_accelerator_design_house",
+      "instrument_type": "public_equity",
+      "issuer": "Accelerator Design House",
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Common equity share valued with approved market-state price.",
+      "reference_data": {
+        "asset_class": "public_equity",
+        "geography": "North America",
+        "industry": "chip design",
+        "sector": "technology",
+        "source_position_id": "pos_a_accelerator_design_house",
+        "synthetic_identifier": "ACCD"
+      },
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "underlying_price"
+        ],
+        "source_valuation_method_hint": "direct_price",
+        "synthetic_identifier": "ACCD"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "standard_public_equity_v1",
+      "currency": "USD",
+      "display_name": "Advanced Packaging Supplier",
+      "eligible_pricing_functions": [
+        "public_equity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_advanced_packaging_supplier",
+      "instrument_type": "public_equity",
+      "issuer": "Advanced Packaging Supplier",
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Common equity share valued with approved market-state price.",
+      "reference_data": {
+        "asset_class": "public_equity",
+        "geography": "Asia",
+        "industry": "semiconductor packaging",
+        "sector": "technology",
+        "source_position_id": "pos_a_advanced_packaging_supplier",
+        "synthetic_identifier": "PACK"
+      },
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "underlying_price"
+        ],
+        "source_valuation_method_hint": "direct_price",
+        "synthetic_identifier": "PACK"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "synthetic_bond_policy_v1",
+      "currency": "USD",
+      "display_name": "Agency MBS Proxy",
+      "eligible_pricing_functions": [
+        "bond_mark_scalar_v1"
+      ],
+      "instrument_id": "instr_agency_mbs_proxy",
+      "instrument_type": "fixed_income",
+      "issuer": "Agency MBS Proxy",
+      "lifecycle_dates": {
+        "issue_date": "2021-06-30",
+        "maturity_date": "2031-06-30"
+      },
+      "payoff_description": "Synthetic fixed-income instrument valued with approved mark scalar and simple cash-flow output.",
+      "reference_data": {
+        "asset_class": "fixed_income",
+        "geography": "North America",
+        "industry": "mortgage backed securities",
+        "sector": "fixed income",
+        "source_position_id": "pos_c_agency_mbs_proxy",
+        "synthetic_identifier": "AMBS"
+      },
+      "required_input_families": [
+        "bond_price_scalars"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "coupon_frequency": "semi_annual",
+        "coupon_rate": 0.04,
+        "day_count": "30_360",
+        "face_amount": 430000.0,
+        "maturity_date": "2031-06-30",
+        "source_required_market_state_variables": [
+          "bond_price_proxy",
+          "duration_bucket_price"
+        ],
+        "source_valuation_method_hint": "bond_proxy",
+        "synthetic_identifier": "AMBS"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fallback_review_required_v1",
+      "currency": "USD",
+      "display_name": "AI Chip Downside Put Spread",
+      "eligible_pricing_functions": [
+        "review_required_treatment_v1"
+      ],
+      "instrument_id": "instr_ai_chip_downside_put_spread",
+      "instrument_type": "option_like",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Option-like instrument routed to explicit review-required treatment in v1.",
+      "reference_data": {
+        "asset_class": "option_like",
+        "geography": "North America",
+        "industry": "equity index option",
+        "sector": "structured products",
+        "source_position_id": "pos_f_ai_chip_downside_put_spread",
+        "synthetic_identifier": "AIPS"
+      },
+      "required_input_families": [
+        "review_policies"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "review_policy": "fallback_review_required_v1",
+        "source_required_market_state_variables": [
+          "underlying_price",
+          "volatility_proxy",
+          "rate_proxy",
+          "time_to_maturity"
+        ],
+        "source_valuation_method_hint": "simple_option_model",
+        "synthetic_identifier": "AIPS"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fund_or_etf_nav_v1",
+      "currency": "USD",
+      "display_name": "AI Chip Basket ETF",
+      "eligible_pricing_functions": [
+        "fund_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_ai_chip_etf",
+      "instrument_type": "etf",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Fund or ETF interest valued with approved market-state NAV or price.",
+      "reference_data": {
+        "asset_class": "etf",
+        "geography": "Global",
+        "industry": "semiconductor ETF",
+        "sector": "technology",
+        "source_position_id": "pos_a_ai_chip_etf",
+        "synthetic_identifier": "AICH"
+      },
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "etf_price",
+          "optional_lookthrough_proxy"
+        ],
+        "source_valuation_method_hint": "etf_proxy",
+        "synthetic_identifier": "AICH"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "standard_public_equity_v1",
+      "currency": "USD",
+      "display_name": "AI Compute Leader",
+      "eligible_pricing_functions": [
+        "public_equity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_ai_compute_leader",
+      "instrument_type": "public_equity",
+      "issuer": "AI Compute Leader",
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Common equity share valued with approved market-state price.",
+      "reference_data": {
+        "asset_class": "public_equity",
+        "geography": "North America",
+        "industry": "semiconductors",
+        "sector": "technology",
+        "source_position_id": "pos_a_ai_compute_leader",
+        "synthetic_identifier": "AICL"
+      },
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "underlying_price"
+        ],
+        "source_valuation_method_hint": "direct_price",
+        "synthetic_identifier": "AICL"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fallback_review_required_v1",
+      "currency": "USD",
+      "display_name": "AI Infrastructure Call Spread Note",
+      "eligible_pricing_functions": [
+        "review_required_treatment_v1"
+      ],
+      "instrument_id": "instr_ai_infra_call_spread_note",
+      "instrument_type": "option_like",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Option-like instrument routed to explicit review-required treatment in v1.",
+      "reference_data": {
+        "asset_class": "option_like",
+        "geography": "North America",
+        "industry": "equity-linked note",
+        "sector": "structured products",
+        "source_position_id": "pos_a_ai_infra_call_spread_note",
+        "synthetic_identifier": "AICN"
+      },
+      "required_input_families": [
+        "review_policies"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "review_policy": "fallback_review_required_v1",
+        "source_required_market_state_variables": [
+          "underlying_price",
+          "volatility_proxy",
+          "rate_proxy",
+          "time_to_maturity"
+        ],
+        "source_valuation_method_hint": "simple_option_model",
+        "synthetic_identifier": "AICN"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "approved_private_mark_policy_v1",
+      "currency": "USD",
+      "display_name": "Asset-Backed Credit Fund",
+      "eligible_pricing_functions": [
+        "approved_private_mark_policy_v1"
+      ],
+      "instrument_id": "instr_asset_backed_credit_fund",
+      "instrument_type": "private_credit",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Private or opaque instrument valued with approved mark or review treatment.",
+      "reference_data": {
+        "asset_class": "private_credit",
+        "geography": "North America",
+        "industry": "asset-backed credit",
+        "sector": "private credit",
+        "source_position_id": "pos_d_asset_backed_credit_fund",
+        "synthetic_identifier": "ABCF"
+      },
+      "required_input_families": [
+        "private_marks"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "mark_policy": "approved_private_mark_policy_v1",
+        "source_required_market_state_variables": [
+          "manager_mark",
+          "credit_spread_proxy"
+        ],
+        "source_valuation_method_hint": "manager_mark",
+        "synthetic_identifier": "ABCF"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "crypto_price_lookup_v1",
+      "currency": "USD",
+      "display_name": "Bitcoin Synthetic Trust",
+      "eligible_pricing_functions": [
+        "crypto_price_lookup_v1"
+      ],
+      "instrument_id": "instr_bitcoin_synthetic_trust",
+      "instrument_type": "crypto",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Synthetic crypto vehicle valued with approved price input.",
+      "reference_data": {
+        "asset_class": "crypto",
+        "geography": "Global",
+        "industry": "bitcoin exposure",
+        "sector": "digital assets",
+        "source_position_id": "pos_f_bitcoin_synthetic_trust",
+        "synthetic_identifier": "BTCX"
+      },
+      "required_input_families": [
+        "crypto_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "crypto_price"
+        ],
+        "source_valuation_method_hint": "crypto_price",
+        "synthetic_identifier": "BTCX"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fund_or_etf_nav_v1",
+      "currency": "USD",
+      "display_name": "Developed Market Equity ETF",
+      "eligible_pricing_functions": [
+        "fund_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_broad_developed_equity_etf",
+      "instrument_type": "etf",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Fund or ETF interest valued with approved market-state NAV or price.",
+      "reference_data": {
+        "asset_class": "etf",
+        "geography": "Global",
+        "industry": "developed market ETF",
+        "sector": "multi-sector",
+        "source_position_id": "pos_b_broad_developed_equity_etf",
+        "synthetic_identifier": "DMKT"
+      },
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "etf_price",
+          "optional_lookthrough_proxy"
+        ],
+        "source_valuation_method_hint": "etf_proxy",
+        "synthetic_identifier": "DMKT"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "standard_public_equity_v1",
+      "currency": "USD",
+      "display_name": "Chip Fabrication Partner",
+      "eligible_pricing_functions": [
+        "public_equity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_chip_fabrication_partner",
+      "instrument_type": "public_equity",
+      "issuer": "Chip Fabrication Partner",
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Common equity share valued with approved market-state price.",
+      "reference_data": {
+        "asset_class": "public_equity",
+        "geography": "Asia",
+        "industry": "semiconductor manufacturing",
+        "sector": "technology",
+        "source_position_id": "pos_a_chip_fabrication_partner",
+        "synthetic_identifier": "CFAB"
+      },
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "underlying_price"
+        ],
+        "source_valuation_method_hint": "direct_price",
+        "synthetic_identifier": "CFAB"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "standard_public_equity_v1",
+      "currency": "USD",
+      "display_name": "Cloud Platform Compounder",
+      "eligible_pricing_functions": [
+        "public_equity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_cloud_platform_compounder",
+      "instrument_type": "public_equity",
+      "issuer": "Cloud Platform Compounder",
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Common equity share valued with approved market-state price.",
+      "reference_data": {
+        "asset_class": "public_equity",
+        "geography": "North America",
+        "industry": "cloud infrastructure",
+        "sector": "technology",
+        "source_position_id": "pos_a_cloud_platform_compounder",
+        "synthetic_identifier": "CLDP"
+      },
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "underlying_price"
+        ],
+        "source_valuation_method_hint": "direct_price",
+        "synthetic_identifier": "CLDP"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fund_or_etf_nav_v1",
+      "currency": "USD",
+      "display_name": "Commodity Basket Fund",
+      "eligible_pricing_functions": [
+        "fund_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_commodity_basket_fund",
+      "instrument_type": "etf",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Fund or ETF interest valued with approved market-state NAV or price.",
+      "reference_data": {
+        "asset_class": "commodities_energy",
+        "geography": "Global",
+        "industry": "commodity basket",
+        "sector": "commodities",
+        "source_position_id": "pos_f_commodity_basket_fund",
+        "synthetic_identifier": "COMB"
+      },
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "etf_price",
+          "optional_lookthrough_proxy"
+        ],
+        "source_valuation_method_hint": "etf_proxy",
+        "synthetic_identifier": "COMB"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "standard_public_equity_v1",
+      "currency": "USD",
+      "display_name": "Consumer Platform Quality",
+      "eligible_pricing_functions": [
+        "public_equity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_consumer_platform_quality",
+      "instrument_type": "public_equity",
+      "issuer": "Consumer Platform Quality",
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Common equity share valued with approved market-state price.",
+      "reference_data": {
+        "asset_class": "public_equity",
+        "geography": "North America",
+        "industry": "consumer platforms",
+        "sector": "technology",
+        "source_position_id": "pos_b_consumer_platform_quality",
+        "synthetic_identifier": "CPQ"
+      },
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "underlying_price"
+        ],
+        "source_valuation_method_hint": "direct_price",
+        "synthetic_identifier": "CPQ"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fund_or_etf_nav_v1",
+      "currency": "USD",
+      "display_name": "Copper Power Demand ETF",
+      "eligible_pricing_functions": [
+        "fund_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_copper_power_demand_etf",
+      "instrument_type": "etf",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Fund or ETF interest valued with approved market-state NAV or price.",
+      "reference_data": {
+        "asset_class": "commodities_energy",
+        "geography": "Global",
+        "industry": "copper ETF",
+        "sector": "commodities",
+        "source_position_id": "pos_f_copper_power_demand_etf",
+        "synthetic_identifier": "CPWR"
+      },
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "etf_price",
+          "optional_lookthrough_proxy"
+        ],
+        "source_valuation_method_hint": "etf_proxy",
+        "synthetic_identifier": "CPWR"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "standard_public_equity_v1",
+      "currency": "USD",
+      "display_name": "Core Bank Quality",
+      "eligible_pricing_functions": [
+        "public_equity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_core_bank_quality",
+      "instrument_type": "public_equity",
+      "issuer": "Core Bank Quality",
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Common equity share valued with approved market-state price.",
+      "reference_data": {
+        "asset_class": "public_equity",
+        "geography": "North America",
+        "industry": "banking",
+        "sector": "financials",
+        "source_position_id": "pos_b_core_bank_quality",
+        "synthetic_identifier": "CBKQ"
+      },
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "underlying_price"
+        ],
+        "source_valuation_method_hint": "direct_price",
+        "synthetic_identifier": "CBKQ"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "money_market_nav_v1",
+      "currency": "USD",
+      "display_name": "Core Quality Cash Sweep",
+      "eligible_pricing_functions": [
+        "money_market_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_core_quality_cash_sweep",
+      "instrument_type": "money_market",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Money-market units valued with approved NAV treatment.",
+      "reference_data": {
+        "asset_class": "cash_money_market",
+        "geography": "North America",
+        "industry": "money market",
+        "sector": "cash",
+        "source_position_id": "pos_b_core_quality_cash_sweep",
+        "synthetic_identifier": "MMQB"
+      },
+      "required_input_families": [
+        "money_market_navs"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "money_market_nav",
+          "cash_treatment"
+        ],
+        "source_valuation_method_hint": "cash_treatment",
+        "synthetic_identifier": "MMQB"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fund_or_etf_nav_v1",
+      "currency": "USD",
+      "display_name": "Covered Call Income ETF",
+      "eligible_pricing_functions": [
+        "fund_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_covered_call_income_etf",
+      "instrument_type": "etf",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Fund or ETF interest valued with approved market-state NAV or price.",
+      "reference_data": {
+        "asset_class": "etf",
+        "geography": "North America",
+        "industry": "covered call ETF",
+        "sector": "multi-sector",
+        "source_position_id": "pos_c_covered_call_income_etf",
+        "synthetic_identifier": "CALL"
+      },
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "etf_price",
+          "optional_lookthrough_proxy"
+        ],
+        "source_valuation_method_hint": "etf_proxy",
+        "synthetic_identifier": "CALL"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "standard_public_equity_v1",
+      "currency": "USD",
+      "display_name": "Data Center Cooling Leader",
+      "eligible_pricing_functions": [
+        "public_equity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_data_center_cooling_leader",
+      "instrument_type": "public_equity",
+      "issuer": "Data Center Cooling Leader",
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Common equity share valued with approved market-state price.",
+      "reference_data": {
+        "asset_class": "public_equity",
+        "geography": "North America",
+        "industry": "thermal management",
+        "sector": "industrials",
+        "source_position_id": "pos_a_data_center_cooling_leader",
+        "synthetic_identifier": "COOL"
+      },
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "underlying_price"
+        ],
+        "source_valuation_method_hint": "direct_price",
+        "synthetic_identifier": "COOL"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fallback_review_required_v1",
+      "currency": "USD",
+      "display_name": "Data Center Development JV",
+      "eligible_pricing_functions": [
+        "approved_private_mark_policy_v1"
+      ],
+      "instrument_id": "instr_data_center_development_jv",
+      "instrument_type": "data_center_investment",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Private or opaque instrument valued with approved mark or review treatment.",
+      "reference_data": {
+        "asset_class": "data_center_investment",
+        "geography": "North America",
+        "industry": "data center development",
+        "sector": "real assets",
+        "source_position_id": "pos_d_data_center_development_jv",
+        "synthetic_identifier": "DCDV"
+      },
+      "required_input_families": [
+        "private_marks"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "mark_policy": "approved_private_mark_policy_v1",
+        "source_required_market_state_variables": [
+          "private_mark",
+          "ai_infrastructure_proxy",
+          "energy_price_proxy"
+        ],
+        "source_valuation_method_hint": "private_mark",
+        "synthetic_identifier": "DCDV"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fallback_review_required_v1",
+      "currency": "USD",
+      "display_name": "Data Center Land Option",
+      "eligible_pricing_functions": [
+        "review_required_treatment_v1"
+      ],
+      "instrument_id": "instr_data_center_land_option",
+      "instrument_type": "option_like",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Option-like instrument routed to explicit review-required treatment in v1.",
+      "reference_data": {
+        "asset_class": "option_like",
+        "geography": "North America",
+        "industry": "land option",
+        "sector": "real assets",
+        "source_position_id": "pos_d_data_center_land_option",
+        "synthetic_identifier": "DCLO"
+      },
+      "required_input_families": [
+        "review_policies"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "review_policy": "fallback_review_required_v1",
+        "source_required_market_state_variables": [
+          "underlying_price",
+          "volatility_proxy",
+          "rate_proxy",
+          "time_to_maturity"
+        ],
+        "source_valuation_method_hint": "simple_option_model",
+        "synthetic_identifier": "DCLO"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "standard_public_equity_v1",
+      "currency": "USD",
+      "display_name": "Public Data Center REIT",
+      "eligible_pricing_functions": [
+        "public_equity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_data_center_public_reit",
+      "instrument_type": "public_equity",
+      "issuer": "Public Data Center REIT",
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Common equity share valued with approved market-state price.",
+      "reference_data": {
+        "asset_class": "real_estate",
+        "geography": "North America",
+        "industry": "data center REIT",
+        "sector": "real estate",
+        "source_position_id": "pos_a_data_center_public_reit",
+        "synthetic_identifier": "DCRT"
+      },
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "underlying_price"
+        ],
+        "source_valuation_method_hint": "direct_price",
+        "synthetic_identifier": "DCRT"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fund_or_etf_nav_v1",
+      "currency": "USD",
+      "display_name": "Defensive Quality ETF",
+      "eligible_pricing_functions": [
+        "fund_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_defensive_quality_etf",
+      "instrument_type": "etf",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Fund or ETF interest valued with approved market-state NAV or price.",
+      "reference_data": {
+        "asset_class": "etf",
+        "geography": "North America",
+        "industry": "defensive quality ETF",
+        "sector": "multi-sector",
+        "source_position_id": "pos_e_defensive_quality_etf",
+        "synthetic_identifier": "DQET"
+      },
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "etf_price",
+          "optional_lookthrough_proxy"
+        ],
+        "source_valuation_method_hint": "etf_proxy",
+        "synthetic_identifier": "DQET"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "standard_public_equity_v1",
+      "currency": "USD",
+      "display_name": "Edge Server Platform",
+      "eligible_pricing_functions": [
+        "public_equity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_edge_server_platform",
+      "instrument_type": "public_equity",
+      "issuer": "Edge Server Platform",
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Common equity share valued with approved market-state price.",
+      "reference_data": {
+        "asset_class": "public_equity",
+        "geography": "North America",
+        "industry": "server infrastructure",
+        "sector": "technology",
+        "source_position_id": "pos_a_edge_server_platform",
+        "synthetic_identifier": "EDGE"
+      },
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "underlying_price"
+        ],
+        "source_valuation_method_hint": "direct_price",
+        "synthetic_identifier": "EDGE"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "standard_public_equity_v1",
+      "currency": "USD",
+      "display_name": "Enterprise AI Software",
+      "eligible_pricing_functions": [
+        "public_equity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_enterprise_ai_software",
+      "instrument_type": "public_equity",
+      "issuer": "Enterprise AI Software",
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Common equity share valued with approved market-state price.",
+      "reference_data": {
+        "asset_class": "public_equity",
+        "geography": "North America",
+        "industry": "enterprise software",
+        "sector": "technology",
+        "source_position_id": "pos_a_enterprise_ai_software",
+        "synthetic_identifier": "EAI"
+      },
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "underlying_price"
+        ],
+        "source_valuation_method_hint": "direct_price",
+        "synthetic_identifier": "EAI"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "crypto_price_lookup_v1",
+      "currency": "USD",
+      "display_name": "Ethereum Synthetic Trust",
+      "eligible_pricing_functions": [
+        "crypto_price_lookup_v1"
+      ],
+      "instrument_id": "instr_ethereum_synthetic_trust",
+      "instrument_type": "crypto",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Synthetic crypto vehicle valued with approved price input.",
+      "reference_data": {
+        "asset_class": "crypto",
+        "geography": "Global",
+        "industry": "ethereum exposure",
+        "sector": "digital assets",
+        "source_position_id": "pos_f_ethereum_synthetic_trust",
+        "synthetic_identifier": "ETHX"
+      },
+      "required_input_families": [
+        "crypto_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "crypto_price"
+        ],
+        "source_valuation_method_hint": "crypto_price",
+        "synthetic_identifier": "ETHX"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fx_translation_v1",
+      "currency": "USD",
+      "display_name": "EUR/USD Forward Exposure",
+      "eligible_pricing_functions": [
+        "fx_notional_translation_v1"
+      ],
+      "instrument_id": "instr_eurusd_forward_exposure",
+      "instrument_type": "fx_exposure",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Synthetic FX exposure valued through approved notional translation.",
+      "reference_data": {
+        "asset_class": "fx",
+        "geography": "Europe",
+        "industry": "FX forward",
+        "sector": "currency",
+        "source_position_id": "pos_f_eurusd_forward_exposure",
+        "synthetic_identifier": "EURF"
+      },
+      "required_input_families": [
+        "fx_rates"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "source_required_market_state_variables": [
+          "fx_rate"
+        ],
+        "source_valuation_method_hint": "fx_rate",
+        "synthetic_identifier": "EURF"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "approved_private_mark_policy_v1",
+      "currency": "USD",
+      "display_name": "Fiber Interconnect Infrastructure LP",
+      "eligible_pricing_functions": [
+        "approved_private_mark_policy_v1"
+      ],
+      "instrument_id": "instr_fiber_interconnect_infra_lp",
+      "instrument_type": "data_center_investment",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Private or opaque instrument valued with approved mark or review treatment.",
+      "reference_data": {
+        "asset_class": "data_center_investment",
+        "geography": "North America",
+        "industry": "fiber and interconnect",
+        "sector": "infrastructure",
+        "source_position_id": "pos_d_fiber_interconnect_infra_lp",
+        "synthetic_identifier": "FIIL"
+      },
+      "required_input_families": [
+        "private_marks"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "mark_policy": "approved_private_mark_policy_v1",
+        "source_required_market_state_variables": [
+          "private_mark",
+          "ai_infrastructure_proxy",
+          "energy_price_proxy"
+        ],
+        "source_valuation_method_hint": "manager_mark",
+        "synthetic_identifier": "FIIL"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fund_or_etf_nav_v1",
+      "currency": "USD",
+      "display_name": "Floating Rate Credit ETF",
+      "eligible_pricing_functions": [
+        "fund_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_floating_rate_credit_etf",
+      "instrument_type": "etf",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Fund or ETF interest valued with approved market-state NAV or price.",
+      "reference_data": {
+        "asset_class": "fixed_income",
+        "geography": "North America",
+        "industry": "floating-rate loans",
+        "sector": "fixed income",
+        "source_position_id": "pos_c_floating_rate_credit_etf",
+        "synthetic_identifier": "FLRT"
+      },
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "etf_price",
+          "optional_lookthrough_proxy"
+        ],
+        "source_valuation_method_hint": "etf_proxy",
+        "synthetic_identifier": "FLRT"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fund_or_etf_nav_v1",
+      "currency": "USD",
+      "display_name": "Gold Defensive ETF",
+      "eligible_pricing_functions": [
+        "fund_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_gold_defensive_etf",
+      "instrument_type": "etf",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Fund or ETF interest valued with approved market-state NAV or price.",
+      "reference_data": {
+        "asset_class": "commodities_energy",
+        "geography": "Global",
+        "industry": "gold ETF",
+        "sector": "commodities",
+        "source_position_id": "pos_e_gold_defensive_etf",
+        "synthetic_identifier": "GLDX"
+      },
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "etf_price",
+          "optional_lookthrough_proxy"
+        ],
+        "source_valuation_method_hint": "etf_proxy",
+        "synthetic_identifier": "GLDX"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "money_market_nav_v1",
+      "currency": "USD",
+      "display_name": "Government Money Market Fund",
+      "eligible_pricing_functions": [
+        "money_market_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_government_money_market",
+      "instrument_type": "money_market",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Money-market units valued with approved NAV treatment.",
+      "reference_data": {
+        "asset_class": "cash_money_market",
+        "geography": "North America",
+        "industry": "government money market",
+        "sector": "cash",
+        "source_position_id": "pos_e_government_money_market",
+        "synthetic_identifier": "GMMF"
+      },
+      "required_input_families": [
+        "money_market_navs"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "money_market_nav",
+          "cash_treatment"
+        ],
+        "source_valuation_method_hint": "cash_treatment",
+        "synthetic_identifier": "GMMF"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "standard_public_equity_v1",
+      "currency": "USD",
+      "display_name": "Grid Enabler Equity",
+      "eligible_pricing_functions": [
+        "public_equity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_grid_enabler_equity",
+      "instrument_type": "public_equity",
+      "issuer": "Grid Enabler Equity",
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Common equity share valued with approved market-state price.",
+      "reference_data": {
+        "asset_class": "public_equity",
+        "geography": "North America",
+        "industry": "grid equipment",
+        "sector": "utilities",
+        "source_position_id": "pos_a_grid_enabler_equity",
+        "synthetic_identifier": "GRID"
+      },
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "underlying_price"
+        ],
+        "source_valuation_method_hint": "direct_price",
+        "synthetic_identifier": "GRID"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "standard_public_equity_v1",
+      "currency": "USD",
+      "display_name": "Healthcare Resilience",
+      "eligible_pricing_functions": [
+        "public_equity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_healthcare_resilience",
+      "instrument_type": "public_equity",
+      "issuer": "Healthcare Resilience",
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Common equity share valued with approved market-state price.",
+      "reference_data": {
+        "asset_class": "public_equity",
+        "geography": "North America",
+        "industry": "managed care",
+        "sector": "health care",
+        "source_position_id": "pos_b_healthcare_resilience",
+        "synthetic_identifier": "HLTH"
+      },
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "underlying_price"
+        ],
+        "source_valuation_method_hint": "direct_price",
+        "synthetic_identifier": "HLTH"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "money_market_nav_v1",
+      "currency": "USD",
+      "display_name": "Income Sleeve Cash Reserve",
+      "eligible_pricing_functions": [
+        "money_market_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_income_sleeve_cash",
+      "instrument_type": "money_market",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Money-market units valued with approved NAV treatment.",
+      "reference_data": {
+        "asset_class": "cash_money_market",
+        "geography": "North America",
+        "industry": "money market",
+        "sector": "cash",
+        "source_position_id": "pos_c_income_sleeve_cash",
+        "synthetic_identifier": "MMCI"
+      },
+      "required_input_families": [
+        "money_market_navs"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "money_market_nav",
+          "cash_treatment"
+        ],
+        "source_valuation_method_hint": "cash_treatment",
+        "synthetic_identifier": "MMCI"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "standard_public_equity_v1",
+      "currency": "USD",
+      "display_name": "Industrial Compounder",
+      "eligible_pricing_functions": [
+        "public_equity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_industrial_compounder",
+      "instrument_type": "public_equity",
+      "issuer": "Industrial Compounder",
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Common equity share valued with approved market-state price.",
+      "reference_data": {
+        "asset_class": "public_equity",
+        "geography": "North America",
+        "industry": "industrial automation",
+        "sector": "industrials",
+        "source_position_id": "pos_b_industrial_compounder",
+        "synthetic_identifier": "INDQ"
+      },
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "underlying_price"
+        ],
+        "source_valuation_method_hint": "direct_price",
+        "synthetic_identifier": "INDQ"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "approved_private_mark_policy_v1",
+      "currency": "USD",
+      "display_name": "Industrial Logistics Real Estate Fund",
+      "eligible_pricing_functions": [
+        "approved_private_mark_policy_v1"
+      ],
+      "instrument_id": "instr_industrial_logistics_real_estate",
+      "instrument_type": "real_estate",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Private or opaque instrument valued with approved mark or review treatment.",
+      "reference_data": {
+        "asset_class": "real_estate",
+        "geography": "North America",
+        "industry": "industrial logistics",
+        "sector": "real estate",
+        "source_position_id": "pos_d_industrial_logistics_real_estate",
+        "synthetic_identifier": "ILRE"
+      },
+      "required_input_families": [
+        "private_marks"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "mark_policy": "approved_private_mark_policy_v1",
+        "source_required_market_state_variables": [
+          "manager_mark",
+          "real_asset_proxy",
+          "liquidity_discount_proxy"
+        ],
+        "source_valuation_method_hint": "manager_mark",
+        "synthetic_identifier": "ILRE"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "synthetic_bond_policy_v1",
+      "currency": "USD",
+      "display_name": "Inflation-Linked Short Note",
+      "eligible_pricing_functions": [
+        "bond_mark_scalar_v1"
+      ],
+      "instrument_id": "instr_inflation_linked_short_note",
+      "instrument_type": "fixed_income",
+      "issuer": "Inflation-Linked Short Note",
+      "lifecycle_dates": {
+        "issue_date": "2021-06-30",
+        "maturity_date": "2031-06-30"
+      },
+      "payoff_description": "Synthetic fixed-income instrument valued with approved mark scalar and simple cash-flow output.",
+      "reference_data": {
+        "asset_class": "fixed_income",
+        "geography": "North America",
+        "industry": "short TIPS",
+        "sector": "fixed income",
+        "source_position_id": "pos_e_inflation_linked_short_note",
+        "synthetic_identifier": "ILSN"
+      },
+      "required_input_families": [
+        "bond_price_scalars"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "coupon_frequency": "semi_annual",
+        "coupon_rate": 0.04,
+        "day_count": "30_360",
+        "face_amount": 345000.0,
+        "maturity_date": "2031-06-30",
+        "source_required_market_state_variables": [
+          "bond_price_proxy",
+          "duration_bucket_price"
+        ],
+        "source_valuation_method_hint": "bond_proxy",
+        "synthetic_identifier": "ILSN"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fund_or_etf_nav_v1",
+      "currency": "USD",
+      "display_name": "Investment Grade Bond ETF",
+      "eligible_pricing_functions": [
+        "fund_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_investment_grade_bond_etf",
+      "instrument_type": "etf",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Fund or ETF interest valued with approved market-state NAV or price.",
+      "reference_data": {
+        "asset_class": "fixed_income",
+        "geography": "North America",
+        "industry": "investment grade credit",
+        "sector": "fixed income",
+        "source_position_id": "pos_c_investment_grade_bond_etf",
+        "synthetic_identifier": "IGBD"
+      },
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "etf_price",
+          "optional_lookthrough_proxy"
+        ],
+        "source_valuation_method_hint": "etf_proxy",
+        "synthetic_identifier": "IGBD"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fx_translation_v1",
+      "currency": "USD",
+      "display_name": "JPY Defensive Hedge",
+      "eligible_pricing_functions": [
+        "fx_notional_translation_v1"
+      ],
+      "instrument_id": "instr_jpy_defensive_hedge",
+      "instrument_type": "fx_exposure",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Synthetic FX exposure valued through approved notional translation.",
+      "reference_data": {
+        "asset_class": "fx",
+        "geography": "Japan",
+        "industry": "FX hedge",
+        "sector": "currency",
+        "source_position_id": "pos_f_jpy_defensive_hedge",
+        "synthetic_identifier": "JPYH"
+      },
+      "required_input_families": [
+        "fx_rates"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "source_required_market_state_variables": [
+          "fx_rate"
+        ],
+        "source_valuation_method_hint": "fx_rate",
+        "synthetic_identifier": "JPYH"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fallback_review_required_v1",
+      "currency": "USD",
+      "display_name": "Macro Overlay Manager Book",
+      "eligible_pricing_functions": [
+        "approved_private_mark_policy_v1"
+      ],
+      "instrument_id": "instr_macro_overlay_manager_book",
+      "instrument_type": "opaque_manager_level",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Private or opaque instrument valued with approved mark or review treatment.",
+      "reference_data": {
+        "asset_class": "opaque_manager_level",
+        "geography": "Global",
+        "industry": "manager overlay",
+        "sector": "macro",
+        "source_position_id": "pos_f_macro_overlay_manager_book",
+        "synthetic_identifier": "MOMB"
+      },
+      "required_input_families": [
+        "private_marks"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "mark_policy": "approved_private_mark_policy_v1",
+        "source_required_market_state_variables": [
+          "manager_mark",
+          "manager_composite_proxy",
+          "human_review_flag"
+        ],
+        "source_valuation_method_hint": "manager_mark",
+        "synthetic_identifier": "MOMB"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fund_or_etf_nav_v1",
+      "currency": "USD",
+      "display_name": "Minimum Volatility Equity ETF",
+      "eligible_pricing_functions": [
+        "fund_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_minimum_volatility_equity",
+      "instrument_type": "etf",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Fund or ETF interest valued with approved market-state NAV or price.",
+      "reference_data": {
+        "asset_class": "etf",
+        "geography": "North America",
+        "industry": "minimum volatility ETF",
+        "sector": "multi-sector",
+        "source_position_id": "pos_e_minimum_volatility_equity",
+        "synthetic_identifier": "MVOL"
+      },
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "etf_price",
+          "optional_lookthrough_proxy"
+        ],
+        "source_valuation_method_hint": "etf_proxy",
+        "synthetic_identifier": "MVOL"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "approved_private_mark_policy_v1",
+      "currency": "USD",
+      "display_name": "Multifamily Real Estate Fund",
+      "eligible_pricing_functions": [
+        "approved_private_mark_policy_v1"
+      ],
+      "instrument_id": "instr_multifamily_real_estate_fund",
+      "instrument_type": "real_estate",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Private or opaque instrument valued with approved mark or review treatment.",
+      "reference_data": {
+        "asset_class": "real_estate",
+        "geography": "North America",
+        "industry": "multifamily",
+        "sector": "real estate",
+        "source_position_id": "pos_d_multifamily_real_estate_fund",
+        "synthetic_identifier": "MFRE"
+      },
+      "required_input_families": [
+        "private_marks"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "mark_policy": "approved_private_mark_policy_v1",
+        "source_required_market_state_variables": [
+          "manager_mark",
+          "real_asset_proxy",
+          "liquidity_discount_proxy"
+        ],
+        "source_valuation_method_hint": "manager_mark",
+        "synthetic_identifier": "MFRE"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "money_market_nav_v1",
+      "currency": "USD",
+      "display_name": "Municipal Cash Reserve",
+      "eligible_pricing_functions": [
+        "money_market_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_municipal_cash_reserve",
+      "instrument_type": "money_market",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Money-market units valued with approved NAV treatment.",
+      "reference_data": {
+        "asset_class": "cash_money_market",
+        "geography": "North America",
+        "industry": "municipal cash",
+        "sector": "cash",
+        "source_position_id": "pos_e_municipal_cash_reserve",
+        "synthetic_identifier": "MCAS"
+      },
+      "required_input_families": [
+        "money_market_navs"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "money_market_nav",
+          "cash_treatment"
+        ],
+        "source_valuation_method_hint": "cash_treatment",
+        "synthetic_identifier": "MCAS"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "synthetic_bond_policy_v1",
+      "currency": "USD",
+      "display_name": "Municipal Income Ladder",
+      "eligible_pricing_functions": [
+        "bond_mark_scalar_v1"
+      ],
+      "instrument_id": "instr_municipal_income_ladder",
+      "instrument_type": "fixed_income",
+      "issuer": "Municipal Income Ladder",
+      "lifecycle_dates": {
+        "issue_date": "2021-06-30",
+        "maturity_date": "2031-06-30"
+      },
+      "payoff_description": "Synthetic fixed-income instrument valued with approved mark scalar and simple cash-flow output.",
+      "reference_data": {
+        "asset_class": "fixed_income",
+        "geography": "North America",
+        "industry": "municipal bonds",
+        "sector": "fixed income",
+        "source_position_id": "pos_c_municipal_income_ladder",
+        "synthetic_identifier": "MUNI"
+      },
+      "required_input_families": [
+        "bond_price_scalars"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "coupon_frequency": "semi_annual",
+        "coupon_rate": 0.04,
+        "day_count": "30_360",
+        "face_amount": 560000.0,
+        "maturity_date": "2031-06-30",
+        "source_required_market_state_variables": [
+          "bond_price_proxy",
+          "duration_bucket_price"
+        ],
+        "source_valuation_method_hint": "bond_proxy",
+        "synthetic_identifier": "MUNI"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fallback_review_required_v1",
+      "currency": "USD",
+      "display_name": "Northstar AI Growth Fund LP",
+      "eligible_pricing_functions": [
+        "approved_private_mark_policy_v1"
+      ],
+      "instrument_id": "instr_northstar_ai_growth_fund",
+      "instrument_type": "private_equity",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Private or opaque instrument valued with approved mark or review treatment.",
+      "reference_data": {
+        "asset_class": "private_equity",
+        "geography": "North America",
+        "industry": "growth buyout",
+        "sector": "private equity",
+        "source_position_id": "pos_d_northstar_ai_growth_fund",
+        "synthetic_identifier": "NAGF"
+      },
+      "required_input_families": [
+        "private_marks"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "mark_policy": "approved_private_mark_policy_v1",
+        "source_required_market_state_variables": [
+          "manager_mark",
+          "private_equity_proxy"
+        ],
+        "source_valuation_method_hint": "manager_mark",
+        "synthetic_identifier": "NAGF"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fallback_review_required_v1",
+      "currency": "USD",
+      "display_name": "Opaque Manager-Level Private Book",
+      "eligible_pricing_functions": [
+        "approved_private_mark_policy_v1"
+      ],
+      "instrument_id": "instr_opaque_manager_level_private_book",
+      "instrument_type": "opaque_manager_level",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Private or opaque instrument valued with approved mark or review treatment.",
+      "reference_data": {
+        "asset_class": "opaque_manager_level",
+        "geography": "Global",
+        "industry": "manager composite",
+        "sector": "private markets",
+        "source_position_id": "pos_d_opaque_manager_level_private_book",
+        "synthetic_identifier": "OMPB"
+      },
+      "required_input_families": [
+        "private_marks"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "mark_policy": "approved_private_mark_policy_v1",
+        "source_required_market_state_variables": [
+          "manager_mark",
+          "manager_composite_proxy",
+          "human_review_flag"
+        ],
+        "source_valuation_method_hint": "manager_mark",
+        "synthetic_identifier": "OMPB"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "cash_face_value_v1",
+      "currency": "USD",
+      "display_name": "Operating Cash USD",
+      "eligible_pricing_functions": [
+        "cash_face_value_v1"
+      ],
+      "instrument_id": "instr_operating_cash_usd",
+      "instrument_type": "cash",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Cash balance valued at face-value treatment.",
+      "reference_data": {
+        "asset_class": "cash_money_market",
+        "geography": "North America",
+        "industry": "operating cash",
+        "sector": "cash",
+        "source_position_id": "pos_e_operating_cash_usd",
+        "synthetic_identifier": "CASH"
+      },
+      "required_input_families": [
+        "cash_scalars"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "cash_currency": "USD",
+        "source_required_market_state_variables": [
+          "cash_treatment"
+        ],
+        "source_valuation_method_hint": "cash_treatment",
+        "synthetic_identifier": "CASH"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "standard_public_equity_v1",
+      "currency": "USD",
+      "display_name": "Payments Network Core",
+      "eligible_pricing_functions": [
+        "public_equity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_payments_network_core",
+      "instrument_type": "public_equity",
+      "issuer": "Payments Network Core",
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Common equity share valued with approved market-state price.",
+      "reference_data": {
+        "asset_class": "public_equity",
+        "geography": "North America",
+        "industry": "payments",
+        "sector": "financials",
+        "source_position_id": "pos_b_payments_network_core",
+        "synthetic_identifier": "PAYN"
+      },
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "underlying_price"
+        ],
+        "source_valuation_method_hint": "direct_price",
+        "synthetic_identifier": "PAYN"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "standard_public_equity_v1",
+      "currency": "USD",
+      "display_name": "Pipeline Cash Yield",
+      "eligible_pricing_functions": [
+        "public_equity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_pipeline_cash_yield",
+      "instrument_type": "public_equity",
+      "issuer": "Pipeline Cash Yield",
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Common equity share valued with approved market-state price.",
+      "reference_data": {
+        "asset_class": "commodities_energy",
+        "geography": "North America",
+        "industry": "midstream energy",
+        "sector": "energy",
+        "source_position_id": "pos_c_pipeline_cash_yield",
+        "synthetic_identifier": "PIPE"
+      },
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "underlying_price"
+        ],
+        "source_valuation_method_hint": "direct_price",
+        "synthetic_identifier": "PIPE"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fallback_review_required_v1",
+      "currency": "USD",
+      "display_name": "Power Campus Preferred Equity",
+      "eligible_pricing_functions": [
+        "approved_private_mark_policy_v1"
+      ],
+      "instrument_id": "instr_power_campus_preferred",
+      "instrument_type": "data_center_investment",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Private or opaque instrument valued with approved mark or review treatment.",
+      "reference_data": {
+        "asset_class": "data_center_investment",
+        "geography": "North America",
+        "industry": "power campus preferred",
+        "sector": "real assets",
+        "source_position_id": "pos_d_power_campus_preferred",
+        "synthetic_identifier": "PCPE"
+      },
+      "required_input_families": [
+        "private_marks"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "mark_policy": "approved_private_mark_policy_v1",
+        "source_required_market_state_variables": [
+          "private_mark",
+          "ai_infrastructure_proxy",
+          "energy_price_proxy"
+        ],
+        "source_valuation_method_hint": "private_mark",
+        "synthetic_identifier": "PCPE"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fund_or_etf_nav_v1",
+      "currency": "USD",
+      "display_name": "Preferred Income ETF",
+      "eligible_pricing_functions": [
+        "fund_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_preferred_income_etf",
+      "instrument_type": "etf",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Fund or ETF interest valued with approved market-state NAV or price.",
+      "reference_data": {
+        "asset_class": "fixed_income",
+        "geography": "North America",
+        "industry": "preferred securities",
+        "sector": "financials",
+        "source_position_id": "pos_c_preferred_income_etf",
+        "synthetic_identifier": "PRFD"
+      },
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "etf_price",
+          "optional_lookthrough_proxy"
+        ],
+        "source_valuation_method_hint": "etf_proxy",
+        "synthetic_identifier": "PRFD"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fallback_review_required_v1",
+      "currency": "USD",
+      "display_name": "Private Credit Income Fund",
+      "eligible_pricing_functions": [
+        "approved_private_mark_policy_v1"
+      ],
+      "instrument_id": "instr_private_credit_income_fund",
+      "instrument_type": "private_credit",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Private or opaque instrument valued with approved mark or review treatment.",
+      "reference_data": {
+        "asset_class": "private_credit",
+        "geography": "North America",
+        "industry": "direct lending",
+        "sector": "private credit",
+        "source_position_id": "pos_c_private_credit_income_fund",
+        "synthetic_identifier": "PCIF"
+      },
+      "required_input_families": [
+        "private_marks"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "mark_policy": "approved_private_mark_policy_v1",
+        "source_required_market_state_variables": [
+          "manager_mark",
+          "credit_spread_proxy"
+        ],
+        "source_valuation_method_hint": "manager_mark",
+        "synthetic_identifier": "PCIF"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "approved_private_mark_policy_v1",
+      "currency": "USD",
+      "display_name": "Private Credit Sidecar",
+      "eligible_pricing_functions": [
+        "approved_private_mark_policy_v1"
+      ],
+      "instrument_id": "instr_private_credit_sidecar",
+      "instrument_type": "private_credit",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Private or opaque instrument valued with approved mark or review treatment.",
+      "reference_data": {
+        "asset_class": "private_credit",
+        "geography": "North America",
+        "industry": "asset-backed lending",
+        "sector": "private credit",
+        "source_position_id": "pos_d_private_credit_sidecar",
+        "synthetic_identifier": "PCSC"
+      },
+      "required_input_families": [
+        "private_marks"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "mark_policy": "approved_private_mark_policy_v1",
+        "source_required_market_state_variables": [
+          "manager_mark",
+          "credit_spread_proxy"
+        ],
+        "source_valuation_method_hint": "manager_mark",
+        "synthetic_identifier": "PCSC"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fallback_review_required_v1",
+      "currency": "USD",
+      "display_name": "Private Mark Placeholder Position",
+      "eligible_pricing_functions": [
+        "approved_private_mark_policy_v1"
+      ],
+      "instrument_id": "instr_private_mark_placeholder",
+      "instrument_type": "opaque_manager_level",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Private or opaque instrument valued with approved mark or review treatment.",
+      "reference_data": {
+        "asset_class": "opaque_manager_level",
+        "geography": "Global",
+        "industry": "manual placeholder",
+        "sector": "private markets",
+        "source_position_id": "pos_d_private_mark_placeholder",
+        "synthetic_identifier": "PMPD"
+      },
+      "required_input_families": [
+        "private_marks"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "mark_policy": "approved_private_mark_policy_v1",
+        "source_required_market_state_variables": [
+          "manager_mark",
+          "manager_composite_proxy",
+          "human_review_flag"
+        ],
+        "source_valuation_method_hint": "manager_mark",
+        "synthetic_identifier": "PMPD"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "money_market_nav_v1",
+      "currency": "USD",
+      "display_name": "Public AI Sleeve Money Market Sweep",
+      "eligible_pricing_functions": [
+        "money_market_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_public_ai_money_market_sweep",
+      "instrument_type": "money_market",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Money-market units valued with approved NAV treatment.",
+      "reference_data": {
+        "asset_class": "cash_money_market",
+        "geography": "North America",
+        "industry": "money market",
+        "sector": "cash",
+        "source_position_id": "pos_a_public_ai_money_market_sweep",
+        "synthetic_identifier": "MMDA"
+      },
+      "required_input_families": [
+        "money_market_navs"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "money_market_nav",
+          "cash_treatment"
+        ],
+        "source_valuation_method_hint": "cash_treatment",
+        "synthetic_identifier": "MMDA"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "standard_public_equity_v1",
+      "currency": "USD",
+      "display_name": "Public Direct Lending BDC",
+      "eligible_pricing_functions": [
+        "public_equity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_public_direct_lending_bdc",
+      "instrument_type": "public_equity",
+      "issuer": "Public Direct Lending BDC",
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Common equity share valued with approved market-state price.",
+      "reference_data": {
+        "asset_class": "private_credit",
+        "geography": "North America",
+        "industry": "business development company",
+        "sector": "financials",
+        "source_position_id": "pos_c_public_direct_lending_bdc",
+        "synthetic_identifier": "BDCI"
+      },
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "underlying_price"
+        ],
+        "source_valuation_method_hint": "direct_price",
+        "synthetic_identifier": "BDCI"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "standard_public_equity_v1",
+      "currency": "USD",
+      "display_name": "Quality Consumer Staples",
+      "eligible_pricing_functions": [
+        "public_equity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_quality_consumer_staples",
+      "instrument_type": "public_equity",
+      "issuer": "Quality Consumer Staples",
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Common equity share valued with approved market-state price.",
+      "reference_data": {
+        "asset_class": "public_equity",
+        "geography": "North America",
+        "industry": "consumer staples",
+        "sector": "consumer staples",
+        "source_position_id": "pos_b_quality_consumer_staples",
+        "synthetic_identifier": "STPL"
+      },
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "underlying_price"
+        ],
+        "source_valuation_method_hint": "direct_price",
+        "synthetic_identifier": "STPL"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fund_or_etf_nav_v1",
+      "currency": "USD",
+      "display_name": "Quality Factor ETF",
+      "eligible_pricing_functions": [
+        "fund_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_quality_factor_etf",
+      "instrument_type": "etf",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Fund or ETF interest valued with approved market-state NAV or price.",
+      "reference_data": {
+        "asset_class": "etf",
+        "geography": "North America",
+        "industry": "quality ETF",
+        "sector": "multi-sector",
+        "source_position_id": "pos_b_quality_factor_etf",
+        "synthetic_identifier": "QUALX"
+      },
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "etf_price",
+          "optional_lookthrough_proxy"
+        ],
+        "source_valuation_method_hint": "etf_proxy",
+        "synthetic_identifier": "QUALX"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fallback_review_required_v1",
+      "currency": "USD",
+      "display_name": "Rates Volatility Collar",
+      "eligible_pricing_functions": [
+        "review_required_treatment_v1"
+      ],
+      "instrument_id": "instr_rates_volatility_collar",
+      "instrument_type": "option_like",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Option-like instrument routed to explicit review-required treatment in v1.",
+      "reference_data": {
+        "asset_class": "option_like",
+        "geography": "North America",
+        "industry": "rates option",
+        "sector": "structured products",
+        "source_position_id": "pos_f_rates_volatility_collar",
+        "synthetic_identifier": "RVOL"
+      },
+      "required_input_families": [
+        "review_policies"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "review_policy": "fallback_review_required_v1",
+        "source_required_market_state_variables": [
+          "underlying_price",
+          "volatility_proxy",
+          "rate_proxy",
+          "time_to_maturity"
+        ],
+        "source_valuation_method_hint": "simple_option_model",
+        "synthetic_identifier": "RVOL"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fund_or_etf_nav_v1",
+      "currency": "USD",
+      "display_name": "REIT Income ETF",
+      "eligible_pricing_functions": [
+        "fund_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_reit_income_etf",
+      "instrument_type": "etf",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Fund or ETF interest valued with approved market-state NAV or price.",
+      "reference_data": {
+        "asset_class": "real_estate",
+        "geography": "North America",
+        "industry": "real estate income",
+        "sector": "real estate",
+        "source_position_id": "pos_c_reit_income_etf",
+        "synthetic_identifier": "RINC"
+      },
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "etf_price",
+          "optional_lookthrough_proxy"
+        ],
+        "source_valuation_method_hint": "etf_proxy",
+        "synthetic_identifier": "RINC"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "approved_private_mark_policy_v1",
+      "currency": "USD",
+      "display_name": "Renewable Power Infrastructure LP",
+      "eligible_pricing_functions": [
+        "approved_private_mark_policy_v1"
+      ],
+      "instrument_id": "instr_renewable_power_infra_lp",
+      "instrument_type": "real_estate",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Private or opaque instrument valued with approved mark or review treatment.",
+      "reference_data": {
+        "asset_class": "real_estate",
+        "geography": "North America",
+        "industry": "renewable power",
+        "sector": "infrastructure",
+        "source_position_id": "pos_d_renewable_power_infra_lp",
+        "synthetic_identifier": "RPIL"
+      },
+      "required_input_families": [
+        "private_marks"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "mark_policy": "approved_private_mark_policy_v1",
+        "source_required_market_state_variables": [
+          "manager_mark",
+          "real_asset_proxy",
+          "liquidity_discount_proxy"
+        ],
+        "source_valuation_method_hint": "manager_mark",
+        "synthetic_identifier": "RPIL"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "approved_private_mark_policy_v1",
+      "currency": "USD",
+      "display_name": "Secondary PE Fund",
+      "eligible_pricing_functions": [
+        "approved_private_mark_policy_v1"
+      ],
+      "instrument_id": "instr_secondary_pe_fund",
+      "instrument_type": "private_equity",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Private or opaque instrument valued with approved mark or review treatment.",
+      "reference_data": {
+        "asset_class": "private_equity",
+        "geography": "Global",
+        "industry": "secondary fund",
+        "sector": "private equity",
+        "source_position_id": "pos_d_secondary_pe_fund",
+        "synthetic_identifier": "SPEF"
+      },
+      "required_input_families": [
+        "private_marks"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "mark_policy": "approved_private_mark_policy_v1",
+        "source_required_market_state_variables": [
+          "manager_mark",
+          "private_equity_proxy"
+        ],
+        "source_valuation_method_hint": "manager_mark",
+        "synthetic_identifier": "SPEF"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "standard_public_equity_v1",
+      "currency": "USD",
+      "display_name": "Semicap Equipment Maker",
+      "eligible_pricing_functions": [
+        "public_equity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_semicap_equipment_maker",
+      "instrument_type": "public_equity",
+      "issuer": "Semicap Equipment Maker",
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Common equity share valued with approved market-state price.",
+      "reference_data": {
+        "asset_class": "public_equity",
+        "geography": "Europe",
+        "industry": "semiconductor equipment",
+        "sector": "technology",
+        "source_position_id": "pos_a_semicap_equipment_maker",
+        "synthetic_identifier": "SEMI"
+      },
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "underlying_price"
+        ],
+        "source_valuation_method_hint": "direct_price",
+        "synthetic_identifier": "SEMI"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fund_or_etf_nav_v1",
+      "currency": "USD",
+      "display_name": "Short Duration IG Bond ETF",
+      "eligible_pricing_functions": [
+        "fund_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_short_duration_ig_bond",
+      "instrument_type": "etf",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Fund or ETF interest valued with approved market-state NAV or price.",
+      "reference_data": {
+        "asset_class": "fixed_income",
+        "geography": "North America",
+        "industry": "short investment grade credit",
+        "sector": "fixed income",
+        "source_position_id": "pos_e_short_duration_ig_bond",
+        "synthetic_identifier": "SDIG"
+      },
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "etf_price",
+          "optional_lookthrough_proxy"
+        ],
+        "source_valuation_method_hint": "etf_proxy",
+        "synthetic_identifier": "SDIG"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fund_or_etf_nav_v1",
+      "currency": "USD",
+      "display_name": "Short TIPS ETF",
+      "eligible_pricing_functions": [
+        "fund_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_short_tips_etf",
+      "instrument_type": "etf",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Fund or ETF interest valued with approved market-state NAV or price.",
+      "reference_data": {
+        "asset_class": "fixed_income",
+        "geography": "North America",
+        "industry": "inflation linked",
+        "sector": "fixed income",
+        "source_position_id": "pos_c_short_tips_etf",
+        "synthetic_identifier": "TIPZ"
+      },
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "etf_price",
+          "optional_lookthrough_proxy"
+        ],
+        "source_valuation_method_hint": "etf_proxy",
+        "synthetic_identifier": "TIPZ"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fund_or_etf_nav_v1",
+      "currency": "USD",
+      "display_name": "Short Treasury ETF",
+      "eligible_pricing_functions": [
+        "fund_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_short_treasury_etf",
+      "instrument_type": "etf",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Fund or ETF interest valued with approved market-state NAV or price.",
+      "reference_data": {
+        "asset_class": "fixed_income",
+        "geography": "North America",
+        "industry": "short treasury ETF",
+        "sector": "fixed income",
+        "source_position_id": "pos_e_short_treasury_etf",
+        "synthetic_identifier": "STSY"
+      },
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "etf_price",
+          "optional_lookthrough_proxy"
+        ],
+        "source_valuation_method_hint": "etf_proxy",
+        "synthetic_identifier": "STSY"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "synthetic_bond_policy_v1",
+      "currency": "USD",
+      "display_name": "Treasury Bill Ladder",
+      "eligible_pricing_functions": [
+        "bond_mark_scalar_v1"
+      ],
+      "instrument_id": "instr_treasury_bill_ladder",
+      "instrument_type": "fixed_income",
+      "issuer": "Treasury Bill Ladder",
+      "lifecycle_dates": {
+        "issue_date": "2021-06-30",
+        "maturity_date": "2031-06-30"
+      },
+      "payoff_description": "Synthetic fixed-income instrument valued with approved mark scalar and simple cash-flow output.",
+      "reference_data": {
+        "asset_class": "fixed_income",
+        "geography": "North America",
+        "industry": "treasury bills",
+        "sector": "fixed income",
+        "source_position_id": "pos_e_treasury_bill_ladder",
+        "synthetic_identifier": "TBIL"
+      },
+      "required_input_families": [
+        "bond_price_scalars"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "coupon_frequency": "semi_annual",
+        "coupon_rate": 0.04,
+        "day_count": "30_360",
+        "face_amount": 1340000.0,
+        "maturity_date": "2031-06-30",
+        "source_required_market_state_variables": [
+          "bond_price_proxy",
+          "duration_bucket_price"
+        ],
+        "source_valuation_method_hint": "bond_proxy",
+        "synthetic_identifier": "TBIL"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fund_or_etf_nav_v1",
+      "currency": "USD",
+      "display_name": "Uranium Power Supply ETF",
+      "eligible_pricing_functions": [
+        "fund_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_uranium_power_supply_etf",
+      "instrument_type": "etf",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Fund or ETF interest valued with approved market-state NAV or price.",
+      "reference_data": {
+        "asset_class": "commodities_energy",
+        "geography": "Global",
+        "industry": "uranium ETF",
+        "sector": "energy",
+        "source_position_id": "pos_f_uranium_power_supply_etf",
+        "synthetic_identifier": "URAN"
+      },
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "etf_price",
+          "optional_lookthrough_proxy"
+        ],
+        "source_valuation_method_hint": "etf_proxy",
+        "synthetic_identifier": "URAN"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fund_or_etf_nav_v1",
+      "currency": "USD",
+      "display_name": "USD Strength Proxy",
+      "eligible_pricing_functions": [
+        "fund_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_usd_strength_proxy",
+      "instrument_type": "etf",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Fund or ETF interest valued with approved market-state NAV or price.",
+      "reference_data": {
+        "asset_class": "fx",
+        "geography": "Global",
+        "industry": "USD basket ETF",
+        "sector": "currency",
+        "source_position_id": "pos_f_usd_strength_proxy",
+        "synthetic_identifier": "USDX"
+      },
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "etf_price",
+          "optional_lookthrough_proxy"
+        ],
+        "source_valuation_method_hint": "etf_proxy",
+        "synthetic_identifier": "USDX"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fund_or_etf_nav_v1",
+      "currency": "USD",
+      "display_name": "Value Factor ETF",
+      "eligible_pricing_functions": [
+        "fund_nav_lookup_v1"
+      ],
+      "instrument_id": "instr_value_factor_etf",
+      "instrument_type": "etf",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Fund or ETF interest valued with approved market-state NAV or price.",
+      "reference_data": {
+        "asset_class": "etf",
+        "geography": "North America",
+        "industry": "value ETF",
+        "sector": "multi-sector",
+        "source_position_id": "pos_b_value_factor_etf",
+        "synthetic_identifier": "VALX"
+      },
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "base_quantity_unit": "shares",
+        "share_class": "synthetic_demo",
+        "source_required_market_state_variables": [
+          "etf_price",
+          "optional_lookthrough_proxy"
+        ],
+        "source_valuation_method_hint": "etf_proxy",
+        "synthetic_identifier": "VALX"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "fallback_review_required_v1",
+      "currency": "USD",
+      "display_name": "Venture AI Infrastructure Fund",
+      "eligible_pricing_functions": [
+        "approved_private_mark_policy_v1"
+      ],
+      "instrument_id": "instr_venture_ai_infrastructure_fund",
+      "instrument_type": "private_equity",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Private or opaque instrument valued with approved mark or review treatment.",
+      "reference_data": {
+        "asset_class": "private_equity",
+        "geography": "North America",
+        "industry": "AI infrastructure venture",
+        "sector": "venture capital",
+        "source_position_id": "pos_d_venture_ai_infrastructure_fund",
+        "synthetic_identifier": "VAIF"
+      },
+      "required_input_families": [
+        "private_marks"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "mark_policy": "approved_private_mark_policy_v1",
+        "source_required_market_state_variables": [
+          "manager_mark",
+          "private_equity_proxy"
+        ],
+        "source_valuation_method_hint": "manager_mark",
+        "synthetic_identifier": "VAIF"
+      }
+    },
+    {
+      "counterparty": null,
+      "coverage_policy": "commodity_price_lookup_v1",
+      "currency": "USD",
+      "display_name": "WTI Energy Exposure",
+      "eligible_pricing_functions": [
+        "commodity_price_lookup_v1"
+      ],
+      "instrument_id": "instr_wti_energy_exposure",
+      "instrument_type": "commodity",
+      "issuer": null,
+      "lifecycle_dates": {
+        "as_of_date": "2026-06-30"
+      },
+      "payoff_description": "Synthetic commodity exposure valued with approved price input.",
+      "reference_data": {
+        "asset_class": "commodities_energy",
+        "geography": "Global",
+        "industry": "oil-linked exposure",
+        "sector": "energy",
+        "source_position_id": "pos_f_wti_energy_exposure",
+        "synthetic_identifier": "WTIE"
+      },
+      "required_input_families": [
+        "commodity_prices"
+      ],
+      "synthetic_data": true,
+      "terms": {
+        "source_required_market_state_variables": [
+          "commodity_price"
+        ],
+        "source_valuation_method_hint": "commodity_proxy",
+        "synthetic_identifier": "WTIE"
+      }
+    }
+  ],
+  "portfolio_id": "portfolio_northstar_family_office",
+  "portfolio_snapshot_id": "northstar_synthetic_position_universe_seed_20260630",
+  "schema_version": "instrument_catalog.v1",
+  "source_metadata": {
+    "derived_from": "simulation_position_universe.v1",
+    "source_path": "data\\simulation\\synthetic_position_universe.json"
+  },
+  "synthetic_data": true,
+  "valuation_date": "2026-06-30"
+}

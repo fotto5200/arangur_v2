@@ -190,6 +190,17 @@ This writes:
 - `data/simulation/analytics/cross_scenario_resilience_summary.json`
 - `data/simulation/analytics/analytics_output_index.json`
 
+## Generate Synthetic Full Revaluation Bundle
+
+The internal full revaluation skeleton values every synthetic position under a base market state and the `ai_chip_selloff` scenario market state, then writes comparison and portfolio-summary artifacts. This is local-only analytics infrastructure; it does not change advisor UI, report views, Docker, deployment, live data, external APIs, or dependencies.
+
+```cmd
+set PYTHONPATH=src
+python -m arangur.analytics.revaluation_runner
+```
+
+This writes deterministic fixtures and outputs under `data/simulation/revaluation/`, including `position_valuation_results_base.json`, `position_valuation_results_ai_chip_selloff.json`, `position_value_comparison_ai_chip_selloff.json`, `portfolio_revaluation_summary_ai_chip_selloff.json`, `valuation_coverage_manifest.json`, and `revaluation_bundle_manifest.json`.
+
 ## Map Analytic Outputs To Report Element Views
 
 The analytic report-element mapper turns those proof outputs into separate renderer-ready payloads for Concentration, Manager Comparison, Scenario Impact by Manager, Data Confidence Note, and Portfolio Status. The local Advisor workflow can now consume these committed analytic-derived fragments for supported configured specs without adding backend endpoints, charts, live data, or dependencies.

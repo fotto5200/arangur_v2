@@ -1,0 +1,1050 @@
+{
+  "assignment_count": 74,
+  "assignments": [
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_ai_compute_leader",
+      "instrument_type": "public_equity",
+      "position_id": "pos_a_ai_compute_leader",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_cloud_platform_compounder",
+      "instrument_type": "public_equity",
+      "position_id": "pos_a_cloud_platform_compounder",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_chip_fabrication_partner",
+      "instrument_type": "public_equity",
+      "position_id": "pos_a_chip_fabrication_partner",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_semicap_equipment_maker",
+      "instrument_type": "public_equity",
+      "position_id": "pos_a_semicap_equipment_maker",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_accelerator_design_house",
+      "instrument_type": "public_equity",
+      "position_id": "pos_a_accelerator_design_house",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_advanced_packaging_supplier",
+      "instrument_type": "public_equity",
+      "position_id": "pos_a_advanced_packaging_supplier",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "instrument_id": "instr_ai_chip_etf",
+      "instrument_type": "etf",
+      "position_id": "pos_a_ai_chip_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_data_center_cooling_leader",
+      "instrument_type": "public_equity",
+      "position_id": "pos_a_data_center_cooling_leader",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_edge_server_platform",
+      "instrument_type": "public_equity",
+      "position_id": "pos_a_edge_server_platform",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_enterprise_ai_software",
+      "instrument_type": "public_equity",
+      "position_id": "pos_a_enterprise_ai_software",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_grid_enabler_equity",
+      "instrument_type": "public_equity",
+      "position_id": "pos_a_grid_enabler_equity",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_data_center_public_reit",
+      "instrument_type": "public_equity",
+      "position_id": "pos_a_data_center_public_reit",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fallback_review_required_v1",
+      "instrument_id": "instr_ai_infra_call_spread_note",
+      "instrument_type": "option_like",
+      "position_id": "pos_a_ai_infra_call_spread_note",
+      "pricing_function_id": "review_required_treatment_v1",
+      "required_input_families": [
+        "review_policies"
+      ],
+      "review_status": "review_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "money_market_nav_v1",
+      "instrument_id": "instr_public_ai_money_market_sweep",
+      "instrument_type": "money_market",
+      "position_id": "pos_a_public_ai_money_market_sweep",
+      "pricing_function_id": "money_market_nav_lookup_v1",
+      "required_input_families": [
+        "money_market_navs"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_cloud_platform_compounder",
+      "instrument_type": "public_equity",
+      "position_id": "pos_b_cloud_platform_compounder",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_ai_compute_leader",
+      "instrument_type": "public_equity",
+      "position_id": "pos_b_ai_compute_leader",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_consumer_platform_quality",
+      "instrument_type": "public_equity",
+      "position_id": "pos_b_consumer_platform_quality",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_payments_network_core",
+      "instrument_type": "public_equity",
+      "position_id": "pos_b_payments_network_core",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_quality_consumer_staples",
+      "instrument_type": "public_equity",
+      "position_id": "pos_b_quality_consumer_staples",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_healthcare_resilience",
+      "instrument_type": "public_equity",
+      "position_id": "pos_b_healthcare_resilience",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_core_bank_quality",
+      "instrument_type": "public_equity",
+      "position_id": "pos_b_core_bank_quality",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_industrial_compounder",
+      "instrument_type": "public_equity",
+      "position_id": "pos_b_industrial_compounder",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "instrument_id": "instr_quality_factor_etf",
+      "instrument_type": "etf",
+      "position_id": "pos_b_quality_factor_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "instrument_id": "instr_value_factor_etf",
+      "instrument_type": "etf",
+      "position_id": "pos_b_value_factor_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "instrument_id": "instr_broad_developed_equity_etf",
+      "instrument_type": "etf",
+      "position_id": "pos_b_broad_developed_equity_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "money_market_nav_v1",
+      "instrument_id": "instr_core_quality_cash_sweep",
+      "instrument_type": "money_market",
+      "position_id": "pos_b_core_quality_cash_sweep",
+      "pricing_function_id": "money_market_nav_lookup_v1",
+      "required_input_families": [
+        "money_market_navs"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "instrument_id": "instr_short_tips_etf",
+      "instrument_type": "etf",
+      "position_id": "pos_c_short_tips_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "instrument_id": "instr_investment_grade_bond_etf",
+      "instrument_type": "etf",
+      "position_id": "pos_c_investment_grade_bond_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "synthetic_bond_policy_v1",
+      "instrument_id": "instr_municipal_income_ladder",
+      "instrument_type": "fixed_income",
+      "position_id": "pos_c_municipal_income_ladder",
+      "pricing_function_id": "bond_mark_scalar_v1",
+      "required_input_families": [
+        "bond_price_scalars"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "synthetic_bond_policy_v1",
+      "instrument_id": "instr_agency_mbs_proxy",
+      "instrument_type": "fixed_income",
+      "position_id": "pos_c_agency_mbs_proxy",
+      "pricing_function_id": "bond_mark_scalar_v1",
+      "required_input_families": [
+        "bond_price_scalars"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "instrument_id": "instr_preferred_income_etf",
+      "instrument_type": "etf",
+      "position_id": "pos_c_preferred_income_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "instrument_id": "instr_floating_rate_credit_etf",
+      "instrument_type": "etf",
+      "position_id": "pos_c_floating_rate_credit_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_public_direct_lending_bdc",
+      "instrument_type": "public_equity",
+      "position_id": "pos_c_public_direct_lending_bdc",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "instrument_id": "instr_pipeline_cash_yield",
+      "instrument_type": "public_equity",
+      "position_id": "pos_c_pipeline_cash_yield",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "instrument_id": "instr_covered_call_income_etf",
+      "instrument_type": "etf",
+      "position_id": "pos_c_covered_call_income_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "instrument_id": "instr_reit_income_etf",
+      "instrument_type": "etf",
+      "position_id": "pos_c_reit_income_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "approved_private_mark_policy_v1",
+      "instrument_id": "instr_private_credit_income_fund",
+      "instrument_type": "private_credit",
+      "position_id": "pos_c_private_credit_income_fund",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_input_families": [
+        "private_marks"
+      ],
+      "review_status": "review_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "money_market_nav_v1",
+      "instrument_id": "instr_income_sleeve_cash",
+      "instrument_type": "money_market",
+      "position_id": "pos_c_income_sleeve_cash",
+      "pricing_function_id": "money_market_nav_lookup_v1",
+      "required_input_families": [
+        "money_market_navs"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "approved_private_mark_policy_v1",
+      "instrument_id": "instr_northstar_ai_growth_fund",
+      "instrument_type": "private_equity",
+      "position_id": "pos_d_northstar_ai_growth_fund",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_input_families": [
+        "private_marks"
+      ],
+      "review_status": "review_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "approved_private_mark_policy_v1",
+      "instrument_id": "instr_venture_ai_infrastructure_fund",
+      "instrument_type": "private_equity",
+      "position_id": "pos_d_venture_ai_infrastructure_fund",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_input_families": [
+        "private_marks"
+      ],
+      "review_status": "review_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "approved_private_mark_policy_v1",
+      "instrument_id": "instr_secondary_pe_fund",
+      "instrument_type": "private_equity",
+      "position_id": "pos_d_secondary_pe_fund",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_input_families": [
+        "private_marks"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "approved_private_mark_policy_v1",
+      "instrument_id": "instr_private_credit_sidecar",
+      "instrument_type": "private_credit",
+      "position_id": "pos_d_private_credit_sidecar",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_input_families": [
+        "private_marks"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "approved_private_mark_policy_v1",
+      "instrument_id": "instr_asset_backed_credit_fund",
+      "instrument_type": "private_credit",
+      "position_id": "pos_d_asset_backed_credit_fund",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_input_families": [
+        "private_marks"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "approved_private_mark_policy_v1",
+      "instrument_id": "instr_industrial_logistics_real_estate",
+      "instrument_type": "real_estate",
+      "position_id": "pos_d_industrial_logistics_real_estate",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_input_families": [
+        "private_marks"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "approved_private_mark_policy_v1",
+      "instrument_id": "instr_multifamily_real_estate_fund",
+      "instrument_type": "real_estate",
+      "position_id": "pos_d_multifamily_real_estate_fund",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_input_families": [
+        "private_marks"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "approved_private_mark_policy_v1",
+      "instrument_id": "instr_data_center_development_jv",
+      "instrument_type": "data_center_investment",
+      "position_id": "pos_d_data_center_development_jv",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_input_families": [
+        "private_marks"
+      ],
+      "review_status": "review_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "approved_private_mark_policy_v1",
+      "instrument_id": "instr_power_campus_preferred",
+      "instrument_type": "data_center_investment",
+      "position_id": "pos_d_power_campus_preferred",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_input_families": [
+        "private_marks"
+      ],
+      "review_status": "review_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "approved_private_mark_policy_v1",
+      "instrument_id": "instr_fiber_interconnect_infra_lp",
+      "instrument_type": "data_center_investment",
+      "position_id": "pos_d_fiber_interconnect_infra_lp",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_input_families": [
+        "private_marks"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "approved_private_mark_policy_v1",
+      "instrument_id": "instr_renewable_power_infra_lp",
+      "instrument_type": "real_estate",
+      "position_id": "pos_d_renewable_power_infra_lp",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_input_families": [
+        "private_marks"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fallback_review_required_v1",
+      "instrument_id": "instr_data_center_land_option",
+      "instrument_type": "option_like",
+      "position_id": "pos_d_data_center_land_option",
+      "pricing_function_id": "review_required_treatment_v1",
+      "required_input_families": [
+        "review_policies"
+      ],
+      "review_status": "review_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "approved_private_mark_policy_v1",
+      "instrument_id": "instr_opaque_manager_level_private_book",
+      "instrument_type": "opaque_manager_level",
+      "position_id": "pos_d_opaque_manager_level_private_book",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_input_families": [
+        "private_marks"
+      ],
+      "review_status": "review_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "approved_private_mark_policy_v1",
+      "instrument_id": "instr_private_mark_placeholder",
+      "instrument_type": "opaque_manager_level",
+      "position_id": "pos_d_private_mark_placeholder",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_input_families": [
+        "private_marks"
+      ],
+      "review_status": "review_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "synthetic_bond_policy_v1",
+      "instrument_id": "instr_treasury_bill_ladder",
+      "instrument_type": "fixed_income",
+      "position_id": "pos_e_treasury_bill_ladder",
+      "pricing_function_id": "bond_mark_scalar_v1",
+      "required_input_families": [
+        "bond_price_scalars"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "money_market_nav_v1",
+      "instrument_id": "instr_government_money_market",
+      "instrument_type": "money_market",
+      "position_id": "pos_e_government_money_market",
+      "pricing_function_id": "money_market_nav_lookup_v1",
+      "required_input_families": [
+        "money_market_navs"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "instrument_id": "instr_short_treasury_etf",
+      "instrument_type": "etf",
+      "position_id": "pos_e_short_treasury_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "instrument_id": "instr_short_duration_ig_bond",
+      "instrument_type": "etf",
+      "position_id": "pos_e_short_duration_ig_bond",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "instrument_id": "instr_minimum_volatility_equity",
+      "instrument_type": "etf",
+      "position_id": "pos_e_minimum_volatility_equity",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "instrument_id": "instr_gold_defensive_etf",
+      "instrument_type": "etf",
+      "position_id": "pos_e_gold_defensive_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "money_market_nav_v1",
+      "instrument_id": "instr_municipal_cash_reserve",
+      "instrument_type": "money_market",
+      "position_id": "pos_e_municipal_cash_reserve",
+      "pricing_function_id": "money_market_nav_lookup_v1",
+      "required_input_families": [
+        "money_market_navs"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "synthetic_bond_policy_v1",
+      "instrument_id": "instr_inflation_linked_short_note",
+      "instrument_type": "fixed_income",
+      "position_id": "pos_e_inflation_linked_short_note",
+      "pricing_function_id": "bond_mark_scalar_v1",
+      "required_input_families": [
+        "bond_price_scalars"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "cash_face_value_v1",
+      "instrument_id": "instr_operating_cash_usd",
+      "instrument_type": "cash",
+      "position_id": "pos_e_operating_cash_usd",
+      "pricing_function_id": "cash_face_value_v1",
+      "required_input_families": [
+        "cash_scalars"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "instrument_id": "instr_defensive_quality_etf",
+      "instrument_type": "etf",
+      "position_id": "pos_e_defensive_quality_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fx_translation_v1",
+      "instrument_id": "instr_eurusd_forward_exposure",
+      "instrument_type": "fx_exposure",
+      "position_id": "pos_f_eurusd_forward_exposure",
+      "pricing_function_id": "fx_notional_translation_v1",
+      "required_input_families": [
+        "fx_rates"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fx_translation_v1",
+      "instrument_id": "instr_jpy_defensive_hedge",
+      "instrument_type": "fx_exposure",
+      "position_id": "pos_f_jpy_defensive_hedge",
+      "pricing_function_id": "fx_notional_translation_v1",
+      "required_input_families": [
+        "fx_rates"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "instrument_id": "instr_usd_strength_proxy",
+      "instrument_type": "etf",
+      "position_id": "pos_f_usd_strength_proxy",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "instrument_id": "instr_commodity_basket_fund",
+      "instrument_type": "etf",
+      "position_id": "pos_f_commodity_basket_fund",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "commodity_price_lookup_v1",
+      "instrument_id": "instr_wti_energy_exposure",
+      "instrument_type": "commodity",
+      "position_id": "pos_f_wti_energy_exposure",
+      "pricing_function_id": "commodity_price_lookup_v1",
+      "required_input_families": [
+        "commodity_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "instrument_id": "instr_copper_power_demand_etf",
+      "instrument_type": "etf",
+      "position_id": "pos_f_copper_power_demand_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "instrument_id": "instr_uranium_power_supply_etf",
+      "instrument_type": "etf",
+      "position_id": "pos_f_uranium_power_supply_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "crypto_price_lookup_v1",
+      "instrument_id": "instr_bitcoin_synthetic_trust",
+      "instrument_type": "crypto",
+      "position_id": "pos_f_bitcoin_synthetic_trust",
+      "pricing_function_id": "crypto_price_lookup_v1",
+      "required_input_families": [
+        "crypto_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "crypto_price_lookup_v1",
+      "instrument_id": "instr_ethereum_synthetic_trust",
+      "instrument_type": "crypto",
+      "position_id": "pos_f_ethereum_synthetic_trust",
+      "pricing_function_id": "crypto_price_lookup_v1",
+      "required_input_families": [
+        "crypto_prices"
+      ],
+      "review_status": "not_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "approved_private_mark_policy_v1",
+      "instrument_id": "instr_macro_overlay_manager_book",
+      "instrument_type": "opaque_manager_level",
+      "position_id": "pos_f_macro_overlay_manager_book",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_input_families": [
+        "private_marks"
+      ],
+      "review_status": "review_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fallback_review_required_v1",
+      "instrument_id": "instr_rates_volatility_collar",
+      "instrument_type": "option_like",
+      "position_id": "pos_f_rates_volatility_collar",
+      "pricing_function_id": "review_required_treatment_v1",
+      "required_input_families": [
+        "review_policies"
+      ],
+      "review_status": "review_required",
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved",
+      "assignment_method": "instrument_type_registry",
+      "coverage_policy_id": "fallback_review_required_v1",
+      "instrument_id": "instr_ai_chip_downside_put_spread",
+      "instrument_type": "option_like",
+      "position_id": "pos_f_ai_chip_downside_put_spread",
+      "pricing_function_id": "review_required_treatment_v1",
+      "required_input_families": [
+        "review_policies"
+      ],
+      "review_status": "review_required",
+      "synthetic_data": true
+    }
+  ],
+  "generated_at": "2026-07-05T00:00:00Z",
+  "portfolio_snapshot_id": "northstar_synthetic_position_universe_seed_20260630",
+  "review_summary": {
+    "not_required": 62,
+    "review_required": 12
+  },
+  "schema_version": "position_pricing_function_assignments.v1",
+  "synthetic_data": true,
+  "valuation_date": "2026-06-30"
+}

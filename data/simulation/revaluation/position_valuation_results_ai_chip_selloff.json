@@ -1,0 +1,2565 @@
+{
+  "base_or_scenario": "scenario",
+  "generated_at": "2026-07-05T00:00:00Z",
+  "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+  "methodology": "full_portfolio_revaluation",
+  "portfolio_id": "portfolio_northstar_family_office",
+  "position_count": 74,
+  "position_results": [
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_ai_compute_leader",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_a_ai_compute_leader",
+      "required_market_inputs": [
+        "equity_prices:instr_ai_compute_leader"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_a_public_equity",
+        "display_name": "AI Compute Leader",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "sleeve_id": "sleeve_public_equity"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_ai_compute_leader"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 2504808.86
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_cloud_platform_compounder",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_a_cloud_platform_compounder",
+      "required_market_inputs": [
+        "equity_prices:instr_cloud_platform_compounder"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_a_public_equity",
+        "display_name": "Cloud Platform Compounder",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "sleeve_id": "sleeve_public_equity"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_cloud_platform_compounder"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 2370018.12
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_chip_fabrication_partner",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_a_chip_fabrication_partner",
+      "required_market_inputs": [
+        "equity_prices:instr_chip_fabrication_partner"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_a_public_equity",
+        "display_name": "Chip Fabrication Partner",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "sleeve_id": "sleeve_public_equity"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_chip_fabrication_partner"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 731831.7
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_semicap_equipment_maker",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_a_semicap_equipment_maker",
+      "required_market_inputs": [
+        "equity_prices:instr_semicap_equipment_maker"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_a_public_equity",
+        "display_name": "Semicap Equipment Maker",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "sleeve_id": "sleeve_public_equity"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_semicap_equipment_maker"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 598493.96
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_accelerator_design_house",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_a_accelerator_design_house",
+      "required_market_inputs": [
+        "equity_prices:instr_accelerator_design_house"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_a_public_equity",
+        "display_name": "Accelerator Design House",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "sleeve_id": "sleeve_public_equity"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_accelerator_design_house"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 481383.74
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_advanced_packaging_supplier",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_a_advanced_packaging_supplier",
+      "required_market_inputs": [
+        "equity_prices:instr_advanced_packaging_supplier"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_a_public_equity",
+        "display_name": "Advanced Packaging Supplier",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "sleeve_id": "sleeve_public_equity"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_advanced_packaging_supplier"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 331768.67
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_ai_chip_etf",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_a_ai_chip_etf",
+      "required_market_inputs": [
+        "fund_prices:instr_ai_chip_etf"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_a_public_equity",
+        "display_name": "AI Chip Basket ETF",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "sleeve_id": "sleeve_public_equity"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fund_prices:instr_ai_chip_etf"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fund_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Fund or ETF units multiplied by approved market-state price or NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 477069.84
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_data_center_cooling_leader",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_a_data_center_cooling_leader",
+      "required_market_inputs": [
+        "equity_prices:instr_data_center_cooling_leader"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_a_public_equity",
+        "display_name": "Data Center Cooling Leader",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "sleeve_id": "sleeve_public_equity"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_data_center_cooling_leader"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 296021.06
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_edge_server_platform",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_a_edge_server_platform",
+      "required_market_inputs": [
+        "equity_prices:instr_edge_server_platform"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_a_public_equity",
+        "display_name": "Edge Server Platform",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "sleeve_id": "sleeve_public_equity"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_edge_server_platform"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 266700.19
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_enterprise_ai_software",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_a_enterprise_ai_software",
+      "required_market_inputs": [
+        "equity_prices:instr_enterprise_ai_software"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_a_public_equity",
+        "display_name": "Enterprise AI Software",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "sleeve_id": "sleeve_public_equity"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_enterprise_ai_software"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 374059.9
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_grid_enabler_equity",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_a_grid_enabler_equity",
+      "required_market_inputs": [
+        "equity_prices:instr_grid_enabler_equity"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_a_public_equity",
+        "display_name": "Grid Enabler Equity",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "sleeve_id": "sleeve_public_equity"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_grid_enabler_equity"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 237437.76
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_data_center_public_reit",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_a_data_center_public_reit",
+      "required_market_inputs": [
+        "equity_prices:instr_data_center_public_reit"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_a_public_equity",
+        "display_name": "Public Data Center REIT",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "sleeve_id": "sleeve_public_equity"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_data_center_public_reit"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 273215.05
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "currency": "USD",
+      "instrument_id": "instr_ai_infra_call_spread_note",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_a_ai_infra_call_spread_note",
+      "required_market_inputs": [
+        "review_policies:fallback_review_required_v1"
+      ],
+      "review_required": true,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_a_public_equity",
+        "display_name": "AI Infrastructure Call Spread Note",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "sleeve_id": "sleeve_public_equity"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "private_marks:instr_ai_infra_call_spread_note"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "review_required_treatment_v1",
+      "valuation_trace": {
+        "input_completeness": "policy_or_review",
+        "summary": "Held latest synthetic mark for reconciliation while routing the position to review.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 275000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_public_ai_money_market_sweep",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_a_public_ai_money_market_sweep",
+      "required_market_inputs": [
+        "money_market_navs:instr_public_ai_money_market_sweep"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_a_public_equity",
+        "display_name": "Public AI Sleeve Money Market Sweep",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "sleeve_id": "sleeve_public_equity"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "money_market_navs:instr_public_ai_money_market_sweep"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "money_market_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Money-market units multiplied by approved market-state NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 310082.46
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_cloud_platform_compounder",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_b_cloud_platform_compounder",
+      "required_market_inputs": [
+        "equity_prices:instr_cloud_platform_compounder"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_b_core_quality",
+        "display_name": "Cloud Platform Compounder",
+        "manager_id": "mgr_b_core_quality_equity",
+        "sleeve_id": "sleeve_core_quality"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_cloud_platform_compounder"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 858678.54
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_ai_compute_leader",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_b_ai_compute_leader",
+      "required_market_inputs": [
+        "equity_prices:instr_ai_compute_leader"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_b_core_quality",
+        "display_name": "AI Compute Leader",
+        "manager_id": "mgr_b_core_quality_equity",
+        "sleeve_id": "sleeve_core_quality"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_ai_compute_leader"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 403310.2
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_consumer_platform_quality",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_b_consumer_platform_quality",
+      "required_market_inputs": [
+        "equity_prices:instr_consumer_platform_quality"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_b_core_quality",
+        "display_name": "Consumer Platform Quality",
+        "manager_id": "mgr_b_core_quality_equity",
+        "sleeve_id": "sleeve_core_quality"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_consumer_platform_quality"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 591938.57
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_payments_network_core",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_b_payments_network_core",
+      "required_market_inputs": [
+        "equity_prices:instr_payments_network_core"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_b_core_quality",
+        "display_name": "Payments Network Core",
+        "manager_id": "mgr_b_core_quality_equity",
+        "sleeve_id": "sleeve_core_quality"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_payments_network_core"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 494397.45
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_quality_consumer_staples",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_b_quality_consumer_staples",
+      "required_market_inputs": [
+        "equity_prices:instr_quality_consumer_staples"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_b_core_quality",
+        "display_name": "Quality Consumer Staples",
+        "manager_id": "mgr_b_core_quality_equity",
+        "sleeve_id": "sleeve_core_quality"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_quality_consumer_staples"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 413072.03
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_healthcare_resilience",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_b_healthcare_resilience",
+      "required_market_inputs": [
+        "equity_prices:instr_healthcare_resilience"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_b_core_quality",
+        "display_name": "Healthcare Resilience",
+        "manager_id": "mgr_b_core_quality_equity",
+        "sleeve_id": "sleeve_core_quality"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_healthcare_resilience"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 351274.1
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_core_bank_quality",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_b_core_bank_quality",
+      "required_market_inputs": [
+        "equity_prices:instr_core_bank_quality"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_b_core_quality",
+        "display_name": "Core Bank Quality",
+        "manager_id": "mgr_b_core_quality_equity",
+        "sleeve_id": "sleeve_core_quality"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_core_bank_quality"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 321975.53
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_industrial_compounder",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_b_industrial_compounder",
+      "required_market_inputs": [
+        "equity_prices:instr_industrial_compounder"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_b_core_quality",
+        "display_name": "Industrial Compounder",
+        "manager_id": "mgr_b_core_quality_equity",
+        "sleeve_id": "sleeve_core_quality"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_industrial_compounder"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 305736.86
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_quality_factor_etf",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_b_quality_factor_etf",
+      "required_market_inputs": [
+        "fund_prices:instr_quality_factor_etf"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_b_core_quality",
+        "display_name": "Quality Factor ETF",
+        "manager_id": "mgr_b_core_quality_equity",
+        "sleeve_id": "sleeve_core_quality"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fund_prices:instr_quality_factor_etf"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fund_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Fund or ETF units multiplied by approved market-state price or NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 617379.16
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_value_factor_etf",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_b_value_factor_etf",
+      "required_market_inputs": [
+        "fund_prices:instr_value_factor_etf"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_b_core_quality",
+        "display_name": "Value Factor ETF",
+        "manager_id": "mgr_b_core_quality_equity",
+        "sleeve_id": "sleeve_core_quality"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fund_prices:instr_value_factor_etf"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fund_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Fund or ETF units multiplied by approved market-state price or NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 291131.55
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_broad_developed_equity_etf",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_b_broad_developed_equity_etf",
+      "required_market_inputs": [
+        "fund_prices:instr_broad_developed_equity_etf"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_b_core_quality",
+        "display_name": "Developed Market Equity ETF",
+        "manager_id": "mgr_b_core_quality_equity",
+        "sleeve_id": "sleeve_core_quality"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fund_prices:instr_broad_developed_equity_etf"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fund_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Fund or ETF units multiplied by approved market-state price or NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 273615.27
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_core_quality_cash_sweep",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_b_core_quality_cash_sweep",
+      "required_market_inputs": [
+        "money_market_navs:instr_core_quality_cash_sweep"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_b_core_quality",
+        "display_name": "Core Quality Cash Sweep",
+        "manager_id": "mgr_b_core_quality_equity",
+        "sleeve_id": "sleeve_core_quality"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "money_market_navs:instr_core_quality_cash_sweep"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "money_market_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Money-market units multiplied by approved market-state NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 220058.52
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_short_tips_etf",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_c_short_tips_etf",
+      "required_market_inputs": [
+        "fund_prices:instr_short_tips_etf"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_c_income",
+        "display_name": "Short TIPS ETF",
+        "manager_id": "mgr_c_income_cash_generation",
+        "sleeve_id": "sleeve_income"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fund_prices:instr_short_tips_etf"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fund_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Fund or ETF units multiplied by approved market-state price or NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 505117.31
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_investment_grade_bond_etf",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_c_investment_grade_bond_etf",
+      "required_market_inputs": [
+        "fund_prices:instr_investment_grade_bond_etf"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_c_income",
+        "display_name": "Investment Grade Bond ETF",
+        "manager_id": "mgr_c_income_cash_generation",
+        "sleeve_id": "sleeve_income"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fund_prices:instr_investment_grade_bond_etf"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fund_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Fund or ETF units multiplied by approved market-state price or NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 589293.54
+    },
+    {
+      "cash_flows": [
+        {
+          "amount": 11200.0,
+          "cash_flow_type": "coupon",
+          "confidence": "medium",
+          "currency": "USD",
+          "date": "2026-12-31",
+          "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30"
+        }
+      ],
+      "caveats": [
+        "Simplified synthetic bond valuation; not production fixed-income accounting."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued_with_approved_policy",
+      "currency": "USD",
+      "instrument_id": "instr_municipal_income_ladder",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_c_municipal_income_ladder",
+      "required_market_inputs": [
+        "bond_price_scalars:instr_municipal_income_ladder"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_c_income",
+        "display_name": "Municipal Income Ladder",
+        "manager_id": "mgr_c_income_cash_generation",
+        "sleeve_id": "sleeve_income"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "bond_price_scalars:instr_municipal_income_ladder"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "bond_mark_scalar_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Applied approved synthetic bond price scalar to position notional.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 571928.0
+    },
+    {
+      "cash_flows": [
+        {
+          "amount": 8600.0,
+          "cash_flow_type": "coupon",
+          "confidence": "medium",
+          "currency": "USD",
+          "date": "2026-12-31",
+          "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30"
+        }
+      ],
+      "caveats": [
+        "Simplified synthetic bond valuation; not production fixed-income accounting."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued_with_approved_policy",
+      "currency": "USD",
+      "instrument_id": "instr_agency_mbs_proxy",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_c_agency_mbs_proxy",
+      "required_market_inputs": [
+        "bond_price_scalars:instr_agency_mbs_proxy"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_c_income",
+        "display_name": "Agency MBS Proxy",
+        "manager_id": "mgr_c_income_cash_generation",
+        "sleeve_id": "sleeve_income"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "bond_price_scalars:instr_agency_mbs_proxy"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "bond_mark_scalar_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Applied approved synthetic bond price scalar to position notional.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 439159.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_preferred_income_etf",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_c_preferred_income_etf",
+      "required_market_inputs": [
+        "fund_prices:instr_preferred_income_etf"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_c_income",
+        "display_name": "Preferred Income ETF",
+        "manager_id": "mgr_c_income_cash_generation",
+        "sleeve_id": "sleeve_income"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fund_prices:instr_preferred_income_etf"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fund_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Fund or ETF units multiplied by approved market-state price or NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 235012.02
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_floating_rate_credit_etf",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_c_floating_rate_credit_etf",
+      "required_market_inputs": [
+        "fund_prices:instr_floating_rate_credit_etf"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_c_income",
+        "display_name": "Floating Rate Credit ETF",
+        "manager_id": "mgr_c_income_cash_generation",
+        "sleeve_id": "sleeve_income"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fund_prices:instr_floating_rate_credit_etf"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fund_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Fund or ETF units multiplied by approved market-state price or NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 333230.95
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_public_direct_lending_bdc",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_c_public_direct_lending_bdc",
+      "required_market_inputs": [
+        "equity_prices:instr_public_direct_lending_bdc"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_c_income",
+        "display_name": "Public Direct Lending BDC",
+        "manager_id": "mgr_c_income_cash_generation",
+        "sleeve_id": "sleeve_income"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_public_direct_lending_bdc"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 188639.09
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_pipeline_cash_yield",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_c_pipeline_cash_yield",
+      "required_market_inputs": [
+        "equity_prices:instr_pipeline_cash_yield"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_c_income",
+        "display_name": "Pipeline Cash Yield",
+        "manager_id": "mgr_c_income_cash_generation",
+        "sleeve_id": "sleeve_income"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "equity_prices:instr_pipeline_cash_yield"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "public_equity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Shares multiplied by approved market-state equity price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 234169.38
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_covered_call_income_etf",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_c_covered_call_income_etf",
+      "required_market_inputs": [
+        "fund_prices:instr_covered_call_income_etf"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_c_income",
+        "display_name": "Covered Call Income ETF",
+        "manager_id": "mgr_c_income_cash_generation",
+        "sleeve_id": "sleeve_income"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fund_prices:instr_covered_call_income_etf"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fund_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Fund or ETF units multiplied by approved market-state price or NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 217489.34
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_reit_income_etf",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_c_reit_income_etf",
+      "required_market_inputs": [
+        "fund_prices:instr_reit_income_etf"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_c_income",
+        "display_name": "REIT Income ETF",
+        "manager_id": "mgr_c_income_cash_generation",
+        "sleeve_id": "sleeve_income"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fund_prices:instr_reit_income_etf"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fund_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Fund or ETF units multiplied by approved market-state price or NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 182403.17
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "currency": "USD",
+      "instrument_id": "instr_private_credit_income_fund",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_c_private_credit_income_fund",
+      "required_market_inputs": [
+        "private_marks:instr_private_credit_income_fund"
+      ],
+      "review_required": true,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_c_income",
+        "display_name": "Private Credit Income Fund",
+        "manager_id": "mgr_c_income_cash_generation",
+        "sleeve_id": "sleeve_income"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "private_marks:instr_private_credit_income_fund"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "approved_private_mark_policy_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Applied approved private/opaque mark policy; no unsupported scenario sensitivity was invented.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 540000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_income_sleeve_cash",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_c_income_sleeve_cash",
+      "required_market_inputs": [
+        "money_market_navs:instr_income_sleeve_cash"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_c_income",
+        "display_name": "Income Sleeve Cash Reserve",
+        "manager_id": "mgr_c_income_cash_generation",
+        "sleeve_id": "sleeve_income"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "money_market_navs:instr_income_sleeve_cash"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "money_market_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Money-market units multiplied by approved market-state NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 180047.88
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "currency": "USD",
+      "instrument_id": "instr_northstar_ai_growth_fund",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_d_northstar_ai_growth_fund",
+      "required_market_inputs": [
+        "private_marks:instr_northstar_ai_growth_fund"
+      ],
+      "review_required": true,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_d_private_markets",
+        "display_name": "Northstar AI Growth Fund LP",
+        "manager_id": "mgr_d_private_real_assets",
+        "sleeve_id": "sleeve_private_markets"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "private_marks:instr_northstar_ai_growth_fund"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "approved_private_mark_policy_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Applied approved private/opaque mark policy; no unsupported scenario sensitivity was invented.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 1260000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "currency": "USD",
+      "instrument_id": "instr_venture_ai_infrastructure_fund",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_d_venture_ai_infrastructure_fund",
+      "required_market_inputs": [
+        "private_marks:instr_venture_ai_infrastructure_fund"
+      ],
+      "review_required": true,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_d_private_markets",
+        "display_name": "Venture AI Infrastructure Fund",
+        "manager_id": "mgr_d_private_real_assets",
+        "sleeve_id": "sleeve_private_markets"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "private_marks:instr_venture_ai_infrastructure_fund"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "approved_private_mark_policy_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Applied approved private/opaque mark policy; no unsupported scenario sensitivity was invented.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 740000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Position was held at an approved mark treatment; scenario impact may understate true exposure."
+      ],
+      "confidence": "medium",
+      "coverage_status": "held_at_mark_with_caveat",
+      "currency": "USD",
+      "instrument_id": "instr_secondary_pe_fund",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_d_secondary_pe_fund",
+      "required_market_inputs": [
+        "private_marks:instr_secondary_pe_fund"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_d_private_markets",
+        "display_name": "Secondary PE Fund",
+        "manager_id": "mgr_d_private_real_assets",
+        "sleeve_id": "sleeve_private_markets"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "private_marks:instr_secondary_pe_fund"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "approved_private_mark_policy_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Applied approved private/opaque mark policy; no unsupported scenario sensitivity was invented.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 690000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Position was held at an approved mark treatment; scenario impact may understate true exposure."
+      ],
+      "confidence": "medium",
+      "coverage_status": "held_at_mark_with_caveat",
+      "currency": "USD",
+      "instrument_id": "instr_private_credit_sidecar",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_d_private_credit_sidecar",
+      "required_market_inputs": [
+        "private_marks:instr_private_credit_sidecar"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_d_private_markets",
+        "display_name": "Private Credit Sidecar",
+        "manager_id": "mgr_d_private_real_assets",
+        "sleeve_id": "sleeve_private_markets"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "private_marks:instr_private_credit_sidecar"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "approved_private_mark_policy_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Applied approved private/opaque mark policy; no unsupported scenario sensitivity was invented.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 580000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Position was held at an approved mark treatment; scenario impact may understate true exposure."
+      ],
+      "confidence": "medium",
+      "coverage_status": "held_at_mark_with_caveat",
+      "currency": "USD",
+      "instrument_id": "instr_asset_backed_credit_fund",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_d_asset_backed_credit_fund",
+      "required_market_inputs": [
+        "private_marks:instr_asset_backed_credit_fund"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_d_private_markets",
+        "display_name": "Asset-Backed Credit Fund",
+        "manager_id": "mgr_d_private_real_assets",
+        "sleeve_id": "sleeve_private_markets"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "private_marks:instr_asset_backed_credit_fund"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "approved_private_mark_policy_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Applied approved private/opaque mark policy; no unsupported scenario sensitivity was invented.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 490000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Position was held at an approved mark treatment; scenario impact may understate true exposure."
+      ],
+      "confidence": "medium",
+      "coverage_status": "held_at_mark_with_caveat",
+      "currency": "USD",
+      "instrument_id": "instr_industrial_logistics_real_estate",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_d_industrial_logistics_real_estate",
+      "required_market_inputs": [
+        "private_marks:instr_industrial_logistics_real_estate"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_d_private_markets",
+        "display_name": "Industrial Logistics Real Estate Fund",
+        "manager_id": "mgr_d_private_real_assets",
+        "sleeve_id": "sleeve_private_markets"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "private_marks:instr_industrial_logistics_real_estate"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "approved_private_mark_policy_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Applied approved private/opaque mark policy; no unsupported scenario sensitivity was invented.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 820000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Position was held at an approved mark treatment; scenario impact may understate true exposure."
+      ],
+      "confidence": "medium",
+      "coverage_status": "held_at_mark_with_caveat",
+      "currency": "USD",
+      "instrument_id": "instr_multifamily_real_estate_fund",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_d_multifamily_real_estate_fund",
+      "required_market_inputs": [
+        "private_marks:instr_multifamily_real_estate_fund"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_d_private_markets",
+        "display_name": "Multifamily Real Estate Fund",
+        "manager_id": "mgr_d_private_real_assets",
+        "sleeve_id": "sleeve_private_markets"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "private_marks:instr_multifamily_real_estate_fund"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "approved_private_mark_policy_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Applied approved private/opaque mark policy; no unsupported scenario sensitivity was invented.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 510000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "currency": "USD",
+      "instrument_id": "instr_data_center_development_jv",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_d_data_center_development_jv",
+      "required_market_inputs": [
+        "private_marks:instr_data_center_development_jv"
+      ],
+      "review_required": true,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_d_private_markets",
+        "display_name": "Data Center Development JV",
+        "manager_id": "mgr_d_private_real_assets",
+        "sleeve_id": "sleeve_private_markets"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "private_marks:instr_data_center_development_jv"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "approved_private_mark_policy_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Applied approved private/opaque mark policy; no unsupported scenario sensitivity was invented.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 940000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "currency": "USD",
+      "instrument_id": "instr_power_campus_preferred",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_d_power_campus_preferred",
+      "required_market_inputs": [
+        "private_marks:instr_power_campus_preferred"
+      ],
+      "review_required": true,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_d_private_markets",
+        "display_name": "Power Campus Preferred Equity",
+        "manager_id": "mgr_d_private_real_assets",
+        "sleeve_id": "sleeve_private_markets"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "private_marks:instr_power_campus_preferred"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "approved_private_mark_policy_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Applied approved private/opaque mark policy; no unsupported scenario sensitivity was invented.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 455000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Position was held at an approved mark treatment; scenario impact may understate true exposure."
+      ],
+      "confidence": "medium",
+      "coverage_status": "held_at_mark_with_caveat",
+      "currency": "USD",
+      "instrument_id": "instr_fiber_interconnect_infra_lp",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_d_fiber_interconnect_infra_lp",
+      "required_market_inputs": [
+        "private_marks:instr_fiber_interconnect_infra_lp"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_d_private_markets",
+        "display_name": "Fiber Interconnect Infrastructure LP",
+        "manager_id": "mgr_d_private_real_assets",
+        "sleeve_id": "sleeve_private_markets"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "private_marks:instr_fiber_interconnect_infra_lp"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "approved_private_mark_policy_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Applied approved private/opaque mark policy; no unsupported scenario sensitivity was invented.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 390000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Position was held at an approved mark treatment; scenario impact may understate true exposure."
+      ],
+      "confidence": "medium",
+      "coverage_status": "held_at_mark_with_caveat",
+      "currency": "USD",
+      "instrument_id": "instr_renewable_power_infra_lp",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_d_renewable_power_infra_lp",
+      "required_market_inputs": [
+        "private_marks:instr_renewable_power_infra_lp"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_d_private_markets",
+        "display_name": "Renewable Power Infrastructure LP",
+        "manager_id": "mgr_d_private_real_assets",
+        "sleeve_id": "sleeve_private_markets"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "private_marks:instr_renewable_power_infra_lp"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "approved_private_mark_policy_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Applied approved private/opaque mark policy; no unsupported scenario sensitivity was invented.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 470000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "currency": "USD",
+      "instrument_id": "instr_data_center_land_option",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_d_data_center_land_option",
+      "required_market_inputs": [
+        "review_policies:fallback_review_required_v1"
+      ],
+      "review_required": true,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_d_private_markets",
+        "display_name": "Data Center Land Option",
+        "manager_id": "mgr_d_private_real_assets",
+        "sleeve_id": "sleeve_private_markets"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "private_marks:instr_data_center_land_option"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "review_required_treatment_v1",
+      "valuation_trace": {
+        "input_completeness": "policy_or_review",
+        "summary": "Held latest synthetic mark for reconciliation while routing the position to review.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 185000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "currency": "USD",
+      "instrument_id": "instr_opaque_manager_level_private_book",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_d_opaque_manager_level_private_book",
+      "required_market_inputs": [
+        "private_marks:instr_opaque_manager_level_private_book"
+      ],
+      "review_required": true,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_d_private_markets",
+        "display_name": "Opaque Manager-Level Private Book",
+        "manager_id": "mgr_d_private_real_assets",
+        "sleeve_id": "sleeve_private_markets"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "private_marks:instr_opaque_manager_level_private_book"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "approved_private_mark_policy_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Applied approved private/opaque mark policy; no unsupported scenario sensitivity was invented.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 610000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "currency": "USD",
+      "instrument_id": "instr_private_mark_placeholder",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_d_private_mark_placeholder",
+      "required_market_inputs": [
+        "private_marks:instr_private_mark_placeholder"
+      ],
+      "review_required": true,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_d_private_markets",
+        "display_name": "Private Mark Placeholder Position",
+        "manager_id": "mgr_d_private_real_assets",
+        "sleeve_id": "sleeve_private_markets"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "private_marks:instr_private_mark_placeholder"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "approved_private_mark_policy_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Applied approved private/opaque mark policy; no unsupported scenario sensitivity was invented.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 125000.0
+    },
+    {
+      "cash_flows": [
+        {
+          "amount": 26800.0,
+          "cash_flow_type": "coupon",
+          "confidence": "medium",
+          "currency": "USD",
+          "date": "2026-12-31",
+          "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30"
+        }
+      ],
+      "caveats": [
+        "Simplified synthetic bond valuation; not production fixed-income accounting."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued_with_approved_policy",
+      "currency": "USD",
+      "instrument_id": "instr_treasury_bill_ladder",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_e_treasury_bill_ladder",
+      "required_market_inputs": [
+        "bond_price_scalars:instr_treasury_bill_ladder"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_e_liquidity_reserve",
+        "display_name": "Treasury Bill Ladder",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "sleeve_id": "sleeve_liquidity_reserve"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "bond_price_scalars:instr_treasury_bill_ladder"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "bond_mark_scalar_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Applied approved synthetic bond price scalar to position notional.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 1368542.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_government_money_market",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_e_government_money_market",
+      "required_market_inputs": [
+        "money_market_navs:instr_government_money_market"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_e_liquidity_reserve",
+        "display_name": "Government Money Market Fund",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "sleeve_id": "sleeve_liquidity_reserve"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "money_market_navs:instr_government_money_market"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "money_market_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Money-market units multiplied by approved market-state NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 980260.68
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_short_treasury_etf",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_e_short_treasury_etf",
+      "required_market_inputs": [
+        "fund_prices:instr_short_treasury_etf"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_e_liquidity_reserve",
+        "display_name": "Short Treasury ETF",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "sleeve_id": "sleeve_liquidity_reserve"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fund_prices:instr_short_treasury_etf"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fund_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Fund or ETF units multiplied by approved market-state price or NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 508621.87
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_short_duration_ig_bond",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_e_short_duration_ig_bond",
+      "required_market_inputs": [
+        "fund_prices:instr_short_duration_ig_bond"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_e_liquidity_reserve",
+        "display_name": "Short Duration IG Bond ETF",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "sleeve_id": "sleeve_liquidity_reserve"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fund_prices:instr_short_duration_ig_bond"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fund_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Fund or ETF units multiplied by approved market-state price or NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 378836.57
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_minimum_volatility_equity",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_e_minimum_volatility_equity",
+      "required_market_inputs": [
+        "fund_prices:instr_minimum_volatility_equity"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_e_liquidity_reserve",
+        "display_name": "Minimum Volatility Equity ETF",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "sleeve_id": "sleeve_liquidity_reserve"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fund_prices:instr_minimum_volatility_equity"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fund_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Fund or ETF units multiplied by approved market-state price or NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 294641.25
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_gold_defensive_etf",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_e_gold_defensive_etf",
+      "required_market_inputs": [
+        "fund_prices:instr_gold_defensive_etf"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_e_liquidity_reserve",
+        "display_name": "Gold Defensive ETF",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "sleeve_id": "sleeve_liquidity_reserve"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fund_prices:instr_gold_defensive_etf"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fund_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Fund or ETF units multiplied by approved market-state price or NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 210465.81
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_municipal_cash_reserve",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_e_municipal_cash_reserve",
+      "required_market_inputs": [
+        "money_market_navs:instr_municipal_cash_reserve"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_e_liquidity_reserve",
+        "display_name": "Municipal Cash Reserve",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "sleeve_id": "sleeve_liquidity_reserve"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "money_market_navs:instr_municipal_cash_reserve"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "money_market_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Money-market units multiplied by approved market-state NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 260069.16
+    },
+    {
+      "cash_flows": [
+        {
+          "amount": 6900.0,
+          "cash_flow_type": "coupon",
+          "confidence": "medium",
+          "currency": "USD",
+          "date": "2026-12-31",
+          "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30"
+        }
+      ],
+      "caveats": [
+        "Simplified synthetic bond valuation; not production fixed-income accounting."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued_with_approved_policy",
+      "currency": "USD",
+      "instrument_id": "instr_inflation_linked_short_note",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_e_inflation_linked_short_note",
+      "required_market_inputs": [
+        "bond_price_scalars:instr_inflation_linked_short_note"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_e_liquidity_reserve",
+        "display_name": "Inflation-Linked Short Note",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "sleeve_id": "sleeve_liquidity_reserve"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "bond_price_scalars:instr_inflation_linked_short_note"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "bond_mark_scalar_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Applied approved synthetic bond price scalar to position notional.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 352348.5
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_operating_cash_usd",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_e_operating_cash_usd",
+      "required_market_inputs": [
+        "cash_scalars:USD"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_e_liquidity_reserve",
+        "display_name": "Operating Cash USD",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "sleeve_id": "sleeve_liquidity_reserve"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "cash_scalars:USD"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "cash_face_value_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Cash amount valued at approved face-value treatment.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 510000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_defensive_quality_etf",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_e_defensive_quality_etf",
+      "required_market_inputs": [
+        "fund_prices:instr_defensive_quality_etf"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_e_liquidity_reserve",
+        "display_name": "Defensive Quality ETF",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "sleeve_id": "sleeve_liquidity_reserve"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fund_prices:instr_defensive_quality_etf"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fund_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Fund or ETF units multiplied by approved market-state price or NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 206957.87
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_eurusd_forward_exposure",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_f_eurusd_forward_exposure",
+      "required_market_inputs": [
+        "fx_rates:USD"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_f_opportunistic_macro",
+        "display_name": "EUR/USD Forward Exposure",
+        "manager_id": "mgr_f_opportunistic_macro",
+        "sleeve_id": "sleeve_opportunistic_macro"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fx_rates:USD"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fx_notional_translation_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Translated notional exposure with approved market-state FX input.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 420000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_jpy_defensive_hedge",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_f_jpy_defensive_hedge",
+      "required_market_inputs": [
+        "fx_rates:USD"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_f_opportunistic_macro",
+        "display_name": "JPY Defensive Hedge",
+        "manager_id": "mgr_f_opportunistic_macro",
+        "sleeve_id": "sleeve_opportunistic_macro"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fx_rates:USD"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fx_notional_translation_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Translated notional exposure with approved market-state FX input.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 360000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_usd_strength_proxy",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_f_usd_strength_proxy",
+      "required_market_inputs": [
+        "fund_prices:instr_usd_strength_proxy"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_f_opportunistic_macro",
+        "display_name": "USD Strength Proxy",
+        "manager_id": "mgr_f_opportunistic_macro",
+        "sleeve_id": "sleeve_opportunistic_macro"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fund_prices:instr_usd_strength_proxy"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fund_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Fund or ETF units multiplied by approved market-state price or NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 217482.32
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_commodity_basket_fund",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_f_commodity_basket_fund",
+      "required_market_inputs": [
+        "fund_prices:instr_commodity_basket_fund"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_f_opportunistic_macro",
+        "display_name": "Commodity Basket Fund",
+        "manager_id": "mgr_f_opportunistic_macro",
+        "sleeve_id": "sleeve_opportunistic_macro"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fund_prices:instr_commodity_basket_fund"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fund_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Fund or ETF units multiplied by approved market-state price or NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 329734.58
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_wti_energy_exposure",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_f_wti_energy_exposure",
+      "required_market_inputs": [
+        "commodity_prices:instr_wti_energy_exposure"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_f_opportunistic_macro",
+        "display_name": "WTI Energy Exposure",
+        "manager_id": "mgr_f_opportunistic_macro",
+        "sleeve_id": "sleeve_opportunistic_macro"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "commodity_prices:instr_wti_energy_exposure"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "commodity_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Commodity exposure amount multiplied by approved market-state price scalar.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 274400.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_copper_power_demand_etf",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_f_copper_power_demand_etf",
+      "required_market_inputs": [
+        "fund_prices:instr_copper_power_demand_etf"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_f_opportunistic_macro",
+        "display_name": "Copper Power Demand ETF",
+        "manager_id": "mgr_f_opportunistic_macro",
+        "sleeve_id": "sleeve_opportunistic_macro"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fund_prices:instr_copper_power_demand_etf"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fund_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Fund or ETF units multiplied by approved market-state price or NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 164878.16
+    },
+    {
+      "cash_flows": [],
+      "caveats": [],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_uranium_power_supply_etf",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_f_uranium_power_supply_etf",
+      "required_market_inputs": [
+        "fund_prices:instr_uranium_power_supply_etf"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_f_opportunistic_macro",
+        "display_name": "Uranium Power Supply ETF",
+        "manager_id": "mgr_f_opportunistic_macro",
+        "sleeve_id": "sleeve_opportunistic_macro"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "fund_prices:instr_uranium_power_supply_etf"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "fund_nav_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Fund or ETF units multiplied by approved market-state price or NAV.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 154338.65
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Synthetic crypto price input; not live market data."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_bitcoin_synthetic_trust",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_f_bitcoin_synthetic_trust",
+      "required_market_inputs": [
+        "crypto_prices:instr_bitcoin_synthetic_trust"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_f_opportunistic_macro",
+        "display_name": "Bitcoin Synthetic Trust",
+        "manager_id": "mgr_f_opportunistic_macro",
+        "sleeve_id": "sleeve_opportunistic_macro"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "crypto_prices:instr_bitcoin_synthetic_trust"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "crypto_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Crypto vehicle units multiplied by approved synthetic market-state price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 349985.79
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Synthetic crypto price input; not live market data."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "currency": "USD",
+      "instrument_id": "instr_ethereum_synthetic_trust",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_f_ethereum_synthetic_trust",
+      "required_market_inputs": [
+        "crypto_prices:instr_ethereum_synthetic_trust"
+      ],
+      "review_required": false,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_f_opportunistic_macro",
+        "display_name": "Ethereum Synthetic Trust",
+        "manager_id": "mgr_f_opportunistic_macro",
+        "sleeve_id": "sleeve_opportunistic_macro"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "crypto_prices:instr_ethereum_synthetic_trust"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "crypto_price_lookup_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Crypto vehicle units multiplied by approved synthetic market-state price.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 209145.22
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "currency": "USD",
+      "instrument_id": "instr_macro_overlay_manager_book",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_f_macro_overlay_manager_book",
+      "required_market_inputs": [
+        "private_marks:instr_macro_overlay_manager_book"
+      ],
+      "review_required": true,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_f_opportunistic_macro",
+        "display_name": "Macro Overlay Manager Book",
+        "manager_id": "mgr_f_opportunistic_macro",
+        "sleeve_id": "sleeve_opportunistic_macro"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "private_marks:instr_macro_overlay_manager_book"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "approved_private_mark_policy_v1",
+      "valuation_trace": {
+        "input_completeness": "complete",
+        "summary": "Applied approved private/opaque mark policy; no unsupported scenario sensitivity was invented.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 330000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "currency": "USD",
+      "instrument_id": "instr_rates_volatility_collar",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_f_rates_volatility_collar",
+      "required_market_inputs": [
+        "review_policies:fallback_review_required_v1"
+      ],
+      "review_required": true,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_f_opportunistic_macro",
+        "display_name": "Rates Volatility Collar",
+        "manager_id": "mgr_f_opportunistic_macro",
+        "sleeve_id": "sleeve_opportunistic_macro"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "private_marks:instr_rates_volatility_collar"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "review_required_treatment_v1",
+      "valuation_trace": {
+        "input_completeness": "policy_or_review",
+        "summary": "Held latest synthetic mark for reconciliation while routing the position to review.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 210000.0
+    },
+    {
+      "cash_flows": [],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "currency": "USD",
+      "instrument_id": "instr_ai_chip_downside_put_spread",
+      "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "position_id": "pos_f_ai_chip_downside_put_spread",
+      "required_market_inputs": [
+        "review_policies:fallback_review_required_v1"
+      ],
+      "review_required": true,
+      "schema_version": "position_valuation_result.v1",
+      "source_position": {
+        "account_id": "acct_f_opportunistic_macro",
+        "display_name": "AI Chip Downside Put Spread",
+        "manager_id": "mgr_f_opportunistic_macro",
+        "sleeve_id": "sleeve_opportunistic_macro"
+      },
+      "synthetic_data": true,
+      "used_market_inputs": [
+        "private_marks:instr_ai_chip_downside_put_spread"
+      ],
+      "valuation_date": "2026-06-30",
+      "valuation_model_id": "review_required_treatment_v1",
+      "valuation_trace": {
+        "input_completeness": "policy_or_review",
+        "summary": "Held latest synthetic mark for reconciliation while routing the position to review.",
+        "trace_visibility": "internal_summary"
+      },
+      "value": 155000.0
+    }
+  ],
+  "scenario_id": "ai_chip_selloff",
+  "schema_version": "position_valuation_results.v1",
+  "summary": {
+    "confidence_summary": {
+      "by_confidence": {
+        "high": 33,
+        "low": 0,
+        "medium": 29,
+        "review_required": 12
+      }
+    },
+    "coverage_summary": {
+      "by_status": {
+        "held_at_mark_with_caveat": 7,
+        "not_valued": 0,
+        "review_required": 12,
+        "valued": 51,
+        "valued_with_approved_policy": 4,
+        "valued_with_substitute_input": 0
+      },
+      "review_required_count": 12
+    },
+    "review_required_count": 12,
+    "total_value": 35397657.2
+  },
+  "synthetic_data": true,
+  "valuation_date": "2026-06-30"
+}

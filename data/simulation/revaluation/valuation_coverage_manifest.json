@@ -1,0 +1,69 @@
+{
+  "approval_metadata": {
+    "approval_status": "approved_for_synthetic_internal_skeleton",
+    "approved_at": "2026-07-05T00:00:00Z"
+  },
+  "artifact_paths": {
+    "base_market_state": "data/simulation/revaluation/base_market_state.json",
+    "instrument_catalog": "data/simulation/revaluation/instrument_catalog.json",
+    "portfolio_revaluation_summary_ai_chip_selloff": "data/simulation/revaluation/portfolio_revaluation_summary_ai_chip_selloff.json",
+    "position_catalog": "data/simulation/revaluation/position_catalog.json",
+    "position_pricing_function_assignments": "data/simulation/revaluation/position_pricing_function_assignments.json",
+    "position_valuation_results_ai_chip_selloff": "data/simulation/revaluation/position_valuation_results_ai_chip_selloff.json",
+    "position_valuation_results_base": "data/simulation/revaluation/position_valuation_results_base.json",
+    "position_value_comparison_ai_chip_selloff": "data/simulation/revaluation/position_value_comparison_ai_chip_selloff.json",
+    "pricing_function_registry": "data/simulation/revaluation/pricing_function_registry.json",
+    "scenario_market_state": "data/simulation/revaluation/scenario_market_state_ai_chip_selloff.json",
+    "valuation_coverage_manifest": "data/simulation/revaluation/valuation_coverage_manifest.json",
+    "valuation_input_coverage_map_ai_chip_selloff": "data/simulation/revaluation/valuation_input_coverage_map_ai_chip_selloff.json",
+    "valuation_input_coverage_map_base": "data/simulation/revaluation/valuation_input_coverage_map_base.json"
+  },
+  "base_market_state_id": "market_state_base_2026-06-30",
+  "caveats": [
+    "Coverage manifest is internal and synthetic.",
+    "Review-required records are not client-ready point impact claims."
+  ],
+  "coverage_summary": {
+    "by_status": {
+      "held_at_mark_with_caveat": {
+        "base_value": 3950000.0,
+        "count": 7,
+        "scenario_value": 3950000.0
+      },
+      "not_valued": {
+        "base_value": 0.0,
+        "count": 0,
+        "scenario_value": 0.0
+      },
+      "review_required": {
+        "base_value": 5825000.0,
+        "count": 12,
+        "scenario_value": 5825000.0
+      },
+      "valued": {
+        "base_value": 32408991.4,
+        "count": 51,
+        "scenario_value": 22890679.7
+      },
+      "valued_with_approved_policy": {
+        "base_value": 2675000.0,
+        "count": 4,
+        "scenario_value": 2731977.5
+      },
+      "valued_with_substitute_input": {
+        "base_value": 0.0,
+        "count": 0,
+        "scenario_value": 0.0
+      }
+    }
+  },
+  "generated_at": "2026-07-05T00:00:00Z",
+  "methodology": "full_portfolio_revaluation",
+  "portfolio_snapshot_id": "northstar_synthetic_position_universe_seed_20260630",
+  "scenario_market_state_ids": [
+    "market_state_scenario_ai_chip_selloff_2026-06-30"
+  ],
+  "schema_version": "valuation_coverage_manifest.v1",
+  "synthetic_data": true,
+  "valuation_date": "2026-06-30"
+}

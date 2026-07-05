@@ -1,0 +1,92 @@
+{
+  "base_market_state_id": "market_state_base_2026-06-30",
+  "base_portfolio_value": 44858991.4,
+  "caveats": [
+    "Synthetic internal analytics infrastructure only.",
+    "No advisor UI, report views, backend endpoints, external APIs, live data, or real client data are used.",
+    "Scenario impact is scenario portfolio value minus base portfolio value after valuing every position."
+  ],
+  "confidence_summary": {
+    "by_confidence": {
+      "high": {
+        "base_value": 25498969.61,
+        "count": 33
+      },
+      "low": {
+        "base_value": 0.0,
+        "count": 0
+      },
+      "medium": {
+        "base_value": 13535021.79,
+        "count": 29
+      },
+      "review_required": {
+        "base_value": 5825000.0,
+        "count": 12
+      }
+    }
+  },
+  "coverage_summary": {
+    "by_status": {
+      "held_at_mark_with_caveat": {
+        "base_value": 3950000.0,
+        "count": 7,
+        "scenario_value": 3950000.0
+      },
+      "not_valued": {
+        "base_value": 0.0,
+        "count": 0,
+        "scenario_value": 0.0
+      },
+      "review_required": {
+        "base_value": 5825000.0,
+        "count": 12,
+        "scenario_value": 5825000.0
+      },
+      "valued": {
+        "base_value": 32408991.4,
+        "count": 51,
+        "scenario_value": 22890679.7
+      },
+      "valued_with_approved_policy": {
+        "base_value": 2675000.0,
+        "count": 4,
+        "scenario_value": 2731977.5
+      },
+      "valued_with_substitute_input": {
+        "base_value": 0.0,
+        "count": 0,
+        "scenario_value": 0.0
+      }
+    }
+  },
+  "generated_at": "2026-07-05T00:00:00Z",
+  "impact": -9461334.2,
+  "impact_percent": -0.210913,
+  "input_files": [
+    "data/simulation/revaluation/instrument_catalog.json",
+    "data/simulation/revaluation/position_catalog.json",
+    "data/simulation/revaluation/pricing_function_registry.json",
+    "data/simulation/revaluation/base_market_state.json",
+    "data/simulation/revaluation/scenario_market_state_ai_chip_selloff.json",
+    "data/simulation/revaluation/position_pricing_function_assignments.json",
+    "data/simulation/revaluation/valuation_input_coverage_map_base.json",
+    "data/simulation/revaluation/valuation_input_coverage_map_ai_chip_selloff.json"
+  ],
+  "methodology": "full_portfolio_revaluation",
+  "output_files": [
+    "data/simulation/revaluation/position_valuation_results_base.json",
+    "data/simulation/revaluation/position_valuation_results_ai_chip_selloff.json",
+    "data/simulation/revaluation/position_value_comparison_ai_chip_selloff.json",
+    "data/simulation/revaluation/portfolio_revaluation_summary_ai_chip_selloff.json",
+    "data/simulation/revaluation/valuation_coverage_manifest.json",
+    "data/simulation/revaluation/revaluation_bundle_manifest.json"
+  ],
+  "position_count": 74,
+  "review_required_count": 12,
+  "scenario_id": "ai_chip_selloff",
+  "scenario_market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+  "scenario_portfolio_value": 35397657.2,
+  "schema_version": "revaluation_bundle_manifest.v1",
+  "synthetic_data": true
+}

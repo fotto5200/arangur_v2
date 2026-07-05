@@ -1,0 +1,170 @@
+{
+  "approval_metadata": {
+    "approval_status": "approved_for_synthetic_internal_skeleton",
+    "approved_at": "2026-07-05T00:00:00Z"
+  },
+  "coverage_policies": [
+    "standard_public_equity_v1",
+    "cash_face_value_v1",
+    "money_market_nav_v1",
+    "fund_or_etf_nav_v1",
+    "synthetic_bond_policy_v1",
+    "fx_translation_v1",
+    "commodity_price_lookup_v1",
+    "crypto_price_lookup_v1",
+    "approved_private_mark_policy_v1",
+    "fallback_review_required_v1"
+  ],
+  "generated_at": "2026-07-05T00:00:00Z",
+  "pricing_functions": [
+    {
+      "allows_explicit_review_treatment": false,
+      "approval_status": "approved",
+      "coverage_policy_id": "standard_public_equity_v1",
+      "display_name": "Public Equity Price Lookup V1",
+      "eligible_instrument_types": [
+        "public_equity"
+      ],
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_input_families": [
+        "equity_prices"
+      ],
+      "scenario_supported": true
+    },
+    {
+      "allows_explicit_review_treatment": false,
+      "approval_status": "approved",
+      "coverage_policy_id": "cash_face_value_v1",
+      "display_name": "Cash Face Value V1",
+      "eligible_instrument_types": [
+        "cash"
+      ],
+      "pricing_function_id": "cash_face_value_v1",
+      "required_input_families": [
+        "cash_scalars"
+      ],
+      "scenario_supported": true
+    },
+    {
+      "allows_explicit_review_treatment": false,
+      "approval_status": "approved",
+      "coverage_policy_id": "money_market_nav_v1",
+      "display_name": "Money Market Nav Lookup V1",
+      "eligible_instrument_types": [
+        "money_market"
+      ],
+      "pricing_function_id": "money_market_nav_lookup_v1",
+      "required_input_families": [
+        "money_market_navs"
+      ],
+      "scenario_supported": true
+    },
+    {
+      "allows_explicit_review_treatment": false,
+      "approval_status": "approved",
+      "coverage_policy_id": "fund_or_etf_nav_v1",
+      "display_name": "Fund Nav Lookup V1",
+      "eligible_instrument_types": [
+        "etf"
+      ],
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_input_families": [
+        "fund_prices"
+      ],
+      "scenario_supported": true
+    },
+    {
+      "allows_explicit_review_treatment": false,
+      "approval_status": "approved",
+      "coverage_policy_id": "synthetic_bond_policy_v1",
+      "display_name": "Bond Mark Scalar V1",
+      "eligible_instrument_types": [
+        "fixed_income"
+      ],
+      "pricing_function_id": "bond_mark_scalar_v1",
+      "required_input_families": [
+        "bond_price_scalars"
+      ],
+      "scenario_supported": true
+    },
+    {
+      "allows_explicit_review_treatment": false,
+      "approval_status": "approved",
+      "coverage_policy_id": "fx_translation_v1",
+      "display_name": "Fx Notional Translation V1",
+      "eligible_instrument_types": [
+        "fx_exposure"
+      ],
+      "pricing_function_id": "fx_notional_translation_v1",
+      "required_input_families": [
+        "fx_rates"
+      ],
+      "scenario_supported": true
+    },
+    {
+      "allows_explicit_review_treatment": false,
+      "approval_status": "approved",
+      "coverage_policy_id": "commodity_price_lookup_v1",
+      "display_name": "Commodity Price Lookup V1",
+      "eligible_instrument_types": [
+        "commodity"
+      ],
+      "pricing_function_id": "commodity_price_lookup_v1",
+      "required_input_families": [
+        "commodity_prices"
+      ],
+      "scenario_supported": true
+    },
+    {
+      "allows_explicit_review_treatment": false,
+      "approval_status": "approved",
+      "coverage_policy_id": "crypto_price_lookup_v1",
+      "display_name": "Crypto Price Lookup V1",
+      "eligible_instrument_types": [
+        "crypto"
+      ],
+      "pricing_function_id": "crypto_price_lookup_v1",
+      "required_input_families": [
+        "crypto_prices"
+      ],
+      "scenario_supported": true
+    },
+    {
+      "allows_explicit_review_treatment": true,
+      "approval_status": "approved",
+      "coverage_policy_id": "approved_private_mark_policy_v1",
+      "display_name": "Approved Private Mark Policy V1",
+      "eligible_instrument_types": [
+        "data_center_investment",
+        "opaque_manager_level",
+        "private_credit",
+        "private_equity",
+        "real_estate"
+      ],
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_input_families": [
+        "private_marks"
+      ],
+      "scenario_supported": true
+    },
+    {
+      "allows_explicit_review_treatment": true,
+      "approval_status": "approved",
+      "coverage_policy_id": "fallback_review_required_v1",
+      "display_name": "Review Required Treatment V1",
+      "eligible_instrument_types": [
+        "option_like",
+        "structured_product",
+        "opaque_manager_level"
+      ],
+      "pricing_function_id": "review_required_treatment_v1",
+      "required_input_families": [
+        "review_policies"
+      ],
+      "scenario_supported": true
+    }
+  ],
+  "registry_version": "synthetic_full_revaluation_skeleton_v1",
+  "schema_version": "pricing_function_registry.v1",
+  "synthetic_data": true
+}

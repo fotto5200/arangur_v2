@@ -1,0 +1,1501 @@
+{
+  "coverage_rows": [
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_ai_compute_leader"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_ai_compute_leader",
+      "missing_market_inputs": [],
+      "position_id": "pos_a_ai_compute_leader",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_ai_compute_leader"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_cloud_platform_compounder"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_cloud_platform_compounder",
+      "missing_market_inputs": [],
+      "position_id": "pos_a_cloud_platform_compounder",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_cloud_platform_compounder"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_chip_fabrication_partner"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_chip_fabrication_partner",
+      "missing_market_inputs": [],
+      "position_id": "pos_a_chip_fabrication_partner",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_chip_fabrication_partner"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_semicap_equipment_maker"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_semicap_equipment_maker",
+      "missing_market_inputs": [],
+      "position_id": "pos_a_semicap_equipment_maker",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_semicap_equipment_maker"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_accelerator_design_house"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_accelerator_design_house",
+      "missing_market_inputs": [],
+      "position_id": "pos_a_accelerator_design_house",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_accelerator_design_house"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_advanced_packaging_supplier"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_advanced_packaging_supplier",
+      "missing_market_inputs": [],
+      "position_id": "pos_a_advanced_packaging_supplier",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_advanced_packaging_supplier"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fund_prices:instr_ai_chip_etf"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_ai_chip_etf",
+      "missing_market_inputs": [],
+      "position_id": "pos_a_ai_chip_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_market_inputs": [
+        "fund_prices:instr_ai_chip_etf"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_data_center_cooling_leader"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_data_center_cooling_leader",
+      "missing_market_inputs": [],
+      "position_id": "pos_a_data_center_cooling_leader",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_data_center_cooling_leader"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_edge_server_platform"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_edge_server_platform",
+      "missing_market_inputs": [],
+      "position_id": "pos_a_edge_server_platform",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_edge_server_platform"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_enterprise_ai_software"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_enterprise_ai_software",
+      "missing_market_inputs": [],
+      "position_id": "pos_a_enterprise_ai_software",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_enterprise_ai_software"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_grid_enabler_equity"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_grid_enabler_equity",
+      "missing_market_inputs": [],
+      "position_id": "pos_a_grid_enabler_equity",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_grid_enabler_equity"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_data_center_public_reit"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_data_center_public_reit",
+      "missing_market_inputs": [],
+      "position_id": "pos_a_data_center_public_reit",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_data_center_public_reit"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "review_policies:fallback_review_required_v1"
+      ],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "instrument_id": "instr_ai_infra_call_spread_note",
+      "missing_market_inputs": [],
+      "position_id": "pos_a_ai_infra_call_spread_note",
+      "pricing_function_id": "review_required_treatment_v1",
+      "required_market_inputs": [
+        "review_policies:fallback_review_required_v1"
+      ],
+      "review_required": true,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "money_market_navs:instr_public_ai_money_market_sweep"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_public_ai_money_market_sweep",
+      "missing_market_inputs": [],
+      "position_id": "pos_a_public_ai_money_market_sweep",
+      "pricing_function_id": "money_market_nav_lookup_v1",
+      "required_market_inputs": [
+        "money_market_navs:instr_public_ai_money_market_sweep"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_cloud_platform_compounder"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_cloud_platform_compounder",
+      "missing_market_inputs": [],
+      "position_id": "pos_b_cloud_platform_compounder",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_cloud_platform_compounder"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_ai_compute_leader"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_ai_compute_leader",
+      "missing_market_inputs": [],
+      "position_id": "pos_b_ai_compute_leader",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_ai_compute_leader"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_consumer_platform_quality"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_consumer_platform_quality",
+      "missing_market_inputs": [],
+      "position_id": "pos_b_consumer_platform_quality",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_consumer_platform_quality"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_payments_network_core"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_payments_network_core",
+      "missing_market_inputs": [],
+      "position_id": "pos_b_payments_network_core",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_payments_network_core"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_quality_consumer_staples"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_quality_consumer_staples",
+      "missing_market_inputs": [],
+      "position_id": "pos_b_quality_consumer_staples",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_quality_consumer_staples"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_healthcare_resilience"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_healthcare_resilience",
+      "missing_market_inputs": [],
+      "position_id": "pos_b_healthcare_resilience",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_healthcare_resilience"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_core_bank_quality"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_core_bank_quality",
+      "missing_market_inputs": [],
+      "position_id": "pos_b_core_bank_quality",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_core_bank_quality"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_industrial_compounder"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_industrial_compounder",
+      "missing_market_inputs": [],
+      "position_id": "pos_b_industrial_compounder",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_industrial_compounder"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fund_prices:instr_quality_factor_etf"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_quality_factor_etf",
+      "missing_market_inputs": [],
+      "position_id": "pos_b_quality_factor_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_market_inputs": [
+        "fund_prices:instr_quality_factor_etf"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fund_prices:instr_value_factor_etf"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_value_factor_etf",
+      "missing_market_inputs": [],
+      "position_id": "pos_b_value_factor_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_market_inputs": [
+        "fund_prices:instr_value_factor_etf"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fund_prices:instr_broad_developed_equity_etf"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_broad_developed_equity_etf",
+      "missing_market_inputs": [],
+      "position_id": "pos_b_broad_developed_equity_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_market_inputs": [
+        "fund_prices:instr_broad_developed_equity_etf"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "money_market_navs:instr_core_quality_cash_sweep"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_core_quality_cash_sweep",
+      "missing_market_inputs": [],
+      "position_id": "pos_b_core_quality_cash_sweep",
+      "pricing_function_id": "money_market_nav_lookup_v1",
+      "required_market_inputs": [
+        "money_market_navs:instr_core_quality_cash_sweep"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fund_prices:instr_short_tips_etf"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_short_tips_etf",
+      "missing_market_inputs": [],
+      "position_id": "pos_c_short_tips_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_market_inputs": [
+        "fund_prices:instr_short_tips_etf"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fund_prices:instr_investment_grade_bond_etf"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_investment_grade_bond_etf",
+      "missing_market_inputs": [],
+      "position_id": "pos_c_investment_grade_bond_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_market_inputs": [
+        "fund_prices:instr_investment_grade_bond_etf"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "bond_price_scalars:instr_municipal_income_ladder"
+      ],
+      "caveats": [
+        "Position was valued with an approved synthetic policy because production valuation is out of scope."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued_with_approved_policy",
+      "instrument_id": "instr_municipal_income_ladder",
+      "missing_market_inputs": [],
+      "position_id": "pos_c_municipal_income_ladder",
+      "pricing_function_id": "bond_mark_scalar_v1",
+      "required_market_inputs": [
+        "bond_price_scalars:instr_municipal_income_ladder"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "bond_price_scalars:instr_agency_mbs_proxy"
+      ],
+      "caveats": [
+        "Position was valued with an approved synthetic policy because production valuation is out of scope."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued_with_approved_policy",
+      "instrument_id": "instr_agency_mbs_proxy",
+      "missing_market_inputs": [],
+      "position_id": "pos_c_agency_mbs_proxy",
+      "pricing_function_id": "bond_mark_scalar_v1",
+      "required_market_inputs": [
+        "bond_price_scalars:instr_agency_mbs_proxy"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fund_prices:instr_preferred_income_etf"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_preferred_income_etf",
+      "missing_market_inputs": [],
+      "position_id": "pos_c_preferred_income_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_market_inputs": [
+        "fund_prices:instr_preferred_income_etf"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fund_prices:instr_floating_rate_credit_etf"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_floating_rate_credit_etf",
+      "missing_market_inputs": [],
+      "position_id": "pos_c_floating_rate_credit_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_market_inputs": [
+        "fund_prices:instr_floating_rate_credit_etf"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_public_direct_lending_bdc"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_public_direct_lending_bdc",
+      "missing_market_inputs": [],
+      "position_id": "pos_c_public_direct_lending_bdc",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_public_direct_lending_bdc"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "equity_prices:instr_pipeline_cash_yield"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_pipeline_cash_yield",
+      "missing_market_inputs": [],
+      "position_id": "pos_c_pipeline_cash_yield",
+      "pricing_function_id": "public_equity_price_lookup_v1",
+      "required_market_inputs": [
+        "equity_prices:instr_pipeline_cash_yield"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fund_prices:instr_covered_call_income_etf"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_covered_call_income_etf",
+      "missing_market_inputs": [],
+      "position_id": "pos_c_covered_call_income_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_market_inputs": [
+        "fund_prices:instr_covered_call_income_etf"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fund_prices:instr_reit_income_etf"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_reit_income_etf",
+      "missing_market_inputs": [],
+      "position_id": "pos_c_reit_income_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_market_inputs": [
+        "fund_prices:instr_reit_income_etf"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "private_marks:instr_private_credit_income_fund"
+      ],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "instrument_id": "instr_private_credit_income_fund",
+      "missing_market_inputs": [],
+      "position_id": "pos_c_private_credit_income_fund",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_market_inputs": [
+        "private_marks:instr_private_credit_income_fund"
+      ],
+      "review_required": true,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "money_market_navs:instr_income_sleeve_cash"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_income_sleeve_cash",
+      "missing_market_inputs": [],
+      "position_id": "pos_c_income_sleeve_cash",
+      "pricing_function_id": "money_market_nav_lookup_v1",
+      "required_market_inputs": [
+        "money_market_navs:instr_income_sleeve_cash"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "private_marks:instr_northstar_ai_growth_fund"
+      ],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "instrument_id": "instr_northstar_ai_growth_fund",
+      "missing_market_inputs": [],
+      "position_id": "pos_d_northstar_ai_growth_fund",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_market_inputs": [
+        "private_marks:instr_northstar_ai_growth_fund"
+      ],
+      "review_required": true,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "private_marks:instr_venture_ai_infrastructure_fund"
+      ],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "instrument_id": "instr_venture_ai_infrastructure_fund",
+      "missing_market_inputs": [],
+      "position_id": "pos_d_venture_ai_infrastructure_fund",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_market_inputs": [
+        "private_marks:instr_venture_ai_infrastructure_fund"
+      ],
+      "review_required": true,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "private_marks:instr_secondary_pe_fund"
+      ],
+      "caveats": [
+        "Position was held at an approved mark treatment; scenario impact may understate true exposure."
+      ],
+      "confidence": "low",
+      "coverage_status": "held_at_mark_with_caveat",
+      "instrument_id": "instr_secondary_pe_fund",
+      "missing_market_inputs": [],
+      "position_id": "pos_d_secondary_pe_fund",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_market_inputs": [
+        "private_marks:instr_secondary_pe_fund"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "private_marks:instr_private_credit_sidecar"
+      ],
+      "caveats": [
+        "Position was held at an approved mark treatment; scenario impact may understate true exposure."
+      ],
+      "confidence": "low",
+      "coverage_status": "held_at_mark_with_caveat",
+      "instrument_id": "instr_private_credit_sidecar",
+      "missing_market_inputs": [],
+      "position_id": "pos_d_private_credit_sidecar",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_market_inputs": [
+        "private_marks:instr_private_credit_sidecar"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "private_marks:instr_asset_backed_credit_fund"
+      ],
+      "caveats": [
+        "Position was held at an approved mark treatment; scenario impact may understate true exposure."
+      ],
+      "confidence": "low",
+      "coverage_status": "held_at_mark_with_caveat",
+      "instrument_id": "instr_asset_backed_credit_fund",
+      "missing_market_inputs": [],
+      "position_id": "pos_d_asset_backed_credit_fund",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_market_inputs": [
+        "private_marks:instr_asset_backed_credit_fund"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "private_marks:instr_industrial_logistics_real_estate"
+      ],
+      "caveats": [
+        "Position was held at an approved mark treatment; scenario impact may understate true exposure."
+      ],
+      "confidence": "low",
+      "coverage_status": "held_at_mark_with_caveat",
+      "instrument_id": "instr_industrial_logistics_real_estate",
+      "missing_market_inputs": [],
+      "position_id": "pos_d_industrial_logistics_real_estate",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_market_inputs": [
+        "private_marks:instr_industrial_logistics_real_estate"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "private_marks:instr_multifamily_real_estate_fund"
+      ],
+      "caveats": [
+        "Position was held at an approved mark treatment; scenario impact may understate true exposure."
+      ],
+      "confidence": "low",
+      "coverage_status": "held_at_mark_with_caveat",
+      "instrument_id": "instr_multifamily_real_estate_fund",
+      "missing_market_inputs": [],
+      "position_id": "pos_d_multifamily_real_estate_fund",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_market_inputs": [
+        "private_marks:instr_multifamily_real_estate_fund"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "private_marks:instr_data_center_development_jv"
+      ],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "instrument_id": "instr_data_center_development_jv",
+      "missing_market_inputs": [],
+      "position_id": "pos_d_data_center_development_jv",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_market_inputs": [
+        "private_marks:instr_data_center_development_jv"
+      ],
+      "review_required": true,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "private_marks:instr_power_campus_preferred"
+      ],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "instrument_id": "instr_power_campus_preferred",
+      "missing_market_inputs": [],
+      "position_id": "pos_d_power_campus_preferred",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_market_inputs": [
+        "private_marks:instr_power_campus_preferred"
+      ],
+      "review_required": true,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "private_marks:instr_fiber_interconnect_infra_lp"
+      ],
+      "caveats": [
+        "Position was held at an approved mark treatment; scenario impact may understate true exposure."
+      ],
+      "confidence": "low",
+      "coverage_status": "held_at_mark_with_caveat",
+      "instrument_id": "instr_fiber_interconnect_infra_lp",
+      "missing_market_inputs": [],
+      "position_id": "pos_d_fiber_interconnect_infra_lp",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_market_inputs": [
+        "private_marks:instr_fiber_interconnect_infra_lp"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "private_marks:instr_renewable_power_infra_lp"
+      ],
+      "caveats": [
+        "Position was held at an approved mark treatment; scenario impact may understate true exposure."
+      ],
+      "confidence": "low",
+      "coverage_status": "held_at_mark_with_caveat",
+      "instrument_id": "instr_renewable_power_infra_lp",
+      "missing_market_inputs": [],
+      "position_id": "pos_d_renewable_power_infra_lp",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_market_inputs": [
+        "private_marks:instr_renewable_power_infra_lp"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "review_policies:fallback_review_required_v1"
+      ],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "instrument_id": "instr_data_center_land_option",
+      "missing_market_inputs": [],
+      "position_id": "pos_d_data_center_land_option",
+      "pricing_function_id": "review_required_treatment_v1",
+      "required_market_inputs": [
+        "review_policies:fallback_review_required_v1"
+      ],
+      "review_required": true,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "private_marks:instr_opaque_manager_level_private_book"
+      ],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "instrument_id": "instr_opaque_manager_level_private_book",
+      "missing_market_inputs": [],
+      "position_id": "pos_d_opaque_manager_level_private_book",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_market_inputs": [
+        "private_marks:instr_opaque_manager_level_private_book"
+      ],
+      "review_required": true,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "private_marks:instr_private_mark_placeholder"
+      ],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "instrument_id": "instr_private_mark_placeholder",
+      "missing_market_inputs": [],
+      "position_id": "pos_d_private_mark_placeholder",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_market_inputs": [
+        "private_marks:instr_private_mark_placeholder"
+      ],
+      "review_required": true,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "bond_price_scalars:instr_treasury_bill_ladder"
+      ],
+      "caveats": [
+        "Position was valued with an approved synthetic policy because production valuation is out of scope."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued_with_approved_policy",
+      "instrument_id": "instr_treasury_bill_ladder",
+      "missing_market_inputs": [],
+      "position_id": "pos_e_treasury_bill_ladder",
+      "pricing_function_id": "bond_mark_scalar_v1",
+      "required_market_inputs": [
+        "bond_price_scalars:instr_treasury_bill_ladder"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "money_market_navs:instr_government_money_market"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_government_money_market",
+      "missing_market_inputs": [],
+      "position_id": "pos_e_government_money_market",
+      "pricing_function_id": "money_market_nav_lookup_v1",
+      "required_market_inputs": [
+        "money_market_navs:instr_government_money_market"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fund_prices:instr_short_treasury_etf"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_short_treasury_etf",
+      "missing_market_inputs": [],
+      "position_id": "pos_e_short_treasury_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_market_inputs": [
+        "fund_prices:instr_short_treasury_etf"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fund_prices:instr_short_duration_ig_bond"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_short_duration_ig_bond",
+      "missing_market_inputs": [],
+      "position_id": "pos_e_short_duration_ig_bond",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_market_inputs": [
+        "fund_prices:instr_short_duration_ig_bond"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fund_prices:instr_minimum_volatility_equity"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_minimum_volatility_equity",
+      "missing_market_inputs": [],
+      "position_id": "pos_e_minimum_volatility_equity",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_market_inputs": [
+        "fund_prices:instr_minimum_volatility_equity"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fund_prices:instr_gold_defensive_etf"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_gold_defensive_etf",
+      "missing_market_inputs": [],
+      "position_id": "pos_e_gold_defensive_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_market_inputs": [
+        "fund_prices:instr_gold_defensive_etf"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "money_market_navs:instr_municipal_cash_reserve"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_municipal_cash_reserve",
+      "missing_market_inputs": [],
+      "position_id": "pos_e_municipal_cash_reserve",
+      "pricing_function_id": "money_market_nav_lookup_v1",
+      "required_market_inputs": [
+        "money_market_navs:instr_municipal_cash_reserve"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "bond_price_scalars:instr_inflation_linked_short_note"
+      ],
+      "caveats": [
+        "Position was valued with an approved synthetic policy because production valuation is out of scope."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued_with_approved_policy",
+      "instrument_id": "instr_inflation_linked_short_note",
+      "missing_market_inputs": [],
+      "position_id": "pos_e_inflation_linked_short_note",
+      "pricing_function_id": "bond_mark_scalar_v1",
+      "required_market_inputs": [
+        "bond_price_scalars:instr_inflation_linked_short_note"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "cash_scalars:USD"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_operating_cash_usd",
+      "missing_market_inputs": [],
+      "position_id": "pos_e_operating_cash_usd",
+      "pricing_function_id": "cash_face_value_v1",
+      "required_market_inputs": [
+        "cash_scalars:USD"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fund_prices:instr_defensive_quality_etf"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_defensive_quality_etf",
+      "missing_market_inputs": [],
+      "position_id": "pos_e_defensive_quality_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_market_inputs": [
+        "fund_prices:instr_defensive_quality_etf"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fx_rates:USD"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_eurusd_forward_exposure",
+      "missing_market_inputs": [],
+      "position_id": "pos_f_eurusd_forward_exposure",
+      "pricing_function_id": "fx_notional_translation_v1",
+      "required_market_inputs": [
+        "fx_rates:USD"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fx_rates:USD"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_jpy_defensive_hedge",
+      "missing_market_inputs": [],
+      "position_id": "pos_f_jpy_defensive_hedge",
+      "pricing_function_id": "fx_notional_translation_v1",
+      "required_market_inputs": [
+        "fx_rates:USD"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fund_prices:instr_usd_strength_proxy"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_usd_strength_proxy",
+      "missing_market_inputs": [],
+      "position_id": "pos_f_usd_strength_proxy",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_market_inputs": [
+        "fund_prices:instr_usd_strength_proxy"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fund_prices:instr_commodity_basket_fund"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_commodity_basket_fund",
+      "missing_market_inputs": [],
+      "position_id": "pos_f_commodity_basket_fund",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_market_inputs": [
+        "fund_prices:instr_commodity_basket_fund"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "commodity_prices:instr_wti_energy_exposure"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_wti_energy_exposure",
+      "missing_market_inputs": [],
+      "position_id": "pos_f_wti_energy_exposure",
+      "pricing_function_id": "commodity_price_lookup_v1",
+      "required_market_inputs": [
+        "commodity_prices:instr_wti_energy_exposure"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fund_prices:instr_copper_power_demand_etf"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "high",
+      "coverage_status": "valued",
+      "instrument_id": "instr_copper_power_demand_etf",
+      "missing_market_inputs": [],
+      "position_id": "pos_f_copper_power_demand_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_market_inputs": [
+        "fund_prices:instr_copper_power_demand_etf"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "fund_prices:instr_uranium_power_supply_etf"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_uranium_power_supply_etf",
+      "missing_market_inputs": [],
+      "position_id": "pos_f_uranium_power_supply_etf",
+      "pricing_function_id": "fund_nav_lookup_v1",
+      "required_market_inputs": [
+        "fund_prices:instr_uranium_power_supply_etf"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "crypto_prices:instr_bitcoin_synthetic_trust"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_bitcoin_synthetic_trust",
+      "missing_market_inputs": [],
+      "position_id": "pos_f_bitcoin_synthetic_trust",
+      "pricing_function_id": "crypto_price_lookup_v1",
+      "required_market_inputs": [
+        "crypto_prices:instr_bitcoin_synthetic_trust"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "crypto_prices:instr_ethereum_synthetic_trust"
+      ],
+      "caveats": [
+        "Position was valued under the approved market state."
+      ],
+      "confidence": "medium",
+      "coverage_status": "valued",
+      "instrument_id": "instr_ethereum_synthetic_trust",
+      "missing_market_inputs": [],
+      "position_id": "pos_f_ethereum_synthetic_trust",
+      "pricing_function_id": "crypto_price_lookup_v1",
+      "required_market_inputs": [
+        "crypto_prices:instr_ethereum_synthetic_trust"
+      ],
+      "review_required": false,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "private_marks:instr_macro_overlay_manager_book"
+      ],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "instrument_id": "instr_macro_overlay_manager_book",
+      "missing_market_inputs": [],
+      "position_id": "pos_f_macro_overlay_manager_book",
+      "pricing_function_id": "approved_private_mark_policy_v1",
+      "required_market_inputs": [
+        "private_marks:instr_macro_overlay_manager_book"
+      ],
+      "review_required": true,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "review_policies:fallback_review_required_v1"
+      ],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "instrument_id": "instr_rates_volatility_collar",
+      "missing_market_inputs": [],
+      "position_id": "pos_f_rates_volatility_collar",
+      "pricing_function_id": "review_required_treatment_v1",
+      "required_market_inputs": [
+        "review_policies:fallback_review_required_v1"
+      ],
+      "review_required": true,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    },
+    {
+      "available_market_inputs": [
+        "review_policies:fallback_review_required_v1"
+      ],
+      "caveats": [
+        "Position requires review before relying on scenario impact."
+      ],
+      "confidence": "review_required",
+      "coverage_status": "review_required",
+      "instrument_id": "instr_ai_chip_downside_put_spread",
+      "missing_market_inputs": [],
+      "position_id": "pos_f_ai_chip_downside_put_spread",
+      "pricing_function_id": "review_required_treatment_v1",
+      "required_market_inputs": [
+        "review_policies:fallback_review_required_v1"
+      ],
+      "review_required": true,
+      "substitute_inputs": [],
+      "synthetic_data": true
+    }
+  ],
+  "coverage_summary": {
+    "by_status": {
+      "held_at_mark_with_caveat": 7,
+      "not_valued": 0,
+      "review_required": 12,
+      "valued": 51,
+      "valued_with_approved_policy": 4,
+      "valued_with_substitute_input": 0
+    },
+    "review_required_count": 12
+  },
+  "generated_at": "2026-07-05T00:00:00Z",
+  "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+  "methodology": "full_portfolio_revaluation",
+  "schema_version": "valuation_input_coverage_map.v1",
+  "synthetic_data": true,
+  "valuation_date": "2026-06-30"
+}

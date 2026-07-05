@@ -1,0 +1,584 @@
+{
+  "base_market_state_id": "market_state_base_2026-06-30",
+  "base_or_scenario": "scenario",
+  "caveats": [
+    "Synthetic full market-state fixture for internal revaluation skeleton only.",
+    "Market inputs are deterministic synthetic values, not live market data."
+  ],
+  "consistency_checks": {
+    "position_count": 74,
+    "required_input_families_present": [
+      "bond_price_scalars",
+      "cash_scalars",
+      "commodity_prices",
+      "crypto_prices",
+      "equity_prices",
+      "fund_prices",
+      "fx_rates",
+      "money_market_navs",
+      "private_marks",
+      "review_policies"
+    ],
+    "status": "complete"
+  },
+  "generated_at": "2026-07-05T00:00:00Z",
+  "market_inputs": {
+    "bond_price_scalars": {
+      "instr_agency_mbs_proxy": {
+        "confidence": "high",
+        "input_id": "bond_price_scalars:instr_agency_mbs_proxy",
+        "price_per_100": 102.13,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_inflation_linked_short_note": {
+        "confidence": "high",
+        "input_id": "bond_price_scalars:instr_inflation_linked_short_note",
+        "price_per_100": 102.13,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_municipal_income_ladder": {
+        "confidence": "high",
+        "input_id": "bond_price_scalars:instr_municipal_income_ladder",
+        "price_per_100": 102.13,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_treasury_bill_ladder": {
+        "confidence": "high",
+        "input_id": "bond_price_scalars:instr_treasury_bill_ladder",
+        "price_per_100": 102.13,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      }
+    },
+    "cash_scalars": {
+      "USD": {
+        "confidence": "high",
+        "input_id": "cash_scalars:USD",
+        "scalar": 1.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      }
+    },
+    "commodity_prices": {
+      "instr_wti_energy_exposure": {
+        "confidence": "high",
+        "input_id": "commodity_prices:instr_wti_energy_exposure",
+        "price": 0.98,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      }
+    },
+    "crypto_prices": {
+      "instr_bitcoin_synthetic_trust": {
+        "confidence": "high",
+        "input_id": "crypto_prices:instr_bitcoin_synthetic_trust",
+        "price": 101.84,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_ethereum_synthetic_trust": {
+        "confidence": "high",
+        "input_id": "crypto_prices:instr_ethereum_synthetic_trust",
+        "price": 331.08,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      }
+    },
+    "equity_prices": {
+      "instr_accelerator_design_house": {
+        "confidence": "high",
+        "input_id": "equity_prices:instr_accelerator_design_house",
+        "price": 26.5,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_advanced_packaging_supplier": {
+        "confidence": "high",
+        "input_id": "equity_prices:instr_advanced_packaging_supplier",
+        "price": 207.86,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_ai_compute_leader": {
+        "confidence": "high",
+        "input_id": "equity_prices:instr_ai_compute_leader",
+        "price": 219.23,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_chip_fabrication_partner": {
+        "confidence": "high",
+        "input_id": "equity_prices:instr_chip_fabrication_partner",
+        "price": 241.76,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_cloud_platform_compounder": {
+        "confidence": "high",
+        "input_id": "equity_prices:instr_cloud_platform_compounder",
+        "price": 264.23,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_consumer_platform_quality": {
+        "confidence": "high",
+        "input_id": "equity_prices:instr_consumer_platform_quality",
+        "price": 103.53,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_core_bank_quality": {
+        "confidence": "high",
+        "input_id": "equity_prices:instr_core_bank_quality",
+        "price": 52.35,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_data_center_cooling_leader": {
+        "confidence": "high",
+        "input_id": "equity_prices:instr_data_center_cooling_leader",
+        "price": 32.55,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_data_center_public_reit": {
+        "confidence": "high",
+        "input_id": "equity_prices:instr_data_center_public_reit",
+        "price": 196.3,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_edge_server_platform": {
+        "confidence": "high",
+        "input_id": "equity_prices:instr_edge_server_platform",
+        "price": 79.35,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_enterprise_ai_software": {
+        "confidence": "high",
+        "input_id": "equity_prices:instr_enterprise_ai_software",
+        "price": 66.81,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_grid_enabler_equity": {
+        "confidence": "high",
+        "input_id": "equity_prices:instr_grid_enabler_equity",
+        "price": 216.55,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_healthcare_resilience": {
+        "confidence": "high",
+        "input_id": "equity_prices:instr_healthcare_resilience",
+        "price": 208.84,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_industrial_compounder": {
+        "confidence": "high",
+        "input_id": "equity_prices:instr_industrial_compounder",
+        "price": 204.89,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_payments_network_core": {
+        "confidence": "high",
+        "input_id": "equity_prices:instr_payments_network_core",
+        "price": 239.41,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_pipeline_cash_yield": {
+        "confidence": "high",
+        "input_id": "equity_prices:instr_pipeline_cash_yield",
+        "price": 69.89,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_public_direct_lending_bdc": {
+        "confidence": "high",
+        "input_id": "equity_prices:instr_public_direct_lending_bdc",
+        "price": 29.95,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_quality_consumer_staples": {
+        "confidence": "high",
+        "input_id": "equity_prices:instr_quality_consumer_staples",
+        "price": 251.06,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_semicap_equipment_maker": {
+        "confidence": "high",
+        "input_id": "equity_prices:instr_semicap_equipment_maker",
+        "price": 63.14,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      }
+    },
+    "fund_prices": {
+      "instr_ai_chip_etf": {
+        "confidence": "high",
+        "input_id": "fund_prices:instr_ai_chip_etf",
+        "price": 132.32,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_broad_developed_equity_etf": {
+        "confidence": "high",
+        "input_id": "fund_prices:instr_broad_developed_equity_etf",
+        "price": 81.41,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_commodity_basket_fund": {
+        "confidence": "high",
+        "input_id": "fund_prices:instr_commodity_basket_fund",
+        "price": 238.35,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_copper_power_demand_etf": {
+        "confidence": "high",
+        "input_id": "fund_prices:instr_copper_power_demand_etf",
+        "price": 29.91,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_covered_call_income_etf": {
+        "confidence": "high",
+        "input_id": "fund_prices:instr_covered_call_income_etf",
+        "price": 140.49,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_defensive_quality_etf": {
+        "confidence": "high",
+        "input_id": "fund_prices:instr_defensive_quality_etf",
+        "price": 282.13,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_floating_rate_credit_etf": {
+        "confidence": "high",
+        "input_id": "fund_prices:instr_floating_rate_credit_etf",
+        "price": 81.72,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_gold_defensive_etf": {
+        "confidence": "high",
+        "input_id": "fund_prices:instr_gold_defensive_etf",
+        "price": 212.72,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_investment_grade_bond_etf": {
+        "confidence": "high",
+        "input_id": "fund_prices:instr_investment_grade_bond_etf",
+        "price": 136.2,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_minimum_volatility_equity": {
+        "confidence": "high",
+        "input_id": "fund_prices:instr_minimum_volatility_equity",
+        "price": 97.96,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_preferred_income_etf": {
+        "confidence": "high",
+        "input_id": "fund_prices:instr_preferred_income_etf",
+        "price": 29.5,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_quality_factor_etf": {
+        "confidence": "high",
+        "input_id": "fund_prices:instr_quality_factor_etf",
+        "price": 179.91,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_reit_income_etf": {
+        "confidence": "high",
+        "input_id": "fund_prices:instr_reit_income_etf",
+        "price": 191.37,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_short_duration_ig_bond": {
+        "confidence": "high",
+        "input_id": "fund_prices:instr_short_duration_ig_bond",
+        "price": 281.71,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_short_tips_etf": {
+        "confidence": "high",
+        "input_id": "fund_prices:instr_short_tips_etf",
+        "price": 148.22,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_short_treasury_etf": {
+        "confidence": "high",
+        "input_id": "fund_prices:instr_short_treasury_etf",
+        "price": 62.14,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_uranium_power_supply_etf": {
+        "confidence": "high",
+        "input_id": "fund_prices:instr_uranium_power_supply_etf",
+        "price": 190.82,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_usd_strength_proxy": {
+        "confidence": "high",
+        "input_id": "fund_prices:instr_usd_strength_proxy",
+        "price": 201.78,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_value_factor_etf": {
+        "confidence": "high",
+        "input_id": "fund_prices:instr_value_factor_etf",
+        "price": 44.15,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      }
+    },
+    "fx_rates": {
+      "USD": {
+        "confidence": "high",
+        "input_id": "fx_rates:USD",
+        "rate_to_usd": 1.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      }
+    },
+    "money_market_navs": {
+      "instr_core_quality_cash_sweep": {
+        "confidence": "high",
+        "input_id": "money_market_navs:instr_core_quality_cash_sweep",
+        "nav": 18.090518,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_government_money_market": {
+        "confidence": "high",
+        "input_id": "money_market_navs:instr_government_money_market",
+        "nav": 155.170191,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_income_sleeve_cash": {
+        "confidence": "high",
+        "input_id": "money_market_navs:instr_income_sleeve_cash",
+        "nav": 372.14815,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_municipal_cash_reserve": {
+        "confidence": "high",
+        "input_id": "money_market_navs:instr_municipal_cash_reserve",
+        "nav": 173.053292,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_public_ai_money_market_sweep": {
+        "confidence": "high",
+        "input_id": "money_market_navs:instr_public_ai_money_market_sweep",
+        "nav": 270.425388,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      }
+    },
+    "private_marks": {
+      "instr_ai_chip_downside_put_spread": {
+        "confidence": "high",
+        "input_id": "private_marks:instr_ai_chip_downside_put_spread",
+        "mark": 155000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_ai_infra_call_spread_note": {
+        "confidence": "high",
+        "input_id": "private_marks:instr_ai_infra_call_spread_note",
+        "mark": 275000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_asset_backed_credit_fund": {
+        "confidence": "high",
+        "input_id": "private_marks:instr_asset_backed_credit_fund",
+        "mark": 490000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_data_center_development_jv": {
+        "confidence": "high",
+        "input_id": "private_marks:instr_data_center_development_jv",
+        "mark": 940000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_data_center_land_option": {
+        "confidence": "high",
+        "input_id": "private_marks:instr_data_center_land_option",
+        "mark": 185000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_fiber_interconnect_infra_lp": {
+        "confidence": "high",
+        "input_id": "private_marks:instr_fiber_interconnect_infra_lp",
+        "mark": 390000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_industrial_logistics_real_estate": {
+        "confidence": "high",
+        "input_id": "private_marks:instr_industrial_logistics_real_estate",
+        "mark": 820000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_macro_overlay_manager_book": {
+        "confidence": "high",
+        "input_id": "private_marks:instr_macro_overlay_manager_book",
+        "mark": 330000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_multifamily_real_estate_fund": {
+        "confidence": "high",
+        "input_id": "private_marks:instr_multifamily_real_estate_fund",
+        "mark": 510000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_northstar_ai_growth_fund": {
+        "confidence": "high",
+        "input_id": "private_marks:instr_northstar_ai_growth_fund",
+        "mark": 1260000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_opaque_manager_level_private_book": {
+        "confidence": "high",
+        "input_id": "private_marks:instr_opaque_manager_level_private_book",
+        "mark": 610000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_power_campus_preferred": {
+        "confidence": "high",
+        "input_id": "private_marks:instr_power_campus_preferred",
+        "mark": 455000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_private_credit_income_fund": {
+        "confidence": "high",
+        "input_id": "private_marks:instr_private_credit_income_fund",
+        "mark": 540000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_private_credit_sidecar": {
+        "confidence": "high",
+        "input_id": "private_marks:instr_private_credit_sidecar",
+        "mark": 580000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_private_mark_placeholder": {
+        "confidence": "high",
+        "input_id": "private_marks:instr_private_mark_placeholder",
+        "mark": 125000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_rates_volatility_collar": {
+        "confidence": "high",
+        "input_id": "private_marks:instr_rates_volatility_collar",
+        "mark": 210000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_renewable_power_infra_lp": {
+        "confidence": "high",
+        "input_id": "private_marks:instr_renewable_power_infra_lp",
+        "mark": 470000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_secondary_pe_fund": {
+        "confidence": "high",
+        "input_id": "private_marks:instr_secondary_pe_fund",
+        "mark": 690000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      },
+      "instr_venture_ai_infrastructure_fund": {
+        "confidence": "high",
+        "input_id": "private_marks:instr_venture_ai_infrastructure_fund",
+        "mark": 740000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      }
+    },
+    "review_policies": {
+      "fallback_review_required_v1": {
+        "confidence": "high",
+        "input_id": "review_policies:fallback_review_required_v1",
+        "policy": 1.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      }
+    }
+  },
+  "market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+  "scenario_display_name": "AI / Chip Selloff",
+  "scenario_id": "ai_chip_selloff",
+  "schema_version": "revaluation_market_state.v1",
+  "source_scenario_state_id": "scenario_state_ai_chip_selloff",
+  "source_scenario_state_path": "data\\simulation\\synthetic_scenario_market_states.json",
+  "state_variable_values": {
+    "ai_infrastructure_proxy": 58.394157,
+    "bond_price_proxy": 102.1303,
+    "cash_treatment": 1.0,
+    "commodity_price": 97.621123,
+    "credit_spread_proxy": 125.799774,
+    "crypto_price": 85.364878,
+    "duration_bucket_price": 101.984822,
+    "energy_price_proxy": 97.501453,
+    "etf_price": 70.155495,
+    "fx_rate": 0.970463,
+    "human_review_flag": 1.0,
+    "liquidity_discount_proxy": 0.165174,
+    "manager_composite_proxy": 6.862304,
+    "manager_mark": 94.377216,
+    "money_market_nav": 1.000266,
+    "optional_lookthrough_proxy": 72.194305,
+    "private_equity_proxy": 73.439704,
+    "private_mark": 100.001669,
+    "rate_proxy": 0.036342,
+    "real_asset_proxy": 98.489324,
+    "time_to_maturity": 0.503425,
+    "underlying_price": 65.05133,
+    "volatility_proxy": 36.462699
+  },
+  "synthetic_data": true,
+  "valuation_date": "2026-06-30"
+}
