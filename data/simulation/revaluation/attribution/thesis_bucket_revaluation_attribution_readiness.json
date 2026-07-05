@@ -15,6 +15,10 @@
     "No thesis-bucket totals are generated until approved assignments exist."
   ],
   "scenario_id": "ai_chip_selloff",
+  "scenario_ids": [
+    "ai_chip_selloff",
+    "rate_shock"
+  ],
   "scenario_market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
   "scenario_portfolio_value": 35397657.2,
   "schema_version": "thesis_bucket_revaluation_attribution_readiness.v1",

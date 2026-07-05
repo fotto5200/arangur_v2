@@ -16,9 +16,11 @@ from arangur.analytics.pricing_functions import (
 
 GENERATED_AT = "2026-07-05T00:00:00Z"
 SCENARIO_ID = "ai_chip_selloff"
+SUPPORTED_SCENARIO_IDS = ("ai_chip_selloff", "rate_shock")
 DEFAULT_POSITION_UNIVERSE_PATH = Path("data/simulation/synthetic_position_universe.json")
 DEFAULT_SCENARIO_MARKET_STATES_PATH = Path("data/simulation/synthetic_scenario_market_states.json")
 DEFAULT_OUTPUT_DIR = Path("data/simulation/revaluation")
+SCENARIO_INDEX_FILE = "revaluation_scenario_index.json"
 
 INPUT_FILES = {
     "instrument_catalog": "instrument_catalog.json",
@@ -40,6 +42,15 @@ OUTPUT_FILES = {
     "revaluation_bundle_manifest": "revaluation_bundle_manifest.json",
 }
 
+SHARED_INPUT_FILE_KEYS = (
+    "instrument_catalog",
+    "position_catalog",
+    "pricing_function_registry",
+    "base_market_state",
+    "position_pricing_function_assignments",
+    "valuation_input_coverage_map_base",
+)
+
 PRIVATE_OR_OPAQUE_TYPES = {
     "private_credit",
     "private_equity",
@@ -49,13 +60,65 @@ PRIVATE_OR_OPAQUE_TYPES = {
 }
 
 
-def load_revaluation_fixtures(output_dir: Path | str = DEFAULT_OUTPUT_DIR) -> dict[str, Any]:
+def input_files_for_scenario(scenario_id: str) -> dict[str, str]:
+    _validate_scenario_id(scenario_id)
+    files = {name: INPUT_FILES[name] for name in SHARED_INPUT_FILE_KEYS}
+    files["scenario_market_state"] = f"scenario_market_state_{scenario_id}.json"
+    files[f"valuation_input_coverage_map_{scenario_id}"] = f"valuation_input_coverage_map_{scenario_id}.json"
+    return files
+
+
+def output_files_for_scenario(scenario_id: str) -> dict[str, str]:
+    _validate_scenario_id(scenario_id)
+    if scenario_id == SCENARIO_ID:
+        return {
+            "position_valuation_results_base": OUTPUT_FILES["position_valuation_results_base"],
+            f"position_valuation_results_{scenario_id}": OUTPUT_FILES["position_valuation_results_ai_chip_selloff"],
+            f"position_value_comparison_{scenario_id}": OUTPUT_FILES["position_value_comparison_ai_chip_selloff"],
+            f"portfolio_revaluation_summary_{scenario_id}": OUTPUT_FILES["portfolio_revaluation_summary_ai_chip_selloff"],
+            "valuation_coverage_manifest": OUTPUT_FILES["valuation_coverage_manifest"],
+            "revaluation_bundle_manifest": OUTPUT_FILES["revaluation_bundle_manifest"],
+        }
+    return {
+        "position_valuation_results_base": OUTPUT_FILES["position_valuation_results_base"],
+        f"position_valuation_results_{scenario_id}": f"position_valuation_results_{scenario_id}.json",
+        f"position_value_comparison_{scenario_id}": f"position_value_comparison_{scenario_id}.json",
+        f"portfolio_revaluation_summary_{scenario_id}": f"portfolio_revaluation_summary_{scenario_id}.json",
+        "valuation_coverage_manifest": f"valuation_coverage_manifest_{scenario_id}.json",
+        "revaluation_bundle_manifest": f"revaluation_bundle_manifest_{scenario_id}.json",
+    }
+
+
+def all_revaluation_files_for_scenarios(scenario_ids: tuple[str, ...] | list[str] = SUPPORTED_SCENARIO_IDS) -> list[str]:
+    filenames: list[str] = []
+    for scenario_id in scenario_ids:
+        filenames.extend(input_files_for_scenario(scenario_id).values())
+        filenames.extend(output_files_for_scenario(scenario_id).values())
+    filenames.append(SCENARIO_INDEX_FILE)
+    return list(dict.fromkeys(filenames))
+
+
+def load_revaluation_fixtures(
+    output_dir: Path | str = DEFAULT_OUTPUT_DIR,
+    *,
+    scenario_id: str = SCENARIO_ID,
+) -> dict[str, Any]:
     """Load generated synthetic revaluation fixture inputs."""
     root = Path(output_dir)
-    return {
-        name: _load_json(root / filename)
-        for name, filename in INPUT_FILES.items()
+    scenario_files = input_files_for_scenario(scenario_id)
+    fixtures = {
+        name: _load_json(root / INPUT_FILES[name])
+        for name in SHARED_INPUT_FILE_KEYS
     }
+    fixtures["scenario_market_state"] = _load_json(root / scenario_files["scenario_market_state"])
+    fixtures[f"valuation_input_coverage_map_{scenario_id}"] = _load_json(
+        root / scenario_files[f"valuation_input_coverage_map_{scenario_id}"]
+    )
+    if scenario_id == SCENARIO_ID:
+        fixtures["valuation_input_coverage_map_ai_chip_selloff"] = fixtures[
+            f"valuation_input_coverage_map_{scenario_id}"
+        ]
+    return fixtures
 
 
 def generate_revaluation_fixtures(
@@ -63,11 +126,13 @@ def generate_revaluation_fixtures(
     position_universe_path: Path | str = DEFAULT_POSITION_UNIVERSE_PATH,
     scenario_market_states_path: Path | str = DEFAULT_SCENARIO_MARKET_STATES_PATH,
     output_dir: Path | str = DEFAULT_OUTPUT_DIR,
+    scenario_id: str = SCENARIO_ID,
 ) -> dict[str, Any]:
     """Generate normalized fixture inputs for the synthetic full revaluation skeleton."""
+    _validate_scenario_id(scenario_id)
     universe = _load_json(Path(position_universe_path))
     scenario_payload = _load_json(Path(scenario_market_states_path))
-    scenario_source = _scenario_by_id(scenario_payload, SCENARIO_ID)
+    scenario_source = _scenario_by_id(scenario_payload, scenario_id)
 
     instruments = build_instrument_catalog(universe)
     positions = build_position_catalog(universe)
@@ -111,11 +176,17 @@ def generate_revaluation_fixtures(
         "scenario_market_state": scenario_market_state,
         "position_pricing_function_assignments": assignments,
         "valuation_input_coverage_map_base": base_coverage,
-        "valuation_input_coverage_map_ai_chip_selloff": scenario_coverage,
+        f"valuation_input_coverage_map_{scenario_id}": scenario_coverage,
     }
+    if scenario_id == SCENARIO_ID:
+        fixtures["valuation_input_coverage_map_ai_chip_selloff"] = scenario_coverage
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
-    for name, filename in INPUT_FILES.items():
+    for name in SHARED_INPUT_FILE_KEYS:
+        _write_json(output_path / INPUT_FILES[name], fixtures[name])
+    for name, filename in input_files_for_scenario(scenario_id).items():
+        if name in SHARED_INPUT_FILE_KEYS:
+            continue
         _write_json(output_path / filename, fixtures[name])
     return fixtures
 
@@ -125,12 +196,15 @@ def run_full_revaluation(
     position_universe_path: Path | str = DEFAULT_POSITION_UNIVERSE_PATH,
     scenario_market_states_path: Path | str = DEFAULT_SCENARIO_MARKET_STATES_PATH,
     output_dir: Path | str = DEFAULT_OUTPUT_DIR,
+    scenario_id: str = SCENARIO_ID,
 ) -> dict[str, Any]:
     """Generate fixture inputs, value every position, compare, aggregate, and write outputs."""
+    _validate_scenario_id(scenario_id)
     fixtures = generate_revaluation_fixtures(
         position_universe_path=position_universe_path,
         scenario_market_states_path=scenario_market_states_path,
         output_dir=output_dir,
+        scenario_id=scenario_id,
     )
     base_results = value_portfolio(
         positions=fixtures["position_catalog"],
@@ -150,9 +224,10 @@ def run_full_revaluation(
         fixtures["scenario_market_state"],
     )
     portfolio_summary = aggregate_position_comparisons(comparisons)
-    coverage_manifest = build_valuation_coverage_manifest(fixtures, comparisons)
+    coverage_manifest = build_valuation_coverage_manifest(fixtures, comparisons, scenario_id=scenario_id)
     bundle_manifest = publish_revaluation_bundle(
         output_dir=Path(output_dir),
+        scenario_id=scenario_id,
         base_results=base_results,
         scenario_results=scenario_results,
         comparisons=comparisons,
@@ -162,12 +237,83 @@ def run_full_revaluation(
     return {
         "fixtures": fixtures,
         "position_valuation_results_base": base_results,
-        "position_valuation_results_ai_chip_selloff": scenario_results,
-        "position_value_comparison_ai_chip_selloff": comparisons,
-        "portfolio_revaluation_summary_ai_chip_selloff": portfolio_summary,
+        f"position_valuation_results_{scenario_id}": scenario_results,
+        f"position_value_comparison_{scenario_id}": comparisons,
+        f"portfolio_revaluation_summary_{scenario_id}": portfolio_summary,
         "valuation_coverage_manifest": coverage_manifest,
         "revaluation_bundle_manifest": bundle_manifest,
     }
+
+
+def run_all_full_revaluations(
+    *,
+    position_universe_path: Path | str = DEFAULT_POSITION_UNIVERSE_PATH,
+    scenario_market_states_path: Path | str = DEFAULT_SCENARIO_MARKET_STATES_PATH,
+    output_dir: Path | str = DEFAULT_OUTPUT_DIR,
+    scenario_ids: tuple[str, ...] | list[str] = SUPPORTED_SCENARIO_IDS,
+) -> dict[str, Any]:
+    scenario_outputs = {}
+    for scenario_id in scenario_ids:
+        scenario_outputs[scenario_id] = run_full_revaluation(
+            position_universe_path=position_universe_path,
+            scenario_market_states_path=scenario_market_states_path,
+            output_dir=output_dir,
+            scenario_id=scenario_id,
+        )
+    scenario_index = publish_revaluation_scenario_index(
+        output_dir=Path(output_dir),
+        scenario_outputs=scenario_outputs,
+    )
+    return {
+        "scenarios": scenario_outputs,
+        "revaluation_scenario_index": scenario_index,
+    }
+
+
+def publish_revaluation_scenario_index(
+    *,
+    output_dir: Path,
+    scenario_outputs: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
+    scenario_rows = []
+    for scenario_id, outputs in scenario_outputs.items():
+        bundle = outputs["revaluation_bundle_manifest"]
+        files = output_files_for_scenario(scenario_id)
+        inputs = input_files_for_scenario(scenario_id)
+        scenario_rows.append(
+            {
+                "scenario_id": scenario_id,
+                "base_market_state_id": bundle["base_market_state_id"],
+                "scenario_market_state_id": bundle["scenario_market_state_id"],
+                "base_portfolio_value": bundle["base_portfolio_value"],
+                "scenario_portfolio_value": bundle["scenario_portfolio_value"],
+                "impact": bundle["impact"],
+                "impact_percent": bundle["impact_percent"],
+                "market_state_fixture": f"data/simulation/revaluation/{inputs['scenario_market_state']}",
+                "position_valuation_results_file": f"data/simulation/revaluation/{files[f'position_valuation_results_{scenario_id}']}",
+                "position_value_comparison_file": f"data/simulation/revaluation/{files[f'position_value_comparison_{scenario_id}']}",
+                "portfolio_summary_file": f"data/simulation/revaluation/{files[f'portfolio_revaluation_summary_{scenario_id}']}",
+                "valuation_coverage_manifest_file": f"data/simulation/revaluation/{files['valuation_coverage_manifest']}",
+                "bundle_manifest_file": f"data/simulation/revaluation/{files['revaluation_bundle_manifest']}",
+                "attribution_index_file": "data/simulation/revaluation/attribution/revaluation_attribution_index.json",
+            }
+        )
+    scenario_rows.sort(key=lambda row: row["scenario_id"])
+    index = {
+        "schema_version": "revaluation_scenario_index.v1",
+        "generated_at": GENERATED_AT,
+        "methodology": "full_portfolio_revaluation",
+        "synthetic_data": True,
+        "scenario_count": len(scenario_rows),
+        "scenario_ids": [row["scenario_id"] for row in scenario_rows],
+        "scenarios": scenario_rows,
+        "caveats": [
+            "Synthetic internal full-revaluation scenario index only.",
+            "Advisor UI and report-element wiring remain paused.",
+        ],
+    }
+    _write_json(output_dir / SCENARIO_INDEX_FILE, index)
+    return index
 
 
 def select_pricing_function(
@@ -279,12 +425,13 @@ def aggregate_position_comparisons(comparisons_payload: dict[str, Any]) -> dict[
     base_total = sum(float(row["base_value"]) for row in rows)
     scenario_total = sum(float(row["scenario_value"]) for row in rows)
     impact = _round_money(scenario_total - base_total)
+    scenario_id = comparisons_payload.get("scenario_id") or (rows[0]["scenario_id"] if rows else SCENARIO_ID)
     return {
         "schema_version": "portfolio_revaluation_summary.v1",
         "generated_at": GENERATED_AT,
         "methodology": "full_portfolio_revaluation",
         "synthetic_data": True,
-        "scenario_id": SCENARIO_ID,
+        "scenario_id": scenario_id,
         "base_portfolio_value": _round_money(base_total),
         "scenario_portfolio_value": _round_money(scenario_total),
         "impact": impact,
@@ -303,28 +450,30 @@ def aggregate_position_comparisons(comparisons_payload: dict[str, Any]) -> dict[
 def publish_revaluation_bundle(
     *,
     output_dir: Path,
+    scenario_id: str,
     base_results: dict[str, Any],
     scenario_results: dict[str, Any],
     comparisons: dict[str, Any],
     portfolio_summary: dict[str, Any],
     coverage_manifest: dict[str, Any],
 ) -> dict[str, Any]:
+    output_files = output_files_for_scenario(scenario_id)
     outputs = {
         "position_valuation_results_base": base_results,
-        "position_valuation_results_ai_chip_selloff": scenario_results,
-        "position_value_comparison_ai_chip_selloff": comparisons,
-        "portfolio_revaluation_summary_ai_chip_selloff": portfolio_summary,
+        f"position_valuation_results_{scenario_id}": scenario_results,
+        f"position_value_comparison_{scenario_id}": comparisons,
+        f"portfolio_revaluation_summary_{scenario_id}": portfolio_summary,
         "valuation_coverage_manifest": coverage_manifest,
     }
     output_dir.mkdir(parents=True, exist_ok=True)
     for name, payload in outputs.items():
-        _write_json(output_dir / OUTPUT_FILES[name], payload)
+        _write_json(output_dir / output_files[name], payload)
     manifest = {
         "schema_version": "revaluation_bundle_manifest.v1",
         "generated_at": GENERATED_AT,
         "methodology": "full_portfolio_revaluation",
         "synthetic_data": True,
-        "scenario_id": SCENARIO_ID,
+        "scenario_id": scenario_id,
         "base_market_state_id": comparisons["base_market_state_id"],
         "scenario_market_state_id": comparisons["scenario_market_state_id"],
         "position_count": comparisons["position_count"],
@@ -337,11 +486,11 @@ def publish_revaluation_bundle(
         "review_required_count": portfolio_summary["review_required_count"],
         "input_files": [
             f"data/simulation/revaluation/{filename}"
-            for filename in INPUT_FILES.values()
+            for filename in input_files_for_scenario(scenario_id).values()
         ],
         "output_files": [
             f"data/simulation/revaluation/{filename}"
-            for filename in OUTPUT_FILES.values()
+            for filename in output_files.values()
         ],
         "caveats": [
             "Synthetic internal analytics infrastructure only.",
@@ -349,7 +498,7 @@ def publish_revaluation_bundle(
             "Scenario impact is scenario portfolio value minus base portfolio value after valuing every position.",
         ],
     }
-    _write_json(output_dir / OUTPUT_FILES["revaluation_bundle_manifest"], manifest)
+    _write_json(output_dir / output_files["revaluation_bundle_manifest"], manifest)
     return manifest
 
 
@@ -508,6 +657,14 @@ def build_market_state(
         else f"market_state_base_{universe['as_of_date']}"
     )
     market_inputs = _market_inputs_for_positions(positions, instrument_by_id, state_values, base_or_scenario)
+    caveats = [
+        "Synthetic full market-state fixture for internal revaluation skeleton only.",
+        "Market inputs are deterministic synthetic values, not live market data.",
+    ]
+    if scenario_id == "rate_shock":
+        caveats.append(
+            "Rate-shock support uses full market-state price and rate inputs with simplified synthetic bond price scalars, not production curve pricing."
+        )
     return {
         "schema_version": "revaluation_market_state.v1",
         "generated_at": GENERATED_AT,
@@ -527,10 +684,7 @@ def build_market_state(
             "position_count": len(positions),
             "status": "complete",
         },
-        "caveats": [
-            "Synthetic full market-state fixture for internal revaluation skeleton only.",
-            "Market inputs are deterministic synthetic values, not live market data.",
-        ],
+        "caveats": caveats,
     }
 
 
@@ -615,7 +769,13 @@ def build_valuation_input_coverage_map(
     }
 
 
-def build_valuation_coverage_manifest(fixtures: dict[str, Any], comparisons: dict[str, Any]) -> dict[str, Any]:
+def build_valuation_coverage_manifest(
+    fixtures: dict[str, Any],
+    comparisons: dict[str, Any],
+    *,
+    scenario_id: str,
+) -> dict[str, Any]:
+    files = {**input_files_for_scenario(scenario_id), **output_files_for_scenario(scenario_id)}
     return {
         "schema_version": "valuation_coverage_manifest.v1",
         "generated_at": GENERATED_AT,
@@ -627,7 +787,7 @@ def build_valuation_coverage_manifest(fixtures: dict[str, Any], comparisons: dic
         "scenario_market_state_ids": [fixtures["scenario_market_state"]["market_state_id"]],
         "artifact_paths": {
             name: f"data/simulation/revaluation/{filename}"
-            for name, filename in {**INPUT_FILES, **OUTPUT_FILES}.items()
+            for name, filename in files.items()
             if name != "revaluation_bundle_manifest"
         },
         "coverage_summary": comparisons["portfolio_summary"]["coverage_summary"],
@@ -653,13 +813,19 @@ def _market_inputs_for_positions(
         "fund_prices": {},
         "money_market_navs": {},
         "bond_price_scalars": {},
-        "cash_scalars": {"USD": _input("cash_scalars:USD", 1.0, "scalar")},
+        "cash_scalars": {"USD": _input("cash_scalars:USD", _factor_for("cash_treatment", state_values, base_or_scenario), "scalar")},
         "fx_rates": {"USD": _input("fx_rates:USD", 1.0, "rate_to_usd")},
         "commodity_prices": {},
         "crypto_prices": {},
         "private_marks": {},
         "review_policies": {
             "fallback_review_required_v1": _input("review_policies:fallback_review_required_v1", 1.0, "policy"),
+        },
+        "rate_curve_inputs": {
+            "USD": _input("rate_curve_inputs:USD", state_values.get("rate_proxy", 0.035), "rate"),
+        },
+        "cash_yield_assumptions": {
+            "USD": _input("cash_yield_assumptions:USD", state_values.get("money_market_nav", 1.0), "nav"),
         },
     }
     for position in positions:
@@ -758,6 +924,12 @@ def _scenario_by_id(payload: dict[str, Any], scenario_id: str) -> dict[str, Any]
         if scenario.get("scenario_id") == scenario_id:
             return scenario
     raise ValueError(f"Scenario not found: {scenario_id}")
+
+
+def _validate_scenario_id(scenario_id: str) -> None:
+    if scenario_id not in SUPPORTED_SCENARIO_IDS:
+        supported = ", ".join(SUPPORTED_SCENARIO_IDS)
+        raise ValueError(f"Unsupported full-revaluation scenario: {scenario_id}. Supported scenarios: {supported}")
 
 
 def _pricing_entry(
@@ -894,7 +1066,7 @@ def _safe_price(value: float, amount: float) -> float:
 def _factor_for(variable_id: str, state_values: dict[str, float], base_or_scenario: str) -> float:
     if base_or_scenario == "base":
         return 1.0
-    denominator = 1.0 if variable_id in {"money_market_nav", "fx_rate"} else 100.0
+    denominator = 1.0 if variable_id in {"money_market_nav", "fx_rate", "cash_treatment"} else 100.0
     return float(state_values.get(variable_id, denominator)) / denominator
 
 

@@ -14,138 +14,10 @@
     "Report-ready additive thesis buckets require published position-thesis assignments."
   ],
   "methodology": "full_portfolio_revaluation_attribution",
-  "portfolio_impact": -9461334.2,
-  "portfolio_impact_percent": -0.210913,
+  "portfolio_impact": -4780321.76,
+  "portfolio_impact_percent": -0.106563,
   "reconciles_to_portfolio": false,
   "rows": [
-    {
-      "advisor_description": "Use when separating economically sensitive public equity exposure from defensive ballast.",
-      "base_value": 32978991.4,
-      "caveats": [
-        "Consumer-demand mapping is a synthetic proxy, not a macro forecast."
-      ],
-      "confidence_mix": {
-        "high": {
-          "base_value": 21353969.61,
-          "count": 25,
-          "impact": -7094523.4,
-          "scenario_value": 14259446.21
-        },
-        "medium": {
-          "base_value": 8225021.79,
-          "count": 18,
-          "impact": -2418707.0,
-          "scenario_value": 5806314.79
-        },
-        "review_required": {
-          "base_value": 3400000.0,
-          "count": 5,
-          "impact": 0.0,
-          "scenario_value": 3400000.0
-        }
-      },
-      "coverage_mix": {
-        "held_at_mark_with_caveat": {
-          "base_value": 690000.0,
-          "count": 1,
-          "impact": 0.0,
-          "scenario_value": 690000.0
-        },
-        "review_required": {
-          "base_value": 3400000.0,
-          "count": 5,
-          "impact": 0.0,
-          "scenario_value": 3400000.0
-        },
-        "valued": {
-          "base_value": 28888991.4,
-          "count": 42,
-          "impact": -9513230.4,
-          "scenario_value": 19375761.0
-        }
-      },
-      "impact": -9513230.4,
-      "impact_percent": -0.288463,
-      "matching_basis": "approved_pack_theme_matchers_against_position_tags_and_classifications",
-      "percent_of_portfolio_base": 0.73517,
-      "percent_of_portfolio_impact": 1.005485,
-      "position_count": 48,
-      "scenario_value": 23465761.0,
-      "theme_display_name": "Consumer Demand Sensitivity",
-      "theme_id": "consumer_demand_sensitivity",
-      "top_positions_by_absolute_impact": [
-        {
-          "account_id": "acct_a_public_equity",
-          "base_value": 3850616.62,
-          "confidence": "high",
-          "coverage_status": "valued",
-          "display_name": "AI Compute Leader",
-          "impact": -1345807.76,
-          "impact_percent": -0.349504,
-          "manager_id": "mgr_a_growth_ai_infrastructure",
-          "position_id": "pos_a_ai_compute_leader",
-          "review_required": false,
-          "scenario_value": 2504808.86,
-          "sleeve_id": "sleeve_public_equity"
-        },
-        {
-          "account_id": "acct_a_public_equity",
-          "base_value": 3643332.17,
-          "confidence": "high",
-          "coverage_status": "valued",
-          "display_name": "Cloud Platform Compounder",
-          "impact": -1273314.05,
-          "impact_percent": -0.349492,
-          "manager_id": "mgr_a_growth_ai_infrastructure",
-          "position_id": "pos_a_cloud_platform_compounder",
-          "review_required": false,
-          "scenario_value": 2370018.12,
-          "sleeve_id": "sleeve_public_equity"
-        },
-        {
-          "account_id": "acct_b_core_quality",
-          "base_value": 1320011.48,
-          "confidence": "high",
-          "coverage_status": "valued",
-          "display_name": "Cloud Platform Compounder",
-          "impact": -461332.94,
-          "impact_percent": -0.349492,
-          "manager_id": "mgr_b_core_quality_equity",
-          "position_id": "pos_b_cloud_platform_compounder",
-          "review_required": false,
-          "scenario_value": 858678.54,
-          "sleeve_id": "sleeve_core_quality"
-        },
-        {
-          "account_id": "acct_a_public_equity",
-          "base_value": 1124991.44,
-          "confidence": "medium",
-          "coverage_status": "valued",
-          "display_name": "Chip Fabrication Partner",
-          "impact": -393159.74,
-          "impact_percent": -0.349478,
-          "manager_id": "mgr_a_growth_ai_infrastructure",
-          "position_id": "pos_a_chip_fabrication_partner",
-          "review_required": false,
-          "scenario_value": 731831.7,
-          "sleeve_id": "sleeve_public_equity"
-        },
-        {
-          "account_id": "acct_a_public_equity",
-          "base_value": 920016.21,
-          "confidence": "high",
-          "coverage_status": "valued",
-          "display_name": "Semicap Equipment Maker",
-          "impact": -321522.25,
-          "impact_percent": -0.349475,
-          "manager_id": "mgr_a_growth_ai_infrastructure",
-          "position_id": "pos_a_semicap_equipment_maker",
-          "review_required": false,
-          "scenario_value": 598493.96,
-          "sleeve_id": "sleeve_public_equity"
-        }
-      ]
-    },
     {
       "advisor_description": "Use when discussing liquidity, cash generation, and stabilizing portfolio roles.",
       "base_value": 37948991.4,
@@ -156,14 +28,14 @@
         "high": {
           "base_value": 25498969.61,
           "count": 33,
-          "impact": -7058114.2,
-          "scenario_value": 18440855.41
+          "impact": -3506653.7,
+          "scenario_value": 21992315.91
         },
         "medium": {
           "base_value": 11245021.79,
           "count": 24,
-          "impact": -2397620.0,
-          "scenario_value": 8847401.79
+          "impact": -1268068.06,
+          "scenario_value": 9976953.73
         },
         "review_required": {
           "base_value": 1205000.0,
@@ -188,23 +60,23 @@
         "valued": {
           "base_value": 31708991.4,
           "count": 49,
-          "impact": -9512711.7,
-          "scenario_value": 22196279.7
+          "impact": -4519259.26,
+          "scenario_value": 27189732.14
         },
         "valued_with_approved_policy": {
           "base_value": 2675000.0,
           "count": 4,
-          "impact": 56977.5,
-          "scenario_value": 2731977.5
+          "impact": -255462.5,
+          "scenario_value": 2419537.5
         }
       },
-      "impact": -9455734.2,
-      "impact_percent": -0.24917,
+      "impact": -4774721.76,
+      "impact_percent": -0.125819,
       "matching_basis": "approved_pack_theme_matchers_against_position_tags_and_classifications",
       "percent_of_portfolio_base": 0.845962,
-      "percent_of_portfolio_impact": 0.999408,
+      "percent_of_portfolio_impact": 0.998829,
       "position_count": 60,
-      "scenario_value": 28493257.2,
+      "scenario_value": 33174269.64,
       "theme_display_name": "Defensive Cash Flow",
       "theme_id": "defensive_cash_flow",
       "top_positions_by_absolute_impact": [
@@ -214,12 +86,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "AI Compute Leader",
-          "impact": -1345807.76,
-          "impact_percent": -0.349504,
+          "impact": -602351.52,
+          "impact_percent": -0.15643,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_ai_compute_leader",
           "review_required": false,
-          "scenario_value": 2504808.86,
+          "scenario_value": 3248265.1,
           "sleeve_id": "sleeve_public_equity"
         },
         {
@@ -228,12 +100,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Cloud Platform Compounder",
-          "impact": -1273314.05,
-          "impact_percent": -0.349492,
+          "impact": -569923.74,
+          "impact_percent": -0.156429,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_cloud_platform_compounder",
           "review_required": false,
-          "scenario_value": 2370018.12,
+          "scenario_value": 3073408.43,
           "sleeve_id": "sleeve_public_equity"
         },
         {
@@ -242,12 +114,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Cloud Platform Compounder",
-          "impact": -461332.94,
-          "impact_percent": -0.349492,
+          "impact": -206488.41,
+          "impact_percent": -0.156429,
           "manager_id": "mgr_b_core_quality_equity",
           "position_id": "pos_b_cloud_platform_compounder",
           "review_required": false,
-          "scenario_value": 858678.54,
+          "scenario_value": 1113523.07,
           "sleeve_id": "sleeve_core_quality"
         },
         {
@@ -256,12 +128,12 @@
           "confidence": "medium",
           "coverage_status": "valued",
           "display_name": "Chip Fabrication Partner",
-          "impact": -393159.74,
-          "impact_percent": -0.349478,
+          "impact": -175965.32,
+          "impact_percent": -0.156415,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_chip_fabrication_partner",
           "review_required": false,
-          "scenario_value": 731831.7,
+          "scenario_value": 949026.12,
           "sleeve_id": "sleeve_public_equity"
         },
         {
@@ -270,12 +142,140 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Semicap Equipment Maker",
-          "impact": -321522.25,
-          "impact_percent": -0.349475,
+          "impact": -143888.79,
+          "impact_percent": -0.156398,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_semicap_equipment_maker",
           "review_required": false,
-          "scenario_value": 598493.96,
+          "scenario_value": 776127.42,
+          "sleeve_id": "sleeve_public_equity"
+        }
+      ]
+    },
+    {
+      "advisor_description": "Use when separating economically sensitive public equity exposure from defensive ballast.",
+      "base_value": 32978991.4,
+      "caveats": [
+        "Consumer-demand mapping is a synthetic proxy, not a macro forecast."
+      ],
+      "confidence_mix": {
+        "high": {
+          "base_value": 21353969.61,
+          "count": 25,
+          "impact": -3345954.59,
+          "scenario_value": 18008015.02
+        },
+        "medium": {
+          "base_value": 8225021.79,
+          "count": 18,
+          "impact": -1173523.06,
+          "scenario_value": 7051498.73
+        },
+        "review_required": {
+          "base_value": 3400000.0,
+          "count": 5,
+          "impact": 0.0,
+          "scenario_value": 3400000.0
+        }
+      },
+      "coverage_mix": {
+        "held_at_mark_with_caveat": {
+          "base_value": 690000.0,
+          "count": 1,
+          "impact": 0.0,
+          "scenario_value": 690000.0
+        },
+        "review_required": {
+          "base_value": 3400000.0,
+          "count": 5,
+          "impact": 0.0,
+          "scenario_value": 3400000.0
+        },
+        "valued": {
+          "base_value": 28888991.4,
+          "count": 42,
+          "impact": -4519477.65,
+          "scenario_value": 24369513.75
+        }
+      },
+      "impact": -4519477.65,
+      "impact_percent": -0.137041,
+      "matching_basis": "approved_pack_theme_matchers_against_position_tags_and_classifications",
+      "percent_of_portfolio_base": 0.73517,
+      "percent_of_portfolio_impact": 0.945434,
+      "position_count": 48,
+      "scenario_value": 28459513.75,
+      "theme_display_name": "Consumer Demand Sensitivity",
+      "theme_id": "consumer_demand_sensitivity",
+      "top_positions_by_absolute_impact": [
+        {
+          "account_id": "acct_a_public_equity",
+          "base_value": 3850616.62,
+          "confidence": "high",
+          "coverage_status": "valued",
+          "display_name": "AI Compute Leader",
+          "impact": -602351.52,
+          "impact_percent": -0.15643,
+          "manager_id": "mgr_a_growth_ai_infrastructure",
+          "position_id": "pos_a_ai_compute_leader",
+          "review_required": false,
+          "scenario_value": 3248265.1,
+          "sleeve_id": "sleeve_public_equity"
+        },
+        {
+          "account_id": "acct_a_public_equity",
+          "base_value": 3643332.17,
+          "confidence": "high",
+          "coverage_status": "valued",
+          "display_name": "Cloud Platform Compounder",
+          "impact": -569923.74,
+          "impact_percent": -0.156429,
+          "manager_id": "mgr_a_growth_ai_infrastructure",
+          "position_id": "pos_a_cloud_platform_compounder",
+          "review_required": false,
+          "scenario_value": 3073408.43,
+          "sleeve_id": "sleeve_public_equity"
+        },
+        {
+          "account_id": "acct_b_core_quality",
+          "base_value": 1320011.48,
+          "confidence": "high",
+          "coverage_status": "valued",
+          "display_name": "Cloud Platform Compounder",
+          "impact": -206488.41,
+          "impact_percent": -0.156429,
+          "manager_id": "mgr_b_core_quality_equity",
+          "position_id": "pos_b_cloud_platform_compounder",
+          "review_required": false,
+          "scenario_value": 1113523.07,
+          "sleeve_id": "sleeve_core_quality"
+        },
+        {
+          "account_id": "acct_a_public_equity",
+          "base_value": 1124991.44,
+          "confidence": "medium",
+          "coverage_status": "valued",
+          "display_name": "Chip Fabrication Partner",
+          "impact": -175965.32,
+          "impact_percent": -0.156415,
+          "manager_id": "mgr_a_growth_ai_infrastructure",
+          "position_id": "pos_a_chip_fabrication_partner",
+          "review_required": false,
+          "scenario_value": 949026.12,
+          "sleeve_id": "sleeve_public_equity"
+        },
+        {
+          "account_id": "acct_a_public_equity",
+          "base_value": 920016.21,
+          "confidence": "high",
+          "coverage_status": "valued",
+          "display_name": "Semicap Equipment Maker",
+          "impact": -143888.79,
+          "impact_percent": -0.156398,
+          "manager_id": "mgr_a_growth_ai_infrastructure",
+          "position_id": "pos_a_semicap_equipment_maker",
+          "review_required": false,
+          "scenario_value": 776127.42,
           "sleeve_id": "sleeve_public_equity"
         }
       ]
@@ -290,14 +290,14 @@
         "high": {
           "base_value": 21353969.61,
           "count": 25,
-          "impact": -7094523.4,
-          "scenario_value": 14259446.21
+          "impact": -3345954.59,
+          "scenario_value": 18008015.02
         },
         "medium": {
           "base_value": 7515032.55,
           "count": 17,
-          "impact": -2358703.55,
-          "scenario_value": 5156329.0
+          "impact": -1113519.61,
+          "scenario_value": 6401512.94
         },
         "review_required": {
           "base_value": 3825000.0,
@@ -322,17 +322,17 @@
         "valued": {
           "base_value": 28479002.16,
           "count": 41,
-          "impact": -9453226.95,
-          "scenario_value": 19025775.21
+          "impact": -4459474.2,
+          "scenario_value": 24019527.96
         }
       },
-      "impact": -9453226.95,
-      "impact_percent": -0.289143,
+      "impact": -4459474.2,
+      "impact_percent": -0.1364,
       "matching_basis": "approved_pack_theme_matchers_against_position_tags_and_classifications",
       "percent_of_portfolio_base": 0.728817,
-      "percent_of_portfolio_impact": 0.999143,
+      "percent_of_portfolio_impact": 0.932882,
       "position_count": 48,
-      "scenario_value": 23240775.21,
+      "scenario_value": 28234527.96,
       "theme_display_name": "AI Infrastructure",
       "theme_id": "ai_infrastructure",
       "top_positions_by_absolute_impact": [
@@ -342,12 +342,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "AI Compute Leader",
-          "impact": -1345807.76,
-          "impact_percent": -0.349504,
+          "impact": -602351.52,
+          "impact_percent": -0.15643,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_ai_compute_leader",
           "review_required": false,
-          "scenario_value": 2504808.86,
+          "scenario_value": 3248265.1,
           "sleeve_id": "sleeve_public_equity"
         },
         {
@@ -356,12 +356,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Cloud Platform Compounder",
-          "impact": -1273314.05,
-          "impact_percent": -0.349492,
+          "impact": -569923.74,
+          "impact_percent": -0.156429,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_cloud_platform_compounder",
           "review_required": false,
-          "scenario_value": 2370018.12,
+          "scenario_value": 3073408.43,
           "sleeve_id": "sleeve_public_equity"
         },
         {
@@ -370,12 +370,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Cloud Platform Compounder",
-          "impact": -461332.94,
-          "impact_percent": -0.349492,
+          "impact": -206488.41,
+          "impact_percent": -0.156429,
           "manager_id": "mgr_b_core_quality_equity",
           "position_id": "pos_b_cloud_platform_compounder",
           "review_required": false,
-          "scenario_value": 858678.54,
+          "scenario_value": 1113523.07,
           "sleeve_id": "sleeve_core_quality"
         },
         {
@@ -384,12 +384,12 @@
           "confidence": "medium",
           "coverage_status": "valued",
           "display_name": "Chip Fabrication Partner",
-          "impact": -393159.74,
-          "impact_percent": -0.349478,
+          "impact": -175965.32,
+          "impact_percent": -0.156415,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_chip_fabrication_partner",
           "review_required": false,
-          "scenario_value": 731831.7,
+          "scenario_value": 949026.12,
           "sleeve_id": "sleeve_public_equity"
         },
         {
@@ -398,12 +398,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Semicap Equipment Maker",
-          "impact": -321522.25,
-          "impact_percent": -0.349475,
+          "impact": -143888.79,
+          "impact_percent": -0.156398,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_semicap_equipment_maker",
           "review_required": false,
-          "scenario_value": 598493.96,
+          "scenario_value": 776127.42,
           "sleeve_id": "sleeve_public_equity"
         }
       ]
@@ -418,14 +418,14 @@
         "high": {
           "base_value": 21353969.61,
           "count": 25,
-          "impact": -7094523.4,
-          "scenario_value": 14259446.21
+          "impact": -3345954.59,
+          "scenario_value": 18008015.02
         },
         "medium": {
           "base_value": 7515032.55,
           "count": 17,
-          "impact": -2358703.55,
-          "scenario_value": 5156329.0
+          "impact": -1113519.61,
+          "scenario_value": 6401512.94
         },
         "review_required": {
           "base_value": 3370000.0,
@@ -450,17 +450,17 @@
         "valued": {
           "base_value": 28479002.16,
           "count": 41,
-          "impact": -9453226.95,
-          "scenario_value": 19025775.21
+          "impact": -4459474.2,
+          "scenario_value": 24019527.96
         }
       },
-      "impact": -9453226.95,
-      "impact_percent": -0.293223,
+      "impact": -4459474.2,
+      "impact_percent": -0.138325,
       "matching_basis": "approved_pack_theme_matchers_against_position_tags_and_classifications",
       "percent_of_portfolio_base": 0.718674,
-      "percent_of_portfolio_impact": 0.999143,
+      "percent_of_portfolio_impact": 0.932882,
       "position_count": 47,
-      "scenario_value": 22785775.21,
+      "scenario_value": 27779527.96,
       "theme_display_name": "China/Taiwan Supply Chain",
       "theme_id": "china_taiwan_supply_chain",
       "top_positions_by_absolute_impact": [
@@ -470,12 +470,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "AI Compute Leader",
-          "impact": -1345807.76,
-          "impact_percent": -0.349504,
+          "impact": -602351.52,
+          "impact_percent": -0.15643,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_ai_compute_leader",
           "review_required": false,
-          "scenario_value": 2504808.86,
+          "scenario_value": 3248265.1,
           "sleeve_id": "sleeve_public_equity"
         },
         {
@@ -484,12 +484,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Cloud Platform Compounder",
-          "impact": -1273314.05,
-          "impact_percent": -0.349492,
+          "impact": -569923.74,
+          "impact_percent": -0.156429,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_cloud_platform_compounder",
           "review_required": false,
-          "scenario_value": 2370018.12,
+          "scenario_value": 3073408.43,
           "sleeve_id": "sleeve_public_equity"
         },
         {
@@ -498,12 +498,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Cloud Platform Compounder",
-          "impact": -461332.94,
-          "impact_percent": -0.349492,
+          "impact": -206488.41,
+          "impact_percent": -0.156429,
           "manager_id": "mgr_b_core_quality_equity",
           "position_id": "pos_b_cloud_platform_compounder",
           "review_required": false,
-          "scenario_value": 858678.54,
+          "scenario_value": 1113523.07,
           "sleeve_id": "sleeve_core_quality"
         },
         {
@@ -512,12 +512,12 @@
           "confidence": "medium",
           "coverage_status": "valued",
           "display_name": "Chip Fabrication Partner",
-          "impact": -393159.74,
-          "impact_percent": -0.349478,
+          "impact": -175965.32,
+          "impact_percent": -0.156415,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_chip_fabrication_partner",
           "review_required": false,
-          "scenario_value": 731831.7,
+          "scenario_value": 949026.12,
           "sleeve_id": "sleeve_public_equity"
         },
         {
@@ -526,12 +526,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Semicap Equipment Maker",
-          "impact": -321522.25,
-          "impact_percent": -0.349475,
+          "impact": -143888.79,
+          "impact_percent": -0.156398,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_semicap_equipment_maker",
           "review_required": false,
-          "scenario_value": 598493.96,
+          "scenario_value": 776127.42,
           "sleeve_id": "sleeve_public_equity"
         }
       ]
@@ -546,14 +546,14 @@
         "high": {
           "base_value": 15048997.75,
           "count": 13,
-          "impact": -5212828.64,
-          "scenario_value": 9836169.11
+          "impact": -2354802.62,
+          "scenario_value": 12694195.13
         },
         "medium": {
           "base_value": 8195025.29,
           "count": 17,
-          "impact": -2024428.6,
-          "scenario_value": 6170596.69
+          "impact": -937423.77,
+          "scenario_value": 7257601.52
         },
         "review_required": {
           "base_value": 4010000.0,
@@ -578,17 +578,17 @@
         "valued": {
           "base_value": 21054023.04,
           "count": 26,
-          "impact": -7237257.24,
-          "scenario_value": 13816765.8
+          "impact": -3292226.39,
+          "scenario_value": 17761796.65
         }
       },
-      "impact": -7237257.24,
-      "impact_percent": -0.265548,
+      "impact": -3292226.39,
+      "impact_percent": -0.120798,
       "matching_basis": "approved_pack_theme_matchers_against_position_tags_and_classifications",
       "percent_of_portfolio_base": 0.607549,
-      "percent_of_portfolio_impact": 0.76493,
+      "percent_of_portfolio_impact": 0.688704,
       "position_count": 37,
-      "scenario_value": 20016765.8,
+      "scenario_value": 23961796.65,
       "theme_display_name": "Data Center Infrastructure",
       "theme_id": "data_center_infrastructure",
       "top_positions_by_absolute_impact": [
@@ -598,12 +598,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "AI Compute Leader",
-          "impact": -1345807.76,
-          "impact_percent": -0.349504,
+          "impact": -602351.52,
+          "impact_percent": -0.15643,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_ai_compute_leader",
           "review_required": false,
-          "scenario_value": 2504808.86,
+          "scenario_value": 3248265.1,
           "sleeve_id": "sleeve_public_equity"
         },
         {
@@ -612,12 +612,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Cloud Platform Compounder",
-          "impact": -1273314.05,
-          "impact_percent": -0.349492,
+          "impact": -569923.74,
+          "impact_percent": -0.156429,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_cloud_platform_compounder",
           "review_required": false,
-          "scenario_value": 2370018.12,
+          "scenario_value": 3073408.43,
           "sleeve_id": "sleeve_public_equity"
         },
         {
@@ -626,12 +626,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Cloud Platform Compounder",
-          "impact": -461332.94,
-          "impact_percent": -0.349492,
+          "impact": -206488.41,
+          "impact_percent": -0.156429,
           "manager_id": "mgr_b_core_quality_equity",
           "position_id": "pos_b_cloud_platform_compounder",
           "review_required": false,
-          "scenario_value": 858678.54,
+          "scenario_value": 1113523.07,
           "sleeve_id": "sleeve_core_quality"
         },
         {
@@ -640,12 +640,12 @@
           "confidence": "medium",
           "coverage_status": "valued",
           "display_name": "Chip Fabrication Partner",
-          "impact": -393159.74,
-          "impact_percent": -0.349478,
+          "impact": -175965.32,
+          "impact_percent": -0.156415,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_chip_fabrication_partner",
           "review_required": false,
-          "scenario_value": 731831.7,
+          "scenario_value": 949026.12,
           "sleeve_id": "sleeve_public_equity"
         },
         {
@@ -654,12 +654,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Semicap Equipment Maker",
-          "impact": -321522.25,
-          "impact_percent": -0.349475,
+          "impact": -143888.79,
+          "impact_percent": -0.156398,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_semicap_equipment_maker",
           "review_required": false,
-          "scenario_value": 598493.96,
+          "scenario_value": 776127.42,
           "sleeve_id": "sleeve_public_equity"
         }
       ]
@@ -674,14 +674,14 @@
         "high": {
           "base_value": 4509996.18,
           "count": 6,
-          "impact": -807236.39,
-          "scenario_value": 3702759.79
+          "impact": -605044.29,
+          "scenario_value": 3904951.89
         },
         "medium": {
           "base_value": 6744969.1,
           "count": 14,
-          "impact": -719406.29,
-          "scenario_value": 6025562.81
+          "impact": -451255.28,
+          "scenario_value": 6293713.82
         },
         "review_required": {
           "base_value": 4940000.0,
@@ -706,23 +706,23 @@
         "valued": {
           "base_value": 5099965.28,
           "count": 10,
-          "impact": -1583620.18,
-          "scenario_value": 3516345.1
+          "impact": -800837.07,
+          "scenario_value": 4299128.21
         },
         "valued_with_approved_policy": {
           "base_value": 2675000.0,
           "count": 4,
-          "impact": 56977.5,
-          "scenario_value": 2731977.5
+          "impact": -255462.5,
+          "scenario_value": 2419537.5
         }
       },
-      "impact": -1526642.68,
-      "impact_percent": -0.094266,
+      "impact": -1056299.57,
+      "impact_percent": -0.065224,
       "matching_basis": "approved_pack_theme_matchers_against_position_tags_and_classifications",
       "percent_of_portfolio_base": 0.361019,
-      "percent_of_portfolio_impact": 0.161356,
+      "percent_of_portfolio_impact": 0.220968,
       "position_count": 28,
-      "scenario_value": 14668322.6,
+      "scenario_value": 15138665.71,
       "theme_display_name": "Credit Stress",
       "theme_id": "credit_stress",
       "top_positions_by_absolute_impact": [
@@ -732,13 +732,27 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Investment Grade Bond ETF",
-          "impact": -250687.73,
-          "impact_percent": -0.298444,
+          "impact": -132050.22,
+          "impact_percent": -0.157206,
           "manager_id": "mgr_c_income_cash_generation",
           "position_id": "pos_c_investment_grade_bond_etf",
           "review_required": false,
-          "scenario_value": 589293.54,
+          "scenario_value": 707931.05,
           "sleeve_id": "sleeve_income"
+        },
+        {
+          "account_id": "acct_e_liquidity_reserve",
+          "base_value": 1340000.0,
+          "confidence": "high",
+          "coverage_status": "valued_with_approved_policy",
+          "display_name": "Treasury Bill Ladder",
+          "impact": -127970.0,
+          "impact_percent": -0.0955,
+          "manager_id": "mgr_e_liquidity_defensive",
+          "position_id": "pos_e_treasury_bill_ladder",
+          "review_required": false,
+          "scenario_value": 1212030.0,
+          "sleeve_id": "sleeve_liquidity_reserve"
         },
         {
           "account_id": "acct_e_liquidity_reserve",
@@ -746,12 +760,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Short Treasury ETF",
-          "impact": -216413.93,
-          "impact_percent": -0.298487,
+          "impact": -114018.38,
+          "impact_percent": -0.157259,
           "manager_id": "mgr_e_liquidity_defensive",
           "position_id": "pos_e_short_treasury_etf",
           "review_required": false,
-          "scenario_value": 508621.87,
+          "scenario_value": 611017.42,
           "sleeve_id": "sleeve_liquidity_reserve"
         },
         {
@@ -760,27 +774,13 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Short TIPS ETF",
-          "impact": -214867.4,
-          "impact_percent": -0.298433,
+          "impact": -113175.99,
+          "impact_percent": -0.157192,
           "manager_id": "mgr_c_income_cash_generation",
           "position_id": "pos_c_short_tips_etf",
           "review_required": false,
-          "scenario_value": 505117.31,
+          "scenario_value": 606808.72,
           "sleeve_id": "sleeve_income"
-        },
-        {
-          "account_id": "acct_b_core_quality",
-          "base_value": 494987.41,
-          "confidence": "medium",
-          "coverage_status": "valued",
-          "display_name": "Core Bank Quality",
-          "impact": -173011.88,
-          "impact_percent": -0.349528,
-          "manager_id": "mgr_b_core_quality_equity",
-          "position_id": "pos_b_core_bank_quality",
-          "review_required": false,
-          "scenario_value": 321975.53,
-          "sleeve_id": "sleeve_core_quality"
         },
         {
           "account_id": "acct_e_liquidity_reserve",
@@ -788,12 +788,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Short Duration IG Bond ETF",
-          "impact": -161157.83,
-          "impact_percent": -0.298444,
+          "impact": -84882.2,
+          "impact_percent": -0.157191,
           "manager_id": "mgr_e_liquidity_defensive",
           "position_id": "pos_e_short_duration_ig_bond",
           "review_required": false,
-          "scenario_value": 378836.57,
+          "scenario_value": 455112.2,
           "sleeve_id": "sleeve_liquidity_reserve"
         }
       ]
@@ -808,14 +808,14 @@
         "high": {
           "base_value": 4509996.18,
           "count": 6,
-          "impact": -807236.39,
-          "scenario_value": 3702759.79
+          "impact": -605044.29,
+          "scenario_value": 3904951.89
         },
         "medium": {
           "base_value": 5664969.1,
           "count": 12,
-          "impact": -719406.29,
-          "scenario_value": 4945562.81
+          "impact": -451255.28,
+          "scenario_value": 5213713.82
         },
         "review_required": {
           "base_value": 395000.0,
@@ -840,23 +840,23 @@
         "valued": {
           "base_value": 5099965.28,
           "count": 10,
-          "impact": -1583620.18,
-          "scenario_value": 3516345.1
+          "impact": -800837.07,
+          "scenario_value": 4299128.21
         },
         "valued_with_approved_policy": {
           "base_value": 2675000.0,
           "count": 4,
-          "impact": 56977.5,
-          "scenario_value": 2731977.5
+          "impact": -255462.5,
+          "scenario_value": 2419537.5
         }
       },
-      "impact": -1526642.68,
-      "impact_percent": -0.144432,
+      "impact": -1056299.57,
+      "impact_percent": -0.099934,
       "matching_basis": "approved_pack_theme_matchers_against_position_tags_and_classifications",
       "percent_of_portfolio_base": 0.235626,
-      "percent_of_portfolio_impact": 0.161356,
+      "percent_of_portfolio_impact": 0.220968,
       "position_count": 20,
-      "scenario_value": 9043322.6,
+      "scenario_value": 9513665.71,
       "theme_display_name": "Duration Exposure",
       "theme_id": "duration_exposure",
       "top_positions_by_absolute_impact": [
@@ -866,13 +866,27 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Investment Grade Bond ETF",
-          "impact": -250687.73,
-          "impact_percent": -0.298444,
+          "impact": -132050.22,
+          "impact_percent": -0.157206,
           "manager_id": "mgr_c_income_cash_generation",
           "position_id": "pos_c_investment_grade_bond_etf",
           "review_required": false,
-          "scenario_value": 589293.54,
+          "scenario_value": 707931.05,
           "sleeve_id": "sleeve_income"
+        },
+        {
+          "account_id": "acct_e_liquidity_reserve",
+          "base_value": 1340000.0,
+          "confidence": "high",
+          "coverage_status": "valued_with_approved_policy",
+          "display_name": "Treasury Bill Ladder",
+          "impact": -127970.0,
+          "impact_percent": -0.0955,
+          "manager_id": "mgr_e_liquidity_defensive",
+          "position_id": "pos_e_treasury_bill_ladder",
+          "review_required": false,
+          "scenario_value": 1212030.0,
+          "sleeve_id": "sleeve_liquidity_reserve"
         },
         {
           "account_id": "acct_e_liquidity_reserve",
@@ -880,12 +894,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Short Treasury ETF",
-          "impact": -216413.93,
-          "impact_percent": -0.298487,
+          "impact": -114018.38,
+          "impact_percent": -0.157259,
           "manager_id": "mgr_e_liquidity_defensive",
           "position_id": "pos_e_short_treasury_etf",
           "review_required": false,
-          "scenario_value": 508621.87,
+          "scenario_value": 611017.42,
           "sleeve_id": "sleeve_liquidity_reserve"
         },
         {
@@ -894,27 +908,13 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Short TIPS ETF",
-          "impact": -214867.4,
-          "impact_percent": -0.298433,
+          "impact": -113175.99,
+          "impact_percent": -0.157192,
           "manager_id": "mgr_c_income_cash_generation",
           "position_id": "pos_c_short_tips_etf",
           "review_required": false,
-          "scenario_value": 505117.31,
+          "scenario_value": 606808.72,
           "sleeve_id": "sleeve_income"
-        },
-        {
-          "account_id": "acct_b_core_quality",
-          "base_value": 494987.41,
-          "confidence": "medium",
-          "coverage_status": "valued",
-          "display_name": "Core Bank Quality",
-          "impact": -173011.88,
-          "impact_percent": -0.349528,
-          "manager_id": "mgr_b_core_quality_equity",
-          "position_id": "pos_b_core_bank_quality",
-          "review_required": false,
-          "scenario_value": 321975.53,
-          "sleeve_id": "sleeve_core_quality"
         },
         {
           "account_id": "acct_e_liquidity_reserve",
@@ -922,12 +922,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Short Duration IG Bond ETF",
-          "impact": -161157.83,
-          "impact_percent": -0.298444,
+          "impact": -84882.2,
+          "impact_percent": -0.157191,
           "manager_id": "mgr_e_liquidity_defensive",
           "position_id": "pos_e_short_duration_ig_bond",
           "review_required": false,
-          "scenario_value": 378836.57,
+          "scenario_value": 455112.2,
           "sleeve_id": "sleeve_liquidity_reserve"
         }
       ]
@@ -942,14 +942,14 @@
         "high": {
           "base_value": 5749996.18,
           "count": 8,
-          "impact": -806906.55,
-          "scenario_value": 4943089.63
+          "impact": -604905.41,
+          "scenario_value": 5145090.77
         },
         "medium": {
           "base_value": 5664969.1,
           "count": 12,
-          "impact": -719406.29,
-          "scenario_value": 4945562.81
+          "impact": -451255.28,
+          "scenario_value": 5213713.82
         },
         "review_required": {
           "base_value": 1390000.0,
@@ -974,23 +974,23 @@
         "valued": {
           "base_value": 6339965.28,
           "count": 12,
-          "impact": -1583290.34,
-          "scenario_value": 4756674.94
+          "impact": -800698.19,
+          "scenario_value": 5539267.09
         },
         "valued_with_approved_policy": {
           "base_value": 2675000.0,
           "count": 4,
-          "impact": 56977.5,
-          "scenario_value": 2731977.5
+          "impact": -255462.5,
+          "scenario_value": 2419537.5
         }
       },
-      "impact": -1526312.84,
-      "impact_percent": -0.119197,
+      "impact": -1056160.69,
+      "impact_percent": -0.082481,
       "matching_basis": "approved_pack_theme_matchers_against_position_tags_and_classifications",
       "percent_of_portfolio_base": 0.285449,
-      "percent_of_portfolio_impact": 0.161321,
+      "percent_of_portfolio_impact": 0.220939,
       "position_count": 24,
-      "scenario_value": 11278652.44,
+      "scenario_value": 11748804.59,
       "theme_display_name": "Rate Sensitivity",
       "theme_id": "rate_sensitivity",
       "top_positions_by_absolute_impact": [
@@ -1000,13 +1000,27 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Investment Grade Bond ETF",
-          "impact": -250687.73,
-          "impact_percent": -0.298444,
+          "impact": -132050.22,
+          "impact_percent": -0.157206,
           "manager_id": "mgr_c_income_cash_generation",
           "position_id": "pos_c_investment_grade_bond_etf",
           "review_required": false,
-          "scenario_value": 589293.54,
+          "scenario_value": 707931.05,
           "sleeve_id": "sleeve_income"
+        },
+        {
+          "account_id": "acct_e_liquidity_reserve",
+          "base_value": 1340000.0,
+          "confidence": "high",
+          "coverage_status": "valued_with_approved_policy",
+          "display_name": "Treasury Bill Ladder",
+          "impact": -127970.0,
+          "impact_percent": -0.0955,
+          "manager_id": "mgr_e_liquidity_defensive",
+          "position_id": "pos_e_treasury_bill_ladder",
+          "review_required": false,
+          "scenario_value": 1212030.0,
+          "sleeve_id": "sleeve_liquidity_reserve"
         },
         {
           "account_id": "acct_e_liquidity_reserve",
@@ -1014,12 +1028,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Short Treasury ETF",
-          "impact": -216413.93,
-          "impact_percent": -0.298487,
+          "impact": -114018.38,
+          "impact_percent": -0.157259,
           "manager_id": "mgr_e_liquidity_defensive",
           "position_id": "pos_e_short_treasury_etf",
           "review_required": false,
-          "scenario_value": 508621.87,
+          "scenario_value": 611017.42,
           "sleeve_id": "sleeve_liquidity_reserve"
         },
         {
@@ -1028,27 +1042,13 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Short TIPS ETF",
-          "impact": -214867.4,
-          "impact_percent": -0.298433,
+          "impact": -113175.99,
+          "impact_percent": -0.157192,
           "manager_id": "mgr_c_income_cash_generation",
           "position_id": "pos_c_short_tips_etf",
           "review_required": false,
-          "scenario_value": 505117.31,
+          "scenario_value": 606808.72,
           "sleeve_id": "sleeve_income"
-        },
-        {
-          "account_id": "acct_b_core_quality",
-          "base_value": 494987.41,
-          "confidence": "medium",
-          "coverage_status": "valued",
-          "display_name": "Core Bank Quality",
-          "impact": -173011.88,
-          "impact_percent": -0.349528,
-          "manager_id": "mgr_b_core_quality_equity",
-          "position_id": "pos_b_core_bank_quality",
-          "review_required": false,
-          "scenario_value": 321975.53,
-          "sleeve_id": "sleeve_core_quality"
         },
         {
           "account_id": "acct_e_liquidity_reserve",
@@ -1056,12 +1056,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Short Duration IG Bond ETF",
-          "impact": -161157.83,
-          "impact_percent": -0.298444,
+          "impact": -84882.2,
+          "impact_percent": -0.157191,
           "manager_id": "mgr_e_liquidity_defensive",
           "position_id": "pos_e_short_duration_ig_bond",
           "review_required": false,
-          "scenario_value": 378836.57,
+          "scenario_value": 455112.2,
           "sleeve_id": "sleeve_liquidity_reserve"
         }
       ]
@@ -1076,14 +1076,14 @@
         "high": {
           "base_value": 2429992.19,
           "count": 6,
-          "impact": -633278.45,
-          "scenario_value": 1796713.74
+          "impact": -360422.29,
+          "scenario_value": 2069569.9
         },
         "medium": {
           "base_value": 4189983.78,
           "count": 10,
-          "impact": -582168.09,
-          "scenario_value": 3607815.69
+          "impact": -275051.23,
+          "scenario_value": 3914932.55
         },
         "review_required": {
           "base_value": 1580000.0,
@@ -1108,23 +1108,23 @@
         "valued": {
           "base_value": 4084975.97,
           "count": 11,
-          "impact": -1222795.04,
-          "scenario_value": 2862180.93
+          "impact": -602526.02,
+          "scenario_value": 3482449.95
         },
         "valued_with_approved_policy": {
           "base_value": 345000.0,
           "count": 1,
-          "impact": 7348.5,
-          "scenario_value": 352348.5
+          "impact": -32947.5,
+          "scenario_value": 312052.5
         }
       },
-      "impact": -1215446.54,
-      "impact_percent": -0.148226,
+      "impact": -635473.52,
+      "impact_percent": -0.077497,
       "matching_basis": "approved_pack_theme_matchers_against_position_tags_and_classifications",
       "percent_of_portfolio_base": 0.182794,
-      "percent_of_portfolio_impact": 0.128465,
+      "percent_of_portfolio_impact": 0.132935,
       "position_count": 19,
-      "scenario_value": 6984529.43,
+      "scenario_value": 7564502.45,
       "theme_display_name": "Real Asset Inflation Hedge",
       "theme_id": "real_asset_inflation_hedge",
       "top_positions_by_absolute_impact": [
@@ -1134,13 +1134,27 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Short TIPS ETF",
-          "impact": -214867.4,
-          "impact_percent": -0.298433,
+          "impact": -113175.99,
+          "impact_percent": -0.157192,
           "manager_id": "mgr_c_income_cash_generation",
           "position_id": "pos_c_short_tips_etf",
           "review_required": false,
-          "scenario_value": 505117.31,
+          "scenario_value": 606808.72,
           "sleeve_id": "sleeve_income"
+        },
+        {
+          "account_id": "acct_f_opportunistic_macro",
+          "base_value": 469998.01,
+          "confidence": "high",
+          "coverage_status": "valued",
+          "display_name": "Commodity Basket Fund",
+          "impact": -73887.66,
+          "impact_percent": -0.157208,
+          "manager_id": "mgr_f_opportunistic_macro",
+          "position_id": "pos_f_commodity_basket_fund",
+          "review_required": false,
+          "scenario_value": 396110.35,
+          "sleeve_id": "sleeve_opportunistic_macro"
         },
         {
           "account_id": "acct_a_public_equity",
@@ -1148,12 +1162,12 @@
           "confidence": "medium",
           "coverage_status": "valued",
           "display_name": "Data Center Cooling Leader",
-          "impact": -158969.22,
-          "impact_percent": -0.34939,
+          "impact": -71208.75,
+          "impact_percent": -0.156506,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_data_center_cooling_leader",
           "review_required": false,
-          "scenario_value": 296021.06,
+          "scenario_value": 383781.53,
           "sleeve_id": "sleeve_public_equity"
         },
         {
@@ -1162,27 +1176,13 @@
           "confidence": "medium",
           "coverage_status": "valued",
           "display_name": "Public Data Center REIT",
-          "impact": -146781.76,
-          "impact_percent": -0.349483,
+          "impact": -65694.09,
+          "impact_percent": -0.156416,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_data_center_public_reit",
           "review_required": false,
-          "scenario_value": 273215.05,
+          "scenario_value": 354302.72,
           "sleeve_id": "sleeve_public_equity"
-        },
-        {
-          "account_id": "acct_f_opportunistic_macro",
-          "base_value": 469998.01,
-          "confidence": "high",
-          "coverage_status": "valued",
-          "display_name": "Commodity Basket Fund",
-          "impact": -140263.43,
-          "impact_percent": -0.298434,
-          "manager_id": "mgr_f_opportunistic_macro",
-          "position_id": "pos_f_commodity_basket_fund",
-          "review_required": false,
-          "scenario_value": 329734.58,
-          "sleeve_id": "sleeve_opportunistic_macro"
         },
         {
           "account_id": "acct_a_public_equity",
@@ -1190,12 +1190,12 @@
           "confidence": "medium",
           "coverage_status": "valued",
           "display_name": "Grid Enabler Equity",
-          "impact": -127561.81,
-          "impact_percent": -0.349485,
+          "impact": -57092.52,
+          "impact_percent": -0.156418,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_grid_enabler_equity",
           "review_required": false,
-          "scenario_value": 237437.76,
+          "scenario_value": 307907.05,
           "sleeve_id": "sleeve_public_equity"
         }
       ]
@@ -1210,14 +1210,14 @@
         "high": {
           "base_value": 1365007.48,
           "count": 4,
-          "impact": -425759.55,
-          "scenario_value": 939247.93
+          "impact": -214298.8,
+          "scenario_value": 1150708.68
         },
         "medium": {
           "base_value": 4599999.61,
           "count": 11,
-          "impact": -725483.73,
-          "scenario_value": 3874515.88
+          "impact": -339213.88,
+          "scenario_value": 4260785.73
         },
         "review_required": {
           "base_value": 2320000.0,
@@ -1242,32 +1242,46 @@
         "valued": {
           "base_value": 3775007.09,
           "count": 11,
-          "impact": -1151243.28,
-          "scenario_value": 2623763.81
+          "impact": -553512.68,
+          "scenario_value": 3221494.41
         }
       },
-      "impact": -1151243.28,
-      "impact_percent": -0.138955,
+      "impact": -553512.68,
+      "impact_percent": -0.066809,
       "matching_basis": "approved_pack_theme_matchers_against_position_tags_and_classifications",
       "percent_of_portfolio_base": 0.18469,
-      "percent_of_portfolio_impact": 0.121679,
+      "percent_of_portfolio_impact": 0.11579,
       "position_count": 19,
-      "scenario_value": 7133763.81,
+      "scenario_value": 7731494.41,
       "theme_display_name": "Energy Security",
       "theme_id": "energy_security",
       "top_positions_by_absolute_impact": [
+        {
+          "account_id": "acct_f_opportunistic_macro",
+          "base_value": 469998.01,
+          "confidence": "high",
+          "coverage_status": "valued",
+          "display_name": "Commodity Basket Fund",
+          "impact": -73887.66,
+          "impact_percent": -0.157208,
+          "manager_id": "mgr_f_opportunistic_macro",
+          "position_id": "pos_f_commodity_basket_fund",
+          "review_required": false,
+          "scenario_value": 396110.35,
+          "sleeve_id": "sleeve_opportunistic_macro"
+        },
         {
           "account_id": "acct_a_public_equity",
           "base_value": 454990.28,
           "confidence": "medium",
           "coverage_status": "valued",
           "display_name": "Data Center Cooling Leader",
-          "impact": -158969.22,
-          "impact_percent": -0.34939,
+          "impact": -71208.75,
+          "impact_percent": -0.156506,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_data_center_cooling_leader",
           "review_required": false,
-          "scenario_value": 296021.06,
+          "scenario_value": 383781.53,
           "sleeve_id": "sleeve_public_equity"
         },
         {
@@ -1276,12 +1290,12 @@
           "confidence": "medium",
           "coverage_status": "valued",
           "display_name": "Public Data Center REIT",
-          "impact": -146781.76,
-          "impact_percent": -0.349483,
+          "impact": -65694.09,
+          "impact_percent": -0.156416,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_data_center_public_reit",
           "review_required": false,
-          "scenario_value": 273215.05,
+          "scenario_value": 354302.72,
           "sleeve_id": "sleeve_public_equity"
         },
         {
@@ -1290,27 +1304,13 @@
           "confidence": "medium",
           "coverage_status": "valued",
           "display_name": "Edge Server Platform",
-          "impact": -143315.64,
-          "impact_percent": -0.349537,
+          "impact": -64162.65,
+          "impact_percent": -0.156488,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_edge_server_platform",
           "review_required": false,
-          "scenario_value": 266700.19,
+          "scenario_value": 345853.18,
           "sleeve_id": "sleeve_public_equity"
-        },
-        {
-          "account_id": "acct_f_opportunistic_macro",
-          "base_value": 469998.01,
-          "confidence": "high",
-          "coverage_status": "valued",
-          "display_name": "Commodity Basket Fund",
-          "impact": -140263.43,
-          "impact_percent": -0.298434,
-          "manager_id": "mgr_f_opportunistic_macro",
-          "position_id": "pos_f_commodity_basket_fund",
-          "review_required": false,
-          "scenario_value": 329734.58,
-          "sleeve_id": "sleeve_opportunistic_macro"
         },
         {
           "account_id": "acct_a_public_equity",
@@ -1318,12 +1318,12 @@
           "confidence": "medium",
           "coverage_status": "valued",
           "display_name": "Grid Enabler Equity",
-          "impact": -127561.81,
-          "impact_percent": -0.349485,
+          "impact": -57092.52,
+          "impact_percent": -0.156418,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_grid_enabler_equity",
           "review_required": false,
-          "scenario_value": 237437.76,
+          "scenario_value": 307907.05,
           "sleeve_id": "sleeve_public_equity"
         }
       ]
@@ -1338,8 +1338,8 @@
         "high": {
           "base_value": 5525040.08,
           "count": 11,
-          "impact": -485794.11,
-          "scenario_value": 5039245.97
+          "impact": -398967.7,
+          "scenario_value": 5126072.38
         },
         "medium": {
           "base_value": 780000.0,
@@ -1364,38 +1364,52 @@
         "valued": {
           "base_value": 4965040.08,
           "count": 12,
-          "impact": -514336.11,
-          "scenario_value": 4450703.97
+          "impact": -270997.7,
+          "scenario_value": 4694042.38
         },
         "valued_with_approved_policy": {
           "base_value": 1340000.0,
           "count": 1,
-          "impact": 28542.0,
-          "scenario_value": 1368542.0
+          "impact": -127970.0,
+          "scenario_value": 1212030.0
         }
       },
-      "impact": -485794.11,
-      "impact_percent": -0.073216,
+      "impact": -398967.7,
+      "impact_percent": -0.06013,
       "matching_basis": "approved_pack_theme_matchers_against_position_tags_and_classifications",
       "percent_of_portfolio_base": 0.147909,
-      "percent_of_portfolio_impact": 0.051345,
+      "percent_of_portfolio_impact": 0.08346,
       "position_count": 14,
-      "scenario_value": 6149245.97,
+      "scenario_value": 6236072.38,
       "theme_display_name": "Dollar Exposure",
       "theme_id": "dollar_exposure",
       "top_positions_by_absolute_impact": [
+        {
+          "account_id": "acct_e_liquidity_reserve",
+          "base_value": 1340000.0,
+          "confidence": "high",
+          "coverage_status": "valued_with_approved_policy",
+          "display_name": "Treasury Bill Ladder",
+          "impact": -127970.0,
+          "impact_percent": -0.0955,
+          "manager_id": "mgr_e_liquidity_defensive",
+          "position_id": "pos_e_treasury_bill_ladder",
+          "review_required": false,
+          "scenario_value": 1212030.0,
+          "sleeve_id": "sleeve_liquidity_reserve"
+        },
         {
           "account_id": "acct_e_liquidity_reserve",
           "base_value": 725035.8,
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Short Treasury ETF",
-          "impact": -216413.93,
-          "impact_percent": -0.298487,
+          "impact": -114018.38,
+          "impact_percent": -0.157259,
           "manager_id": "mgr_e_liquidity_defensive",
           "position_id": "pos_e_short_treasury_etf",
           "review_required": false,
-          "scenario_value": 508621.87,
+          "scenario_value": 611017.42,
           "sleeve_id": "sleeve_liquidity_reserve"
         },
         {
@@ -1404,12 +1418,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Developed Market Equity ETF",
-          "impact": -116389.83,
-          "impact_percent": -0.298432,
+          "impact": -61303.8,
+          "impact_percent": -0.157187,
           "manager_id": "mgr_b_core_quality_equity",
           "position_id": "pos_b_broad_developed_equity_etf",
           "review_required": false,
-          "scenario_value": 273615.27,
+          "scenario_value": 328701.3,
           "sleeve_id": "sleeve_core_quality"
         },
         {
@@ -1418,12 +1432,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "USD Strength Proxy",
-          "impact": -92519.98,
-          "impact_percent": -0.298449,
+          "impact": -48738.97,
+          "impact_percent": -0.157221,
           "manager_id": "mgr_f_opportunistic_macro",
           "position_id": "pos_f_usd_strength_proxy",
           "review_required": false,
-          "scenario_value": 217482.32,
+          "scenario_value": 261263.33,
           "sleeve_id": "sleeve_opportunistic_macro"
         },
         {
@@ -1432,26 +1446,12 @@
           "confidence": "high",
           "coverage_status": "valued",
           "display_name": "Gold Defensive ETF",
-          "impact": -89531.07,
-          "impact_percent": -0.29844,
+          "impact": -47154.94,
+          "impact_percent": -0.157185,
           "manager_id": "mgr_e_liquidity_defensive",
           "position_id": "pos_e_gold_defensive_etf",
           "review_required": false,
-          "scenario_value": 210465.81,
-          "sleeve_id": "sleeve_liquidity_reserve"
-        },
-        {
-          "account_id": "acct_e_liquidity_reserve",
-          "base_value": 1340000.0,
-          "confidence": "high",
-          "coverage_status": "valued_with_approved_policy",
-          "display_name": "Treasury Bill Ladder",
-          "impact": 28542.0,
-          "impact_percent": 0.0213,
-          "manager_id": "mgr_e_liquidity_defensive",
-          "position_id": "pos_e_treasury_bill_ladder",
-          "review_required": false,
-          "scenario_value": 1368542.0,
+          "scenario_value": 252841.94,
           "sleeve_id": "sleeve_liquidity_reserve"
         }
       ]
@@ -1466,8 +1466,8 @@
         "medium": {
           "base_value": 4919976.85,
           "count": 10,
-          "impact": -325719.54,
-          "scenario_value": 4594257.31
+          "impact": -151913.86,
+          "scenario_value": 4768062.99
         },
         "review_required": {
           "base_value": 5185000.0,
@@ -1492,17 +1492,17 @@
         "valued": {
           "base_value": 969976.85,
           "count": 3,
-          "impact": -325719.54,
-          "scenario_value": 644257.31
+          "impact": -151913.86,
+          "scenario_value": 818062.99
         }
       },
-      "impact": -325719.54,
-      "impact_percent": -0.032234,
+      "impact": -151913.86,
+      "impact_percent": -0.015034,
       "matching_basis": "approved_pack_theme_matchers_against_position_tags_and_classifications",
       "percent_of_portfolio_base": 0.225261,
-      "percent_of_portfolio_impact": 0.034426,
+      "percent_of_portfolio_impact": 0.031779,
       "position_count": 19,
-      "scenario_value": 9779257.31,
+      "scenario_value": 9953062.99,
       "theme_display_name": "Private Market Liquidity",
       "theme_id": "private_market_liquidity",
       "top_positions_by_absolute_impact": [
@@ -1512,12 +1512,12 @@
           "confidence": "medium",
           "coverage_status": "valued",
           "display_name": "Public Data Center REIT",
-          "impact": -146781.76,
-          "impact_percent": -0.349483,
+          "impact": -65694.09,
+          "impact_percent": -0.156416,
           "manager_id": "mgr_a_growth_ai_infrastructure",
           "position_id": "pos_a_data_center_public_reit",
           "review_required": false,
-          "scenario_value": 273215.05,
+          "scenario_value": 354302.72,
           "sleeve_id": "sleeve_public_equity"
         },
         {
@@ -1526,12 +1526,12 @@
           "confidence": "medium",
           "coverage_status": "valued",
           "display_name": "Public Direct Lending BDC",
-          "impact": -101342.33,
-          "impact_percent": -0.349479,
+          "impact": -45348.96,
+          "impact_percent": -0.156386,
           "manager_id": "mgr_c_income_cash_generation",
           "position_id": "pos_c_public_direct_lending_bdc",
           "review_required": false,
-          "scenario_value": 188639.09,
+          "scenario_value": 244632.46,
           "sleeve_id": "sleeve_income"
         },
         {
@@ -1540,12 +1540,12 @@
           "confidence": "medium",
           "coverage_status": "valued",
           "display_name": "REIT Income ETF",
-          "impact": -77595.45,
-          "impact_percent": -0.298446,
+          "impact": -40870.81,
+          "impact_percent": -0.157196,
           "manager_id": "mgr_c_income_cash_generation",
           "position_id": "pos_c_reit_income_etf",
           "review_required": false,
-          "scenario_value": 182403.17,
+          "scenario_value": 219127.81,
           "sleeve_id": "sleeve_income"
         },
         {
@@ -1579,12 +1579,12 @@
       ]
     }
   ],
-  "scenario_id": "ai_chip_selloff",
-  "scenario_market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
-  "scenario_portfolio_value": 35397657.2,
+  "scenario_id": "rate_shock",
+  "scenario_market_state_id": "market_state_scenario_rate_shock_2026-06-30",
+  "scenario_portfolio_value": 40078669.64,
   "schema_version": "theme_revaluation_attribution.v1",
-  "source_revaluation_bundle_id": "ai_chip_selloff:market_state_base_2026-06-30:market_state_scenario_ai_chip_selloff_2026-06-30",
-  "source_revaluation_manifest": "data/simulation/revaluation/revaluation_bundle_manifest.json",
+  "source_revaluation_bundle_id": "rate_shock:market_state_base_2026-06-30:market_state_scenario_rate_shock_2026-06-30",
+  "source_revaluation_manifest": "data/simulation/revaluation/revaluation_bundle_manifest_rate_shock.json",
   "synthetic_data": true,
   "theme_count": 12,
   "unclassified_position_count": 0

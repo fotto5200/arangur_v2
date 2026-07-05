@@ -6,48 +6,83 @@
     "No external APIs, live data, Docker, Postgres, production services, or production reporting are required."
   ],
   "current_limitations": [
-    "Only one full-revaluation scenario bundle is available.",
     "Theme attribution is non-additive because general theme tags can overlap.",
     "Thesis-bucket attribution is readiness-only until position-thesis assignment artifacts are published.",
     "Outputs are not wired into report elements or advisor UI in this tranche."
   ],
   "generated_at": "2026-07-05T00:00:00Z",
   "methodology": "full_portfolio_revaluation_attribution",
-  "output_count": 8,
+  "output_count": 15,
   "outputs": [
     {
-      "output_name": "manager_revaluation_attribution",
+      "output_name": "manager_revaluation_attribution_ai_chip_selloff",
       "path": "data/simulation/revaluation/attribution/manager_revaluation_attribution_ai_chip_selloff.json",
       "schema_version": "manager_revaluation_attribution.v1",
       "status": "available"
     },
     {
-      "output_name": "account_revaluation_attribution",
+      "output_name": "account_revaluation_attribution_ai_chip_selloff",
       "path": "data/simulation/revaluation/attribution/account_revaluation_attribution_ai_chip_selloff.json",
       "schema_version": "account_revaluation_attribution.v1",
       "status": "available"
     },
     {
-      "output_name": "sleeve_revaluation_attribution",
+      "output_name": "sleeve_revaluation_attribution_ai_chip_selloff",
       "path": "data/simulation/revaluation/attribution/sleeve_revaluation_attribution_ai_chip_selloff.json",
       "schema_version": "sleeve_revaluation_attribution.v1",
       "status": "available"
     },
     {
-      "output_name": "coverage_revaluation_attribution",
+      "output_name": "coverage_revaluation_attribution_ai_chip_selloff",
       "path": "data/simulation/revaluation/attribution/coverage_revaluation_attribution_ai_chip_selloff.json",
       "schema_version": "coverage_revaluation_attribution.v1",
       "status": "available"
     },
     {
-      "output_name": "confidence_revaluation_attribution",
+      "output_name": "confidence_revaluation_attribution_ai_chip_selloff",
       "path": "data/simulation/revaluation/attribution/confidence_revaluation_attribution_ai_chip_selloff.json",
       "schema_version": "confidence_revaluation_attribution.v1",
       "status": "available"
     },
     {
-      "output_name": "theme_revaluation_attribution",
+      "output_name": "theme_revaluation_attribution_ai_chip_selloff",
       "path": "data/simulation/revaluation/attribution/theme_revaluation_attribution_ai_chip_selloff.json",
+      "schema_version": "theme_revaluation_attribution.v1",
+      "status": "limited_gross_position_tag_attribution"
+    },
+    {
+      "output_name": "manager_revaluation_attribution_rate_shock",
+      "path": "data/simulation/revaluation/attribution/manager_revaluation_attribution_rate_shock.json",
+      "schema_version": "manager_revaluation_attribution.v1",
+      "status": "available"
+    },
+    {
+      "output_name": "account_revaluation_attribution_rate_shock",
+      "path": "data/simulation/revaluation/attribution/account_revaluation_attribution_rate_shock.json",
+      "schema_version": "account_revaluation_attribution.v1",
+      "status": "available"
+    },
+    {
+      "output_name": "sleeve_revaluation_attribution_rate_shock",
+      "path": "data/simulation/revaluation/attribution/sleeve_revaluation_attribution_rate_shock.json",
+      "schema_version": "sleeve_revaluation_attribution.v1",
+      "status": "available"
+    },
+    {
+      "output_name": "coverage_revaluation_attribution_rate_shock",
+      "path": "data/simulation/revaluation/attribution/coverage_revaluation_attribution_rate_shock.json",
+      "schema_version": "coverage_revaluation_attribution.v1",
+      "status": "available"
+    },
+    {
+      "output_name": "confidence_revaluation_attribution_rate_shock",
+      "path": "data/simulation/revaluation/attribution/confidence_revaluation_attribution_rate_shock.json",
+      "schema_version": "confidence_revaluation_attribution.v1",
+      "status": "available"
+    },
+    {
+      "output_name": "theme_revaluation_attribution_rate_shock",
+      "path": "data/simulation/revaluation/attribution/theme_revaluation_attribution_rate_shock.json",
       "schema_version": "theme_revaluation_attribution.v1",
       "status": "limited_gross_position_tag_attribution"
     },
@@ -58,20 +93,58 @@
       "status": "requires_published_position_thesis_assignments"
     },
     {
+      "output_name": "cross_scenario_revaluation_summary",
+      "path": "data/simulation/revaluation/attribution/cross_scenario_revaluation_summary.json",
+      "schema_version": "cross_scenario_revaluation_summary.v1",
+      "status": "available"
+    },
+    {
       "output_name": "cross_scenario_revaluation_readiness",
       "path": "data/simulation/revaluation/attribution/cross_scenario_revaluation_readiness.json",
       "schema_version": "cross_scenario_revaluation_readiness.v1",
-      "status": "requires_additional_full_revaluation_scenario_bundles"
+      "status": "cross_scenario_summary_available"
     }
   ],
   "portfolio_impact": -9461334.2,
   "portfolio_impact_percent": -0.210913,
+  "scenario_count": 2,
   "scenario_id": "ai_chip_selloff",
+  "scenario_ids": [
+    "ai_chip_selloff",
+    "rate_shock"
+  ],
   "scenario_market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
   "scenario_portfolio_value": 35397657.2,
+  "scenarios": [
+    {
+      "attribution_outputs": [
+        "data/simulation/revaluation/attribution/manager_revaluation_attribution_ai_chip_selloff.json",
+        "data/simulation/revaluation/attribution/account_revaluation_attribution_ai_chip_selloff.json",
+        "data/simulation/revaluation/attribution/sleeve_revaluation_attribution_ai_chip_selloff.json",
+        "data/simulation/revaluation/attribution/coverage_revaluation_attribution_ai_chip_selloff.json",
+        "data/simulation/revaluation/attribution/confidence_revaluation_attribution_ai_chip_selloff.json",
+        "data/simulation/revaluation/attribution/theme_revaluation_attribution_ai_chip_selloff.json"
+      ],
+      "bundle_manifest": "data/simulation/revaluation/revaluation_bundle_manifest.json",
+      "scenario_id": "ai_chip_selloff"
+    },
+    {
+      "attribution_outputs": [
+        "data/simulation/revaluation/attribution/manager_revaluation_attribution_rate_shock.json",
+        "data/simulation/revaluation/attribution/account_revaluation_attribution_rate_shock.json",
+        "data/simulation/revaluation/attribution/sleeve_revaluation_attribution_rate_shock.json",
+        "data/simulation/revaluation/attribution/coverage_revaluation_attribution_rate_shock.json",
+        "data/simulation/revaluation/attribution/confidence_revaluation_attribution_rate_shock.json",
+        "data/simulation/revaluation/attribution/theme_revaluation_attribution_rate_shock.json"
+      ],
+      "bundle_manifest": "data/simulation/revaluation/revaluation_bundle_manifest_rate_shock.json",
+      "scenario_id": "rate_shock"
+    }
+  ],
   "schema_version": "revaluation_attribution_index.v1",
   "source_inputs": [
     "data/simulation/revaluation/position_value_comparison_ai_chip_selloff.json",
+    "data/simulation/revaluation/position_value_comparison_rate_shock.json",
     "data/simulation/revaluation/position_catalog.json",
     "data/simulation/revaluation/instrument_catalog.json",
     "data/simulation/synthetic_position_universe.json",
@@ -79,7 +152,9 @@
   ],
   "source_manifests": [
     "data/simulation/revaluation/revaluation_bundle_manifest.json",
-    "data/simulation/revaluation/valuation_coverage_manifest.json"
+    "data/simulation/revaluation/revaluation_bundle_manifest_rate_shock.json",
+    "data/simulation/revaluation/valuation_coverage_manifest.json",
+    "data/simulation/revaluation/valuation_coverage_manifest_rate_shock.json"
   ],
   "source_revaluation_bundle_id": "ai_chip_selloff:market_state_base_2026-06-30:market_state_scenario_ai_chip_selloff_2026-06-30",
   "source_revaluation_manifest": "data/simulation/revaluation/revaluation_bundle_manifest.json",

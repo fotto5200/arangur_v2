@@ -10,6 +10,7 @@
     "required_input_families_present": [
       "bond_price_scalars",
       "cash_scalars",
+      "cash_yield_assumptions",
       "commodity_prices",
       "crypto_prices",
       "equity_prices",
@@ -17,6 +18,7 @@
       "fx_rates",
       "money_market_navs",
       "private_marks",
+      "rate_curve_inputs",
       "review_policies"
     ],
     "status": "complete"
@@ -58,6 +60,15 @@
         "confidence": "high",
         "input_id": "cash_scalars:USD",
         "scalar": 1.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      }
+    },
+    "cash_yield_assumptions": {
+      "USD": {
+        "confidence": "high",
+        "input_id": "cash_yield_assumptions:USD",
+        "nav": 1.000266,
         "source": "synthetic_revaluation_fixture",
         "synthetic_data": true
       }
@@ -534,6 +545,15 @@
         "confidence": "high",
         "input_id": "private_marks:instr_venture_ai_infrastructure_fund",
         "mark": 740000.0,
+        "source": "synthetic_revaluation_fixture",
+        "synthetic_data": true
+      }
+    },
+    "rate_curve_inputs": {
+      "USD": {
+        "confidence": "high",
+        "input_id": "rate_curve_inputs:USD",
+        "rate": 0.04,
         "source": "synthetic_revaluation_fixture",
         "synthetic_data": true
       }

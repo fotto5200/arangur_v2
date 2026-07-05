@@ -46,12 +46,12 @@
       "valued": {
         "base_value": 32408991.4,
         "count": 51,
-        "scenario_value": 22890679.7
+        "scenario_value": 27884132.14
       },
       "valued_with_approved_policy": {
         "base_value": 2675000.0,
         "count": 4,
-        "scenario_value": 2731977.5
+        "scenario_value": 2419537.5
       },
       "valued_with_substitute_input": {
         "base_value": 0.0,
@@ -61,8 +61,8 @@
     }
   },
   "generated_at": "2026-07-05T00:00:00Z",
-  "impact": -9461334.2,
-  "impact_percent": -0.210913,
+  "impact": -4780321.76,
+  "impact_percent": -0.106563,
   "input_files": [
     "data/simulation/revaluation/instrument_catalog.json",
     "data/simulation/revaluation/position_catalog.json",
@@ -70,23 +70,23 @@
     "data/simulation/revaluation/base_market_state.json",
     "data/simulation/revaluation/position_pricing_function_assignments.json",
     "data/simulation/revaluation/valuation_input_coverage_map_base.json",
-    "data/simulation/revaluation/scenario_market_state_ai_chip_selloff.json",
-    "data/simulation/revaluation/valuation_input_coverage_map_ai_chip_selloff.json"
+    "data/simulation/revaluation/scenario_market_state_rate_shock.json",
+    "data/simulation/revaluation/valuation_input_coverage_map_rate_shock.json"
   ],
   "methodology": "full_portfolio_revaluation",
   "output_files": [
     "data/simulation/revaluation/position_valuation_results_base.json",
-    "data/simulation/revaluation/position_valuation_results_ai_chip_selloff.json",
-    "data/simulation/revaluation/position_value_comparison_ai_chip_selloff.json",
-    "data/simulation/revaluation/portfolio_revaluation_summary_ai_chip_selloff.json",
-    "data/simulation/revaluation/valuation_coverage_manifest.json",
-    "data/simulation/revaluation/revaluation_bundle_manifest.json"
+    "data/simulation/revaluation/position_valuation_results_rate_shock.json",
+    "data/simulation/revaluation/position_value_comparison_rate_shock.json",
+    "data/simulation/revaluation/portfolio_revaluation_summary_rate_shock.json",
+    "data/simulation/revaluation/valuation_coverage_manifest_rate_shock.json",
+    "data/simulation/revaluation/revaluation_bundle_manifest_rate_shock.json"
   ],
   "position_count": 74,
   "review_required_count": 12,
-  "scenario_id": "ai_chip_selloff",
-  "scenario_market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
-  "scenario_portfolio_value": 35397657.2,
+  "scenario_id": "rate_shock",
+  "scenario_market_state_id": "market_state_scenario_rate_shock_2026-06-30",
+  "scenario_portfolio_value": 40078669.64,
   "schema_version": "revaluation_bundle_manifest.v1",
   "synthetic_data": true
 }

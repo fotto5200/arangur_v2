@@ -192,25 +192,25 @@ This writes:
 
 ## Generate Synthetic Full Revaluation Bundle
 
-The internal full revaluation skeleton values every synthetic position under a base market state and the `ai_chip_selloff` scenario market state, then writes comparison and portfolio-summary artifacts. This is local-only analytics infrastructure; it does not change advisor UI, report views, Docker, deployment, live data, external APIs, or dependencies.
+The internal full revaluation skeleton values every synthetic position under a base market state and the supported scenario market states, currently `ai_chip_selloff` and `rate_shock`, then writes comparison, portfolio-summary, and scenario-index artifacts. This is local-only analytics infrastructure; it does not change advisor UI, report views, Docker, deployment, live data, external APIs, or dependencies.
 
 ```cmd
 set PYTHONPATH=src
 python -m arangur.analytics.revaluation_runner
 ```
 
-This writes deterministic fixtures and outputs under `data/simulation/revaluation/`, including `position_valuation_results_base.json`, `position_valuation_results_ai_chip_selloff.json`, `position_value_comparison_ai_chip_selloff.json`, `portfolio_revaluation_summary_ai_chip_selloff.json`, `valuation_coverage_manifest.json`, and `revaluation_bundle_manifest.json`.
+This writes deterministic fixtures and outputs under `data/simulation/revaluation/`, including `position_valuation_results_base.json`, scenario-specific valuation/comparison/summary files, scenario-specific coverage and bundle manifests, and `revaluation_scenario_index.json`. Existing `ai_chip_selloff` filenames are preserved for compatibility.
 
 ## Generate Revaluation Attribution Outputs
 
-The attribution generator aggregates the full revaluation comparison rows into manager, account, sleeve, coverage, confidence, gross theme, and readiness outputs. It stays local-only and does not wire anything into advisor UI or report elements.
+The attribution generator aggregates the full revaluation comparison rows into scenario-specific manager, account, sleeve, coverage, confidence, and gross theme outputs, plus thesis-readiness and cross-scenario summary outputs. It stays local-only and does not wire anything into advisor UI or report elements.
 
 ```cmd
 set PYTHONPATH=src
 python -m arangur.analytics.revaluation_attribution
 ```
 
-This writes deterministic attribution outputs under `data/simulation/revaluation/attribution/`.
+This writes deterministic attribution outputs under `data/simulation/revaluation/attribution/`, including `cross_scenario_revaluation_summary.json` for the currently supported full-revaluation scenarios.
 
 ## Map Analytic Outputs To Report Element Views
 

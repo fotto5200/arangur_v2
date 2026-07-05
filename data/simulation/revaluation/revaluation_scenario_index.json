@@ -1,0 +1,49 @@
+{
+  "caveats": [
+    "Synthetic internal full-revaluation scenario index only.",
+    "Advisor UI and report-element wiring remain paused."
+  ],
+  "generated_at": "2026-07-05T00:00:00Z",
+  "methodology": "full_portfolio_revaluation",
+  "scenario_count": 2,
+  "scenario_ids": [
+    "ai_chip_selloff",
+    "rate_shock"
+  ],
+  "scenarios": [
+    {
+      "attribution_index_file": "data/simulation/revaluation/attribution/revaluation_attribution_index.json",
+      "base_market_state_id": "market_state_base_2026-06-30",
+      "base_portfolio_value": 44858991.4,
+      "bundle_manifest_file": "data/simulation/revaluation/revaluation_bundle_manifest.json",
+      "impact": -9461334.2,
+      "impact_percent": -0.210913,
+      "market_state_fixture": "data/simulation/revaluation/scenario_market_state_ai_chip_selloff.json",
+      "portfolio_summary_file": "data/simulation/revaluation/portfolio_revaluation_summary_ai_chip_selloff.json",
+      "position_valuation_results_file": "data/simulation/revaluation/position_valuation_results_ai_chip_selloff.json",
+      "position_value_comparison_file": "data/simulation/revaluation/position_value_comparison_ai_chip_selloff.json",
+      "scenario_id": "ai_chip_selloff",
+      "scenario_market_state_id": "market_state_scenario_ai_chip_selloff_2026-06-30",
+      "scenario_portfolio_value": 35397657.2,
+      "valuation_coverage_manifest_file": "data/simulation/revaluation/valuation_coverage_manifest.json"
+    },
+    {
+      "attribution_index_file": "data/simulation/revaluation/attribution/revaluation_attribution_index.json",
+      "base_market_state_id": "market_state_base_2026-06-30",
+      "base_portfolio_value": 44858991.4,
+      "bundle_manifest_file": "data/simulation/revaluation/revaluation_bundle_manifest_rate_shock.json",
+      "impact": -4780321.76,
+      "impact_percent": -0.106563,
+      "market_state_fixture": "data/simulation/revaluation/scenario_market_state_rate_shock.json",
+      "portfolio_summary_file": "data/simulation/revaluation/portfolio_revaluation_summary_rate_shock.json",
+      "position_valuation_results_file": "data/simulation/revaluation/position_valuation_results_rate_shock.json",
+      "position_value_comparison_file": "data/simulation/revaluation/position_value_comparison_rate_shock.json",
+      "scenario_id": "rate_shock",
+      "scenario_market_state_id": "market_state_scenario_rate_shock_2026-06-30",
+      "scenario_portfolio_value": 40078669.64,
+      "valuation_coverage_manifest_file": "data/simulation/revaluation/valuation_coverage_manifest_rate_shock.json"
+    }
+  ],
+  "schema_version": "revaluation_scenario_index.v1",
+  "synthetic_data": true
+}
