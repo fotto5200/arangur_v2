@@ -437,6 +437,7 @@ Future scenario, data-coverage, and deployable private-demo work is captured in:
 - `docs/product/report_purpose_information_economy_audit_v1.md`
 - `docs/product/report_system_redesign_blueprint_v1.md`
 - `docs/product/report_family_catalog_v1.md`
+- `docs/product/revised_report_mockup_spec_v2.md`
 - `docs/architecture/arranger_control_plane_boundary_v1.md`
 - `docs/architecture/arranger_internal_analytics_algorithm_design_v1.md`
 - `docs/architecture/key_market_state_scenario_basis_design_v1.md`
