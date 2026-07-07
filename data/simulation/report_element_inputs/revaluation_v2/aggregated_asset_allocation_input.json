@@ -1,0 +1,95 @@
+{
+  "audience_tier": "client_briefing",
+  "denominator_category_system": "broad asset type share of base portfolio value",
+  "display_title": "Aggregated Asset Allocation",
+  "exact_report_question": "What does the portfolio own by broad asset type?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator_version": "lean_report_views_v2.v1",
+  "information_budget": {
+    "max_advisor_notes": 1,
+    "max_caveats": 2,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 5,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true
+  },
+  "internal_source_refs": [
+    "data/simulation/revaluation/position_catalog.json",
+    "data/simulation/revaluation/instrument_catalog.json",
+    "data/simulation/revaluation/position_valuation_results_base.json"
+  ],
+  "master_question_family": "Ownership / Exposure",
+  "not_wired_into_advisor_ui": true,
+  "not_wired_into_generated_reports": true,
+  "rendering_mode": "table_first",
+  "report_element_id": "aggregated_asset_allocation",
+  "representation_level": "portfolio holdings grouped by asset type",
+  "schema_version": "revaluation_report_input.v2",
+  "source_prerequisite_pack_refs": [],
+  "summary_detail_status": "summary",
+  "synthetic_data": true,
+  "table_validation": {
+    "base_value": 44858991.4,
+    "category_system": "asset_type",
+    "row_share_total": 1.0,
+    "row_value_total": 44858991.4
+  },
+  "visible_content": {
+    "advisor_note": null,
+    "caveats": [
+      "Small asset-type buckets are grouped into Other to keep the summary readable."
+    ],
+    "compact_table": {
+      "columns": [
+        "Asset Type",
+        "Value",
+        "Portfolio Share"
+      ],
+      "rows": [
+        {
+          "Asset Type": "Public Equity",
+          "Portfolio Share": "43.3%",
+          "Value": "$19.4M"
+        },
+        {
+          "Asset Type": "Funds / ETFs",
+          "Portfolio Share": "19.7%",
+          "Value": "$8.8M"
+        },
+        {
+          "Asset Type": "Private Markets",
+          "Portfolio Share": "17.6%",
+          "Value": "$7.9M"
+        },
+        {
+          "Asset Type": "Fixed Income / Cash",
+          "Portfolio Share": "11.4%",
+          "Value": "$5.1M"
+        },
+        {
+          "Asset Type": "Other",
+          "Portfolio Share": "8.0%",
+          "Value": "$3.6M"
+        }
+      ],
+      "title": "Asset Type Allocation"
+    },
+    "headline_metrics": [
+      {
+        "formatted_value": "Public Equity",
+        "label": "Largest asset type",
+        "value": "Public Equity"
+      },
+      {
+        "formatted_value": "$19.4M",
+        "label": "Largest asset value",
+        "value": 19414045.05
+      }
+    ],
+    "headline_sentence": "Public Equity is the largest broad allocation at $19.4M (43.3%)."
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "advisor_note": null,
+  "audience_tier": "advisor_review",
+  "caveats": [
+    "This concentration view uses asset type only; manager and coverage views are separate."
+  ],
+  "compact_table": {
+    "columns": [
+      "Asset Type",
+      "Portfolio Share",
+      "Value",
+      "Why It Matters"
+    ],
+    "rows": [
+      {
+        "Asset Type": "Public Equity",
+        "Portfolio Share": "43.3%",
+        "Value": "$19.4M",
+        "Why It Matters": "Largest source of equity-market and growth sensitivity."
+      },
+      {
+        "Asset Type": "Funds / ETFs",
+        "Portfolio Share": "19.7%",
+        "Value": "$8.8M",
+        "Why It Matters": "Packaged exposure can reduce transparency versus direct holdings."
+      },
+      {
+        "Asset Type": "Private Markets",
+        "Portfolio Share": "17.6%",
+        "Value": "$7.9M",
+        "Why It Matters": "Illiquidity and mark timing can affect interpretation."
+      },
+      {
+        "Asset Type": "Fixed Income / Cash",
+        "Portfolio Share": "11.4%",
+        "Value": "$5.1M",
+        "Why It Matters": "Supports liquidity and income but remains rate-sensitive."
+      },
+      {
+        "Asset Type": "Other",
+        "Portfolio Share": "8.0%",
+        "Value": "$3.6M",
+        "Why It Matters": "Smaller exposures are grouped so the concentration report stays focused."
+      }
+    ],
+    "title": "Asset-Type Concentrations"
+  },
+  "denominator_category_system": "broad asset type share of base portfolio value",
+  "display_title": "Concentration by Asset Type",
+  "exact_report_question": "Is the portfolio concentrated by broad asset type?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator_version": "lean_report_views_v2.v1",
+  "headline_metrics": [
+    {
+      "formatted_value": "Public Equity",
+      "label": "Largest concentration",
+      "value": "Public Equity"
+    },
+    {
+      "formatted_value": "43.3%",
+      "label": "Largest share",
+      "value": 0.432779
+    }
+  ],
+  "headline_sentence": "Public Equity is the largest asset-type concentration at 43.3% of portfolio value.",
+  "information_budget_applied": {
+    "actual_advisor_notes": 0,
+    "actual_caveats": 1,
+    "actual_headline_metrics": 2,
+    "actual_headline_sentences": 1,
+    "actual_visible_table_rows": 5,
+    "max_advisor_notes": 1,
+    "max_caveats": 2,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 5,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true,
+    "rendering_mode": "table_first"
+  },
+  "internal_source_refs": [
+    "data/simulation/revaluation/position_catalog.json",
+    "data/simulation/revaluation/instrument_catalog.json",
+    "data/simulation/revaluation/position_valuation_results_base.json"
+  ],
+  "master_question_family": "Risk / Downside",
+  "rendering_mode": "table_first",
+  "report_element_id": "concentration_by_asset_type",
+  "representation_level": "asset-type bucket",
+  "schema_version": "revaluation_report_view.v2",
+  "source_prerequisite_pack_refs": [],
+  "summary_detail_status": "summary",
+  "synthetic_data": true,
+  "table_validation": {
+    "category_system": "asset_type",
+    "mixed_category_systems": false,
+    "row_share_total": 1.0
+  },
+  "visual_placeholder": null
+}

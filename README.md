@@ -240,6 +240,21 @@ This writes deterministic JSON under:
 
 - `data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/`
 
+## Generate Revaluation v2 Report Mockups
+
+The v2 report-view generator turns full-revaluation outputs, attribution outputs, and the synthetic prerequisite pack into v2 report input fixtures, v2 report view fixtures, and Markdown product-review mockups. It preserves v1 mockups and does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
+
+```cmd
+set PYTHONPATH=src
+python -m arangur.analytics.lean_report_views_v2
+```
+
+This writes:
+
+- `data/simulation/report_element_inputs/revaluation_v2/`
+- `data/simulation/report_element_views/revaluation_v2/`
+- `docs/product/report_mockups/revaluation_v2/`
+
 ## Map Analytic Outputs To Report Element Views
 
 The analytic report-element mapper turns those proof outputs into separate renderer-ready payloads for Concentration, Manager Comparison, Scenario Impact by Manager, Data Confidence Note, and Portfolio Status. The local Advisor workflow can now consume these committed analytic-derived fragments for supported configured specs without adding backend endpoints, charts, live data, or dependencies.

@@ -1,0 +1,102 @@
+{
+  "audience_tier": "advisor_review",
+  "denominator_category_system": "portfolio value by representation status",
+  "display_title": "Portfolio Representation Status",
+  "exact_report_question": "What is the current portfolio state, and how complete is our view?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator_version": "lean_report_views_v2.v1",
+  "information_budget": {
+    "max_advisor_notes": 1,
+    "max_caveats": 2,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 5,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true
+  },
+  "internal_source_refs": [
+    "data/simulation/revaluation/position_catalog.json",
+    "data/simulation/revaluation/instrument_catalog.json",
+    "data/simulation/revaluation/position_valuation_results_base.json"
+  ],
+  "master_question_family": "Ownership / Exposure",
+  "not_wired_into_advisor_ui": true,
+  "not_wired_into_generated_reports": true,
+  "rendering_mode": "summary_first",
+  "report_element_id": "portfolio_representation_status",
+  "representation_level": "whole portfolio with representation-status rows",
+  "schema_version": "revaluation_report_input.v2",
+  "source_prerequisite_pack_refs": [],
+  "summary_detail_status": "summary",
+  "synthetic_data": true,
+  "table_validation": {
+    "base_value": 44858991.4,
+    "category_system": "representation_status",
+    "review_required_value": 5825000.0,
+    "row_share_total": 1.0,
+    "row_value_total": 44858991.4
+  },
+  "visible_content": {
+    "advisor_note": null,
+    "caveats": [
+      "Fund/NAV and manager-level rows do not imply full underlying look-through.",
+      "Review-required exposure should stay advisor-review until resolved."
+    ],
+    "compact_table": {
+      "columns": [
+        "Representation",
+        "Positions",
+        "Value",
+        "Portfolio Share"
+      ],
+      "rows": [
+        {
+          "Portfolio Share": "58.5%",
+          "Positions": "36",
+          "Representation": "Direct positions",
+          "Value": "$26.3M"
+        },
+        {
+          "Portfolio Share": "28.5%",
+          "Positions": "26",
+          "Representation": "Fund/NAV positions with limited look-through",
+          "Value": "$12.8M"
+        },
+        {
+          "Portfolio Share": "2.4%",
+          "Positions": "3",
+          "Representation": "Manager/sleeve-level holdings requiring review",
+          "Value": "$1.1M"
+        },
+        {
+          "Portfolio Share": "10.6%",
+          "Positions": "9",
+          "Representation": "Other review-required exposure",
+          "Value": "$4.8M"
+        }
+      ],
+      "title": "Representation Mix"
+    },
+    "headline_metrics": [
+      {
+        "formatted_value": "$44.9M",
+        "label": "Base portfolio value",
+        "value": 44858991.4
+      },
+      {
+        "formatted_value": "58.5%",
+        "label": "Direct position share",
+        "value": 0.5854798409488984
+      },
+      {
+        "formatted_value": "$5.8M",
+        "label": "Review-required value",
+        "value": 5825000.0
+      }
+    ],
+    "headline_sentence": "The portfolio is $44.9M, with 58.5% in direct positions and $5.8M needing review before point-impact claims."
+  }
+}

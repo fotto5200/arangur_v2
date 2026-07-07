@@ -1,0 +1,92 @@
+{
+  "audience_tier": "client_briefing",
+  "denominator_category_system": "approved deterministic scenarios",
+  "display_title": "Current Portfolio Scenario Downside",
+  "exact_report_question": "How does the current portfolio revalue under selected approved downside scenarios?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator_version": "lean_report_views_v2.v1",
+  "information_budget": {
+    "max_advisor_notes": 1,
+    "max_caveats": 2,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 5,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true
+  },
+  "internal_source_refs": [
+    "data/simulation/revaluation/attribution/cross_scenario_revaluation_summary.json",
+    "data/simulation/revaluation/portfolio_revaluation_summary_ai_chip_selloff.json",
+    "data/simulation/revaluation/portfolio_revaluation_summary_rate_shock.json"
+  ],
+  "master_question_family": "Risk / Downside",
+  "not_wired_into_advisor_ui": true,
+  "not_wired_into_generated_reports": true,
+  "rendering_mode": "table_first",
+  "report_element_id": "current_portfolio_scenario_downside",
+  "representation_level": "whole portfolio scenario result",
+  "schema_version": "revaluation_report_input.v2",
+  "source_prerequisite_pack_refs": [],
+  "summary_detail_status": "summary",
+  "synthetic_data": true,
+  "table_validation": {
+    "benchmark_comparison_included": false,
+    "category_system": "deterministic_scenario",
+    "probabilistic_range_included": false,
+    "scenario_count": 2
+  },
+  "visible_content": {
+    "advisor_note": null,
+    "caveats": [
+      "Scenarios are deterministic stress views, not forecasts.",
+      "This base report does not include benchmark, manager, or lens breakdowns."
+    ],
+    "compact_table": {
+      "columns": [
+        "Scenario",
+        "Portfolio Impact",
+        "Portfolio Change",
+        "Value After Scenario",
+        "Status"
+      ],
+      "rows": [
+        {
+          "Portfolio Change": "-21.1%",
+          "Portfolio Impact": "-$9.5M",
+          "Scenario": "AI / Chip Selloff",
+          "Status": "Deterministic stress",
+          "Value After Scenario": "$35.4M"
+        },
+        {
+          "Portfolio Change": "-10.7%",
+          "Portfolio Impact": "-$4.8M",
+          "Scenario": "Rate Shock",
+          "Status": "Deterministic stress",
+          "Value After Scenario": "$40.1M"
+        }
+      ],
+      "title": "Scenario Results"
+    },
+    "headline_metrics": [
+      {
+        "formatted_value": "AI / Chip Selloff",
+        "label": "Larger downside case",
+        "value": "AI / Chip Selloff"
+      },
+      {
+        "formatted_value": "-$9.5M",
+        "label": "Portfolio impact",
+        "value": -9461334.2
+      },
+      {
+        "formatted_value": "-21.1%",
+        "label": "Portfolio change",
+        "value": -0.210913
+      }
+    ],
+    "headline_sentence": "AI / Chip Selloff is the larger deterministic downside case, reducing portfolio value by $9.5M (-21.1%)."
+  }
+}

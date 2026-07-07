@@ -1,0 +1,114 @@
+{
+  "audience_tier": "advisor_review",
+  "denominator_category_system": "coverage/confidence status",
+  "display_title": "Coverage and Confidence Warning",
+  "exact_report_question": "Can the advisor trust the numbers enough to show them?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator_version": "lean_report_views_v2.v1",
+  "information_budget": {
+    "max_advisor_notes": 1,
+    "max_caveats": 2,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 5,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true
+  },
+  "internal_source_refs": [
+    "data/simulation/revaluation/attribution/coverage_revaluation_attribution_ai_chip_selloff.json",
+    "data/simulation/revaluation/attribution/confidence_revaluation_attribution_ai_chip_selloff.json",
+    "data/simulation/revaluation/portfolio_revaluation_summary_ai_chip_selloff.json"
+  ],
+  "master_question_family": "Risk / Downside",
+  "not_wired_into_advisor_ui": true,
+  "not_wired_into_generated_reports": true,
+  "rendering_mode": "summary_first",
+  "report_element_id": "coverage_confidence_warning",
+  "representation_level": "coverage/confidence status buckets",
+  "schema_version": "revaluation_report_input.v2",
+  "source_prerequisite_pack_refs": [],
+  "summary_detail_status": "summary",
+  "synthetic_data": true,
+  "table_validation": {
+    "category_system": "coverage_confidence_status",
+    "contains_approved_policy": true,
+    "contains_held_at_mark": true,
+    "contains_review_required": true,
+    "coverage_rows": [
+      "valued",
+      "valued_with_approved_policy",
+      "held_at_mark_with_caveat",
+      "review_required",
+      "not_valued"
+    ]
+  },
+  "visible_content": {
+    "advisor_note": "Resolve the review-required bucket before treating this as client-ready language.",
+    "caveats": [
+      "Review-required exposure should not support strong point-impact claims.",
+      "Held-at-mark exposure may understate stress exposure."
+    ],
+    "compact_table": {
+      "columns": [
+        "Status",
+        "Positions",
+        "Base Value",
+        "Advisor Meaning"
+      ],
+      "rows": [
+        {
+          "Advisor Meaning": "Usable for the current synthetic summary.",
+          "Base Value": "$32.4M",
+          "Positions": "51",
+          "Status": "Valued"
+        },
+        {
+          "Advisor Meaning": "Usable with policy caveat.",
+          "Base Value": "$2.7M",
+          "Positions": "4",
+          "Status": "Approved Policy"
+        },
+        {
+          "Advisor Meaning": "May understate stress exposure.",
+          "Base Value": "$4.0M",
+          "Positions": "7",
+          "Status": "Held At Mark"
+        },
+        {
+          "Advisor Meaning": "Review before relying on point impact.",
+          "Base Value": "$5.8M",
+          "Positions": "12",
+          "Status": "Review Required"
+        },
+        {
+          "Advisor Meaning": "Do not use for point impact.",
+          "Base Value": "$0",
+          "Positions": "0",
+          "Status": "Not Valued"
+        }
+      ],
+      "title": "Coverage Summary"
+    },
+    "headline_metrics": [
+      {
+        "formatted_value": "$5.8M",
+        "label": "Review-required value",
+        "value": 5825000.0
+      },
+      {
+        "formatted_value": "$4.0M",
+        "label": "Held-at-mark value",
+        "value": 3950000.0
+      },
+      {
+        "formatted_value": "$2.7M",
+        "label": "Approved-policy value",
+        "value": 2675000.0
+      }
+    ],
+    "headline_sentence": "12 positions representing $5.8M need review before relying on point scenario impact."
+  }
+}

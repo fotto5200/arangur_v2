@@ -1,0 +1,156 @@
+{
+  "advisor_note": "Use this to compare manager expression under one lens, not to compare across different lenses.",
+  "audience_tier": "advisor_review",
+  "caveats": [
+    "Each manager row uses that manager's own base value as denominator.",
+    "The grid is limited to the four largest managers by base value for readability."
+  ],
+  "compact_table": {
+    "columns": [
+      "Manager/Sleeve",
+      "Core AI Hardware",
+      "AI Platform",
+      "AI Beneficiary",
+      "AI Disrupted",
+      "Data Center/Power",
+      "Neutral/Low",
+      "Review"
+    ],
+    "rows": [
+      {
+        "AI Beneficiary": "0.0%",
+        "AI Disrupted": "0.0%",
+        "AI Platform": "29.5%",
+        "Core AI Hardware": "56.7%",
+        "Data Center/Power": "11.6%",
+        "Manager/Sleeve": "Manager A - Growth / AI Infrastructure",
+        "Neutral/Low": "2.2%",
+        "Review": "0.0%"
+      },
+      {
+        "AI Beneficiary": "9.9%",
+        "AI Disrupted": "0.0%",
+        "AI Platform": "15.2%",
+        "Core AI Hardware": "0.0%",
+        "Data Center/Power": "32.8%",
+        "Manager/Sleeve": "Manager D - Private Markets / Real Assets",
+        "Neutral/Low": "0.0%",
+        "Review": "42.0%"
+      },
+      {
+        "AI Beneficiary": "17.0%",
+        "AI Disrupted": "14.8%",
+        "AI Platform": "29.1%",
+        "Core AI Hardware": "14.2%",
+        "Data Center/Power": "0.0%",
+        "Manager/Sleeve": "Manager B - Core Quality Equity",
+        "Neutral/Low": "24.9%",
+        "Review": "0.0%"
+      },
+      {
+        "AI Beneficiary": "0.0%",
+        "AI Disrupted": "0.0%",
+        "AI Platform": "0.0%",
+        "Core AI Hardware": "0.0%",
+        "Data Center/Power": "0.0%",
+        "Manager/Sleeve": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "Neutral/Low": "100.0%",
+        "Review": "0.0%"
+      }
+    ],
+    "title": "Manager Mix by AI Adoption"
+  },
+  "denominator_category_system": "AI Adoption buckets as percent of each manager's base value",
+  "display_title": "Manager by Lens Exposure - AI Adoption",
+  "exact_report_question": "How do managers compare under the same selected AI Adoption lens?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator_version": "lean_report_views_v2.v1",
+  "headline_metrics": [
+    {
+      "formatted_value": "4",
+      "label": "Managers shown",
+      "value": 4
+    },
+    {
+      "formatted_value": "AI Adoption",
+      "label": "Lens used",
+      "value": "AI Adoption"
+    },
+    {
+      "formatted_value": "Manager base value",
+      "label": "Row denominator",
+      "value": "manager base value"
+    }
+  ],
+  "headline_sentence": "The four largest managers are shown under the same AI Adoption lens; Manager A - Growth / AI Infrastructure is most exposed to Core AI Hardware.",
+  "information_budget_applied": {
+    "actual_advisor_notes": 1,
+    "actual_caveats": 2,
+    "actual_headline_metrics": 3,
+    "actual_headline_sentences": 1,
+    "actual_visible_table_rows": 4,
+    "manager_by_lens_grid_allowed": true,
+    "max_advisor_notes": 1,
+    "max_caveats": 2,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 5,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true,
+    "rendering_mode": "table_first"
+  },
+  "internal_source_refs": [
+    "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/ai_adoption_lens_v1.json",
+    "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/position_lens_assignments_ai_adoption_v1.json",
+    "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/manager_mandate_catalog.json"
+  ],
+  "master_question_family": "Ownership / Exposure",
+  "rendering_mode": "table_first",
+  "report_element_id": "manager_by_lens_exposure_ai_adoption",
+  "representation_level": "manager/sleeve rows by lens bucket columns",
+  "schema_version": "revaluation_report_view.v2",
+  "source_prerequisite_pack_refs": [
+    "ai_adoption_lens_v1.json",
+    "position_lens_assignments_ai_adoption_v1.json",
+    "manager_mandate_catalog.json"
+  ],
+  "summary_detail_status": "summary",
+  "synthetic_data": true,
+  "table_validation": {
+    "all_rows_reconcile_to_one": true,
+    "category_system": "ai_adoption",
+    "complete_manager_lens_data_exists": true,
+    "manager_count_shown": 4,
+    "row_denominator": "manager_base_value",
+    "row_reconciliations": [
+      {
+        "denominator": "manager_base_value",
+        "manager_display_name": "Manager A - Growth / AI Infrastructure",
+        "manager_id": "mgr_a_growth_ai_infrastructure",
+        "row_share_total": 0.999999
+      },
+      {
+        "denominator": "manager_base_value",
+        "manager_display_name": "Manager D - Private Markets / Real Assets",
+        "manager_id": "mgr_d_private_real_assets",
+        "row_share_total": 1.000001
+      },
+      {
+        "denominator": "manager_base_value",
+        "manager_display_name": "Manager B - Core Quality Equity",
+        "manager_id": "mgr_b_core_quality_equity",
+        "row_share_total": 0.999999
+      },
+      {
+        "denominator": "manager_base_value",
+        "manager_display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "manager_id": "mgr_e_liquidity_defensive",
+        "row_share_total": 1.0
+      }
+    ]
+  },
+  "visual_placeholder": null
+}

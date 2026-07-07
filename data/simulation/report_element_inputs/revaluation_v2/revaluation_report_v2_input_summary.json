@@ -1,0 +1,47 @@
+{
+  "gated_reports_not_generated": [
+    "scenario_versus_benchmark",
+    "integrated_performance_attribution_summary",
+    "integrated_performance_attribution_detail",
+    "probabilistic_scenario_range",
+    "current_versus_proposed_portfolio",
+    "timing_attribution",
+    "custom_benchmark_construction"
+  ],
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator_version": "lean_report_views_v2.v1",
+  "input_files": [
+    "portfolio_representation_status_input.json",
+    "aggregated_asset_allocation_input.json",
+    "allocation_by_manager_input.json",
+    "coverage_confidence_warning_input.json",
+    "concentration_by_asset_type_input.json",
+    "concentration_by_manager_sleeve_input.json",
+    "current_portfolio_scenario_downside_input.json",
+    "manager_role_summary_input.json",
+    "cash_flow_support_summary_input.json",
+    "full_lens_exposure_ai_adoption_input.json",
+    "full_lens_exposure_energy_security_input.json",
+    "manager_by_lens_exposure_ai_adoption_input.json",
+    "manager_by_lens_exposure_energy_security_input.json"
+  ],
+  "mockups_generated_from_views": true,
+  "report_ids": [
+    "portfolio_representation_status",
+    "aggregated_asset_allocation",
+    "allocation_by_manager",
+    "coverage_confidence_warning",
+    "concentration_by_asset_type",
+    "concentration_by_manager_sleeve",
+    "current_portfolio_scenario_downside",
+    "manager_role_summary",
+    "cash_flow_support_summary",
+    "full_lens_exposure_ai_adoption",
+    "full_lens_exposure_energy_security",
+    "manager_by_lens_exposure_ai_adoption",
+    "manager_by_lens_exposure_energy_security"
+  ],
+  "report_input_count": 13,
+  "schema_version": "revaluation_report_input_summary.v2",
+  "synthetic_data": true
+}

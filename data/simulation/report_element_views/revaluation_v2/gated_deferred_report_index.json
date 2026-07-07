@@ -1,0 +1,44 @@
+{
+  "gated_or_deferred_reports": [
+    {
+      "display_title": "Scenario Versus Benchmark",
+      "reason": "Needs approved benchmark maps and benchmark scenario values.",
+      "report_id": "scenario_versus_benchmark"
+    },
+    {
+      "display_title": "Integrated Performance Attribution Summary",
+      "reason": "Needs historical returns, benchmark returns, weights, flows, and an attribution method.",
+      "report_id": "integrated_performance_attribution_summary"
+    },
+    {
+      "display_title": "Integrated Performance Attribution Detail",
+      "reason": "Needs summary prerequisites plus detailed holding, trade, and reconciliation policy.",
+      "report_id": "integrated_performance_attribution_detail"
+    },
+    {
+      "display_title": "Probabilistic Scenario Range",
+      "reason": "Needs approved probabilistic analytics and range methodology.",
+      "report_id": "probabilistic_scenario_range"
+    },
+    {
+      "display_title": "Current Versus Proposed Portfolio",
+      "reason": "Needs an explicit proposed allocation workflow and data object.",
+      "report_id": "current_versus_proposed_portfolio"
+    },
+    {
+      "display_title": "Timing Attribution",
+      "reason": "Needs clean timing methodology plus trade and holding history.",
+      "report_id": "timing_attribution"
+    },
+    {
+      "display_title": "Custom Benchmark Construction",
+      "reason": "Intentionally not part of the v2 mockup set.",
+      "report_id": "custom_benchmark_construction"
+    }
+  ],
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator_version": "lean_report_views_v2.v1",
+  "purpose": "Product/readiness index for v2 reports deliberately not generated.",
+  "schema_version": "revaluation_report_gated_deferred_index.v2",
+  "synthetic_data": true
+}

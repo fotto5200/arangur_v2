@@ -1,0 +1,130 @@
+{
+  "advisor_note": null,
+  "audience_tier": "advisor_review",
+  "caveats": [
+    "Every in-scope synthetic position has one primary bucket; no weighted splits are used.",
+    "Review buckets remain visible instead of being forced into another category."
+  ],
+  "compact_table": {
+    "columns": [
+      "Lens Bucket",
+      "Value",
+      "Portfolio Share",
+      "Positions"
+    ],
+    "rows": [
+      {
+        "Lens Bucket": "Core AI Infrastructure / Hardware",
+        "Portfolio Share": "21.0%",
+        "Positions": "10",
+        "Value": "$9.4M"
+      },
+      {
+        "Lens Bucket": "AI Model / Platform Exposure",
+        "Portfolio Share": "17.2%",
+        "Positions": "5",
+        "Value": "$7.7M"
+      },
+      {
+        "Lens Bucket": "AI Downstream Productivity Beneficiary",
+        "Portfolio Share": "4.7%",
+        "Positions": "3",
+        "Value": "$2.1M"
+      },
+      {
+        "Lens Bucket": "AI-Disrupted Incumbent",
+        "Portfolio Share": "2.5%",
+        "Positions": "2",
+        "Value": "$1.1M"
+      },
+      {
+        "Lens Bucket": "Data Center / Power Bottleneck Exposure",
+        "Portfolio Share": "10.7%",
+        "Positions": "11",
+        "Value": "$4.8M"
+      },
+      {
+        "Lens Bucket": "Neutral / Low Direct AI Exposure",
+        "Portfolio Share": "33.3%",
+        "Positions": "32",
+        "Value": "$14.9M"
+      },
+      {
+        "Lens Bucket": "Unclassified / Review Required",
+        "Portfolio Share": "10.5%",
+        "Positions": "11",
+        "Value": "$4.7M"
+      }
+    ],
+    "title": "AI Adoption Buckets"
+  },
+  "denominator_category_system": "AI Adoption lens buckets over in-scope base value",
+  "display_title": "Full Lens Exposure - AI Adoption",
+  "exact_report_question": "How does the whole portfolio map into every bucket of the AI Adoption lens?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator_version": "lean_report_views_v2.v1",
+  "headline_metrics": [
+    {
+      "formatted_value": "Neutral / Low Direct AI Exposure",
+      "label": "Largest bucket",
+      "value": "Neutral / Low Direct AI Exposure"
+    },
+    {
+      "formatted_value": "33.3%",
+      "label": "Largest bucket share",
+      "value": 0.333043
+    },
+    {
+      "formatted_value": "10.5%",
+      "label": "Review bucket share",
+      "value": 0.104996
+    }
+  ],
+  "headline_sentence": "Under the AI Adoption lens, Neutral / Low Direct AI Exposure is the largest bucket at 33.3%, with 10.5% requiring review.",
+  "information_budget_applied": {
+    "actual_advisor_notes": 0,
+    "actual_caveats": 2,
+    "actual_headline_metrics": 3,
+    "actual_headline_sentences": 1,
+    "actual_visible_table_rows": 7,
+    "exception_reason": "Full Lens Exposure must show every bucket in the selected lens.",
+    "max_advisor_notes": 1,
+    "max_caveats": 2,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 8,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true,
+    "rendering_mode": "table_first"
+  },
+  "internal_source_refs": [
+    "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/ai_adoption_lens_v1.json",
+    "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/position_lens_assignments_ai_adoption_v1.json"
+  ],
+  "master_question_family": "Ownership / Exposure",
+  "rendering_mode": "table_first",
+  "report_element_id": "full_lens_exposure_ai_adoption",
+  "representation_level": "lens bucket",
+  "schema_version": "revaluation_report_view.v2",
+  "source_prerequisite_pack_refs": [
+    "ai_adoption_lens_v1.json",
+    "position_lens_assignments_ai_adoption_v1.json"
+  ],
+  "summary_detail_status": "summary",
+  "synthetic_data": true,
+  "table_validation": {
+    "all_lens_buckets_included": true,
+    "assigned_base_value": 44858991.4,
+    "base_value_total": 44858991.4,
+    "bucket_count": 7,
+    "category_system": "ai_adoption",
+    "contains_neutral_bucket": true,
+    "contains_review_bucket": true,
+    "row_share_total": 1.0,
+    "weighted_splits_used": false
+  },
+  "visual_placeholder": null
+}

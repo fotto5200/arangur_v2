@@ -1,0 +1,130 @@
+{
+  "advisor_note": null,
+  "audience_tier": "advisor_review",
+  "caveats": [
+    "Every in-scope synthetic position has one primary bucket; no weighted splits are used.",
+    "Review buckets remain visible instead of being forced into another category."
+  ],
+  "compact_table": {
+    "columns": [
+      "Lens Bucket",
+      "Value",
+      "Portfolio Share",
+      "Positions"
+    ],
+    "rows": [
+      {
+        "Lens Bucket": "Energy Supply Beneficiary",
+        "Portfolio Share": "1.1%",
+        "Positions": "2",
+        "Value": "$500K"
+      },
+      {
+        "Lens Bucket": "Grid Infrastructure Beneficiary",
+        "Portfolio Share": "4.3%",
+        "Positions": "5",
+        "Value": "$1.9M"
+      },
+      {
+        "Lens Bucket": "Energy Input-Cost Sensitive",
+        "Portfolio Share": "40.4%",
+        "Positions": "18",
+        "Value": "$18.1M"
+      },
+      {
+        "Lens Bucket": "Transition Policy Sensitive",
+        "Portfolio Share": "1.7%",
+        "Positions": "2",
+        "Value": "$770K"
+      },
+      {
+        "Lens Bucket": "Commodity Supply Security Exposure",
+        "Portfolio Share": "1.7%",
+        "Positions": "2",
+        "Value": "$770K"
+      },
+      {
+        "Lens Bucket": "Neutral / Low Direct Energy Exposure",
+        "Portfolio Share": "39.7%",
+        "Positions": "35",
+        "Value": "$17.8M"
+      },
+      {
+        "Lens Bucket": "Unclassified / Review Required",
+        "Portfolio Share": "11.1%",
+        "Positions": "10",
+        "Value": "$5.0M"
+      }
+    ],
+    "title": "Energy Security Buckets"
+  },
+  "denominator_category_system": "Energy Security lens buckets over in-scope base value",
+  "display_title": "Full Lens Exposure - Energy Security",
+  "exact_report_question": "How does the whole portfolio map into every bucket of the Energy Security lens?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator_version": "lean_report_views_v2.v1",
+  "headline_metrics": [
+    {
+      "formatted_value": "Energy Input-Cost Sensitive",
+      "label": "Largest bucket",
+      "value": "Energy Input-Cost Sensitive"
+    },
+    {
+      "formatted_value": "40.4%",
+      "label": "Largest bucket share",
+      "value": 0.404022
+    },
+    {
+      "formatted_value": "11.1%",
+      "label": "Review bucket share",
+      "value": 0.111237
+    }
+  ],
+  "headline_sentence": "Under the Energy Security lens, Energy Input-Cost Sensitive is the largest bucket at 40.4%, with 11.1% requiring review.",
+  "information_budget_applied": {
+    "actual_advisor_notes": 0,
+    "actual_caveats": 2,
+    "actual_headline_metrics": 3,
+    "actual_headline_sentences": 1,
+    "actual_visible_table_rows": 7,
+    "exception_reason": "Full Lens Exposure must show every bucket in the selected lens.",
+    "max_advisor_notes": 1,
+    "max_caveats": 2,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 8,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true,
+    "rendering_mode": "table_first"
+  },
+  "internal_source_refs": [
+    "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/energy_security_lens_v1.json",
+    "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/position_lens_assignments_energy_security_v1.json"
+  ],
+  "master_question_family": "Ownership / Exposure",
+  "rendering_mode": "table_first",
+  "report_element_id": "full_lens_exposure_energy_security",
+  "representation_level": "lens bucket",
+  "schema_version": "revaluation_report_view.v2",
+  "source_prerequisite_pack_refs": [
+    "energy_security_lens_v1.json",
+    "position_lens_assignments_energy_security_v1.json"
+  ],
+  "summary_detail_status": "summary",
+  "synthetic_data": true,
+  "table_validation": {
+    "all_lens_buckets_included": true,
+    "assigned_base_value": 44858991.4,
+    "base_value_total": 44858991.4,
+    "bucket_count": 7,
+    "category_system": "energy_security",
+    "contains_neutral_bucket": true,
+    "contains_review_bucket": true,
+    "row_share_total": 1.0,
+    "weighted_splits_used": false
+  },
+  "visual_placeholder": null
+}

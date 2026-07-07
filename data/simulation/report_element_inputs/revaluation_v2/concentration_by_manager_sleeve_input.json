@@ -1,0 +1,101 @@
+{
+  "audience_tier": "advisor_review",
+  "denominator_category_system": "manager/sleeve share of base portfolio value",
+  "display_title": "Concentration by Manager/Sleeve",
+  "exact_report_question": "Is the portfolio concentrated in one manager or sleeve?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator_version": "lean_report_views_v2.v1",
+  "information_budget": {
+    "max_advisor_notes": 1,
+    "max_caveats": 2,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 5,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true
+  },
+  "internal_source_refs": [
+    "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/manager_mandate_catalog.json",
+    "data/simulation/revaluation/attribution/manager_revaluation_attribution_ai_chip_selloff.json"
+  ],
+  "master_question_family": "Risk / Downside",
+  "not_wired_into_advisor_ui": true,
+  "not_wired_into_generated_reports": true,
+  "rendering_mode": "table_first",
+  "report_element_id": "concentration_by_manager_sleeve",
+  "representation_level": "manager/sleeve",
+  "schema_version": "revaluation_report_input.v2",
+  "source_prerequisite_pack_refs": [
+    "manager_mandate_catalog.json"
+  ],
+  "summary_detail_status": "summary",
+  "synthetic_data": true,
+  "table_validation": {
+    "category_system": "manager_sleeve",
+    "mixed_category_systems": false,
+    "row_share_total": 1.0
+  },
+  "visible_content": {
+    "advisor_note": "The largest manager/sleeve is above a quarter of portfolio value, so size alone deserves review.",
+    "caveats": [
+      "This concentration view uses manager/sleeve only; asset type and coverage are separate."
+    ],
+    "compact_table": {
+      "columns": [
+        "Manager/Sleeve",
+        "Portfolio Share",
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "Interpretation": "Largest manager/sleeve exposure.",
+          "Manager/Sleeve": "Manager A - Growth / AI Infrastructure",
+          "Portfolio Share": "31.8%",
+          "Value": "$14.3M"
+        },
+        {
+          "Interpretation": "Part of the same manager/sleeve grouping.",
+          "Manager/Sleeve": "Manager D - Private Markets / Real Assets",
+          "Portfolio Share": "18.4%",
+          "Value": "$8.3M"
+        },
+        {
+          "Interpretation": "Part of the same manager/sleeve grouping.",
+          "Manager/Sleeve": "Manager B - Core Quality Equity",
+          "Portfolio Share": "17.1%",
+          "Value": "$7.7M"
+        },
+        {
+          "Interpretation": "Part of the same manager/sleeve grouping.",
+          "Manager/Sleeve": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "Portfolio Share": "12.7%",
+          "Value": "$5.7M"
+        },
+        {
+          "Interpretation": "Part of the same manager/sleeve grouping.",
+          "Manager/Sleeve": "Other",
+          "Portfolio Share": "19.9%",
+          "Value": "$8.9M"
+        }
+      ],
+      "title": "Manager/Sleeve Concentrations"
+    },
+    "headline_metrics": [
+      {
+        "formatted_value": "Manager A - Growth / AI Infrastructure",
+        "label": "Largest manager/sleeve",
+        "value": "Manager A - Growth / AI Infrastructure"
+      },
+      {
+        "formatted_value": "31.8%",
+        "label": "Largest share",
+        "value": 0.318309
+      }
+    ],
+    "headline_sentence": "Manager A - Growth / AI Infrastructure is the largest manager/sleeve concentration at 31.8%."
+  }
+}

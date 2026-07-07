@@ -1,0 +1,104 @@
+{
+  "advisor_note": "Funding policy: use income and distributions first, then the liquidity reserve buffer, with advisor review rebalancing if needed.",
+  "audience_tier": "client_briefing",
+  "caveats": [
+    "Synthetic cash history is explicit enough for a whole-portfolio demo summary, but it is not a reliable manager/sleeve cash-flow source.",
+    "Projection is a deterministic synthetic demo input, not a production forecast."
+  ],
+  "compact_table": {
+    "columns": [
+      "Measure",
+      "Amount"
+    ],
+    "rows": [
+      {
+        "Amount": "$1.2M",
+        "Measure": "Stated annual cash need"
+      },
+      {
+        "Amount": "$1.4M",
+        "Measure": "Last-period cash generated"
+      },
+      {
+        "Amount": "$1.1M",
+        "Measure": "Last-period cash paid out"
+      },
+      {
+        "Amount": "$1.3M",
+        "Measure": "Projected next-period generation"
+      },
+      {
+        "Amount": "$115K",
+        "Measure": "Projected surplus versus need"
+      }
+    ],
+    "title": "Cash-Flow Support Inputs"
+  },
+  "denominator_category_system": "stated annual cash need versus cash generation",
+  "display_title": "Cash-Flow Support Summary",
+  "exact_report_question": "Can the portfolio support the stated annual cash need?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator_version": "lean_report_views_v2.v1",
+  "headline_metrics": [
+    {
+      "formatted_value": "$1.2M",
+      "label": "Annual cash need",
+      "value": 1200000.0
+    },
+    {
+      "formatted_value": "$1.3M",
+      "label": "Projected generation",
+      "value": 1315000.0
+    },
+    {
+      "formatted_value": "$115K",
+      "label": "Projected surplus",
+      "value": 115000.0
+    }
+  ],
+  "headline_sentence": "Projected cash generation exceeds the stated annual need by $115K in the synthetic local demo.",
+  "information_budget_applied": {
+    "actual_advisor_notes": 1,
+    "actual_caveats": 2,
+    "actual_headline_metrics": 3,
+    "actual_headline_sentences": 1,
+    "actual_visible_table_rows": 5,
+    "max_advisor_notes": 1,
+    "max_caveats": 2,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 5,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true,
+    "rendering_mode": "summary_first"
+  },
+  "internal_source_refs": [
+    "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/cash_flow_support_inputs.json",
+    "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/cash_flow_need_profile.json",
+    "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/cash_flow_history_summary.json",
+    "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/cash_flow_projection_summary.json"
+  ],
+  "master_question_family": "Performance / Plan",
+  "rendering_mode": "summary_first",
+  "report_element_id": "cash_flow_support_summary",
+  "representation_level": "whole portfolio cash-flow support",
+  "schema_version": "revaluation_report_view.v2",
+  "source_prerequisite_pack_refs": [
+    "cash_flow_support_inputs.json",
+    "cash_flow_need_profile.json",
+    "cash_flow_history_summary.json",
+    "cash_flow_projection_summary.json"
+  ],
+  "summary_detail_status": "summary",
+  "synthetic_data": true,
+  "table_validation": {
+    "cash_flow_by_manager_sleeve_ready": false,
+    "cash_flow_support_status": "ready_for_synthetic_demo_whole_portfolio_summary",
+    "need_coverage_ratio": 1.095833,
+    "support_logic": "projected_cash_generation - stated_annual_cash_need"
+  },
+  "visual_placeholder": null
+}

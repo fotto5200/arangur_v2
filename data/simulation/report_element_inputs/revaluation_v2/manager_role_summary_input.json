@@ -1,0 +1,116 @@
+{
+  "audience_tier": "advisor_review",
+  "denominator_category_system": "manager/sleeve share with approved role language",
+  "display_title": "Manager Role Summary",
+  "exact_report_question": "Why is each manager in the portfolio, and is the intended role being expressed?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator_version": "lean_report_views_v2.v1",
+  "information_budget": {
+    "max_advisor_notes": 1,
+    "max_caveats": 2,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 5,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true
+  },
+  "internal_source_refs": [
+    "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/manager_mandate_catalog.json",
+    "data/simulation/revaluation/attribution/manager_revaluation_attribution_ai_chip_selloff.json",
+    "data/simulation/revaluation/attribution/manager_revaluation_attribution_rate_shock.json"
+  ],
+  "master_question_family": "Ownership / Exposure",
+  "not_wired_into_advisor_ui": true,
+  "not_wired_into_generated_reports": true,
+  "rendering_mode": "table_first",
+  "report_element_id": "manager_role_summary",
+  "representation_level": "manager/sleeve",
+  "schema_version": "revaluation_report_input.v2",
+  "source_prerequisite_pack_refs": [
+    "manager_mandate_catalog.json"
+  ],
+  "summary_detail_status": "summary",
+  "synthetic_data": true,
+  "table_validation": {
+    "category_system": "manager_role",
+    "manager_row_count": 5,
+    "role_language_repeats_manager_name": false,
+    "role_language_source": "synthetic_manager_mandate_catalog",
+    "visible_manager_count": 5
+  },
+  "visible_content": {
+    "advisor_note": "Use this report to explain manager purpose, not to rank managers.",
+    "caveats": [
+      "Role language is approved for the synthetic local demo, not real client mandate approval.",
+      "Rows show the five largest managers by base value to stay within the summary budget."
+    ],
+    "compact_table": {
+      "columns": [
+        "Manager/Sleeve",
+        "Approved Role",
+        "Portfolio Share",
+        "Actual Exposure / Key Risk",
+        "Mandate Fit Note"
+      ],
+      "rows": [
+        {
+          "Actual Exposure / Key Risk": "AI cycle, semiconductor supply-chain, and power bottleneck drawdown sensitivity.",
+          "Approved Role": "High-conviction public growth and AI infrastructure exposure.",
+          "Manager/Sleeve": "Manager A - Growth / AI Infrastructure",
+          "Mandate Fit Note": "Owns synthetic compute, semiconductor, cloud, data-center, and grid-enablement names.",
+          "Portfolio Share": "31.8%"
+        },
+        {
+          "Actual Exposure / Key Risk": "Illiquidity, stale marks, and opaque private-market look-through.",
+          "Approved Role": "Illiquid growth, real assets, private credit, and data center exposure.",
+          "Manager/Sleeve": "Manager D - Private Markets / Real Assets",
+          "Mandate Fit Note": "Holds synthetic fund interests, real estate, infrastructure, data centers, and opaque private marks.",
+          "Portfolio Share": "18.4%"
+        },
+        {
+          "Actual Exposure / Key Risk": "Broad equity drawdown and platform overlap with the growth sleeve.",
+          "Approved Role": "Durable core public equity exposure with quality and valuation discipline.",
+          "Manager/Sleeve": "Manager B - Core Quality Equity",
+          "Mandate Fit Note": "Balances quality compounders, broad equity, and selective AI overlap.",
+          "Portfolio Share": "17.1%"
+        },
+        {
+          "Actual Exposure / Key Risk": "Opportunity cost in risk-on markets and short-rate reinvestment sensitivity.",
+          "Approved Role": "Liquidity, capital preservation, and spending buffer.",
+          "Manager/Sleeve": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "Mandate Fit Note": "Holds cash, Treasury bills, short-duration bonds, defensive ETFs, and inflation hedges.",
+          "Portfolio Share": "12.7%"
+        },
+        {
+          "Actual Exposure / Key Risk": "Rate, credit-spread, and income sustainability sensitivity.",
+          "Approved Role": "Income, credit, and rate-sensitive exposure for spending support.",
+          "Manager/Sleeve": "Manager C - Income and Cash Generation",
+          "Mandate Fit Note": "Owns public credit, municipal income, floating-rate exposure, and income-oriented real assets.",
+          "Portfolio Share": "11.8%"
+        }
+      ],
+      "title": "Manager Roles"
+    },
+    "headline_metrics": [
+      {
+        "formatted_value": "Manager A - Growth / AI Infrastructure",
+        "label": "Largest manager/sleeve",
+        "value": "Manager A - Growth / AI Infrastructure"
+      },
+      {
+        "formatted_value": "31.8%",
+        "label": "Largest share",
+        "value": 0.318309
+      },
+      {
+        "formatted_value": "5",
+        "label": "Managers shown",
+        "value": 5
+      }
+    ],
+    "headline_sentence": "Each major manager has an approved synthetic role; Manager A - Growth / AI Infrastructure is the largest current manager/sleeve at 31.8%."
+  }
+}
