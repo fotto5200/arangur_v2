@@ -1,0 +1,1817 @@
+{
+  "assignment_scope": {
+    "base_portfolio_value": 44858991.4,
+    "denominator": "base_portfolio_value",
+    "in_scope_position_count": 74,
+    "scope_type": "whole_portfolio"
+  },
+  "assignments": [
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate direct compute, chip, hardware, or AI infrastructure exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 3850616.62,
+      "confidence": "high",
+      "display_name": "AI Compute Leader",
+      "instrument_id": "instr_ai_compute_leader",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "missing_evidence": [],
+      "position_id": "pos_a_ai_compute_leader",
+      "primary_bucket_id": "core_ai_infrastructure_hardware",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity"
+      ],
+      "sleeve_id": "sleeve_public_equity",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate cloud, platform, software, or AI growth exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 3643332.17,
+      "confidence": "high",
+      "display_name": "Cloud Platform Compounder",
+      "instrument_id": "instr_cloud_platform_compounder",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "missing_evidence": [],
+      "position_id": "pos_a_cloud_platform_compounder",
+      "primary_bucket_id": "ai_model_platform_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity"
+      ],
+      "sleeve_id": "sleeve_public_equity",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate direct compute, chip, hardware, or AI infrastructure exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 1124991.44,
+      "confidence": "high",
+      "display_name": "Chip Fabrication Partner",
+      "instrument_id": "instr_chip_fabrication_partner",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "missing_evidence": [],
+      "position_id": "pos_a_chip_fabrication_partner",
+      "primary_bucket_id": "core_ai_infrastructure_hardware",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity"
+      ],
+      "sleeve_id": "sleeve_public_equity",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate direct compute, chip, hardware, or AI infrastructure exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 920016.21,
+      "confidence": "high",
+      "display_name": "Semicap Equipment Maker",
+      "instrument_id": "instr_semicap_equipment_maker",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "missing_evidence": [],
+      "position_id": "pos_a_semicap_equipment_maker",
+      "primary_bucket_id": "core_ai_infrastructure_hardware",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity"
+      ],
+      "sleeve_id": "sleeve_public_equity",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate direct compute, chip, hardware, or AI infrastructure exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 740059.37,
+      "confidence": "high",
+      "display_name": "Accelerator Design House",
+      "instrument_id": "instr_accelerator_design_house",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "missing_evidence": [],
+      "position_id": "pos_a_accelerator_design_house",
+      "primary_bucket_id": "core_ai_infrastructure_hardware",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity"
+      ],
+      "sleeve_id": "sleeve_public_equity",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate direct compute, chip, hardware, or AI infrastructure exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 510006.95,
+      "confidence": "high",
+      "display_name": "Advanced Packaging Supplier",
+      "instrument_id": "instr_advanced_packaging_supplier",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "missing_evidence": [],
+      "position_id": "pos_a_advanced_packaging_supplier",
+      "primary_bucket_id": "core_ai_infrastructure_hardware",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity"
+      ],
+      "sleeve_id": "sleeve_public_equity",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate direct compute, chip, hardware, or AI infrastructure exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 679983.16,
+      "confidence": "high",
+      "display_name": "AI Chip Basket ETF",
+      "instrument_id": "instr_ai_chip_etf",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "missing_evidence": [],
+      "position_id": "pos_a_ai_chip_etf",
+      "primary_bucket_id": "core_ai_infrastructure_hardware",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity"
+      ],
+      "sleeve_id": "sleeve_public_equity",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate data center, power, cooling, grid, or interconnect exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 454990.28,
+      "confidence": "high",
+      "display_name": "Data Center Cooling Leader",
+      "instrument_id": "instr_data_center_cooling_leader",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "missing_evidence": [],
+      "position_id": "pos_a_data_center_cooling_leader",
+      "primary_bucket_id": "data_center_power_bottleneck_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity",
+        "power_demand_sensitivity"
+      ],
+      "sleeve_id": "sleeve_public_equity",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate data center, power, cooling, grid, or interconnect exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 410015.83,
+      "confidence": "high",
+      "display_name": "Edge Server Platform",
+      "instrument_id": "instr_edge_server_platform",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "missing_evidence": [],
+      "position_id": "pos_a_edge_server_platform",
+      "primary_bucket_id": "data_center_power_bottleneck_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity",
+        "power_demand_sensitivity"
+      ],
+      "sleeve_id": "sleeve_public_equity",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate cloud, platform, software, or AI growth exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 575003.02,
+      "confidence": "high",
+      "display_name": "Enterprise AI Software",
+      "instrument_id": "instr_enterprise_ai_software",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "missing_evidence": [],
+      "position_id": "pos_a_enterprise_ai_software",
+      "primary_bucket_id": "ai_model_platform_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity"
+      ],
+      "sleeve_id": "sleeve_public_equity",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate data center, power, cooling, grid, or interconnect exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 364999.57,
+      "confidence": "high",
+      "display_name": "Grid Enabler Equity",
+      "instrument_id": "instr_grid_enabler_equity",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "missing_evidence": [],
+      "position_id": "pos_a_grid_enabler_equity",
+      "primary_bucket_id": "data_center_power_bottleneck_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "power_demand_sensitivity"
+      ],
+      "sleeve_id": "sleeve_public_equity",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate data center, power, cooling, grid, or interconnect exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 419996.81,
+      "confidence": "high",
+      "display_name": "Public Data Center REIT",
+      "instrument_id": "instr_data_center_public_reit",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "missing_evidence": [],
+      "position_id": "pos_a_data_center_public_reit",
+      "primary_bucket_id": "data_center_power_bottleneck_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity",
+        "power_demand_sensitivity"
+      ],
+      "sleeve_id": "sleeve_public_equity",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate direct compute, chip, hardware, or AI infrastructure exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 275000.0,
+      "confidence": "review_required",
+      "display_name": "AI Infrastructure Call Spread Note",
+      "instrument_id": "instr_ai_infra_call_spread_note",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "missing_evidence": [],
+      "position_id": "pos_a_ai_infra_call_spread_note",
+      "primary_bucket_id": "core_ai_infrastructure_hardware",
+      "review_status": "review_required",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity",
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_public_equity",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic cash or money-market holding has low direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 310000.0,
+      "confidence": "medium",
+      "display_name": "Public AI Sleeve Money Market Sweep",
+      "instrument_id": "instr_public_ai_money_market_sweep",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "missing_evidence": [],
+      "position_id": "pos_a_public_ai_money_market_sweep",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_public_equity",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate cloud, platform, software, or AI growth exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 1320011.48,
+      "confidence": "high",
+      "display_name": "Cloud Platform Compounder",
+      "instrument_id": "instr_cloud_platform_compounder",
+      "manager_id": "mgr_b_core_quality_equity",
+      "missing_evidence": [],
+      "position_id": "pos_b_cloud_platform_compounder",
+      "primary_bucket_id": "ai_model_platform_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity"
+      ],
+      "sleeve_id": "sleeve_core_quality",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate direct compute, chip, hardware, or AI infrastructure exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 620004.57,
+      "confidence": "high",
+      "display_name": "AI Compute Leader",
+      "instrument_id": "instr_ai_compute_leader",
+      "manager_id": "mgr_b_core_quality_equity",
+      "missing_evidence": [],
+      "position_id": "pos_b_ai_compute_leader",
+      "primary_bucket_id": "core_ai_infrastructure_hardware",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity"
+      ],
+      "sleeve_id": "sleeve_core_quality",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate cloud, platform, software, or AI growth exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 910006.21,
+      "confidence": "high",
+      "display_name": "Consumer Platform Quality",
+      "instrument_id": "instr_consumer_platform_quality",
+      "manager_id": "mgr_b_core_quality_equity",
+      "missing_evidence": [],
+      "position_id": "pos_b_consumer_platform_quality",
+      "primary_bucket_id": "ai_model_platform_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_core_quality",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate operating businesses that may be downstream AI adopters.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 760006.24,
+      "confidence": "medium",
+      "display_name": "Payments Network Core",
+      "instrument_id": "instr_payments_network_core",
+      "manager_id": "mgr_b_core_quality_equity",
+      "missing_evidence": [],
+      "position_id": "pos_b_payments_network_core",
+      "primary_bucket_id": "ai_downstream_productivity_beneficiary",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_core_quality",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate incumbents that may face AI-enabled business model pressure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 635008.17,
+      "confidence": "medium",
+      "display_name": "Quality Consumer Staples",
+      "instrument_id": "instr_quality_consumer_staples",
+      "manager_id": "mgr_b_core_quality_equity",
+      "missing_evidence": [],
+      "position_id": "pos_b_quality_consumer_staples",
+      "primary_bucket_id": "ai_disrupted_incumbent",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_core_quality",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate operating businesses that may be downstream AI adopters.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 539997.31,
+      "confidence": "medium",
+      "display_name": "Healthcare Resilience",
+      "instrument_id": "instr_healthcare_resilience",
+      "manager_id": "mgr_b_core_quality_equity",
+      "missing_evidence": [],
+      "position_id": "pos_b_healthcare_resilience",
+      "primary_bucket_id": "ai_downstream_productivity_beneficiary",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "regulatory_sensitivity"
+      ],
+      "sleeve_id": "sleeve_core_quality",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate incumbents that may face AI-enabled business model pressure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 494987.41,
+      "confidence": "medium",
+      "display_name": "Core Bank Quality",
+      "instrument_id": "instr_core_bank_quality",
+      "manager_id": "mgr_b_core_quality_equity",
+      "missing_evidence": [],
+      "position_id": "pos_b_core_bank_quality",
+      "primary_bucket_id": "ai_disrupted_incumbent",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "regulatory_sensitivity"
+      ],
+      "sleeve_id": "sleeve_core_quality",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate direct compute, chip, hardware, or AI infrastructure exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 469998.23,
+      "confidence": "high",
+      "display_name": "Industrial Compounder",
+      "instrument_id": "instr_industrial_compounder",
+      "manager_id": "mgr_b_core_quality_equity",
+      "missing_evidence": [],
+      "position_id": "pos_b_industrial_compounder",
+      "primary_bucket_id": "core_ai_infrastructure_hardware",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity"
+      ],
+      "sleeve_id": "sleeve_core_quality",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 879999.5,
+      "confidence": "medium",
+      "display_name": "Quality Factor ETF",
+      "instrument_id": "instr_quality_factor_etf",
+      "manager_id": "mgr_b_core_quality_equity",
+      "missing_evidence": [],
+      "position_id": "pos_b_quality_factor_etf",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_core_quality",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 414969.61,
+      "confidence": "medium",
+      "display_name": "Value Factor ETF",
+      "instrument_id": "instr_value_factor_etf",
+      "manager_id": "mgr_b_core_quality_equity",
+      "missing_evidence": [],
+      "position_id": "pos_b_value_factor_etf",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_core_quality",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 390005.1,
+      "confidence": "medium",
+      "display_name": "Developed Market Equity ETF",
+      "instrument_id": "instr_broad_developed_equity_etf",
+      "manager_id": "mgr_b_core_quality_equity",
+      "missing_evidence": [],
+      "position_id": "pos_b_broad_developed_equity_etf",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_core_quality",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic cash or money-market holding has low direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 220000.0,
+      "confidence": "medium",
+      "display_name": "Core Quality Cash Sweep",
+      "instrument_id": "instr_core_quality_cash_sweep",
+      "manager_id": "mgr_b_core_quality_equity",
+      "missing_evidence": [],
+      "position_id": "pos_b_core_quality_cash_sweep",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_core_quality",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 719984.71,
+      "confidence": "medium",
+      "display_name": "Short TIPS ETF",
+      "instrument_id": "instr_short_tips_etf",
+      "manager_id": "mgr_c_income_cash_generation",
+      "missing_evidence": [],
+      "position_id": "pos_c_short_tips_etf",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_income",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 839981.27,
+      "confidence": "medium",
+      "display_name": "Investment Grade Bond ETF",
+      "instrument_id": "instr_investment_grade_bond_etf",
+      "manager_id": "mgr_c_income_cash_generation",
+      "missing_evidence": [],
+      "position_id": "pos_c_investment_grade_bond_etf",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_income",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 560000.0,
+      "confidence": "medium",
+      "display_name": "Municipal Income Ladder",
+      "instrument_id": "instr_municipal_income_ladder",
+      "manager_id": "mgr_c_income_cash_generation",
+      "missing_evidence": [],
+      "position_id": "pos_c_municipal_income_ladder",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "regulatory_sensitivity"
+      ],
+      "sleeve_id": "sleeve_income",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 430000.0,
+      "confidence": "medium",
+      "display_name": "Agency MBS Proxy",
+      "instrument_id": "instr_agency_mbs_proxy",
+      "manager_id": "mgr_c_income_cash_generation",
+      "missing_evidence": [],
+      "position_id": "pos_c_agency_mbs_proxy",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_income",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 334991.7,
+      "confidence": "medium",
+      "display_name": "Preferred Income ETF",
+      "instrument_id": "instr_preferred_income_etf",
+      "manager_id": "mgr_c_income_cash_generation",
+      "missing_evidence": [],
+      "position_id": "pos_c_preferred_income_etf",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_income",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 475013.14,
+      "confidence": "medium",
+      "display_name": "Floating Rate Credit ETF",
+      "instrument_id": "instr_floating_rate_credit_etf",
+      "manager_id": "mgr_c_income_cash_generation",
+      "missing_evidence": [],
+      "position_id": "pos_c_floating_rate_credit_etf",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_income",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 289981.42,
+      "confidence": "medium",
+      "display_name": "Public Direct Lending BDC",
+      "instrument_id": "instr_public_direct_lending_bdc",
+      "manager_id": "mgr_c_income_cash_generation",
+      "missing_evidence": [],
+      "position_id": "pos_c_public_direct_lending_bdc",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_income",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic cash or money-market holding has low direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 360015.74,
+      "confidence": "medium",
+      "display_name": "Pipeline Cash Yield",
+      "instrument_id": "instr_pipeline_cash_yield",
+      "manager_id": "mgr_c_income_cash_generation",
+      "missing_evidence": [],
+      "position_id": "pos_c_pipeline_cash_yield",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "power_demand_sensitivity"
+      ],
+      "sleeve_id": "sleeve_income",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 310002.42,
+      "confidence": "medium",
+      "display_name": "Covered Call Income ETF",
+      "instrument_id": "instr_covered_call_income_etf",
+      "manager_id": "mgr_c_income_cash_generation",
+      "missing_evidence": [],
+      "position_id": "pos_c_covered_call_income_etf",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_income",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 259998.62,
+      "confidence": "medium",
+      "display_name": "REIT Income ETF",
+      "instrument_id": "instr_reit_income_etf",
+      "manager_id": "mgr_c_income_cash_generation",
+      "missing_evidence": [],
+      "position_id": "pos_c_reit_income_etf",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_income",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic review flag prevents stronger AI lens assignment.",
+      "assignment_method": "review_required_fallback_rule",
+      "base_value": 540000.0,
+      "confidence": "review_required",
+      "display_name": "Private Credit Income Fund",
+      "instrument_id": "instr_private_credit_income_fund",
+      "manager_id": "mgr_c_income_cash_generation",
+      "missing_evidence": [
+        "approved look-through evidence"
+      ],
+      "position_id": "pos_c_private_credit_income_fund",
+      "primary_bucket_id": "unclassified_review_required",
+      "review_status": "review_required",
+      "secondary_flag_ids": [
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_income",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic cash or money-market holding has low direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 180000.0,
+      "confidence": "medium",
+      "display_name": "Income Sleeve Cash Reserve",
+      "instrument_id": "instr_income_sleeve_cash",
+      "manager_id": "mgr_c_income_cash_generation",
+      "missing_evidence": [],
+      "position_id": "pos_c_income_sleeve_cash",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_income",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate cloud, platform, software, or AI growth exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 1260000.0,
+      "confidence": "review_required",
+      "display_name": "Northstar AI Growth Fund LP",
+      "instrument_id": "instr_northstar_ai_growth_fund",
+      "manager_id": "mgr_d_private_real_assets",
+      "missing_evidence": [],
+      "position_id": "pos_d_northstar_ai_growth_fund",
+      "primary_bucket_id": "ai_model_platform_exposure",
+      "review_status": "review_required",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity",
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_private_markets",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate data center, power, cooling, grid, or interconnect exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 740000.0,
+      "confidence": "review_required",
+      "display_name": "Venture AI Infrastructure Fund",
+      "instrument_id": "instr_venture_ai_infrastructure_fund",
+      "manager_id": "mgr_d_private_real_assets",
+      "missing_evidence": [],
+      "position_id": "pos_d_venture_ai_infrastructure_fund",
+      "primary_bucket_id": "data_center_power_bottleneck_exposure",
+      "review_status": "review_required",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity",
+        "power_demand_sensitivity",
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_private_markets",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic review flag prevents stronger AI lens assignment.",
+      "assignment_method": "review_required_fallback_rule",
+      "base_value": 690000.0,
+      "confidence": "review_required",
+      "display_name": "Secondary PE Fund",
+      "instrument_id": "instr_secondary_pe_fund",
+      "manager_id": "mgr_d_private_real_assets",
+      "missing_evidence": [
+        "approved look-through evidence"
+      ],
+      "position_id": "pos_d_secondary_pe_fund",
+      "primary_bucket_id": "unclassified_review_required",
+      "review_status": "review_required",
+      "secondary_flag_ids": [
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_private_markets",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic review flag prevents stronger AI lens assignment.",
+      "assignment_method": "review_required_fallback_rule",
+      "base_value": 580000.0,
+      "confidence": "review_required",
+      "display_name": "Private Credit Sidecar",
+      "instrument_id": "instr_private_credit_sidecar",
+      "manager_id": "mgr_d_private_real_assets",
+      "missing_evidence": [
+        "approved look-through evidence"
+      ],
+      "position_id": "pos_d_private_credit_sidecar",
+      "primary_bucket_id": "unclassified_review_required",
+      "review_status": "review_required",
+      "secondary_flag_ids": [
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_private_markets",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic review flag prevents stronger AI lens assignment.",
+      "assignment_method": "review_required_fallback_rule",
+      "base_value": 490000.0,
+      "confidence": "review_required",
+      "display_name": "Asset-Backed Credit Fund",
+      "instrument_id": "instr_asset_backed_credit_fund",
+      "manager_id": "mgr_d_private_real_assets",
+      "missing_evidence": [
+        "approved look-through evidence"
+      ],
+      "position_id": "pos_d_asset_backed_credit_fund",
+      "primary_bucket_id": "unclassified_review_required",
+      "review_status": "review_required",
+      "secondary_flag_ids": [
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_private_markets",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate operating businesses that may be downstream AI adopters.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 820000.0,
+      "confidence": "medium",
+      "display_name": "Industrial Logistics Real Estate Fund",
+      "instrument_id": "instr_industrial_logistics_real_estate",
+      "manager_id": "mgr_d_private_real_assets",
+      "missing_evidence": [],
+      "position_id": "pos_d_industrial_logistics_real_estate",
+      "primary_bucket_id": "ai_downstream_productivity_beneficiary",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_private_markets",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic review flag prevents stronger AI lens assignment.",
+      "assignment_method": "review_required_fallback_rule",
+      "base_value": 510000.0,
+      "confidence": "review_required",
+      "display_name": "Multifamily Real Estate Fund",
+      "instrument_id": "instr_multifamily_real_estate_fund",
+      "manager_id": "mgr_d_private_real_assets",
+      "missing_evidence": [
+        "approved look-through evidence"
+      ],
+      "position_id": "pos_d_multifamily_real_estate_fund",
+      "primary_bucket_id": "unclassified_review_required",
+      "review_status": "review_required",
+      "secondary_flag_ids": [
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_private_markets",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate data center, power, cooling, grid, or interconnect exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 940000.0,
+      "confidence": "review_required",
+      "display_name": "Data Center Development JV",
+      "instrument_id": "instr_data_center_development_jv",
+      "manager_id": "mgr_d_private_real_assets",
+      "missing_evidence": [],
+      "position_id": "pos_d_data_center_development_jv",
+      "primary_bucket_id": "data_center_power_bottleneck_exposure",
+      "review_status": "review_required",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity",
+        "power_demand_sensitivity",
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_private_markets",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate data center, power, cooling, grid, or interconnect exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 455000.0,
+      "confidence": "review_required",
+      "display_name": "Power Campus Preferred Equity",
+      "instrument_id": "instr_power_campus_preferred",
+      "manager_id": "mgr_d_private_real_assets",
+      "missing_evidence": [],
+      "position_id": "pos_d_power_campus_preferred",
+      "primary_bucket_id": "data_center_power_bottleneck_exposure",
+      "review_status": "review_required",
+      "secondary_flag_ids": [
+        "power_demand_sensitivity",
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_private_markets",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate data center, power, cooling, grid, or interconnect exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 390000.0,
+      "confidence": "review_required",
+      "display_name": "Fiber Interconnect Infrastructure LP",
+      "instrument_id": "instr_fiber_interconnect_infra_lp",
+      "manager_id": "mgr_d_private_real_assets",
+      "missing_evidence": [],
+      "position_id": "pos_d_fiber_interconnect_infra_lp",
+      "primary_bucket_id": "data_center_power_bottleneck_exposure",
+      "review_status": "review_required",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity",
+        "power_demand_sensitivity",
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_private_markets",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic review flag prevents stronger AI lens assignment.",
+      "assignment_method": "review_required_fallback_rule",
+      "base_value": 470000.0,
+      "confidence": "review_required",
+      "display_name": "Renewable Power Infrastructure LP",
+      "instrument_id": "instr_renewable_power_infra_lp",
+      "manager_id": "mgr_d_private_real_assets",
+      "missing_evidence": [
+        "approved look-through evidence"
+      ],
+      "position_id": "pos_d_renewable_power_infra_lp",
+      "primary_bucket_id": "unclassified_review_required",
+      "review_status": "review_required",
+      "secondary_flag_ids": [
+        "power_demand_sensitivity",
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_private_markets",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate data center, power, cooling, grid, or interconnect exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 185000.0,
+      "confidence": "review_required",
+      "display_name": "Data Center Land Option",
+      "instrument_id": "instr_data_center_land_option",
+      "manager_id": "mgr_d_private_real_assets",
+      "missing_evidence": [],
+      "position_id": "pos_d_data_center_land_option",
+      "primary_bucket_id": "data_center_power_bottleneck_exposure",
+      "review_status": "review_required",
+      "secondary_flag_ids": [
+        "power_demand_sensitivity",
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_private_markets",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Opaque or derivative-like synthetic holding is routed to review for AI lens exposure.",
+      "assignment_method": "review_required_fallback_rule",
+      "base_value": 610000.0,
+      "confidence": "review_required",
+      "display_name": "Opaque Manager-Level Private Book",
+      "instrument_id": "instr_opaque_manager_level_private_book",
+      "manager_id": "mgr_d_private_real_assets",
+      "missing_evidence": [
+        "approved look-through evidence"
+      ],
+      "position_id": "pos_d_opaque_manager_level_private_book",
+      "primary_bucket_id": "unclassified_review_required",
+      "review_status": "review_required",
+      "secondary_flag_ids": [
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_private_markets",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Opaque or derivative-like synthetic holding is routed to review for AI lens exposure.",
+      "assignment_method": "review_required_fallback_rule",
+      "base_value": 125000.0,
+      "confidence": "review_required",
+      "display_name": "Private Mark Placeholder Position",
+      "instrument_id": "instr_private_mark_placeholder",
+      "manager_id": "mgr_d_private_real_assets",
+      "missing_evidence": [
+        "approved look-through evidence"
+      ],
+      "position_id": "pos_d_private_mark_placeholder",
+      "primary_bucket_id": "unclassified_review_required",
+      "review_status": "review_required",
+      "secondary_flag_ids": [
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_private_markets",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic cash or money-market holding has low direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 1340000.0,
+      "confidence": "medium",
+      "display_name": "Treasury Bill Ladder",
+      "instrument_id": "instr_treasury_bill_ladder",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "missing_evidence": [],
+      "position_id": "pos_e_treasury_bill_ladder",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_liquidity_reserve",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic cash or money-market holding has low direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 980000.0,
+      "confidence": "medium",
+      "display_name": "Government Money Market Fund",
+      "instrument_id": "instr_government_money_market",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "missing_evidence": [],
+      "position_id": "pos_e_government_money_market",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_liquidity_reserve",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 725035.8,
+      "confidence": "medium",
+      "display_name": "Short Treasury ETF",
+      "instrument_id": "instr_short_treasury_etf",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "missing_evidence": [],
+      "position_id": "pos_e_short_treasury_etf",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_liquidity_reserve",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 539994.4,
+      "confidence": "medium",
+      "display_name": "Short Duration IG Bond ETF",
+      "instrument_id": "instr_short_duration_ig_bond",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "missing_evidence": [],
+      "position_id": "pos_e_short_duration_ig_bond",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_liquidity_reserve",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 420005.14,
+      "confidence": "medium",
+      "display_name": "Minimum Volatility Equity ETF",
+      "instrument_id": "instr_minimum_volatility_equity",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "missing_evidence": [],
+      "position_id": "pos_e_minimum_volatility_equity",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_liquidity_reserve",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 299996.88,
+      "confidence": "medium",
+      "display_name": "Gold Defensive ETF",
+      "instrument_id": "instr_gold_defensive_etf",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "missing_evidence": [],
+      "position_id": "pos_e_gold_defensive_etf",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_liquidity_reserve",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic cash or money-market holding has low direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 260000.0,
+      "confidence": "medium",
+      "display_name": "Municipal Cash Reserve",
+      "instrument_id": "instr_municipal_cash_reserve",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "missing_evidence": [],
+      "position_id": "pos_e_municipal_cash_reserve",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "regulatory_sensitivity"
+      ],
+      "sleeve_id": "sleeve_liquidity_reserve",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 345000.0,
+      "confidence": "medium",
+      "display_name": "Inflation-Linked Short Note",
+      "instrument_id": "instr_inflation_linked_short_note",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "missing_evidence": [],
+      "position_id": "pos_e_inflation_linked_short_note",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_liquidity_reserve",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic cash or money-market holding has low direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 510000.0,
+      "confidence": "medium",
+      "display_name": "Operating Cash USD",
+      "instrument_id": "instr_operating_cash_usd",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "missing_evidence": [],
+      "position_id": "pos_e_operating_cash_usd",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_liquidity_reserve",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 294999.14,
+      "confidence": "medium",
+      "display_name": "Defensive Quality ETF",
+      "instrument_id": "instr_defensive_quality_etf",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "missing_evidence": [],
+      "position_id": "pos_e_defensive_quality_etf",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_liquidity_reserve",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 420000.0,
+      "confidence": "medium",
+      "display_name": "EUR/USD Forward Exposure",
+      "instrument_id": "instr_eurusd_forward_exposure",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "missing_evidence": [],
+      "position_id": "pos_f_eurusd_forward_exposure",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_opportunistic_macro",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 360000.0,
+      "confidence": "medium",
+      "display_name": "JPY Defensive Hedge",
+      "instrument_id": "instr_jpy_defensive_hedge",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "missing_evidence": [],
+      "position_id": "pos_f_jpy_defensive_hedge",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_opportunistic_macro",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 310002.3,
+      "confidence": "medium",
+      "display_name": "USD Strength Proxy",
+      "instrument_id": "instr_usd_strength_proxy",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "missing_evidence": [],
+      "position_id": "pos_f_usd_strength_proxy",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_opportunistic_macro",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 469998.01,
+      "confidence": "medium",
+      "display_name": "Commodity Basket Fund",
+      "instrument_id": "instr_commodity_basket_fund",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "missing_evidence": [],
+      "position_id": "pos_f_commodity_basket_fund",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_opportunistic_macro",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 280000.0,
+      "confidence": "medium",
+      "display_name": "WTI Energy Exposure",
+      "instrument_id": "instr_wti_energy_exposure",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "missing_evidence": [],
+      "position_id": "pos_f_wti_energy_exposure",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [],
+      "sleeve_id": "sleeve_opportunistic_macro",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate data center, power, cooling, grid, or interconnect exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 234996.85,
+      "confidence": "high",
+      "display_name": "Copper Power Demand ETF",
+      "instrument_id": "instr_copper_power_demand_etf",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "missing_evidence": [],
+      "position_id": "pos_f_copper_power_demand_etf",
+      "primary_bucket_id": "data_center_power_bottleneck_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "power_demand_sensitivity"
+      ],
+      "sleeve_id": "sleeve_opportunistic_macro",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate data center, power, cooling, grid, or interconnect exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 219998.5,
+      "confidence": "high",
+      "display_name": "Uranium Power Supply ETF",
+      "instrument_id": "instr_uranium_power_supply_etf",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "missing_evidence": [],
+      "position_id": "pos_f_uranium_power_supply_etf",
+      "primary_bucket_id": "data_center_power_bottleneck_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "power_demand_sensitivity"
+      ],
+      "sleeve_id": "sleeve_opportunistic_macro",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels do not indicate material direct AI exposure.",
+      "assignment_method": "neutral_default_rule",
+      "base_value": 409989.24,
+      "confidence": "medium",
+      "display_name": "Bitcoin Synthetic Trust",
+      "instrument_id": "instr_bitcoin_synthetic_trust",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "missing_evidence": [],
+      "position_id": "pos_f_bitcoin_synthetic_trust",
+      "primary_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "regulatory_sensitivity"
+      ],
+      "sleeve_id": "sleeve_opportunistic_macro",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Synthetic labels indicate direct compute, chip, hardware, or AI infrastructure exposure.",
+      "assignment_method": "deterministic_keyword_rule",
+      "base_value": 245000.86,
+      "confidence": "high",
+      "display_name": "Ethereum Synthetic Trust",
+      "instrument_id": "instr_ethereum_synthetic_trust",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "missing_evidence": [],
+      "position_id": "pos_f_ethereum_synthetic_trust",
+      "primary_bucket_id": "core_ai_infrastructure_hardware",
+      "review_status": "approved_synthetic_demo",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity",
+        "regulatory_sensitivity"
+      ],
+      "sleeve_id": "sleeve_opportunistic_macro",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Opaque or derivative-like synthetic holding is routed to review for AI lens exposure.",
+      "assignment_method": "review_required_fallback_rule",
+      "base_value": 330000.0,
+      "confidence": "review_required",
+      "display_name": "Macro Overlay Manager Book",
+      "instrument_id": "instr_macro_overlay_manager_book",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "missing_evidence": [
+        "approved look-through evidence"
+      ],
+      "position_id": "pos_f_macro_overlay_manager_book",
+      "primary_bucket_id": "unclassified_review_required",
+      "review_status": "review_required",
+      "secondary_flag_ids": [
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_opportunistic_macro",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Opaque or derivative-like synthetic holding is routed to review for AI lens exposure.",
+      "assignment_method": "review_required_fallback_rule",
+      "base_value": 210000.0,
+      "confidence": "review_required",
+      "display_name": "Rates Volatility Collar",
+      "instrument_id": "instr_rates_volatility_collar",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "missing_evidence": [
+        "approved look-through evidence"
+      ],
+      "position_id": "pos_f_rates_volatility_collar",
+      "primary_bucket_id": "unclassified_review_required",
+      "review_status": "review_required",
+      "secondary_flag_ids": [
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_opportunistic_macro",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    },
+    {
+      "advisor_safe_rationale": "Opaque or derivative-like synthetic holding is routed to review for AI lens exposure.",
+      "assignment_method": "review_required_fallback_rule",
+      "base_value": 155000.0,
+      "confidence": "review_required",
+      "display_name": "AI Chip Downside Put Spread",
+      "instrument_id": "instr_ai_chip_downside_put_spread",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "missing_evidence": [
+        "approved look-through evidence"
+      ],
+      "position_id": "pos_f_ai_chip_downside_put_spread",
+      "primary_bucket_id": "unclassified_review_required",
+      "review_status": "review_required",
+      "secondary_flag_ids": [
+        "china_taiwan_supply_chain_exposure",
+        "hardware_cycle_sensitivity",
+        "private_market_opacity"
+      ],
+      "sleeve_id": "sleeve_opportunistic_macro",
+      "source_metadata": {
+        "external_data_used": false,
+        "llm_used": false,
+        "source": "deterministic_synthetic_position_rule",
+        "synthetic_data": true
+      }
+    }
+  ],
+  "bucket_exposure_summary": [
+    {
+      "base_value": 9435677.41,
+      "bucket_display_name": "Core AI Infrastructure / Hardware",
+      "bucket_id": "core_ai_infrastructure_hardware",
+      "portfolio_share": 0.210341,
+      "position_count": 10,
+      "review_required_base_value": 275000.0,
+      "review_required_position_count": 1
+    },
+    {
+      "base_value": 7708352.88,
+      "bucket_display_name": "AI Model / Platform Exposure",
+      "bucket_id": "ai_model_platform_exposure",
+      "portfolio_share": 0.171835,
+      "position_count": 5,
+      "review_required_base_value": 1260000.0,
+      "review_required_position_count": 1
+    },
+    {
+      "base_value": 2120003.55,
+      "bucket_display_name": "AI Downstream Productivity Beneficiary",
+      "bucket_id": "ai_downstream_productivity_beneficiary",
+      "portfolio_share": 0.047259,
+      "position_count": 3,
+      "review_required_base_value": 0,
+      "review_required_position_count": 0
+    },
+    {
+      "base_value": 1129995.58,
+      "bucket_display_name": "AI-Disrupted Incumbent",
+      "bucket_id": "ai_disrupted_incumbent",
+      "portfolio_share": 0.02519,
+      "position_count": 2,
+      "review_required_base_value": 0,
+      "review_required_position_count": 0
+    },
+    {
+      "base_value": 4814997.84,
+      "bucket_display_name": "Data Center / Power Bottleneck Exposure",
+      "bucket_id": "data_center_power_bottleneck_exposure",
+      "portfolio_share": 0.107336,
+      "position_count": 11,
+      "review_required_base_value": 2710000.0,
+      "review_required_position_count": 5
+    },
+    {
+      "base_value": 14939964.14,
+      "bucket_display_name": "Neutral / Low Direct AI Exposure",
+      "bucket_id": "neutral_low_direct_ai_exposure",
+      "portfolio_share": 0.333043,
+      "position_count": 32,
+      "review_required_base_value": 0,
+      "review_required_position_count": 0
+    },
+    {
+      "base_value": 4710000.0,
+      "bucket_display_name": "Unclassified / Review Required",
+      "bucket_id": "unclassified_review_required",
+      "portfolio_share": 0.104996,
+      "position_count": 11,
+      "review_required_base_value": 4710000.0,
+      "review_required_position_count": 11
+    }
+  ],
+  "coverage_summary": {
+    "assigned_base_value": 44858991.4,
+    "assigned_base_value_share": 1.0,
+    "assigned_position_count": 74,
+    "assignment_policy": "single_primary_bucket_per_position_no_weighted_splits",
+    "base_value_total": 44858991.4,
+    "in_scope_position_count": 74,
+    "unassigned_position_count": 0
+  },
+  "generated_at": "2026-07-07T00:00:00Z",
+  "lens_id": "ai_adoption",
+  "lens_version": "v1",
+  "neutral_bucket_id": "neutral_low_direct_ai_exposure",
+  "pack_id": "synthetic_report_prerequisite_pack_v1",
+  "pack_version": "2026-07-07",
+  "portfolio_id": "portfolio_northstar_family_office",
+  "portfolio_snapshot_id": "northstar_synthetic_position_universe_seed_20260630",
+  "review_required_bucket_id": "unclassified_review_required",
+  "review_summary": {
+    "review_required_base_value": 8955000.0,
+    "review_required_base_value_share": 0.199626,
+    "review_required_bucket_id": "unclassified_review_required",
+    "review_required_position_count": 18
+  },
+  "schema_version": "position_lens_assignments.v1",
+  "source_metadata": {
+    "external_data_used": false,
+    "local_only": true,
+    "notes": [
+      "Assignments are deterministic synthetic prerequisite data.",
+      "No raw evidence packets or LLM responses are included."
+    ],
+    "source": "synthetic_lens_assignment_rules",
+    "synthetic_data": true
+  },
+  "synthetic_data": true,
+  "valuation_date": "2026-06-30"
+}

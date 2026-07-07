@@ -1,0 +1,39 @@
+{
+  "cash_flow_support_readiness_no_longer_only_missing_inputs": true,
+  "caveats": [
+    "Whole-portfolio synthetic cash inputs exist for demo report generation.",
+    "Manager/sleeve cash-flow support remains gated until reliable source cash-flow detail exists."
+  ],
+  "generated_at": "2026-07-07T00:00:00Z",
+  "input_files": [
+    "cash_flow_need_profile.json",
+    "cash_flow_history_summary.json",
+    "cash_flow_projection_summary.json"
+  ],
+  "pack_id": "synthetic_report_prerequisite_pack_v1",
+  "pack_version": "2026-07-07",
+  "readiness": {
+    "cash_flow_by_manager_sleeve_ready": false,
+    "cash_flow_support_summary_ready": true,
+    "client_ready_with_real_data": false,
+    "synthetic_demo_only": true
+  },
+  "report_family_id": "cash_flow_support_summary",
+  "required_inputs": {
+    "cash_generated_last_period": 1365000.0,
+    "cash_paid_out_last_period": 1110000.0,
+    "currency": "USD",
+    "projected_cash_generation": 1315000.0,
+    "projected_surplus_shortfall": 115000.0,
+    "stated_annual_cash_need": 1200000.0
+  },
+  "schema_version": "cash_flow_support_inputs.v1",
+  "status": "ready_for_synthetic_demo_whole_portfolio_summary",
+  "support_logic": {
+    "calculation": "projected_cash_generation - stated_annual_cash_need",
+    "need_coverage_ratio": 1.095833,
+    "projected_surplus_shortfall": 115000.0,
+    "support_status": "projected_surplus"
+  },
+  "synthetic_data": true
+}

@@ -1,0 +1,44 @@
+{
+  "approval_metadata": {
+    "approval_status": "approved_for_synthetic_demo_prerequisite_pack",
+    "local_only": true
+  },
+  "generated_at": "2026-07-07T00:00:00Z",
+  "lens_count": 2,
+  "lenses": [
+    {
+      "assignment_file": "position_lens_assignments_ai_adoption_v1.json",
+      "display_name": "AI Adoption",
+      "full_lens_exposure_ready": true,
+      "lens_file": "ai_adoption_lens_v1.json",
+      "lens_id": "ai_adoption",
+      "lens_version": "v1",
+      "neutral_bucket_id": "neutral_low_direct_ai_exposure",
+      "review_required_bucket_id": "unclassified_review_required",
+      "supported_report_families": [
+        "full_lens_exposure",
+        "manager_by_lens_exposure",
+        "scenario_by_lens_after_aggregation"
+      ]
+    },
+    {
+      "assignment_file": "position_lens_assignments_energy_security_v1.json",
+      "display_name": "Energy Security",
+      "full_lens_exposure_ready": true,
+      "lens_file": "energy_security_lens_v1.json",
+      "lens_id": "energy_security",
+      "lens_version": "v1",
+      "neutral_bucket_id": "neutral_low_direct_energy_exposure",
+      "review_required_bucket_id": "unclassified_review_required",
+      "supported_report_families": [
+        "full_lens_exposure",
+        "manager_by_lens_exposure",
+        "scenario_by_lens_after_aggregation"
+      ]
+    }
+  ],
+  "pack_id": "synthetic_report_prerequisite_pack_v1",
+  "pack_version": "2026-07-07",
+  "schema_version": "synthetic_lens_catalog.v1",
+  "synthetic_data": true
+}

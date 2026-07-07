@@ -1,0 +1,122 @@
+{
+  "artifact_count": 13,
+  "artifacts": [
+    {
+      "artifact_name": "synthetic_report_prerequisite_pack_manifest",
+      "path": "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/synthetic_report_prerequisite_pack_manifest.json",
+      "synthetic_data": true
+    },
+    {
+      "artifact_name": "cash_flow_need_profile",
+      "path": "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/cash_flow_need_profile.json",
+      "synthetic_data": true
+    },
+    {
+      "artifact_name": "cash_flow_history_summary",
+      "path": "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/cash_flow_history_summary.json",
+      "synthetic_data": true
+    },
+    {
+      "artifact_name": "cash_flow_projection_summary",
+      "path": "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/cash_flow_projection_summary.json",
+      "synthetic_data": true
+    },
+    {
+      "artifact_name": "cash_flow_support_inputs",
+      "path": "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/cash_flow_support_inputs.json",
+      "synthetic_data": true
+    },
+    {
+      "artifact_name": "manager_mandate_catalog",
+      "path": "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/manager_mandate_catalog.json",
+      "synthetic_data": true
+    },
+    {
+      "artifact_name": "synthetic_lens_catalog",
+      "path": "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/synthetic_lens_catalog.json",
+      "synthetic_data": true
+    },
+    {
+      "artifact_name": "ai_adoption_lens_v1",
+      "path": "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/ai_adoption_lens_v1.json",
+      "synthetic_data": true
+    },
+    {
+      "artifact_name": "energy_security_lens_v1",
+      "path": "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/energy_security_lens_v1.json",
+      "synthetic_data": true
+    },
+    {
+      "artifact_name": "position_lens_assignments_ai_adoption_v1",
+      "path": "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/position_lens_assignments_ai_adoption_v1.json",
+      "synthetic_data": true
+    },
+    {
+      "artifact_name": "position_lens_assignments_energy_security_v1",
+      "path": "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/position_lens_assignments_energy_security_v1.json",
+      "synthetic_data": true
+    },
+    {
+      "artifact_name": "lens_exposure_prerequisite_summary",
+      "path": "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/lens_exposure_prerequisite_summary.json",
+      "synthetic_data": true
+    },
+    {
+      "artifact_name": "scenario_lens_readiness_summary",
+      "path": "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/scenario_lens_readiness_summary.json",
+      "synthetic_data": true
+    }
+  ],
+  "base_portfolio_value": 44858991.4,
+  "boundaries": [
+    "No advisor UI changes.",
+    "No generated-report wiring.",
+    "No backend endpoints.",
+    "No Docker or deployment changes.",
+    "No live or real client data.",
+    "No benchmark, performance, probabilistic, or proposed-portfolio analytics."
+  ],
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator_version": "synthetic_report_prerequisites.v1",
+  "local_only": true,
+  "pack_id": "synthetic_report_prerequisite_pack_v1",
+  "pack_version": "2026-07-07",
+  "portfolio_id": "portfolio_northstar_family_office",
+  "portfolio_snapshot_id": "northstar_synthetic_position_universe_seed_20260630",
+  "possible_next_report_prerequisites": [
+    "manager_by_lens_exposure_with_same_lens_and_manager_mapping",
+    "scenario_by_lens_aggregation_from_existing_revaluation_rows"
+  ],
+  "readiness_summary": {
+    "advisor_ui_report_wiring_paused": true,
+    "cash_flow_support_summary_ready": true,
+    "full_lens_exposure_ready": "ready_for_synthetic_demo",
+    "manager_role_summary_ready": true
+  },
+  "report_prerequisites_unblocked": [
+    "cash_flow_support_summary_whole_portfolio_synthetic_demo",
+    "manager_role_summary_synthetic_mandate_catalog",
+    "full_lens_exposure_ai_adoption",
+    "full_lens_exposure_energy_security"
+  ],
+  "schema_version": "synthetic_report_prerequisite_pack_manifest.v1",
+  "source_files": [
+    "data/simulation/synthetic_position_universe.json",
+    "data/simulation/revaluation/position_catalog.json",
+    "data/simulation/revaluation/instrument_catalog.json",
+    "data/simulation/revaluation/position_valuation_results_base.json",
+    "data/simulation/revaluation/revaluation_scenario_index.json",
+    "data/simulation/revaluation/portfolio_revaluation_summary_ai_chip_selloff.json",
+    "data/simulation/revaluation/portfolio_revaluation_summary_rate_shock.json"
+  ],
+  "still_gated": [
+    "cash_flow_by_manager_sleeve",
+    "scenario_versus_benchmark",
+    "integrated_performance_attribution",
+    "probabilistic_scenario_range",
+    "current_vs_proposed_portfolio",
+    "timing_attribution"
+  ],
+  "synthetic_data": true,
+  "valuation_date": "2026-06-30"
+}

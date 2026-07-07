@@ -227,6 +227,19 @@ This writes:
 - `data/simulation/report_element_views/lean_revaluation_v1/`
 - `docs/product/report_mockups/`
 
+## Generate Synthetic Report Prerequisite Pack
+
+The prerequisite-pack generator writes local-only synthetic inputs for the next v2 mockup tranche: Cash-Flow Support Summary, Manager Role Summary, and Full Lens Exposure. It does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
+
+```cmd
+set PYTHONPATH=src
+python -m arangur.analytics.synthetic_report_prerequisites
+```
+
+This writes deterministic JSON under:
+
+- `data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/`
+
 ## Map Analytic Outputs To Report Element Views
 
 The analytic report-element mapper turns those proof outputs into separate renderer-ready payloads for Concentration, Manager Comparison, Scenario Impact by Manager, Data Confidence Note, and Portfolio Status. The local Advisor workflow can now consume these committed analytic-derived fragments for supported configured specs without adding backend endpoints, charts, live data, or dependencies.

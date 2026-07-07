@@ -1,0 +1,117 @@
+{
+  "approval_metadata": {
+    "approval_status": "approved_for_synthetic_demo_prerequisite_pack",
+    "approved_at": "2026-07-07T00:00:00Z",
+    "approved_by": "synthetic_demo_fixture",
+    "local_only": true
+  },
+  "assignment_policy": {
+    "assignment_mode": "one_primary_bucket_per_position",
+    "policy_id": "ai_adoption_deterministic_synthetic_assignment_policy_v1",
+    "rule_basis": [
+      "synthetic position display name",
+      "synthetic classifications",
+      "synthetic themes",
+      "synthetic scenario exposure hints",
+      "synthetic manager and sleeve labels",
+      "valuation coverage and review flags"
+    ],
+    "secondary_flags_are_non_additive": true,
+    "uses_llm": false,
+    "weighted_splits_allowed": false
+  },
+  "display_name": "AI Adoption",
+  "generated_at": "2026-07-07T00:00:00Z",
+  "lens_id": "ai_adoption",
+  "lens_version": "v1",
+  "neutral_bucket_id": "neutral_low_direct_ai_exposure",
+  "pack_id": "synthetic_report_prerequisite_pack_v1",
+  "pack_version": "2026-07-07",
+  "primary_buckets": [
+    {
+      "additive": true,
+      "advisor_safe_description": "Direct compute, semiconductor, accelerator, and hardware infrastructure exposure.",
+      "bucket_id": "core_ai_infrastructure_hardware",
+      "display_name": "Core AI Infrastructure / Hardware"
+    },
+    {
+      "additive": true,
+      "advisor_safe_description": "Cloud, platform, software, and data assets that enable AI adoption.",
+      "bucket_id": "ai_model_platform_exposure",
+      "display_name": "AI Model / Platform Exposure"
+    },
+    {
+      "additive": true,
+      "advisor_safe_description": "Operating businesses that may benefit from AI-enabled productivity.",
+      "bucket_id": "ai_downstream_productivity_beneficiary",
+      "display_name": "AI Downstream Productivity Beneficiary"
+    },
+    {
+      "additive": true,
+      "advisor_safe_description": "Businesses where AI may pressure legacy economics or workflows.",
+      "bucket_id": "ai_disrupted_incumbent",
+      "display_name": "AI-Disrupted Incumbent"
+    },
+    {
+      "additive": true,
+      "advisor_safe_description": "Data center, grid, cooling, and power bottleneck exposure tied to AI demand.",
+      "bucket_id": "data_center_power_bottleneck_exposure",
+      "display_name": "Data Center / Power Bottleneck Exposure"
+    },
+    {
+      "additive": true,
+      "advisor_safe_description": "Holdings with limited direct AI thesis exposure in the synthetic fixture.",
+      "bucket_id": "neutral_low_direct_ai_exposure",
+      "display_name": "Neutral / Low Direct AI Exposure"
+    },
+    {
+      "additive": true,
+      "advisor_safe_description": "Opaque, derivative, or insufficiently evidenced holdings that need review.",
+      "bucket_id": "unclassified_review_required",
+      "display_name": "Unclassified / Review Required"
+    }
+  ],
+  "purpose": "Classify the synthetic portfolio by economic exposure to AI adoption, infrastructure buildout, disruption, and bottlenecks.",
+  "review_required_bucket_id": "unclassified_review_required",
+  "schema_version": "synthetic_thesis_lens.v1",
+  "secondary_flags": [
+    {
+      "additive": false,
+      "advisor_safe_description": "Semiconductor or Asia supply-chain exposure that may matter to AI thesis review.",
+      "display_name": "China/Taiwan Supply-Chain Exposure",
+      "flag_id": "china_taiwan_supply_chain_exposure"
+    },
+    {
+      "additive": false,
+      "advisor_safe_description": "Exposure whose economics may be affected by data-center power demand.",
+      "display_name": "Power Demand Sensitivity",
+      "flag_id": "power_demand_sensitivity"
+    },
+    {
+      "additive": false,
+      "advisor_safe_description": "Exposure with material regulatory, policy, or financial-system sensitivity.",
+      "display_name": "Regulatory Sensitivity",
+      "flag_id": "regulatory_sensitivity"
+    },
+    {
+      "additive": false,
+      "advisor_safe_description": "Private, stale-mark, manager-level, or review-required exposure.",
+      "display_name": "Private-Market Opacity",
+      "flag_id": "private_market_opacity"
+    },
+    {
+      "additive": false,
+      "advisor_safe_description": "Compute, chip, accelerator, or semiconductor-cycle sensitivity.",
+      "display_name": "Hardware Cycle Sensitivity",
+      "flag_id": "hardware_cycle_sensitivity"
+    }
+  ],
+  "synthetic_data": true,
+  "validation_rules": {
+    "bucket_totals_must_reconcile_to_portfolio_base_value": true,
+    "every_in_scope_position_requires_assignment": true,
+    "neutral_bucket_required": true,
+    "primary_bucket_ids_are_mutually_exclusive": true,
+    "review_bucket_required": true
+  }
+}

@@ -1,0 +1,267 @@
+{
+  "coverage_summary": {
+    "current_managers_covered": true,
+    "current_sleeves_covered": true,
+    "manager_count": 6,
+    "role_language_repeats_manager_name": false,
+    "sleeve_count": 6
+  },
+  "generated_at": "2026-07-07T00:00:00Z",
+  "manager_mandates": [
+    {
+      "approval_status": "approved_for_synthetic_demo_reports",
+      "approved_role_label": "Growth / AI Infrastructure",
+      "base_value": 14279011.43,
+      "expected_contribution": "Long-term growth engine; may create concentration and drawdown risk.",
+      "intended_role": "High-conviction public growth and AI infrastructure exposure.",
+      "key_risk_for_report": "AI cycle, semiconductor supply-chain, and power bottleneck drawdown sensitivity.",
+      "liquidity_profile": "mostly_liquid",
+      "manager_display_name": "Manager A - Growth / AI Infrastructure",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "mandate_expression_summary": "Owns synthetic compute, semiconductor, cloud, data-center, and grid-enablement names.",
+      "portfolio_share": 0.318309,
+      "position_count": 14,
+      "primary_themes": [
+        "AI infrastructure",
+        "semiconductors",
+        "data center power demand",
+        "growth/value"
+      ],
+      "sleeve_display_names": [
+        "Public Equity / AI Infrastructure Sleeve"
+      ],
+      "sleeve_ids": [
+        "sleeve_public_equity"
+      ],
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved_for_synthetic_demo_reports",
+      "approved_role_label": "Core Quality Equity",
+      "base_value": 7654993.83,
+      "expected_contribution": "Core compounding with less thematic concentration than Manager A.",
+      "intended_role": "Durable core public equity exposure with quality and valuation discipline.",
+      "key_risk_for_report": "Broad equity drawdown and platform overlap with the growth sleeve.",
+      "liquidity_profile": "liquid",
+      "manager_display_name": "Manager B - Core Quality Equity",
+      "manager_id": "mgr_b_core_quality_equity",
+      "mandate_expression_summary": "Balances quality compounders, broad equity, and selective AI overlap.",
+      "portfolio_share": 0.170646,
+      "position_count": 12,
+      "primary_themes": [
+        "growth/value",
+        "defensive ballast",
+        "manager overlap"
+      ],
+      "sleeve_display_names": [
+        "Core Quality Equity Sleeve"
+      ],
+      "sleeve_ids": [
+        "sleeve_core_quality"
+      ],
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved_for_synthetic_demo_reports",
+      "approved_role_label": "Income and Cash Generation",
+      "base_value": 5299969.02,
+      "expected_contribution": "Cash yield and portfolio income, with rate and credit spread sensitivity.",
+      "intended_role": "Income, credit, and rate-sensitive exposure for spending support.",
+      "key_risk_for_report": "Rate, credit-spread, and income sustainability sensitivity.",
+      "liquidity_profile": "mixed_liquid",
+      "manager_display_name": "Manager C - Income and Cash Generation",
+      "manager_id": "mgr_c_income_cash_generation",
+      "mandate_expression_summary": "Owns public credit, municipal income, floating-rate exposure, and income-oriented real assets.",
+      "portfolio_share": 0.118147,
+      "position_count": 12,
+      "primary_themes": [
+        "cash generation",
+        "rates sensitivity",
+        "defensive ballast"
+      ],
+      "sleeve_display_names": [
+        "Income / Cash Generation Sleeve"
+      ],
+      "sleeve_ids": [
+        "sleeve_income"
+      ],
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved_for_synthetic_demo_reports",
+      "approved_role_label": "Private Markets / Real Assets",
+      "base_value": 8265000.0,
+      "expected_contribution": "Private-market return and inflation-sensitive exposure with lower transparency.",
+      "intended_role": "Illiquid growth, real assets, private credit, and data center exposure.",
+      "key_risk_for_report": "Illiquidity, stale marks, and opaque private-market look-through.",
+      "liquidity_profile": "illiquid",
+      "manager_display_name": "Manager D - Private Markets / Real Assets",
+      "manager_id": "mgr_d_private_real_assets",
+      "mandate_expression_summary": "Holds synthetic fund interests, real estate, infrastructure, data centers, and opaque private marks.",
+      "portfolio_share": 0.184244,
+      "position_count": 14,
+      "primary_themes": [
+        "private-market liquidity",
+        "opaque/private marks",
+        "data center power demand"
+      ],
+      "sleeve_display_names": [
+        "Private Markets / Real Assets Sleeve"
+      ],
+      "sleeve_ids": [
+        "sleeve_private_markets"
+      ],
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved_for_synthetic_demo_reports",
+      "approved_role_label": "Liquidity Reserve / Defensive Ballast",
+      "base_value": 5715031.36,
+      "expected_contribution": "May lag in risk-on markets but supports liquidity and drawdown control.",
+      "intended_role": "Liquidity, capital preservation, and spending buffer.",
+      "key_risk_for_report": "Opportunity cost in risk-on markets and short-rate reinvestment sensitivity.",
+      "liquidity_profile": "daily_liquidity",
+      "manager_display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "mandate_expression_summary": "Holds cash, Treasury bills, short-duration bonds, defensive ETFs, and inflation hedges.",
+      "portfolio_share": 0.1274,
+      "position_count": 10,
+      "primary_themes": [
+        "defensive ballast",
+        "USD exposure",
+        "rates sensitivity"
+      ],
+      "sleeve_display_names": [
+        "Liquidity Reserve / Defensive Ballast Sleeve"
+      ],
+      "sleeve_ids": [
+        "sleeve_liquidity_reserve"
+      ],
+      "synthetic_data": true
+    },
+    {
+      "approval_status": "approved_for_synthetic_demo_reports",
+      "approved_role_label": "Opportunistic Macro / Hedge",
+      "base_value": 3644985.76,
+      "expected_contribution": "Crisis convexity and differentiated macro exposure, with more complex valuation needs.",
+      "intended_role": "Macro hedges, currency exposure, commodities, crypto, and option-like risk controls.",
+      "key_risk_for_report": "Complex macro, commodity, currency, crypto, and option-like exposure.",
+      "liquidity_profile": "mixed_liquid",
+      "manager_display_name": "Manager F - Opportunistic Macro / Hedge",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "mandate_expression_summary": "Uses synthetic FX, commodity, volatility, crypto, and structured exposures.",
+      "portfolio_share": 0.081254,
+      "position_count": 12,
+      "primary_themes": [
+        "energy bottlenecks",
+        "inflation sensitivity",
+        "crypto risk",
+        "USD exposure"
+      ],
+      "sleeve_display_names": [
+        "Opportunistic Macro / Hedge Sleeve"
+      ],
+      "sleeve_ids": [
+        "sleeve_opportunistic_macro"
+      ],
+      "synthetic_data": true
+    }
+  ],
+  "pack_id": "synthetic_report_prerequisite_pack_v1",
+  "pack_version": "2026-07-07",
+  "portfolio_id": "portfolio_northstar_family_office",
+  "portfolio_snapshot_id": "northstar_synthetic_position_universe_seed_20260630",
+  "report_readiness": {
+    "manager_by_lens_exposure_possible_with_lens_assignments": true,
+    "manager_role_summary_ready": true,
+    "single_manager_detail_possible_later": true
+  },
+  "schema_version": "manager_mandate_catalog.v1",
+  "sleeve_mandates": [
+    {
+      "approved_role_label": "Core Quality Equity",
+      "manager_id": "mgr_b_core_quality_equity",
+      "sleeve_display_name": "Core Quality Equity Sleeve",
+      "sleeve_id": "sleeve_core_quality",
+      "synthetic_data": true,
+      "themes": [
+        "growth/value",
+        "defensive ballast",
+        "manager overlap"
+      ]
+    },
+    {
+      "approved_role_label": "Income and Cash Generation",
+      "manager_id": "mgr_c_income_cash_generation",
+      "sleeve_display_name": "Income / Cash Generation Sleeve",
+      "sleeve_id": "sleeve_income",
+      "synthetic_data": true,
+      "themes": [
+        "cash generation",
+        "rates sensitivity",
+        "defensive ballast"
+      ]
+    },
+    {
+      "approved_role_label": "Liquidity Reserve / Defensive Ballast",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "sleeve_display_name": "Liquidity Reserve / Defensive Ballast Sleeve",
+      "sleeve_id": "sleeve_liquidity_reserve",
+      "synthetic_data": true,
+      "themes": [
+        "defensive ballast",
+        "USD exposure",
+        "rates sensitivity"
+      ]
+    },
+    {
+      "approved_role_label": "Opportunistic Macro / Hedge",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "sleeve_display_name": "Opportunistic Macro / Hedge Sleeve",
+      "sleeve_id": "sleeve_opportunistic_macro",
+      "synthetic_data": true,
+      "themes": [
+        "energy bottlenecks",
+        "inflation sensitivity",
+        "crypto risk",
+        "USD exposure"
+      ]
+    },
+    {
+      "approved_role_label": "Private Markets / Real Assets",
+      "manager_id": "mgr_d_private_real_assets",
+      "sleeve_display_name": "Private Markets / Real Assets Sleeve",
+      "sleeve_id": "sleeve_private_markets",
+      "synthetic_data": true,
+      "themes": [
+        "private-market liquidity",
+        "opaque/private marks",
+        "data center power demand"
+      ]
+    },
+    {
+      "approved_role_label": "Growth / AI Infrastructure",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "sleeve_display_name": "Public Equity / AI Infrastructure Sleeve",
+      "sleeve_id": "sleeve_public_equity",
+      "synthetic_data": true,
+      "themes": [
+        "AI infrastructure",
+        "semiconductors",
+        "data center power demand",
+        "growth/value"
+      ]
+    }
+  ],
+  "source_metadata": {
+    "external_data_used": false,
+    "local_only": true,
+    "notes": [
+      "data/simulation/synthetic_position_universe.json"
+    ],
+    "source": "synthetic_position_universe_manager_fields",
+    "synthetic_data": true
+  },
+  "synthetic_data": true,
+  "valuation_date": "2026-06-30"
+}

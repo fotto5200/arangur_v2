@@ -1,0 +1,42 @@
+{
+  "confidence": "medium",
+  "confidence_caveat": "Projection is a deterministic synthetic demo input, not a production forecast.",
+  "generated_at": "2026-07-07T00:00:00Z",
+  "pack_id": "synthetic_report_prerequisite_pack_v1",
+  "pack_version": "2026-07-07",
+  "portfolio_id": "portfolio_northstar_family_office",
+  "portfolio_snapshot_id": "northstar_synthetic_position_universe_seed_20260630",
+  "projected_cash_generation": {
+    "amount": 1315000.0,
+    "currency": "USD",
+    "projection_basis": "synthetic_income_run_rate_with_moderate_haircut"
+  },
+  "projected_paid_out_need": {
+    "amount": 1200000.0,
+    "currency": "USD",
+    "need_source": "cash_flow_need_profile.stated_annual_cash_need"
+  },
+  "projected_surplus_shortfall": {
+    "amount": 115000.0,
+    "currency": "USD",
+    "status": "projected_surplus"
+  },
+  "projection_period": {
+    "end_date": "2027-06-30",
+    "period_id": "synthetic_next_12_months_2026_07_to_2027_06",
+    "period_months": 12,
+    "start_date": "2026-07-01"
+  },
+  "schema_version": "cash_flow_projection_summary.v1",
+  "source_metadata": {
+    "external_data_used": false,
+    "local_only": true,
+    "notes": [
+      "No live market data, production cash-flow model, or real client plan is used."
+    ],
+    "source": "synthetic_cash_projection_fixture",
+    "synthetic_data": true
+  },
+  "synthetic_data": true,
+  "valuation_date": "2026-06-30"
+}

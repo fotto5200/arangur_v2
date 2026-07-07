@@ -1,0 +1,117 @@
+{
+  "approval_metadata": {
+    "approval_status": "approved_for_synthetic_demo_prerequisite_pack",
+    "approved_at": "2026-07-07T00:00:00Z",
+    "approved_by": "synthetic_demo_fixture",
+    "local_only": true
+  },
+  "assignment_policy": {
+    "assignment_mode": "one_primary_bucket_per_position",
+    "policy_id": "energy_security_deterministic_synthetic_assignment_policy_v1",
+    "rule_basis": [
+      "synthetic position display name",
+      "synthetic classifications",
+      "synthetic themes",
+      "synthetic scenario exposure hints",
+      "synthetic manager and sleeve labels",
+      "valuation coverage and review flags"
+    ],
+    "secondary_flags_are_non_additive": true,
+    "uses_llm": false,
+    "weighted_splits_allowed": false
+  },
+  "display_name": "Energy Security",
+  "generated_at": "2026-07-07T00:00:00Z",
+  "lens_id": "energy_security",
+  "lens_version": "v1",
+  "neutral_bucket_id": "neutral_low_direct_energy_exposure",
+  "pack_id": "synthetic_report_prerequisite_pack_v1",
+  "pack_version": "2026-07-07",
+  "primary_buckets": [
+    {
+      "additive": true,
+      "advisor_safe_description": "Direct energy, pipeline, fuel, uranium, or power supply exposure.",
+      "bucket_id": "energy_supply_beneficiary",
+      "display_name": "Energy Supply Beneficiary"
+    },
+    {
+      "additive": true,
+      "advisor_safe_description": "Grid, power campus, renewable infrastructure, and related infrastructure exposure.",
+      "bucket_id": "grid_infrastructure_beneficiary",
+      "display_name": "Grid Infrastructure Beneficiary"
+    },
+    {
+      "additive": true,
+      "advisor_safe_description": "Businesses whose economics may be sensitive to power or energy input costs.",
+      "bucket_id": "energy_input_cost_sensitive",
+      "display_name": "Energy Input-Cost Sensitive"
+    },
+    {
+      "additive": true,
+      "advisor_safe_description": "Holdings with policy, transition, real-asset, or infrastructure sensitivity.",
+      "bucket_id": "transition_policy_sensitive",
+      "display_name": "Transition Policy Sensitive"
+    },
+    {
+      "additive": true,
+      "advisor_safe_description": "Commodity, metals, gold, or resource security exposure.",
+      "bucket_id": "commodity_supply_security_exposure",
+      "display_name": "Commodity Supply Security Exposure"
+    },
+    {
+      "additive": true,
+      "advisor_safe_description": "Holdings with limited direct energy-security exposure in the synthetic fixture.",
+      "bucket_id": "neutral_low_direct_energy_exposure",
+      "display_name": "Neutral / Low Direct Energy Exposure"
+    },
+    {
+      "additive": true,
+      "advisor_safe_description": "Opaque, derivative, or insufficiently evidenced holdings that need review.",
+      "bucket_id": "unclassified_review_required",
+      "display_name": "Unclassified / Review Required"
+    }
+  ],
+  "purpose": "Classify the synthetic portfolio by exposure to power reliability, energy supply, commodity availability, grid infrastructure, and transition bottlenecks.",
+  "review_required_bucket_id": "unclassified_review_required",
+  "schema_version": "synthetic_thesis_lens.v1",
+  "secondary_flags": [
+    {
+      "additive": false,
+      "advisor_safe_description": "Exposure affected by power availability, reliability, or grid constraints.",
+      "display_name": "Power Reliability Sensitivity",
+      "flag_id": "power_reliability_sensitivity"
+    },
+    {
+      "additive": false,
+      "advisor_safe_description": "Data center or AI infrastructure exposure tied to power demand.",
+      "display_name": "Data Center Power Demand",
+      "flag_id": "data_center_power_demand"
+    },
+    {
+      "additive": false,
+      "advisor_safe_description": "Exposure affected by energy transition or infrastructure policy.",
+      "display_name": "Transition Policy Sensitivity",
+      "flag_id": "transition_policy_sensitivity"
+    },
+    {
+      "additive": false,
+      "advisor_safe_description": "Resource, energy, metals, or commodity price exposure.",
+      "display_name": "Commodity Price Sensitivity",
+      "flag_id": "commodity_price_sensitivity"
+    },
+    {
+      "additive": false,
+      "advisor_safe_description": "Private, stale-mark, manager-level, or review-required exposure.",
+      "display_name": "Private-Market Opacity",
+      "flag_id": "private_market_opacity"
+    }
+  ],
+  "synthetic_data": true,
+  "validation_rules": {
+    "bucket_totals_must_reconcile_to_portfolio_base_value": true,
+    "every_in_scope_position_requires_assignment": true,
+    "neutral_bucket_required": true,
+    "primary_bucket_ids_are_mutually_exclusive": true,
+    "review_bucket_required": true
+  }
+}

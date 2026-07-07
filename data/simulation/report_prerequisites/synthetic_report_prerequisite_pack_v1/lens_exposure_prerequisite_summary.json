@@ -1,0 +1,183 @@
+{
+  "base_portfolio_value": 44858991.4,
+  "caveats": [
+    "Assignments are synthetic, local-only prerequisite artifacts.",
+    "Client-facing lens reports still need report-view generation and product review."
+  ],
+  "generated_at": "2026-07-07T00:00:00Z",
+  "lens_count": 2,
+  "lenses": [
+    {
+      "assigned_base_value": 44858991.4,
+      "assigned_base_value_share": 1.0,
+      "assigned_position_count": 74,
+      "assignment_file": "position_lens_assignments_ai_adoption_v1.json",
+      "base_value_total": 44858991.4,
+      "bucket_exposure_summary": [
+        {
+          "base_value": 9435677.41,
+          "bucket_display_name": "Core AI Infrastructure / Hardware",
+          "bucket_id": "core_ai_infrastructure_hardware",
+          "portfolio_share": 0.210341,
+          "position_count": 10,
+          "review_required_base_value": 275000.0,
+          "review_required_position_count": 1
+        },
+        {
+          "base_value": 7708352.88,
+          "bucket_display_name": "AI Model / Platform Exposure",
+          "bucket_id": "ai_model_platform_exposure",
+          "portfolio_share": 0.171835,
+          "position_count": 5,
+          "review_required_base_value": 1260000.0,
+          "review_required_position_count": 1
+        },
+        {
+          "base_value": 2120003.55,
+          "bucket_display_name": "AI Downstream Productivity Beneficiary",
+          "bucket_id": "ai_downstream_productivity_beneficiary",
+          "portfolio_share": 0.047259,
+          "position_count": 3,
+          "review_required_base_value": 0,
+          "review_required_position_count": 0
+        },
+        {
+          "base_value": 1129995.58,
+          "bucket_display_name": "AI-Disrupted Incumbent",
+          "bucket_id": "ai_disrupted_incumbent",
+          "portfolio_share": 0.02519,
+          "position_count": 2,
+          "review_required_base_value": 0,
+          "review_required_position_count": 0
+        },
+        {
+          "base_value": 4814997.84,
+          "bucket_display_name": "Data Center / Power Bottleneck Exposure",
+          "bucket_id": "data_center_power_bottleneck_exposure",
+          "portfolio_share": 0.107336,
+          "position_count": 11,
+          "review_required_base_value": 2710000.0,
+          "review_required_position_count": 5
+        },
+        {
+          "base_value": 14939964.14,
+          "bucket_display_name": "Neutral / Low Direct AI Exposure",
+          "bucket_id": "neutral_low_direct_ai_exposure",
+          "portfolio_share": 0.333043,
+          "position_count": 32,
+          "review_required_base_value": 0,
+          "review_required_position_count": 0
+        },
+        {
+          "base_value": 4710000.0,
+          "bucket_display_name": "Unclassified / Review Required",
+          "bucket_id": "unclassified_review_required",
+          "portfolio_share": 0.104996,
+          "position_count": 11,
+          "review_required_base_value": 4710000.0,
+          "review_required_position_count": 11
+        }
+      ],
+      "full_lens_exposure_ready": true,
+      "in_scope_position_count": 74,
+      "lens_display_name": "AI Adoption",
+      "lens_file": "ai_adoption_lens_v1.json",
+      "lens_id": "ai_adoption",
+      "manager_by_lens_exposure_possible": true,
+      "review_required_base_value_share": 0.199626,
+      "unassigned_position_count": 0
+    },
+    {
+      "assigned_base_value": 44858991.4,
+      "assigned_base_value_share": 1.0,
+      "assigned_position_count": 74,
+      "assignment_file": "position_lens_assignments_energy_security_v1.json",
+      "base_value_total": 44858991.4,
+      "bucket_exposure_summary": [
+        {
+          "base_value": 499998.5,
+          "bucket_display_name": "Energy Supply Beneficiary",
+          "bucket_id": "energy_supply_beneficiary",
+          "portfolio_share": 0.011146,
+          "position_count": 2,
+          "review_required_base_value": 0,
+          "review_required_position_count": 0
+        },
+        {
+          "base_value": 1914996.42,
+          "bucket_display_name": "Grid Infrastructure Beneficiary",
+          "bucket_id": "grid_infrastructure_beneficiary",
+          "portfolio_share": 0.042689,
+          "position_count": 5,
+          "review_required_base_value": 1315000.0,
+          "review_required_position_count": 3
+        },
+        {
+          "base_value": 18124023.12,
+          "bucket_display_name": "Energy Input-Cost Sensitive",
+          "bucket_id": "energy_input_cost_sensitive",
+          "portfolio_share": 0.404022,
+          "position_count": 18,
+          "review_required_base_value": 2960000.0,
+          "review_required_position_count": 5
+        },
+        {
+          "base_value": 769998.62,
+          "bucket_display_name": "Transition Policy Sensitive",
+          "bucket_id": "transition_policy_sensitive",
+          "portfolio_share": 0.017165,
+          "position_count": 2,
+          "review_required_base_value": 510000.0,
+          "review_required_position_count": 1
+        },
+        {
+          "base_value": 769994.89,
+          "bucket_display_name": "Commodity Supply Security Exposure",
+          "bucket_id": "commodity_supply_security_exposure",
+          "portfolio_share": 0.017165,
+          "position_count": 2,
+          "review_required_base_value": 0,
+          "review_required_position_count": 0
+        },
+        {
+          "base_value": 17789979.85,
+          "bucket_display_name": "Neutral / Low Direct Energy Exposure",
+          "bucket_id": "neutral_low_direct_energy_exposure",
+          "portfolio_share": 0.396576,
+          "position_count": 35,
+          "review_required_base_value": 0,
+          "review_required_position_count": 0
+        },
+        {
+          "base_value": 4990000.0,
+          "bucket_display_name": "Unclassified / Review Required",
+          "bucket_id": "unclassified_review_required",
+          "portfolio_share": 0.111237,
+          "position_count": 10,
+          "review_required_base_value": 4990000.0,
+          "review_required_position_count": 10
+        }
+      ],
+      "full_lens_exposure_ready": true,
+      "in_scope_position_count": 74,
+      "lens_display_name": "Energy Security",
+      "lens_file": "energy_security_lens_v1.json",
+      "lens_id": "energy_security",
+      "manager_by_lens_exposure_possible": true,
+      "review_required_base_value_share": 0.217905,
+      "unassigned_position_count": 0
+    }
+  ],
+  "pack_id": "synthetic_report_prerequisite_pack_v1",
+  "pack_version": "2026-07-07",
+  "portfolio_id": "portfolio_northstar_family_office",
+  "portfolio_snapshot_id": "northstar_synthetic_position_universe_seed_20260630",
+  "report_readiness": {
+    "full_lens_exposure": "ready_for_synthetic_demo",
+    "manager_by_lens_exposure": "possible_next_with_same_lens_and_manager_mapping",
+    "scenario_by_lens": "possible_next_if_a_tranche_aggregates_existing_revaluation_impacts_by_lens"
+  },
+  "schema_version": "lens_exposure_prerequisite_summary.v1",
+  "synthetic_data": true,
+  "valuation_date": "2026-06-30"
+}

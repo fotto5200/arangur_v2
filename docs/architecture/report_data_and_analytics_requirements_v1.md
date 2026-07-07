@@ -22,16 +22,17 @@ Available now in the repo:
 - position valuation results, position value comparisons, portfolio scenario summaries, coverage manifests, and scenario index artifacts;
 - revaluation attribution by manager, account, sleeve, coverage, confidence, gross theme, and cross-scenario summary;
 - thesis-bucket attribution readiness output, not real thesis-bucket attribution;
+- Synthetic Report Prerequisite Pack v1 with local-only cash-flow support inputs, approved synthetic manager mandate catalog, and complete synthetic AI Adoption / Energy Security lens assignments;
 - lean local product-review mockups for Portfolio Status, Aggregated Asset Allocation, Manager Role Summary, Concentration Review, Scenario Downside Summary, Coverage and Confidence Warning, and Cash-Flow Support Readiness;
 - analytic pack choices and committed analytic-derived fragments for the current local demo path.
 
 Missing or deferred:
 
-- real cash-flow need or liability schedule;
-- cash paid out and projected generation sufficient for a client cash-flow support report;
+- real cash-flow need, liability schedule, account cash history, and production projection basis;
+- reliable manager/sleeve cash-flow source data sufficient for a Cash Flow by Manager/Sleeve report;
 - approved benchmark/proxy maps;
 - lens-bucket benchmark maps;
-- published position-thesis assignments for product-grade lenses;
+- published position-thesis assignments beyond the synthetic AI Adoption and Energy Security prerequisite pack;
 - historical returns and performance calculation inputs;
 - trade/holding history sufficient for attribution timing;
 - proposed allocation objects;
@@ -59,15 +60,15 @@ Missing or deferred:
 | Portfolio Representation Status | Required | Required with representation type and coverage | Useful | Optional | Not required | Not required | Not required | Optional | Coverage/confidence summary useful | Not required | Synthetic portfolio, position catalog, coverage outputs | Better look-through/representation basis labels | Completeness of unknown look-through |
 | Aggregated Asset Allocation | Required | Required with asset type | Optional | Not required unless asset class is modeled as lens | Not required | Not required | Not required | Not required | Not required | Not required | Synthetic broad asset classifications and values | Revised taxonomy approval | Asset taxonomy confidence beyond fixture |
 | Allocation by Manager | Required | Position values by manager | Required | Optional | Not required | Not required | Not required | Not required | Optional scenario context | Not required | Manager/sleeve value aggregation exists | Product spec and manager role language | Manager mandate claims without data |
-| Full Lens Exposure | Required | Required for every in-scope position | Optional manager rollup | Required | Not required unless comparing | Not required | Not required | Not required | Optional for impact lens | Optional later | Some broad theme/lens tags exist | Published product-grade assignments | Bucket totals for unassigned positions |
-| Manager by Lens Exposure | Required | Required | Required | Required | Not required | Not required | Not required | Not required | Optional | Optional later | Manager and some theme aggregation exist | Approved lens assignments | Cross-manager lens claims without same lens |
-| Manager Role Summary | Required | Useful | Required with mandate/role | Optional for role expression | Optional manager benchmark later | Optional | Optional | Optional | Scenario downside by manager available | Not required | Manager value and scenario attribution | Approved intended role/mandate language | Why a manager is owned when mandate absent |
+| Full Lens Exposure | Required | Required for every in-scope position | Optional manager rollup | Required | Not required unless comparing | Not required | Not required | Not required | Optional for impact lens | Optional later | Complete synthetic AI Adoption and Energy Security assignments now exist | Product-grade assignments for other lenses and report-view generation | Bucket totals for unassigned positions |
+| Manager by Lens Exposure | Required | Required | Required | Required | Not required | Not required | Not required | Not required | Optional | Optional later | Manager mappings and complete synthetic AI Adoption / Energy Security assignments exist | Approved report shape and any non-synthetic lens assignments | Cross-manager lens claims without same lens |
+| Manager Role Summary | Required | Useful | Required with mandate/role | Optional for role expression | Optional manager benchmark later | Optional | Optional | Optional | Scenario downside by manager available | Not required | Manager value, scenario attribution, and approved synthetic mandate catalog | Real/client mandate approval beyond synthetic demo | Why a manager is owned when mandate absent |
 | Integrated Performance Attribution | Required | Required over period | Required for manager mode | Required for lens mode | Required | Required | Required | Required for flow-adjusted returns | Optional scenario overlay | Not required | Not available as report-ready system | Benchmark maps, return history, holdings/trades, flows | Value-add, timing, or benchmark-relative claims |
-| Cash-Flow Support Summary | Required | Required where income/distributions matter | Optional manager rollup | Not required | Not required | Optional | Useful | Required: need, generated, paid out, projected generation | Optional stress overlay | Optional later | Readiness-only note exists | Explicit need/liability schedule and cash-flow projection | Support/sufficiency conclusion |
+| Cash-Flow Support Summary | Required | Required where income/distributions matter | Optional manager rollup | Not required | Not required | Optional | Useful | Required: need, generated, paid out, projected generation | Optional stress overlay | Optional later | Synthetic prerequisite pack supplies whole-portfolio demo inputs | Real/client cash-flow sources, liability schedule, and production projection basis | Real support/sufficiency conclusion |
 | Cash Flow by Manager/Sleeve | Required | Required income/distribution records | Required | Not required | Optional | Optional | Useful | Required | Optional | Optional later | Not report-ready | Reliable cash-flow source data | Manager cash generation claims |
 | Current Portfolio Scenario Downside | Required | Required with valuation coverage | Optional for contributor detail | Optional for lens variant | Not required | Not required | Not required | Not required | Required | Not required | Two full-revaluation scenarios and summaries | More scenarios, product caveat policy | Probability or forecast claim |
 | Scenario by Manager | Required | Required | Required | Optional | Not required | Not required | Not required | Not required | Required manager attribution | Not required | Manager attribution for two scenarios | Client/advisor display policy | Manager causality beyond attribution |
-| Scenario by Lens | Required | Required | Optional | Required | Optional | Not required | Not required | Not required | Required plus lens assignments | Optional later | Theme/gross attribution exists but thesis readiness only | Product-grade lens assignments | Thesis-bucket impacts without assignments |
+| Scenario by Lens | Required | Required | Optional | Required | Optional | Not required | Not required | Not required | Required plus lens assignments | Optional later | Complete synthetic AI Adoption assignments can pair with AI / Chip Selloff in a future aggregation tranche | Report-view generation and any other scenario/lens pairs | Thesis-bucket impacts without assignments |
 | Scenario Versus Benchmark | Required | Required | Optional | Optional | Required | Optional | Optional | Not required | Required for portfolio and benchmark/proxy | Optional | Portfolio scenario output exists | Benchmark/proxy scenario mapping | Benchmark comparison |
 | Probabilistic Scenario Range | Required | Required depending on model | Optional | Optional | Optional/required for benchmark range | Possibly required | Possibly required | Optional | Deterministic scenarios may seed methodology but are not enough | Required | Not available | Approved range model and validation | Percentile range or probability |
 | Coverage and Confidence Warning | Required | Required with valuation status | Useful for aggregation | Optional | Not required | Not required | Not required | Optional | Coverage/confidence attribution required | Not required | Coverage/confidence outputs exist | Client-facing threshold policy | Assurance that low-confidence values are reliable |
@@ -93,7 +94,7 @@ Minimum report evidence:
 - surplus/shortfall versus need;
 - one confidence caveat.
 
-Current cash-flow readiness does not satisfy this. It should remain an internal/advisor setup state until the data exists.
+The older Cash-Flow Support Readiness note does not satisfy this. Synthetic Report Prerequisite Pack v1 now satisfies the minimum fields for a local-only whole-portfolio demo summary, but real/client cash-flow support remains gated until real cash-flow sources, plan data, and projection policy exist.
 
 ### Integrated Performance Attribution
 
@@ -140,7 +141,7 @@ Lens reports should show unavailable/review buckets rather than silently forcing
 - Revised mockups should declare report family id, audience tier, representation level, denominator, and data readiness.
 - Tests for future report views should block mixed category systems in additive tables.
 - Benchmark-relative report fixtures should not be generated until benchmark/proxy maps exist.
-- Cash-flow support should stay readiness-only until cash-need and cash-flow inputs exist.
+- Cash-flow support may be generated only for the local synthetic demo from the prerequisite pack; real/client cash-flow support stays readiness-only until real cash-need and cash-flow inputs exist.
+- Full Lens Exposure may be generated for the complete synthetic AI Adoption and Energy Security assignments; any other lens remains readiness/design-only until complete assignments exist.
 - Probabilistic ranges should wait for explicit range analytics.
 - Advisor UI wiring remains a later separate decision.
-

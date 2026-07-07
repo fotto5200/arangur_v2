@@ -1,0 +1,47 @@
+{
+  "available_full_revaluation_scenario_ids": [
+    "ai_chip_selloff",
+    "rate_shock"
+  ],
+  "complete_lens_assignment_ids": [
+    "ai_adoption",
+    "energy_security"
+  ],
+  "generated_at": "2026-07-07T00:00:00Z",
+  "not_created_in_this_pack": [
+    "scenario_by_lens_report_view",
+    "benchmark_or_proxy_comparison",
+    "probabilistic_range"
+  ],
+  "pack_id": "synthetic_report_prerequisite_pack_v1",
+  "pack_version": "2026-07-07",
+  "scenario_lens_rows": [
+    {
+      "compatible_lens_ids": [
+        "ai_adoption"
+      ],
+      "note": "Full revaluation rows and complete AI Adoption assignments both exist.",
+      "readiness_status": "ready_for_future_scenario_by_lens_aggregation",
+      "scenario_display_name": "AI / Chip Selloff",
+      "scenario_id": "ai_chip_selloff"
+    },
+    {
+      "compatible_lens_ids": [],
+      "note": "Rate Shock remains usable for current portfolio downside, not a lens report by itself.",
+      "readiness_status": "no_specific_lens_pair_selected",
+      "scenario_display_name": "Rate Shock",
+      "scenario_id": "rate_shock"
+    },
+    {
+      "compatible_lens_ids": [
+        "energy_security"
+      ],
+      "note": "Energy Security assignments exist; a full energy-shock revaluation bundle is not part of this tranche.",
+      "readiness_status": "lens_ready_but_full_revaluation_scenario_not_yet_generated",
+      "scenario_display_name": "Energy Shock",
+      "scenario_id": "energy_shock"
+    }
+  ],
+  "schema_version": "scenario_lens_readiness_summary.v1",
+  "synthetic_data": true
+}

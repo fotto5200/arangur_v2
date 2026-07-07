@@ -10,6 +10,8 @@ This spec determines what the revised mockups should show, what current mockups 
 
 This tranche does not implement code, modify advisor UI, add report views, wire report elements, regenerate report fixtures, regenerate Markdown mockups, generate analytics outputs, add backend endpoints, change runtime behavior, use live or real data, or add dependencies.
 
+Update after Synthetic Report Prerequisite Pack v1: local-only synthetic prerequisites now exist for a whole-portfolio Cash-Flow Support Summary, approved synthetic manager mandate language, and complete AI Adoption / Energy Security lens assignments. This updates v2 mockup readiness only; it does not wire reports into Advisor Preview, Populate, Present, or generated reports, and it does not create real-client cash-flow, benchmark, performance, probabilistic, proposed-portfolio, or deployment readiness.
+
 ## 2. Governing Design Rules
 
 - One report, one question.
@@ -53,25 +55,33 @@ These are the exact v2 mockups or v2 mockup specs the next implementation tranch
 | Concentration by Asset Type | Generate v2 Markdown mockup from v2 view fixture | Corrects v1 mixed-category concentration |
 | Concentration by Manager/Sleeve | Generate v2 Markdown mockup from v2 view fixture | Separate concentration view using one manager/sleeve grouping |
 | Current Portfolio Scenario Downside | Generate v2 Markdown mockup from v2 view fixture | Existing two-scenario full-revaluation outputs support this honestly |
-| Manager Role Summary | Generate v2 Markdown mockup if role/mandate language is approved; otherwise generate advisor-review mockup with explicit mandate-language caveat | Needed to explain why managers are in the portfolio |
-| Full Lens Exposure | Produce design-only mockup specification unless a complete synthetic lens assignment exists | No fake lens-bucket totals. Current repo has lens readiness, not complete published position-to-lens assignments |
+| Cash-Flow Support Summary | Generate v2 Markdown mockup from v2 view fixture using the synthetic prerequisite pack | Explicit synthetic need, generated cash, paid cash, projected generation, surplus logic, and caveat now exist for a local demo whole-portfolio summary |
+| Manager Role Summary | Generate v2 Markdown mockup using the approved synthetic manager mandate catalog | Needed to explain why managers are in the portfolio without role text that merely repeats manager names |
+| Full Lens Exposure | Generate v2 Markdown mockup for the complete synthetic AI Adoption and Energy Security assignments | Complete synthetic lens definitions and one primary assignment per in-scope position now exist; show neutral and review buckets |
 
-### B. Optional / Gated Mockups
+### B. Optional / Possible-Next Mockups
+
+These are now possible from the prerequisite pack or existing mappings, but should wait for Frank to approve the exact v2 report shape.
+
+| Mockup target | Gate / note |
+| --- | --- |
+| Manager by Lens Exposure | Possible next because complete lens assignments and manager mappings now exist; use one selected lens and one denominator |
+| Scenario by Lens | Possible next after a separate tranche aggregates existing full-revaluation rows by the selected complete lens |
+| Cash Flow by Manager/Sleeve | Still gated until reliable manager/sleeve cash-flow source data and period logic exist |
+
+### C. Still-Gated Mockups
 
 These should not be generated as data-backed v2 mockups until their gates are satisfied.
 
 | Gated mockup | Gate |
 | --- | --- |
-| Cash-Flow Support Summary | Explicit annual cash need, cash generated last period, cash paid out last period, projected generation, surplus/shortfall logic, and confidence caveat |
-| Cash Flow by Manager/Sleeve | Reliable cash-flow source data by manager/sleeve and period |
 | Scenario Versus Benchmark | Approved benchmark/proxy maps and benchmark scenario values or approved scenario proxy methodology |
-| Manager by Lens Exposure | Complete lens assignments for every in-scope position under one selected lens |
 | Integrated Performance Attribution Summary | Historical portfolio returns, benchmark returns, weights/flows, benchmark map, and attribution method |
 | Integrated Performance Attribution Detail | Summary prerequisites plus detailed position/holding/trade history and reconciliation policy |
 | Probabilistic Scenario Range | Approved probabilistic/range analytics and, for comparison, approved benchmark/proxy range |
 | Current Versus Proposed Portfolio | Explicit proposed allocation workflow/object and revaluation or exposure outputs for current and proposed states |
 
-### C. Do-Not-Generate-Yet Mockups
+### D. Do-Not-Generate-Yet Mockups
 
 - Client-facing Top Impacted Positions as a default standalone report.
 - Detailed data-confidence report unless data quality is the meeting topic.
@@ -302,7 +312,7 @@ These should not be generated as data-backed v2 mockups until their gates are sa
 - Advisor-only fields: Unassigned positions, assignment confidence detail, affected managers.
 - Internal-only fields: Evidence packets, LLM responses, rule traces, raw source descriptions.
 - Source analytics/data needed: Published position-to-lens assignments for every in-scope position, lens catalog, portfolio values.
-- Missing prerequisite behavior: Current repo appears to have no complete published lens assignment artifact. Produce design-only spec/readiness language, not fake bucket totals.
+- Missing prerequisite behavior: For the synthetic AI Adoption and Energy Security lenses, use the prerequisite pack. For any future lens without complete assignments, produce design-only spec/readiness language, not fake bucket totals.
 - Acceptable visible content example: "Illustrative design example only: AI Adoption lens rows would include all approved buckets, including Neutral / Low Direct AI Exposure and Unclassified / Review Required."
 - Anti-clutter rule: Do not show only the largest lens bucket; a lens is a complete category system.
 
@@ -404,15 +414,15 @@ Do not generate performance attribution mockups until historical return, benchma
 
 | Gated report | Missing data / prerequisite | Required behavior |
 | --- | --- | --- |
-| Cash-Flow Support Summary | Stated annual cash need, period, cash generated, cash paid out, projected generation, funding policy, confidence caveat | Show advisor/internal setup readiness only; do not fake support/sufficiency |
+| Cash-Flow Support Summary | For synthetic demo: prerequisite pack now supplies stated annual cash need, period, cash generated, cash paid out, projected generation, funding policy, surplus/shortfall, and confidence caveat. For real/client mode: real cash-flow sources and plan data remain absent | Generate only synthetic-demo mockup content from the pack; keep real/client cash-flow readiness gated |
 | Cash Flow by Manager/Sleeve | Reliable cash-flow history/projection by manager/sleeve | Gate until source data and period logic exist |
 | Scenario Versus Benchmark | Approved benchmark/proxy map and benchmark scenario value or proxy methodology | Defer benchmark comparison |
-| Manager by Lens Exposure | Published complete position-to-lens assignments | Gate; do not force unassigned positions into buckets |
+| Manager by Lens Exposure | Published complete position-to-lens assignments plus manager mapping | Possible next for synthetic AI Adoption and Energy Security; defer for any lens without complete assignments |
 | Integrated Performance Attribution Summary | Historical portfolio returns, benchmark returns, weights, flows, and benchmark map | Defer attribution |
 | Integrated Performance Attribution Detail | Summary prerequisites plus position/holding/trade history and reconciliation | Defer detail report |
 | Timing Attribution | Two clearly specified portfolio states, trade/holding history, flow treatment, clean timing methodology | Omit timing or mark unavailable |
 | Probabilistic Scenario Range | Covariance/probabilistic scenario engine outputs, range methodology, horizon, validation, benchmark range if compared | Do not create ranges from deterministic scenarios |
-| Full Lens Exposure | Complete lens definition and published position-to-lens assignments for all in-scope positions | Produce design-only spec/readiness if missing |
+| Full Lens Exposure | Complete lens definition and published position-to-lens assignments for all in-scope positions | Generate synthetic AI Adoption and Energy Security mockups from the pack; produce design-only spec/readiness if missing for another lens |
 | Current Versus Proposed Portfolio | Proposed allocation data/workflow and analytics for current/proposed states | Defer current-versus-proposed report |
 
 Missing data should produce setup/readiness status for advisor/internal use, not a fake client-facing report.
@@ -463,8 +473,8 @@ It should:
 - enforce information budgets with tests;
 - avoid advisor UI wiring;
 - avoid generated-report wiring;
-- avoid generating gated reports as if data exists;
+- use the synthetic prerequisite pack for Cash-Flow Support Summary, Manager Role Summary, and Full Lens Exposure rather than inventing report values inside mockups;
+- avoid generating still-gated reports as if data exists;
 - preserve v1 artifacts if useful for comparison, or write v2 artifacts to a separate path;
 - keep synthetic/local-only boundaries;
 - avoid new analytics outputs unless separately authorized.
-
