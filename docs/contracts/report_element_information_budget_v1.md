@@ -115,6 +115,27 @@ Internal-only defaults:
 - Raw reconciliation fields.
 - Valuation traces.
 
+## Report-System Redesign Addendum
+
+Future report-element fixtures should also carry these design constraints when the report family requires them:
+
+- `report_family_id`: stable id from the report family catalog.
+- `representation_level`: direct security, fund/NAV position, manager-level sleeve, look-through holding, lens bucket, benchmark/proxy, or proposed allocation.
+- `denominator_policy`: the denominator that makes visible rows comparable or additive.
+- `category_system_id`: the single taxonomy, lens, manager grouping, geography system, benchmark map, or status taxonomy used by the table.
+- `summary_or_detail_variant`: summary and detail should be separate report variants, not one expanding default report.
+- `lens_assignment_status`: present when a report depends on selected lens buckets.
+- `benchmark_map_status`: present when a report makes benchmark-relative claims.
+- `visual_denominator_or_range`: present for chart-first reports so the visual has the same explicit denominator/range discipline as tables.
+- `timing_attribution_gate`: present for performance attribution; timing can appear only when two clearly specified portfolio states, period history, and flow treatment make it measurable.
+
+Additional anti-clutter checks:
+
+- Do not mix asset type, manager/sleeve, lens/theme, and coverage/review statuses in one additive table.
+- Do not show benchmark-relative, lens-bucket, cash-flow support, proposed-allocation, timing-attribution, or probabilistic range claims unless the matching data/analytics prerequisites are satisfied.
+- Do not use readiness artifacts as client-facing reports. They may explain why a report is unavailable.
+- Visual-first reports must state the range, benchmark/proxy, horizon, and caveat needed to interpret the picture.
+
 ## Kill Switch
 
 If a future report element cannot satisfy this sentence, it should be postponed:

@@ -1,0 +1,146 @@
+# Report Data And Analytics Requirements v1
+
+## Purpose
+
+This document maps the redesigned report families to the data and analytics they need. It is architecture/design documentation only.
+
+It does not implement code, generate analytics outputs, change UI, add endpoints, change Docker/deployment configuration, use live data, use real client data, or add dependencies.
+
+The rule is direct:
+
+```text
+If required data or analytics do not exist, the report should be unavailable, advisor-readiness only, or explicitly caveated. It should not be fabricated.
+```
+
+## Current Local Synthetic Availability
+
+Available now in the repo:
+
+- synthetic portfolio and position universe;
+- manager, account, sleeve, instrument, and broad classification fixture data;
+- synthetic market states and two supported full-revaluation scenarios: `ai_chip_selloff` and `rate_shock`;
+- position valuation results, position value comparisons, portfolio scenario summaries, coverage manifests, and scenario index artifacts;
+- revaluation attribution by manager, account, sleeve, coverage, confidence, gross theme, and cross-scenario summary;
+- thesis-bucket attribution readiness output, not real thesis-bucket attribution;
+- lean local product-review mockups for Portfolio Status, Aggregated Asset Allocation, Manager Role Summary, Concentration Review, Scenario Downside Summary, Coverage and Confidence Warning, and Cash-Flow Support Readiness;
+- analytic pack choices and committed analytic-derived fragments for the current local demo path.
+
+Missing or deferred:
+
+- real cash-flow need or liability schedule;
+- cash paid out and projected generation sufficient for a client cash-flow support report;
+- approved benchmark/proxy maps;
+- lens-bucket benchmark maps;
+- published position-thesis assignments for product-grade lenses;
+- historical returns and performance calculation inputs;
+- trade/holding history sufficient for attribution timing;
+- proposed allocation objects;
+- probabilistic/range analytics;
+- production data, live market data, live Plaid data, and real client data.
+
+## Readiness Gates
+
+| Gate | Required before report can claim | Missing-input behavior |
+| --- | --- | --- |
+| Representation gate | The row level is known: direct security, fund/NAV, manager-level, look-through, lens bucket, benchmark, or proposed allocation | Label as representation incomplete or keep advisor-only |
+| Denominator gate | All rows in an additive table share one denominator/category system | Split the report or show as non-additive diagnostic |
+| Lens gate | Each in-scope position has an approved assignment, neutral bucket, or review bucket for the selected lens | Show readiness/review status, not lens exposure claims |
+| Benchmark gate | Benchmark or proxy map is approved for the report scope | Defer benchmark-relative report |
+| Cash need gate | Stated need, period, funding policy, cash generated, cash paid, and projection basis exist | Keep Cash-Flow Support as readiness only |
+| Performance history gate | Returns, holdings, flows, and benchmark history are available for the selected period | Defer performance attribution |
+| Timing gate | Two clearly specified portfolio states and enough trade/flow history exist | Omit timing; do not relabel residual/noise |
+| Probabilistic gate | Approved range methodology and inputs exist | Do not create ranges from deterministic scenarios |
+| Proposal gate | Current and proposed portfolio states are both explicit | Defer current-versus-proposed reports |
+
+## Requirements Matrix
+
+| Report area | Portfolio data | Instrument/position data | Manager/sleeve data | Lens assignments | Benchmark/proxy maps | Historical returns | Trade/holding history | Cash-flow data | Scenario/revaluation outputs | Probabilistic analytics | Available now | Missing/deferred | Cannot fabricate |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Portfolio Representation Status | Required | Required with representation type and coverage | Useful | Optional | Not required | Not required | Not required | Optional | Coverage/confidence summary useful | Not required | Synthetic portfolio, position catalog, coverage outputs | Better look-through/representation basis labels | Completeness of unknown look-through |
+| Aggregated Asset Allocation | Required | Required with asset type | Optional | Not required unless asset class is modeled as lens | Not required | Not required | Not required | Not required | Not required | Not required | Synthetic broad asset classifications and values | Revised taxonomy approval | Asset taxonomy confidence beyond fixture |
+| Allocation by Manager | Required | Position values by manager | Required | Optional | Not required | Not required | Not required | Not required | Optional scenario context | Not required | Manager/sleeve value aggregation exists | Product spec and manager role language | Manager mandate claims without data |
+| Full Lens Exposure | Required | Required for every in-scope position | Optional manager rollup | Required | Not required unless comparing | Not required | Not required | Not required | Optional for impact lens | Optional later | Some broad theme/lens tags exist | Published product-grade assignments | Bucket totals for unassigned positions |
+| Manager by Lens Exposure | Required | Required | Required | Required | Not required | Not required | Not required | Not required | Optional | Optional later | Manager and some theme aggregation exist | Approved lens assignments | Cross-manager lens claims without same lens |
+| Manager Role Summary | Required | Useful | Required with mandate/role | Optional for role expression | Optional manager benchmark later | Optional | Optional | Optional | Scenario downside by manager available | Not required | Manager value and scenario attribution | Approved intended role/mandate language | Why a manager is owned when mandate absent |
+| Integrated Performance Attribution | Required | Required over period | Required for manager mode | Required for lens mode | Required | Required | Required | Required for flow-adjusted returns | Optional scenario overlay | Not required | Not available as report-ready system | Benchmark maps, return history, holdings/trades, flows | Value-add, timing, or benchmark-relative claims |
+| Cash-Flow Support Summary | Required | Required where income/distributions matter | Optional manager rollup | Not required | Not required | Optional | Useful | Required: need, generated, paid out, projected generation | Optional stress overlay | Optional later | Readiness-only note exists | Explicit need/liability schedule and cash-flow projection | Support/sufficiency conclusion |
+| Cash Flow by Manager/Sleeve | Required | Required income/distribution records | Required | Not required | Optional | Optional | Useful | Required | Optional | Optional later | Not report-ready | Reliable cash-flow source data | Manager cash generation claims |
+| Current Portfolio Scenario Downside | Required | Required with valuation coverage | Optional for contributor detail | Optional for lens variant | Not required | Not required | Not required | Not required | Required | Not required | Two full-revaluation scenarios and summaries | More scenarios, product caveat policy | Probability or forecast claim |
+| Scenario by Manager | Required | Required | Required | Optional | Not required | Not required | Not required | Not required | Required manager attribution | Not required | Manager attribution for two scenarios | Client/advisor display policy | Manager causality beyond attribution |
+| Scenario by Lens | Required | Required | Optional | Required | Optional | Not required | Not required | Not required | Required plus lens assignments | Optional later | Theme/gross attribution exists but thesis readiness only | Product-grade lens assignments | Thesis-bucket impacts without assignments |
+| Scenario Versus Benchmark | Required | Required | Optional | Optional | Required | Optional | Optional | Not required | Required for portfolio and benchmark/proxy | Optional | Portfolio scenario output exists | Benchmark/proxy scenario mapping | Benchmark comparison |
+| Probabilistic Scenario Range | Required | Required depending on model | Optional | Optional | Optional/required for benchmark range | Possibly required | Possibly required | Optional | Deterministic scenarios may seed methodology but are not enough | Required | Not available | Approved range model and validation | Percentile range or probability |
+| Coverage and Confidence Warning | Required | Required with valuation status | Useful for aggregation | Optional | Not required | Not required | Not required | Optional | Coverage/confidence attribution required | Not required | Coverage/confidence outputs exist | Client-facing threshold policy | Assurance that low-confidence values are reliable |
+| Opaque / Review-Required Exposure | Required | Required with review flags and marks | Useful | Optional | Not required | Optional | Optional | Optional | Coverage/review outputs useful | Not required | Review-required and held-at-mark outputs exist | Review queue product spec | Resolved exposure without review |
+| Concentration by Consistent Category | Required | Required for chosen category | Optional if manager category | Required if selected lens/theme | Not required | Not required | Not required | Not required | Optional for downside concentration | Optional later | Asset, manager, theme, coverage aggregations exist | One-category product spec | Mixed-category concentration table |
+| Portfolio vs Benchmark Scenario Range | Required | Required | Optional | Optional | Required | Possibly required | Possibly required | Optional | Required scenario/range data | Required for range version | Not available | Benchmark map and range analytics | Benchmark range |
+| Current vs Proposed Portfolio | Required for current and proposed | Required for current/proposed holdings | Required if manager change | Optional | Optional | Optional | Required for transition/timing | Optional | Revaluation of both states required | Optional | Not available | Proposed allocation object | Improvement claim without proposed state |
+| Proposed Allocation Change | Required | Required for proposed rows | Required if manager change | Optional | Optional | Optional | Optional | Optional | Optional | Optional | Not available | Proposal workflow/object | Rationale for nonexistent proposal |
+| Upside / Downside Tradeoff | Required | Required | Optional | Required if thesis/lens framing | Optional | Optional | Optional | Optional | Required upside/downside scenario set | Optional | Not available | Approved upside scenarios and lens assignments | Tradeoff score without model |
+| Manager Rebalancing Rationale | Required current/proposed | Required | Required | Optional | Optional manager benchmarks | Useful | Useful | Optional | Optional scenario impact | Optional | Not available | Proposed manager changes and approval state | Recommendation/rationale without proposal |
+| Thesis / Lens Positioning | Required | Required | Optional manager rollup | Required | Optional | Optional | Optional | Optional | Optional scenario overlay | Optional later | Thesis readiness only | Published assignments for chosen lens | Client thesis exposure claims |
+
+## Report-Specific Notes
+
+### Cash-Flow Support
+
+Minimum report evidence:
+
+- stated annual cash need;
+- cash generated last period;
+- cash paid out last period;
+- projected cash generation for the next period or periods;
+- surplus/shortfall versus need;
+- one confidence caveat.
+
+Current cash-flow readiness does not satisfy this. It should remain an internal/advisor setup state until the data exists.
+
+### Integrated Performance Attribution
+
+Minimum report evidence:
+
+- approved benchmark or proxy map;
+- selected period;
+- portfolio and benchmark returns;
+- holdings, weights, and cash-flow treatment for the period;
+- manager/sleeve mapping when manager mode is selected;
+- lens assignments and lens-bucket benchmarks when lens mode is selected;
+- residual policy;
+- timing gate outcome.
+
+If benchmark or history inputs are missing, do not show attribution. If timing is not cleanly measurable, omit timing.
+
+### Probabilistic Scenario Range
+
+Minimum report evidence:
+
+- approved scenario family or stochastic model;
+- horizon;
+- central estimate or expected impact definition;
+- range definition such as 5th-95th percentile;
+- validation/caveat language;
+- benchmark/proxy range if comparison is shown.
+
+Deterministic `ai_chip_selloff` and `rate_shock` scenario points do not by themselves create a probabilistic range.
+
+### Lens And Benchmark Reports
+
+Minimum report evidence:
+
+- approved lens definition;
+- one primary bucket, neutral bucket, or review bucket for every in-scope position when the lens is additive;
+- confidence/review treatment;
+- approved benchmark/proxy map for any relative claim;
+- representation basis label.
+
+Lens reports should show unavailable/review buckets rather than silently forcing assignments.
+
+## Implementation Implications
+
+- Revised mockups should declare report family id, audience tier, representation level, denominator, and data readiness.
+- Tests for future report views should block mixed category systems in additive tables.
+- Benchmark-relative report fixtures should not be generated until benchmark/proxy maps exist.
+- Cash-flow support should stay readiness-only until cash-need and cash-flow inputs exist.
+- Probabilistic ranges should wait for explicit range analytics.
+- Advisor UI wiring remains a later separate decision.
+
