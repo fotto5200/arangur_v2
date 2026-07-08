@@ -5,7 +5,9 @@
     "production_attribution_report",
     "scenario_versus_benchmark",
     "probabilistic_scenario_range",
-    "current_versus_proposed_attribution"
+    "current_versus_proposed_attribution",
+    "integrated_attribution_summary_by_manager",
+    "integrated_attribution_detail_by_manager"
   ],
   "generated_at": "2026-07-07T00:00:00Z",
   "generated_report_wiring": "not_changed",

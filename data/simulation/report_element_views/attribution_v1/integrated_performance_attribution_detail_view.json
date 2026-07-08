@@ -1,73 +1,132 @@
 {
-  "advisor_note": "Use detail mode for advisor review of the reconciliation; keep residual/unexplained separate from timing until a clean timing method exists.",
+  "advisor_note": "Bucket-level selection and sizing components are not separately measured in this v1 synthetic input; use total effect and the residual tie-out for review.",
   "audience_tier": "Advisor review",
   "benchmark_or_proxy_basis": "Northstar Synthetic Policy Benchmark",
   "caveats": [
-    "Synthetic local-demo returns, benchmark, and contribution effects only.",
-    "Timing is unavailable and is not folded into residual."
+    "Synthetic local-demo returns and theme benchmarks only; some theme benchmarks are proxy benchmarks for demo purposes, not production recommendations.",
+    "Timing attribution is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present."
   ],
-  "compact_table": null,
-  "contribution_bridge": {
+  "compact_table": {
     "columns": [
-      "Step",
-      "Effect",
-      "Interpretation"
+      "Theme Bucket",
+      "Weight",
+      "Portfolio Return",
+      "Theme Benchmark Return",
+      "Theme Benchmark Selection",
+      "Theme Benchmark Sizing",
+      "Asset Selection",
+      "Asset Sizing",
+      "Total Effect"
     ],
     "rows": [
       {
-        "Effect": "6.99%",
-        "Interpretation": "Starting point.",
-        "Step": "Benchmark return"
+        "Asset Selection": "Not separately measured",
+        "Asset Sizing": "Not separately measured",
+        "Portfolio Return": "11.70%",
+        "Theme Benchmark Return": "10.30%",
+        "Theme Benchmark Selection": "Not separately measured",
+        "Theme Benchmark Sizing": "Not separately measured",
+        "Theme Bucket": "Core AI Infrastructure / Hardware",
+        "Total Effect": "+0.29%",
+        "Weight": "21.03%"
       },
       {
-        "Effect": "+0.41%",
-        "Interpretation": "Positive bucket choice versus policy mix.",
-        "Step": "Strategy/lens-bucket selection"
+        "Asset Selection": "Not separately measured",
+        "Asset Sizing": "Not separately measured",
+        "Portfolio Return": "10.40%",
+        "Theme Benchmark Return": "9.20%",
+        "Theme Benchmark Selection": "Not separately measured",
+        "Theme Benchmark Sizing": "Not separately measured",
+        "Theme Bucket": "AI Model / Platform Exposure",
+        "Total Effect": "+0.21%",
+        "Weight": "17.18%"
       },
       {
-        "Effect": "+0.25%",
-        "Interpretation": "Positioning size helped relative return.",
-        "Step": "Strategy/lens-bucket sizing"
+        "Asset Selection": "Not separately measured",
+        "Asset Sizing": "Not separately measured",
+        "Portfolio Return": "9.50%",
+        "Theme Benchmark Return": "8.50%",
+        "Theme Benchmark Selection": "Not separately measured",
+        "Theme Benchmark Sizing": "Not separately measured",
+        "Theme Bucket": "Data Center / Power Bottleneck Exposure",
+        "Total Effect": "+0.11%",
+        "Weight": "10.73%"
       },
       {
-        "Effect": "+0.32%",
-        "Interpretation": "Selected assets outperformed their reference mix.",
-        "Step": "Asset selection"
+        "Asset Selection": "Not separately measured",
+        "Asset Sizing": "Not separately measured",
+        "Portfolio Return": "5.40%",
+        "Theme Benchmark Return": "5.20%",
+        "Theme Benchmark Selection": "Not separately measured",
+        "Theme Benchmark Sizing": "Not separately measured",
+        "Theme Bucket": "Neutral / Low Direct AI Exposure",
+        "Total Effect": "+0.07%",
+        "Weight": "33.30%"
       },
       {
-        "Effect": "+0.10%",
-        "Interpretation": "Sizing within selected assets helped modestly.",
-        "Step": "Asset sizing"
+        "Asset Selection": "Not separately measured",
+        "Asset Sizing": "Not separately measured",
+        "Portfolio Return": "7.70%",
+        "Theme Benchmark Return": "7.10%",
+        "Theme Benchmark Selection": "Not separately measured",
+        "Theme Benchmark Sizing": "Not separately measured",
+        "Theme Bucket": "AI Downstream Productivity Beneficiary",
+        "Total Effect": "+0.03%",
+        "Weight": "4.73%"
       },
       {
-        "Effect": "+0.06%",
-        "Interpretation": "Remaining reconciler, not timing.",
-        "Step": "Residual / unexplained"
+        "Asset Selection": "Not separately measured",
+        "Asset Sizing": "Not separately measured",
+        "Portfolio Return": "3.40%",
+        "Theme Benchmark Return": "3.80%",
+        "Theme Benchmark Selection": "Not separately measured",
+        "Theme Benchmark Sizing": "Not separately measured",
+        "Theme Bucket": "AI-Disrupted Incumbent",
+        "Total Effect": "-0.01%",
+        "Weight": "2.52%"
       },
       {
-        "Effect": "8.15%",
-        "Interpretation": "Ending point after visible effects.",
-        "Step": "Actual portfolio return"
+        "Asset Selection": "Not separately measured",
+        "Asset Sizing": "Not separately measured",
+        "Portfolio Return": "4.00%",
+        "Theme Benchmark Return": "4.00%",
+        "Theme Benchmark Selection": "Not separately measured",
+        "Theme Benchmark Sizing": "Not separately measured",
+        "Theme Bucket": "Unclassified / Review Required",
+        "Total Effect": "+0.00%",
+        "Weight": "10.50%"
+      },
+      {
+        "Asset Selection": "Not separately measured",
+        "Asset Sizing": "Not separately measured",
+        "Portfolio Return": "n/a",
+        "Theme Benchmark Return": "n/a",
+        "Theme Benchmark Selection": "Not separately measured",
+        "Theme Benchmark Sizing": "Not separately measured",
+        "Theme Bucket": "Residual / unexplained",
+        "Total Effect": "+0.46%",
+        "Weight": "n/a"
       }
     ],
-    "title": "Benchmark-to-Actual Bridge"
+    "title": "Theme Benchmark Detail"
   },
-  "denominator_category_system": "Benchmark-to-actual contribution bridge",
+  "contribution_bridge": null,
+  "denominator_category_system": "Theme benchmark bucket total effects plus residual tie-out",
   "display_title": "Integrated Performance Attribution Detail",
-  "exact_report_question": "What is the full decomposition of value added or lost versus benchmark?",
+  "exact_report_question": "How do theme benchmarks / lens buckets explain the synthetic benchmark-to-portfolio attribution bridge?",
   "gated_or_deferred": false,
   "generated_at": "2026-07-07T00:00:00Z",
   "generator_version": "attribution_report_views.v1",
   "headline_metrics": [
     {
       "formatted_value": "6.99%",
-      "label": "Benchmark return",
+      "label": "Global benchmark return",
       "value": 0.06994
     },
     {
-      "formatted_value": "+1.15%",
-      "label": "Total contribution",
-      "value": 0.011516
+      "formatted_value": "+0.69%",
+      "label": "Theme row total",
+      "value": 0.006929
     },
     {
       "formatted_value": "8.15%",
@@ -75,13 +134,13 @@
       "value": 0.081456
     }
   ],
-  "headline_sentence": "The whole-portfolio bridge ties benchmark return to actual portfolio return without using timing as a residual.",
+  "headline_sentence": "Theme benchmark rows show the measured bucket-level effects, with residual / unexplained completing the global benchmark-to-portfolio tie-out.",
   "information_budget_applied": {
     "actual_advisor_notes": 1,
     "actual_caveats": 2,
     "actual_headline_metrics": 3,
     "actual_headline_sentences": 1,
-    "actual_visible_table_rows": 7,
+    "actual_visible_table_rows": 8,
     "max_advisor_notes": 1,
     "max_caveats": 2,
     "max_headline_metrics": 3,
@@ -107,7 +166,7 @@
   "report_element_id": "integrated_performance_attribution_detail",
   "report_family": "Integrated Performance Attribution",
   "representation_level": "Whole portfolio versus benchmark",
-  "residual_policy": "Residual / unexplained is the remaining reconciler and must not be relabeled as timing.",
+  "residual_policy": "Residual / unexplained is the remaining reconciler and may include unmeasured timing, data, flow, or reconciliation effects.",
   "schema_version": "attribution_report_view.v1",
   "source_prerequisite_pack_refs": [
     "synthetic_attribution_prerequisite_pack_v1"
@@ -116,11 +175,16 @@
   "synthetic_data": true,
   "table_validation": {
     "actual_return": 0.081456,
-    "benchmark_return": 0.06994,
-    "bridge_row_count": 7,
+    "bridge_row_count": 8,
+    "component_effects_not_separately_measured": true,
     "effect_total": 0.011516,
+    "global_benchmark_return": 0.06994,
     "recomputed_actual_return": 0.081456,
     "residual_label": "Residual / unexplained",
+    "residual_unexplained": 0.004587,
+    "theme_benchmark_lens": "AI Adoption",
+    "theme_bucket_row_count": 7,
+    "theme_bucket_total_effect": 0.006929,
     "ties_to_actual_return": true,
     "timing_contribution_included": false
   },

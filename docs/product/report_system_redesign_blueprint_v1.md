@@ -182,18 +182,17 @@ Did the portfolio or manager add value versus benchmark, and what decision produ
 
 The user-facing product language should not force the term "Brinson" as the main label. Internally, the system may use Brinson-style allocation and selection logic where appropriate, but the report family is broader.
 
-Synthetic Attribution Prerequisite Pack v1 supplies deterministic benchmark, return, weight/flow, decomposition, and manager prerequisite inputs for the local synthetic attribution mockups. Timing remains unavailable until it is tied to cleanly specified portfolio states and trade/flow history.
+Synthetic Attribution Prerequisite Pack v1 supplies deterministic benchmark, return, weight/flow, theme-benchmark detail, decomposition, and manager prerequisite inputs for the local synthetic attribution mockups. Timing remains unavailable until it is tied to cleanly specified portfolio states and trade/flow history.
 
 The attribution chain:
 
 ```text
 global benchmark
--> strategy / lens-bucket selection
--> strategy / lens-bucket sizing
--> strategy timing, only when cleanly measurable
+-> theme benchmark selection
+-> theme benchmark sizing
 -> asset selection
 -> asset sizing
--> asset timing, only when cleanly measurable
+-> residual / unexplained
 -> actual portfolio
 ```
 
@@ -208,7 +207,8 @@ Required modes:
 Timing gate:
 
 - Include timing only when comparing two clearly specified portfolio states over a defined period.
-- Omit timing when residuals are dominated by cash flows, missing holdings, pricing gaps, or noise.
+- Omit timing when clean trade/holding history, flow treatment, and an approved timing method are absent.
+- Treat `Residual / unexplained` as the remaining reconciler; it may include unmeasured timing, data, flow, or reconciliation effects.
 - Do not label residual/noise as timing.
 
 Manager/advisor value explanation is a central product purpose of this family. Reports should help answer why the client is paying the advisor or manager: outperformance, risk reduction, scenario resilience, thesis expression, asset selection, exposure sizing, and timing only when actually measurable.

@@ -56,6 +56,9 @@ FORBIDDEN_VISIBLE_TERMS = (
     "raw json",
     "debug",
     "brinson",
+    "strategy/lens-bucket",
+    "proxy return",
+    "bucket return",
 )
 
 RAW_ID_PATTERNS = (
@@ -187,7 +190,7 @@ class AttributionReportViewsTests(unittest.TestCase):
                 self.assertTrue(view["synthetic_data"])
                 self.assertFalse(view["gated_or_deferred"])
                 self.assertEqual("unavailable", view["timing_status"])
-                self.assertIn("Synthetic", view["benchmark_or_proxy_basis"])
+                self.assertIn("synthetic", view["benchmark_or_proxy_basis"].lower())
                 self.assertTrue(view.get("compact_table") or view.get("contribution_bridge"))
 
     def test_markdown_mockups_are_generated_from_view_fixtures(self) -> None:
@@ -282,18 +285,19 @@ class AttributionReportViewsTests(unittest.TestCase):
             "integrated_performance_attribution_detail",
         ):
             view = _load_json(VIEW_DIR / VIEW_FILENAME_BY_REPORT_ID[report_id])
-            bridge = view["contribution_bridge"]
+            table = view.get("contribution_bridge") or view["compact_table"]
             row_text = "\n".join(
                 str(value)
-                for row in bridge["rows"]
+                for row in table["rows"]
                 for value in row.values()
             ).lower()
             with self.subTest(report_id=report_id):
                 self.assertEqual("unavailable", view["timing_status"])
                 self.assertFalse(view["table_validation"]["timing_contribution_included"])
                 self.assertNotIn("| timing |", row_text)
+                self.assertNotIn("not timing", row_text)
                 self.assertIn("residual / unexplained", row_text)
-                self.assertIn("residual", view["residual_policy"].lower())
+                self.assertIn("may include unmeasured timing", view["residual_policy"].lower())
 
     def test_detail_bridge_ties_to_actual_return(self) -> None:
         view = _load_json(VIEW_DIR / "integrated_performance_attribution_detail_view.json")
@@ -301,13 +305,30 @@ class AttributionReportViewsTests(unittest.TestCase):
         self.assertTrue(validation["ties_to_actual_return"])
         self.assertAlmostEqual(
             validation["actual_return"],
-            validation["benchmark_return"] + validation["effect_total"],
+            validation["global_benchmark_return"] + validation["effect_total"],
             places=6,
         )
         self.assertAlmostEqual(
             validation["actual_return"],
             validation["recomputed_actual_return"],
             places=6,
+        )
+        self.assertAlmostEqual(
+            validation["effect_total"],
+            validation["theme_bucket_total_effect"] + validation["residual_unexplained"],
+            places=6,
+        )
+        self.assertGreater(validation["theme_bucket_row_count"], 0)
+        self.assertTrue(validation["component_effects_not_separately_measured"])
+        table = view["compact_table"]
+        self.assertEqual("Theme Benchmark Detail", table["title"])
+        self.assertIn("Theme Bucket", table["columns"])
+        self.assertIn("Theme Benchmark Return", table["columns"])
+        self.assertIn("Theme Benchmark Selection", table["columns"])
+        self.assertIn("Asset Selection", table["columns"])
+        self.assertNotEqual(
+            "Contribution Summary",
+            table["title"],
         )
 
     def test_manager_summary_covers_all_managers_or_justifies_scope(self) -> None:
@@ -320,11 +341,18 @@ class AttributionReportViewsTests(unittest.TestCase):
         self.assertEqual(expected_names, actual_names)
         self.assertEqual(6, view["table_validation"]["manager_rows_shown"])
         self.assertTrue(view["table_validation"]["all_current_managers_covered"])
+        self.assertTrue(view["table_validation"]["timing_column_removed"])
+        self.assertEqual("6 of 6", view["table_validation"]["manager_benchmark_coverage"])
         self.assertIn("All six", view["headline_sentence"])
+        self.assertIn("Manager Benchmark Return", table["columns"])
+        self.assertNotIn("Proxy return", table["columns"])
+        self.assertNotIn("Timing", table["columns"])
+        self.assertIn("proxy benchmarks", "\n".join(view["caveats"]))
+        self.assertIn("not production recommendations", "\n".join(view["caveats"]))
         for row in table["rows"]:
             with self.subTest(manager=row["Manager"]):
-                self.assertEqual("Unavailable", row["Timing"])
-                self.assertIn("Strategy", row["Largest driver"])
+                self.assertIn("Manager Benchmark Return", row)
+                self.assertIn("Theme benchmark", row["Largest Driver"])
 
     def test_lens_reports_cover_all_ai_and_energy_buckets(self) -> None:
         returns = _load_json(PACK_DIR / "synthetic_period_returns.json")
@@ -340,14 +368,37 @@ class AttributionReportViewsTests(unittest.TestCase):
                 for row in returns["lens_bucket_returns"]
                 if row["lens_id"] == lens_id
             }
-            actual_buckets = {row["Lens Bucket"] for row in table["rows"]}
+            actual_buckets = {row["Theme Bucket"] for row in table["rows"]}
             with self.subTest(report_id=report_id):
                 self.assertEqual(expected_buckets, actual_buckets)
                 self.assertEqual(7, len(table["rows"]))
                 self.assertTrue(view["table_validation"]["all_lens_buckets_included"])
                 self.assertTrue(view["table_validation"]["contains_neutral_bucket"])
                 self.assertTrue(view["table_validation"]["contains_review_bucket"])
-                self.assertIn("Synthetic lens-bucket proxies only", "\n".join(view["caveats"]))
+                self.assertIn("Theme Bucket", table["columns"])
+                self.assertIn("Portfolio Return", table["columns"])
+                self.assertIn("Theme Benchmark Return", table["columns"])
+                self.assertNotIn("Lens Bucket", table["columns"])
+                self.assertNotIn("Proxy return", table["columns"])
+                self.assertIn("proxy benchmarks", "\n".join(view["caveats"]))
+                self.assertIn("not production recommendations", "\n".join(view["caveats"]))
+
+    def test_polished_attribution_terms_are_visible(self) -> None:
+        summary = _load_json(
+            VIEW_DIR / "integrated_performance_attribution_summary_view.json"
+        )
+        detail = _load_json(VIEW_DIR / "integrated_performance_attribution_detail_view.json")
+        combined = f"{_visible_text(summary)}\n{_visible_text(detail)}"
+
+        self.assertIn("Global benchmark return", combined)
+        self.assertIn("Theme benchmark selection", combined)
+        self.assertIn("Theme benchmark sizing", combined)
+        self.assertIn("Asset selection", combined)
+        self.assertIn("Asset sizing", combined)
+        self.assertIn("Residual / unexplained", combined)
+        self.assertNotIn("Strategy/lens-bucket", combined)
+        self.assertNotIn("Proxy return", combined)
+        self.assertNotIn("Remaining reconciler, not timing", combined)
 
     def test_source_module_has_no_external_api_or_secret_markers(self) -> None:
         source = (SRC / "arangur" / "analytics" / "attribution_report_views.py").read_text(

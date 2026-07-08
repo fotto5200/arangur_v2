@@ -485,6 +485,11 @@ def build_integrated_attribution_decomposition_inputs(
     active_return = _round_return(portfolio_return - benchmark_return)
     whole_effects = _effect_breakdown(active_return)
     whole_tie = _tie_out(benchmark_return, whole_effects, portfolio_return)
+    theme_benchmark_detail = _theme_benchmark_detail(
+        context,
+        returns,
+        active_return,
+    )
 
     return {
         "schema_version": "integrated_attribution_decomposition_inputs.v1",
@@ -503,6 +508,7 @@ def build_integrated_attribution_decomposition_inputs(
                 "actual_return": portfolio_return,
                 "active_return": active_return,
                 "effects": whole_effects,
+                "theme_benchmark_detail": theme_benchmark_detail,
                 "strategy_timing": _timing_unavailable(),
                 "asset_timing": _timing_unavailable(),
                 "tie_out": whole_tie,
@@ -808,6 +814,70 @@ def _lens_bucket_weight(context: dict[str, Any], lens_id: str, bucket_id: str) -
         if bucket["bucket_id"] == bucket_id:
             return _round_weight(float(bucket["portfolio_share"]))
     raise KeyError(f"Missing bucket weight for {lens_id}:{bucket_id}")
+
+
+def _theme_benchmark_detail(
+    context: dict[str, Any],
+    returns: dict[str, Any],
+    active_return: float,
+) -> dict[str, Any]:
+    lens_id = "ai_adoption"
+    lens = context["lenses"][lens_id]
+    rows = []
+    for return_row in returns["lens_bucket_returns"]:
+        if return_row["lens_id"] != lens_id:
+            continue
+        weight = _lens_bucket_weight(context, lens_id, return_row["bucket_id"])
+        relative_return = _round_return(
+            float(return_row["period_return"]) - float(return_row["proxy_period_return"])
+        )
+        total_effect = _round_return(weight * relative_return)
+        rows.append(
+            {
+                "lens_id": lens_id,
+                "lens_display_name": lens["display_name"],
+                "bucket_id": return_row["bucket_id"],
+                "bucket_display_name": return_row["bucket_display_name"],
+                "weight": weight,
+                "portfolio_return": return_row["period_return"],
+                "theme_benchmark_return": return_row["proxy_period_return"],
+                "relative_return": relative_return,
+                "theme_benchmark_selection_effect": None,
+                "theme_benchmark_sizing_effect": None,
+                "asset_selection_effect": None,
+                "asset_sizing_effect": None,
+                "total_effect": total_effect,
+                "component_status": "total_effect_available_components_not_separately_measured",
+                "synthetic_data": True,
+            }
+        )
+
+    rows.sort(key=lambda row: abs(float(row["total_effect"])), reverse=True)
+    row_total = _round_return(sum(row["total_effect"] for row in rows))
+    residual_unexplained = _round_return(active_return - row_total)
+    return {
+        "lens_id": lens_id,
+        "lens_display_name": lens["display_name"],
+        "detail_basis": "theme_bucket_weight_times_portfolio_minus_theme_benchmark_return",
+        "rows": rows,
+        "theme_bucket_total_effect": row_total,
+        "residual_unexplained": residual_unexplained,
+        "tie_out": {
+            "active_return": active_return,
+            "theme_bucket_total_effect": row_total,
+            "residual_unexplained": residual_unexplained,
+            "recomputed_active_return": _round_return(row_total + residual_unexplained),
+            "ties_to_active_return": abs(
+                active_return - _round_return(row_total + residual_unexplained)
+            )
+            <= TIE_OUT_TOLERANCE,
+        },
+        "component_effect_policy": (
+            "Theme-bucket total effect is measured from available synthetic weights and returns; "
+            "selection and sizing components are not separately measured at bucket level in v1."
+        ),
+        "timing_status": "unavailable",
+    }
 
 
 def _selected_position_returns(

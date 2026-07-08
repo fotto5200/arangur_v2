@@ -227,6 +227,11 @@ class SyntheticAttributionPrerequisitePackTests(unittest.TestCase):
         self.assertEqual("unavailable", whole["strategy_timing"]["timing_status"])
         self.assertEqual("unavailable", whole["asset_timing"]["timing_status"])
         self.assertIn("residual_unexplained", effects)
+        detail = whole["theme_benchmark_detail"]
+        self.assertEqual("AI Adoption", detail["lens_display_name"])
+        self.assertGreater(len(detail["rows"]), 0)
+        self.assertTrue(detail["tie_out"]["ties_to_active_return"])
+        self.assertEqual("unavailable", detail["timing_status"])
         self.assertFalse(whole["tie_out"]["timing_used_as_residual"])
         self.assertTrue(whole["tie_out"]["ties_to_actual_return"])
         self.assertAlmostEqual(

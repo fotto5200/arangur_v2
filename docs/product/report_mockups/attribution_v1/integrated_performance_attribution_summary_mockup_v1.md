@@ -1,27 +1,27 @@
 # Integrated Performance Attribution Summary
 
-Portfolio return exceeded Northstar Synthetic Policy Benchmark by +1.15%, with strategy/lens-bucket selection the largest visible driver.
+Portfolio return exceeded the global benchmark by +1.15%, with theme benchmark selection the largest visible driver.
 
 ## Key Metrics
 
 - **Portfolio return:** 8.15%
-- **Benchmark return:** 6.99%
+- **Global benchmark return:** 6.99%
 - **Relative return:** +1.15%
 
 ## Contribution Summary
 
 | Contribution | Effect | Interpretation |
 | --- | --- | --- |
-| Strategy/lens-bucket selection | +0.41% | Positive bucket choice versus policy mix. |
-| Strategy/lens-bucket sizing | +0.25% | Positioning size helped relative return. |
+| Theme benchmark selection | +0.41% | Theme benchmark choices helped relative return. |
+| Theme benchmark sizing | +0.25% | Theme benchmark sizing helped relative return. |
 | Asset selection | +0.32% | Selected assets outperformed their reference mix. |
 | Asset sizing | +0.10% | Sizing within selected assets helped modestly. |
-| Residual / unexplained | +0.06% | Remaining reconciler, not timing. |
+| Residual / unexplained | +0.06% | Remaining reconciler; may include unmeasured timing, data, flow, or reconciliation effects. |
 
 ## Caveats
 
 - Synthetic local-demo returns and benchmark inputs only.
-- Timing is unavailable because clean trade history, flow treatment, and an approved timing method are absent.
+- Timing attribution is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present.
 
 ## Advisor Note
 

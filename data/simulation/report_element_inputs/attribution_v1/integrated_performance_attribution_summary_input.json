@@ -3,7 +3,7 @@
   "benchmark_or_proxy_basis": "Northstar Synthetic Policy Benchmark",
   "denominator_category_system": "Benchmark-relative contribution bridge",
   "display_title": "Integrated Performance Attribution Summary",
-  "exact_report_question": "Did the portfolio add value versus benchmark, and why?",
+  "exact_report_question": "Did the portfolio add value versus the global benchmark, and what were the largest visible decision effects?",
   "gated_or_deferred": false,
   "generated_at": "2026-07-07T00:00:00Z",
   "generator_version": "attribution_report_views.v1",
@@ -34,7 +34,7 @@
   "report_element_id": "integrated_performance_attribution_summary",
   "report_family": "Integrated Performance Attribution",
   "representation_level": "Whole portfolio versus benchmark",
-  "residual_policy": "Residual / unexplained is shown only as the remaining reconciler; timing remains unavailable.",
+  "residual_policy": "Residual / unexplained is the remaining reconciler and may include unmeasured timing, data, flow, or reconciliation effects.",
   "schema_version": "attribution_report_input.v1",
   "source_prerequisite_pack_refs": [
     "synthetic_attribution_prerequisite_pack_v1"
@@ -54,7 +54,7 @@
     "advisor_note": "Use this as a compact product-review shape; real/client attribution remains gated until production returns, benchmark maps, flows, and methodology are approved.",
     "caveats": [
       "Synthetic local-demo returns and benchmark inputs only.",
-      "Timing is unavailable because clean trade history, flow treatment, and an approved timing method are absent."
+      "Timing attribution is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present."
     ],
     "contribution_bridge": {
       "columns": [
@@ -64,14 +64,14 @@
       ],
       "rows": [
         {
-          "Contribution": "Strategy/lens-bucket selection",
+          "Contribution": "Theme benchmark selection",
           "Effect": "+0.41%",
-          "Interpretation": "Positive bucket choice versus policy mix."
+          "Interpretation": "Theme benchmark choices helped relative return."
         },
         {
-          "Contribution": "Strategy/lens-bucket sizing",
+          "Contribution": "Theme benchmark sizing",
           "Effect": "+0.25%",
-          "Interpretation": "Positioning size helped relative return."
+          "Interpretation": "Theme benchmark sizing helped relative return."
         },
         {
           "Contribution": "Asset selection",
@@ -86,7 +86,7 @@
         {
           "Contribution": "Residual / unexplained",
           "Effect": "+0.06%",
-          "Interpretation": "Remaining reconciler, not timing."
+          "Interpretation": "Remaining reconciler; may include unmeasured timing, data, flow, or reconciliation effects."
         }
       ],
       "title": "Contribution Summary"
@@ -99,7 +99,7 @@
       },
       {
         "formatted_value": "6.99%",
-        "label": "Benchmark return",
+        "label": "Global benchmark return",
         "value": 0.06994
       },
       {
@@ -108,6 +108,6 @@
         "value": 0.011516
       }
     ],
-    "headline_sentence": "Portfolio return exceeded Northstar Synthetic Policy Benchmark by +1.15%, with strategy/lens-bucket selection the largest visible driver."
+    "headline_sentence": "Portfolio return exceeded the global benchmark by +1.15%, with theme benchmark selection the largest visible driver."
   }
 }

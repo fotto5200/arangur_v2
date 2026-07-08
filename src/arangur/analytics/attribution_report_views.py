@@ -97,6 +97,18 @@ GATED_REPORTS: tuple[dict[str, str], ...] = (
         "status": "Gated",
         "reason": "Gated on proposed allocation data, comparison methodology, and approval.",
     },
+    {
+        "report_id": "integrated_attribution_summary_by_manager",
+        "display_title": "Integrated Attribution Summary - By Manager",
+        "status": "Design soon",
+        "reason": "Future variant; keep separate from Manager Attribution Summary until manager-level integrated summary shape is approved.",
+    },
+    {
+        "report_id": "integrated_attribution_detail_by_manager",
+        "display_title": "Integrated Attribution Detail - By Manager",
+        "status": "Design soon",
+        "reason": "Future variant; needs approved manager-level integrated detail shape before mockup generation.",
+    },
 )
 
 DEFAULT_INFORMATION_BUDGET = {
@@ -112,19 +124,21 @@ DEFAULT_INFORMATION_BUDGET = {
 }
 
 EFFECT_LABELS = {
-    "strategy_lens_bucket_selection_effect": "Strategy/lens-bucket selection",
-    "strategy_lens_bucket_sizing_effect": "Strategy/lens-bucket sizing",
+    "strategy_lens_bucket_selection_effect": "Theme benchmark selection",
+    "strategy_lens_bucket_sizing_effect": "Theme benchmark sizing",
     "asset_selection_effect": "Asset selection",
     "asset_sizing_effect": "Asset sizing",
     "residual_unexplained": "Residual / unexplained",
 }
 
 EFFECT_INTERPRETATIONS = {
-    "strategy_lens_bucket_selection_effect": "Positive bucket choice versus policy mix.",
-    "strategy_lens_bucket_sizing_effect": "Positioning size helped relative return.",
+    "strategy_lens_bucket_selection_effect": "Theme benchmark choices helped relative return.",
+    "strategy_lens_bucket_sizing_effect": "Theme benchmark sizing helped relative return.",
     "asset_selection_effect": "Selected assets outperformed their reference mix.",
     "asset_sizing_effect": "Sizing within selected assets helped modestly.",
-    "residual_unexplained": "Remaining reconciler, not timing.",
+    "residual_unexplained": (
+        "Remaining reconciler; may include unmeasured timing, data, flow, or reconciliation effects."
+    ),
 }
 
 LENS_REPORTS = {
@@ -133,18 +147,18 @@ LENS_REPORTS = {
         "display_title": "Lens-Based Performance Attribution - AI Adoption",
         "lens_display_name": "AI Adoption",
         "exact_report_question": (
-            "Which AI Adoption lens buckets explain relative performance versus their proxies?"
+            "Which AI Adoption theme buckets explain relative performance versus their theme benchmarks?"
         ),
-        "denominator_category_system": "AI Adoption lens buckets versus synthetic proxies",
+        "denominator_category_system": "AI Adoption theme buckets versus synthetic theme benchmarks",
     },
     "energy_security": {
         "report_id": "lens_based_performance_attribution_energy_security",
         "display_title": "Lens-Based Performance Attribution - Energy Security",
         "lens_display_name": "Energy Security",
         "exact_report_question": (
-            "Which Energy Security lens buckets explain relative performance versus their proxies?"
+            "Which Energy Security theme buckets explain relative performance versus their theme benchmarks?"
         ),
-        "denominator_category_system": "Energy Security lens buckets versus synthetic proxies",
+        "denominator_category_system": "Energy Security theme buckets versus synthetic theme benchmarks",
     },
 }
 
@@ -158,6 +172,9 @@ FORBIDDEN_VISIBLE_TERMS = (
     "raw json",
     "debug",
     "brinson",
+    "strategy/lens-bucket",
+    "proxy return",
+    "bucket return",
 )
 
 FORBIDDEN_PLACEHOLDER_TERMS = (
@@ -389,6 +406,10 @@ def render_mockup_readme(
             "They remain local synthetic-demo only and are not wired into Advisor Preview, "
             "Populate, Present, generated reports, Docker, deployment, live data, or dependencies."
         ),
+        (
+            "Visible attribution wording uses global benchmark, theme benchmark, asset selection/sizing, "
+            "and residual / unexplained labels; proxy benchmarks appear only as synthetic-demo caveats."
+        ),
         "",
         "## Generated Mockups",
         "",
@@ -415,13 +436,13 @@ def _integrated_summary_input(
     largest = max(rows, key=lambda row: abs(float(row["numeric_value"])))
     visible = {
         "headline_sentence": (
-            f"Portfolio return exceeded {benchmark['display_name']} by "
+            f"Portfolio return exceeded the global benchmark by "
             f"{_format_signed_percent(whole['active_return'])}, with "
             f"{largest['Contribution'].lower()} the largest visible driver."
         ),
         "headline_metrics": [
             _metric("Portfolio return", whole["actual_return"], _format_percent(whole["actual_return"])),
-            _metric("Benchmark return", whole["benchmark_return"], _format_percent(whole["benchmark_return"])),
+            _metric("Global benchmark return", whole["benchmark_return"], _format_percent(whole["benchmark_return"])),
             _metric("Relative return", whole["active_return"], _format_signed_percent(whole["active_return"])),
         ],
         "contribution_bridge": _table(
@@ -431,7 +452,7 @@ def _integrated_summary_input(
         ),
         "caveats": [
             "Synthetic local-demo returns and benchmark inputs only.",
-            "Timing is unavailable because clean trade history, flow treatment, and an approved timing method are absent.",
+            "Timing attribution is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present.",
         ],
         "advisor_note": (
             "Use this as a compact product-review shape; real/client attribution remains gated "
@@ -443,7 +464,9 @@ def _integrated_summary_input(
         display_title="Integrated Performance Attribution Summary",
         report_family="Integrated Performance Attribution",
         master_question_family="Performance / Plan",
-        exact_report_question="Did the portfolio add value versus benchmark, and why?",
+        exact_report_question=(
+            "Did the portfolio add value versus the global benchmark, and what were the largest visible decision effects?"
+        ),
         audience_tier="Client briefing and advisor review",
         summary_detail_status="Summary",
         representation_level="Whole portfolio versus benchmark",
@@ -453,7 +476,7 @@ def _integrated_summary_input(
         visible_content=visible,
         timing_status="unavailable",
         residual_policy=(
-            "Residual / unexplained is shown only as the remaining reconciler; timing remains unavailable."
+            "Residual / unexplained is the remaining reconciler and may include unmeasured timing, data, flow, or reconciliation effects."
         ),
         benchmark_or_proxy_basis=benchmark["display_name"],
         table_validation={
@@ -475,58 +498,83 @@ def _integrated_detail_input(
     whole: dict[str, Any],
     benchmark: dict[str, Any],
 ) -> dict[str, Any]:
-    effect_rows = [
-        _bridge_row(effect_key, value, include_numeric=True)
-        for effect_key, value in _ordered_effects(whole["effects"])
-    ]
-    rows = [
+    detail = whole["theme_benchmark_detail"]
+    rows = []
+    for row in detail["rows"]:
+        rows.append(
+            {
+                "Theme Bucket": row["bucket_display_name"],
+                "Weight": _format_percent(row["weight"]),
+                "Portfolio Return": _format_percent(row["portfolio_return"]),
+                "Theme Benchmark Return": _format_percent(row["theme_benchmark_return"]),
+                "Theme Benchmark Selection": _format_component(row["theme_benchmark_selection_effect"]),
+                "Theme Benchmark Sizing": _format_component(row["theme_benchmark_sizing_effect"]),
+                "Asset Selection": _format_component(row["asset_selection_effect"]),
+                "Asset Sizing": _format_component(row["asset_sizing_effect"]),
+                "Total Effect": _format_signed_percent(row["total_effect"]),
+                "numeric_total_effect": row["total_effect"],
+            }
+        )
+    rows.append(
         {
-            "Step": "Benchmark return",
-            "Effect": _format_percent(whole["benchmark_return"]),
-            "Interpretation": "Starting point.",
-            "row_type": "start",
-            "numeric_value": whole["benchmark_return"],
-        },
-        *effect_rows,
-        {
-            "Step": "Actual portfolio return",
-            "Effect": _format_percent(whole["actual_return"]),
-            "Interpretation": "Ending point after visible effects.",
-            "row_type": "actual",
-            "numeric_value": whole["actual_return"],
-        },
-    ]
+            "Theme Bucket": "Residual / unexplained",
+            "Weight": "n/a",
+            "Portfolio Return": "n/a",
+            "Theme Benchmark Return": "n/a",
+            "Theme Benchmark Selection": "Not separately measured",
+            "Theme Benchmark Sizing": "Not separately measured",
+            "Asset Selection": "Not separately measured",
+            "Asset Sizing": "Not separately measured",
+            "Total Effect": _format_signed_percent(detail["residual_unexplained"]),
+            "numeric_total_effect": detail["residual_unexplained"],
+        }
+    )
     visible_rows = [
         {
-            "Step": row["Step"] if "Step" in row else row["Contribution"],
-            "Effect": row["Effect"],
-            "Interpretation": row["Interpretation"],
+            "Theme Bucket": row["Theme Bucket"],
+            "Weight": row["Weight"],
+            "Portfolio Return": row["Portfolio Return"],
+            "Theme Benchmark Return": row["Theme Benchmark Return"],
+            "Theme Benchmark Selection": row["Theme Benchmark Selection"],
+            "Theme Benchmark Sizing": row["Theme Benchmark Sizing"],
+            "Asset Selection": row["Asset Selection"],
+            "Asset Sizing": row["Asset Sizing"],
+            "Total Effect": row["Total Effect"],
         }
         for row in rows
     ]
-    effect_total = whole["tie_out"]["effect_total"]
+    theme_total = detail["theme_bucket_total_effect"]
+    residual = detail["residual_unexplained"]
     visible = {
         "headline_sentence": (
-            "The whole-portfolio bridge ties benchmark return to actual portfolio return "
-            "without using timing as a residual."
+            "Theme benchmark rows show the measured bucket-level effects, with residual / unexplained completing the global benchmark-to-portfolio tie-out."
         ),
         "headline_metrics": [
-            _metric("Benchmark return", whole["benchmark_return"], _format_percent(whole["benchmark_return"])),
-            _metric("Total contribution", effect_total, _format_signed_percent(effect_total)),
+            _metric("Global benchmark return", whole["benchmark_return"], _format_percent(whole["benchmark_return"])),
+            _metric("Theme row total", theme_total, _format_signed_percent(theme_total)),
             _metric("Actual portfolio return", whole["actual_return"], _format_percent(whole["actual_return"])),
         ],
-        "contribution_bridge": _table(
-            "Benchmark-to-Actual Bridge",
-            ["Step", "Effect", "Interpretation"],
+        "compact_table": _table(
+            "Theme Benchmark Detail",
+            [
+                "Theme Bucket",
+                "Weight",
+                "Portfolio Return",
+                "Theme Benchmark Return",
+                "Theme Benchmark Selection",
+                "Theme Benchmark Sizing",
+                "Asset Selection",
+                "Asset Sizing",
+                "Total Effect",
+            ],
             visible_rows,
         ),
         "caveats": [
-            "Synthetic local-demo returns, benchmark, and contribution effects only.",
-            "Timing is unavailable and is not folded into residual.",
+            "Synthetic local-demo returns and theme benchmarks only; some theme benchmarks are proxy benchmarks for demo purposes, not production recommendations.",
+            "Timing attribution is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present.",
         ],
         "advisor_note": (
-            "Use detail mode for advisor review of the reconciliation; keep residual/unexplained "
-            "separate from timing until a clean timing method exists."
+            "Bucket-level selection and sizing components are not separately measured in this v1 synthetic input; use total effect and the residual tie-out for review."
         ),
     }
     return _report_input(
@@ -534,26 +582,36 @@ def _integrated_detail_input(
         display_title="Integrated Performance Attribution Detail",
         report_family="Integrated Performance Attribution",
         master_question_family="Performance / Plan",
-        exact_report_question="What is the full decomposition of value added or lost versus benchmark?",
+        exact_report_question=(
+            "How do theme benchmarks / lens buckets explain the synthetic benchmark-to-portfolio attribution bridge?"
+        ),
         audience_tier="Advisor review",
         summary_detail_status="Detail",
         representation_level="Whole portfolio versus benchmark",
-        denominator_category_system="Benchmark-to-actual contribution bridge",
+        denominator_category_system="Theme benchmark bucket total effects plus residual tie-out",
         rendering_mode="detail_first",
         context=context,
         visible_content=visible,
         timing_status="unavailable",
         residual_policy=(
-            "Residual / unexplained is the remaining reconciler and must not be relabeled as timing."
+            "Residual / unexplained is the remaining reconciler and may include unmeasured timing, data, flow, or reconciliation effects."
         ),
         benchmark_or_proxy_basis=benchmark["display_name"],
         table_validation={
             "bridge_row_count": len(visible_rows),
-            "benchmark_return": whole["benchmark_return"],
-            "effect_total": effect_total,
+            "theme_benchmark_lens": detail["lens_display_name"],
+            "theme_bucket_row_count": len(detail["rows"]),
+            "theme_bucket_total_effect": theme_total,
+            "residual_unexplained": residual,
+            "effect_total": round(theme_total + residual, 6),
             "actual_return": whole["actual_return"],
-            "recomputed_actual_return": round(whole["benchmark_return"] + effect_total, 6),
-            "ties_to_actual_return": whole["tie_out"]["ties_to_actual_return"],
+            "global_benchmark_return": whole["benchmark_return"],
+            "recomputed_actual_return": round(whole["benchmark_return"] + theme_total + residual, 6),
+            "ties_to_actual_return": abs(
+                whole["actual_return"] - round(whole["benchmark_return"] + theme_total + residual, 6)
+            )
+            <= 0.000001,
+            "component_effects_not_separately_measured": True,
             "timing_contribution_included": False,
             "residual_label": "Residual / unexplained",
         },
@@ -574,14 +632,12 @@ def _manager_summary_input(
             {
                 "Manager": manager["display_name"],
                 "Return": _format_percent(manager["manager_return"]),
-                "Proxy return": _format_percent(manager["benchmark_proxy_return"]),
-                "Relative return": _format_signed_percent(manager["relative_return"]),
-                "Largest driver": _largest_manager_driver(manager),
-                "Timing": "Unavailable",
+                "Manager Benchmark Return": _format_percent(manager["benchmark_proxy_return"]),
+                "Relative Return": _format_signed_percent(manager["relative_return"]),
+                "Largest Driver": _largest_manager_driver(manager),
                 "portfolio_active_contribution": manager["portfolio_active_contribution"],
             }
         )
-    largest = rows[0]["Manager"]
     total_contribution = round(
         sum(float(row["portfolio_active_contribution"]) for row in rows), 6
     )
@@ -589,42 +645,42 @@ def _manager_summary_input(
         {
             "Manager": row["Manager"],
             "Return": row["Return"],
-            "Proxy return": row["Proxy return"],
-            "Relative return": row["Relative return"],
-            "Largest driver": row["Largest driver"],
-            "Timing": row["Timing"],
+            "Manager Benchmark Return": row["Manager Benchmark Return"],
+            "Relative Return": row["Relative Return"],
+            "Largest Driver": row["Largest Driver"],
         }
         for row in rows
     ]
     visible = {
         "headline_sentence": (
-            f"All six current managers have synthetic proxy returns, and {largest} is the "
-            "largest active contributor."
+            "All six current managers have synthetic manager benchmark returns, with contribution direction shown against each benchmark."
         ),
         "headline_metrics": [
             _metric("Managers covered", len(rows), str(len(rows))),
-            _metric(
-                "Largest relative return",
-                max(manager["relative_return"] for manager in managers),
-                _format_signed_percent(max(manager["relative_return"] for manager in managers)),
-            ),
             _metric(
                 "Total manager contribution",
                 total_contribution,
                 _format_signed_percent(total_contribution),
             ),
+            _metric("Manager benchmark coverage", len(rows), f"{len(rows)} of {len(managers)}"),
         ],
         "compact_table": _table(
             "Manager Contribution Summary",
-            ["Manager", "Return", "Proxy return", "Relative return", "Largest driver", "Timing"],
+            [
+                "Manager",
+                "Return",
+                "Manager Benchmark Return",
+                "Relative Return",
+                "Largest Driver",
+            ],
             visible_rows,
         ),
         "caveats": [
-            "Synthetic manager proxy returns only; they are not production benchmarks.",
-            "Timing is unavailable and residual remains separate.",
+            "Synthetic manager benchmarks may use proxy benchmarks for demo purposes; they are not production recommendations.",
+            "Timing attribution is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present.",
         ],
         "advisor_note": (
-            "Use this for manager contribution review, not as a stand-alone rebalance instruction."
+            "This summary is not a replacement for future manager-level integrated attribution summary/detail variants."
         ),
     }
     return _report_input(
@@ -632,17 +688,21 @@ def _manager_summary_input(
         display_title="Manager Attribution Summary",
         report_family="Manager Attribution",
         master_question_family="Performance / Plan",
-        exact_report_question="Which managers contributed to relative performance versus their proxies?",
+        exact_report_question=(
+            "Which managers added or lost value versus their manager benchmarks, and what kind of contribution drove it?"
+        ),
         audience_tier="Advisor review",
         summary_detail_status="Summary",
-        representation_level="Manager versus manager-specific proxy",
-        denominator_category_system="Manager-specific proxy relative returns",
+        representation_level="Manager versus manager-specific benchmark",
+        denominator_category_system="Manager-specific benchmark relative returns",
         rendering_mode="table_first",
         context=context,
         visible_content=visible,
         timing_status="unavailable",
-        residual_policy="Residual / unexplained stays separate from timing for every manager.",
-        benchmark_or_proxy_basis="Manager-specific Synthetic policy proxies",
+        residual_policy=(
+            "Residual / unexplained is the manager-level reconciler and may include unmeasured timing, data, flow, or reconciliation effects."
+        ),
+        benchmark_or_proxy_basis="Manager-specific synthetic benchmarks",
         table_validation={
             "current_manager_count": len(managers),
             "manager_rows_shown": len(visible_rows),
@@ -650,7 +710,8 @@ def _manager_summary_input(
             "coverage_justification": (
                 "All six current managers are shown because the product budget allows six rows."
             ),
-            "timing_column_is_status_only": True,
+            "timing_column_removed": True,
+            "manager_benchmark_coverage": f"{len(visible_rows)} of {len(managers)}",
             "residual_labeled_separately": True,
         },
     )
@@ -676,11 +737,11 @@ def _lens_attribution_input(context: dict[str, Any], lens_id: str) -> dict[str, 
         relative_contribution = round(weight * relative_return, 6)
         rows.append(
             {
-                "Lens Bucket": return_row["bucket_display_name"],
+                "Theme Bucket": return_row["bucket_display_name"],
                 "Weight": _format_percent(weight),
-                "Bucket return": _format_percent(return_row["period_return"]),
-                "Proxy return": _format_percent(return_row["proxy_period_return"]),
-                "Relative contribution": _format_signed_percent(relative_contribution),
+                "Portfolio Return": _format_percent(return_row["period_return"]),
+                "Theme Benchmark Return": _format_percent(return_row["proxy_period_return"]),
+                "Relative Contribution": _format_signed_percent(relative_contribution),
                 "bucket_id": bucket_id,
                 "relative_contribution": relative_contribution,
             }
@@ -688,11 +749,11 @@ def _lens_attribution_input(context: dict[str, Any], lens_id: str) -> dict[str, 
     rows.sort(key=lambda row: abs(float(row["relative_contribution"])), reverse=True)
     visible_rows = [
         {
-            "Lens Bucket": row["Lens Bucket"],
+            "Theme Bucket": row["Theme Bucket"],
             "Weight": row["Weight"],
-            "Bucket return": row["Bucket return"],
-            "Proxy return": row["Proxy return"],
-            "Relative contribution": row["Relative contribution"],
+            "Portfolio Return": row["Portfolio Return"],
+            "Theme Benchmark Return": row["Theme Benchmark Return"],
+            "Relative Contribution": row["Relative Contribution"],
         }
         for row in rows
     ]
@@ -701,39 +762,39 @@ def _lens_attribution_input(context: dict[str, Any], lens_id: str) -> dict[str, 
     top_negative = min(rows, key=lambda row: float(row["relative_contribution"]))
     visible = {
         "headline_sentence": (
-            f"Under the {spec['lens_display_name']} lens, {top_positive['Lens Bucket']} "
-            "is the largest positive relative contributor versus its proxy."
+            f"Under the {spec['lens_display_name']} lens, {top_positive['Theme Bucket']} "
+            "is the largest positive relative contributor versus its theme benchmark."
         ),
         "headline_metrics": [
             _metric("Net relative contribution", total, _format_signed_percent(total)),
             _metric(
-                "Largest positive bucket",
+                "Largest positive theme bucket",
                 top_positive["relative_contribution"],
-                f"{top_positive['Lens Bucket']} ({_format_signed_percent(top_positive['relative_contribution'])})",
+                f"{top_positive['Theme Bucket']} ({_format_signed_percent(top_positive['relative_contribution'])})",
             ),
             _metric(
-                "Largest negative bucket",
+                "Largest negative theme bucket",
                 top_negative["relative_contribution"],
-                f"{top_negative['Lens Bucket']} ({_format_signed_percent(top_negative['relative_contribution'])})",
+                f"{top_negative['Theme Bucket']} ({_format_signed_percent(top_negative['relative_contribution'])})",
             ),
         ],
         "compact_table": _table(
-            f"{spec['lens_display_name']} Bucket Performance",
+            f"{spec['lens_display_name']} Theme Bucket Performance",
             [
-                "Lens Bucket",
+                "Theme Bucket",
                 "Weight",
-                "Bucket return",
-                "Proxy return",
-                "Relative contribution",
+                "Portfolio Return",
+                "Theme Benchmark Return",
+                "Relative Contribution",
             ],
             visible_rows,
         ),
         "caveats": [
-            "Synthetic lens-bucket proxies only; they are not investable benchmarks or live market returns.",
+            "Some synthetic theme benchmarks are proxy benchmarks for demo purposes; they are not production recommendations.",
             "Bucket weights use the complete synthetic lens assignment pack, including neutral and review buckets.",
         ],
         "advisor_note": (
-            "Read this as a one-lens performance view; do not compare these rows to "
+            "Read this as a one-lens theme performance view; do not compare these rows to "
             "scenario or proposed-allocation results."
         ),
     }
@@ -745,20 +806,22 @@ def _lens_attribution_input(context: dict[str, Any], lens_id: str) -> dict[str, 
         exact_report_question=spec["exact_report_question"],
         audience_tier="Advisor review",
         summary_detail_status="Summary",
-        representation_level=f"{spec['lens_display_name']} lens bucket",
+        representation_level=f"{spec['lens_display_name']} theme bucket",
         denominator_category_system=spec["denominator_category_system"],
         rendering_mode="table_first",
         context=context,
         visible_content=visible,
         timing_status="unavailable",
-        residual_policy="No residual row is shown in the lens-bucket summary; timing remains unavailable.",
-        benchmark_or_proxy_basis=f"Synthetic {spec['lens_display_name']} lens-bucket proxies",
+        residual_policy=(
+            "No residual row is shown in the theme-bucket summary; timing attribution is not separately measured."
+        ),
+        benchmark_or_proxy_basis=f"Synthetic {spec['lens_display_name']} theme benchmark set",
         table_validation={
             "lens_id": lens_id,
             "lens_bucket_count": len(rows),
             "all_lens_buckets_included": True,
-            "contains_neutral_bucket": any("Neutral" in row["Lens Bucket"] for row in rows),
-            "contains_review_bucket": any("Review" in row["Lens Bucket"] for row in rows),
+            "contains_neutral_bucket": any("Neutral" in row["Theme Bucket"] for row in rows),
+            "contains_review_bucket": any("Review" in row["Theme Bucket"] for row in rows),
             "relative_contribution_total": total,
             "timing_contribution_included": False,
         },
@@ -905,8 +968,8 @@ def _bridge_row(effect_key: str, value: float, *, include_numeric: bool = False)
 
 def _largest_manager_driver(manager: dict[str, Any]) -> str:
     candidates = {
-        "Strategy selection": manager["strategy_selection_contribution"],
-        "Strategy sizing": manager["strategy_sizing_contribution"],
+        "Theme benchmark selection": manager["strategy_selection_contribution"],
+        "Theme benchmark sizing": manager["strategy_sizing_contribution"],
         "Asset selection": manager["asset_selection_contribution"],
         "Asset sizing": manager["asset_sizing_contribution"],
         "Residual / unexplained": manager["residual_unexplained"],
@@ -924,7 +987,7 @@ def _budget_for_report(report_id: str) -> dict[str, Any]:
         budget["exception_reason"] = "Manager Attribution Summary may show all six current managers."
     if report_id.startswith("lens_based_performance_attribution_"):
         budget["max_visible_table_rows"] = 7
-        budget["exception_reason"] = "Lens-Based Performance Attribution shows every bucket in the selected lens."
+        budget["exception_reason"] = "Lens-Based Performance Attribution shows every theme bucket in the selected lens."
     return budget
 
 
@@ -1042,6 +1105,12 @@ def _format_signed_percent(value: Any) -> str:
     number = float(value)
     sign = "+" if number >= 0 else "-"
     return f"{sign}{abs(number) * 100:.2f}%"
+
+
+def _format_component(value: Any) -> str:
+    if value is None:
+        return "Not separately measured"
+    return _format_signed_percent(value)
 
 
 def _sentence_count(value: str) -> int:

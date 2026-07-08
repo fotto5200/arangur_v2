@@ -29,6 +29,18 @@
       "reason": "Gated on proposed allocation data, comparison methodology, and approval.",
       "report_id": "current_versus_proposed_attribution",
       "status": "Gated"
+    },
+    {
+      "display_title": "Integrated Attribution Summary - By Manager",
+      "reason": "Future variant; keep separate from Manager Attribution Summary until manager-level integrated summary shape is approved.",
+      "report_id": "integrated_attribution_summary_by_manager",
+      "status": "Design soon"
+    },
+    {
+      "display_title": "Integrated Attribution Detail - By Manager",
+      "reason": "Future variant; needs approved manager-level integrated detail shape before mockup generation.",
+      "report_id": "integrated_attribution_detail_by_manager",
+      "status": "Design soon"
     }
   ],
   "generated_at": "2026-07-07T00:00:00Z",

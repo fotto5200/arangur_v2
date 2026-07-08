@@ -1,16 +1,16 @@
 # Lens-Based Performance Attribution - AI Adoption
 
-Under the AI Adoption lens, Core AI Infrastructure / Hardware is the largest positive relative contributor versus its proxy.
+Under the AI Adoption lens, Core AI Infrastructure / Hardware is the largest positive relative contributor versus its theme benchmark.
 
 ## Key Metrics
 
 - **Net relative contribution:** +0.69%
-- **Largest positive bucket:** Core AI Infrastructure / Hardware (+0.29%)
-- **Largest negative bucket:** AI-Disrupted Incumbent (-0.01%)
+- **Largest positive theme bucket:** Core AI Infrastructure / Hardware (+0.29%)
+- **Largest negative theme bucket:** AI-Disrupted Incumbent (-0.01%)
 
-## AI Adoption Bucket Performance
+## AI Adoption Theme Bucket Performance
 
-| Lens Bucket | Weight | Bucket return | Proxy return | Relative contribution |
+| Theme Bucket | Weight | Portfolio Return | Theme Benchmark Return | Relative Contribution |
 | --- | --- | --- | --- | --- |
 | Core AI Infrastructure / Hardware | 21.03% | 11.70% | 10.30% | +0.29% |
 | AI Model / Platform Exposure | 17.18% | 10.40% | 9.20% | +0.21% |
@@ -22,9 +22,9 @@ Under the AI Adoption lens, Core AI Infrastructure / Hardware is the largest pos
 
 ## Caveats
 
-- Synthetic lens-bucket proxies only; they are not investable benchmarks or live market returns.
+- Some synthetic theme benchmarks are proxy benchmarks for demo purposes; they are not production recommendations.
 - Bucket weights use the complete synthetic lens assignment pack, including neutral and review buckets.
 
 ## Advisor Note
 
-Read this as a one-lens performance view; do not compare these rows to scenario or proposed-allocation results.
+Read this as a one-lens theme performance view; do not compare these rows to scenario or proposed-allocation results.

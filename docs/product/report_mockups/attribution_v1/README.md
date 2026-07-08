@@ -1,6 +1,7 @@
 # Attribution v1 Report Mockups
 
 These product-review mockups are generated from attribution v1 view fixtures. They remain local synthetic-demo only and are not wired into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
+Visible attribution wording uses global benchmark, theme benchmark, asset selection/sizing, and residual / unexplained labels; proxy benchmarks appear only as synthetic-demo caveats.
 
 ## Generated Mockups
 
@@ -17,3 +18,5 @@ These product-review mockups are generated from attribution v1 view fixtures. Th
 - Scenario Versus Benchmark (Gated): Gated unless benchmark scenario values or an approved benchmark scenario methodology exist.
 - Probabilistic Scenario Range (Gated): Gated until probabilistic analytics and range methodology exist.
 - Current Versus Proposed Attribution (Gated): Gated on proposed allocation data, comparison methodology, and approval.
+- Integrated Attribution Summary - By Manager (Design soon): Future variant; keep separate from Manager Attribution Summary until manager-level integrated summary shape is approved.
+- Integrated Attribution Detail - By Manager (Design soon): Future variant; needs approved manager-level integrated detail shape before mockup generation.

@@ -1,16 +1,16 @@
 # Lens-Based Performance Attribution - Energy Security
 
-Under the Energy Security lens, Neutral / Low Direct Energy Exposure is the largest positive relative contributor versus its proxy.
+Under the Energy Security lens, Neutral / Low Direct Energy Exposure is the largest positive relative contributor versus its theme benchmark.
 
 ## Key Metrics
 
 - **Net relative contribution:** +0.05%
-- **Largest positive bucket:** Neutral / Low Direct Energy Exposure (+0.08%)
-- **Largest negative bucket:** Energy Input-Cost Sensitive (-0.08%)
+- **Largest positive theme bucket:** Neutral / Low Direct Energy Exposure (+0.08%)
+- **Largest negative theme bucket:** Energy Input-Cost Sensitive (-0.08%)
 
-## Energy Security Bucket Performance
+## Energy Security Theme Bucket Performance
 
-| Lens Bucket | Weight | Bucket return | Proxy return | Relative contribution |
+| Theme Bucket | Weight | Portfolio Return | Theme Benchmark Return | Relative Contribution |
 | --- | --- | --- | --- | --- |
 | Energy Input-Cost Sensitive | 40.40% | 5.60% | 5.80% | -0.08% |
 | Neutral / Low Direct Energy Exposure | 39.66% | 5.00% | 4.80% | +0.08% |
@@ -22,9 +22,9 @@ Under the Energy Security lens, Neutral / Low Direct Energy Exposure is the larg
 
 ## Caveats
 
-- Synthetic lens-bucket proxies only; they are not investable benchmarks or live market returns.
+- Some synthetic theme benchmarks are proxy benchmarks for demo purposes; they are not production recommendations.
 - Bucket weights use the complete synthetic lens assignment pack, including neutral and review buckets.
 
 ## Advisor Note
 
-Read this as a one-lens performance view; do not compare these rows to scenario or proposed-allocation results.
+Read this as a one-lens theme performance view; do not compare these rows to scenario or proposed-allocation results.

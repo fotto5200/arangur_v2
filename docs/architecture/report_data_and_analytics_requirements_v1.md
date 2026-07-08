@@ -51,7 +51,7 @@ Missing or deferred:
 | Benchmark gate | Benchmark or proxy map is approved for the report scope | Synthetic Attribution Prerequisite Pack v1 satisfies this only for local synthetic `attribution_v1` mockups; otherwise defer benchmark-relative reports |
 | Cash need gate | For delivered cash: period, generated cash, paid-out cash, and retained/reinvested cash. For support outlook: stated need, period, funding policy, projected generation, and projection basis | Generate only local synthetic delivered/outlook summaries when these inputs exist; keep real/client support readiness gated |
 | Performance history gate | Returns, holdings, flows, and benchmark history are available for the selected period | Synthetic Attribution Prerequisite Pack v1 supplies local synthetic attribution inputs; defer real/client performance attribution |
-| Timing gate | Two clearly specified portfolio states and enough trade/flow history exist | Omit timing; do not relabel residual/noise |
+| Timing gate | Two clearly specified portfolio states, flow treatment, and enough trade/flow history exist | Omit timing; `Residual / unexplained` may include unmeasured timing, data, flow, or reconciliation effects, but must not be labeled timing |
 | Probabilistic gate | Approved range methodology and inputs exist | Do not create ranges from deterministic scenarios |
 | Proposal gate | Current and proposed portfolio states are both explicit | Defer current-versus-proposed reports |
 
@@ -115,11 +115,11 @@ Minimum report evidence:
 - portfolio and benchmark returns;
 - holdings, weights, and cash-flow treatment for the period;
 - manager/sleeve mapping when manager mode is selected;
-- lens assignments and lens-bucket benchmarks when lens mode is selected;
+- lens assignments and theme-bucket benchmark maps when lens mode is selected;
 - residual policy;
 - timing gate outcome.
 
-For local synthetic demo work, Synthetic Attribution Prerequisite Pack v1 supplies the minimum benchmark, return, weight/flow, decomposition, lens-bucket proxy, manager, residual, and timing-unavailable inputs used by `attribution_v1` Integrated Performance Attribution Summary/Detail, Manager Attribution Summary, and Lens-Based Performance Attribution mockups. For real/client or production reporting, if benchmark or history inputs are missing, do not show attribution. If timing is not cleanly measurable, omit timing.
+For local synthetic demo work, Synthetic Attribution Prerequisite Pack v1 supplies the minimum benchmark, return, weight/flow, decomposition, theme-benchmark detail, lens-bucket proxy, manager, residual, and timing-unavailable inputs used by `attribution_v1` Integrated Performance Attribution Summary/Detail, Manager Attribution Summary, and Lens-Based Performance Attribution mockups. The product-facing mockups translate proxy inputs into Global benchmark, Theme benchmark, Manager Benchmark Return, Portfolio Return, Asset selection/sizing, and `Residual / unexplained` language; proxy wording appears only in caveats explaining synthetic demo inputs. For real/client or production reporting, if benchmark or history inputs are missing, do not show attribution. If timing is not cleanly measurable, omit timing.
 
 ### Probabilistic Scenario Range
 

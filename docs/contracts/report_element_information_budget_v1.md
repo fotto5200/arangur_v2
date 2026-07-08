@@ -138,6 +138,8 @@ Additional anti-clutter checks:
 - Keep prior-period cash delivered and forward-looking cash support outlook as separate report shapes unless a future approved detail variant explicitly combines them.
 - Do not use readiness artifacts as client-facing reports. They may explain why a report is unavailable.
 - Visual-first reports must state the range, benchmark/proxy, horizon, and caveat needed to interpret the picture.
+- Performance attribution visible labels should prefer Global benchmark, Theme benchmark, Manager Benchmark Return, Portfolio Return, Asset selection/sizing, and `Residual / unexplained`; do not show raw proxy ids, proxy-return labels, or strategy/lens-bucket construction language in product-facing mockups.
+- Timing attribution should stay unavailable unless clean trade/holding history, flow treatment, and an approved timing method exist; residual may include unmeasured timing/data/flow/reconciliation effects but must not be labeled timing.
 
 ## Kill Switch
 

@@ -395,9 +395,9 @@ These are v2 visual mockup concepts. Do not implement visuals in this tranche.
 - Used for: Integrated Performance Attribution Summary or Detail.
 - Question answered: What decisions explain value added or lost versus benchmark?
 - Rendering: Waterfall first, with optional supporting table.
-- Visible content: Strategy/lens-bucket selection, strategy/lens-bucket sizing, asset selection, asset sizing, and timing only if clean.
+- Visible content: Global benchmark return, theme benchmark selection, theme benchmark sizing, asset selection, asset sizing, and `Residual / unexplained`.
 - Gate: Benchmark returns, portfolio returns, weights, holdings, flows, benchmark map, attribution method, and timing gate if timing appears.
-- Forbidden: Residual/noise labeled as timing.
+- Forbidden: Residual/noise labeled as timing, or visible proxy-return/raw proxy-id labels instead of benchmark-return labels.
 
 ### D. Full Lens Exposure Bar / Stacked View
 
@@ -454,15 +454,14 @@ The detail report should be advisor-review first. It should support whole-portfo
 Detail should show:
 
 - global benchmark to actual portfolio bridge;
-- strategy or lens-bucket selection;
-- strategy or lens-bucket sizing;
-- strategy timing only if clean;
+- theme benchmark selection;
+- theme benchmark sizing;
 - asset selection;
 - asset sizing;
-- asset timing only if clean;
-- residual/unexplained bucket when needed, without relabeling it as timing.
+- residual/unexplained bucket when needed, without relabeling it as timing;
+- timing only if clean trade/holding history, flow treatment, and an approved timing method exist.
 
-Synthetic demo attribution mockups are now generated from the attribution prerequisite pack in `attribution_v1`, and they keep timing unavailable unless a later tranche defines two clean portfolio states and the required trade/flow history. Do not generate production/client attribution reports until historical return, benchmark, position history, holding/flow, and approved benchmark/proxy prerequisites exist.
+Synthetic demo attribution mockups are now generated from the attribution prerequisite pack in `attribution_v1`. The content-polished v1 mockups use global benchmark, theme benchmark, asset selection/sizing, and residual/unexplained wording; Manager Attribution uses Manager Benchmark Return; lens-based reports use Theme Bucket, Portfolio Return, and Theme Benchmark Return. They keep timing unavailable unless a later tranche defines two clean portfolio states, flow treatment, and the required trade/flow history. Do not generate production/client attribution reports until historical return, benchmark, position history, holding/flow, and approved benchmark/proxy prerequisites exist.
 
 ## 9. Data And Prerequisite Gating
 
@@ -473,8 +472,8 @@ Synthetic demo attribution mockups are now generated from the attribution prereq
 | Cash Flow by Manager/Sleeve | Reliable cash-flow history/projection by manager/sleeve | Gate until source data and period logic exist |
 | Scenario Versus Benchmark | Approved benchmark/proxy map and benchmark scenario value or proxy methodology | Defer benchmark comparison |
 | Manager by Lens Exposure | Published complete position-to-lens assignments plus manager mapping | Possible next for synthetic AI Adoption and Energy Security; defer for any lens without complete assignments |
-| Integrated Performance Attribution Summary | For synthetic demo: Synthetic Attribution Prerequisite Pack v1 supplies benchmark, returns, weights/flows, decomposition inputs, and caveats. For real/client mode: production return, benchmark, holding, flow, and methodology inputs remain absent | Eligible for future synthetic demo mockup; keep real/client attribution gated |
-| Integrated Performance Attribution Detail | For synthetic demo: decomposition inputs and manager rows exist, with timing unavailable. For real/client mode: detailed production holdings/trades and reconciliation policy remain absent | Eligible for future advisor-review synthetic demo mockup; omit timing unless cleanly defined |
+| Integrated Performance Attribution Summary | For synthetic demo: Synthetic Attribution Prerequisite Pack v1 supplies benchmark, returns, weights/flows, decomposition inputs, and caveats. For real/client mode: production return, benchmark, holding, flow, and methodology inputs remain absent | Generated for local synthetic demo; keep real/client attribution gated |
+| Integrated Performance Attribution Detail | For synthetic demo: decomposition inputs, theme-benchmark detail rows, and manager rows exist, with timing unavailable. For real/client mode: detailed production holdings/trades and reconciliation policy remain absent | Generated for local synthetic demo; omit timing unless cleanly defined |
 | Timing Attribution | Two clearly specified portfolio states, trade/holding history, flow treatment, clean timing methodology | Omit timing or mark unavailable |
 | Probabilistic Scenario Range | Covariance/probabilistic scenario engine outputs, range methodology, horizon, validation, benchmark range if compared | Do not create ranges from deterministic scenarios |
 | Full Lens Exposure | Complete lens definition and published position-to-lens assignments for all in-scope positions | Generate synthetic AI Adoption and Energy Security mockups from the pack; produce design-only spec/readiness if missing for another lens |
