@@ -30,6 +30,23 @@ TIMING_UNAVAILABLE_TEXT = (
     "Timing is not shown separately because clean trade/holding history, flow treatment, "
     "and an approved timing method are not present."
 )
+RETURN_BASIS_EXPLANATION = "Return columns are shown on a 100% theme-bucket basis."
+EFFECT_BASIS_EXPLANATION = (
+    "Effect columns are measured in percentage points of total portfolio return."
+)
+POLICY_WEIGHT_LABEL = "Policy Weight"
+ACTUAL_WEIGHT_LABEL = "Actual Weight"
+ACTIVE_RETURN_DEFINITION_TEXT = (
+    "Active Return is Portfolio Return minus Theme Benchmark Return inside the bucket."
+)
+ACTIVE_RETURN_NOT_TOTAL_EFFECT_TEXT = (
+    "Active Return is not the same as Total Effect because Total Effect is measured "
+    "against the whole portfolio and includes theme choice/weighting effects."
+)
+UNDERWEIGHTING_NOTE_TEXT = (
+    "A theme can beat its theme benchmark but still have a negative total effect if "
+    "the portfolio was underweight that theme relative to the policy/global benchmark mix."
+)
 
 CALCULATED_ARTIFACT_FILES = {
     "manifest": "calculated_attribution_engine_manifest.json",
@@ -161,6 +178,7 @@ FORBIDDEN_VISIBLE_TERMS = (
     "strategy lens bucket",
     "proxy return",
     "bucket return",
+    "contribution",
     "not separately measured",
     "not timing",
     "residual is not timing",
@@ -440,8 +458,8 @@ def render_mockup_readme(
             "attribution remains gated."
         ),
         (
-            "Detail and lens tables distinguish Active Return from Total Attribution "
-            "Effect, and Manager Attribution Summary separates largest driver, other "
+            "Detail and lens tables distinguish bucket-level return columns from effects "
+            "on total portfolio return, and Manager Attribution Summary separates largest driver, other "
             "measured effects, and residual / unexplained."
         ),
         "",
@@ -465,22 +483,22 @@ def _integrated_summary_input(
     whole = context["calculated"]["whole_portfolio_summary"]
     rows = [
         _bridge_row(
-            "Theme benchmark selection",
+            "Theme Choice Effect",
             whole["theme_benchmark_selection_effect"],
             "Calculated from policy theme benchmark return minus global benchmark return.",
         ),
         _bridge_row(
-            "Theme benchmark sizing",
+            "Theme Weight Effect",
             whole["theme_benchmark_sizing_effect"],
             "Calculated from actual-weight theme benchmark return minus policy theme benchmark return.",
         ),
         _bridge_row(
-            "Asset selection",
+            "Asset Choice Effect",
             whole["asset_selection_effect"],
             "Calculated from per-theme reference-weight asset returns.",
         ),
         _bridge_row(
-            "Asset sizing",
+            "Asset Weight Effect",
             whole["asset_sizing_effect"],
             "Calculated from per-theme actual-weight asset returns.",
         ),
@@ -495,7 +513,7 @@ def _integrated_summary_input(
         "headline_sentence": (
             f"Portfolio return exceeded the global benchmark by "
             f"{_format_signed_percent(whole['relative_return'])}, with "
-            f"{largest['Contribution'].lower()} the largest calculated driver."
+            f"{largest['Effect Driver'].lower()} the largest calculated driver."
         ),
         "headline_metrics": [
             _metric(
@@ -515,8 +533,8 @@ def _integrated_summary_input(
             ),
         ],
         "contribution_bridge": _table(
-            "Calculated Contribution Summary",
-            ["Contribution", "Effect", "Interpretation"],
+            "Calculated Effect Summary",
+            ["Effect Driver", "Effect", "Interpretation"],
             rows,
         ),
         "caveats": [
@@ -541,7 +559,7 @@ def _integrated_summary_input(
         audience_tier="Client briefing and advisor review",
         summary_detail_status="Summary",
         representation_level="Whole portfolio versus benchmark",
-        denominator_category_system="Benchmark-relative contribution bridge",
+        denominator_category_system="Benchmark-relative effect bridge",
         rendering_mode="summary_first",
         context=context,
         visible_content=visible,
@@ -602,18 +620,20 @@ def _integrated_detail_input(
             ),
         ],
         "compact_table": _table(
-            "Calculated Theme Benchmark Detail",
+            "Calculated Theme Return and Effect Detail",
             [
                 "Theme Bucket",
-                "Weight",
+                POLICY_WEIGHT_LABEL,
+                ACTUAL_WEIGHT_LABEL,
                 "Portfolio Return",
                 "Theme Benchmark Return",
                 "Active Return",
-                "Theme Benchmark Selection",
-                "Theme Benchmark Sizing",
-                "Asset Selection",
-                "Asset Sizing",
-                "Total Attribution Effect",
+                "Theme Choice Effect",
+                "Theme Weight Effect",
+                "Asset Choice Effect",
+                "Asset Weight Effect",
+                "Residual / Reconciler",
+                "Total Effect",
             ],
             visible_rows,
         ),
@@ -622,10 +642,11 @@ def _integrated_detail_input(
             TIMING_UNAVAILABLE_TEXT,
         ],
         "advisor_note": (
-            "Theme benchmark is the bucket benchmark inside AI Adoption. Active Return is "
-            "Portfolio Return minus Theme Benchmark Return; Total Attribution Effect "
-            "combines theme benchmark selection, theme benchmark sizing, asset selection, "
-            "and asset sizing, so it may differ."
+            f"Policy Weight is the policy/equal-weight benchmark mix for AI Adoption; "
+            f"Actual Weight is the portfolio's actual share in that theme bucket. "
+            f"{RETURN_BASIS_EXPLANATION} {EFFECT_BASIS_EXPLANATION} "
+            f"{ACTIVE_RETURN_DEFINITION_TEXT} {ACTIVE_RETURN_NOT_TOTAL_EFFECT_TEXT} "
+            f"{UNDERWEIGHTING_NOTE_TEXT}"
         ),
     }
     return _report_input(
@@ -675,7 +696,14 @@ def _integrated_detail_input(
             "detail_is_not_summary_bridge": True,
             "active_return_bridge_included": True,
             "active_return_definition": "portfolio_return_minus_theme_benchmark_return",
+            "return_basis_explanation": RETURN_BASIS_EXPLANATION,
+            "effect_basis_explanation": EFFECT_BASIS_EXPLANATION,
+            "policy_weight_label": POLICY_WEIGHT_LABEL,
+            "actual_weight_label": ACTUAL_WEIGHT_LABEL,
+            "effect_columns_basis": "percentage_points_of_total_portfolio_return",
+            "active_return_is_not_total_effect": True,
             "total_effect_distinguished_from_active_return": True,
+            "underweighting_note_included": True,
             "timing_contribution_included": False,
             "residual_label": "Residual / unexplained",
         },
@@ -806,11 +834,11 @@ def _lens_attribution_input(context: dict[str, Any]) -> dict[str, Any]:
     rows = [
         {
             "Theme Bucket": row["bucket_display_name"],
-            "Weight": _format_percent(row["actual_portfolio_weight"]),
+            ACTUAL_WEIGHT_LABEL: _format_percent(row["actual_portfolio_weight"]),
             "Portfolio Return": _format_percent(row["actual_portfolio_theme_return"]),
             "Theme Benchmark Return": _format_percent(row["theme_benchmark_return"]),
             "Active Return": _format_signed_percent(_theme_active_return(row)),
-            "Total Attribution Effect": _format_signed_percent(row["total_effect"]),
+            "Total Effect": _format_signed_percent(row["total_effect"]),
             "total_effect": row["total_effect"],
         }
         for row in detail["rows"]
@@ -821,18 +849,18 @@ def _lens_attribution_input(context: dict[str, Any]) -> dict[str, Any]:
     visible_rows = [
         {
             "Theme Bucket": row["Theme Bucket"],
-            "Weight": row["Weight"],
+            ACTUAL_WEIGHT_LABEL: row[ACTUAL_WEIGHT_LABEL],
             "Portfolio Return": row["Portfolio Return"],
             "Theme Benchmark Return": row["Theme Benchmark Return"],
             "Active Return": row["Active Return"],
-            "Total Attribution Effect": row["Total Attribution Effect"],
+            "Total Effect": row["Total Effect"],
         }
         for row in rows
     ]
     visible = {
         "headline_sentence": (
             f"Under the {selected_lens['display_name']} lens, {top_positive['Theme Bucket']} "
-            "is the largest positive total attribution effect; active return is shown separately."
+            "is the largest positive Total Effect; Active Return is shown separately."
         ),
         "headline_metrics": [
             _metric("Net calculated theme effect", total, _format_signed_percent(total)),
@@ -851,11 +879,11 @@ def _lens_attribution_input(context: dict[str, Any]) -> dict[str, Any]:
             f"{selected_lens['display_name']} Calculated Theme Performance",
             [
                 "Theme Bucket",
-                "Weight",
+                ACTUAL_WEIGHT_LABEL,
                 "Portfolio Return",
                 "Theme Benchmark Return",
                 "Active Return",
-                "Total Attribution Effect",
+                "Total Effect",
             ],
             visible_rows,
         ),
@@ -864,9 +892,10 @@ def _lens_attribution_input(context: dict[str, Any]) -> dict[str, Any]:
             "Energy Security calculated attribution remains gated until a calculated output pack exists for that lens.",
         ],
         "advisor_note": (
-            "Theme benchmarks apply bucket-by-bucket inside AI Adoption. Active Return is "
-            "Portfolio Return minus Theme Benchmark Return; Total Attribution Effect also "
-            f"reflects benchmark selection/sizing and asset effects. {TIMING_UNAVAILABLE_TEXT}"
+            f"Theme benchmarks apply bucket-by-bucket inside AI Adoption. "
+            f"{RETURN_BASIS_EXPLANATION} {EFFECT_BASIS_EXPLANATION} "
+            f"{ACTIVE_RETURN_DEFINITION_TEXT} {ACTIVE_RETURN_NOT_TOTAL_EFFECT_TEXT} "
+            f"{TIMING_UNAVAILABLE_TEXT}"
         ),
     }
     return _report_input(
@@ -906,6 +935,11 @@ def _lens_attribution_input(context: dict[str, Any]) -> dict[str, Any]:
             "unsupported_calculated_lenses_gated": ["Energy Security"],
             "active_return_bridge_included": True,
             "active_return_definition": "portfolio_return_minus_theme_benchmark_return",
+            "return_basis_explanation": RETURN_BASIS_EXPLANATION,
+            "effect_basis_explanation": EFFECT_BASIS_EXPLANATION,
+            "actual_weight_label": ACTUAL_WEIGHT_LABEL,
+            "effect_columns_basis": "percentage_points_of_total_portfolio_return",
+            "active_return_is_not_total_effect": True,
             "total_effect_distinguished_from_active_return": True,
             "timing_contribution_included": False,
         },
@@ -1057,7 +1091,7 @@ def _gated_deferred_index() -> dict[str, Any]:
 
 def _bridge_row(label: str, value: float, interpretation: str) -> dict[str, Any]:
     return {
-        "Contribution": label,
+        "Effect Driver": label,
         "Effect": _format_signed_percent(value),
         "Interpretation": interpretation,
         "numeric_value": value,
@@ -1068,19 +1102,21 @@ def _bridge_row(label: str, value: float, interpretation: str) -> dict[str, Any]
 def _theme_detail_visible_row(row: dict[str, Any]) -> dict[str, Any]:
     return {
         "Theme Bucket": row["bucket_display_name"],
-        "Weight": _format_percent(row["actual_portfolio_weight"]),
+        POLICY_WEIGHT_LABEL: _format_percent(row["policy_or_equal_weight"]),
+        ACTUAL_WEIGHT_LABEL: _format_percent(row["actual_portfolio_weight"]),
         "Portfolio Return": _format_percent(row["actual_portfolio_theme_return"]),
         "Theme Benchmark Return": _format_percent(row["theme_benchmark_return"]),
         "Active Return": _format_signed_percent(_theme_active_return(row)),
-        "Theme Benchmark Selection": _format_signed_percent(
+        "Theme Choice Effect": _format_signed_percent(
             row["theme_benchmark_selection_effect"]
         ),
-        "Theme Benchmark Sizing": _format_signed_percent(
+        "Theme Weight Effect": _format_signed_percent(
             row["theme_benchmark_sizing_effect"]
         ),
-        "Asset Selection": _format_signed_percent(row["asset_selection_effect"]),
-        "Asset Sizing": _format_signed_percent(row["asset_sizing_effect"]),
-        "Total Attribution Effect": _format_signed_percent(row["total_effect"]),
+        "Asset Choice Effect": _format_signed_percent(row["asset_selection_effect"]),
+        "Asset Weight Effect": _format_signed_percent(row["asset_sizing_effect"]),
+        "Residual / Reconciler": _format_signed_percent(row["residual_unexplained"]),
+        "Total Effect": _format_signed_percent(row["total_effect"]),
     }
 
 
@@ -1092,9 +1128,18 @@ def _theme_active_return(row: dict[str, Any]) -> float:
 
 def _largest_manager_driver(manager: dict[str, Any]) -> str:
     return (
-        f"{manager['largest_driver']['label']} "
+        f"{_visible_effect_driver_label(manager['largest_driver']['label'])} "
         f"({_format_signed_percent(manager['largest_driver']['value'])})"
     )
+
+
+def _visible_effect_driver_label(label: str) -> str:
+    return {
+        "Theme benchmark selection": "Theme Choice Effect",
+        "Theme benchmark sizing": "Theme Weight Effect",
+        "Asset selection": "Asset Choice Effect",
+        "Asset sizing": "Asset Weight Effect",
+    }.get(label, label)
 
 
 def _manager_other_measured_effects(manager: dict[str, Any]) -> float:

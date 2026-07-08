@@ -1,6 +1,6 @@
 # Integrated Performance Attribution Summary
 
-Portfolio return exceeded the global benchmark by +1.15%, with asset selection the largest calculated driver.
+Portfolio return exceeded the global benchmark by +1.15%, with asset choice effect the largest calculated driver.
 
 ## Key Metrics
 
@@ -8,14 +8,14 @@ Portfolio return exceeded the global benchmark by +1.15%, with asset selection t
 - **Global benchmark return:** 6.99%
 - **Relative return:** +1.15%
 
-## Calculated Contribution Summary
+## Calculated Effect Summary
 
-| Contribution | Effect | Interpretation |
+| Effect Driver | Effect | Interpretation |
 | --- | --- | --- |
-| Theme benchmark selection | -0.12% | Calculated from policy theme benchmark return minus global benchmark return. |
-| Theme benchmark sizing | +0.37% | Calculated from actual-weight theme benchmark return minus policy theme benchmark return. |
-| Asset selection | +0.56% | Calculated from per-theme reference-weight asset returns. |
-| Asset sizing | +0.13% | Calculated from per-theme actual-weight asset returns. |
+| Theme Choice Effect | -0.12% | Calculated from policy theme benchmark return minus global benchmark return. |
+| Theme Weight Effect | +0.37% | Calculated from actual-weight theme benchmark return minus policy theme benchmark return. |
+| Asset Choice Effect | +0.56% | Calculated from per-theme reference-weight asset returns. |
+| Asset Weight Effect | +0.13% | Calculated from per-theme actual-weight asset returns. |
 | Residual / unexplained | +0.21% | Calculated reconciler after visible attribution effects. |
 
 ## Caveats

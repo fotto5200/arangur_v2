@@ -96,7 +96,7 @@
       ],
       "rows": [
         {
-          "Largest Driver": "Theme benchmark sizing (+2.78%)",
+          "Largest Driver": "Theme Weight Effect (+2.78%)",
           "Manager": "Manager A - Growth / AI Infrastructure",
           "Manager Benchmark Return": "9.50%",
           "Other Measured Effects": "-1.36%",
@@ -105,7 +105,7 @@
           "Return": "11.60%"
         },
         {
-          "Largest Driver": "Theme benchmark selection (-0.73%)",
+          "Largest Driver": "Theme Choice Effect (-0.73%)",
           "Manager": "Manager B - Core Quality Equity",
           "Manager Benchmark Return": "7.60%",
           "Other Measured Effects": "+0.98%",
@@ -114,7 +114,7 @@
           "Return": "8.40%"
         },
         {
-          "Largest Driver": "Theme benchmark selection (+2.57%)",
+          "Largest Driver": "Theme Choice Effect (+2.57%)",
           "Manager": "Manager C - Income and Cash Generation",
           "Manager Benchmark Return": "4.30%",
           "Other Measured Effects": "-1.61%",
@@ -123,7 +123,7 @@
           "Return": "4.70%"
         },
         {
-          "Largest Driver": "Theme benchmark selection (+0.57%)",
+          "Largest Driver": "Theme Choice Effect (+0.57%)",
           "Manager": "Manager D - Private Markets / Real Assets",
           "Manager Benchmark Return": "6.30%",
           "Other Measured Effects": "+0.27%",
@@ -132,7 +132,7 @@
           "Return": "7.10%"
         },
         {
-          "Largest Driver": "Theme benchmark selection (+3.77%)",
+          "Largest Driver": "Theme Choice Effect (+3.77%)",
           "Manager": "Manager E - Liquidity Reserve / Defensive Ballast",
           "Manager Benchmark Return": "3.10%",
           "Other Measured Effects": "-1.47%",

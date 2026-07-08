@@ -1,6 +1,6 @@
 # Lens-Based Performance Attribution - AI Adoption
 
-Under the AI Adoption lens, Core AI Infrastructure / Hardware is the largest positive total attribution effect; active return is shown separately.
+Under the AI Adoption lens, Core AI Infrastructure / Hardware is the largest positive Total Effect; Active Return is shown separately.
 
 ## Key Metrics
 
@@ -10,7 +10,7 @@ Under the AI Adoption lens, Core AI Infrastructure / Hardware is the largest pos
 
 ## AI Adoption Calculated Theme Performance
 
-| Theme Bucket | Weight | Portfolio Return | Theme Benchmark Return | Active Return | Total Attribution Effect |
+| Theme Bucket | Actual Weight | Portfolio Return | Theme Benchmark Return | Active Return | Total Effect |
 | --- | --- | --- | --- | --- | --- |
 | Core AI Infrastructure / Hardware | 21.03% | 11.70% | 10.30% | +1.40% | +1.46% |
 | AI Model / Platform Exposure | 17.18% | 10.40% | 9.20% | +1.20% | +0.79% |
@@ -27,4 +27,4 @@ Under the AI Adoption lens, Core AI Infrastructure / Hardware is the largest pos
 
 ## Advisor Note
 
-Theme benchmarks apply bucket-by-bucket inside AI Adoption. Active Return is Portfolio Return minus Theme Benchmark Return; Total Attribution Effect also reflects benchmark selection/sizing and asset effects. Timing is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present.
+Theme benchmarks apply bucket-by-bucket inside AI Adoption. Return columns are shown on a 100% theme-bucket basis. Effect columns are measured in percentage points of total portfolio return. Active Return is Portfolio Return minus Theme Benchmark Return inside the bucket. Active Return is not the same as Total Effect because Total Effect is measured against the whole portfolio and includes theme choice/weighting effects. Timing is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present.

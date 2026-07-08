@@ -569,7 +569,9 @@ Future attribution reports should change as follows:
 
 - Summary should include a benchmark-basis note: global benchmark, selected lens, and whether effects are calculated or supplied.
 - Detail now shows calculated theme-benchmark rows in supported local `attribution_v1` fixtures. `Not separately measured` component columns should remain absent from client-facing calculated mockups unless a future advisor/internal gap view deliberately needs them.
-- Detail and lens reports should distinguish Active Return, meaning portfolio return minus theme benchmark return, from Total Attribution Effect, meaning the calculated attribution effect after benchmark selection/sizing and asset effects.
+- Detail and lens reports should distinguish Active Return, meaning portfolio return minus theme benchmark return inside the selected theme bucket, from Total Effect, meaning the calculated effect measured in percentage points of total portfolio return.
+- Detail and lens reports should state that return columns are on a 100% theme-bucket basis while effect columns are measured against total portfolio return. Detail rows should show Policy Weight and Actual Weight when theme weighting effects are visible.
+- A theme can beat its theme benchmark but still have a negative Total Effect if the portfolio was underweight that theme relative to the policy/global benchmark mix.
 - Manager reports should disclose manager benchmark basis: mandate benchmark, broad policy benchmark, or theme-benchmark blend.
 - Manager summary reports should not imply residual is the only non-largest-driver effect; show or explain other measured effects separately from residual.
 - Lens-based reports should clarify theme benchmark construction and proxy status.
@@ -585,13 +587,14 @@ Synthetic Attribution Calculation Inputs v1
 Calculated Synthetic Attribution Engine v1
 Regenerate Attribution Mockups from Calculated Outputs v1
 Attribution Calculation Explanation Polish v1
+Attribution Effect Basis Polish v1
 ```
 
 The implemented calculation-input pack supplies:
 
 - selected AI Adoption attribution lens policy;
 - equal-weight and actual-weight theme benchmark portfolio weights;
-- theme benchmark return inputs and contribution arithmetic;
+- theme benchmark return inputs and effect arithmetic;
 - compact grouped synthetic asset inputs for asset selection/sizing;
 - explicit manager benchmark-basis metadata and manager-level calculation inputs;
 - explicit residual policy and timing-unavailable gate.
@@ -607,7 +610,7 @@ The implemented calculated engine outputs:
 Recommended next step:
 
 ```text
-Frank review of regenerated calculated attribution mockups
+Frank review of basis-polished calculated attribution mockups
 ```
 
 Follow-up work should:

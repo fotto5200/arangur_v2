@@ -10,40 +10,40 @@
   "compact_table": null,
   "contribution_bridge": {
     "columns": [
-      "Contribution",
+      "Effect Driver",
       "Effect",
       "Interpretation"
     ],
     "rows": [
       {
-        "Contribution": "Theme benchmark selection",
         "Effect": "-0.12%",
+        "Effect Driver": "Theme Choice Effect",
         "Interpretation": "Calculated from policy theme benchmark return minus global benchmark return."
       },
       {
-        "Contribution": "Theme benchmark sizing",
         "Effect": "+0.37%",
+        "Effect Driver": "Theme Weight Effect",
         "Interpretation": "Calculated from actual-weight theme benchmark return minus policy theme benchmark return."
       },
       {
-        "Contribution": "Asset selection",
         "Effect": "+0.56%",
+        "Effect Driver": "Asset Choice Effect",
         "Interpretation": "Calculated from per-theme reference-weight asset returns."
       },
       {
-        "Contribution": "Asset sizing",
         "Effect": "+0.13%",
+        "Effect Driver": "Asset Weight Effect",
         "Interpretation": "Calculated from per-theme actual-weight asset returns."
       },
       {
-        "Contribution": "Residual / unexplained",
         "Effect": "+0.21%",
+        "Effect Driver": "Residual / unexplained",
         "Interpretation": "Calculated reconciler after visible attribution effects."
       }
     ],
-    "title": "Calculated Contribution Summary"
+    "title": "Calculated Effect Summary"
   },
-  "denominator_category_system": "Benchmark-relative contribution bridge",
+  "denominator_category_system": "Benchmark-relative effect bridge",
   "display_title": "Integrated Performance Attribution Summary",
   "exact_report_question": "Did the portfolio add value versus the global benchmark, and what were the largest calculated effects?",
   "gated_or_deferred": false,
@@ -66,7 +66,7 @@
       "value": 0.011516
     }
   ],
-  "headline_sentence": "Portfolio return exceeded the global benchmark by +1.15%, with asset selection the largest calculated driver.",
+  "headline_sentence": "Portfolio return exceeded the global benchmark by +1.15%, with asset choice effect the largest calculated driver.",
   "information_budget_applied": {
     "actual_advisor_notes": 1,
     "actual_caveats": 2,

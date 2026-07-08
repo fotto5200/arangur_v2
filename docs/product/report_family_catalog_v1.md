@@ -55,6 +55,8 @@ Status update after Regenerate Attribution Mockups from Calculated Outputs v1: l
 
 Status update after Attribution Calculation Explanation Polish v1: calculated attribution mockups now clarify benchmark basis and arithmetic. Detail and AI Adoption lens reports show Active Return separately from Total Attribution Effect so a bucket's return gap versus its theme benchmark is not confused with its full attribution effect. Manager Attribution Summary states manager benchmark basis and separates Largest Driver, Other Measured Effects, and Residual / unexplained.
 
+Status update after Attribution Effect Basis Polish v1: calculated attribution detail and AI Adoption lens mockups now make unit basis explicit. Return columns are on a 100% theme-bucket basis, effect columns are measured in percentage points of total portfolio return, and detail rows show Policy Weight and Actual Weight. Visible detail labels now use Theme Choice Effect, Theme Weight Effect, Asset Choice Effect, Asset Weight Effect, Residual / Reconciler, and Total Effect rather than contribution-oriented wording.
+
 ## Catalog Rules
 
 - A family may have multiple report instances, but each instance should answer one question.

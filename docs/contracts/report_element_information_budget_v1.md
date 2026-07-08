@@ -141,6 +141,8 @@ After Regenerate Attribution Mockups from Calculated Outputs v1, local `attribut
 
 After Attribution Calculation Explanation Polish v1, calculated local attribution reports should distinguish Active Return from Total Attribution Effect where a theme-bucket return gap could otherwise be confused with the full attribution result. Manager summaries should not imply residual is the only non-largest-driver effect; they should show or explain Other Measured Effects separately from Residual / unexplained.
 
+After Attribution Effect Basis Polish v1, calculated local attribution detail/lens reports should distinguish return basis from effect basis. Return columns should be described as 100% theme-bucket basis values. Effect columns should be described as percentage points of total portfolio return, with visible labels such as Theme Choice Effect, Theme Weight Effect, Asset Choice Effect, Asset Weight Effect, Residual / Reconciler, and Total Effect. Detail reports should show Policy Weight and Actual Weight when theme weighting effects are visible, and should state that Active Return is not Total Effect.
+
 Additional anti-clutter checks:
 
 - Do not mix asset type, manager/sleeve, lens/theme, and coverage/review statuses in one additive table.
@@ -148,8 +150,8 @@ Additional anti-clutter checks:
 - Keep prior-period cash delivered and forward-looking cash support outlook as separate report shapes unless a future approved detail variant explicitly combines them.
 - Do not use readiness artifacts as client-facing reports. They may explain why a report is unavailable.
 - Visual-first reports must state the range, benchmark/proxy, horizon, and caveat needed to interpret the picture.
-- Performance attribution visible labels should prefer Global benchmark, Theme benchmark, Manager Benchmark Return, Portfolio Return, Asset selection/sizing, and `Residual / unexplained`; do not show raw proxy ids, proxy-return labels, or strategy/lens-bucket construction language in product-facing mockups.
-- Performance attribution detail/lens tables should distinguish Active Return, meaning portfolio return minus theme benchmark return, from Total Attribution Effect, meaning the calculated attribution effect after benchmark selection/sizing and asset effects.
+- Performance attribution visible labels should prefer Global benchmark, Theme benchmark, Manager Benchmark Return, Portfolio Return, Theme Choice Effect, Theme Weight Effect, Asset Choice Effect, Asset Weight Effect, Total Effect, and `Residual / unexplained`; do not show raw proxy ids, proxy-return labels, or strategy/lens-bucket construction language in product-facing mockups.
+- Performance attribution detail/lens tables should distinguish Active Return, meaning portfolio return minus theme benchmark return inside the bucket, from Total Effect, meaning the calculated effect in percentage points of total portfolio return.
 - Benchmark-relative attribution effects must not imply lower-level calculation unless the required benchmark portfolio, asset, weight, manager benchmark-basis inputs, and calculated engine outputs exist. For the local calculated synthetic path, prefer the calculated output pack over supplied allocation fields; if an effect is supplied for synthetic demo review, label or caveat that provenance instead of hiding it.
 - Timing attribution should stay unavailable unless clean trade/holding history, flow treatment, and an approved timing method exist; residual may include unmeasured timing, data, flow, rounding, or reconciliation effects but must not be labeled timing.
 

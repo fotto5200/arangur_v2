@@ -2,7 +2,7 @@
 
 These product-review mockups are generated from attribution v1 view fixtures that consume the calculated synthetic attribution output pack. They remain local synthetic-demo only and are not wired into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
 AI Adoption is the selected calculated attribution lens. Timing remains unavailable, residual / unexplained stays separate, and production/client attribution remains gated.
-Detail and lens tables distinguish Active Return from Total Attribution Effect, and Manager Attribution Summary separates largest driver, other measured effects, and residual / unexplained.
+Detail and lens tables distinguish bucket-level return columns from effects on total portfolio return, and Manager Attribution Summary separates largest driver, other measured effects, and residual / unexplained.
 
 ## Generated Mockups
 

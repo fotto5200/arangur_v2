@@ -28,6 +28,8 @@ Update after Regenerate Attribution Mockups from Calculated Outputs v1: `attribu
 
 Update after Attribution Calculation Explanation Polish v1: calculated `attribution_v1` mockups now distinguish Active Return from Total Attribution Effect in the detail and AI Adoption lens tables. Active Return is the return gap versus the theme benchmark; Total Attribution Effect is the calculated attribution effect after benchmark selection/sizing and asset effects. Manager Attribution Summary now separates Largest Driver, Other Measured Effects, and Residual / unexplained, with explicit manager benchmark-basis language. Timing remains unavailable and is not shown as a contribution.
 
+Update after Attribution Effect Basis Polish v1: calculated `attribution_v1` detail and AI Adoption lens mockups now distinguish return columns shown on a 100% theme-bucket basis from effect columns measured in percentage points of total portfolio return. Integrated Performance Attribution Detail shows Policy Weight and Actual Weight, uses Theme Choice Effect, Theme Weight Effect, Asset Choice Effect, Asset Weight Effect, Residual / Reconciler, and Total Effect labels, and explains that Active Return is not Total Effect. A strong but underweighted theme can therefore show positive bucket-level active return and negative Total Effect. Visible report language should continue to prefer effect terminology over contribution terminology.
+
 ## 2. Governing Design Rules
 
 - One report, one question.

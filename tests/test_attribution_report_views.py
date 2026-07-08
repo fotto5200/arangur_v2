@@ -16,11 +16,18 @@ if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
 from arangur.analytics.attribution_report_views import (
+    ACTIVE_RETURN_DEFINITION_TEXT,
+    ACTIVE_RETURN_NOT_TOTAL_EFFECT_TEXT,
+    ACTUAL_WEIGHT_LABEL,
     BUILD_NOW_REPORT_IDS,
     CALCULATED_ARTIFACT_FILES,
+    EFFECT_BASIS_EXPLANATION,
     GATED_REPORTS,
     INPUT_FILENAME_BY_REPORT_ID,
     MOCKUP_FILENAME_BY_REPORT_ID,
+    POLICY_WEIGHT_LABEL,
+    RETURN_BASIS_EXPLANATION,
+    UNDERWEIGHTING_NOTE_TEXT,
     VIEW_FILENAME_BY_REPORT_ID,
     generate_attribution_report_views,
     render_markdown_mockup,
@@ -67,6 +74,12 @@ FORBIDDEN_VISIBLE_TERMS = (
     "strategy/lens-bucket",
     "proxy return",
     "bucket return",
+    "contribution",
+    "total attribution effect",
+    "theme benchmark selection",
+    "theme benchmark sizing",
+    "asset selection",
+    "asset sizing",
     "not timing",
 )
 
@@ -351,7 +364,9 @@ class AttributionReportViewsTests(unittest.TestCase):
         )
 
         self.assertIn("whole-portfolio benchmark", _visible_text(summary))
-        self.assertIn("bucket benchmark inside AI Adoption", _visible_text(detail))
+        self.assertIn("policy/equal-weight benchmark mix for AI Adoption", _visible_text(detail))
+        self.assertIn(RETURN_BASIS_EXPLANATION, _visible_text(detail))
+        self.assertIn(EFFECT_BASIS_EXPLANATION, _visible_text(detail))
         self.assertIn("Manager Benchmark Return is the manager/sleeve benchmark", _visible_text(manager))
         self.assertIn("explicit manager-specific mandate proxy", _visible_text(manager))
         self.assertIn("Theme benchmarks apply bucket-by-bucket inside AI Adoption", _visible_text(lens))
@@ -360,25 +375,28 @@ class AttributionReportViewsTests(unittest.TestCase):
         whole = _load_calculated("whole_portfolio_summary")
         view = _load_json(VIEW_DIR / "integrated_performance_attribution_summary_view.json")
         table = view["contribution_bridge"]
-        effects = {row["Contribution"]: row["Effect"] for row in table["rows"]}
+        effects = {row["Effect Driver"]: row["Effect"] for row in table["rows"]}
 
         self.assertTrue(view["table_validation"]["uses_calculated_whole_portfolio_summary"])
         self.assertTrue(view["table_validation"]["ties_to_relative_return"])
+        self.assertEqual("Calculated Effect Summary", table["title"])
+        self.assertIn("Effect Driver", table["columns"])
+        self.assertNotIn("Contribution", table["columns"])
         self.assertEqual(
             _format_signed_percent(whole["theme_benchmark_selection_effect"]),
-            effects["Theme benchmark selection"],
+            effects["Theme Choice Effect"],
         )
         self.assertEqual(
             _format_signed_percent(whole["theme_benchmark_sizing_effect"]),
-            effects["Theme benchmark sizing"],
+            effects["Theme Weight Effect"],
         )
         self.assertEqual(
             _format_signed_percent(whole["asset_selection_effect"]),
-            effects["Asset selection"],
+            effects["Asset Choice Effect"],
         )
         self.assertEqual(
             _format_signed_percent(whole["asset_sizing_effect"]),
-            effects["Asset sizing"],
+            effects["Asset Weight Effect"],
         )
         self.assertEqual(
             _format_signed_percent(whole["residual_unexplained"]),
@@ -409,16 +427,23 @@ class AttributionReportViewsTests(unittest.TestCase):
         )
 
         table = view["compact_table"]
-        self.assertEqual("Calculated Theme Benchmark Detail", table["title"])
+        self.assertEqual("Calculated Theme Return and Effect Detail", table["title"])
         self.assertIn("Theme Bucket", table["columns"])
+        self.assertIn(POLICY_WEIGHT_LABEL, table["columns"])
+        self.assertIn(ACTUAL_WEIGHT_LABEL, table["columns"])
         self.assertIn("Theme Benchmark Return", table["columns"])
         self.assertIn("Active Return", table["columns"])
-        self.assertIn("Theme Benchmark Selection", table["columns"])
-        self.assertIn("Theme Benchmark Sizing", table["columns"])
-        self.assertIn("Asset Selection", table["columns"])
-        self.assertIn("Asset Sizing", table["columns"])
-        self.assertIn("Total Attribution Effect", table["columns"])
-        self.assertNotIn("Total Effect", table["columns"])
+        self.assertIn("Theme Choice Effect", table["columns"])
+        self.assertIn("Theme Weight Effect", table["columns"])
+        self.assertIn("Asset Choice Effect", table["columns"])
+        self.assertIn("Asset Weight Effect", table["columns"])
+        self.assertIn("Residual / Reconciler", table["columns"])
+        self.assertIn("Total Effect", table["columns"])
+        self.assertNotIn("Theme Benchmark Selection", table["columns"])
+        self.assertNotIn("Theme Benchmark Sizing", table["columns"])
+        self.assertNotIn("Asset Selection", table["columns"])
+        self.assertNotIn("Asset Sizing", table["columns"])
+        self.assertNotIn("Total Attribution Effect", table["columns"])
         self.assertNotIn("Contribution", table["columns"])
         self.assertNotEqual(
             "Calculated Contribution Summary",
@@ -430,14 +455,36 @@ class AttributionReportViewsTests(unittest.TestCase):
             "portfolio_return_minus_theme_benchmark_return",
             validation["active_return_definition"],
         )
+        self.assertEqual(RETURN_BASIS_EXPLANATION, validation["return_basis_explanation"])
+        self.assertEqual(EFFECT_BASIS_EXPLANATION, validation["effect_basis_explanation"])
+        self.assertEqual(POLICY_WEIGHT_LABEL, validation["policy_weight_label"])
+        self.assertEqual(ACTUAL_WEIGHT_LABEL, validation["actual_weight_label"])
+        self.assertEqual(
+            "percentage_points_of_total_portfolio_return",
+            validation["effect_columns_basis"],
+        )
+        self.assertTrue(validation["active_return_is_not_total_effect"])
         self.assertTrue(validation["total_effect_distinguished_from_active_return"])
-        self.assertIn("Active Return is Portfolio Return minus Theme Benchmark Return", _visible_text(view))
-        self.assertIn("Total Attribution Effect combines", _visible_text(view))
+        self.assertTrue(validation["underweighting_note_included"])
+        self.assertIn(RETURN_BASIS_EXPLANATION, _visible_text(view))
+        self.assertIn(EFFECT_BASIS_EXPLANATION, _visible_text(view))
+        self.assertIn(ACTIVE_RETURN_DEFINITION_TEXT, _visible_text(view))
+        self.assertIn(ACTIVE_RETURN_NOT_TOTAL_EFFECT_TEXT, _visible_text(view))
+        self.assertIn(UNDERWEIGHTING_NOTE_TEXT, _visible_text(view))
+        self.assertNotIn("Total Attribution Effect", _visible_text(view))
 
         by_bucket = {row["bucket_display_name"]: row for row in detail["rows"]}
         for row in table["rows"]:
             with self.subTest(bucket=row["Theme Bucket"]):
                 source = by_bucket[row["Theme Bucket"]]
+                self.assertEqual(
+                    _format_percent(source["policy_or_equal_weight"]),
+                    row[POLICY_WEIGHT_LABEL],
+                )
+                self.assertEqual(
+                    _format_percent(source["actual_portfolio_weight"]),
+                    row[ACTUAL_WEIGHT_LABEL],
+                )
                 self.assertEqual(
                     _format_signed_percent(
                         source["actual_portfolio_theme_return"]
@@ -447,23 +494,27 @@ class AttributionReportViewsTests(unittest.TestCase):
                 )
                 self.assertEqual(
                     _format_signed_percent(source["theme_benchmark_selection_effect"]),
-                    row["Theme Benchmark Selection"],
+                    row["Theme Choice Effect"],
                 )
                 self.assertEqual(
                     _format_signed_percent(source["theme_benchmark_sizing_effect"]),
-                    row["Theme Benchmark Sizing"],
+                    row["Theme Weight Effect"],
                 )
                 self.assertEqual(
                     _format_signed_percent(source["asset_selection_effect"]),
-                    row["Asset Selection"],
+                    row["Asset Choice Effect"],
                 )
                 self.assertEqual(
                     _format_signed_percent(source["asset_sizing_effect"]),
-                    row["Asset Sizing"],
+                    row["Asset Weight Effect"],
+                )
+                self.assertEqual(
+                    _format_signed_percent(source["residual_unexplained"]),
+                    row["Residual / Reconciler"],
                 )
                 self.assertEqual(
                     _format_signed_percent(source["total_effect"]),
-                    row["Total Attribution Effect"],
+                    row["Total Effect"],
                 )
 
     def test_manager_summary_covers_all_managers_or_justifies_scope(self) -> None:
@@ -485,6 +536,12 @@ class AttributionReportViewsTests(unittest.TestCase):
         self.assertIn("Residual / unexplained", table["columns"])
         self.assertNotIn("Proxy return", table["columns"])
         self.assertNotIn("Timing", table["columns"])
+        largest_driver_text = "\n".join(str(row["Largest Driver"]) for row in table["rows"])
+        self.assertIn("Effect", largest_driver_text)
+        self.assertNotIn("Theme benchmark selection", largest_driver_text)
+        self.assertNotIn("Theme benchmark sizing", largest_driver_text)
+        self.assertNotIn("Asset selection", largest_driver_text)
+        self.assertNotIn("Asset sizing", largest_driver_text)
         self.assertIn("proxy benchmarks", "\n".join(view["caveats"]))
         self.assertIn("not production recommendations", "\n".join(view["caveats"]))
         self.assertTrue(view["table_validation"]["other_measured_effects_column_included"])
@@ -533,17 +590,29 @@ class AttributionReportViewsTests(unittest.TestCase):
             view["table_validation"]["unsupported_calculated_lenses_gated"],
         )
         self.assertIn("Theme Bucket", table["columns"])
+        self.assertIn(ACTUAL_WEIGHT_LABEL, table["columns"])
         self.assertIn("Portfolio Return", table["columns"])
         self.assertIn("Theme Benchmark Return", table["columns"])
         self.assertIn("Active Return", table["columns"])
-        self.assertIn("Total Attribution Effect", table["columns"])
-        self.assertNotIn("Total Effect", table["columns"])
+        self.assertIn("Total Effect", table["columns"])
+        self.assertNotIn("Total Attribution Effect", table["columns"])
+        self.assertNotIn("Weight", table["columns"])
         self.assertNotIn("Lens Bucket", table["columns"])
         self.assertNotIn("Proxy return", table["columns"])
         self.assertTrue(view["table_validation"]["active_return_bridge_included"])
         self.assertTrue(view["table_validation"]["total_effect_distinguished_from_active_return"])
-        self.assertIn("active return is shown separately", view["headline_sentence"])
-        self.assertIn("Total Attribution Effect also reflects", _visible_text(view))
+        self.assertEqual(RETURN_BASIS_EXPLANATION, view["table_validation"]["return_basis_explanation"])
+        self.assertEqual(EFFECT_BASIS_EXPLANATION, view["table_validation"]["effect_basis_explanation"])
+        self.assertEqual(ACTUAL_WEIGHT_LABEL, view["table_validation"]["actual_weight_label"])
+        self.assertEqual(
+            "percentage_points_of_total_portfolio_return",
+            view["table_validation"]["effect_columns_basis"],
+        )
+        self.assertTrue(view["table_validation"]["active_return_is_not_total_effect"])
+        self.assertIn("Active Return is shown separately", view["headline_sentence"])
+        self.assertIn(EFFECT_BASIS_EXPLANATION, _visible_text(view))
+        self.assertIn(ACTIVE_RETURN_NOT_TOTAL_EFFECT_TEXT, _visible_text(view))
+        self.assertNotIn("Total Attribution Effect", _visible_text(view))
         self.assertIn("proxy benchmarks", "\n".join(view["caveats"]))
         self.assertIn(
             "Energy Security calculated attribution remains gated",
@@ -555,6 +624,10 @@ class AttributionReportViewsTests(unittest.TestCase):
             with self.subTest(bucket=row["Theme Bucket"]):
                 source = by_bucket[row["Theme Bucket"]]
                 self.assertEqual(
+                    _format_percent(source["actual_portfolio_weight"]),
+                    row[ACTUAL_WEIGHT_LABEL],
+                )
+                self.assertEqual(
                     _format_signed_percent(
                         source["actual_portfolio_theme_return"]
                         - source["theme_benchmark_return"]
@@ -563,7 +636,7 @@ class AttributionReportViewsTests(unittest.TestCase):
                 )
                 self.assertEqual(
                     _format_signed_percent(source["total_effect"]),
-                    row["Total Attribution Effect"],
+                    row["Total Effect"],
                 )
 
         gated_index = _load_json(VIEW_DIR / "gated_deferred_attribution_report_index.json")
@@ -583,13 +656,19 @@ class AttributionReportViewsTests(unittest.TestCase):
         combined = f"{_visible_text(summary)}\n{_visible_text(detail)}"
 
         self.assertIn("Global benchmark return", combined)
-        self.assertIn("Theme benchmark selection", combined)
-        self.assertIn("Theme benchmark sizing", combined)
-        self.assertIn("Asset selection", combined)
-        self.assertIn("Asset sizing", combined)
+        self.assertIn("Theme Choice Effect", combined)
+        self.assertIn("Theme Weight Effect", combined)
+        self.assertIn("Asset Choice Effect", combined)
+        self.assertIn("Asset Weight Effect", combined)
         self.assertIn("Residual / unexplained", combined)
         self.assertIn("Active Return", combined)
-        self.assertIn("Total Attribution Effect", combined)
+        self.assertIn("Total Effect", combined)
+        self.assertIn(RETURN_BASIS_EXPLANATION, combined)
+        self.assertIn(EFFECT_BASIS_EXPLANATION, combined)
+        self.assertNotIn("Contribution", combined)
+        self.assertNotIn("Total Attribution Effect", combined)
+        self.assertNotIn("Theme Benchmark Selection", combined)
+        self.assertNotIn("Theme Benchmark Sizing", combined)
         self.assertNotIn("Strategy/lens-bucket", combined)
         self.assertNotIn("Proxy return", combined)
         self.assertNotIn("Not separately measured", combined)

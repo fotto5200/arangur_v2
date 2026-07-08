@@ -128,6 +128,8 @@ For local synthetic demo work, Synthetic Attribution Prerequisite Pack v1 suppli
 
 Attribution Calculation Explanation Polish v1 adds a presentation rule for calculated local attribution: distinguish Active Return, the return gap versus a theme benchmark, from Total Attribution Effect, the calculated attribution effect after benchmark selection/sizing and asset effects. Manager summaries should identify manager benchmark basis and separate Largest Driver, Other Measured Effects, and Residual / unexplained. Residual may include unmeasured timing, data, flow, rounding, or reconciliation effects; timing still remains unavailable unless clean timing inputs and an approved method exist.
 
+Attribution Effect Basis Polish v1 adds the unit-basis rule for calculated local attribution: return columns are shown on a 100% theme-bucket basis, while effect columns are measured in percentage points of total portfolio return. Detail reports should show Policy Weight and Actual Weight where theme weighting effects are visible, use effect terminology rather than contribution terminology, and explain that Active Return is not Total Effect. A strong but underweighted theme can have positive bucket-level active return and negative Total Effect.
+
 ### Probabilistic Scenario Range
 
 Minimum report evidence:
@@ -159,7 +161,8 @@ Lens reports should show unavailable/review buckets rather than silently forcing
 - Tests for future report views should block mixed category systems in additive tables.
 - Benchmark-relative report fixtures should not be generated until benchmark/proxy maps exist. Synthetic Attribution Prerequisite Pack v1 satisfies this only for the local synthetic `attribution_v1` attribution mockups, not for scenario-versus-benchmark, probabilistic range, or production/client reports.
 - Future attribution fixtures should carry effect provenance and manager benchmark-basis metadata. The local `attribution_v1` calculated mockups now source those fields and calculated effects from Calculated Synthetic Attribution Engine v1 where supported; final report fixtures should not return to supplied fixed-share allocations.
-- Calculated attribution fixtures should show or explain active return separately from total attribution effect when a theme-bucket return gap could be confused with the full attribution result.
+- Calculated attribution fixtures should show or explain active return separately from Total Effect when a theme-bucket return gap could be confused with the effect on total portfolio return.
+- Calculated attribution detail/lens fixtures should carry return/effect-basis metadata and visible notes: returns on a 100% theme-bucket basis, effects in percentage points of total portfolio return, and Policy Weight / Actual Weight where weighting effects are visible.
 - Cash Flow Delivered and Cash-Flow Support Outlook may be generated only for the local synthetic demo from the prerequisite pack; real/client cash-flow support stays readiness-only until real cash-need and cash-flow inputs exist.
 - Full Lens Exposure may be generated for the complete synthetic AI Adoption and Energy Security assignments; any other lens remains readiness/design-only until complete assignments exist.
 - Probabilistic ranges should wait for explicit range analytics.
