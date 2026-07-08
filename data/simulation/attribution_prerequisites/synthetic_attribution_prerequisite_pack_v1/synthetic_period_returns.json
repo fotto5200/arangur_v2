@@ -1,0 +1,435 @@
+{
+  "base_currency": "USD",
+  "benchmark_return": {
+    "benchmark_id": "northstar_synthetic_policy_benchmark_v1",
+    "period_return": 0.06994,
+    "return_source": "weighted_synthetic_manager_proxy_returns"
+  },
+  "caveats": [
+    "Synthetic demo returns only.",
+    "These values are deterministic local prerequisites and do not imply historical truth."
+  ],
+  "generated_at": "2026-07-07T00:00:00Z",
+  "lens_bucket_returns": [
+    {
+      "bucket_display_name": "Core AI Infrastructure / Hardware",
+      "bucket_id": "core_ai_infrastructure_hardware",
+      "lens_id": "ai_adoption",
+      "period_return": 0.117,
+      "proxy_id": "ai_adoption_core_ai_infrastructure_hardware_synthetic_proxy_v1",
+      "proxy_period_return": 0.103,
+      "relative_return": 0.014,
+      "synthetic_data": true
+    },
+    {
+      "bucket_display_name": "AI Model / Platform Exposure",
+      "bucket_id": "ai_model_platform_exposure",
+      "lens_id": "ai_adoption",
+      "period_return": 0.104,
+      "proxy_id": "ai_adoption_ai_model_platform_exposure_synthetic_proxy_v1",
+      "proxy_period_return": 0.092,
+      "relative_return": 0.012,
+      "synthetic_data": true
+    },
+    {
+      "bucket_display_name": "AI Downstream Productivity Beneficiary",
+      "bucket_id": "ai_downstream_productivity_beneficiary",
+      "lens_id": "ai_adoption",
+      "period_return": 0.077,
+      "proxy_id": "ai_adoption_ai_downstream_productivity_beneficiary_synthetic_proxy_v1",
+      "proxy_period_return": 0.071,
+      "relative_return": 0.006,
+      "synthetic_data": true
+    },
+    {
+      "bucket_display_name": "AI-Disrupted Incumbent",
+      "bucket_id": "ai_disrupted_incumbent",
+      "lens_id": "ai_adoption",
+      "period_return": 0.034,
+      "proxy_id": "ai_adoption_ai_disrupted_incumbent_synthetic_proxy_v1",
+      "proxy_period_return": 0.038,
+      "relative_return": -0.004,
+      "synthetic_data": true
+    },
+    {
+      "bucket_display_name": "Data Center / Power Bottleneck Exposure",
+      "bucket_id": "data_center_power_bottleneck_exposure",
+      "lens_id": "ai_adoption",
+      "period_return": 0.095,
+      "proxy_id": "ai_adoption_data_center_power_bottleneck_exposure_synthetic_proxy_v1",
+      "proxy_period_return": 0.085,
+      "relative_return": 0.01,
+      "synthetic_data": true
+    },
+    {
+      "bucket_display_name": "Neutral / Low Direct AI Exposure",
+      "bucket_id": "neutral_low_direct_ai_exposure",
+      "lens_id": "ai_adoption",
+      "period_return": 0.054,
+      "proxy_id": "ai_adoption_neutral_low_direct_ai_exposure_synthetic_proxy_v1",
+      "proxy_period_return": 0.052,
+      "relative_return": 0.002,
+      "synthetic_data": true
+    },
+    {
+      "bucket_display_name": "Unclassified / Review Required",
+      "bucket_id": "unclassified_review_required",
+      "lens_id": "ai_adoption",
+      "period_return": 0.04,
+      "proxy_id": "ai_adoption_unclassified_review_required_synthetic_proxy_v1",
+      "proxy_period_return": 0.04,
+      "relative_return": 0.0,
+      "synthetic_data": true
+    },
+    {
+      "bucket_display_name": "Energy Supply Beneficiary",
+      "bucket_id": "energy_supply_beneficiary",
+      "lens_id": "energy_security",
+      "period_return": 0.085,
+      "proxy_id": "energy_security_energy_supply_beneficiary_synthetic_proxy_v1",
+      "proxy_period_return": 0.079,
+      "relative_return": 0.006,
+      "synthetic_data": true
+    },
+    {
+      "bucket_display_name": "Grid Infrastructure Beneficiary",
+      "bucket_id": "grid_infrastructure_beneficiary",
+      "lens_id": "energy_security",
+      "period_return": 0.081,
+      "proxy_id": "energy_security_grid_infrastructure_beneficiary_synthetic_proxy_v1",
+      "proxy_period_return": 0.073,
+      "relative_return": 0.008,
+      "synthetic_data": true
+    },
+    {
+      "bucket_display_name": "Energy Input-Cost Sensitive",
+      "bucket_id": "energy_input_cost_sensitive",
+      "lens_id": "energy_security",
+      "period_return": 0.056,
+      "proxy_id": "energy_security_energy_input_cost_sensitive_synthetic_proxy_v1",
+      "proxy_period_return": 0.058,
+      "relative_return": -0.002,
+      "synthetic_data": true
+    },
+    {
+      "bucket_display_name": "Transition Policy Sensitive",
+      "bucket_id": "transition_policy_sensitive",
+      "lens_id": "energy_security",
+      "period_return": 0.053,
+      "proxy_id": "energy_security_transition_policy_sensitive_synthetic_proxy_v1",
+      "proxy_period_return": 0.052,
+      "relative_return": 0.001,
+      "synthetic_data": true
+    },
+    {
+      "bucket_display_name": "Commodity Supply Security Exposure",
+      "bucket_id": "commodity_supply_security_exposure",
+      "lens_id": "energy_security",
+      "period_return": 0.088,
+      "proxy_id": "energy_security_commodity_supply_security_exposure_synthetic_proxy_v1",
+      "proxy_period_return": 0.081,
+      "relative_return": 0.007,
+      "synthetic_data": true
+    },
+    {
+      "bucket_display_name": "Neutral / Low Direct Energy Exposure",
+      "bucket_id": "neutral_low_direct_energy_exposure",
+      "lens_id": "energy_security",
+      "period_return": 0.05,
+      "proxy_id": "energy_security_neutral_low_direct_energy_exposure_synthetic_proxy_v1",
+      "proxy_period_return": 0.048,
+      "relative_return": 0.002,
+      "synthetic_data": true
+    },
+    {
+      "bucket_display_name": "Unclassified / Review Required",
+      "bucket_id": "unclassified_review_required",
+      "lens_id": "energy_security",
+      "period_return": 0.04,
+      "proxy_id": "energy_security_unclassified_review_required_synthetic_proxy_v1",
+      "proxy_period_return": 0.04,
+      "relative_return": 0.0,
+      "synthetic_data": true
+    }
+  ],
+  "manager_returns": [
+    {
+      "benchmark_return": 0.095,
+      "display_name": "Manager A - Growth / AI Infrastructure",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "manager_return": 0.116,
+      "relative_return": 0.021,
+      "synthetic_data": true
+    },
+    {
+      "benchmark_return": 0.076,
+      "display_name": "Manager B - Core Quality Equity",
+      "manager_id": "mgr_b_core_quality_equity",
+      "manager_return": 0.084,
+      "relative_return": 0.008,
+      "synthetic_data": true
+    },
+    {
+      "benchmark_return": 0.043,
+      "display_name": "Manager C - Income and Cash Generation",
+      "manager_id": "mgr_c_income_cash_generation",
+      "manager_return": 0.047,
+      "relative_return": 0.004,
+      "synthetic_data": true
+    },
+    {
+      "benchmark_return": 0.063,
+      "display_name": "Manager D - Private Markets / Real Assets",
+      "manager_id": "mgr_d_private_real_assets",
+      "manager_return": 0.071,
+      "relative_return": 0.008,
+      "synthetic_data": true
+    },
+    {
+      "benchmark_return": 0.031,
+      "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "manager_return": 0.034,
+      "relative_return": 0.003,
+      "synthetic_data": true
+    },
+    {
+      "benchmark_return": 0.075,
+      "display_name": "Manager F - Opportunistic Macro / Hedge",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "manager_return": 0.089,
+      "relative_return": 0.014,
+      "synthetic_data": true
+    }
+  ],
+  "pack_id": "synthetic_attribution_prerequisite_pack_v1",
+  "pack_version": "2026-07-07",
+  "period_end": "2026-06-30",
+  "period_start": "2025-07-01",
+  "portfolio_return": {
+    "period_return": 0.081456,
+    "portfolio_id": "portfolio_northstar_family_office",
+    "return_source": "weighted_synthetic_manager_returns"
+  },
+  "position_returns": [
+    {
+      "display_name": "AI Compute Leader",
+      "instrument_type": "public_equity",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "period_return": 0.114,
+      "position_id": "pos_a_ai_compute_leader",
+      "return_basis": "selected_synthetic_position_total_return",
+      "synthetic_data": true
+    },
+    {
+      "display_name": "Cloud Platform Compounder",
+      "instrument_type": "public_equity",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "period_return": 0.115,
+      "position_id": "pos_a_cloud_platform_compounder",
+      "return_basis": "selected_synthetic_position_total_return",
+      "synthetic_data": true
+    },
+    {
+      "display_name": "Treasury Bill Ladder",
+      "instrument_type": "fixed_income",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "period_return": 0.034,
+      "position_id": "pos_e_treasury_bill_ladder",
+      "return_basis": "selected_synthetic_position_total_return",
+      "synthetic_data": true
+    },
+    {
+      "display_name": "Cloud Platform Compounder",
+      "instrument_type": "public_equity",
+      "manager_id": "mgr_b_core_quality_equity",
+      "period_return": 0.085,
+      "position_id": "pos_b_cloud_platform_compounder",
+      "return_basis": "selected_synthetic_position_total_return",
+      "synthetic_data": true
+    },
+    {
+      "display_name": "Northstar AI Growth Fund LP",
+      "instrument_type": "private_equity",
+      "manager_id": "mgr_d_private_real_assets",
+      "period_return": 0.073,
+      "position_id": "pos_d_northstar_ai_growth_fund",
+      "return_basis": "selected_synthetic_position_total_return",
+      "synthetic_data": true
+    },
+    {
+      "display_name": "Chip Fabrication Partner",
+      "instrument_type": "public_equity",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "period_return": 0.114,
+      "position_id": "pos_a_chip_fabrication_partner",
+      "return_basis": "selected_synthetic_position_total_return",
+      "synthetic_data": true
+    },
+    {
+      "display_name": "Government Money Market Fund",
+      "instrument_type": "money_market",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "period_return": 0.033,
+      "position_id": "pos_e_government_money_market",
+      "return_basis": "selected_synthetic_position_total_return",
+      "synthetic_data": true
+    },
+    {
+      "display_name": "Data Center Development JV",
+      "instrument_type": "data_center_investment",
+      "manager_id": "mgr_d_private_real_assets",
+      "period_return": 0.071,
+      "position_id": "pos_d_data_center_development_jv",
+      "return_basis": "selected_synthetic_position_total_return",
+      "synthetic_data": true
+    },
+    {
+      "display_name": "Semicap Equipment Maker",
+      "instrument_type": "public_equity",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "period_return": 0.117,
+      "position_id": "pos_a_semicap_equipment_maker",
+      "return_basis": "selected_synthetic_position_total_return",
+      "synthetic_data": true
+    },
+    {
+      "display_name": "Consumer Platform Quality",
+      "instrument_type": "public_equity",
+      "manager_id": "mgr_b_core_quality_equity",
+      "period_return": 0.086,
+      "position_id": "pos_b_consumer_platform_quality",
+      "return_basis": "selected_synthetic_position_total_return",
+      "synthetic_data": true
+    },
+    {
+      "display_name": "Quality Factor ETF",
+      "instrument_type": "etf",
+      "manager_id": "mgr_b_core_quality_equity",
+      "period_return": 0.082,
+      "position_id": "pos_b_quality_factor_etf",
+      "return_basis": "selected_synthetic_position_total_return",
+      "synthetic_data": true
+    },
+    {
+      "display_name": "Investment Grade Bond ETF",
+      "instrument_type": "etf",
+      "manager_id": "mgr_c_income_cash_generation",
+      "period_return": 0.046,
+      "position_id": "pos_c_investment_grade_bond_etf",
+      "return_basis": "selected_synthetic_position_total_return",
+      "synthetic_data": true
+    }
+  ],
+  "proxy_returns": [
+    {
+      "bucket_id": "core_ai_infrastructure_hardware",
+      "lens_id": "ai_adoption",
+      "period_return": 0.103,
+      "proxy_id": "ai_adoption_core_ai_infrastructure_hardware_synthetic_proxy_v1",
+      "synthetic_data": true
+    },
+    {
+      "bucket_id": "ai_model_platform_exposure",
+      "lens_id": "ai_adoption",
+      "period_return": 0.092,
+      "proxy_id": "ai_adoption_ai_model_platform_exposure_synthetic_proxy_v1",
+      "synthetic_data": true
+    },
+    {
+      "bucket_id": "ai_downstream_productivity_beneficiary",
+      "lens_id": "ai_adoption",
+      "period_return": 0.071,
+      "proxy_id": "ai_adoption_ai_downstream_productivity_beneficiary_synthetic_proxy_v1",
+      "synthetic_data": true
+    },
+    {
+      "bucket_id": "ai_disrupted_incumbent",
+      "lens_id": "ai_adoption",
+      "period_return": 0.038,
+      "proxy_id": "ai_adoption_ai_disrupted_incumbent_synthetic_proxy_v1",
+      "synthetic_data": true
+    },
+    {
+      "bucket_id": "data_center_power_bottleneck_exposure",
+      "lens_id": "ai_adoption",
+      "period_return": 0.085,
+      "proxy_id": "ai_adoption_data_center_power_bottleneck_exposure_synthetic_proxy_v1",
+      "synthetic_data": true
+    },
+    {
+      "bucket_id": "neutral_low_direct_ai_exposure",
+      "lens_id": "ai_adoption",
+      "period_return": 0.052,
+      "proxy_id": "ai_adoption_neutral_low_direct_ai_exposure_synthetic_proxy_v1",
+      "synthetic_data": true
+    },
+    {
+      "bucket_id": "unclassified_review_required",
+      "lens_id": "ai_adoption",
+      "period_return": 0.04,
+      "proxy_id": "ai_adoption_unclassified_review_required_synthetic_proxy_v1",
+      "synthetic_data": true
+    },
+    {
+      "bucket_id": "energy_supply_beneficiary",
+      "lens_id": "energy_security",
+      "period_return": 0.079,
+      "proxy_id": "energy_security_energy_supply_beneficiary_synthetic_proxy_v1",
+      "synthetic_data": true
+    },
+    {
+      "bucket_id": "grid_infrastructure_beneficiary",
+      "lens_id": "energy_security",
+      "period_return": 0.073,
+      "proxy_id": "energy_security_grid_infrastructure_beneficiary_synthetic_proxy_v1",
+      "synthetic_data": true
+    },
+    {
+      "bucket_id": "energy_input_cost_sensitive",
+      "lens_id": "energy_security",
+      "period_return": 0.058,
+      "proxy_id": "energy_security_energy_input_cost_sensitive_synthetic_proxy_v1",
+      "synthetic_data": true
+    },
+    {
+      "bucket_id": "transition_policy_sensitive",
+      "lens_id": "energy_security",
+      "period_return": 0.052,
+      "proxy_id": "energy_security_transition_policy_sensitive_synthetic_proxy_v1",
+      "synthetic_data": true
+    },
+    {
+      "bucket_id": "commodity_supply_security_exposure",
+      "lens_id": "energy_security",
+      "period_return": 0.081,
+      "proxy_id": "energy_security_commodity_supply_security_exposure_synthetic_proxy_v1",
+      "synthetic_data": true
+    },
+    {
+      "bucket_id": "neutral_low_direct_energy_exposure",
+      "lens_id": "energy_security",
+      "period_return": 0.048,
+      "proxy_id": "energy_security_neutral_low_direct_energy_exposure_synthetic_proxy_v1",
+      "synthetic_data": true
+    },
+    {
+      "bucket_id": "unclassified_review_required",
+      "lens_id": "energy_security",
+      "period_return": 0.04,
+      "proxy_id": "energy_security_unclassified_review_required_synthetic_proxy_v1",
+      "synthetic_data": true
+    }
+  ],
+  "return_basis": "total_return_synthetic",
+  "schema_version": "synthetic_period_returns.v1",
+  "source_metadata": {
+    "external_data_used": false,
+    "live_market_data_used": false,
+    "local_only": true,
+    "real_client_data_used": false,
+    "source": "synthetic_attribution_return_fixture",
+    "synthetic_data": true
+  },
+  "synthetic_data": true
+}

@@ -1,0 +1,261 @@
+{
+  "base_currency": "USD",
+  "coverage_summary": {
+    "all_current_managers_covered": true,
+    "current_manager_count": 6,
+    "manager_by_manager_attribution_supported": true,
+    "manager_prerequisite_count": 6,
+    "timing_available": false
+  },
+  "generated_at": "2026-07-07T00:00:00Z",
+  "managers": [
+    {
+      "approved_role": "Growth / AI Infrastructure",
+      "asset_selection_contribution": 0.00588,
+      "asset_sizing_contribution": 0.00189,
+      "benchmark_proxy_return": 0.095,
+      "caveats": [
+        "Synthetic manager attribution prerequisite only.",
+        "Timing is not used as a residual bucket."
+      ],
+      "display_name": "Manager A - Growth / AI Infrastructure",
+      "manager_benchmark_proxy": {
+        "approval_status": "synthetic_demo_approved",
+        "caveat": "Synthetic manager proxy only; not a production benchmark recommendation.",
+        "proxy_display_name": "Synthetic Growth / AI Infrastructure Manager Proxy",
+        "proxy_id": "mgr_a_growth_ai_infrastructure_synthetic_manager_proxy_v1"
+      },
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "manager_return": 0.116,
+      "mandate_reference": "synthetic_report_prerequisite_pack_v1.manager_mandate_catalog",
+      "portfolio_active_contribution": 0.006684,
+      "portfolio_weight": 0.318309,
+      "readiness_status": "ready_for_future_synthetic_manager_attribution_mockup",
+      "relative_return": 0.021,
+      "residual_unexplained": 0.00105,
+      "strategy_selection_contribution": 0.00756,
+      "strategy_sizing_contribution": 0.00462,
+      "synthetic_data": true,
+      "tie_out": {
+        "actual_return": 0.116,
+        "benchmark_return": 0.095,
+        "difference": 0.0,
+        "effect_total": 0.021,
+        "recomputed_actual_return": 0.116,
+        "ties_to_actual_return": true,
+        "timing_used_as_residual": false
+      },
+      "timing_reason": "Missing clean trade/holding history and deferred timing methodology.",
+      "timing_status": "unavailable"
+    },
+    {
+      "approved_role": "Core Quality Equity",
+      "asset_selection_contribution": 0.00224,
+      "asset_sizing_contribution": 0.00072,
+      "benchmark_proxy_return": 0.076,
+      "caveats": [
+        "Synthetic manager attribution prerequisite only.",
+        "Timing is not used as a residual bucket."
+      ],
+      "display_name": "Manager B - Core Quality Equity",
+      "manager_benchmark_proxy": {
+        "approval_status": "synthetic_demo_approved",
+        "caveat": "Synthetic manager proxy only; not a production benchmark recommendation.",
+        "proxy_display_name": "Synthetic Core Quality Equity Manager Proxy",
+        "proxy_id": "mgr_b_core_quality_equity_synthetic_manager_proxy_v1"
+      },
+      "manager_id": "mgr_b_core_quality_equity",
+      "manager_return": 0.084,
+      "mandate_reference": "synthetic_report_prerequisite_pack_v1.manager_mandate_catalog",
+      "portfolio_active_contribution": 0.001365,
+      "portfolio_weight": 0.170646,
+      "readiness_status": "ready_for_future_synthetic_manager_attribution_mockup",
+      "relative_return": 0.008,
+      "residual_unexplained": 0.0004,
+      "strategy_selection_contribution": 0.00288,
+      "strategy_sizing_contribution": 0.00176,
+      "synthetic_data": true,
+      "tie_out": {
+        "actual_return": 0.084,
+        "benchmark_return": 0.076,
+        "difference": 0.0,
+        "effect_total": 0.008,
+        "recomputed_actual_return": 0.084,
+        "ties_to_actual_return": true,
+        "timing_used_as_residual": false
+      },
+      "timing_reason": "Missing clean trade/holding history and deferred timing methodology.",
+      "timing_status": "unavailable"
+    },
+    {
+      "approved_role": "Income and Cash Generation",
+      "asset_selection_contribution": 0.00112,
+      "asset_sizing_contribution": 0.00036,
+      "benchmark_proxy_return": 0.043,
+      "caveats": [
+        "Synthetic manager attribution prerequisite only.",
+        "Timing is not used as a residual bucket."
+      ],
+      "display_name": "Manager C - Income and Cash Generation",
+      "manager_benchmark_proxy": {
+        "approval_status": "synthetic_demo_approved",
+        "caveat": "Synthetic manager proxy only; not a production benchmark recommendation.",
+        "proxy_display_name": "Synthetic Income and Credit Manager Proxy",
+        "proxy_id": "mgr_c_income_cash_generation_synthetic_manager_proxy_v1"
+      },
+      "manager_id": "mgr_c_income_cash_generation",
+      "manager_return": 0.047,
+      "mandate_reference": "synthetic_report_prerequisite_pack_v1.manager_mandate_catalog",
+      "portfolio_active_contribution": 0.000473,
+      "portfolio_weight": 0.118147,
+      "readiness_status": "ready_for_future_synthetic_manager_attribution_mockup",
+      "relative_return": 0.004,
+      "residual_unexplained": 0.0002,
+      "strategy_selection_contribution": 0.00144,
+      "strategy_sizing_contribution": 0.00088,
+      "synthetic_data": true,
+      "tie_out": {
+        "actual_return": 0.047,
+        "benchmark_return": 0.043,
+        "difference": 0.0,
+        "effect_total": 0.004,
+        "recomputed_actual_return": 0.047,
+        "ties_to_actual_return": true,
+        "timing_used_as_residual": false
+      },
+      "timing_reason": "Missing clean trade/holding history and deferred timing methodology.",
+      "timing_status": "unavailable"
+    },
+    {
+      "approved_role": "Private Markets / Real Assets",
+      "asset_selection_contribution": 0.00224,
+      "asset_sizing_contribution": 0.00072,
+      "benchmark_proxy_return": 0.063,
+      "caveats": [
+        "Synthetic manager attribution prerequisite only.",
+        "Timing is not used as a residual bucket."
+      ],
+      "display_name": "Manager D - Private Markets / Real Assets",
+      "manager_benchmark_proxy": {
+        "approval_status": "synthetic_demo_approved",
+        "caveat": "Synthetic manager proxy only; not a production benchmark recommendation.",
+        "proxy_display_name": "Synthetic Private Markets / Real Assets Manager Proxy",
+        "proxy_id": "mgr_d_private_real_assets_synthetic_manager_proxy_v1"
+      },
+      "manager_id": "mgr_d_private_real_assets",
+      "manager_return": 0.071,
+      "mandate_reference": "synthetic_report_prerequisite_pack_v1.manager_mandate_catalog",
+      "portfolio_active_contribution": 0.001474,
+      "portfolio_weight": 0.184244,
+      "readiness_status": "ready_for_future_synthetic_manager_attribution_mockup",
+      "relative_return": 0.008,
+      "residual_unexplained": 0.0004,
+      "strategy_selection_contribution": 0.00288,
+      "strategy_sizing_contribution": 0.00176,
+      "synthetic_data": true,
+      "tie_out": {
+        "actual_return": 0.071,
+        "benchmark_return": 0.063,
+        "difference": 0.0,
+        "effect_total": 0.008,
+        "recomputed_actual_return": 0.071,
+        "ties_to_actual_return": true,
+        "timing_used_as_residual": false
+      },
+      "timing_reason": "Missing clean trade/holding history and deferred timing methodology.",
+      "timing_status": "unavailable"
+    },
+    {
+      "approved_role": "Liquidity Reserve / Defensive Ballast",
+      "asset_selection_contribution": 0.00084,
+      "asset_sizing_contribution": 0.00027,
+      "benchmark_proxy_return": 0.031,
+      "caveats": [
+        "Synthetic manager attribution prerequisite only.",
+        "Timing is not used as a residual bucket."
+      ],
+      "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+      "manager_benchmark_proxy": {
+        "approval_status": "synthetic_demo_approved",
+        "caveat": "Synthetic manager proxy only; not a production benchmark recommendation.",
+        "proxy_display_name": "Synthetic Liquidity Reserve Policy Proxy",
+        "proxy_id": "mgr_e_liquidity_defensive_synthetic_manager_proxy_v1"
+      },
+      "manager_id": "mgr_e_liquidity_defensive",
+      "manager_return": 0.034,
+      "mandate_reference": "synthetic_report_prerequisite_pack_v1.manager_mandate_catalog",
+      "portfolio_active_contribution": 0.000382,
+      "portfolio_weight": 0.1274,
+      "readiness_status": "ready_for_future_synthetic_manager_attribution_mockup",
+      "relative_return": 0.003,
+      "residual_unexplained": 0.00015,
+      "strategy_selection_contribution": 0.00108,
+      "strategy_sizing_contribution": 0.00066,
+      "synthetic_data": true,
+      "tie_out": {
+        "actual_return": 0.034,
+        "benchmark_return": 0.031,
+        "difference": 0.0,
+        "effect_total": 0.003,
+        "recomputed_actual_return": 0.034,
+        "ties_to_actual_return": true,
+        "timing_used_as_residual": false
+      },
+      "timing_reason": "Missing clean trade/holding history and deferred timing methodology.",
+      "timing_status": "unavailable"
+    },
+    {
+      "approved_role": "Opportunistic Macro / Hedge",
+      "asset_selection_contribution": 0.00392,
+      "asset_sizing_contribution": 0.00126,
+      "benchmark_proxy_return": 0.075,
+      "caveats": [
+        "Synthetic manager attribution prerequisite only.",
+        "Timing is not used as a residual bucket."
+      ],
+      "display_name": "Manager F - Opportunistic Macro / Hedge",
+      "manager_benchmark_proxy": {
+        "approval_status": "synthetic_demo_approved",
+        "caveat": "Synthetic manager proxy only; not a production benchmark recommendation.",
+        "proxy_display_name": "Synthetic Opportunistic Macro / Hedge Proxy",
+        "proxy_id": "mgr_f_opportunistic_macro_synthetic_manager_proxy_v1"
+      },
+      "manager_id": "mgr_f_opportunistic_macro",
+      "manager_return": 0.089,
+      "mandate_reference": "synthetic_report_prerequisite_pack_v1.manager_mandate_catalog",
+      "portfolio_active_contribution": 0.001138,
+      "portfolio_weight": 0.081254,
+      "readiness_status": "ready_for_future_synthetic_manager_attribution_mockup",
+      "relative_return": 0.014,
+      "residual_unexplained": 0.0007,
+      "strategy_selection_contribution": 0.00504,
+      "strategy_sizing_contribution": 0.00308,
+      "synthetic_data": true,
+      "tie_out": {
+        "actual_return": 0.089,
+        "benchmark_return": 0.075,
+        "difference": 0.0,
+        "effect_total": 0.014,
+        "recomputed_actual_return": 0.089,
+        "ties_to_actual_return": true,
+        "timing_used_as_residual": false
+      },
+      "timing_reason": "Missing clean trade/holding history and deferred timing methodology.",
+      "timing_status": "unavailable"
+    }
+  ],
+  "pack_id": "synthetic_attribution_prerequisite_pack_v1",
+  "pack_version": "2026-07-07",
+  "period_end": "2026-06-30",
+  "period_start": "2025-07-01",
+  "schema_version": "manager_attribution_prerequisites.v1",
+  "source_metadata": {
+    "external_data_used": false,
+    "live_market_data_used": false,
+    "local_only": true,
+    "real_client_data_used": false,
+    "source": "synthetic_manager_attribution_fixture",
+    "synthetic_data": true
+  },
+  "synthetic_data": true
+}

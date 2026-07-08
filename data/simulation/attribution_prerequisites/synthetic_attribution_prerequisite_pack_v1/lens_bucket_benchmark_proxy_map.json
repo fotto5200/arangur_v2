@@ -1,0 +1,250 @@
+{
+  "base_currency": "USD",
+  "coverage_summary": {
+    "advisor_freeform_benchmark_construction_used": false,
+    "all_lens_buckets_have_proxy": true,
+    "lens_count": 2,
+    "proxy_count": 14
+  },
+  "generated_at": "2026-07-07T00:00:00Z",
+  "pack_id": "synthetic_attribution_prerequisite_pack_v1",
+  "pack_version": "2026-07-07",
+  "period_end": "2026-06-30",
+  "period_start": "2025-07-01",
+  "proxy_map": [
+    {
+      "approval_status": "synthetic_demo_approved",
+      "bucket_display_name": "Core AI Infrastructure / Hardware",
+      "bucket_id": "core_ai_infrastructure_hardware",
+      "caveats": [
+        "Synthetic demo proxy only.",
+        "Not an investable recommendation, production benchmark, or live market return."
+      ],
+      "intended_representation": "Local-demo return proxy for the Core AI Infrastructure / Hardware bucket inside the AI Adoption lens.",
+      "lens_id": "ai_adoption",
+      "lens_version": "v1",
+      "proxy_display_name": "Synthetic Core AI Infrastructure / Hardware Proxy",
+      "proxy_id": "ai_adoption_core_ai_infrastructure_hardware_synthetic_proxy_v1",
+      "proxy_type": "synthetic_index",
+      "synthetic_period_return": 0.103
+    },
+    {
+      "approval_status": "synthetic_demo_approved",
+      "bucket_display_name": "AI Model / Platform Exposure",
+      "bucket_id": "ai_model_platform_exposure",
+      "caveats": [
+        "Synthetic demo proxy only.",
+        "Not an investable recommendation, production benchmark, or live market return."
+      ],
+      "intended_representation": "Local-demo return proxy for the AI Model / Platform Exposure bucket inside the AI Adoption lens.",
+      "lens_id": "ai_adoption",
+      "lens_version": "v1",
+      "proxy_display_name": "Synthetic AI Model / Platform Exposure Proxy",
+      "proxy_id": "ai_adoption_ai_model_platform_exposure_synthetic_proxy_v1",
+      "proxy_type": "synthetic_index",
+      "synthetic_period_return": 0.092
+    },
+    {
+      "approval_status": "synthetic_demo_approved",
+      "bucket_display_name": "AI Downstream Productivity Beneficiary",
+      "bucket_id": "ai_downstream_productivity_beneficiary",
+      "caveats": [
+        "Synthetic demo proxy only.",
+        "Not an investable recommendation, production benchmark, or live market return."
+      ],
+      "intended_representation": "Local-demo return proxy for the AI Downstream Productivity Beneficiary bucket inside the AI Adoption lens.",
+      "lens_id": "ai_adoption",
+      "lens_version": "v1",
+      "proxy_display_name": "Synthetic AI Downstream Productivity Beneficiary Proxy",
+      "proxy_id": "ai_adoption_ai_downstream_productivity_beneficiary_synthetic_proxy_v1",
+      "proxy_type": "synthetic_etf_proxy",
+      "synthetic_period_return": 0.071
+    },
+    {
+      "approval_status": "synthetic_demo_approved",
+      "bucket_display_name": "AI-Disrupted Incumbent",
+      "bucket_id": "ai_disrupted_incumbent",
+      "caveats": [
+        "Synthetic demo proxy only.",
+        "Not an investable recommendation, production benchmark, or live market return."
+      ],
+      "intended_representation": "Local-demo return proxy for the AI-Disrupted Incumbent bucket inside the AI Adoption lens.",
+      "lens_id": "ai_adoption",
+      "lens_version": "v1",
+      "proxy_display_name": "Synthetic AI-Disrupted Incumbent Proxy",
+      "proxy_id": "ai_adoption_ai_disrupted_incumbent_synthetic_proxy_v1",
+      "proxy_type": "synthetic_etf_proxy",
+      "synthetic_period_return": 0.038
+    },
+    {
+      "approval_status": "synthetic_demo_approved",
+      "bucket_display_name": "Data Center / Power Bottleneck Exposure",
+      "bucket_id": "data_center_power_bottleneck_exposure",
+      "caveats": [
+        "Synthetic demo proxy only.",
+        "Not an investable recommendation, production benchmark, or live market return."
+      ],
+      "intended_representation": "Local-demo return proxy for the Data Center / Power Bottleneck Exposure bucket inside the AI Adoption lens.",
+      "lens_id": "ai_adoption",
+      "lens_version": "v1",
+      "proxy_display_name": "Synthetic Data Center / Power Bottleneck Exposure Proxy",
+      "proxy_id": "ai_adoption_data_center_power_bottleneck_exposure_synthetic_proxy_v1",
+      "proxy_type": "synthetic_etf_proxy",
+      "synthetic_period_return": 0.085
+    },
+    {
+      "approval_status": "synthetic_demo_approved",
+      "bucket_display_name": "Neutral / Low Direct AI Exposure",
+      "bucket_id": "neutral_low_direct_ai_exposure",
+      "caveats": [
+        "Synthetic demo proxy only.",
+        "Not an investable recommendation, production benchmark, or live market return."
+      ],
+      "intended_representation": "Local-demo return proxy for the Neutral / Low Direct AI Exposure bucket inside the AI Adoption lens.",
+      "lens_id": "ai_adoption",
+      "lens_version": "v1",
+      "proxy_display_name": "Synthetic Neutral / Low Direct AI Exposure Proxy",
+      "proxy_id": "ai_adoption_neutral_low_direct_ai_exposure_synthetic_proxy_v1",
+      "proxy_type": "policy_proxy",
+      "synthetic_period_return": 0.052
+    },
+    {
+      "approval_status": "synthetic_demo_approved",
+      "bucket_display_name": "Unclassified / Review Required",
+      "bucket_id": "unclassified_review_required",
+      "caveats": [
+        "Synthetic demo proxy only.",
+        "Not an investable recommendation, production benchmark, or live market return."
+      ],
+      "intended_representation": "Local-demo return proxy for the Unclassified / Review Required bucket inside the AI Adoption lens.",
+      "lens_id": "ai_adoption",
+      "lens_version": "v1",
+      "proxy_display_name": "Synthetic Unclassified / Review Required Proxy",
+      "proxy_id": "ai_adoption_unclassified_review_required_synthetic_proxy_v1",
+      "proxy_type": "policy_proxy",
+      "synthetic_period_return": 0.04
+    },
+    {
+      "approval_status": "synthetic_demo_approved",
+      "bucket_display_name": "Energy Supply Beneficiary",
+      "bucket_id": "energy_supply_beneficiary",
+      "caveats": [
+        "Synthetic demo proxy only.",
+        "Not an investable recommendation, production benchmark, or live market return."
+      ],
+      "intended_representation": "Local-demo return proxy for the Energy Supply Beneficiary bucket inside the Energy Security lens.",
+      "lens_id": "energy_security",
+      "lens_version": "v1",
+      "proxy_display_name": "Synthetic Energy Supply Beneficiary Proxy",
+      "proxy_id": "energy_security_energy_supply_beneficiary_synthetic_proxy_v1",
+      "proxy_type": "synthetic_etf_proxy",
+      "synthetic_period_return": 0.079
+    },
+    {
+      "approval_status": "synthetic_demo_approved",
+      "bucket_display_name": "Grid Infrastructure Beneficiary",
+      "bucket_id": "grid_infrastructure_beneficiary",
+      "caveats": [
+        "Synthetic demo proxy only.",
+        "Not an investable recommendation, production benchmark, or live market return."
+      ],
+      "intended_representation": "Local-demo return proxy for the Grid Infrastructure Beneficiary bucket inside the Energy Security lens.",
+      "lens_id": "energy_security",
+      "lens_version": "v1",
+      "proxy_display_name": "Synthetic Grid Infrastructure Beneficiary Proxy",
+      "proxy_id": "energy_security_grid_infrastructure_beneficiary_synthetic_proxy_v1",
+      "proxy_type": "synthetic_index",
+      "synthetic_period_return": 0.073
+    },
+    {
+      "approval_status": "synthetic_demo_approved",
+      "bucket_display_name": "Energy Input-Cost Sensitive",
+      "bucket_id": "energy_input_cost_sensitive",
+      "caveats": [
+        "Synthetic demo proxy only.",
+        "Not an investable recommendation, production benchmark, or live market return."
+      ],
+      "intended_representation": "Local-demo return proxy for the Energy Input-Cost Sensitive bucket inside the Energy Security lens.",
+      "lens_id": "energy_security",
+      "lens_version": "v1",
+      "proxy_display_name": "Synthetic Energy Input-Cost Sensitive Proxy",
+      "proxy_id": "energy_security_energy_input_cost_sensitive_synthetic_proxy_v1",
+      "proxy_type": "synthetic_etf_proxy",
+      "synthetic_period_return": 0.058
+    },
+    {
+      "approval_status": "synthetic_demo_approved",
+      "bucket_display_name": "Transition Policy Sensitive",
+      "bucket_id": "transition_policy_sensitive",
+      "caveats": [
+        "Synthetic demo proxy only.",
+        "Not an investable recommendation, production benchmark, or live market return."
+      ],
+      "intended_representation": "Local-demo return proxy for the Transition Policy Sensitive bucket inside the Energy Security lens.",
+      "lens_id": "energy_security",
+      "lens_version": "v1",
+      "proxy_display_name": "Synthetic Transition Policy Sensitive Proxy",
+      "proxy_id": "energy_security_transition_policy_sensitive_synthetic_proxy_v1",
+      "proxy_type": "synthetic_etf_proxy",
+      "synthetic_period_return": 0.052
+    },
+    {
+      "approval_status": "synthetic_demo_approved",
+      "bucket_display_name": "Commodity Supply Security Exposure",
+      "bucket_id": "commodity_supply_security_exposure",
+      "caveats": [
+        "Synthetic demo proxy only.",
+        "Not an investable recommendation, production benchmark, or live market return."
+      ],
+      "intended_representation": "Local-demo return proxy for the Commodity Supply Security Exposure bucket inside the Energy Security lens.",
+      "lens_id": "energy_security",
+      "lens_version": "v1",
+      "proxy_display_name": "Synthetic Commodity Supply Security Exposure Proxy",
+      "proxy_id": "energy_security_commodity_supply_security_exposure_synthetic_proxy_v1",
+      "proxy_type": "synthetic_basket",
+      "synthetic_period_return": 0.081
+    },
+    {
+      "approval_status": "synthetic_demo_approved",
+      "bucket_display_name": "Neutral / Low Direct Energy Exposure",
+      "bucket_id": "neutral_low_direct_energy_exposure",
+      "caveats": [
+        "Synthetic demo proxy only.",
+        "Not an investable recommendation, production benchmark, or live market return."
+      ],
+      "intended_representation": "Local-demo return proxy for the Neutral / Low Direct Energy Exposure bucket inside the Energy Security lens.",
+      "lens_id": "energy_security",
+      "lens_version": "v1",
+      "proxy_display_name": "Synthetic Neutral / Low Direct Energy Exposure Proxy",
+      "proxy_id": "energy_security_neutral_low_direct_energy_exposure_synthetic_proxy_v1",
+      "proxy_type": "policy_proxy",
+      "synthetic_period_return": 0.048
+    },
+    {
+      "approval_status": "synthetic_demo_approved",
+      "bucket_display_name": "Unclassified / Review Required",
+      "bucket_id": "unclassified_review_required",
+      "caveats": [
+        "Synthetic demo proxy only.",
+        "Not an investable recommendation, production benchmark, or live market return."
+      ],
+      "intended_representation": "Local-demo return proxy for the Unclassified / Review Required bucket inside the Energy Security lens.",
+      "lens_id": "energy_security",
+      "lens_version": "v1",
+      "proxy_display_name": "Synthetic Unclassified / Review Required Proxy",
+      "proxy_id": "energy_security_unclassified_review_required_synthetic_proxy_v1",
+      "proxy_type": "policy_proxy",
+      "synthetic_period_return": 0.04
+    }
+  ],
+  "schema_version": "lens_bucket_benchmark_proxy_map.v1",
+  "source_metadata": {
+    "external_data_used": false,
+    "live_market_data_used": false,
+    "local_only": true,
+    "real_client_data_used": false,
+    "source": "synthetic_lens_catalog_and_assignments",
+    "synthetic_data": true
+  },
+  "synthetic_data": true
+}

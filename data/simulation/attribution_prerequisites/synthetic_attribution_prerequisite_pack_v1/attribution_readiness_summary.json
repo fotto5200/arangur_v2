@@ -1,0 +1,71 @@
+{
+  "future_reports_can_now_be_mocked_honestly": [
+    "integrated_performance_attribution_summary",
+    "integrated_performance_attribution_detail",
+    "manager_attribution_summary",
+    "lens_based_performance_attribution"
+  ],
+  "generated_at": "2026-07-07T00:00:00Z",
+  "lens_based_attribution_readiness": "ready_for_synthetic_demo_mockup",
+  "manager_attribution_readiness": "ready_for_synthetic_demo_mockup",
+  "missing_production_prerequisites": [
+    "real portfolio and benchmark returns",
+    "approved production benchmark maps",
+    "complete production holdings and flow history",
+    "client-approved attribution method and residual policy",
+    "clean timing methodology before any timing effect is shown"
+  ],
+  "pack_id": "synthetic_attribution_prerequisite_pack_v1",
+  "pack_version": "2026-07-07",
+  "period_end": "2026-06-30",
+  "period_start": "2025-07-01",
+  "report_readiness": {
+    "integrated_performance_attribution_detail": "ready_for_synthetic_demo_mockup",
+    "integrated_performance_attribution_summary": "ready_for_synthetic_demo_mockup",
+    "lens_based_performance_attribution": "ready_for_synthetic_demo_mockup",
+    "manager_attribution_summary": "ready_for_synthetic_demo_mockup",
+    "probabilistic_scenario_range": "gated",
+    "scenario_versus_benchmark": "gated_until_benchmark_scenario_values_exist",
+    "timing_attribution": "unavailable"
+  },
+  "reports_still_gated": [
+    "timing_attribution",
+    "probabilistic_scenario_range",
+    "scenario_versus_benchmark",
+    "current_versus_proposed_portfolio"
+  ],
+  "schema_version": "attribution_readiness_summary.v1",
+  "source_counts": {
+    "lens_count": 2,
+    "lens_proxy_count": 14,
+    "manager_count": 6
+  },
+  "source_metadata": {
+    "external_data_used": false,
+    "live_market_data_used": false,
+    "local_only": true,
+    "real_client_data_used": false,
+    "source": "synthetic_attribution_readiness_summary",
+    "synthetic_data": true
+  },
+  "supporting_artifacts": [
+    "portfolio_benchmark_catalog.json",
+    "lens_bucket_benchmark_proxy_map.json",
+    "synthetic_period_returns.json",
+    "synthetic_attribution_weights_flows.json",
+    "integrated_attribution_decomposition_inputs.json",
+    "manager_attribution_prerequisites.json"
+  ],
+  "synthetic_data": true,
+  "synthetic_demo_limitations": [
+    "Synthetic returns and proxies are deterministic local-demo inputs.",
+    "No live market data, vendor returns, or real client records are used.",
+    "Scenario Versus Benchmark remains gated because benchmark scenario values are not created here.",
+    "Probabilistic Scenario Range remains gated because no range analytics are created here."
+  ],
+  "timing_attribution_readiness": {
+    "reason": "No clean two-state trade/holding history or approved timing methodology exists.",
+    "status": "unavailable"
+  },
+  "whole_portfolio_attribution_readiness": "ready_for_synthetic_demo_mockup"
+}

@@ -1,0 +1,37 @@
+{
+  "base_currency": "USD",
+  "benchmarks": [
+    {
+      "approval_status": "synthetic_demo_approved",
+      "base_currency": "USD",
+      "benchmark_id": "northstar_synthetic_policy_benchmark_v1",
+      "benchmark_type": "synthetic_policy_composite",
+      "caveats": [
+        "Synthetic local-demo benchmark only.",
+        "It is explicit about its policy-composite purpose and is not objectively correct for real portfolios."
+      ],
+      "description": "A deterministic local-demo composite benchmark aligned to the current synthetic manager mandate mix.",
+      "display_name": "Northstar Synthetic Policy Benchmark",
+      "intended_use": "Synthetic prerequisite for future Integrated Performance Attribution mockups; not a production benchmark recommendation.",
+      "period_end": "2026-06-30",
+      "period_start": "2025-07-01",
+      "source_metadata": {
+        "external_data_used": false,
+        "live_market_data_used": false,
+        "local_only": true,
+        "real_client_data_used": false,
+        "source": "weighted_synthetic_manager_policy_proxy_returns",
+        "synthetic_data": true
+      },
+      "synthetic_return": 0.06994
+    }
+  ],
+  "generated_at": "2026-07-07T00:00:00Z",
+  "pack_id": "synthetic_attribution_prerequisite_pack_v1",
+  "pack_version": "2026-07-07",
+  "period_end": "2026-06-30",
+  "period_start": "2025-07-01",
+  "portfolio_id": "portfolio_northstar_family_office",
+  "schema_version": "portfolio_benchmark_catalog.v1",
+  "synthetic_data": true
+}

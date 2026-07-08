@@ -25,16 +25,17 @@ Available now in the repo:
 - Synthetic Report Prerequisite Pack v1 with local-only cash-flow support inputs, approved synthetic manager mandate catalog, and complete synthetic AI Adoption / Energy Security lens assignments;
 - lean local product-review mockups for Portfolio Status, Aggregated Asset Allocation, Manager Role Summary, Concentration Review, Scenario Downside Summary, Coverage and Confidence Warning, and Cash-Flow Support Readiness;
 - v2 local product-review mockups for Cash Flow Delivered and Cash-Flow Support Outlook, generated from the synthetic prerequisite pack and kept separate from Advisor Preview/Populate/Present wiring;
+- Synthetic Attribution Prerequisite Pack v1 with local-only whole-portfolio benchmark, AI Adoption / Energy Security lens-bucket proxy map, synthetic period returns, weights/flows, decomposition inputs, and manager attribution prerequisites;
 - analytic pack choices and committed analytic-derived fragments for the current local demo path.
 
 Missing or deferred:
 
 - real cash-flow need, liability schedule, account cash history, and production projection basis;
 - reliable manager/sleeve cash-flow source data sufficient for a Cash Flow by Manager/Sleeve report;
-- approved benchmark/proxy maps;
-- lens-bucket benchmark maps;
+- production-approved benchmark/proxy maps beyond the synthetic attribution prerequisite pack;
+- production or scenario-comparison lens-bucket benchmark maps beyond the synthetic attribution prerequisite pack;
 - published position-thesis assignments beyond the synthetic AI Adoption and Energy Security prerequisite pack;
-- historical returns and performance calculation inputs;
+- production historical returns and performance calculation inputs;
 - trade/holding history sufficient for attribution timing;
 - proposed allocation objects;
 - probabilistic/range analytics;
@@ -47,9 +48,9 @@ Missing or deferred:
 | Representation gate | The row level is known: direct security, fund/NAV, manager-level, look-through, lens bucket, benchmark, or proposed allocation | Label as representation incomplete or keep advisor-only |
 | Denominator gate | All rows in an additive table share one denominator/category system | Split the report or show as non-additive diagnostic |
 | Lens gate | Each in-scope position has an approved assignment, neutral bucket, or review bucket for the selected lens | Show readiness/review status, not lens exposure claims |
-| Benchmark gate | Benchmark or proxy map is approved for the report scope | Defer benchmark-relative report |
+| Benchmark gate | Benchmark or proxy map is approved for the report scope | Synthetic Attribution Prerequisite Pack v1 satisfies this only for future local synthetic attribution mockups; otherwise defer benchmark-relative reports |
 | Cash need gate | For delivered cash: period, generated cash, paid-out cash, and retained/reinvested cash. For support outlook: stated need, period, funding policy, projected generation, and projection basis | Generate only local synthetic delivered/outlook summaries when these inputs exist; keep real/client support readiness gated |
-| Performance history gate | Returns, holdings, flows, and benchmark history are available for the selected period | Defer performance attribution |
+| Performance history gate | Returns, holdings, flows, and benchmark history are available for the selected period | Synthetic Attribution Prerequisite Pack v1 supplies local synthetic attribution inputs; defer real/client performance attribution |
 | Timing gate | Two clearly specified portfolio states and enough trade/flow history exist | Omit timing; do not relabel residual/noise |
 | Probabilistic gate | Approved range methodology and inputs exist | Do not create ranges from deterministic scenarios |
 | Proposal gate | Current and proposed portfolio states are both explicit | Defer current-versus-proposed reports |
@@ -64,7 +65,7 @@ Missing or deferred:
 | Full Lens Exposure | Required | Required for every in-scope position | Optional manager rollup | Required | Not required unless comparing | Not required | Not required | Not required | Optional for impact lens | Optional later | Complete synthetic AI Adoption and Energy Security assignments now exist | Product-grade assignments for other lenses and report-view generation | Bucket totals for unassigned positions |
 | Manager by Lens Exposure | Required | Required | Required | Required | Not required | Not required | Not required | Not required | Optional | Optional later | Manager mappings and complete synthetic AI Adoption / Energy Security assignments exist | Approved report shape and any non-synthetic lens assignments | Cross-manager lens claims without same lens |
 | Manager Role Summary | Required | Useful | Required with mandate/role | Optional for role expression | Optional manager benchmark later | Optional | Optional | Optional | Scenario downside by manager available | Not required | Manager value, scenario attribution, and approved synthetic mandate catalog | Real/client mandate approval beyond synthetic demo | Why a manager is owned when mandate absent |
-| Integrated Performance Attribution | Required | Required over period | Required for manager mode | Required for lens mode | Required | Required | Required | Required for flow-adjusted returns | Optional scenario overlay | Not required | Not available as report-ready system | Benchmark maps, return history, holdings/trades, flows | Value-add, timing, or benchmark-relative claims |
+| Integrated Performance Attribution | Required | Required over period | Required for manager mode | Required for lens mode | Required | Required | Required | Required for flow-adjusted returns | Optional scenario overlay | Not required | Synthetic attribution prerequisite pack now exists; report views/mockups are not generated yet | Real/client benchmark maps, return history, holdings/trades, flows, and approved methodology | Value-add, timing, or benchmark-relative claims beyond the synthetic prerequisite pack |
 | Cash Flow Delivered | Required | Required where income/distributions matter | Optional manager rollup | Not required | Not required | Optional | Useful | Required: period, generated cash, paid-out cash, retained/reinvested cash | Optional stress overlay | Optional later | Synthetic prerequisite pack supplies whole-portfolio trailing-period demo inputs | Real/client cash-flow sources and reliable source history | Real delivered-cash claims |
 | Cash-Flow Support Outlook | Required | Required where income/distributions matter | Optional manager rollup | Not required | Not required | Optional | Useful | Required: stated need, projected generation, surplus/shortfall, funding policy | Optional stress overlay | Optional later | Synthetic prerequisite pack supplies whole-portfolio support outlook inputs | Real/client cash-flow sources, liability schedule, and production projection basis | Real support/sufficiency conclusion |
 | Cash Flow by Manager/Sleeve | Required | Required income/distribution records | Required | Not required | Optional | Optional | Useful | Required | Optional | Optional later | Not report-ready | Reliable cash-flow source data | Manager cash generation claims |
@@ -118,7 +119,7 @@ Minimum report evidence:
 - residual policy;
 - timing gate outcome.
 
-If benchmark or history inputs are missing, do not show attribution. If timing is not cleanly measurable, omit timing.
+For local synthetic demo work, Synthetic Attribution Prerequisite Pack v1 supplies the minimum benchmark, return, weight/flow, decomposition, lens-bucket proxy, manager, residual, and timing-unavailable inputs needed for future Integrated Performance Attribution Summary/Detail, Manager Attribution Summary, and Lens-Based Performance Attribution mockups. For real/client or production reporting, if benchmark or history inputs are missing, do not show attribution. If timing is not cleanly measurable, omit timing.
 
 ### Probabilistic Scenario Range
 
@@ -149,7 +150,7 @@ Lens reports should show unavailable/review buckets rather than silently forcing
 
 - Revised mockups should declare report family id, audience tier, representation level, denominator, and data readiness.
 - Tests for future report views should block mixed category systems in additive tables.
-- Benchmark-relative report fixtures should not be generated until benchmark/proxy maps exist.
+- Benchmark-relative report fixtures should not be generated until benchmark/proxy maps exist. Synthetic Attribution Prerequisite Pack v1 satisfies this only for future local synthetic attribution mockups, not for scenario-versus-benchmark, probabilistic range, or production/client reports.
 - Cash Flow Delivered and Cash-Flow Support Outlook may be generated only for the local synthetic demo from the prerequisite pack; real/client cash-flow support stays readiness-only until real cash-need and cash-flow inputs exist.
 - Full Lens Exposure may be generated for the complete synthetic AI Adoption and Energy Security assignments; any other lens remains readiness/design-only until complete assignments exist.
 - Probabilistic ranges should wait for explicit range analytics.

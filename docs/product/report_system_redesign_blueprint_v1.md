@@ -153,6 +153,8 @@ Benchmarks are explicit product objects. A benchmark may be:
 
 V1 should use predefined and approved benchmark/proxy maps. Advisor freeform benchmark creation should not be part of the first report build.
 
+Synthetic Attribution Prerequisite Pack v1 now supplies a local-only policy benchmark and AI Adoption / Energy Security lens-bucket proxy map for future synthetic attribution mockups. These are demo prerequisites, not production benchmark recommendations and not benchmark scenario outputs.
+
 Lens-bucket benchmark maps support:
 
 - performance attribution;
@@ -179,6 +181,8 @@ Did the portfolio or manager add value versus benchmark, and what decision produ
 ```
 
 The user-facing product language should not force the term "Brinson" as the main label. Internally, the system may use Brinson-style allocation and selection logic where appropriate, but the report family is broader.
+
+Synthetic Attribution Prerequisite Pack v1 now makes the summary/detail attribution family eligible for future synthetic demo mockups by supplying deterministic benchmark, return, weight/flow, decomposition, and manager prerequisite artifacts. Timing remains unavailable until it is tied to cleanly specified portfolio states and trade/flow history.
 
 The attribution chain:
 
@@ -268,8 +272,9 @@ Visual-first does not mean chart-heavy. A visual report should still have one qu
 - Full Lens Exposure.
 - Manager by Lens Exposure.
 - Manager Role Summary and Single-Manager Detail.
-- Integrated Performance Attribution Summary and Detail.
-- Lens-bucket benchmark map contract.
+- Integrated Performance Attribution Summary and Detail from Synthetic Attribution Prerequisite Pack v1.
+- Manager Attribution Summary and Lens-Based Performance Attribution from the synthetic attribution prerequisite pack.
+- Lens-bucket benchmark map contract for any production or scenario-comparison usage beyond the synthetic pack.
 - Probabilistic Scenario Range.
 - Portfolio vs Benchmark Scenario Range.
 

@@ -1,0 +1,56 @@
+{
+  "approval_status": "synthetic_demo_approved",
+  "attribution_families_gated": [
+    "timing_attribution",
+    "probabilistic_scenario_range",
+    "scenario_versus_benchmark",
+    "current_versus_proposed_portfolio"
+  ],
+  "attribution_families_supported": [
+    "integrated_performance_attribution_summary",
+    "integrated_performance_attribution_detail",
+    "manager_attribution_summary",
+    "lens_based_performance_attribution"
+  ],
+  "base_currency": "USD",
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generated_by": "python -m arangur.analytics.synthetic_attribution_prerequisites",
+  "generator_version": "synthetic_attribution_prerequisites.v1",
+  "included_artifacts": [
+    "synthetic_attribution_prerequisite_pack_manifest.json",
+    "portfolio_benchmark_catalog.json",
+    "lens_bucket_benchmark_proxy_map.json",
+    "synthetic_period_returns.json",
+    "synthetic_attribution_weights_flows.json",
+    "integrated_attribution_decomposition_inputs.json",
+    "manager_attribution_prerequisites.json",
+    "attribution_readiness_summary.json"
+  ],
+  "limitations": [
+    "Synthetic returns and proxies are deterministic local-demo inputs.",
+    "No live market data, vendor returns, or real client records are used.",
+    "Scenario Versus Benchmark remains gated because benchmark scenario values are not created here.",
+    "Probabilistic Scenario Range remains gated because no range analytics are created here."
+  ],
+  "local_only": true,
+  "pack_id": "synthetic_attribution_prerequisite_pack_v1",
+  "pack_version": "2026-07-07",
+  "period_end": "2026-06-30",
+  "period_start": "2025-07-01",
+  "portfolio_id": "portfolio_northstar_family_office",
+  "portfolio_snapshot_id": "northstar_synthetic_position_universe_seed_20260630",
+  "readiness_summary": {
+    "integrated_performance_attribution_detail": "ready_for_synthetic_demo_mockup",
+    "integrated_performance_attribution_summary": "ready_for_synthetic_demo_mockup",
+    "lens_based_performance_attribution": "ready_for_synthetic_demo_mockup",
+    "manager_attribution_summary": "ready_for_synthetic_demo_mockup",
+    "probabilistic_scenario_range": "gated",
+    "scenario_versus_benchmark": "gated_until_benchmark_scenario_values_exist",
+    "timing_attribution": "unavailable"
+  },
+  "schema_version": "synthetic_attribution_prerequisite_pack_manifest.v1",
+  "source_lens_catalog": "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/synthetic_lens_catalog.json",
+  "source_manager_mandate_catalog": "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/manager_mandate_catalog.json",
+  "source_position_catalog": "data/simulation/revaluation/position_catalog.json",
+  "synthetic_data": true
+}
