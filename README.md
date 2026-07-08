@@ -268,6 +268,17 @@ This writes:
 - `data/simulation/report_element_views/attribution_v1/`
 - `docs/product/report_mockups/attribution_v1/`
 
+## Audit Synthetic Attribution Methodology
+
+The attribution methodology audit summarizes the calculation provenance and known gaps in the current local synthetic attribution artifacts. It is read-only by default and does not regenerate mockups or wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
+
+```cmd
+set PYTHONPATH=src
+python -m arangur.analytics.attribution_methodology_audit
+```
+
+Use `--output path\to\audit_summary.json` only when a local JSON copy is useful. The full methodology note lives at `docs/architecture/attribution_methodology_and_calculation_audit_v1.md`.
+
 ## Generate Revaluation v2 Report Mockups
 
 The v2 report-view generator turns full-revaluation outputs, attribution outputs, and the synthetic prerequisite pack into v2 report input fixtures, v2 report view fixtures, and Markdown product-review mockups, including separate Cash Flow Delivered and Cash-Flow Support Outlook reports. It preserves v1 mockups and does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.

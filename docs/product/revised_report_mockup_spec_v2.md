@@ -18,6 +18,8 @@ Update after Synthetic Attribution Prerequisite Pack v1: local-only synthetic be
 
 Update after Synthetic Attribution Report Mockups v1: concrete local-only attribution report inputs, view fixtures, and Markdown product-review mockups now exist under `data/simulation/report_element_inputs/attribution_v1/`, `data/simulation/report_element_views/attribution_v1/`, and `docs/product/report_mockups/attribution_v1/`. The generated set covers Integrated Performance Attribution Summary/Detail, Manager Attribution Summary, and Lens-Based Performance Attribution for AI Adoption and Energy Security. This still does not wire Advisor Preview / Populate / Present / generated reports, approve production/client attribution, or make timing, scenario-versus-benchmark, probabilistic range, proposed-portfolio, real-client, or deployment readiness available.
 
+Update after Attribution Methodology and Calculation Audit v1: `docs/architecture/attribution_methodology_and_calculation_audit_v1.md` now defines the attribution objects, benchmark hierarchy, current calculation provenance, and gaps behind the synthetic attribution mockups. The audit confirms that current summary selection/sizing effects are deterministic fixed-share synthetic allocations rather than lower-level calculated attribution effects, while portfolio return, global benchmark return, manager relative return, manager contribution, and lens-bucket relative contribution are arithmetic from local synthetic inputs. Future attribution mockup revisions should wait until the next calculation-input tranche replaces or explicitly labels uncalculated effects.
+
 ## 2. Governing Design Rules
 
 - One report, one question.
@@ -396,7 +398,7 @@ These are v2 visual mockup concepts. Do not implement visuals in this tranche.
 - Question answered: What decisions explain value added or lost versus benchmark?
 - Rendering: Waterfall first, with optional supporting table.
 - Visible content: Global benchmark return, theme benchmark selection, theme benchmark sizing, asset selection, asset sizing, and `Residual / unexplained`.
-- Gate: Benchmark returns, portfolio returns, weights, holdings, flows, benchmark map, attribution method, and timing gate if timing appears.
+- Gate: Benchmark returns, portfolio returns, weights, holdings, flows, benchmark map, attribution method, effect provenance, manager benchmark basis, and timing gate if timing appears.
 - Forbidden: Residual/noise labeled as timing, or visible proxy-return/raw proxy-id labels instead of benchmark-return labels.
 
 ### D. Full Lens Exposure Bar / Stacked View
@@ -445,7 +447,7 @@ Required future visible content:
 - largest positive and negative decision effects;
 - short caveat on benchmark fit or data completeness.
 
-For synthetic demo mockups, the benchmark, period returns, weights/flows, and contribution inputs should come from Synthetic Attribution Prerequisite Pack v1 rather than being invented inside a report generator. Real/client attribution remains gated until production return, benchmark, holding, flow, and methodology inputs exist.
+For synthetic demo mockups, the benchmark, period returns, weights/flows, and contribution inputs should come from Synthetic Attribution Prerequisite Pack v1 rather than being invented inside a report generator. Attribution Methodology and Calculation Audit v1 now adds a stricter provenance rule: every visible attribution effect should be calculated from lower-level inputs or explicitly labeled as a supplied synthetic allocation with a documented reason. Real/client attribution remains gated until production return, benchmark, holding, flow, and methodology inputs exist.
 
 ### B. Detail Shape
 
@@ -461,7 +463,7 @@ Detail should show:
 - residual/unexplained bucket when needed, without relabeling it as timing;
 - timing only if clean trade/holding history, flow treatment, and an approved timing method exist.
 
-Synthetic demo attribution mockups are now generated from the attribution prerequisite pack in `attribution_v1`. The content-polished v1 mockups use global benchmark, theme benchmark, asset selection/sizing, and residual/unexplained wording; Manager Attribution uses Manager Benchmark Return; lens-based reports use Theme Bucket, Portfolio Return, and Theme Benchmark Return. They keep timing unavailable unless a later tranche defines two clean portfolio states, flow treatment, and the required trade/flow history. Do not generate production/client attribution reports until historical return, benchmark, position history, holding/flow, and approved benchmark/proxy prerequisites exist.
+Synthetic demo attribution mockups are now generated from the attribution prerequisite pack in `attribution_v1`. The content-polished v1 mockups use global benchmark, theme benchmark, asset selection/sizing, and residual/unexplained wording; Manager Attribution uses Manager Benchmark Return; lens-based reports use Theme Bucket, Portfolio Return, and Theme Benchmark Return. The methodology audit keeps those files useful for product review but flags the current summary effect components and manager component effects as not lower-level calculated. They keep timing unavailable unless a later tranche defines two clean portfolio states, flow treatment, and the required trade/flow history. Do not generate production/client attribution reports until historical return, benchmark, position history, holding/flow, and approved benchmark/proxy prerequisites exist.
 
 ## 9. Data And Prerequisite Gating
 
@@ -472,8 +474,8 @@ Synthetic demo attribution mockups are now generated from the attribution prereq
 | Cash Flow by Manager/Sleeve | Reliable cash-flow history/projection by manager/sleeve | Gate until source data and period logic exist |
 | Scenario Versus Benchmark | Approved benchmark/proxy map and benchmark scenario value or proxy methodology | Defer benchmark comparison |
 | Manager by Lens Exposure | Published complete position-to-lens assignments plus manager mapping | Possible next for synthetic AI Adoption and Energy Security; defer for any lens without complete assignments |
-| Integrated Performance Attribution Summary | For synthetic demo: Synthetic Attribution Prerequisite Pack v1 supplies benchmark, returns, weights/flows, decomposition inputs, and caveats. For real/client mode: production return, benchmark, holding, flow, and methodology inputs remain absent | Generated for local synthetic demo; keep real/client attribution gated |
-| Integrated Performance Attribution Detail | For synthetic demo: decomposition inputs, theme-benchmark detail rows, and manager rows exist, with timing unavailable. For real/client mode: detailed production holdings/trades and reconciliation policy remain absent | Generated for local synthetic demo; omit timing unless cleanly defined |
+| Integrated Performance Attribution Summary | For synthetic demo: Synthetic Attribution Prerequisite Pack v1 supplies benchmark, returns, weights/flows, decomposition inputs, and caveats, and Attribution Methodology and Calculation Audit v1 now documents which effects are arithmetic versus supplied synthetic allocations. For real/client mode: production return, benchmark, holding, flow, and methodology inputs remain absent | Generated for local synthetic demo; keep real/client attribution gated and replace or explicitly label uncalculated effects before durable product implementation |
+| Integrated Performance Attribution Detail | For synthetic demo: decomposition inputs, theme-benchmark detail rows, and manager rows exist, with timing unavailable; component fields marked `Not separately measured` are audit-recognized calculation gaps. For real/client mode: detailed production holdings/trades and reconciliation policy remain absent | Generated for local synthetic demo; omit timing unless cleanly defined and replace `Not separately measured` only after calculation inputs exist |
 | Timing Attribution | Two clearly specified portfolio states, trade/holding history, flow treatment, clean timing methodology | Omit timing or mark unavailable |
 | Probabilistic Scenario Range | Covariance/probabilistic scenario engine outputs, range methodology, horizon, validation, benchmark range if compared | Do not create ranges from deterministic scenarios |
 | Full Lens Exposure | Complete lens definition and published position-to-lens assignments for all in-scope positions | Generate synthetic AI Adoption and Energy Security mockups from the pack; produce design-only spec/readiness if missing for another lens |
@@ -528,7 +530,8 @@ It should:
 - avoid advisor UI wiring;
 - avoid generated-report wiring;
 - use the synthetic report prerequisite pack for Cash Flow Delivered, Cash-Flow Support Outlook, Manager Role Summary, and Full Lens Exposure rather than inventing report values inside mockups;
-- use Synthetic Attribution Prerequisite Pack v1 for attribution mockups rather than inventing benchmark, return, weight, or decomposition values inside mockups;
+- use Synthetic Attribution Prerequisite Pack v1 and Attribution Methodology and Calculation Audit v1 for attribution work rather than inventing benchmark, return, weight, or decomposition values inside mockups;
+- prefer a separate Synthetic Attribution Calculation Inputs v1 tranche before regenerating final attribution mockups;
 - avoid generating still-gated reports as if data exists;
 - preserve v1 artifacts if useful for comparison, or write v2 artifacts to a separate path;
 - keep synthetic/local-only boundaries;
