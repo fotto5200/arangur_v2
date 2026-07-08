@@ -1,0 +1,334 @@
+{
+  "actual_allocation_benchmark_return": 0.067375,
+  "actual_manager_weights": [
+    {
+      "actual_weight": 0.248556,
+      "manager_id": "mgr_a_growth_ai_infrastructure"
+    },
+    {
+      "actual_weight": 0.188107,
+      "manager_id": "mgr_b_core_quality_equity"
+    },
+    {
+      "actual_weight": 0.130237,
+      "manager_id": "mgr_c_income_cash_generation"
+    },
+    {
+      "actual_weight": 0.203096,
+      "manager_id": "mgr_d_private_real_assets"
+    },
+    {
+      "actual_weight": 0.140435,
+      "manager_id": "mgr_e_liquidity_defensive"
+    },
+    {
+      "actual_weight": 0.089569,
+      "manager_id": "mgr_f_opportunistic_macro"
+    }
+  ],
+  "actual_portfolio_return": 0.081456,
+  "allocation_drift_input": [
+    {
+      "actual_weight": 0.248556,
+      "advisor_meaning": "Within the synthetic rebalance tolerance; monitor without treating as an error.",
+      "caveats": [
+        "Drift is not automatically an advisor or manager error.",
+        "Synthetic causes are review prompts, not conclusions."
+      ],
+      "display_name": "Manager A - Growth / AI Infrastructure",
+      "drift": 0.028556,
+      "drift_status": "within_tolerance",
+      "likely_drift_causes": [
+        "performance_drift",
+        "valuation_mark_effect"
+      ],
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "policy_bucket_id": "high_upside_optionality_thematic_growth",
+      "target_weight": 0.22,
+      "tolerance": 0.035
+    },
+    {
+      "actual_weight": 0.188107,
+      "advisor_meaning": "Within the synthetic rebalance tolerance; monitor without treating as an error.",
+      "caveats": [
+        "Drift is not automatically an advisor or manager error.",
+        "Synthetic causes are review prompts, not conclusions."
+      ],
+      "display_name": "Manager B - Core Quality Equity",
+      "drift": -0.001893,
+      "drift_status": "within_tolerance",
+      "likely_drift_causes": [
+        "performance_drift",
+        "valuation_mark_effect"
+      ],
+      "manager_id": "mgr_b_core_quality_equity",
+      "policy_bucket_id": "core_quality_growth",
+      "target_weight": 0.19,
+      "tolerance": 0.035
+    },
+    {
+      "actual_weight": 0.130237,
+      "advisor_meaning": "Below target and outside tolerance; review flows, timing, and policy intent before assigning cause.",
+      "caveats": [
+        "Drift is not automatically an advisor or manager error.",
+        "Synthetic causes are review prompts, not conclusions."
+      ],
+      "display_name": "Manager C - Income and Cash Generation",
+      "drift": -0.039763,
+      "drift_status": "review",
+      "likely_drift_causes": [
+        "flow_or_withdrawal",
+        "implementation_timing",
+        "unknown"
+      ],
+      "manager_id": "mgr_c_income_cash_generation",
+      "policy_bucket_id": "income_capital_preservation",
+      "target_weight": 0.17,
+      "tolerance": 0.03
+    },
+    {
+      "actual_weight": 0.203096,
+      "advisor_meaning": "Within the synthetic rebalance tolerance; monitor without treating as an error.",
+      "caveats": [
+        "Drift is not automatically an advisor or manager error.",
+        "Synthetic causes are review prompts, not conclusions."
+      ],
+      "display_name": "Manager D - Private Markets / Real Assets",
+      "drift": 0.003096,
+      "drift_status": "within_tolerance",
+      "likely_drift_causes": [
+        "performance_drift",
+        "valuation_mark_effect"
+      ],
+      "manager_id": "mgr_d_private_real_assets",
+      "policy_bucket_id": "private_markets_real_assets",
+      "target_weight": 0.2,
+      "tolerance": 0.04
+    },
+    {
+      "actual_weight": 0.140435,
+      "advisor_meaning": "Within the synthetic rebalance tolerance; monitor without treating as an error.",
+      "caveats": [
+        "Drift is not automatically an advisor or manager error.",
+        "Synthetic causes are review prompts, not conclusions."
+      ],
+      "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+      "drift": 0.000435,
+      "drift_status": "within_tolerance",
+      "likely_drift_causes": [
+        "performance_drift",
+        "valuation_mark_effect"
+      ],
+      "manager_id": "mgr_e_liquidity_defensive",
+      "policy_bucket_id": "liquidity_reserve_defensive_ballast",
+      "target_weight": 0.14,
+      "tolerance": 0.025
+    },
+    {
+      "actual_weight": 0.089569,
+      "advisor_meaning": "Within the synthetic rebalance tolerance; monitor without treating as an error.",
+      "caveats": [
+        "Drift is not automatically an advisor or manager error.",
+        "Synthetic causes are review prompts, not conclusions."
+      ],
+      "display_name": "Manager F - Opportunistic Macro / Hedge",
+      "drift": 0.009569,
+      "drift_status": "within_tolerance",
+      "likely_drift_causes": [
+        "performance_drift",
+        "valuation_mark_effect"
+      ],
+      "manager_id": "mgr_f_opportunistic_macro",
+      "policy_bucket_id": "high_upside_optionality_thematic_growth",
+      "target_weight": 0.08,
+      "tolerance": 0.025
+    }
+  ],
+  "calculated_report_ready": false,
+  "caveats": [
+    "Preliminary arithmetic only; this artifact is an input scaffold, not a final policy attribution report.",
+    "A future engine should define the exact return/flow basis before client use."
+  ],
+  "generated_at": "2026-07-08T00:00:00Z",
+  "global_benchmark_return": 0.06994,
+  "input_rows": [
+    {
+      "actual_allocation_benchmark_contribution": 0.023613,
+      "actual_manager_return_contribution": 0.028832,
+      "actual_weight": 0.248556,
+      "display_name": "Manager A - Growth / AI Infrastructure",
+      "manager_actual_return": 0.116,
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "mandate_benchmark_return": 0.095,
+      "policy_benchmark_contribution": 0.0209,
+      "policy_weight": 0.22
+    },
+    {
+      "actual_allocation_benchmark_contribution": 0.014296,
+      "actual_manager_return_contribution": 0.015801,
+      "actual_weight": 0.188107,
+      "display_name": "Manager B - Core Quality Equity",
+      "manager_actual_return": 0.084,
+      "manager_id": "mgr_b_core_quality_equity",
+      "mandate_benchmark_return": 0.076,
+      "policy_benchmark_contribution": 0.01444,
+      "policy_weight": 0.19
+    },
+    {
+      "actual_allocation_benchmark_contribution": 0.0056,
+      "actual_manager_return_contribution": 0.006121,
+      "actual_weight": 0.130237,
+      "display_name": "Manager C - Income and Cash Generation",
+      "manager_actual_return": 0.047,
+      "manager_id": "mgr_c_income_cash_generation",
+      "mandate_benchmark_return": 0.043,
+      "policy_benchmark_contribution": 0.00731,
+      "policy_weight": 0.17
+    },
+    {
+      "actual_allocation_benchmark_contribution": 0.012795,
+      "actual_manager_return_contribution": 0.01442,
+      "actual_weight": 0.203096,
+      "display_name": "Manager D - Private Markets / Real Assets",
+      "manager_actual_return": 0.071,
+      "manager_id": "mgr_d_private_real_assets",
+      "mandate_benchmark_return": 0.063,
+      "policy_benchmark_contribution": 0.0126,
+      "policy_weight": 0.2
+    },
+    {
+      "actual_allocation_benchmark_contribution": 0.004353,
+      "actual_manager_return_contribution": 0.004775,
+      "actual_weight": 0.140435,
+      "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+      "manager_actual_return": 0.034,
+      "manager_id": "mgr_e_liquidity_defensive",
+      "mandate_benchmark_return": 0.031,
+      "policy_benchmark_contribution": 0.00434,
+      "policy_weight": 0.14
+    },
+    {
+      "actual_allocation_benchmark_contribution": 0.006718,
+      "actual_manager_return_contribution": 0.007972,
+      "actual_weight": 0.089569,
+      "display_name": "Manager F - Opportunistic Macro / Hedge",
+      "manager_actual_return": 0.089,
+      "manager_id": "mgr_f_opportunistic_macro",
+      "mandate_benchmark_return": 0.075,
+      "policy_benchmark_contribution": 0.006,
+      "policy_weight": 0.08
+    }
+  ],
+  "local_only": true,
+  "manager_actual_returns": [
+    {
+      "manager_actual_return": 0.116,
+      "manager_id": "mgr_a_growth_ai_infrastructure"
+    },
+    {
+      "manager_actual_return": 0.084,
+      "manager_id": "mgr_b_core_quality_equity"
+    },
+    {
+      "manager_actual_return": 0.047,
+      "manager_id": "mgr_c_income_cash_generation"
+    },
+    {
+      "manager_actual_return": 0.071,
+      "manager_id": "mgr_d_private_real_assets"
+    },
+    {
+      "manager_actual_return": 0.034,
+      "manager_id": "mgr_e_liquidity_defensive"
+    },
+    {
+      "manager_actual_return": 0.089,
+      "manager_id": "mgr_f_opportunistic_macro"
+    }
+  ],
+  "manager_current_weight_return_reconciliation": {
+    "calculated_actual_portfolio_return": 0.081456,
+    "difference": 0.003535,
+    "meaning": "The policy scaffold uses current revaluation marks for actual weights; the existing calculated attribution pack uses its own synthetic period return basis.",
+    "return_from_current_snapshot_weights": 0.077921,
+    "status": "scaffold_reconciliation_needed"
+  },
+  "manager_implementation_effect_candidate": 0.010546,
+  "manager_mandate_benchmark_returns": [
+    {
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "mandate_benchmark_return": 0.095
+    },
+    {
+      "manager_id": "mgr_b_core_quality_equity",
+      "mandate_benchmark_return": 0.076
+    },
+    {
+      "manager_id": "mgr_c_income_cash_generation",
+      "mandate_benchmark_return": 0.043
+    },
+    {
+      "manager_id": "mgr_d_private_real_assets",
+      "mandate_benchmark_return": 0.063
+    },
+    {
+      "manager_id": "mgr_e_liquidity_defensive",
+      "mandate_benchmark_return": 0.031
+    },
+    {
+      "manager_id": "mgr_f_opportunistic_macro",
+      "mandate_benchmark_return": 0.075
+    }
+  ],
+  "pack_id": "synthetic_policy_mandate_pack_v1",
+  "pack_version": "2026-07-08",
+  "period_end": "2026-06-30",
+  "period_start": "2025-07-01",
+  "policy_allocation_drift_effect_candidate": 0.001785,
+  "policy_benchmark_return": 0.06559,
+  "policy_selection_mandate_mix_input": -0.00435,
+  "residual_policy": {
+    "residual_is_explicit_reconciler": true,
+    "timing_status": "unavailable",
+    "timing_used_as_residual": false
+  },
+  "scaffold_not_final_report": true,
+  "schema_version": "policy_level_attribution_inputs.v1",
+  "source_metadata": {
+    "external_data_used": false,
+    "live_market_data_used": false,
+    "local_only": true,
+    "real_client_data_used": false,
+    "source": "policy_level_attribution_inputs",
+    "synthetic_data": true
+  },
+  "synthetic_data": true,
+  "target_manager_weights": [
+    {
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "target_weight": 0.22
+    },
+    {
+      "manager_id": "mgr_b_core_quality_equity",
+      "target_weight": 0.19
+    },
+    {
+      "manager_id": "mgr_c_income_cash_generation",
+      "target_weight": 0.17
+    },
+    {
+      "manager_id": "mgr_d_private_real_assets",
+      "target_weight": 0.2
+    },
+    {
+      "manager_id": "mgr_e_liquidity_defensive",
+      "target_weight": 0.14
+    },
+    {
+      "manager_id": "mgr_f_opportunistic_macro",
+      "target_weight": 0.08
+    }
+  ],
+  "tie_out_tolerance": 1e-06,
+  "timing_status": "unavailable"
+}

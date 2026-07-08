@@ -1,0 +1,162 @@
+{
+  "allocation_mode": "explicit_policy_allocation",
+  "approval_status": "synthetic_demo_approved",
+  "base_currency": "USD",
+  "caveats": [
+    "Synthetic advisor/family policy profile for local demo readiness.",
+    "Not a client mandate document."
+  ],
+  "equal_weight_theme_policy": false,
+  "equal_weight_theme_policy_note": "This policy profile does not use equal-weight AI Adoption theme buckets.",
+  "generated_at": "2026-07-08T00:00:00Z",
+  "local_only": true,
+  "manager_sleeve_target_allocation": [
+    {
+      "advisor_notes": "High-upside sleeve; drift should be reviewed in context of volatility and realized performance.",
+      "client_safe_description": "Growth engine for AI infrastructure and related public equity exposure.",
+      "display_name": "Manager A - Growth / AI Infrastructure",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "mandate_role": "Growth / AI Infrastructure",
+      "policy_bucket_id": "high_upside_optionality_thematic_growth",
+      "rebalance_tolerance": 0.035,
+      "target_weight": 0.22,
+      "target_weight_source": "synthetic_policy_profile"
+    },
+    {
+      "advisor_notes": "Anchor public-equity growth sleeve with normal rebalance bands.",
+      "client_safe_description": "Core public equity allocation intended to compound through higher-quality businesses.",
+      "display_name": "Manager B - Core Quality Equity",
+      "manager_id": "mgr_b_core_quality_equity",
+      "mandate_role": "Core Quality Equity",
+      "policy_bucket_id": "core_quality_growth",
+      "rebalance_tolerance": 0.035,
+      "target_weight": 0.19,
+      "target_weight_source": "synthetic_policy_profile"
+    },
+    {
+      "advisor_notes": "Review underweights before assigning cause; flows may explain drift.",
+      "client_safe_description": "Income-oriented allocation intended to support cash generation and capital preservation.",
+      "display_name": "Manager C - Income and Cash Generation",
+      "manager_id": "mgr_c_income_cash_generation",
+      "mandate_role": "Income and Cash Generation",
+      "policy_bucket_id": "income_capital_preservation",
+      "rebalance_tolerance": 0.03,
+      "target_weight": 0.17,
+      "target_weight_source": "synthetic_policy_profile"
+    },
+    {
+      "advisor_notes": "Valuation marks can move slowly; drift should not be overread.",
+      "client_safe_description": "Private markets and real-asset allocation for diversification and inflation sensitivity.",
+      "display_name": "Manager D - Private Markets / Real Assets",
+      "manager_id": "mgr_d_private_real_assets",
+      "mandate_role": "Private Markets / Real Assets",
+      "policy_bucket_id": "private_markets_real_assets",
+      "rebalance_tolerance": 0.04,
+      "target_weight": 0.2,
+      "target_weight_source": "synthetic_policy_profile"
+    },
+    {
+      "advisor_notes": "Useful quick-start baseline for cash and defensive allocation review.",
+      "client_safe_description": "Liquidity reserve and defensive ballast for near-term flexibility.",
+      "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "mandate_role": "Liquidity Reserve / Defensive Ballast",
+      "policy_bucket_id": "liquidity_reserve_defensive_ballast",
+      "rebalance_tolerance": 0.025,
+      "target_weight": 0.14,
+      "target_weight_source": "synthetic_policy_profile"
+    },
+    {
+      "advisor_notes": "Small sleeve; evaluate in context of approved optionality budget.",
+      "client_safe_description": "Opportunistic macro allocation intended to add convexity and tactical breadth.",
+      "display_name": "Manager F - Opportunistic Macro / Hedge",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "mandate_role": "Opportunistic Macro / Hedge",
+      "policy_bucket_id": "high_upside_optionality_thematic_growth",
+      "rebalance_tolerance": 0.025,
+      "target_weight": 0.08,
+      "target_weight_source": "synthetic_policy_profile"
+    }
+  ],
+  "manager_sleeve_target_weight_sum": 1.0,
+  "pack_id": "synthetic_policy_mandate_pack_v1",
+  "pack_version": "2026-07-08",
+  "period_end": "2026-06-30",
+  "period_start": "2025-07-01",
+  "policy_bucket_target_allocation": [
+    {
+      "display_name": "Income / Capital Preservation",
+      "linked_managers": [
+        "mgr_c_income_cash_generation"
+      ],
+      "policy_bucket_id": "income_capital_preservation",
+      "rebalance_tolerance": 0.03,
+      "risk_budget_note": "Lower volatility role; review if materially below target.",
+      "role_description": "Support cash generation and preserve capital through income-oriented exposures.",
+      "target_weight": 0.17,
+      "target_weight_source": "synthetic_policy_profile"
+    },
+    {
+      "display_name": "Core Quality Growth",
+      "linked_managers": [
+        "mgr_b_core_quality_equity"
+      ],
+      "policy_bucket_id": "core_quality_growth",
+      "rebalance_tolerance": 0.035,
+      "risk_budget_note": "Moderate equity risk budget with normal rebalance flexibility.",
+      "role_description": "Maintain a durable core public equity growth allocation.",
+      "target_weight": 0.19,
+      "target_weight_source": "synthetic_policy_profile"
+    },
+    {
+      "display_name": "Private Markets / Real Assets",
+      "linked_managers": [
+        "mgr_d_private_real_assets"
+      ],
+      "policy_bucket_id": "private_markets_real_assets",
+      "rebalance_tolerance": 0.04,
+      "risk_budget_note": "Valuation cadence can create apparent drift that needs review.",
+      "role_description": "Diversify the portfolio through private market and real-asset exposures.",
+      "target_weight": 0.2,
+      "target_weight_source": "synthetic_policy_profile"
+    },
+    {
+      "display_name": "Liquidity Reserve / Defensive Ballast",
+      "linked_managers": [
+        "mgr_e_liquidity_defensive"
+      ],
+      "policy_bucket_id": "liquidity_reserve_defensive_ballast",
+      "rebalance_tolerance": 0.025,
+      "risk_budget_note": "Tighter tolerance because this bucket supports flexibility.",
+      "role_description": "Keep near-term liquidity and defensive ballast explicit.",
+      "target_weight": 0.14,
+      "target_weight_source": "synthetic_policy_profile"
+    },
+    {
+      "display_name": "High-Upside Optionality / Thematic Growth",
+      "linked_managers": [
+        "mgr_a_growth_ai_infrastructure",
+        "mgr_f_opportunistic_macro"
+      ],
+      "policy_bucket_id": "high_upside_optionality_thematic_growth",
+      "rebalance_tolerance": 0.035,
+      "risk_budget_note": "Upside can create drift; review before interpreting as an error.",
+      "role_description": "Limit high-upside thematic and opportunistic exposure to an agreed sleeve.",
+      "target_weight": 0.3,
+      "target_weight_source": "synthetic_policy_profile"
+    }
+  ],
+  "policy_bucket_target_weight_sum": 1.0,
+  "policy_profile_display_name": "Northstar Synthetic Family Policy Allocation",
+  "policy_profile_id": "northstar_synthetic_family_policy_allocation_v1",
+  "schema_version": "policy_allocation_profile.v1",
+  "source_metadata": {
+    "external_data_used": false,
+    "live_market_data_used": false,
+    "local_only": true,
+    "real_client_data_used": false,
+    "source": "synthetic_policy_allocation_profile",
+    "synthetic_data": true
+  },
+  "synthetic_data": true
+}

@@ -59,6 +59,8 @@ Status update after Attribution Effect Basis Polish v1: calculated attribution d
 
 Status update after Attribution Policy / Mandate Benchmark Design v1: attribution report families should separate family/advisor policy allocation from manager mandate implementation. Equal-weight lens attribution is a diagnostic report basis unless the family/advisor policy explicitly selected equal weights. The next attribution family split should add Policy Allocation Review and Policy-Level Attribution before attempting a blended all-in attribution bridge.
 
+Status update after Synthetic Policy Allocation / Mandate Benchmark Pack v1: local synthetic policy/mandate prerequisites now exist for explicit policy targets, actual manager allocation, drift/tolerance review, imputed-current baseline, manager mandate benchmarks, policy-level attribution input scaffolding, and equal-weight diagnostic classification. Policy Allocation Review is ready for a synthetic demo mockup; Policy-Level Attribution remains input-scaffold ready until a calculated engine tranche exists; Equal-Weight Diagnostic Attribution remains advisor/internal unless explicitly selected as policy.
+
 ## Catalog Rules
 
 - A family may have multiple report instances, but each instance should answer one question.

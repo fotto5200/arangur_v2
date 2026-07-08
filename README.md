@@ -307,6 +307,19 @@ This writes deterministic JSON under:
 
 - `data/simulation/attribution_calculated/synthetic_attribution_engine_v1/`
 
+## Generate Synthetic Policy Mandate Prerequisites
+
+The policy/mandate prerequisite generator writes local-only synthetic policy allocation and manager mandate benchmark artifacts for future Policy Allocation Review and Policy-Level Attribution work. It does not regenerate attribution mockups or wire Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
+
+```cmd
+set PYTHONPATH=src
+python -m arangur.analytics.synthetic_policy_mandate_prerequisites
+```
+
+This writes deterministic JSON under:
+
+- `data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/`
+
 ## Generate Revaluation v2 Report Mockups
 
 The v2 report-view generator turns full-revaluation outputs, attribution outputs, and the synthetic prerequisite pack into v2 report input fixtures, v2 report view fixtures, and Markdown product-review mockups, including separate Cash Flow Delivered and Cash-Flow Support Outlook reports. It preserves v1 mockups and does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.

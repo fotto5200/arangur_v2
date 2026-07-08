@@ -32,6 +32,8 @@ Update after Attribution Effect Basis Polish v1: calculated `attribution_v1` det
 
 Update after Attribution Policy / Mandate Benchmark Design v1: future attribution mockups should not treat equal-weight theme buckets as the default client policy benchmark. Equal-weight attribution is diagnostic unless explicitly selected as policy. The next mockup path should split policy allocation review / policy-level attribution from within-manager mandate attribution before adding any blended all-in attribution report.
 
+Update after Synthetic Policy Allocation / Mandate Benchmark Pack v1: local-only prerequisite artifacts now exist for explicit policy allocation, actual manager allocation, drift/tolerance rows, imputed-current baseline, manager mandate benchmarks, policy-level attribution input scaffolding, and equal-weight diagnostic classification. This makes Policy Allocation Review eligible for a future synthetic mockup. Policy-Level Attribution still needs a calculation-engine tranche before a calculated report mockup should be generated. This update does not regenerate existing attribution mockups or wire Advisor Preview / Populate / Present / generated reports.
+
 ## 2. Governing Design Rules
 
 - One report, one question.

@@ -1,0 +1,222 @@
+{
+  "coverage_summary": {
+    "all_current_managers_covered": true,
+    "all_manager_benchmark_basis_explicit": true,
+    "policy_actual_and_mandate_benchmark_linked": true
+  },
+  "generated_at": "2026-07-08T00:00:00Z",
+  "local_only": true,
+  "manager_count": 6,
+  "pack_id": "synthetic_policy_mandate_pack_v1",
+  "pack_version": "2026-07-08",
+  "rows": [
+    {
+      "actual_weight": 0.248556,
+      "attribution_layer_supported": [
+        "policy_allocation",
+        "manager_mandate",
+        "within_manager"
+      ],
+      "benchmark_basis_description": "Uses the existing manager-specific synthetic mandate proxy as the manager comparison benchmark, while separately storing the selected AI Adoption theme-benchmark blend needed for future calculated effects.",
+      "benchmark_basis_type": "hybrid_synthetic_demo",
+      "caveats": [
+        "Policy allocation uses target and actual weights.",
+        "Manager mandate attribution uses the mandate benchmark, not capital the manager did not control."
+      ],
+      "display_name": "Manager A - Growth / AI Infrastructure",
+      "drift_status": "within_tolerance",
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "mandate_benchmark_id": "mgr_a_growth_ai_infrastructure_mandate_benchmark_v1",
+      "mandate_benchmark_return": 0.095,
+      "policy_weight": 0.22,
+      "theme_benchmark_blend": [
+        {
+          "component_return": 0.095,
+          "component_type": "manager_specific_synthetic_mandate_proxy",
+          "proxy_display_name": "Synthetic Growth / AI Infrastructure Manager Proxy",
+          "proxy_id": "mgr_a_growth_ai_infrastructure_synthetic_manager_proxy_v1"
+        },
+        {
+          "component_return": 0.096563,
+          "component_type": "selected_lens_theme_benchmark_blend",
+          "selected_lens_id": "ai_adoption"
+        }
+      ]
+    },
+    {
+      "actual_weight": 0.188107,
+      "attribution_layer_supported": [
+        "policy_allocation",
+        "manager_mandate",
+        "within_manager"
+      ],
+      "benchmark_basis_description": "Uses the existing manager-specific synthetic mandate proxy as the manager comparison benchmark, while separately storing the selected AI Adoption theme-benchmark blend needed for future calculated effects.",
+      "benchmark_basis_type": "hybrid_synthetic_demo",
+      "caveats": [
+        "Policy allocation uses target and actual weights.",
+        "Manager mandate attribution uses the mandate benchmark, not capital the manager did not control."
+      ],
+      "display_name": "Manager B - Core Quality Equity",
+      "drift_status": "within_tolerance",
+      "manager_id": "mgr_b_core_quality_equity",
+      "mandate_benchmark_id": "mgr_b_core_quality_equity_mandate_benchmark_v1",
+      "mandate_benchmark_return": 0.076,
+      "policy_weight": 0.19,
+      "theme_benchmark_blend": [
+        {
+          "component_return": 0.076,
+          "component_type": "manager_specific_synthetic_mandate_proxy",
+          "proxy_display_name": "Synthetic Core Quality Equity Manager Proxy",
+          "proxy_id": "mgr_b_core_quality_equity_synthetic_manager_proxy_v1"
+        },
+        {
+          "component_return": 0.072075,
+          "component_type": "selected_lens_theme_benchmark_blend",
+          "selected_lens_id": "ai_adoption"
+        }
+      ]
+    },
+    {
+      "actual_weight": 0.130237,
+      "attribution_layer_supported": [
+        "policy_allocation",
+        "manager_mandate",
+        "within_manager"
+      ],
+      "benchmark_basis_description": "Uses the existing manager-specific synthetic mandate proxy as the manager comparison benchmark, while separately storing the selected AI Adoption theme-benchmark blend needed for future calculated effects.",
+      "benchmark_basis_type": "hybrid_synthetic_demo",
+      "caveats": [
+        "Policy allocation uses target and actual weights.",
+        "Manager mandate attribution uses the mandate benchmark, not capital the manager did not control."
+      ],
+      "display_name": "Manager C - Income and Cash Generation",
+      "drift_status": "review",
+      "manager_id": "mgr_c_income_cash_generation",
+      "mandate_benchmark_id": "mgr_c_income_cash_generation_mandate_benchmark_v1",
+      "mandate_benchmark_return": 0.043,
+      "policy_weight": 0.17,
+      "theme_benchmark_blend": [
+        {
+          "component_return": 0.043,
+          "component_type": "manager_specific_synthetic_mandate_proxy",
+          "proxy_display_name": "Synthetic Income and Credit Manager Proxy",
+          "proxy_id": "mgr_c_income_cash_generation_synthetic_manager_proxy_v1"
+        },
+        {
+          "component_return": 0.050777,
+          "component_type": "selected_lens_theme_benchmark_blend",
+          "selected_lens_id": "ai_adoption"
+        }
+      ]
+    },
+    {
+      "actual_weight": 0.203096,
+      "attribution_layer_supported": [
+        "policy_allocation",
+        "manager_mandate",
+        "within_manager"
+      ],
+      "benchmark_basis_description": "Uses the existing manager-specific synthetic mandate proxy as the manager comparison benchmark, while separately storing the selected AI Adoption theme-benchmark blend needed for future calculated effects.",
+      "benchmark_basis_type": "hybrid_synthetic_demo",
+      "caveats": [
+        "Policy allocation uses target and actual weights.",
+        "Manager mandate attribution uses the mandate benchmark, not capital the manager did not control."
+      ],
+      "display_name": "Manager D - Private Markets / Real Assets",
+      "drift_status": "within_tolerance",
+      "manager_id": "mgr_d_private_real_assets",
+      "mandate_benchmark_id": "mgr_d_private_real_assets_mandate_benchmark_v1",
+      "mandate_benchmark_return": 0.063,
+      "policy_weight": 0.2,
+      "theme_benchmark_blend": [
+        {
+          "component_return": 0.063,
+          "component_type": "manager_specific_synthetic_mandate_proxy",
+          "proxy_display_name": "Synthetic Private Markets / Real Assets Manager Proxy",
+          "proxy_id": "mgr_d_private_real_assets_synthetic_manager_proxy_v1"
+        },
+        {
+          "component_return": 0.065758,
+          "component_type": "selected_lens_theme_benchmark_blend",
+          "selected_lens_id": "ai_adoption"
+        }
+      ]
+    },
+    {
+      "actual_weight": 0.140435,
+      "attribution_layer_supported": [
+        "policy_allocation",
+        "manager_mandate",
+        "within_manager"
+      ],
+      "benchmark_basis_description": "Uses the existing manager-specific synthetic mandate proxy as the manager comparison benchmark, while separately storing the selected AI Adoption theme-benchmark blend needed for future calculated effects.",
+      "benchmark_basis_type": "hybrid_synthetic_demo",
+      "caveats": [
+        "Policy allocation uses target and actual weights.",
+        "Manager mandate attribution uses the mandate benchmark, not capital the manager did not control."
+      ],
+      "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+      "drift_status": "within_tolerance",
+      "manager_id": "mgr_e_liquidity_defensive",
+      "mandate_benchmark_id": "mgr_e_liquidity_defensive_mandate_benchmark_v1",
+      "mandate_benchmark_return": 0.031,
+      "policy_weight": 0.14,
+      "theme_benchmark_blend": [
+        {
+          "component_return": 0.031,
+          "component_type": "manager_specific_synthetic_mandate_proxy",
+          "proxy_display_name": "Synthetic Liquidity Reserve Policy Proxy",
+          "proxy_id": "mgr_e_liquidity_defensive_synthetic_manager_proxy_v1"
+        },
+        {
+          "component_return": 0.052,
+          "component_type": "selected_lens_theme_benchmark_blend",
+          "selected_lens_id": "ai_adoption"
+        }
+      ]
+    },
+    {
+      "actual_weight": 0.089569,
+      "attribution_layer_supported": [
+        "policy_allocation",
+        "manager_mandate",
+        "within_manager"
+      ],
+      "benchmark_basis_description": "Uses the existing manager-specific synthetic mandate proxy as the manager comparison benchmark, while separately storing the selected AI Adoption theme-benchmark blend needed for future calculated effects.",
+      "benchmark_basis_type": "hybrid_synthetic_demo",
+      "caveats": [
+        "Policy allocation uses target and actual weights.",
+        "Manager mandate attribution uses the mandate benchmark, not capital the manager did not control."
+      ],
+      "display_name": "Manager F - Opportunistic Macro / Hedge",
+      "drift_status": "within_tolerance",
+      "manager_id": "mgr_f_opportunistic_macro",
+      "mandate_benchmark_id": "mgr_f_opportunistic_macro_mandate_benchmark_v1",
+      "mandate_benchmark_return": 0.075,
+      "policy_weight": 0.08,
+      "theme_benchmark_blend": [
+        {
+          "component_return": 0.075,
+          "component_type": "manager_specific_synthetic_mandate_proxy",
+          "proxy_display_name": "Synthetic Opportunistic Macro / Hedge Proxy",
+          "proxy_id": "mgr_f_opportunistic_macro_synthetic_manager_proxy_v1"
+        },
+        {
+          "component_return": 0.057259,
+          "component_type": "selected_lens_theme_benchmark_blend",
+          "selected_lens_id": "ai_adoption"
+        }
+      ]
+    }
+  ],
+  "schema_version": "manager_benchmark_basis_map.v1",
+  "source_metadata": {
+    "external_data_used": false,
+    "live_market_data_used": false,
+    "local_only": true,
+    "real_client_data_used": false,
+    "source": "manager_benchmark_basis_map",
+    "synthetic_data": true
+  },
+  "synthetic_data": true
+}

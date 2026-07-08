@@ -1,0 +1,59 @@
+{
+  "default_mode": "explicit_policy_allocation",
+  "generated_at": "2026-07-08T00:00:00Z",
+  "local_only": true,
+  "modes": [
+    {
+      "caveats": [
+        "Synthetic local-demo policy only.",
+        "Drift needs interpretation before judgment."
+      ],
+      "client_advisor_meaning": "Target-versus-actual drift can be discussed without blaming the manager for capital allocation.",
+      "display_name": "Explicit Policy Allocation",
+      "mode": "explicit_policy_allocation",
+      "purpose": "Use stated family/advisor target weights as the allocation benchmark.",
+      "readiness_status": "ready_for_synthetic_demo",
+      "what_question_it_answers": "Did the portfolio follow the agreed allocation, and did that allocation work?",
+      "when_used": "Use when target weights by manager, mandate, sleeve, or policy bucket have been documented."
+    },
+    {
+      "caveats": [
+        "Does not prove the current allocation was intentionally chosen.",
+        "Useful for setup, not a substitute for advisor/family policy approval."
+      ],
+      "client_advisor_meaning": "Suppresses policy allocation drift attribution until a target policy is agreed.",
+      "display_name": "Imputed Current Allocation",
+      "mode": "imputed_current_allocation",
+      "purpose": "Accept current NAV weights as the starting policy baseline.",
+      "readiness_status": "ready_for_synthetic_demo_quick_start",
+      "what_question_it_answers": "What happened given the capital already allocated today?",
+      "when_used": "Use for quick-start setup or when no documented target weights exist yet."
+    },
+    {
+      "caveats": [
+        "Each row must disclose whether it is explicit, imputed, or grouped.",
+        "Do not calculate drift where no target exists."
+      ],
+      "client_advisor_meaning": "Keeps target-backed drift separate from current-baseline or grouped rows.",
+      "display_name": "Hybrid Policy Allocation",
+      "mode": "hybrid_policy_allocation",
+      "purpose": "Blend explicit targets with imputed or grouped baselines.",
+      "readiness_status": "design_ready_synthetic_demo_later",
+      "what_question_it_answers": "Which parts of the allocation can be evaluated against targets, and which are baseline-only?",
+      "when_used": "Use when only some sleeves have documented targets."
+    }
+  ],
+  "pack_id": "synthetic_policy_mandate_pack_v1",
+  "pack_version": "2026-07-08",
+  "quick_start_alternative": "imputed_current_allocation",
+  "schema_version": "policy_allocation_mode.v1",
+  "source_metadata": {
+    "external_data_used": false,
+    "live_market_data_used": false,
+    "local_only": true,
+    "real_client_data_used": false,
+    "source": "synthetic_policy_allocation_modes",
+    "synthetic_data": true
+  },
+  "synthetic_data": true
+}

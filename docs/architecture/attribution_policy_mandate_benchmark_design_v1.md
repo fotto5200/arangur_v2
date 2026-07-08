@@ -340,3 +340,9 @@ Defer until separate reports are understood and accepted.
 - Should policy allocation reports be client-facing by default?
 - Should equal-weight diagnostic attribution remain advisor-only?
 - How much setup should be required before attribution reports are allowed?
+
+## 15. Follow-Up: Synthetic Policy Allocation / Mandate Benchmark Pack v1
+
+Synthetic Policy Allocation / Mandate Benchmark Pack v1 now provides deterministic local-only artifacts for explicit policy allocations, actual manager allocation snapshots, allocation drift summaries, imputed-current baseline, manager mandate benchmarks, manager benchmark-basis mapping, policy-level attribution input scaffolding, and equal-weight diagnostic classification.
+
+This pack makes Policy Allocation Review ready for a synthetic demo mockup and gives Policy-Level Attribution an input scaffold for a future calculation engine. Equal-weight AI Adoption attribution remains diagnostic unless the advisor/family explicitly selected equal-weight theme buckets as policy. Advisor UI/report wiring, generated-report integration, final policy attribution mockups, timing attribution, live/real data, external APIs, deployment, and production attribution modeling remain out of scope.

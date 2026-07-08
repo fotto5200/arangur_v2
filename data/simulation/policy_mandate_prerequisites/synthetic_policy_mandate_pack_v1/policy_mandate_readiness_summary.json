@@ -1,0 +1,60 @@
+{
+  "advisor_ui_report_wiring": "paused",
+  "equal_weight_diagnostic_readiness": "ready_as_advisor_internal_diagnostic",
+  "explicit_policy_allocation_readiness": "ready_for_synthetic_demo",
+  "future_report_readiness": [
+    {
+      "report_family": "Policy Allocation Review",
+      "status": "ready_for_synthetic_demo_mockup"
+    },
+    {
+      "report_family": "Policy-Level Attribution",
+      "status": "input_scaffold_ready_calculated_engine_needed"
+    },
+    {
+      "report_family": "Manager Mandate Attribution",
+      "status": "ready_to_align_future_reports_to_mandate_benchmarks"
+    },
+    {
+      "report_family": "Within-Manager Attribution Detail",
+      "status": "foundation_ready_for_future_mandate_aligned_views"
+    },
+    {
+      "report_family": "Equal-Weight Diagnostic Attribution",
+      "status": "ready_as_advisor_internal_diagnostic"
+    },
+    {
+      "report_family": "Blended All-In Attribution",
+      "status": "deferred"
+    }
+  ],
+  "generated_at": "2026-07-08T00:00:00Z",
+  "generated_report_wiring": "paused",
+  "imputed_current_allocation_readiness": "ready_for_synthetic_demo_quick_start",
+  "local_only": true,
+  "manager_mandate_attribution_readiness": "ready_to_align_future_reports_to_mandate_benchmarks",
+  "manager_mandate_benchmark_readiness": "ready_for_synthetic_demo",
+  "missing_production_prerequisites": [
+    "real client policy mandate approvals",
+    "approved benchmark construction records",
+    "production historical return and flow basis",
+    "clean timing attribution inputs",
+    "client-ready benchmark disclosure language"
+  ],
+  "pack_id": "synthetic_policy_mandate_pack_v1",
+  "pack_version": "2026-07-08",
+  "policy_allocation_drift_readiness": "ready_for_synthetic_demo",
+  "policy_level_attribution_input_readiness": "input_scaffold_ready_engine_needed",
+  "recommended_next_tranche": "Policy Allocation Review Mockups v1 or Policy-Level Attribution Calculation Engine v1",
+  "schema_version": "policy_mandate_readiness_summary.v1",
+  "source_metadata": {
+    "external_data_used": false,
+    "live_market_data_used": false,
+    "local_only": true,
+    "real_client_data_used": false,
+    "source": "policy_mandate_readiness_summary",
+    "synthetic_data": true
+  },
+  "synthetic_data": true,
+  "within_manager_attribution_readiness": "calculated_ai_adoption_path_exists_for_future_alignment"
+}

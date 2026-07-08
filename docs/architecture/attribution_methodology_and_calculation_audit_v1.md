@@ -662,3 +662,9 @@ Remaining for future report regeneration and product wording:
 1. How much residual is acceptable before a report should say attribution is incomplete?
 2. Should the summary report disclose the selected attribution lens explicitly in every client-facing mode?
 3. When calculated synthetic effects replace supplied allocations, should the report mockups be regenerated as the same `attribution_v1` family or as a new versioned family?
+
+## 15. Follow-Up: Synthetic Policy Allocation / Mandate Benchmark Pack v1
+
+Synthetic Policy Allocation / Mandate Benchmark Pack v1 now exists under `data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/`. It adds explicit synthetic policy targets, current manager allocation weights from the revaluation position catalog, drift/tolerance rows, imputed-current baseline, manager mandate benchmark catalog, manager benchmark-basis map, a policy-level attribution input scaffold, and an equal-weight diagnostic classification.
+
+Policy Allocation Review can now be mocked in a future tranche. Policy-Level Attribution has lower-level inputs but still needs a calculation-engine tranche before it should be shown as a calculated report. Manager mandate attribution can now align to explicit mandate benchmark rows. Equal-weight attribution remains diagnostic unless a policy artifact explicitly selects equal-weight theme buckets as policy.

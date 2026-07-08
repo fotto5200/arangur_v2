@@ -145,6 +145,8 @@ After Attribution Effect Basis Polish v1, calculated local attribution detail/le
 
 After Attribution Policy / Mandate Benchmark Design v1, attribution reports should also declare the responsibility layer being evaluated. Policy allocation reports evaluate advisor/family target allocation and drift. Manager mandate reports evaluate implementation inside assigned capital and mandate. Equal-weight attribution is diagnostic unless an explicit policy artifact says the agreed policy is equal-weight.
 
+After Synthetic Policy Allocation / Mandate Benchmark Pack v1, future local attribution report elements can source explicit policy target weights, actual manager weights, drift/tolerance status, imputed-current baseline, manager mandate benchmark basis, and equal-weight diagnostic classification from `data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/`. Policy Allocation Review may be mocked from these artifacts; Policy-Level Attribution still needs a calculated engine before it should show calculated effects.
+
 Additional anti-clutter checks:
 
 - Do not mix asset type, manager/sleeve, lens/theme, and coverage/review statuses in one additive table.

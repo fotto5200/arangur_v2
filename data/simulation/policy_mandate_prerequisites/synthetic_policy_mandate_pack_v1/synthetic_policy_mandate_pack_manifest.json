@@ -1,0 +1,71 @@
+{
+  "approval_status": "synthetic_demo_approved",
+  "base_currency": "USD",
+  "gated_future_reports": [
+    "Policy-Level Attribution calculated report",
+    "Blended All-In Attribution",
+    "Timing Attribution",
+    "Scenario Versus Benchmark",
+    "Probabilistic Scenario Range",
+    "Current Versus Proposed Portfolio"
+  ],
+  "generated_at": "2026-07-08T00:00:00Z",
+  "generated_by": {
+    "command": "python -m arangur.analytics.synthetic_policy_mandate_prerequisites",
+    "module": "arangur.analytics.synthetic_policy_mandate_prerequisites"
+  },
+  "generator_version": "synthetic_policy_mandate_prerequisites.v1",
+  "included_artifacts": [
+    "synthetic_policy_mandate_pack_manifest.json",
+    "policy_allocation_mode.json",
+    "policy_allocation_profile.json",
+    "actual_manager_allocation_snapshot.json",
+    "allocation_drift_summary.json",
+    "imputed_current_allocation_baseline.json",
+    "manager_mandate_benchmark_catalog.json",
+    "manager_benchmark_basis_map.json",
+    "policy_level_attribution_inputs.json",
+    "equal_weight_diagnostic_attribution_classification.json",
+    "policy_mandate_readiness_summary.json"
+  ],
+  "limitations": [
+    "Synthetic local-only prerequisite pack.",
+    "No Advisor Preview, Populate, Present, or generated-report wiring.",
+    "No final policy attribution report or Markdown mockup generation.",
+    "No external data, live market data, real client data, or dependency changes."
+  ],
+  "local_only": true,
+  "pack_id": "synthetic_policy_mandate_pack_v1",
+  "pack_version": "2026-07-08",
+  "period_end": "2026-06-30",
+  "period_start": "2025-07-01",
+  "readiness_summary": {
+    "blended_all_in_attribution": "deferred",
+    "equal_weight_diagnostic": "ready_as_advisor_internal_diagnostic",
+    "manager_mandate_attribution": "ready_to_align_future_reports_to_mandate_benchmarks",
+    "policy_allocation_review": "ready_for_synthetic_demo_mockup",
+    "policy_level_attribution": "input_scaffold_ready_engine_needed"
+  },
+  "schema_version": "synthetic_policy_mandate_pack_manifest.v1",
+  "source_attribution_prerequisite_pack": "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1",
+  "source_calculated_attribution_pack": "data/simulation/attribution_calculated/synthetic_attribution_engine_v1",
+  "source_manager_mandate_catalog": "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/manager_mandate_catalog.json",
+  "source_metadata": {
+    "external_data_used": false,
+    "live_market_data_used": false,
+    "local_only": true,
+    "real_client_data_used": false,
+    "source": "synthetic_policy_mandate_pack_manifest",
+    "synthetic_data": true
+  },
+  "source_position_catalog": "data/simulation/revaluation/position_catalog.json",
+  "supported_future_reports": [
+    "Policy Allocation Review",
+    "Policy-Level Attribution input scaffold",
+    "Manager Mandate Attribution Summary",
+    "Within-Manager Attribution Detail alignment",
+    "Equal-Weight Diagnostic Attribution"
+  ],
+  "synthetic_data": true,
+  "timing_status": "unavailable"
+}
