@@ -20,6 +20,10 @@ Update after Synthetic Attribution Report Mockups v1: concrete local-only attrib
 
 Update after Attribution Methodology and Calculation Audit v1: `docs/architecture/attribution_methodology_and_calculation_audit_v1.md` now defines the attribution objects, benchmark hierarchy, current calculation provenance, and gaps behind the synthetic attribution mockups. The audit confirms that current summary selection/sizing effects are deterministic fixed-share synthetic allocations rather than lower-level calculated attribution effects, while portfolio return, global benchmark return, manager relative return, manager contribution, and lens-bucket relative contribution are arithmetic from local synthetic inputs. Future attribution mockup revisions should wait until the next calculation-input tranche replaces or explicitly labels uncalculated effects.
 
+Update after Synthetic Attribution Calculation Inputs v1: explicit lower-level local synthetic inputs now exist for the first calculated attribution lens, AI Adoption. The pack supplies selected-lens policy, theme benchmark weight states, theme benchmark return inputs, compact grouped asset inputs, explicit manager benchmark-basis metadata, residual policy, and timing-unavailable readiness. The current `attribution_v1` mockups still predate calculated output regeneration.
+
+Update after Calculated Synthetic Attribution Engine v1: calculated local synthetic attribution outputs now exist under `data/simulation/attribution_calculated/synthetic_attribution_engine_v1/`. The output pack includes whole-portfolio calculated attribution, theme benchmark detail, theme asset detail, manager calculated attribution, and quality/readiness summaries. Future attribution mockup regeneration should consume these calculated outputs rather than the older fixed-share supplied allocation fields. This still does not wire Advisor Preview / Populate / Present / generated reports or make timing, production/client attribution, scenario-versus-benchmark, probabilistic range, proposed-portfolio, real-client, or deployment readiness available.
+
 ## 2. Governing Design Rules
 
 - One report, one question.
@@ -76,10 +80,10 @@ These are now possible from the prerequisite pack or existing mappings, but shou
 | --- | --- |
 | Manager by Lens Exposure | Possible next because complete lens assignments and manager mappings now exist; use one selected lens and one denominator |
 | Scenario by Lens | Possible next after a separate tranche aggregates existing full-revaluation rows by the selected complete lens |
-| Integrated Performance Attribution Summary | Generated in `attribution_v1` as a local synthetic-demo mockup; keep real/client mode gated |
-| Integrated Performance Attribution Detail | Generated in `attribution_v1` as an advisor-review synthetic-demo mockup with timing unavailable |
-| Manager Attribution Summary | Generated in `attribution_v1` with all six current managers and synthetic manager proxies |
-| Lens-Based Performance Attribution | Generated in `attribution_v1` for AI Adoption and Energy Security with all seven buckets per lens |
+| Integrated Performance Attribution Summary | Existing `attribution_v1` mockup predates the calculated engine; next regeneration should use `data/simulation/attribution_calculated/synthetic_attribution_engine_v1/`; keep real/client mode gated |
+| Integrated Performance Attribution Detail | Existing `attribution_v1` detail mockup predates the calculated engine; next regeneration should use calculated theme benchmark and asset detail outputs; timing remains unavailable |
+| Manager Attribution Summary | Existing `attribution_v1` manager mockup covers all six current managers; next regeneration should use `manager_calculated_attribution_summary.json` |
+| Lens-Based Performance Attribution | Existing `attribution_v1` lens mockups cover AI Adoption and Energy Security; calculated-output regeneration is ready first for the selected AI Adoption attribution lens |
 | Cash Flow by Manager/Sleeve | Still gated until reliable manager/sleeve cash-flow source data and period logic exist |
 
 ### C. Still-Gated Mockups

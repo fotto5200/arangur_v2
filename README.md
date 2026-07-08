@@ -292,6 +292,19 @@ This writes deterministic JSON under:
 
 - `data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/calculation_inputs/`
 
+## Generate Calculated Synthetic Attribution Outputs
+
+The calculated attribution engine consumes the local synthetic calculation inputs and writes whole-portfolio, theme benchmark, theme asset, manager, and quality/readiness outputs for future attribution mockup regeneration. It does not regenerate attribution mockups, wire Advisor Preview / Populate / Present / generated reports, touch Docker/deployment, use live data, or add dependencies.
+
+```cmd
+set PYTHONPATH=src
+python -m arangur.analytics.calculated_synthetic_attribution
+```
+
+This writes deterministic JSON under:
+
+- `data/simulation/attribution_calculated/synthetic_attribution_engine_v1/`
+
 ## Generate Revaluation v2 Report Mockups
 
 The v2 report-view generator turns full-revaluation outputs, attribution outputs, and the synthetic prerequisite pack into v2 report input fixtures, v2 report view fixtures, and Markdown product-review mockups, including separate Cash Flow Delivered and Cash-Flow Support Outlook reports. It preserves v1 mockups and does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.

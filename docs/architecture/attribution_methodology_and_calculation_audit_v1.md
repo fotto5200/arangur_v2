@@ -321,7 +321,8 @@ Current status: calculated by simple arithmetic for AI Adoption and Energy Secur
 | `integrated_attribution_decomposition_inputs.json` | Mixed. Active return and tie-outs are derived by arithmetic. Summary selection/sizing/asset effects are fixed-share synthetic allocations of active return. Theme-bucket total effects are calculated as weight times relative return. Theme-benchmark selection/sizing and asset selection/sizing at row level are not separately measured. |
 | `manager_attribution_prerequisites.json` | Mixed. Manager relative returns and portfolio contributions are arithmetic. Manager benchmark returns are supplied synthetic inputs. Manager component effects are fixed-share synthetic allocations, not lower-level manager attribution calculations. |
 | `attribution_readiness_summary.json` | Readiness metadata. It correctly keeps timing unavailable and production/client attribution gated. |
-| `calculation_inputs/` | Follow-up local synthetic calculation-input layer. It supplies the selected AI Adoption lens policy, equal-weight and actual-weight theme benchmark states, theme benchmark return inputs, compact grouped asset inputs, manager benchmark-basis metadata, and calculated-attribution readiness. It is not yet a calculated attribution engine or final report source. |
+| `calculation_inputs/` | Follow-up local synthetic calculation-input layer. It supplies the selected AI Adoption lens policy, equal-weight and actual-weight theme benchmark states, theme benchmark return inputs, compact grouped asset inputs, manager benchmark-basis metadata, and calculated-attribution readiness. It is now the source input pack for Calculated Synthetic Attribution Engine v1. |
+| `data/simulation/attribution_calculated/synthetic_attribution_engine_v1/` | Calculated local synthetic attribution output layer. It calculates whole-portfolio theme benchmark selection/sizing, asset selection/sizing, residual/unexplained, theme benchmark detail, theme asset detail, manager component effects, manager residuals, and quality/readiness flags from the calculation-input artifacts. It is not yet wired into `attribution_v1` report fixtures or advisor flows. |
 | `attribution_v1` report input/view fixtures | Presentation metadata generated from prerequisites. They should not be treated as calculation sources. |
 
 The strongest currently calculated attribution quantities are:
@@ -333,7 +334,7 @@ The strongest currently calculated attribution quantities are:
 - lens-bucket relative contribution;
 - tie-outs and residuals.
 
-The weakest currently calculated quantities are:
+The weakest calculated quantities in the existing `attribution_v1` report mockups are:
 
 - theme benchmark selection;
 - theme benchmark sizing;
@@ -341,9 +342,9 @@ The weakest currently calculated quantities are:
 - asset sizing;
 - manager-level component effects.
 
-Those values are deterministic in the existing `attribution_v1` mockups, but they are not yet calculated from lower-level benchmark portfolios or asset inputs.
+Those values are deterministic in the existing `attribution_v1` mockups, but the mockups still use the older fixed-share supplied allocation layer.
 
-Follow-up status: Synthetic Attribution Calculation Inputs v1 now supplies the lower-level local synthetic inputs needed to calculate those effects in a future engine tranche. The current report mockups have not been regenerated from calculated effects yet.
+Follow-up status: Synthetic Attribution Calculation Inputs v1 supplies the lower-level local synthetic inputs, and Calculated Synthetic Attribution Engine v1 now calculates those effects into `data/simulation/attribution_calculated/synthetic_attribution_engine_v1/`. The current report mockups have not been regenerated from calculated effects yet.
 
 ## 6. Calculation Gap Analysis
 
@@ -565,10 +566,11 @@ Future attribution reports should change as follows:
 
 ## 11. Implementation Sequencing Recommendation
 
-Follow-up implemented:
+Follow-ups implemented:
 
 ```text
 Synthetic Attribution Calculation Inputs v1
+Calculated Synthetic Attribution Engine v1
 ```
 
 The implemented calculation-input pack supplies:
@@ -580,29 +582,54 @@ The implemented calculation-input pack supplies:
 - explicit manager benchmark-basis metadata and manager-level calculation inputs;
 - explicit residual policy and timing-unavailable gate.
 
+The implemented calculated engine outputs:
+
+- whole-portfolio calculated attribution summary;
+- theme benchmark calculated detail rows;
+- theme asset calculated attribution detail rows;
+- manager calculated attribution summary;
+- quality/readiness summary for future local report mockups.
+
 Recommended next tranche:
 
 ```text
-Calculated Synthetic Attribution Engine v1
+Regenerate Attribution Mockups from Calculated Outputs v1
 ```
 
 The next tranche should:
 
-- calculate summary and detail effects from the new calculation-input artifacts;
+- use the calculated output pack, not fixed-share supplied allocations, as the source for attribution report input/view fixtures;
 - keep residual as an explicit reconciler and timing unavailable unless clean timing inputs are added;
-- regenerate attribution prerequisites after calculations are reproducible;
-- update attribution mockups only after calculated effects replace fixed-share synthetic allocations;
+- regenerate local attribution mockups only from calculated outputs;
+- preserve the gated/deferred status for timing attribution, production/client attribution, scenario-versus-benchmark, probabilistic range, and current-versus-proposed attribution;
 - keep Advisor Preview, Populate, Present, generated reports, backend endpoints, Docker/deployment, real data, external APIs, and production attribution modeling out of scope.
 
 ## 12. Follow-Up: Synthetic Attribution Calculation Inputs v1
 
-Synthetic Attribution Calculation Inputs v1 now supplies the lower-level inputs needed for calculated theme benchmark selection/sizing and asset selection/sizing in the next engine tranche.
+Synthetic Attribution Calculation Inputs v1 supplies the lower-level inputs used by Calculated Synthetic Attribution Engine v1 for calculated theme benchmark selection/sizing and asset selection/sizing.
 
 It does not regenerate final attribution report mockups, wire advisor workflows, create backend endpoints, or make production benchmark recommendations. Timing remains gated because the synthetic pack still does not include clean beginning/ending portfolio states, trade history, flow treatment, and an approved timing method.
 
-The next recommended implementation tranche is Calculated Synthetic Attribution Engine v1.
+The next recommended implementation tranche after the inputs was completed as Calculated Synthetic Attribution Engine v1.
 
-## 13. Open Questions For Frank
+## 13. Follow-Up: Calculated Synthetic Attribution Engine v1
+
+Calculated Synthetic Attribution Engine v1 now consumes the local `calculation_inputs/` pack and writes a separate calculated output pack under `data/simulation/attribution_calculated/synthetic_attribution_engine_v1/`.
+
+Implemented calculated outputs:
+
+- `calculated_attribution_engine_manifest.json`
+- `whole_portfolio_calculated_attribution_summary.json`
+- `theme_benchmark_calculated_detail.json`
+- `theme_asset_calculated_attribution_detail.json`
+- `manager_calculated_attribution_summary.json`
+- `calculated_attribution_quality_summary.json`
+
+The whole-portfolio output ties Global benchmark return 0.069940 to Actual portfolio return 0.081456 through calculated theme benchmark selection -0.001225, theme benchmark sizing 0.003713, asset selection 0.005601, asset sizing 0.001329, and residual/unexplained 0.002098. Theme and manager detail outputs carry their own tie-out checks. Timing remains unavailable and `timing_used_as_residual` remains false.
+
+The next durable report step is to regenerate the local attribution report fixtures and Markdown mockups from these calculated outputs. Until that happens, the existing `attribution_v1` mockups should still be treated as product-review fixtures that predate the calculated engine.
+
+## 14. Open Questions For Frank
 
 Resolved for Synthetic Attribution Calculation Inputs v1:
 
@@ -611,7 +638,7 @@ Resolved for Synthetic Attribution Calculation Inputs v1:
 3. Manager benchmark basis is explicit as `hybrid_synthetic_demo`, with manager-specific mandate proxy and selected-lens theme benchmark blend components.
 4. Asset selection/sizing can start from compact grouped synthetic assets before any future position-level implementation.
 
-Remaining for the calculated engine and future report layer:
+Remaining for future report regeneration and product wording:
 
 1. How much residual is acceptable before a report should say attribution is incomplete?
 2. Should the summary report disclose the selected attribution lens explicitly in every client-facing mode?

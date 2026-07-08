@@ -1,0 +1,65 @@
+{
+  "approval_status": "synthetic_demo_calculated",
+  "asset_detail_tie_out_status": "all_bucket_tie_outs_pass",
+  "detail_ready_from_calculated_outputs": true,
+  "engine_id": "synthetic_attribution_engine_v1",
+  "engine_version": "2026-07-08",
+  "future_report_mockups_ready_from_calculated_outputs": [
+    "integrated_performance_attribution_summary",
+    "integrated_performance_attribution_detail",
+    "manager_attribution_summary",
+    "lens_based_performance_attribution_ai_adoption"
+  ],
+  "future_reports_still_gated": [
+    "timing_attribution",
+    "production_attribution_report",
+    "scenario_versus_benchmark",
+    "probabilistic_scenario_range",
+    "current_versus_proposed_attribution"
+  ],
+  "generated_at": "2026-07-08T00:00:00Z",
+  "manager_ready_from_calculated_outputs": true,
+  "manager_tie_out_status": "all_manager_tie_outs_pass",
+  "max_tie_out_difference": 0.0,
+  "period_end": "2026-06-30",
+  "period_start": "2025-07-01",
+  "report_readiness": {
+    "integrated_performance_attribution_detail": "ready_from_calculated_theme_detail",
+    "integrated_performance_attribution_summary": "ready_from_calculated_outputs",
+    "lens_based_performance_attribution": "ready_from_calculated_theme_detail",
+    "manager_attribution_summary": "ready_from_calculated_manager_outputs",
+    "production_attribution": "gated",
+    "timing_attribution": "unavailable"
+  },
+  "residual_policy": {
+    "actual_portfolio_return": 0.081456,
+    "difference": 0.0,
+    "effect_total": 0.011516,
+    "global_benchmark_return": 0.06994,
+    "recomputed_actual_portfolio_return": 0.081456,
+    "ties_to_actual_portfolio_return": true,
+    "timing_used_as_residual": false
+  },
+  "residual_review_threshold": 0.005,
+  "residual_size": 0.002098,
+  "residual_threshold_status": "within_synthetic_demo_review_threshold",
+  "schema_version": "calculated_attribution_quality_summary.v1",
+  "selected_attribution_lens": {
+    "display_name": "AI Adoption",
+    "lens_id": "ai_adoption",
+    "lens_version": "v1"
+  },
+  "source_metadata": {
+    "external_data_used": false,
+    "live_market_data_used": false,
+    "local_only": true,
+    "real_client_data_used": false,
+    "source": "calculated_attribution_quality_summary",
+    "synthetic_data": true
+  },
+  "summary_ready_from_calculated_outputs": true,
+  "synthetic_data": true,
+  "theme_detail_tie_out_status": "ties_to_summary_calculated_effects",
+  "timing_status": "unavailable",
+  "whole_portfolio_tie_out_status": "ties_to_actual_portfolio_return"
+}

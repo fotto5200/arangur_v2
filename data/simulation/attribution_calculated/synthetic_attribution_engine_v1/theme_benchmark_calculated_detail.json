@@ -1,0 +1,190 @@
+{
+  "approval_status": "synthetic_demo_calculated",
+  "detail_basis": "calculated_theme_benchmark_and_asset_effects",
+  "engine_id": "synthetic_attribution_engine_v1",
+  "engine_version": "2026-07-08",
+  "generated_at": "2026-07-08T00:00:00Z",
+  "period_end": "2026-06-30",
+  "period_start": "2025-07-01",
+  "rows": [
+    {
+      "actual_portfolio_theme_return": 0.117,
+      "actual_portfolio_weight": 0.210341,
+      "asset_selection_effect": 0.002989,
+      "asset_sizing_effect": -4.4e-05,
+      "bucket_display_name": "Core AI Infrastructure / Hardware",
+      "bucket_id": "core_ai_infrastructure_hardware",
+      "caveats": [
+        "Synthetic theme benchmark and compact asset inputs only.",
+        "This row is a calculated output for future report generation, not a report row yet."
+      ],
+      "component_status": "calculated_from_synthetic_inputs",
+      "contribution_to_portfolio_relative_return": 0.014621,
+      "policy_or_equal_weight": 0.142857,
+      "residual_unexplained": 0.0,
+      "theme_benchmark_return": 0.103,
+      "theme_benchmark_selection_effect": 0.004725,
+      "theme_benchmark_sizing_effect": 0.006951,
+      "theme_bucket_asset_total_effect": 0.002945,
+      "total_effect": 0.014621
+    },
+    {
+      "actual_portfolio_theme_return": 0.104,
+      "actual_portfolio_weight": 0.171835,
+      "asset_selection_effect": 0.002317,
+      "asset_sizing_effect": -0.000255,
+      "bucket_display_name": "AI Model / Platform Exposure",
+      "bucket_id": "ai_model_platform_exposure",
+      "caveats": [
+        "Synthetic theme benchmark and compact asset inputs only.",
+        "This row is a calculated output for future report generation, not a report row yet."
+      ],
+      "component_status": "calculated_from_synthetic_inputs",
+      "contribution_to_portfolio_relative_return": 0.007879,
+      "policy_or_equal_weight": 0.142857,
+      "residual_unexplained": 0.0,
+      "theme_benchmark_return": 0.092,
+      "theme_benchmark_selection_effect": 0.003151,
+      "theme_benchmark_sizing_effect": 0.002666,
+      "theme_bucket_asset_total_effect": 0.002062,
+      "total_effect": 0.007879
+    },
+    {
+      "actual_portfolio_theme_return": 0.077,
+      "actual_portfolio_weight": 0.047259,
+      "asset_selection_effect": 0.000305,
+      "asset_sizing_effect": -2.2e-05,
+      "bucket_display_name": "AI Downstream Productivity Beneficiary",
+      "bucket_id": "ai_downstream_productivity_beneficiary",
+      "caveats": [
+        "Synthetic theme benchmark and compact asset inputs only.",
+        "This row is a calculated output for future report generation, not a report row yet."
+      ],
+      "component_status": "calculated_from_synthetic_inputs",
+      "contribution_to_portfolio_relative_return": -0.006353,
+      "policy_or_equal_weight": 0.142857,
+      "residual_unexplained": 0.0,
+      "theme_benchmark_return": 0.071,
+      "theme_benchmark_selection_effect": 0.000151,
+      "theme_benchmark_sizing_effect": -0.006787,
+      "theme_bucket_asset_total_effect": 0.000283,
+      "total_effect": -0.006353
+    },
+    {
+      "actual_portfolio_theme_return": 0.034,
+      "actual_portfolio_weight": 0.02519,
+      "asset_selection_effect": -9.5e-05,
+      "asset_sizing_effect": -5e-06,
+      "bucket_display_name": "AI-Disrupted Incumbent",
+      "bucket_id": "ai_disrupted_incumbent",
+      "caveats": [
+        "Synthetic theme benchmark and compact asset inputs only.",
+        "This row is a calculated output for future report generation, not a report row yet."
+      ],
+      "component_status": "calculated_from_synthetic_inputs",
+      "contribution_to_portfolio_relative_return": -0.009134,
+      "policy_or_equal_weight": 0.142857,
+      "residual_unexplained": 0.0,
+      "theme_benchmark_return": 0.038,
+      "theme_benchmark_selection_effect": -0.004563,
+      "theme_benchmark_sizing_effect": -0.004471,
+      "theme_bucket_asset_total_effect": -0.0001,
+      "total_effect": -0.009134
+    },
+    {
+      "actual_portfolio_theme_return": 0.095,
+      "actual_portfolio_weight": 0.107336,
+      "asset_selection_effect": 0.000881,
+      "asset_sizing_effect": 0.000193,
+      "bucket_display_name": "Data Center / Power Bottleneck Exposure",
+      "bucket_id": "data_center_power_bottleneck_exposure",
+      "caveats": [
+        "Synthetic theme benchmark and compact asset inputs only.",
+        "This row is a calculated output for future report generation, not a report row yet."
+      ],
+      "component_status": "calculated_from_synthetic_inputs",
+      "contribution_to_portfolio_relative_return": 0.000206,
+      "policy_or_equal_weight": 0.142857,
+      "residual_unexplained": 0.0,
+      "theme_benchmark_return": 0.085,
+      "theme_benchmark_selection_effect": 0.002151,
+      "theme_benchmark_sizing_effect": -0.003019,
+      "theme_bucket_asset_total_effect": 0.001074,
+      "total_effect": 0.000206
+    },
+    {
+      "actual_portfolio_theme_return": 0.054,
+      "actual_portfolio_weight": 0.333043,
+      "asset_selection_effect": -0.000547,
+      "asset_sizing_effect": 0.001213,
+      "bucket_display_name": "Neutral / Low Direct AI Exposure",
+      "bucket_id": "neutral_low_direct_ai_exposure",
+      "caveats": [
+        "Synthetic theme benchmark and compact asset inputs only.",
+        "This row is a calculated output for future report generation, not a report row yet."
+      ],
+      "component_status": "calculated_from_synthetic_inputs",
+      "contribution_to_portfolio_relative_return": 0.00799,
+      "policy_or_equal_weight": 0.142857,
+      "residual_unexplained": 0.0,
+      "theme_benchmark_return": 0.052,
+      "theme_benchmark_selection_effect": -0.002563,
+      "theme_benchmark_sizing_effect": 0.009887,
+      "theme_bucket_asset_total_effect": 0.000666,
+      "total_effect": 0.00799
+    },
+    {
+      "actual_portfolio_theme_return": 0.04,
+      "actual_portfolio_weight": 0.104996,
+      "asset_selection_effect": -0.000249,
+      "asset_sizing_effect": 0.000249,
+      "bucket_display_name": "Unclassified / Review Required",
+      "bucket_id": "unclassified_review_required",
+      "caveats": [
+        "Synthetic theme benchmark and compact asset inputs only.",
+        "This row is a calculated output for future report generation, not a report row yet."
+      ],
+      "component_status": "calculated_from_synthetic_inputs",
+      "contribution_to_portfolio_relative_return": -0.005791,
+      "policy_or_equal_weight": 0.142858,
+      "residual_unexplained": 0.0,
+      "theme_benchmark_return": 0.04,
+      "theme_benchmark_selection_effect": -0.004277,
+      "theme_benchmark_sizing_effect": -0.001514,
+      "theme_bucket_asset_total_effect": 0.0,
+      "total_effect": -0.005791
+    }
+  ],
+  "schema_version": "theme_benchmark_calculated_detail.v1",
+  "selected_attribution_lens": {
+    "display_name": "AI Adoption",
+    "lens_id": "ai_adoption",
+    "lens_version": "v1"
+  },
+  "source_metadata": {
+    "external_data_used": false,
+    "live_market_data_used": false,
+    "local_only": true,
+    "real_client_data_used": false,
+    "source": "theme_benchmark_calculated_detail",
+    "synthetic_data": true
+  },
+  "synthetic_data": true,
+  "tie_out_status": {
+    "asset_selection_difference": 0.0,
+    "asset_sizing_difference": 0.0,
+    "theme_benchmark_selection_difference": 0.0,
+    "theme_benchmark_sizing_difference": 0.0,
+    "ties_to_summary_calculated_effects": true,
+    "timing_used_as_residual": false
+  },
+  "timing_status": "unavailable",
+  "totals": {
+    "asset_selection_effect": 0.005601,
+    "asset_sizing_effect": 0.001329,
+    "residual_unexplained": 0.0,
+    "theme_benchmark_selection_effect": -0.001225,
+    "theme_benchmark_sizing_effect": 0.003713,
+    "total_effect": 0.009418
+  }
+}

@@ -1,0 +1,322 @@
+{
+  "approval_status": "synthetic_demo_calculated",
+  "coverage_summary": {
+    "all_current_managers_covered": true,
+    "all_manager_benchmark_basis_types_explicit": true,
+    "manager_count": 6,
+    "manager_tie_outs_reconcile": true,
+    "max_manager_tie_out_difference": 0.0
+  },
+  "engine_id": "synthetic_attribution_engine_v1",
+  "engine_version": "2026-07-08",
+  "generated_at": "2026-07-08T00:00:00Z",
+  "manager_count": 6,
+  "managers": [
+    {
+      "asset_selection_effect": 0.012958,
+      "asset_sizing_effect": -0.000272,
+      "benchmark_basis_description": "Uses the existing manager-specific synthetic mandate proxy as the manager comparison benchmark, while separately storing the selected AI Adoption theme-benchmark blend needed for future calculated effects.",
+      "caveats": [
+        "Synthetic demo manager calculated attribution output only.",
+        "Residual / unexplained is not labeled as timing."
+      ],
+      "display_name": "Manager A - Growth / AI Infrastructure",
+      "largest_driver": {
+        "label": "Theme benchmark sizing",
+        "value": 0.027848
+      },
+      "manager_benchmark_basis_type": "hybrid_synthetic_demo",
+      "manager_benchmark_components": [
+        {
+          "component_return": 0.095,
+          "component_type": "manager_specific_synthetic_mandate_proxy",
+          "proxy_display_name": "Synthetic Growth / AI Infrastructure Manager Proxy",
+          "proxy_id": "mgr_a_growth_ai_infrastructure_synthetic_manager_proxy_v1"
+        },
+        {
+          "component_return": 0.096563,
+          "component_type": "selected_lens_theme_benchmark_blend",
+          "selected_lens_id": "ai_adoption"
+        }
+      ],
+      "manager_benchmark_return": 0.095,
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "manager_return": 0.116,
+      "relative_return": 0.021,
+      "residual_unexplained": 0.006751,
+      "source_metadata": {
+        "external_data_used": false,
+        "live_market_data_used": false,
+        "local_only": true,
+        "mandate_source": "approved_for_synthetic_demo_reports",
+        "real_client_data_used": false,
+        "source": "synthetic_manager_calculated_attribution_inputs",
+        "synthetic_data": true
+      },
+      "theme_benchmark_selection_effect": -0.026285,
+      "theme_benchmark_sizing_effect": 0.027848,
+      "tie_out_difference": 0.0,
+      "tie_out_status": "ties_to_manager_relative_return",
+      "timing_status": "unavailable",
+      "timing_used_as_residual": false
+    },
+    {
+      "asset_selection_effect": 0.006082,
+      "asset_sizing_effect": 0.000334,
+      "benchmark_basis_description": "Uses the existing manager-specific synthetic mandate proxy as the manager comparison benchmark, while separately storing the selected AI Adoption theme-benchmark blend needed for future calculated effects.",
+      "caveats": [
+        "Synthetic demo manager calculated attribution output only.",
+        "Residual / unexplained is not labeled as timing."
+      ],
+      "display_name": "Manager B - Core Quality Equity",
+      "largest_driver": {
+        "label": "Theme benchmark selection",
+        "value": -0.007285
+      },
+      "manager_benchmark_basis_type": "hybrid_synthetic_demo",
+      "manager_benchmark_components": [
+        {
+          "component_return": 0.076,
+          "component_type": "manager_specific_synthetic_mandate_proxy",
+          "proxy_display_name": "Synthetic Core Quality Equity Manager Proxy",
+          "proxy_id": "mgr_b_core_quality_equity_synthetic_manager_proxy_v1"
+        },
+        {
+          "component_return": 0.072075,
+          "component_type": "selected_lens_theme_benchmark_blend",
+          "selected_lens_id": "ai_adoption"
+        }
+      ],
+      "manager_benchmark_return": 0.076,
+      "manager_id": "mgr_b_core_quality_equity",
+      "manager_return": 0.084,
+      "relative_return": 0.008,
+      "residual_unexplained": 0.005509,
+      "source_metadata": {
+        "external_data_used": false,
+        "live_market_data_used": false,
+        "local_only": true,
+        "mandate_source": "approved_for_synthetic_demo_reports",
+        "real_client_data_used": false,
+        "source": "synthetic_manager_calculated_attribution_inputs",
+        "synthetic_data": true
+      },
+      "theme_benchmark_selection_effect": -0.007285,
+      "theme_benchmark_sizing_effect": 0.00336,
+      "tie_out_difference": 0.0,
+      "tie_out_status": "ties_to_manager_relative_return",
+      "timing_status": "unavailable",
+      "timing_used_as_residual": false
+    },
+    {
+      "asset_selection_effect": -0.001717,
+      "asset_sizing_effect": 0.003514,
+      "benchmark_basis_description": "Uses the existing manager-specific synthetic mandate proxy as the manager comparison benchmark, while separately storing the selected AI Adoption theme-benchmark blend needed for future calculated effects.",
+      "caveats": [
+        "Synthetic demo manager calculated attribution output only.",
+        "Residual / unexplained is not labeled as timing."
+      ],
+      "display_name": "Manager C - Income and Cash Generation",
+      "largest_driver": {
+        "label": "Theme benchmark selection",
+        "value": 0.025715
+      },
+      "manager_benchmark_basis_type": "hybrid_synthetic_demo",
+      "manager_benchmark_components": [
+        {
+          "component_return": 0.043,
+          "component_type": "manager_specific_synthetic_mandate_proxy",
+          "proxy_display_name": "Synthetic Income and Credit Manager Proxy",
+          "proxy_id": "mgr_c_income_cash_generation_synthetic_manager_proxy_v1"
+        },
+        {
+          "component_return": 0.050777,
+          "component_type": "selected_lens_theme_benchmark_blend",
+          "selected_lens_id": "ai_adoption"
+        }
+      ],
+      "manager_benchmark_return": 0.043,
+      "manager_id": "mgr_c_income_cash_generation",
+      "manager_return": 0.047,
+      "relative_return": 0.004,
+      "residual_unexplained": -0.005574,
+      "source_metadata": {
+        "external_data_used": false,
+        "live_market_data_used": false,
+        "local_only": true,
+        "mandate_source": "approved_for_synthetic_demo_reports",
+        "real_client_data_used": false,
+        "source": "synthetic_manager_calculated_attribution_inputs",
+        "synthetic_data": true
+      },
+      "theme_benchmark_selection_effect": 0.025715,
+      "theme_benchmark_sizing_effect": -0.017938,
+      "tie_out_difference": 0.0,
+      "tie_out_status": "ties_to_manager_relative_return",
+      "timing_status": "unavailable",
+      "timing_used_as_residual": false
+    },
+    {
+      "asset_selection_effect": 0.004389,
+      "asset_sizing_effect": 0.001314,
+      "benchmark_basis_description": "Uses the existing manager-specific synthetic mandate proxy as the manager comparison benchmark, while separately storing the selected AI Adoption theme-benchmark blend needed for future calculated effects.",
+      "caveats": [
+        "Synthetic demo manager calculated attribution output only.",
+        "Residual / unexplained is not labeled as timing."
+      ],
+      "display_name": "Manager D - Private Markets / Real Assets",
+      "largest_driver": {
+        "label": "Theme benchmark selection",
+        "value": 0.005715
+      },
+      "manager_benchmark_basis_type": "hybrid_synthetic_demo",
+      "manager_benchmark_components": [
+        {
+          "component_return": 0.063,
+          "component_type": "manager_specific_synthetic_mandate_proxy",
+          "proxy_display_name": "Synthetic Private Markets / Real Assets Manager Proxy",
+          "proxy_id": "mgr_d_private_real_assets_synthetic_manager_proxy_v1"
+        },
+        {
+          "component_return": 0.065758,
+          "component_type": "selected_lens_theme_benchmark_blend",
+          "selected_lens_id": "ai_adoption"
+        }
+      ],
+      "manager_benchmark_return": 0.063,
+      "manager_id": "mgr_d_private_real_assets",
+      "manager_return": 0.071,
+      "relative_return": 0.008,
+      "residual_unexplained": -0.000461,
+      "source_metadata": {
+        "external_data_used": false,
+        "live_market_data_used": false,
+        "local_only": true,
+        "mandate_source": "approved_for_synthetic_demo_reports",
+        "real_client_data_used": false,
+        "source": "synthetic_manager_calculated_attribution_inputs",
+        "synthetic_data": true
+      },
+      "theme_benchmark_selection_effect": 0.005715,
+      "theme_benchmark_sizing_effect": -0.002957,
+      "tie_out_difference": 0.0,
+      "tie_out_status": "ties_to_manager_relative_return",
+      "timing_status": "unavailable",
+      "timing_used_as_residual": false
+    },
+    {
+      "asset_selection_effect": -0.001643,
+      "asset_sizing_effect": 0.003643,
+      "benchmark_basis_description": "Uses the existing manager-specific synthetic mandate proxy as the manager comparison benchmark, while separately storing the selected AI Adoption theme-benchmark blend needed for future calculated effects.",
+      "caveats": [
+        "Synthetic demo manager calculated attribution output only.",
+        "Residual / unexplained is not labeled as timing."
+      ],
+      "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+      "largest_driver": {
+        "label": "Theme benchmark selection",
+        "value": 0.037715
+      },
+      "manager_benchmark_basis_type": "hybrid_synthetic_demo",
+      "manager_benchmark_components": [
+        {
+          "component_return": 0.031,
+          "component_type": "manager_specific_synthetic_mandate_proxy",
+          "proxy_display_name": "Synthetic Liquidity Reserve Policy Proxy",
+          "proxy_id": "mgr_e_liquidity_defensive_synthetic_manager_proxy_v1"
+        },
+        {
+          "component_return": 0.052,
+          "component_type": "selected_lens_theme_benchmark_blend",
+          "selected_lens_id": "ai_adoption"
+        }
+      ],
+      "manager_benchmark_return": 0.031,
+      "manager_id": "mgr_e_liquidity_defensive",
+      "manager_return": 0.034,
+      "relative_return": 0.003,
+      "residual_unexplained": -0.02,
+      "source_metadata": {
+        "external_data_used": false,
+        "live_market_data_used": false,
+        "local_only": true,
+        "mandate_source": "approved_for_synthetic_demo_reports",
+        "real_client_data_used": false,
+        "source": "synthetic_manager_calculated_attribution_inputs",
+        "synthetic_data": true
+      },
+      "theme_benchmark_selection_effect": 0.037715,
+      "theme_benchmark_sizing_effect": -0.016715,
+      "tie_out_difference": 0.0,
+      "tie_out_status": "ties_to_manager_relative_return",
+      "timing_status": "unavailable",
+      "timing_used_as_residual": false
+    },
+    {
+      "asset_selection_effect": 0.000513,
+      "asset_sizing_effect": 0.002911,
+      "benchmark_basis_description": "Uses the existing manager-specific synthetic mandate proxy as the manager comparison benchmark, while separately storing the selected AI Adoption theme-benchmark blend needed for future calculated effects.",
+      "caveats": [
+        "Synthetic demo manager calculated attribution output only.",
+        "Residual / unexplained is not labeled as timing."
+      ],
+      "display_name": "Manager F - Opportunistic Macro / Hedge",
+      "largest_driver": {
+        "label": "Residual / unexplained",
+        "value": 0.028317
+      },
+      "manager_benchmark_basis_type": "hybrid_synthetic_demo",
+      "manager_benchmark_components": [
+        {
+          "component_return": 0.075,
+          "component_type": "manager_specific_synthetic_mandate_proxy",
+          "proxy_display_name": "Synthetic Opportunistic Macro / Hedge Proxy",
+          "proxy_id": "mgr_f_opportunistic_macro_synthetic_manager_proxy_v1"
+        },
+        {
+          "component_return": 0.057259,
+          "component_type": "selected_lens_theme_benchmark_blend",
+          "selected_lens_id": "ai_adoption"
+        }
+      ],
+      "manager_benchmark_return": 0.075,
+      "manager_id": "mgr_f_opportunistic_macro",
+      "manager_return": 0.089,
+      "relative_return": 0.014,
+      "residual_unexplained": 0.028317,
+      "source_metadata": {
+        "external_data_used": false,
+        "live_market_data_used": false,
+        "local_only": true,
+        "mandate_source": "approved_for_synthetic_demo_reports",
+        "real_client_data_used": false,
+        "source": "synthetic_manager_calculated_attribution_inputs",
+        "synthetic_data": true
+      },
+      "theme_benchmark_selection_effect": -0.006285,
+      "theme_benchmark_sizing_effect": -0.011456,
+      "tie_out_difference": 0.0,
+      "tie_out_status": "ties_to_manager_relative_return",
+      "timing_status": "unavailable",
+      "timing_used_as_residual": false
+    }
+  ],
+  "period_end": "2026-06-30",
+  "period_start": "2025-07-01",
+  "schema_version": "manager_calculated_attribution_summary.v1",
+  "selected_attribution_lens": {
+    "display_name": "AI Adoption",
+    "lens_id": "ai_adoption",
+    "lens_version": "v1"
+  },
+  "source_metadata": {
+    "external_data_used": false,
+    "live_market_data_used": false,
+    "local_only": true,
+    "real_client_data_used": false,
+    "source": "manager_calculated_attribution_summary",
+    "synthetic_data": true
+  },
+  "synthetic_data": true,
+  "timing_status": "unavailable"
+}
