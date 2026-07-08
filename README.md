@@ -242,7 +242,7 @@ This writes deterministic JSON under:
 
 ## Generate Synthetic Attribution Prerequisite Pack
 
-The attribution prerequisite-pack generator writes local-only synthetic benchmark, lens-bucket proxy, period return, weight/flow, decomposition, and manager attribution inputs for future Integrated Performance Attribution mockups. It does not create final attribution reports, wire Advisor Preview / Populate / Present / generated reports, touch Docker/deployment, use live data, or add dependencies.
+The attribution prerequisite-pack generator writes local-only synthetic benchmark, lens-bucket proxy, period return, weight/flow, decomposition, and manager attribution inputs used by the local attribution mockups. It does not wire Advisor Preview / Populate / Present / generated reports, touch Docker/deployment, use live data, or add dependencies.
 
 ```cmd
 set PYTHONPATH=src
@@ -252,6 +252,21 @@ python -m arangur.analytics.synthetic_attribution_prerequisites
 This writes deterministic JSON under:
 
 - `data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/`
+
+## Generate Synthetic Attribution Report Mockups
+
+The attribution report-view generator turns the synthetic attribution prerequisite pack into local-only attribution report input fixtures, view fixtures, and Markdown product-review mockups. It does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
+
+```cmd
+set PYTHONPATH=src
+python -m arangur.analytics.attribution_report_views
+```
+
+This writes:
+
+- `data/simulation/report_element_inputs/attribution_v1/`
+- `data/simulation/report_element_views/attribution_v1/`
+- `docs/product/report_mockups/attribution_v1/`
 
 ## Generate Revaluation v2 Report Mockups
 

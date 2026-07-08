@@ -1,0 +1,139 @@
+{
+  "audience_tier": "Advisor review",
+  "benchmark_or_proxy_basis": "Manager-specific Synthetic policy proxies",
+  "denominator_category_system": "Manager-specific proxy relative returns",
+  "display_title": "Manager Attribution Summary",
+  "exact_report_question": "Which managers contributed to relative performance versus their proxies?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator_version": "attribution_report_views.v1",
+  "information_budget": {
+    "exception_reason": "Manager Attribution Summary may show all six current managers.",
+    "max_advisor_notes": 1,
+    "max_caveats": 2,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 6,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true
+  },
+  "internal_source_refs": [
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_attribution_prerequisite_pack_manifest.json",
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_period_returns.json",
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_attribution_weights_flows.json",
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/manager_attribution_prerequisites.json"
+  ],
+  "master_question_family": "Performance / Plan",
+  "not_wired_into_advisor_ui": true,
+  "not_wired_into_generated_reports": true,
+  "period_end": "2026-06-30",
+  "period_start": "2025-07-01",
+  "rendering_mode": "table_first",
+  "report_element_id": "manager_attribution_summary",
+  "report_family": "Manager Attribution",
+  "representation_level": "Manager versus manager-specific proxy",
+  "residual_policy": "Residual / unexplained stays separate from timing for every manager.",
+  "schema_version": "attribution_report_input.v1",
+  "source_prerequisite_pack_refs": [
+    "synthetic_attribution_prerequisite_pack_v1"
+  ],
+  "summary_detail_status": "Summary",
+  "synthetic_data": true,
+  "table_validation": {
+    "all_current_managers_covered": true,
+    "coverage_justification": "All six current managers are shown because the product budget allows six rows.",
+    "current_manager_count": 6,
+    "manager_rows_shown": 6,
+    "residual_labeled_separately": true,
+    "timing_column_is_status_only": true
+  },
+  "timing_status": "unavailable",
+  "visible_content": {
+    "advisor_note": "Use this for manager contribution review, not as a stand-alone rebalance instruction.",
+    "caveats": [
+      "Synthetic manager proxy returns only; they are not production benchmarks.",
+      "Timing is unavailable and residual remains separate."
+    ],
+    "compact_table": {
+      "columns": [
+        "Manager",
+        "Return",
+        "Proxy return",
+        "Relative return",
+        "Largest driver",
+        "Timing"
+      ],
+      "rows": [
+        {
+          "Largest driver": "Strategy selection (+0.76%)",
+          "Manager": "Manager A - Growth / AI Infrastructure",
+          "Proxy return": "9.50%",
+          "Relative return": "+2.10%",
+          "Return": "11.60%",
+          "Timing": "Unavailable"
+        },
+        {
+          "Largest driver": "Strategy selection (+0.29%)",
+          "Manager": "Manager D - Private Markets / Real Assets",
+          "Proxy return": "6.30%",
+          "Relative return": "+0.80%",
+          "Return": "7.10%",
+          "Timing": "Unavailable"
+        },
+        {
+          "Largest driver": "Strategy selection (+0.29%)",
+          "Manager": "Manager B - Core Quality Equity",
+          "Proxy return": "7.60%",
+          "Relative return": "+0.80%",
+          "Return": "8.40%",
+          "Timing": "Unavailable"
+        },
+        {
+          "Largest driver": "Strategy selection (+0.50%)",
+          "Manager": "Manager F - Opportunistic Macro / Hedge",
+          "Proxy return": "7.50%",
+          "Relative return": "+1.40%",
+          "Return": "8.90%",
+          "Timing": "Unavailable"
+        },
+        {
+          "Largest driver": "Strategy selection (+0.14%)",
+          "Manager": "Manager C - Income and Cash Generation",
+          "Proxy return": "4.30%",
+          "Relative return": "+0.40%",
+          "Return": "4.70%",
+          "Timing": "Unavailable"
+        },
+        {
+          "Largest driver": "Strategy selection (+0.11%)",
+          "Manager": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "Proxy return": "3.10%",
+          "Relative return": "+0.30%",
+          "Return": "3.40%",
+          "Timing": "Unavailable"
+        }
+      ],
+      "title": "Manager Contribution Summary"
+    },
+    "headline_metrics": [
+      {
+        "formatted_value": "6",
+        "label": "Managers covered",
+        "value": 6
+      },
+      {
+        "formatted_value": "+2.10%",
+        "label": "Largest relative return",
+        "value": 0.021
+      },
+      {
+        "formatted_value": "+1.15%",
+        "label": "Total manager contribution",
+        "value": 0.011516
+      }
+    ],
+    "headline_sentence": "All six current managers have synthetic proxy returns, and Manager A - Growth / AI Infrastructure is the largest active contributor."
+  }
+}

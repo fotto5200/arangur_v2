@@ -1,0 +1,52 @@
+{
+  "advisor_ui_wiring": "not_changed",
+  "gated_reports_not_generated": [
+    "timing_attribution",
+    "production_attribution_report",
+    "scenario_versus_benchmark",
+    "probabilistic_scenario_range",
+    "current_versus_proposed_attribution"
+  ],
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generated_report_wiring": "not_changed",
+  "generator_version": "attribution_report_views.v1",
+  "information_budget": {
+    "max_advisor_notes": 1,
+    "max_caveats": 2,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 5,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true
+  },
+  "markdown_mockup_count": 5,
+  "mockup_files": [
+    "integrated_performance_attribution_summary_mockup_v1.md",
+    "integrated_performance_attribution_detail_mockup_v1.md",
+    "manager_attribution_summary_mockup_v1.md",
+    "lens_based_performance_attribution_ai_adoption_mockup_v1.md",
+    "lens_based_performance_attribution_energy_security_mockup_v1.md",
+    "README.md"
+  ],
+  "mockups_generated_from_views": true,
+  "report_ids": [
+    "integrated_performance_attribution_summary",
+    "integrated_performance_attribution_detail",
+    "manager_attribution_summary",
+    "lens_based_performance_attribution_ai_adoption",
+    "lens_based_performance_attribution_energy_security"
+  ],
+  "report_view_count": 5,
+  "schema_version": "attribution_report_view_summary.v1",
+  "synthetic_data": true,
+  "view_files": [
+    "integrated_performance_attribution_summary_view.json",
+    "integrated_performance_attribution_detail_view.json",
+    "manager_attribution_summary_view.json",
+    "lens_based_performance_attribution_ai_adoption_view.json",
+    "lens_based_performance_attribution_energy_security_view.json",
+    "gated_deferred_attribution_report_index.json"
+  ]
+}

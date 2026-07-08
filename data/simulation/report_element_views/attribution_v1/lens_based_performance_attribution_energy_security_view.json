@@ -1,0 +1,143 @@
+{
+  "advisor_note": "Read this as a one-lens performance view; do not compare these rows to scenario or proposed-allocation results.",
+  "audience_tier": "Advisor review",
+  "benchmark_or_proxy_basis": "Synthetic Energy Security lens-bucket proxies",
+  "caveats": [
+    "Synthetic lens-bucket proxies only; they are not investable benchmarks or live market returns.",
+    "Bucket weights use the complete synthetic lens assignment pack, including neutral and review buckets."
+  ],
+  "compact_table": {
+    "columns": [
+      "Lens Bucket",
+      "Weight",
+      "Bucket return",
+      "Proxy return",
+      "Relative contribution"
+    ],
+    "rows": [
+      {
+        "Bucket return": "5.60%",
+        "Lens Bucket": "Energy Input-Cost Sensitive",
+        "Proxy return": "5.80%",
+        "Relative contribution": "-0.08%",
+        "Weight": "40.40%"
+      },
+      {
+        "Bucket return": "5.00%",
+        "Lens Bucket": "Neutral / Low Direct Energy Exposure",
+        "Proxy return": "4.80%",
+        "Relative contribution": "+0.08%",
+        "Weight": "39.66%"
+      },
+      {
+        "Bucket return": "8.10%",
+        "Lens Bucket": "Grid Infrastructure Beneficiary",
+        "Proxy return": "7.30%",
+        "Relative contribution": "+0.03%",
+        "Weight": "4.27%"
+      },
+      {
+        "Bucket return": "8.80%",
+        "Lens Bucket": "Commodity Supply Security Exposure",
+        "Proxy return": "8.10%",
+        "Relative contribution": "+0.01%",
+        "Weight": "1.72%"
+      },
+      {
+        "Bucket return": "8.50%",
+        "Lens Bucket": "Energy Supply Beneficiary",
+        "Proxy return": "7.90%",
+        "Relative contribution": "+0.01%",
+        "Weight": "1.11%"
+      },
+      {
+        "Bucket return": "5.30%",
+        "Lens Bucket": "Transition Policy Sensitive",
+        "Proxy return": "5.20%",
+        "Relative contribution": "+0.00%",
+        "Weight": "1.72%"
+      },
+      {
+        "Bucket return": "4.00%",
+        "Lens Bucket": "Unclassified / Review Required",
+        "Proxy return": "4.00%",
+        "Relative contribution": "+0.00%",
+        "Weight": "11.12%"
+      }
+    ],
+    "title": "Energy Security Bucket Performance"
+  },
+  "contribution_bridge": null,
+  "denominator_category_system": "Energy Security lens buckets versus synthetic proxies",
+  "display_title": "Lens-Based Performance Attribution - Energy Security",
+  "exact_report_question": "Which Energy Security lens buckets explain relative performance versus their proxies?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator_version": "attribution_report_views.v1",
+  "headline_metrics": [
+    {
+      "formatted_value": "+0.05%",
+      "label": "Net relative contribution",
+      "value": 0.000531
+    },
+    {
+      "formatted_value": "Neutral / Low Direct Energy Exposure (+0.08%)",
+      "label": "Largest positive bucket",
+      "value": 0.000793
+    },
+    {
+      "formatted_value": "Energy Input-Cost Sensitive (-0.08%)",
+      "label": "Largest negative bucket",
+      "value": -0.000808
+    }
+  ],
+  "headline_sentence": "Under the Energy Security lens, Neutral / Low Direct Energy Exposure is the largest positive relative contributor versus its proxy.",
+  "information_budget_applied": {
+    "actual_advisor_notes": 1,
+    "actual_caveats": 2,
+    "actual_headline_metrics": 3,
+    "actual_headline_sentences": 1,
+    "actual_visible_table_rows": 7,
+    "exception_reason": "Lens-Based Performance Attribution shows every bucket in the selected lens.",
+    "max_advisor_notes": 1,
+    "max_caveats": 2,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 7,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true,
+    "rendering_mode": "table_first"
+  },
+  "internal_source_refs": [
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_attribution_prerequisite_pack_manifest.json",
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_period_returns.json",
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_attribution_weights_flows.json",
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/lens_bucket_benchmark_proxy_map.json"
+  ],
+  "master_question_family": "Performance / Plan",
+  "period_end": "2026-06-30",
+  "period_start": "2025-07-01",
+  "rendering_mode": "table_first",
+  "report_element_id": "lens_based_performance_attribution_energy_security",
+  "report_family": "Lens-Based Performance Attribution",
+  "representation_level": "Energy Security lens bucket",
+  "residual_policy": "No residual row is shown in the lens-bucket summary; timing remains unavailable.",
+  "schema_version": "attribution_report_view.v1",
+  "source_prerequisite_pack_refs": [
+    "synthetic_attribution_prerequisite_pack_v1"
+  ],
+  "summary_detail_status": "Summary",
+  "synthetic_data": true,
+  "table_validation": {
+    "all_lens_buckets_included": true,
+    "contains_neutral_bucket": true,
+    "contains_review_bucket": true,
+    "lens_bucket_count": 7,
+    "lens_id": "energy_security",
+    "relative_contribution_total": 0.000531,
+    "timing_contribution_included": false
+  },
+  "timing_status": "unavailable"
+}

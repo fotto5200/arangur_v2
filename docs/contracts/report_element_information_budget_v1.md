@@ -129,7 +129,7 @@ Future report-element fixtures should also carry these design constraints when t
 - `visual_denominator_or_range`: present for chart-first reports so the visual has the same explicit denominator/range discipline as tables.
 - `timing_attribution_gate`: present for performance attribution; timing can appear only when two clearly specified portfolio states, period history, and flow treatment make it measurable.
 
-After Synthetic Attribution Prerequisite Pack v1, `benchmark_map_status` may be satisfied for future local synthetic Integrated Performance Attribution, Manager Attribution, and Lens-Based Performance Attribution mockups only when the report points to the pack's synthetic policy benchmark or lens-bucket proxy map. This does not satisfy production/client attribution, scenario-versus-benchmark, probabilistic range, or timing attribution gates.
+After Synthetic Attribution Report Mockups v1, `benchmark_map_status` is satisfied only for the local synthetic `attribution_v1` Integrated Performance Attribution, Manager Attribution, and Lens-Based Performance Attribution mockups that point to the pack's synthetic policy benchmark or lens-bucket proxy map. This does not satisfy production/client attribution, scenario-versus-benchmark, probabilistic range, or timing attribution gates.
 
 Additional anti-clutter checks:
 

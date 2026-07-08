@@ -182,7 +182,7 @@ Did the portfolio or manager add value versus benchmark, and what decision produ
 
 The user-facing product language should not force the term "Brinson" as the main label. Internally, the system may use Brinson-style allocation and selection logic where appropriate, but the report family is broader.
 
-Synthetic Attribution Prerequisite Pack v1 now makes the summary/detail attribution family eligible for future synthetic demo mockups by supplying deterministic benchmark, return, weight/flow, decomposition, and manager prerequisite artifacts. Timing remains unavailable until it is tied to cleanly specified portfolio states and trade/flow history.
+Synthetic Attribution Prerequisite Pack v1 supplies deterministic benchmark, return, weight/flow, decomposition, and manager prerequisite inputs for the local synthetic attribution mockups. Timing remains unavailable until it is tied to cleanly specified portfolio states and trade/flow history.
 
 The attribution chain:
 

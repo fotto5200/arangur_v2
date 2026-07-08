@@ -14,7 +14,9 @@ Update after Synthetic Report Prerequisite Pack v1: local-only synthetic prerequ
 
 Update after first v2 mockup review: the cash-flow report shape is split into Cash Flow Delivered for prior-period advisor value delivered and Cash-Flow Support Outlook for forward-looking need support. The split keeps delivered cash, paid-out cash, projected generation, and surplus/shortfall from being overpacked into one report.
 
-Update after Synthetic Attribution Prerequisite Pack v1: local-only synthetic benchmark, lens-bucket proxy, period return, weight/flow, decomposition, and manager attribution prerequisite artifacts now exist for future Integrated Performance Attribution Summary, Integrated Performance Attribution Detail, Manager Attribution Summary, and Lens-Based Performance Attribution mockups. This does not create final attribution reports, wire Advisor Preview / Populate / Present / generated reports, approve production benchmarks, or make timing, scenario-versus-benchmark, probabilistic range, proposed-portfolio, real-client, or deployment readiness available.
+Update after Synthetic Attribution Prerequisite Pack v1: local-only synthetic benchmark, lens-bucket proxy, period return, weight/flow, decomposition, and manager attribution prerequisite artifacts were added for Integrated Performance Attribution Summary, Integrated Performance Attribution Detail, Manager Attribution Summary, and Lens-Based Performance Attribution mockups. This did not wire Advisor Preview / Populate / Present / generated reports, approve production benchmarks, or make timing, scenario-versus-benchmark, probabilistic range, proposed-portfolio, real-client, or deployment readiness available.
+
+Update after Synthetic Attribution Report Mockups v1: concrete local-only attribution report inputs, view fixtures, and Markdown product-review mockups now exist under `data/simulation/report_element_inputs/attribution_v1/`, `data/simulation/report_element_views/attribution_v1/`, and `docs/product/report_mockups/attribution_v1/`. The generated set covers Integrated Performance Attribution Summary/Detail, Manager Attribution Summary, and Lens-Based Performance Attribution for AI Adoption and Energy Security. This still does not wire Advisor Preview / Populate / Present / generated reports, approve production/client attribution, or make timing, scenario-versus-benchmark, probabilistic range, proposed-portfolio, real-client, or deployment readiness available.
 
 ## 2. Governing Design Rules
 
@@ -72,10 +74,10 @@ These are now possible from the prerequisite pack or existing mappings, but shou
 | --- | --- |
 | Manager by Lens Exposure | Possible next because complete lens assignments and manager mappings now exist; use one selected lens and one denominator |
 | Scenario by Lens | Possible next after a separate tranche aggregates existing full-revaluation rows by the selected complete lens |
-| Integrated Performance Attribution Summary | Possible next as a synthetic demo mockup using Synthetic Attribution Prerequisite Pack v1; keep real/client mode gated |
-| Integrated Performance Attribution Detail | Possible next as an advisor-review synthetic demo mockup using the synthetic decomposition inputs; show timing as unavailable |
-| Manager Attribution Summary | Possible next because manager returns, manager benchmark proxies, contribution effects, and tie-outs now exist synthetically |
-| Lens-Based Performance Attribution | Possible next because AI Adoption and Energy Security lens-bucket proxy returns and weights now exist synthetically |
+| Integrated Performance Attribution Summary | Generated in `attribution_v1` as a local synthetic-demo mockup; keep real/client mode gated |
+| Integrated Performance Attribution Detail | Generated in `attribution_v1` as an advisor-review synthetic-demo mockup with timing unavailable |
+| Manager Attribution Summary | Generated in `attribution_v1` with all six current managers and synthetic manager proxies |
+| Lens-Based Performance Attribution | Generated in `attribution_v1` for AI Adoption and Energy Security with all seven buckets per lens |
 | Cash Flow by Manager/Sleeve | Still gated until reliable manager/sleeve cash-flow source data and period logic exist |
 
 ### C. Still-Gated Mockups
@@ -460,7 +462,7 @@ Detail should show:
 - asset timing only if clean;
 - residual/unexplained bucket when needed, without relabeling it as timing.
 
-Synthetic demo attribution mockups may now be generated from the attribution prerequisite pack, but they should keep timing unavailable unless a later tranche defines two clean portfolio states and the required trade/flow history. Do not generate production/client attribution reports until historical return, benchmark, position history, holding/flow, and approved benchmark/proxy prerequisites exist.
+Synthetic demo attribution mockups are now generated from the attribution prerequisite pack in `attribution_v1`, and they keep timing unavailable unless a later tranche defines two clean portfolio states and the required trade/flow history. Do not generate production/client attribution reports until historical return, benchmark, position history, holding/flow, and approved benchmark/proxy prerequisites exist.
 
 ## 9. Data And Prerequisite Gating
 
@@ -527,7 +529,7 @@ It should:
 - avoid advisor UI wiring;
 - avoid generated-report wiring;
 - use the synthetic report prerequisite pack for Cash Flow Delivered, Cash-Flow Support Outlook, Manager Role Summary, and Full Lens Exposure rather than inventing report values inside mockups;
-- use Synthetic Attribution Prerequisite Pack v1 for future Integrated Performance Attribution Summary/Detail, Manager Attribution Summary, and Lens-Based Performance Attribution mockups rather than inventing benchmark, return, weight, or decomposition values inside mockups;
+- use Synthetic Attribution Prerequisite Pack v1 for attribution mockups rather than inventing benchmark, return, weight, or decomposition values inside mockups;
 - avoid generating still-gated reports as if data exists;
 - preserve v1 artifacts if useful for comparison, or write v2 artifacts to a separate path;
 - keep synthetic/local-only boundaries;

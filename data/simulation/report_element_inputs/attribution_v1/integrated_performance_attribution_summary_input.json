@@ -1,0 +1,113 @@
+{
+  "audience_tier": "Client briefing and advisor review",
+  "benchmark_or_proxy_basis": "Northstar Synthetic Policy Benchmark",
+  "denominator_category_system": "Benchmark-relative contribution bridge",
+  "display_title": "Integrated Performance Attribution Summary",
+  "exact_report_question": "Did the portfolio add value versus benchmark, and why?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator_version": "attribution_report_views.v1",
+  "information_budget": {
+    "max_advisor_notes": 1,
+    "max_caveats": 2,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 5,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true
+  },
+  "internal_source_refs": [
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_attribution_prerequisite_pack_manifest.json",
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_period_returns.json",
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_attribution_weights_flows.json",
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/portfolio_benchmark_catalog.json",
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/integrated_attribution_decomposition_inputs.json"
+  ],
+  "master_question_family": "Performance / Plan",
+  "not_wired_into_advisor_ui": true,
+  "not_wired_into_generated_reports": true,
+  "period_end": "2026-06-30",
+  "period_start": "2025-07-01",
+  "rendering_mode": "summary_first",
+  "report_element_id": "integrated_performance_attribution_summary",
+  "report_family": "Integrated Performance Attribution",
+  "representation_level": "Whole portfolio versus benchmark",
+  "residual_policy": "Residual / unexplained is shown only as the remaining reconciler; timing remains unavailable.",
+  "schema_version": "attribution_report_input.v1",
+  "source_prerequisite_pack_refs": [
+    "synthetic_attribution_prerequisite_pack_v1"
+  ],
+  "summary_detail_status": "Summary",
+  "synthetic_data": true,
+  "table_validation": {
+    "active_return": 0.011516,
+    "bridge_row_count": 5,
+    "effects_sum": 0.011516,
+    "residual_label": "Residual / unexplained",
+    "ties_to_active_return": true,
+    "timing_contribution_included": false
+  },
+  "timing_status": "unavailable",
+  "visible_content": {
+    "advisor_note": "Use this as a compact product-review shape; real/client attribution remains gated until production returns, benchmark maps, flows, and methodology are approved.",
+    "caveats": [
+      "Synthetic local-demo returns and benchmark inputs only.",
+      "Timing is unavailable because clean trade history, flow treatment, and an approved timing method are absent."
+    ],
+    "contribution_bridge": {
+      "columns": [
+        "Contribution",
+        "Effect",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "Contribution": "Strategy/lens-bucket selection",
+          "Effect": "+0.41%",
+          "Interpretation": "Positive bucket choice versus policy mix."
+        },
+        {
+          "Contribution": "Strategy/lens-bucket sizing",
+          "Effect": "+0.25%",
+          "Interpretation": "Positioning size helped relative return."
+        },
+        {
+          "Contribution": "Asset selection",
+          "Effect": "+0.32%",
+          "Interpretation": "Selected assets outperformed their reference mix."
+        },
+        {
+          "Contribution": "Asset sizing",
+          "Effect": "+0.10%",
+          "Interpretation": "Sizing within selected assets helped modestly."
+        },
+        {
+          "Contribution": "Residual / unexplained",
+          "Effect": "+0.06%",
+          "Interpretation": "Remaining reconciler, not timing."
+        }
+      ],
+      "title": "Contribution Summary"
+    },
+    "headline_metrics": [
+      {
+        "formatted_value": "8.15%",
+        "label": "Portfolio return",
+        "value": 0.081456
+      },
+      {
+        "formatted_value": "6.99%",
+        "label": "Benchmark return",
+        "value": 0.06994
+      },
+      {
+        "formatted_value": "+1.15%",
+        "label": "Relative return",
+        "value": 0.011516
+      }
+    ],
+    "headline_sentence": "Portfolio return exceeded Northstar Synthetic Policy Benchmark by +1.15%, with strategy/lens-bucket selection the largest visible driver."
+  }
+}

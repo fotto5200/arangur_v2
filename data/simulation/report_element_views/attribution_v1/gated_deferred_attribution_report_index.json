@@ -1,0 +1,39 @@
+{
+  "gated_or_deferred_reports": [
+    {
+      "display_title": "Timing Attribution",
+      "reason": "Unavailable unless clean history, flow treatment, and an approved timing methodology exist.",
+      "report_id": "timing_attribution",
+      "status": "Unavailable"
+    },
+    {
+      "display_title": "Production Attribution Report",
+      "reason": "Gated on real benchmark, return, holding, flow data, and formal approval.",
+      "report_id": "production_attribution_report",
+      "status": "Gated"
+    },
+    {
+      "display_title": "Scenario Versus Benchmark",
+      "reason": "Gated unless benchmark scenario values or an approved benchmark scenario methodology exist.",
+      "report_id": "scenario_versus_benchmark",
+      "status": "Gated"
+    },
+    {
+      "display_title": "Probabilistic Scenario Range",
+      "reason": "Gated until probabilistic analytics and range methodology exist.",
+      "report_id": "probabilistic_scenario_range",
+      "status": "Gated"
+    },
+    {
+      "display_title": "Current Versus Proposed Attribution",
+      "reason": "Gated on proposed allocation data, comparison methodology, and approval.",
+      "report_id": "current_versus_proposed_attribution",
+      "status": "Gated"
+    }
+  ],
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator_version": "attribution_report_views.v1",
+  "purpose": "Product/readiness index for attribution reports deliberately not generated.",
+  "schema_version": "attribution_report_gated_deferred_index.v1",
+  "synthetic_data": true
+}

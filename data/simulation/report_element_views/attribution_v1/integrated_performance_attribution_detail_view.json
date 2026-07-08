@@ -1,0 +1,128 @@
+{
+  "advisor_note": "Use detail mode for advisor review of the reconciliation; keep residual/unexplained separate from timing until a clean timing method exists.",
+  "audience_tier": "Advisor review",
+  "benchmark_or_proxy_basis": "Northstar Synthetic Policy Benchmark",
+  "caveats": [
+    "Synthetic local-demo returns, benchmark, and contribution effects only.",
+    "Timing is unavailable and is not folded into residual."
+  ],
+  "compact_table": null,
+  "contribution_bridge": {
+    "columns": [
+      "Step",
+      "Effect",
+      "Interpretation"
+    ],
+    "rows": [
+      {
+        "Effect": "6.99%",
+        "Interpretation": "Starting point.",
+        "Step": "Benchmark return"
+      },
+      {
+        "Effect": "+0.41%",
+        "Interpretation": "Positive bucket choice versus policy mix.",
+        "Step": "Strategy/lens-bucket selection"
+      },
+      {
+        "Effect": "+0.25%",
+        "Interpretation": "Positioning size helped relative return.",
+        "Step": "Strategy/lens-bucket sizing"
+      },
+      {
+        "Effect": "+0.32%",
+        "Interpretation": "Selected assets outperformed their reference mix.",
+        "Step": "Asset selection"
+      },
+      {
+        "Effect": "+0.10%",
+        "Interpretation": "Sizing within selected assets helped modestly.",
+        "Step": "Asset sizing"
+      },
+      {
+        "Effect": "+0.06%",
+        "Interpretation": "Remaining reconciler, not timing.",
+        "Step": "Residual / unexplained"
+      },
+      {
+        "Effect": "8.15%",
+        "Interpretation": "Ending point after visible effects.",
+        "Step": "Actual portfolio return"
+      }
+    ],
+    "title": "Benchmark-to-Actual Bridge"
+  },
+  "denominator_category_system": "Benchmark-to-actual contribution bridge",
+  "display_title": "Integrated Performance Attribution Detail",
+  "exact_report_question": "What is the full decomposition of value added or lost versus benchmark?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator_version": "attribution_report_views.v1",
+  "headline_metrics": [
+    {
+      "formatted_value": "6.99%",
+      "label": "Benchmark return",
+      "value": 0.06994
+    },
+    {
+      "formatted_value": "+1.15%",
+      "label": "Total contribution",
+      "value": 0.011516
+    },
+    {
+      "formatted_value": "8.15%",
+      "label": "Actual portfolio return",
+      "value": 0.081456
+    }
+  ],
+  "headline_sentence": "The whole-portfolio bridge ties benchmark return to actual portfolio return without using timing as a residual.",
+  "information_budget_applied": {
+    "actual_advisor_notes": 1,
+    "actual_caveats": 2,
+    "actual_headline_metrics": 3,
+    "actual_headline_sentences": 1,
+    "actual_visible_table_rows": 7,
+    "max_advisor_notes": 1,
+    "max_caveats": 2,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 8,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true,
+    "rendering_mode": "detail_first"
+  },
+  "internal_source_refs": [
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_attribution_prerequisite_pack_manifest.json",
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_period_returns.json",
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_attribution_weights_flows.json",
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/portfolio_benchmark_catalog.json",
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/integrated_attribution_decomposition_inputs.json"
+  ],
+  "master_question_family": "Performance / Plan",
+  "period_end": "2026-06-30",
+  "period_start": "2025-07-01",
+  "rendering_mode": "detail_first",
+  "report_element_id": "integrated_performance_attribution_detail",
+  "report_family": "Integrated Performance Attribution",
+  "representation_level": "Whole portfolio versus benchmark",
+  "residual_policy": "Residual / unexplained is the remaining reconciler and must not be relabeled as timing.",
+  "schema_version": "attribution_report_view.v1",
+  "source_prerequisite_pack_refs": [
+    "synthetic_attribution_prerequisite_pack_v1"
+  ],
+  "summary_detail_status": "Detail",
+  "synthetic_data": true,
+  "table_validation": {
+    "actual_return": 0.081456,
+    "benchmark_return": 0.06994,
+    "bridge_row_count": 7,
+    "effect_total": 0.011516,
+    "recomputed_actual_return": 0.081456,
+    "residual_label": "Residual / unexplained",
+    "ties_to_actual_return": true,
+    "timing_contribution_included": false
+  },
+  "timing_status": "unavailable"
+}
