@@ -1,0 +1,760 @@
+{
+  "approval_status": "synthetic_demo_approved",
+  "asset_set_policy": {
+    "asset_set_type": "compact_grouped_synthetic_assets",
+    "grouped_remaining_positions": true,
+    "max_named_positions_per_bucket": 3,
+    "reference_weight_policy": "equal_weight_within_compact_bucket_asset_set",
+    "source_position_ids_available": true
+  },
+  "buckets": [
+    {
+      "actual_portfolio_weight": 0.210341,
+      "assets": [
+        {
+          "actual_asset_weight_within_bucket": 0.408092,
+          "asset_return": 0.111961,
+          "benchmark_component_return": 0.103,
+          "display_name": "AI Compute Leader",
+          "position_ids": [
+            "pos_a_ai_compute_leader"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.103,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_a_ai_compute_leader"
+        },
+        {
+          "actual_asset_weight_within_bucket": 0.119227,
+          "asset_return": 0.115461,
+          "benchmark_component_return": 0.103,
+          "display_name": "Chip Fabrication Partner",
+          "position_ids": [
+            "pos_a_chip_fabrication_partner"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.103,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_a_chip_fabrication_partner"
+        },
+        {
+          "actual_asset_weight_within_bucket": 0.097504,
+          "asset_return": 0.118961,
+          "benchmark_component_return": 0.103,
+          "display_name": "Semicap Equipment Maker",
+          "position_ids": [
+            "pos_a_semicap_equipment_maker"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.103,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_a_semicap_equipment_maker"
+        },
+        {
+          "actual_asset_weight_within_bucket": 0.375177,
+          "asset_return": 0.122461,
+          "benchmark_component_return": 0.103,
+          "display_name": "Grouped remaining Core AI Infrastructure / Hardware exposure",
+          "position_ids": [
+            "pos_a_accelerator_design_house",
+            "pos_a_ai_chip_etf",
+            "pos_b_ai_compute_leader",
+            "pos_a_advanced_packaging_supplier",
+            "pos_b_industrial_compounder",
+            "pos_a_ai_infra_call_spread_note",
+            "pos_f_ethereum_synthetic_trust"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.103,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "grouped_synthetic_positions",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "grouped_remaining_core_ai_infrastructure__hardware_synthetic_assets"
+        }
+      ],
+      "bucket_display_name": "Core AI Infrastructure / Hardware",
+      "bucket_id": "core_ai_infrastructure_hardware",
+      "bucket_level_totals": {
+        "actual_asset_weight_sum": 1.0,
+        "actual_minus_theme_benchmark_effect_input": 0.002945,
+        "actual_weight_asset_return": 0.117,
+        "asset_selection_effect_input": 0.002989,
+        "asset_sizing_effect_input": -4.4e-05,
+        "asset_total_effect_input": 0.002945,
+        "caveats": [
+          "Compact grouped synthetic assets only.",
+          "These rows are calculation inputs, not final report rows."
+        ],
+        "reference_asset_weight_sum": 1.0,
+        "reference_weight_asset_return": 0.117211
+      },
+      "theme_benchmark_return": 0.103
+    },
+    {
+      "actual_portfolio_weight": 0.171835,
+      "assets": [
+        {
+          "actual_asset_weight_within_bucket": 0.472648,
+          "asset_return": 0.100234,
+          "benchmark_component_return": 0.092,
+          "display_name": "Cloud Platform Compounder",
+          "position_ids": [
+            "pos_a_cloud_platform_compounder"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.092,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_a_cloud_platform_compounder"
+        },
+        {
+          "actual_asset_weight_within_bucket": 0.171244,
+          "asset_return": 0.103734,
+          "benchmark_component_return": 0.092,
+          "display_name": "Cloud Platform Compounder",
+          "position_ids": [
+            "pos_b_cloud_platform_compounder"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.092,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_b_cloud_platform_compounder"
+        },
+        {
+          "actual_asset_weight_within_bucket": 0.163459,
+          "asset_return": 0.107234,
+          "benchmark_component_return": 0.092,
+          "display_name": "Northstar AI Growth Fund LP",
+          "position_ids": [
+            "pos_d_northstar_ai_growth_fund"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.092,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_d_northstar_ai_growth_fund"
+        },
+        {
+          "actual_asset_weight_within_bucket": 0.192649,
+          "asset_return": 0.110732,
+          "benchmark_component_return": 0.092,
+          "display_name": "Grouped remaining AI Model / Platform Exposure exposure",
+          "position_ids": [
+            "pos_b_consumer_platform_quality",
+            "pos_a_enterprise_ai_software"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.092,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "grouped_synthetic_positions",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "grouped_remaining_ai_model__platform_exposure_synthetic_assets"
+        }
+      ],
+      "bucket_display_name": "AI Model / Platform Exposure",
+      "bucket_id": "ai_model_platform_exposure",
+      "bucket_level_totals": {
+        "actual_asset_weight_sum": 1.0,
+        "actual_minus_theme_benchmark_effect_input": 0.002062,
+        "actual_weight_asset_return": 0.104,
+        "asset_selection_effect_input": 0.002317,
+        "asset_sizing_effect_input": -0.000255,
+        "asset_total_effect_input": 0.002062,
+        "caveats": [
+          "Compact grouped synthetic assets only.",
+          "These rows are calculation inputs, not final report rows."
+        ],
+        "reference_asset_weight_sum": 1.0,
+        "reference_weight_asset_return": 0.105484
+      },
+      "theme_benchmark_return": 0.092
+    },
+    {
+      "actual_portfolio_weight": 0.047259,
+      "assets": [
+        {
+          "actual_asset_weight_within_bucket": 0.386792,
+          "asset_return": 0.073962,
+          "benchmark_component_return": 0.071,
+          "display_name": "Industrial Logistics Real Estate Fund",
+          "position_ids": [
+            "pos_d_industrial_logistics_real_estate"
+          ],
+          "reference_asset_weight_within_bucket": 0.333333,
+          "reference_return": 0.071,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_d_industrial_logistics_real_estate"
+        },
+        {
+          "actual_asset_weight_within_bucket": 0.358493,
+          "asset_return": 0.077462,
+          "benchmark_component_return": 0.071,
+          "display_name": "Payments Network Core",
+          "position_ids": [
+            "pos_b_payments_network_core"
+          ],
+          "reference_asset_weight_within_bucket": 0.333333,
+          "reference_return": 0.071,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_b_payments_network_core"
+        },
+        {
+          "actual_asset_weight_within_bucket": 0.254715,
+          "asset_return": 0.080963,
+          "benchmark_component_return": 0.071,
+          "display_name": "Healthcare Resilience",
+          "position_ids": [
+            "pos_b_healthcare_resilience"
+          ],
+          "reference_asset_weight_within_bucket": 0.333334,
+          "reference_return": 0.071,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_b_healthcare_resilience"
+        }
+      ],
+      "bucket_display_name": "AI Downstream Productivity Beneficiary",
+      "bucket_id": "ai_downstream_productivity_beneficiary",
+      "bucket_level_totals": {
+        "actual_asset_weight_sum": 1.0,
+        "actual_minus_theme_benchmark_effect_input": 0.000284,
+        "actual_weight_asset_return": 0.077,
+        "asset_selection_effect_input": 0.000305,
+        "asset_sizing_effect_input": -2.2e-05,
+        "asset_total_effect_input": 0.000283,
+        "caveats": [
+          "Compact grouped synthetic assets only.",
+          "These rows are calculation inputs, not final report rows."
+        ],
+        "reference_asset_weight_sum": 1.0,
+        "reference_weight_asset_return": 0.077462
+      },
+      "theme_benchmark_return": 0.071
+    },
+    {
+      "actual_portfolio_weight": 0.02519,
+      "assets": [
+        {
+          "actual_asset_weight_within_bucket": 0.561956,
+          "asset_return": 0.032467,
+          "benchmark_component_return": 0.038,
+          "display_name": "Quality Consumer Staples",
+          "position_ids": [
+            "pos_b_quality_consumer_staples"
+          ],
+          "reference_asset_weight_within_bucket": 0.5,
+          "reference_return": 0.038,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_b_quality_consumer_staples"
+        },
+        {
+          "actual_asset_weight_within_bucket": 0.438044,
+          "asset_return": 0.035967,
+          "benchmark_component_return": 0.038,
+          "display_name": "Core Bank Quality",
+          "position_ids": [
+            "pos_b_core_bank_quality"
+          ],
+          "reference_asset_weight_within_bucket": 0.5,
+          "reference_return": 0.038,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_b_core_bank_quality"
+        }
+      ],
+      "bucket_display_name": "AI-Disrupted Incumbent",
+      "bucket_id": "ai_disrupted_incumbent",
+      "bucket_level_totals": {
+        "actual_asset_weight_sum": 1.0,
+        "actual_minus_theme_benchmark_effect_input": -0.000101,
+        "actual_weight_asset_return": 0.034,
+        "asset_selection_effect_input": -9.5e-05,
+        "asset_sizing_effect_input": -5e-06,
+        "asset_total_effect_input": -0.0001,
+        "caveats": [
+          "Compact grouped synthetic assets only.",
+          "These rows are calculation inputs, not final report rows."
+        ],
+        "reference_asset_weight_sum": 1.0,
+        "reference_weight_asset_return": 0.034217
+      },
+      "theme_benchmark_return": 0.038
+    },
+    {
+      "actual_portfolio_weight": 0.107336,
+      "assets": [
+        {
+          "actual_asset_weight_within_bucket": 0.195223,
+          "asset_return": 0.087956,
+          "benchmark_component_return": 0.085,
+          "display_name": "Data Center Development JV",
+          "position_ids": [
+            "pos_d_data_center_development_jv"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.085,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_d_data_center_development_jv"
+        },
+        {
+          "actual_asset_weight_within_bucket": 0.153686,
+          "asset_return": 0.091456,
+          "benchmark_component_return": 0.085,
+          "display_name": "Venture AI Infrastructure Fund",
+          "position_ids": [
+            "pos_d_venture_ai_infrastructure_fund"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.085,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_d_venture_ai_infrastructure_fund"
+        },
+        {
+          "actual_asset_weight_within_bucket": 0.094496,
+          "asset_return": 0.094956,
+          "benchmark_component_return": 0.085,
+          "display_name": "Power Campus Preferred Equity",
+          "position_ids": [
+            "pos_d_power_campus_preferred"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.085,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_d_power_campus_preferred"
+        },
+        {
+          "actual_asset_weight_within_bucket": 0.556595,
+          "asset_return": 0.098457,
+          "benchmark_component_return": 0.085,
+          "display_name": "Grouped remaining Data Center / Power Bottleneck Exposure exposure",
+          "position_ids": [
+            "pos_a_data_center_cooling_leader",
+            "pos_a_data_center_public_reit",
+            "pos_a_edge_server_platform",
+            "pos_d_fiber_interconnect_infra_lp",
+            "pos_a_grid_enabler_equity",
+            "pos_f_copper_power_demand_etf",
+            "pos_f_uranium_power_supply_etf",
+            "pos_d_data_center_land_option"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.085,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "grouped_synthetic_positions",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "grouped_remaining_data_center__power_bottleneck_exposure_synthetic_assets"
+        }
+      ],
+      "bucket_display_name": "Data Center / Power Bottleneck Exposure",
+      "bucket_id": "data_center_power_bottleneck_exposure",
+      "bucket_level_totals": {
+        "actual_asset_weight_sum": 1.0,
+        "actual_minus_theme_benchmark_effect_input": 0.001073,
+        "actual_weight_asset_return": 0.095,
+        "asset_selection_effect_input": 0.000881,
+        "asset_sizing_effect_input": 0.000193,
+        "asset_total_effect_input": 0.001074,
+        "caveats": [
+          "Compact grouped synthetic assets only.",
+          "These rows are calculation inputs, not final report rows."
+        ],
+        "reference_asset_weight_sum": 1.0,
+        "reference_weight_asset_return": 0.093206
+      },
+      "theme_benchmark_return": 0.085
+    },
+    {
+      "actual_portfolio_weight": 0.333043,
+      "assets": [
+        {
+          "actual_asset_weight_within_bucket": 0.089692,
+          "asset_return": 0.045107,
+          "benchmark_component_return": 0.052,
+          "display_name": "Treasury Bill Ladder",
+          "position_ids": [
+            "pos_e_treasury_bill_ladder"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.052,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_e_treasury_bill_ladder"
+        },
+        {
+          "actual_asset_weight_within_bucket": 0.065596,
+          "asset_return": 0.048607,
+          "benchmark_component_return": 0.052,
+          "display_name": "Government Money Market Fund",
+          "position_ids": [
+            "pos_e_government_money_market"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.052,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_e_government_money_market"
+        },
+        {
+          "actual_asset_weight_within_bucket": 0.058902,
+          "asset_return": 0.052107,
+          "benchmark_component_return": 0.052,
+          "display_name": "Quality Factor ETF",
+          "position_ids": [
+            "pos_b_quality_factor_etf"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.052,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_b_quality_factor_etf"
+        },
+        {
+          "actual_asset_weight_within_bucket": 0.78581,
+          "asset_return": 0.055607,
+          "benchmark_component_return": 0.052,
+          "display_name": "Grouped remaining Neutral / Low Direct AI Exposure exposure",
+          "position_ids": [
+            "pos_c_investment_grade_bond_etf",
+            "pos_e_short_treasury_etf",
+            "pos_c_short_tips_etf",
+            "pos_c_municipal_income_ladder",
+            "pos_e_short_duration_ig_bond",
+            "pos_e_operating_cash_usd",
+            "pos_c_floating_rate_credit_etf",
+            "pos_f_commodity_basket_fund",
+            "pos_c_agency_mbs_proxy",
+            "pos_e_minimum_volatility_equity",
+            "pos_f_eurusd_forward_exposure",
+            "pos_b_value_factor_etf",
+            "pos_f_bitcoin_synthetic_trust",
+            "pos_b_broad_developed_equity_etf",
+            "pos_c_pipeline_cash_yield",
+            "pos_f_jpy_defensive_hedge",
+            "pos_e_inflation_linked_short_note",
+            "pos_c_preferred_income_etf",
+            "pos_c_covered_call_income_etf",
+            "pos_f_usd_strength_proxy",
+            "pos_a_public_ai_money_market_sweep",
+            "pos_e_gold_defensive_etf",
+            "pos_e_defensive_quality_etf",
+            "pos_c_public_direct_lending_bdc",
+            "pos_f_wti_energy_exposure",
+            "pos_e_municipal_cash_reserve",
+            "pos_c_reit_income_etf",
+            "pos_b_core_quality_cash_sweep",
+            "pos_c_income_sleeve_cash"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.052,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "grouped_synthetic_positions",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "grouped_remaining_neutral__low_direct_ai_exposure_synthetic_assets"
+        }
+      ],
+      "bucket_display_name": "Neutral / Low Direct AI Exposure",
+      "bucket_id": "neutral_low_direct_ai_exposure",
+      "bucket_level_totals": {
+        "actual_asset_weight_sum": 1.0,
+        "actual_minus_theme_benchmark_effect_input": 0.000666,
+        "actual_weight_asset_return": 0.054,
+        "asset_selection_effect_input": -0.000547,
+        "asset_sizing_effect_input": 0.001213,
+        "asset_total_effect_input": 0.000666,
+        "caveats": [
+          "Compact grouped synthetic assets only.",
+          "These rows are calculation inputs, not final report rows."
+        ],
+        "reference_asset_weight_sum": 1.0,
+        "reference_weight_asset_return": 0.050357
+      },
+      "theme_benchmark_return": 0.052
+    },
+    {
+      "actual_portfolio_weight": 0.104996,
+      "assets": [
+        {
+          "actual_asset_weight_within_bucket": 0.146497,
+          "asset_return": 0.032376,
+          "benchmark_component_return": 0.04,
+          "display_name": "Secondary PE Fund",
+          "position_ids": [
+            "pos_d_secondary_pe_fund"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.04,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_d_secondary_pe_fund"
+        },
+        {
+          "actual_asset_weight_within_bucket": 0.129512,
+          "asset_return": 0.035876,
+          "benchmark_component_return": 0.04,
+          "display_name": "Opaque Manager-Level Private Book",
+          "position_ids": [
+            "pos_d_opaque_manager_level_private_book"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.04,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_d_opaque_manager_level_private_book"
+        },
+        {
+          "actual_asset_weight_within_bucket": 0.123142,
+          "asset_return": 0.039376,
+          "benchmark_component_return": 0.04,
+          "display_name": "Private Credit Sidecar",
+          "position_ids": [
+            "pos_d_private_credit_sidecar"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.04,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "source_position",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "pos_d_private_credit_sidecar"
+        },
+        {
+          "actual_asset_weight_within_bucket": 0.600849,
+          "asset_return": 0.042876,
+          "benchmark_component_return": 0.04,
+          "display_name": "Grouped remaining Unclassified / Review Required exposure",
+          "position_ids": [
+            "pos_c_private_credit_income_fund",
+            "pos_d_multifamily_real_estate_fund",
+            "pos_d_asset_backed_credit_fund",
+            "pos_d_renewable_power_infra_lp",
+            "pos_f_macro_overlay_manager_book",
+            "pos_f_rates_volatility_collar",
+            "pos_f_ai_chip_downside_put_spread",
+            "pos_d_private_mark_placeholder"
+          ],
+          "reference_asset_weight_within_bucket": 0.25,
+          "reference_return": 0.04,
+          "source_metadata": {
+            "external_data_used": false,
+            "live_market_data_used": false,
+            "local_only": true,
+            "real_client_data_used": false,
+            "source": "synthetic_grouped_asset_calculation_input",
+            "source_kind": "grouped_synthetic_positions",
+            "synthetic_data": true
+          },
+          "synthetic_asset_id": "grouped_remaining_unclassified__review_required_synthetic_assets"
+        }
+      ],
+      "bucket_display_name": "Unclassified / Review Required",
+      "bucket_id": "unclassified_review_required",
+      "bucket_level_totals": {
+        "actual_asset_weight_sum": 1.0,
+        "actual_minus_theme_benchmark_effect_input": 0.0,
+        "actual_weight_asset_return": 0.04,
+        "asset_selection_effect_input": -0.000249,
+        "asset_sizing_effect_input": 0.000249,
+        "asset_total_effect_input": 0.0,
+        "caveats": [
+          "Compact grouped synthetic assets only.",
+          "These rows are calculation inputs, not final report rows."
+        ],
+        "reference_asset_weight_sum": 1.0,
+        "reference_weight_asset_return": 0.037626
+      },
+      "theme_benchmark_return": 0.04
+    }
+  ],
+  "generated_at": "2026-07-08T00:00:00Z",
+  "pack_id": "synthetic_attribution_calculation_inputs_v1",
+  "pack_version": "2026-07-08",
+  "portfolio_level_totals": {
+    "asset_selection_effect_input": 0.005601,
+    "asset_sizing_effect_input": 0.001329,
+    "asset_total_effect_input": 0.00693
+  },
+  "schema_version": "theme_asset_calculation_inputs.v1",
+  "selected_lens_display_name": "AI Adoption",
+  "selected_lens_id": "ai_adoption",
+  "source_metadata": {
+    "external_data_used": false,
+    "live_market_data_used": false,
+    "local_only": true,
+    "real_client_data_used": false,
+    "source": "synthetic_ai_adoption_asset_inputs",
+    "synthetic_data": true
+  },
+  "synthetic_data": true
+}

@@ -279,6 +279,19 @@ python -m arangur.analytics.attribution_methodology_audit
 
 Use `--output path\to\audit_summary.json` only when a local JSON copy is useful. The full methodology note lives at `docs/architecture/attribution_methodology_and_calculation_audit_v1.md`.
 
+## Generate Synthetic Attribution Calculation Inputs
+
+The attribution calculation-input generator writes the lower-level local synthetic inputs needed by a future calculated attribution engine: selected AI Adoption lens policy, theme benchmark weight states, theme benchmark return inputs, compact grouped asset inputs, manager benchmark-basis metadata, residual policy, and readiness status. It does not regenerate attribution mockups, wire Advisor Preview / Populate / Present / generated reports, touch Docker/deployment, use live data, or add dependencies.
+
+```cmd
+set PYTHONPATH=src
+python -m arangur.analytics.synthetic_attribution_calculation_inputs
+```
+
+This writes deterministic JSON under:
+
+- `data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/calculation_inputs/`
+
 ## Generate Revaluation v2 Report Mockups
 
 The v2 report-view generator turns full-revaluation outputs, attribution outputs, and the synthetic prerequisite pack into v2 report input fixtures, v2 report view fixtures, and Markdown product-review mockups, including separate Cash Flow Delivered and Cash-Flow Support Outlook reports. It preserves v1 mockups and does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.

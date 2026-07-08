@@ -1,0 +1,124 @@
+{
+  "approval_status": "synthetic_demo_approved",
+  "generated_at": "2026-07-08T00:00:00Z",
+  "pack_id": "synthetic_attribution_calculation_inputs_v1",
+  "pack_version": "2026-07-08",
+  "policy_weight_sum_validation": {
+    "ai_adoption_actual_portfolio_theme_weights_v1": 1.0,
+    "ai_adoption_equal_weight_selected_buckets_v1": 1.0
+  },
+  "schema_version": "theme_benchmark_weight_policy.v1",
+  "selected_lens_display_name": "AI Adoption",
+  "selected_lens_id": "ai_adoption",
+  "source_metadata": {
+    "external_data_used": false,
+    "live_market_data_used": false,
+    "local_only": true,
+    "real_client_data_used": false,
+    "source": "synthetic_ai_adoption_theme_weight_policy",
+    "synthetic_data": true
+  },
+  "synthetic_data": true,
+  "weight_policies": [
+    {
+      "caveats": [
+        "Synthetic demo policy only.",
+        "Equal weights are not a production benchmark recommendation."
+      ],
+      "included_buckets": [
+        {
+          "bucket_display_name": "Core AI Infrastructure / Hardware",
+          "bucket_id": "core_ai_infrastructure_hardware",
+          "weight": 0.142857
+        },
+        {
+          "bucket_display_name": "AI Model / Platform Exposure",
+          "bucket_id": "ai_model_platform_exposure",
+          "weight": 0.142857
+        },
+        {
+          "bucket_display_name": "AI Downstream Productivity Beneficiary",
+          "bucket_id": "ai_downstream_productivity_beneficiary",
+          "weight": 0.142857
+        },
+        {
+          "bucket_display_name": "AI-Disrupted Incumbent",
+          "bucket_id": "ai_disrupted_incumbent",
+          "weight": 0.142857
+        },
+        {
+          "bucket_display_name": "Data Center / Power Bottleneck Exposure",
+          "bucket_id": "data_center_power_bottleneck_exposure",
+          "weight": 0.142857
+        },
+        {
+          "bucket_display_name": "Neutral / Low Direct AI Exposure",
+          "bucket_id": "neutral_low_direct_ai_exposure",
+          "weight": 0.142857
+        },
+        {
+          "bucket_display_name": "Unclassified / Review Required",
+          "bucket_id": "unclassified_review_required",
+          "weight": 0.142858
+        }
+      ],
+      "neutral_bucket_treatment": "included_with_equal_weight",
+      "rationale": "Equal weights provide a neutral synthetic policy mix for the first calculation-input tranche and avoid claiming a real approved policy mix.",
+      "return_calculation_convention": "sum(bucket_weight * theme_benchmark_return)",
+      "review_bucket_treatment": "included_with_equal_weight",
+      "weight_policy_id": "ai_adoption_equal_weight_selected_buckets_v1",
+      "weight_policy_type": "equal_weight_selected_buckets",
+      "weight_sum": 1.0
+    },
+    {
+      "caveats": [
+        "Synthetic demo actual weights only.",
+        "Review-required exposure remains visible rather than hidden."
+      ],
+      "included_buckets": [
+        {
+          "bucket_display_name": "Core AI Infrastructure / Hardware",
+          "bucket_id": "core_ai_infrastructure_hardware",
+          "weight": 0.210341
+        },
+        {
+          "bucket_display_name": "AI Model / Platform Exposure",
+          "bucket_id": "ai_model_platform_exposure",
+          "weight": 0.171835
+        },
+        {
+          "bucket_display_name": "AI Downstream Productivity Beneficiary",
+          "bucket_id": "ai_downstream_productivity_beneficiary",
+          "weight": 0.047259
+        },
+        {
+          "bucket_display_name": "AI-Disrupted Incumbent",
+          "bucket_id": "ai_disrupted_incumbent",
+          "weight": 0.02519
+        },
+        {
+          "bucket_display_name": "Data Center / Power Bottleneck Exposure",
+          "bucket_id": "data_center_power_bottleneck_exposure",
+          "weight": 0.107336
+        },
+        {
+          "bucket_display_name": "Neutral / Low Direct AI Exposure",
+          "bucket_id": "neutral_low_direct_ai_exposure",
+          "weight": 0.333043
+        },
+        {
+          "bucket_display_name": "Unclassified / Review Required",
+          "bucket_id": "unclassified_review_required",
+          "weight": 0.104996
+        }
+      ],
+      "neutral_bucket_treatment": "included_at_actual_portfolio_weight",
+      "rationale": "Actual weights come from the complete synthetic AI Adoption lens assignment base-value shares.",
+      "return_calculation_convention": "sum(actual_portfolio_theme_weight * theme_benchmark_return)",
+      "review_bucket_treatment": "included_at_actual_portfolio_weight",
+      "weight_policy_id": "ai_adoption_actual_portfolio_theme_weights_v1",
+      "weight_policy_type": "actual_portfolio_theme_weights",
+      "weight_sum": 1.0
+    }
+  ]
+}

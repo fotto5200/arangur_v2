@@ -1,0 +1,603 @@
+{
+  "approval_status": "synthetic_demo_approved",
+  "coverage_summary": {
+    "all_current_managers_covered": true,
+    "all_manager_benchmark_basis_types_explicit": true,
+    "manager_count": 6,
+    "manager_theme_weights_reconcile": true,
+    "manager_tie_outs_reconcile": true
+  },
+  "generated_at": "2026-07-08T00:00:00Z",
+  "managers": [
+    {
+      "approved_role": "Growth / AI Infrastructure",
+      "benchmark_basis_description": "Uses the existing manager-specific synthetic mandate proxy as the manager comparison benchmark, while separately storing the selected AI Adoption theme-benchmark blend needed for future calculated effects.",
+      "caveats": [
+        "Synthetic demo manager calculation inputs only.",
+        "Manager benchmark basis is explicit but not production-approved."
+      ],
+      "display_name": "Manager A - Growth / AI Infrastructure",
+      "manager_actual_theme_return": 0.10925,
+      "manager_asset_selection_input": 0.012958,
+      "manager_asset_sizing_input": -0.000272,
+      "manager_benchmark_basis_type": "hybrid_synthetic_demo",
+      "manager_benchmark_components": [
+        {
+          "component_return": 0.095,
+          "component_type": "manager_specific_synthetic_mandate_proxy",
+          "proxy_display_name": "Synthetic Growth / AI Infrastructure Manager Proxy",
+          "proxy_id": "mgr_a_growth_ai_infrastructure_synthetic_manager_proxy_v1"
+        },
+        {
+          "component_return": 0.096563,
+          "component_type": "selected_lens_theme_benchmark_blend",
+          "selected_lens_id": "ai_adoption"
+        }
+      ],
+      "manager_benchmark_return": 0.095,
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "manager_return": 0.116,
+      "manager_theme_benchmark_blend_return": 0.096563,
+      "manager_theme_selection_input": -0.026285,
+      "manager_theme_sizing_input": 0.027848,
+      "manager_theme_weight_sum": 1.0,
+      "manager_theme_weights": [
+        {
+          "bucket_display_name": "Core AI Infrastructure / Hardware",
+          "bucket_id": "core_ai_infrastructure_hardware",
+          "weight": 0.567314,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "AI Model / Platform Exposure",
+          "bucket_id": "ai_model_platform_exposure",
+          "weight": 0.295422,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "AI Downstream Productivity Beneficiary",
+          "bucket_id": "ai_downstream_productivity_beneficiary",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "AI-Disrupted Incumbent",
+          "bucket_id": "ai_disrupted_incumbent",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "Data Center / Power Bottleneck Exposure",
+          "bucket_id": "data_center_power_bottleneck_exposure",
+          "weight": 0.115554,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "Neutral / Low Direct AI Exposure",
+          "bucket_id": "neutral_low_direct_ai_exposure",
+          "weight": 0.02171,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "Unclassified / Review Required",
+          "bucket_id": "unclassified_review_required",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        }
+      ],
+      "portfolio_weight": 0.318309,
+      "residual_input": 0.006751,
+      "source_metadata": {
+        "external_data_used": false,
+        "live_market_data_used": false,
+        "local_only": true,
+        "mandate_source": "approved_for_synthetic_demo_reports",
+        "real_client_data_used": false,
+        "source": "synthetic_manager_calculated_attribution_inputs",
+        "synthetic_data": true
+      },
+      "tie_out_status": {
+        "difference": 0.0,
+        "manager_relative_return": 0.021,
+        "recomputed_relative_return": 0.021,
+        "ties_to_manager_relative_return": true,
+        "timing_used_as_residual": false
+      },
+      "timing_status": "unavailable"
+    },
+    {
+      "approved_role": "Core Quality Equity",
+      "benchmark_basis_description": "Uses the existing manager-specific synthetic mandate proxy as the manager comparison benchmark, while separately storing the selected AI Adoption theme-benchmark blend needed for future calculated effects.",
+      "caveats": [
+        "Synthetic demo manager calculation inputs only.",
+        "Manager benchmark basis is explicit but not production-approved."
+      ],
+      "display_name": "Manager B - Core Quality Equity",
+      "manager_actual_theme_return": 0.07849,
+      "manager_asset_selection_input": 0.006082,
+      "manager_asset_sizing_input": 0.000334,
+      "manager_benchmark_basis_type": "hybrid_synthetic_demo",
+      "manager_benchmark_components": [
+        {
+          "component_return": 0.076,
+          "component_type": "manager_specific_synthetic_mandate_proxy",
+          "proxy_display_name": "Synthetic Core Quality Equity Manager Proxy",
+          "proxy_id": "mgr_b_core_quality_equity_synthetic_manager_proxy_v1"
+        },
+        {
+          "component_return": 0.072075,
+          "component_type": "selected_lens_theme_benchmark_blend",
+          "selected_lens_id": "ai_adoption"
+        }
+      ],
+      "manager_benchmark_return": 0.076,
+      "manager_id": "mgr_b_core_quality_equity",
+      "manager_return": 0.084,
+      "manager_theme_benchmark_blend_return": 0.072075,
+      "manager_theme_selection_input": -0.007285,
+      "manager_theme_sizing_input": 0.00336,
+      "manager_theme_weight_sum": 1.0,
+      "manager_theme_weights": [
+        {
+          "bucket_display_name": "Core AI Infrastructure / Hardware",
+          "bucket_id": "core_ai_infrastructure_hardware",
+          "weight": 0.142391,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "AI Model / Platform Exposure",
+          "bucket_id": "ai_model_platform_exposure",
+          "weight": 0.291316,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "AI Downstream Productivity Beneficiary",
+          "bucket_id": "ai_downstream_productivity_beneficiary",
+          "weight": 0.169824,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "AI-Disrupted Incumbent",
+          "bucket_id": "ai_disrupted_incumbent",
+          "weight": 0.147615,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "Data Center / Power Bottleneck Exposure",
+          "bucket_id": "data_center_power_bottleneck_exposure",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "Neutral / Low Direct AI Exposure",
+          "bucket_id": "neutral_low_direct_ai_exposure",
+          "weight": 0.248854,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "Unclassified / Review Required",
+          "bucket_id": "unclassified_review_required",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        }
+      ],
+      "portfolio_weight": 0.170646,
+      "residual_input": 0.005509,
+      "source_metadata": {
+        "external_data_used": false,
+        "live_market_data_used": false,
+        "local_only": true,
+        "mandate_source": "approved_for_synthetic_demo_reports",
+        "real_client_data_used": false,
+        "source": "synthetic_manager_calculated_attribution_inputs",
+        "synthetic_data": true
+      },
+      "tie_out_status": {
+        "difference": 0.0,
+        "manager_relative_return": 0.008,
+        "recomputed_relative_return": 0.008,
+        "ties_to_manager_relative_return": true,
+        "timing_used_as_residual": false
+      },
+      "timing_status": "unavailable"
+    },
+    {
+      "approved_role": "Income and Cash Generation",
+      "benchmark_basis_description": "Uses the existing manager-specific synthetic mandate proxy as the manager comparison benchmark, while separately storing the selected AI Adoption theme-benchmark blend needed for future calculated effects.",
+      "caveats": [
+        "Synthetic demo manager calculation inputs only.",
+        "Manager benchmark basis is explicit but not production-approved."
+      ],
+      "display_name": "Manager C - Income and Cash Generation",
+      "manager_actual_theme_return": 0.052574,
+      "manager_asset_selection_input": -0.001717,
+      "manager_asset_sizing_input": 0.003514,
+      "manager_benchmark_basis_type": "hybrid_synthetic_demo",
+      "manager_benchmark_components": [
+        {
+          "component_return": 0.043,
+          "component_type": "manager_specific_synthetic_mandate_proxy",
+          "proxy_display_name": "Synthetic Income and Credit Manager Proxy",
+          "proxy_id": "mgr_c_income_cash_generation_synthetic_manager_proxy_v1"
+        },
+        {
+          "component_return": 0.050777,
+          "component_type": "selected_lens_theme_benchmark_blend",
+          "selected_lens_id": "ai_adoption"
+        }
+      ],
+      "manager_benchmark_return": 0.043,
+      "manager_id": "mgr_c_income_cash_generation",
+      "manager_return": 0.047,
+      "manager_theme_benchmark_blend_return": 0.050777,
+      "manager_theme_selection_input": 0.025715,
+      "manager_theme_sizing_input": -0.017938,
+      "manager_theme_weight_sum": 1.0,
+      "manager_theme_weights": [
+        {
+          "bucket_display_name": "Core AI Infrastructure / Hardware",
+          "bucket_id": "core_ai_infrastructure_hardware",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "AI Model / Platform Exposure",
+          "bucket_id": "ai_model_platform_exposure",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "AI Downstream Productivity Beneficiary",
+          "bucket_id": "ai_downstream_productivity_beneficiary",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "AI-Disrupted Incumbent",
+          "bucket_id": "ai_disrupted_incumbent",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "Data Center / Power Bottleneck Exposure",
+          "bucket_id": "data_center_power_bottleneck_exposure",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "Neutral / Low Direct AI Exposure",
+          "bucket_id": "neutral_low_direct_ai_exposure",
+          "weight": 0.898113,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "Unclassified / Review Required",
+          "bucket_id": "unclassified_review_required",
+          "weight": 0.101887,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        }
+      ],
+      "portfolio_weight": 0.118147,
+      "residual_input": -0.005574,
+      "source_metadata": {
+        "external_data_used": false,
+        "live_market_data_used": false,
+        "local_only": true,
+        "mandate_source": "approved_for_synthetic_demo_reports",
+        "real_client_data_used": false,
+        "source": "synthetic_manager_calculated_attribution_inputs",
+        "synthetic_data": true
+      },
+      "tie_out_status": {
+        "difference": 0.0,
+        "manager_relative_return": 0.004,
+        "recomputed_relative_return": 0.004,
+        "ties_to_manager_relative_return": true,
+        "timing_used_as_residual": false
+      },
+      "timing_status": "unavailable"
+    },
+    {
+      "approved_role": "Private Markets / Real Assets",
+      "benchmark_basis_description": "Uses the existing manager-specific synthetic mandate proxy as the manager comparison benchmark, while separately storing the selected AI Adoption theme-benchmark blend needed for future calculated effects.",
+      "caveats": [
+        "Synthetic demo manager calculation inputs only.",
+        "Manager benchmark basis is explicit but not production-approved."
+      ],
+      "display_name": "Manager D - Private Markets / Real Assets",
+      "manager_actual_theme_return": 0.071462,
+      "manager_asset_selection_input": 0.004389,
+      "manager_asset_sizing_input": 0.001314,
+      "manager_benchmark_basis_type": "hybrid_synthetic_demo",
+      "manager_benchmark_components": [
+        {
+          "component_return": 0.063,
+          "component_type": "manager_specific_synthetic_mandate_proxy",
+          "proxy_display_name": "Synthetic Private Markets / Real Assets Manager Proxy",
+          "proxy_id": "mgr_d_private_real_assets_synthetic_manager_proxy_v1"
+        },
+        {
+          "component_return": 0.065758,
+          "component_type": "selected_lens_theme_benchmark_blend",
+          "selected_lens_id": "ai_adoption"
+        }
+      ],
+      "manager_benchmark_return": 0.063,
+      "manager_id": "mgr_d_private_real_assets",
+      "manager_return": 0.071,
+      "manager_theme_benchmark_blend_return": 0.065758,
+      "manager_theme_selection_input": 0.005715,
+      "manager_theme_sizing_input": -0.002957,
+      "manager_theme_weight_sum": 1.0,
+      "manager_theme_weights": [
+        {
+          "bucket_display_name": "Core AI Infrastructure / Hardware",
+          "bucket_id": "core_ai_infrastructure_hardware",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "AI Model / Platform Exposure",
+          "bucket_id": "ai_model_platform_exposure",
+          "weight": 0.15245,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "AI Downstream Productivity Beneficiary",
+          "bucket_id": "ai_downstream_productivity_beneficiary",
+          "weight": 0.099214,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "AI-Disrupted Incumbent",
+          "bucket_id": "ai_disrupted_incumbent",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "Data Center / Power Bottleneck Exposure",
+          "bucket_id": "data_center_power_bottleneck_exposure",
+          "weight": 0.327889,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "Neutral / Low Direct AI Exposure",
+          "bucket_id": "neutral_low_direct_ai_exposure",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "Unclassified / Review Required",
+          "bucket_id": "unclassified_review_required",
+          "weight": 0.420447,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        }
+      ],
+      "portfolio_weight": 0.184244,
+      "residual_input": -0.000461,
+      "source_metadata": {
+        "external_data_used": false,
+        "live_market_data_used": false,
+        "local_only": true,
+        "mandate_source": "approved_for_synthetic_demo_reports",
+        "real_client_data_used": false,
+        "source": "synthetic_manager_calculated_attribution_inputs",
+        "synthetic_data": true
+      },
+      "tie_out_status": {
+        "difference": 0.0,
+        "manager_relative_return": 0.008,
+        "recomputed_relative_return": 0.008,
+        "ties_to_manager_relative_return": true,
+        "timing_used_as_residual": false
+      },
+      "timing_status": "unavailable"
+    },
+    {
+      "approved_role": "Liquidity Reserve / Defensive Ballast",
+      "benchmark_basis_description": "Uses the existing manager-specific synthetic mandate proxy as the manager comparison benchmark, while separately storing the selected AI Adoption theme-benchmark blend needed for future calculated effects.",
+      "caveats": [
+        "Synthetic demo manager calculation inputs only.",
+        "Manager benchmark basis is explicit but not production-approved."
+      ],
+      "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+      "manager_actual_theme_return": 0.054,
+      "manager_asset_selection_input": -0.001643,
+      "manager_asset_sizing_input": 0.003643,
+      "manager_benchmark_basis_type": "hybrid_synthetic_demo",
+      "manager_benchmark_components": [
+        {
+          "component_return": 0.031,
+          "component_type": "manager_specific_synthetic_mandate_proxy",
+          "proxy_display_name": "Synthetic Liquidity Reserve Policy Proxy",
+          "proxy_id": "mgr_e_liquidity_defensive_synthetic_manager_proxy_v1"
+        },
+        {
+          "component_return": 0.052,
+          "component_type": "selected_lens_theme_benchmark_blend",
+          "selected_lens_id": "ai_adoption"
+        }
+      ],
+      "manager_benchmark_return": 0.031,
+      "manager_id": "mgr_e_liquidity_defensive",
+      "manager_return": 0.034,
+      "manager_theme_benchmark_blend_return": 0.052,
+      "manager_theme_selection_input": 0.037715,
+      "manager_theme_sizing_input": -0.016715,
+      "manager_theme_weight_sum": 1.0,
+      "manager_theme_weights": [
+        {
+          "bucket_display_name": "Core AI Infrastructure / Hardware",
+          "bucket_id": "core_ai_infrastructure_hardware",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "AI Model / Platform Exposure",
+          "bucket_id": "ai_model_platform_exposure",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "AI Downstream Productivity Beneficiary",
+          "bucket_id": "ai_downstream_productivity_beneficiary",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "AI-Disrupted Incumbent",
+          "bucket_id": "ai_disrupted_incumbent",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "Data Center / Power Bottleneck Exposure",
+          "bucket_id": "data_center_power_bottleneck_exposure",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "Neutral / Low Direct AI Exposure",
+          "bucket_id": "neutral_low_direct_ai_exposure",
+          "weight": 1.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "Unclassified / Review Required",
+          "bucket_id": "unclassified_review_required",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        }
+      ],
+      "portfolio_weight": 0.1274,
+      "residual_input": -0.02,
+      "source_metadata": {
+        "external_data_used": false,
+        "live_market_data_used": false,
+        "local_only": true,
+        "mandate_source": "approved_for_synthetic_demo_reports",
+        "real_client_data_used": false,
+        "source": "synthetic_manager_calculated_attribution_inputs",
+        "synthetic_data": true
+      },
+      "tie_out_status": {
+        "difference": 0.0,
+        "manager_relative_return": 0.003,
+        "recomputed_relative_return": 0.003,
+        "ties_to_manager_relative_return": true,
+        "timing_used_as_residual": false
+      },
+      "timing_status": "unavailable"
+    },
+    {
+      "approved_role": "Opportunistic Macro / Hedge",
+      "benchmark_basis_description": "Uses the existing manager-specific synthetic mandate proxy as the manager comparison benchmark, while separately storing the selected AI Adoption theme-benchmark blend needed for future calculated effects.",
+      "caveats": [
+        "Synthetic demo manager calculation inputs only.",
+        "Manager benchmark basis is explicit but not production-approved."
+      ],
+      "display_name": "Manager F - Opportunistic Macro / Hedge",
+      "manager_actual_theme_return": 0.060683,
+      "manager_asset_selection_input": 0.000513,
+      "manager_asset_sizing_input": 0.002911,
+      "manager_benchmark_basis_type": "hybrid_synthetic_demo",
+      "manager_benchmark_components": [
+        {
+          "component_return": 0.075,
+          "component_type": "manager_specific_synthetic_mandate_proxy",
+          "proxy_display_name": "Synthetic Opportunistic Macro / Hedge Proxy",
+          "proxy_id": "mgr_f_opportunistic_macro_synthetic_manager_proxy_v1"
+        },
+        {
+          "component_return": 0.057259,
+          "component_type": "selected_lens_theme_benchmark_blend",
+          "selected_lens_id": "ai_adoption"
+        }
+      ],
+      "manager_benchmark_return": 0.075,
+      "manager_id": "mgr_f_opportunistic_macro",
+      "manager_return": 0.089,
+      "manager_theme_benchmark_blend_return": 0.057259,
+      "manager_theme_selection_input": -0.006285,
+      "manager_theme_sizing_input": -0.011456,
+      "manager_theme_weight_sum": 1.0,
+      "manager_theme_weights": [
+        {
+          "bucket_display_name": "Core AI Infrastructure / Hardware",
+          "bucket_id": "core_ai_infrastructure_hardware",
+          "weight": 0.067216,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "AI Model / Platform Exposure",
+          "bucket_id": "ai_model_platform_exposure",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "AI Downstream Productivity Beneficiary",
+          "bucket_id": "ai_downstream_productivity_beneficiary",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "AI-Disrupted Incumbent",
+          "bucket_id": "ai_disrupted_incumbent",
+          "weight": 0.0,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "Data Center / Power Bottleneck Exposure",
+          "bucket_id": "data_center_power_bottleneck_exposure",
+          "weight": 0.124828,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "Neutral / Low Direct AI Exposure",
+          "bucket_id": "neutral_low_direct_ai_exposure",
+          "weight": 0.617283,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        },
+        {
+          "bucket_display_name": "Unclassified / Review Required",
+          "bucket_id": "unclassified_review_required",
+          "weight": 0.190673,
+          "weight_basis": "manager_base_value_share_within_selected_lens"
+        }
+      ],
+      "portfolio_weight": 0.081254,
+      "residual_input": 0.028317,
+      "source_metadata": {
+        "external_data_used": false,
+        "live_market_data_used": false,
+        "local_only": true,
+        "mandate_source": "approved_for_synthetic_demo_reports",
+        "real_client_data_used": false,
+        "source": "synthetic_manager_calculated_attribution_inputs",
+        "synthetic_data": true
+      },
+      "tie_out_status": {
+        "difference": 0.0,
+        "manager_relative_return": 0.014,
+        "recomputed_relative_return": 0.014,
+        "ties_to_manager_relative_return": true,
+        "timing_used_as_residual": false
+      },
+      "timing_status": "unavailable"
+    }
+  ],
+  "pack_id": "synthetic_attribution_calculation_inputs_v1",
+  "pack_version": "2026-07-08",
+  "schema_version": "manager_calculated_attribution_inputs.v1",
+  "selected_lens_display_name": "AI Adoption",
+  "selected_lens_id": "ai_adoption",
+  "source_metadata": {
+    "external_data_used": false,
+    "live_market_data_used": false,
+    "local_only": true,
+    "real_client_data_used": false,
+    "source": "synthetic_manager_calculation_inputs",
+    "synthetic_data": true
+  },
+  "synthetic_data": true
+}

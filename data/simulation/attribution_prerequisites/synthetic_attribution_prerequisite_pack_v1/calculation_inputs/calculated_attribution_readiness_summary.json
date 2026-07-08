@@ -1,0 +1,49 @@
+{
+  "approval_status": "synthetic_demo_approved",
+  "asset_selection_can_be_calculated": true,
+  "asset_sizing_can_be_calculated": true,
+  "detail_attribution_calculation_inputs": "ready_for_selected_lens_synthetic_demo_calculation",
+  "generated_at": "2026-07-08T00:00:00Z",
+  "manager_effects_can_be_calculated": true,
+  "manager_level_calculation_inputs": "ready_for_synthetic_demo_calculation",
+  "missing_inputs": [
+    "Production-approved return and benchmark history.",
+    "Client-approved attribution method and report disclosure policy.",
+    "Clean timing history and approved timing methodology."
+  ],
+  "pack_id": "synthetic_attribution_calculation_inputs_v1",
+  "pack_version": "2026-07-08",
+  "recommended_next_implementation_tranche": "Calculated Synthetic Attribution Engine v1",
+  "residual_policy": {
+    "policy": "explicit_reconciler_after_calculated_effects",
+    "timing_used_as_residual": false,
+    "tolerance": 1e-06
+  },
+  "schema_version": "calculated_attribution_readiness_summary.v1",
+  "selected_lens_display_name": "AI Adoption",
+  "selected_lens_id": "ai_adoption",
+  "source_metadata": {
+    "external_data_used": false,
+    "live_market_data_used": false,
+    "local_only": true,
+    "real_client_data_used": false,
+    "source": "synthetic_calculated_attribution_readiness",
+    "synthetic_data": true
+  },
+  "summary_attribution_calculation_inputs": "ready_for_synthetic_demo_calculation",
+  "supporting_artifacts": [
+    "selected_attribution_lens_policy.json",
+    "theme_benchmark_weight_policy.json",
+    "theme_benchmark_return_inputs.json",
+    "theme_asset_calculation_inputs.json",
+    "manager_calculated_attribution_inputs.json"
+  ],
+  "synthetic_data": true,
+  "theme_benchmark_selection_can_be_calculated": true,
+  "theme_benchmark_sizing_can_be_calculated": true,
+  "timing_gate": {
+    "reason": "No clean beginning/ending holdings, trade dates, external flows, price path, and approved timing methodology are included.",
+    "status": "unavailable"
+  },
+  "timing_status": "unavailable"
+}

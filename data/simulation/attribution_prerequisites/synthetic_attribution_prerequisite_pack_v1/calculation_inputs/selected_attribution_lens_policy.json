@@ -1,0 +1,85 @@
+{
+  "approval_status": "synthetic_demo_approved",
+  "bucket_ids": [
+    "core_ai_infrastructure_hardware",
+    "ai_model_platform_exposure",
+    "ai_downstream_productivity_beneficiary",
+    "ai_disrupted_incumbent",
+    "data_center_power_bottleneck_exposure",
+    "neutral_low_direct_ai_exposure",
+    "unclassified_review_required"
+  ],
+  "buckets": [
+    {
+      "additive": true,
+      "bucket_display_name": "Core AI Infrastructure / Hardware",
+      "bucket_id": "core_ai_infrastructure_hardware"
+    },
+    {
+      "additive": true,
+      "bucket_display_name": "AI Model / Platform Exposure",
+      "bucket_id": "ai_model_platform_exposure"
+    },
+    {
+      "additive": true,
+      "bucket_display_name": "AI Downstream Productivity Beneficiary",
+      "bucket_id": "ai_downstream_productivity_beneficiary"
+    },
+    {
+      "additive": true,
+      "bucket_display_name": "AI-Disrupted Incumbent",
+      "bucket_id": "ai_disrupted_incumbent"
+    },
+    {
+      "additive": true,
+      "bucket_display_name": "Data Center / Power Bottleneck Exposure",
+      "bucket_id": "data_center_power_bottleneck_exposure"
+    },
+    {
+      "additive": true,
+      "bucket_display_name": "Neutral / Low Direct AI Exposure",
+      "bucket_id": "neutral_low_direct_ai_exposure"
+    },
+    {
+      "additive": true,
+      "bucket_display_name": "Unclassified / Review Required",
+      "bucket_id": "unclassified_review_required"
+    }
+  ],
+  "buckets_are_additive": true,
+  "generated_at": "2026-07-08T00:00:00Z",
+  "lens_version": "v1",
+  "limitations": [
+    "Synthetic lens assignments are local demo inputs.",
+    "This policy does not regenerate attribution reports or advisor-facing views.",
+    "Timing remains gated until clean trade, holding, price, and flow history exists."
+  ],
+  "neutral_bucket_treatment": {
+    "bucket_id": "neutral_low_direct_ai_exposure",
+    "treatment": "Included as an explicit additive bucket in policy, actual, detail, and manager calculations."
+  },
+  "pack_id": "synthetic_attribution_calculation_inputs_v1",
+  "pack_version": "2026-07-08",
+  "rationale": "AI Adoption is the first calculated-attribution lens because the current synthetic prerequisite pack has complete position assignments, all seven bucket benchmark proxies, and existing attribution mockup alignment.",
+  "review_bucket_treatment": {
+    "bucket_id": "unclassified_review_required",
+    "treatment": "Included as an explicit additive bucket so review-required exposure is not hidden; caveats remain synthetic-demo only."
+  },
+  "schema_version": "selected_attribution_lens_policy.v1",
+  "selected_lens_display_name": "AI Adoption",
+  "selected_lens_id": "ai_adoption",
+  "source_metadata": {
+    "external_data_used": false,
+    "live_market_data_used": false,
+    "local_only": true,
+    "real_client_data_used": false,
+    "source": "synthetic_ai_adoption_lens_policy",
+    "synthetic_data": true
+  },
+  "supported_scope": [
+    "whole_portfolio",
+    "manager_by_manager"
+  ],
+  "synthetic_data": true,
+  "timing_status": "unavailable"
+}

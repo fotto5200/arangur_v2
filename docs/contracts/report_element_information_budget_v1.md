@@ -133,6 +133,8 @@ After Synthetic Attribution Report Mockups v1, `benchmark_map_status` is satisfi
 
 After Attribution Methodology and Calculation Audit v1, future attribution fixtures should also declare `attribution_effect_provenance` for each visible effect and `manager_benchmark_basis` for each manager benchmark-relative row. Acceptable provenance values should distinguish calculated arithmetic, supplied synthetic input, supplied formula allocation, and residual reconciler. A visible `Not separately measured` field is acceptable only as an advisor/internal calculation-gap signal, not as a final client-facing answer.
 
+After Synthetic Attribution Calculation Inputs v1, future local calculated attribution fixtures can source `attribution_effect_provenance`, selected-lens policy, theme benchmark weight states, grouped asset inputs, residual policy, and manager benchmark-basis fields from `data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/calculation_inputs/`. Report fixtures should stop using supplied fixed-share attribution allocations once calculated synthetic outputs exist.
+
 Additional anti-clutter checks:
 
 - Do not mix asset type, manager/sleeve, lens/theme, and coverage/review statuses in one additive table.
@@ -141,7 +143,7 @@ Additional anti-clutter checks:
 - Do not use readiness artifacts as client-facing reports. They may explain why a report is unavailable.
 - Visual-first reports must state the range, benchmark/proxy, horizon, and caveat needed to interpret the picture.
 - Performance attribution visible labels should prefer Global benchmark, Theme benchmark, Manager Benchmark Return, Portfolio Return, Asset selection/sizing, and `Residual / unexplained`; do not show raw proxy ids, proxy-return labels, or strategy/lens-bucket construction language in product-facing mockups.
-- Benchmark-relative attribution effects must not imply lower-level calculation unless the required benchmark portfolio, asset, weight, and manager benchmark-basis inputs exist. If an effect is supplied for synthetic demo review, label or caveat that provenance instead of hiding it.
+- Benchmark-relative attribution effects must not imply lower-level calculation unless the required benchmark portfolio, asset, weight, manager benchmark-basis inputs, and calculated engine outputs exist. If an effect is supplied for synthetic demo review, label or caveat that provenance instead of hiding it.
 - Timing attribution should stay unavailable unless clean trade/holding history, flow treatment, and an approved timing method exist; residual may include unmeasured timing/data/flow/reconciliation effects but must not be labeled timing.
 
 ## Kill Switch
