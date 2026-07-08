@@ -30,6 +30,8 @@ Update after Attribution Calculation Explanation Polish v1: calculated `attribut
 
 Update after Attribution Effect Basis Polish v1: calculated `attribution_v1` detail and AI Adoption lens mockups now distinguish return columns shown on a 100% theme-bucket basis from effect columns measured in percentage points of total portfolio return. Integrated Performance Attribution Detail shows Policy Weight and Actual Weight, uses Theme Choice Effect, Theme Weight Effect, Asset Choice Effect, Asset Weight Effect, Residual / Reconciler, and Total Effect labels, and explains that Active Return is not Total Effect. A strong but underweighted theme can therefore show positive bucket-level active return and negative Total Effect. Visible report language should continue to prefer effect terminology over contribution terminology.
 
+Update after Attribution Policy / Mandate Benchmark Design v1: future attribution mockups should not treat equal-weight theme buckets as the default client policy benchmark. Equal-weight attribution is diagnostic unless explicitly selected as policy. The next mockup path should split policy allocation review / policy-level attribution from within-manager mandate attribution before adding any blended all-in attribution report.
+
 ## 2. Governing Design Rules
 
 - One report, one question.

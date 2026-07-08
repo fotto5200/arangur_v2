@@ -184,6 +184,8 @@ The user-facing product language should not force the term "Brinson" as the main
 
 Synthetic Attribution Prerequisite Pack v1 supplies deterministic benchmark, return, weight/flow, theme-benchmark detail, decomposition, and manager prerequisite inputs for the local synthetic attribution mockups. Timing remains unavailable until it is tied to cleanly specified portfolio states and trade/flow history.
 
+Attribution Policy / Mandate Benchmark Design v1 adds a required responsibility split before future attribution expansion: policy allocation attribution should evaluate the advisor/family's agreed allocation, while manager mandate attribution should evaluate implementation inside assigned capital and mandate. Equal-weight lens attribution is diagnostic unless the family/advisor policy explicitly selected equal weights.
+
 The attribution chain:
 
 ```text

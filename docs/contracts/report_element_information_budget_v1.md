@@ -143,6 +143,8 @@ After Attribution Calculation Explanation Polish v1, calculated local attributio
 
 After Attribution Effect Basis Polish v1, calculated local attribution detail/lens reports should distinguish return basis from effect basis. Return columns should be described as 100% theme-bucket basis values. Effect columns should be described as percentage points of total portfolio return, with visible labels such as Theme Choice Effect, Theme Weight Effect, Asset Choice Effect, Asset Weight Effect, Residual / Reconciler, and Total Effect. Detail reports should show Policy Weight and Actual Weight when theme weighting effects are visible, and should state that Active Return is not Total Effect.
 
+After Attribution Policy / Mandate Benchmark Design v1, attribution reports should also declare the responsibility layer being evaluated. Policy allocation reports evaluate advisor/family target allocation and drift. Manager mandate reports evaluate implementation inside assigned capital and mandate. Equal-weight attribution is diagnostic unless an explicit policy artifact says the agreed policy is equal-weight.
+
 Additional anti-clutter checks:
 
 - Do not mix asset type, manager/sleeve, lens/theme, and coverage/review statuses in one additive table.
@@ -152,6 +154,7 @@ Additional anti-clutter checks:
 - Visual-first reports must state the range, benchmark/proxy, horizon, and caveat needed to interpret the picture.
 - Performance attribution visible labels should prefer Global benchmark, Theme benchmark, Manager Benchmark Return, Portfolio Return, Theme Choice Effect, Theme Weight Effect, Asset Choice Effect, Asset Weight Effect, Total Effect, and `Residual / unexplained`; do not show raw proxy ids, proxy-return labels, or strategy/lens-bucket construction language in product-facing mockups.
 - Performance attribution detail/lens tables should distinguish Active Return, meaning portfolio return minus theme benchmark return inside the bucket, from Total Effect, meaning the calculated effect in percentage points of total portfolio return.
+- Performance attribution reports should not blame a manager for capital allocation outside the manager's control or blame an advisor for not overweighting a winning optionality sleeve beyond agreed policy. Diagnostic equal-weight basis must be named as diagnostic.
 - Benchmark-relative attribution effects must not imply lower-level calculation unless the required benchmark portfolio, asset, weight, manager benchmark-basis inputs, and calculated engine outputs exist. For the local calculated synthetic path, prefer the calculated output pack over supplied allocation fields; if an effect is supplied for synthetic demo review, label or caveat that provenance instead of hiding it.
 - Timing attribution should stay unavailable unless clean trade/holding history, flow treatment, and an approved timing method exist; residual may include unmeasured timing, data, flow, rounding, or reconciliation effects but must not be labeled timing.
 

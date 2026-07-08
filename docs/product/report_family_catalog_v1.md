@@ -57,6 +57,8 @@ Status update after Attribution Calculation Explanation Polish v1: calculated at
 
 Status update after Attribution Effect Basis Polish v1: calculated attribution detail and AI Adoption lens mockups now make unit basis explicit. Return columns are on a 100% theme-bucket basis, effect columns are measured in percentage points of total portfolio return, and detail rows show Policy Weight and Actual Weight. Visible detail labels now use Theme Choice Effect, Theme Weight Effect, Asset Choice Effect, Asset Weight Effect, Residual / Reconciler, and Total Effect rather than contribution-oriented wording.
 
+Status update after Attribution Policy / Mandate Benchmark Design v1: attribution report families should separate family/advisor policy allocation from manager mandate implementation. Equal-weight lens attribution is a diagnostic report basis unless the family/advisor policy explicitly selected equal weights. The next attribution family split should add Policy Allocation Review and Policy-Level Attribution before attempting a blended all-in attribution bridge.
+
 ## Catalog Rules
 
 - A family may have multiple report instances, but each instance should answer one question.
