@@ -1,0 +1,131 @@
+{
+  "advisor_note": "Keep this basis separate from policy allocation drift and any later blended report.",
+  "audience_tier": "advisor_review",
+  "baseline_type": "manager_mandate_benchmark_basis",
+  "benchmark_basis_status": "all_current_managers_covered",
+  "caveats": [
+    "Use these rows to frame mandate review; production benchmark approval is separate."
+  ],
+  "compact_table": {
+    "columns": [
+      "Manager/Sleeve",
+      "Mandate Benchmark",
+      "Basis Type",
+      "Meaning"
+    ],
+    "rows": [
+      {
+        "Basis Type": "Hybrid synthetic demo",
+        "Manager/Sleeve": "Manager A - Growth / AI Infrastructure",
+        "Mandate Benchmark": "Synthetic Growth / AI Infrastructure Mandate Benchmark",
+        "Meaning": "High-conviction public growth and AI infrastructure exposure."
+      },
+      {
+        "Basis Type": "Hybrid synthetic demo",
+        "Manager/Sleeve": "Manager B - Core Quality Equity",
+        "Mandate Benchmark": "Synthetic Core Quality Equity Mandate Benchmark",
+        "Meaning": "Durable core public equity exposure with quality and valuation discipline."
+      },
+      {
+        "Basis Type": "Hybrid synthetic demo",
+        "Manager/Sleeve": "Manager C - Income and Cash Generation",
+        "Mandate Benchmark": "Synthetic Income and Cash Generation Mandate Benchmark",
+        "Meaning": "Income, credit, and rate-sensitive exposure for spending support."
+      },
+      {
+        "Basis Type": "Hybrid synthetic demo",
+        "Manager/Sleeve": "Manager D - Private Markets / Real Assets",
+        "Mandate Benchmark": "Synthetic Private Markets / Real Assets Mandate Benchmark",
+        "Meaning": "Illiquid growth, real assets, private credit, and data center exposure."
+      },
+      {
+        "Basis Type": "Hybrid synthetic demo",
+        "Manager/Sleeve": "Manager E - Liquidity Reserve / Defensive Ballast",
+        "Mandate Benchmark": "Synthetic Liquidity Reserve / Defensive Ballast Mandate Benchmark",
+        "Meaning": "Liquidity, capital preservation, and spending buffer."
+      },
+      {
+        "Basis Type": "Hybrid synthetic demo",
+        "Manager/Sleeve": "Manager F - Opportunistic Macro / Hedge",
+        "Mandate Benchmark": "Synthetic Opportunistic Macro / Hedge Mandate Benchmark",
+        "Meaning": "Macro hedges, currency exposure, commodities, crypto, and option-like risk controls."
+      }
+    ],
+    "title": "Manager Mandate Benchmark Basis"
+  },
+  "denominator_category_system": "one_manager_mandate_benchmark_basis_per_row",
+  "diagnostic_equal_weight_not_policy": true,
+  "display_title": "Manager Mandate Benchmark Basis",
+  "equal_weight_theme_policy": false,
+  "exact_report_question": "What benchmark basis should frame each manager's mandate review?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-08T00:00:00Z",
+  "generator_version": "policy_allocation_report_views.v1",
+  "headline_metrics": [
+    {
+      "formatted_value": "6 of 6",
+      "label": "Managers covered",
+      "value": 6
+    },
+    {
+      "formatted_value": "Explicit",
+      "label": "Basis status",
+      "value": "explicit"
+    },
+    {
+      "formatted_value": "Advisor review",
+      "label": "Use",
+      "value": "advisor_review"
+    }
+  ],
+  "headline_sentence": "All six current managers have a documented mandate benchmark basis for local review.",
+  "information_budget_applied": {
+    "actual_advisor_notes": 1,
+    "actual_caveats": 1,
+    "actual_headline_metrics": 3,
+    "actual_headline_sentences": 1,
+    "actual_visible_table_rows": 6,
+    "exception_reason": "Manager Mandate Benchmark Basis shows all six current manager/sleeve rows.",
+    "max_advisor_notes": 1,
+    "max_caveats": 2,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 6,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true,
+    "rendering_mode": "compact_reference_table"
+  },
+  "internal_source_refs": [
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/synthetic_policy_mandate_pack_manifest.json",
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/manager_mandate_benchmark_catalog.json",
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/manager_benchmark_basis_map.json"
+  ],
+  "local_only": true,
+  "master_question_family": "Performance / Plan",
+  "period_end": "2026-06-30",
+  "period_start": "2025-07-01",
+  "policy_allocation_mode": "explicit_policy_allocation",
+  "policy_level_attribution_status": "engine_gated",
+  "rendering_mode": "compact_reference_table",
+  "report_element_id": "manager_mandate_benchmark_basis",
+  "report_family": "manager_mandate_benchmark_basis",
+  "representation_level": "manager_sleeve_mandate_benchmark",
+  "responsibility_layer": "manager_mandate_implementation_basis",
+  "schema_version": "policy_allocation_report_view.v1",
+  "source_policy_mandate_pack_id": "synthetic_policy_mandate_pack_v1",
+  "source_policy_pack_artifacts": [
+    "synthetic_policy_mandate_pack_manifest.json",
+    "manager_mandate_benchmark_catalog.json",
+    "manager_benchmark_basis_map.json"
+  ],
+  "summary_detail_status": "summary_reference",
+  "synthetic_data": true,
+  "table_validation": {
+    "all_benchmark_basis_types_explicit": true,
+    "all_current_managers_covered": true,
+    "manager_rows_shown": 6
+  },
+  "valuation_date": "2026-06-30"
+}

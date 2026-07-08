@@ -309,7 +309,7 @@ This writes deterministic JSON under:
 
 ## Generate Synthetic Policy Mandate Prerequisites
 
-The policy/mandate prerequisite generator writes local-only synthetic policy allocation and manager mandate benchmark artifacts for future Policy Allocation Review and Policy-Level Attribution work. It does not regenerate attribution mockups or wire Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
+The policy/mandate prerequisite generator writes local-only synthetic policy allocation and manager mandate benchmark artifacts used by Policy Allocation Review mockups and future Policy-Level Attribution work. It does not regenerate attribution mockups or wire Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
 
 ```cmd
 set PYTHONPATH=src
@@ -319,6 +319,21 @@ python -m arangur.analytics.synthetic_policy_mandate_prerequisites
 This writes deterministic JSON under:
 
 - `data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/`
+
+## Generate Policy Allocation Report Mockups
+
+The policy allocation report-view generator turns the synthetic policy/mandate prerequisite pack into local-only report input fixtures, view fixtures, and Markdown product-review mockups for Policy Allocation Review, Policy Allocation Drift Summary, Imputed Current Allocation Baseline, and Manager Mandate Benchmark Basis. Policy-Level Attribution, blended/all-in attribution, production policy reporting, current-vs-proposed allocation, and timing attribution remain gated or deferred. This does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
+
+```cmd
+set PYTHONPATH=src
+python -m arangur.analytics.policy_allocation_report_views
+```
+
+This writes:
+
+- `data/simulation/report_element_inputs/policy_allocation_v1/`
+- `data/simulation/report_element_views/policy_allocation_v1/`
+- `docs/product/report_mockups/policy_allocation_v1/`
 
 ## Generate Revaluation v2 Report Mockups
 

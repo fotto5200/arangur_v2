@@ -147,6 +147,8 @@ After Attribution Policy / Mandate Benchmark Design v1, attribution reports shou
 
 After Synthetic Policy Allocation / Mandate Benchmark Pack v1, future local attribution report elements can source explicit policy target weights, actual manager weights, drift/tolerance status, imputed-current baseline, manager mandate benchmark basis, and equal-weight diagnostic classification from `data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/`. Policy Allocation Review may be mocked from these artifacts; Policy-Level Attribution still needs a calculated engine before it should show calculated effects.
 
+After Policy Allocation Review Mockups v1, local `policy_allocation_v1` report fixtures and mockups demonstrate the policy allocation budget. Policy Allocation Review may show all six current manager/sleeve rows because the report's job is to compare target weight, actual weight, drift, tolerance, and status across the current manager set. Policy Allocation Drift Summary should stay smaller and show only review/material watch-list rows. Imputed Current Allocation Baseline is a setup/readiness note, not a standard client report, and should suppress drift attribution until explicit targets exist. Manager Mandate Benchmark Basis may show all six current manager/sleeve benchmark-basis rows as advisor reference content.
+
 Additional anti-clutter checks:
 
 - Do not mix asset type, manager/sleeve, lens/theme, and coverage/review statuses in one additive table.
@@ -157,6 +159,7 @@ Additional anti-clutter checks:
 - Performance attribution visible labels should prefer Global benchmark, Theme benchmark, Manager Benchmark Return, Portfolio Return, Theme Choice Effect, Theme Weight Effect, Asset Choice Effect, Asset Weight Effect, Total Effect, and `Residual / unexplained`; do not show raw proxy ids, proxy-return labels, or strategy/lens-bucket construction language in product-facing mockups.
 - Performance attribution detail/lens tables should distinguish Active Return, meaning portfolio return minus theme benchmark return inside the bucket, from Total Effect, meaning the calculated effect in percentage points of total portfolio return.
 - Performance attribution reports should not blame a manager for capital allocation outside the manager's control or blame an advisor for not overweighting a winning optionality sleeve beyond agreed policy. Diagnostic equal-weight basis must be named as diagnostic.
+- Policy allocation review reports should not imply calculated policy-level effects until a policy-level engine exists. Keep drift, tolerance, and review status separate from performance effect language.
 - Benchmark-relative attribution effects must not imply lower-level calculation unless the required benchmark portfolio, asset, weight, manager benchmark-basis inputs, and calculated engine outputs exist. For the local calculated synthetic path, prefer the calculated output pack over supplied allocation fields; if an effect is supplied for synthetic demo review, label or caveat that provenance instead of hiding it.
 - Timing attribution should stay unavailable unless clean trade/holding history, flow treatment, and an approved timing method exist; residual may include unmeasured timing, data, flow, rounding, or reconciliation effects but must not be labeled timing.
 

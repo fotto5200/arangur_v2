@@ -1,0 +1,52 @@
+{
+  "advisor_ui_wiring": "not_changed",
+  "gated_reports_not_generated": [
+    "policy_level_attribution",
+    "blended_all_in_attribution",
+    "production_policy_allocation_report",
+    "current_vs_proposed_policy_allocation",
+    "timing_attribution"
+  ],
+  "generated_at": "2026-07-08T00:00:00Z",
+  "generated_report_wiring": "not_changed",
+  "generator_version": "policy_allocation_report_views.v1",
+  "information_budget": {
+    "max_advisor_notes": 1,
+    "max_caveats": 2,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 5,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true
+  },
+  "local_only": true,
+  "manager_mandate_benchmark_basis_status": "generated",
+  "markdown_mockup_count": 4,
+  "mockup_files": [
+    "policy_allocation_review_mockup_v1.md",
+    "policy_allocation_drift_summary_mockup_v1.md",
+    "imputed_current_allocation_baseline_mockup_v1.md",
+    "manager_mandate_benchmark_basis_mockup_v1.md",
+    "README.md"
+  ],
+  "mockups_generated_from_views": true,
+  "report_ids": [
+    "policy_allocation_review",
+    "policy_allocation_drift_summary",
+    "imputed_current_allocation_baseline",
+    "manager_mandate_benchmark_basis"
+  ],
+  "report_view_count": 4,
+  "schema_version": "policy_allocation_report_view_index.v1",
+  "source_policy_mandate_pack_id": "synthetic_policy_mandate_pack_v1",
+  "synthetic_data": true,
+  "view_files": [
+    "policy_allocation_review_view.json",
+    "policy_allocation_drift_summary_view.json",
+    "imputed_current_allocation_baseline_view.json",
+    "manager_mandate_benchmark_basis_view.json",
+    "gated_deferred_policy_report_index.json"
+  ]
+}

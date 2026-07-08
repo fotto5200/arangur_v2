@@ -1,0 +1,114 @@
+{
+  "audience_tier": "advisor_setup_review",
+  "baseline_type": "accepted_current_manager_weights",
+  "benchmark_basis_status": "manager_mandate_basis_available_for_future_reports",
+  "denominator_category_system": "current_nav_share_by_manager_sleeve",
+  "diagnostic_equal_weight_not_policy": true,
+  "display_title": "Imputed Current Allocation Baseline",
+  "equal_weight_theme_policy": false,
+  "exact_report_question": "How can review start when explicit target allocations are not documented?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-08T00:00:00Z",
+  "generator_version": "policy_allocation_report_views.v1",
+  "information_budget": {
+    "max_advisor_notes": 1,
+    "max_caveats": 2,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 5,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true
+  },
+  "internal_source_refs": [
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/synthetic_policy_mandate_pack_manifest.json",
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/imputed_current_allocation_baseline.json",
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/actual_manager_allocation_snapshot.json"
+  ],
+  "local_only": true,
+  "master_question_family": "Performance / Plan",
+  "not_wired_into_advisor_ui": true,
+  "not_wired_into_generated_report_flow": true,
+  "period_end": "2026-06-30",
+  "period_start": "2025-07-01",
+  "policy_allocation_mode": "imputed_current_allocation",
+  "policy_level_attribution_status": "drift_suppressed_until_explicit_targets_exist",
+  "rendering_mode": "setup_note",
+  "report_element_id": "imputed_current_allocation_baseline",
+  "report_family": "policy_allocation_review",
+  "representation_level": "current_manager_sleeve_baseline",
+  "responsibility_layer": "actual_manager_sleeve_allocation_baseline",
+  "schema_version": "policy_allocation_report_input.v1",
+  "source_policy_mandate_pack_id": "synthetic_policy_mandate_pack_v1",
+  "source_policy_pack_artifacts": [
+    "synthetic_policy_mandate_pack_manifest.json",
+    "imputed_current_allocation_baseline.json",
+    "actual_manager_allocation_snapshot.json"
+  ],
+  "source_policy_pack_refs": [
+    "synthetic_policy_mandate_pack_v1"
+  ],
+  "summary_detail_status": "setup_note",
+  "synthetic_data": true,
+  "table_validation": {
+    "baseline_weight_count": 6,
+    "current_weights_accepted_as_baseline": true,
+    "not_default_client_report": true,
+    "policy_allocation_drift_suppressed": true
+  },
+  "valuation_date": "2026-06-30",
+  "visible_content": {
+    "advisor_note": "This is a setup/readiness note, not a standard client report.",
+    "caveats": [
+      "Replace this baseline with explicit policy targets when policy documentation is available."
+    ],
+    "compact_table": {
+      "columns": [
+        "Topic",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "Meaning": "Current manager weights are accepted as the baseline.",
+          "Topic": "Mode"
+        },
+        {
+          "Meaning": "Manager and mandate review can start before explicit targets are entered.",
+          "Topic": "What it enables"
+        },
+        {
+          "Meaning": "Target-versus-actual drift attribution is suppressed.",
+          "Topic": "What it suppresses"
+        },
+        {
+          "Meaning": "Use for quick-start review when documented policy targets are missing.",
+          "Topic": "When to use"
+        },
+        {
+          "Meaning": "It does not prove the current allocation is ideal.",
+          "Topic": "Limit"
+        }
+      ],
+      "title": "Imputed-Current Baseline Use"
+    },
+    "headline_metrics": [
+      {
+        "formatted_value": "Current weights",
+        "label": "Baseline weights",
+        "value": "current_manager_weights"
+      },
+      {
+        "formatted_value": "Suppressed",
+        "label": "Drift status",
+        "value": "suppressed"
+      },
+      {
+        "formatted_value": "Quick start",
+        "label": "Use case",
+        "value": "quick_start"
+      }
+    ],
+    "headline_sentence": "Imputed-current mode accepts current manager weights as the baseline and suppresses drift attribution."
+  }
+}

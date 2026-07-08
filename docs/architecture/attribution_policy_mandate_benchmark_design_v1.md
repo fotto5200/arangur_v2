@@ -345,4 +345,17 @@ Defer until separate reports are understood and accepted.
 
 Synthetic Policy Allocation / Mandate Benchmark Pack v1 now provides deterministic local-only artifacts for explicit policy allocations, actual manager allocation snapshots, allocation drift summaries, imputed-current baseline, manager mandate benchmarks, manager benchmark-basis mapping, policy-level attribution input scaffolding, and equal-weight diagnostic classification.
 
-This pack makes Policy Allocation Review ready for a synthetic demo mockup and gives Policy-Level Attribution an input scaffold for a future calculation engine. Equal-weight AI Adoption attribution remains diagnostic unless the advisor/family explicitly selected equal-weight theme buckets as policy. Advisor UI/report wiring, generated-report integration, final policy attribution mockups, timing attribution, live/real data, external APIs, deployment, and production attribution modeling remain out of scope.
+This pack feeds the local Policy Allocation Review mockups and gives Policy-Level Attribution an input scaffold for a future calculation engine. Equal-weight AI Adoption attribution remains diagnostic unless the advisor/family explicitly selected equal-weight theme buckets as policy. Advisor UI/report wiring, generated-report integration, calculated policy-level attribution, timing attribution, live/real data, external APIs, deployment, and production attribution modeling remain out of scope.
+
+## 16. Follow-Up: Policy Allocation Review Mockups v1
+
+Policy Allocation Review Mockups v1 now turns the synthetic policy/mandate prerequisite pack into local product-review artifacts under `policy_allocation_v1`.
+
+Generated reports:
+
+- Policy Allocation Review: target weight, actual weight, drift, tolerance, and status for all six current managers.
+- Policy Allocation Drift Summary: compact review/material watch list, currently the Manager C under-target row.
+- Imputed Current Allocation Baseline: setup/readiness note that accepts current weights as the baseline, suppresses drift attribution, supports quick-start use, and does not prove the current allocation is ideal.
+- Manager Mandate Benchmark Basis: all six current manager mandate benchmark-basis rows.
+
+Policy-Level Attribution remains gated on a calculated engine. Blended / All-In Attribution remains deferred until separate policy allocation and manager mandate reports are understood. Production policy allocation reporting, current-vs-proposed allocation, timing attribution, Advisor Preview/Populate/Present wiring, generated-report integration, live/real data, external APIs, deployment, and production attribution modeling remain out of scope.

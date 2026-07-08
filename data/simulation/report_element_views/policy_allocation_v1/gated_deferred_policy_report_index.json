@@ -1,0 +1,41 @@
+{
+  "gated_or_deferred_reports": [
+    {
+      "display_title": "Policy-Level Attribution",
+      "reason": "Needs a policy-level calculated engine before showing allocation effects.",
+      "report_id": "policy_level_attribution",
+      "status": "Gated"
+    },
+    {
+      "display_title": "Blended / All-In Attribution",
+      "reason": "Deferred until separate policy allocation and manager mandate reports are understood first.",
+      "report_id": "blended_all_in_attribution",
+      "status": "Deferred"
+    },
+    {
+      "display_title": "Production Policy Allocation Report",
+      "reason": "Gated on real target allocations, approved mandates, and client-ready approval.",
+      "report_id": "production_policy_allocation_report",
+      "status": "Gated"
+    },
+    {
+      "display_title": "Current-vs-Proposed Policy Allocation",
+      "reason": "Gated on a proposed allocation workflow and current/proposed comparison outputs.",
+      "report_id": "current_vs_proposed_policy_allocation",
+      "status": "Gated"
+    },
+    {
+      "display_title": "Timing Attribution",
+      "reason": "Unavailable because clean timing inputs and an approved method are absent.",
+      "report_id": "timing_attribution",
+      "status": "Unavailable"
+    }
+  ],
+  "generated_at": "2026-07-08T00:00:00Z",
+  "generator_version": "policy_allocation_report_views.v1",
+  "local_only": true,
+  "purpose": "Product/readiness index for policy reports deliberately not generated.",
+  "schema_version": "policy_allocation_report_gated_deferred_index.v1",
+  "source_policy_mandate_pack_id": "synthetic_policy_mandate_pack_v1",
+  "synthetic_data": true
+}
