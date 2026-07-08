@@ -6,7 +6,7 @@ This document defines and audits the methodology behind the current local synthe
 
 Synthetic demo inputs are acceptable. Uncalculated or unexplained attribution effects are not acceptable for durable product design.
 
-The current attribution mockups are useful product-review artifacts. They prove report shape, language, information budget, and gating posture. They should not be treated as final analytic methodology. The next durable attribution tranche should make each visible effect either calculated from lower-level synthetic inputs or explicitly labeled as a supplied synthetic input with a documented reason.
+The original attribution mockups were useful product-review artifacts. They proved report shape, language, information budget, and gating posture, but they were not final analytic methodology. Follow-up tranches now provide lower-level calculation inputs, calculated synthetic outputs, and regenerated `attribution_v1` mockups for the supported AI Adoption local-demo attribution path. Remaining attribution work should keep each visible effect either calculated from lower-level inputs or explicitly labeled as a supplied synthetic input with a documented reason.
 
 This document does not build final reports, wire Advisor Preview, Populate, Present, or generated reports, add production attribution math, call external APIs, use real client data, or change advisor UI.
 
@@ -176,7 +176,7 @@ theme_benchmark_selection_effect
 
 Meaning: Did the selected lens's policy theme-benchmark mix beat the global benchmark before considering actual portfolio sizing?
 
-Current status: not lower-level calculated. The current +0.41% value comes from fixed-share synthetic decomposition:
+Original audit status: not lower-level calculated. The then-current +0.41% value came from fixed-share synthetic decomposition:
 
 ```text
 +0.41% = active_return * 0.36
@@ -190,6 +190,8 @@ Alternative future conventions:
 
 Recommendation: use explicit policy weights. Equal weighting is easy, but it can overstate tiny or review buckets.
 
+Implemented local-demo status: calculated for the AI Adoption lens as -0.12% in Calculated Synthetic Attribution Engine v1.
+
 ### Theme Benchmark Sizing Effect
 
 Recommended v1 formula:
@@ -202,11 +204,13 @@ theme_benchmark_sizing_effect
 
 Meaning: Did the portfolio's actual sizing across theme buckets help or hurt relative to the policy theme-benchmark mix?
 
-Current status: not lower-level calculated. The current +0.25% value comes from fixed-share synthetic decomposition:
+Original audit status: not lower-level calculated. The then-current +0.25% value came from fixed-share synthetic decomposition:
 
 ```text
 +0.25% = active_return * 0.22
 ```
+
+Implemented local-demo status: calculated for the AI Adoption lens as +0.37% in Calculated Synthetic Attribution Engine v1.
 
 ### Asset Selection Effect
 
@@ -225,13 +229,15 @@ asset_selection_effect
 
 Meaning: Within each theme bucket, did selected assets beat that bucket's theme benchmark before actual asset sizing effects?
 
-Current status: not lower-level calculated. The current +0.32% value comes from fixed-share synthetic decomposition:
+Original audit status: not lower-level calculated. The then-current +0.32% value came from fixed-share synthetic decomposition:
 
 ```text
 +0.32% = active_return * 0.28
 ```
 
 If position-level benchmark/reference returns are not available, a simpler v1 may use equal asset weights within each bucket as the policy asset mix.
+
+Implemented local-demo status: calculated for the AI Adoption lens as +0.56% in Calculated Synthetic Attribution Engine v1.
 
 ### Asset Sizing Effect
 
@@ -250,11 +256,13 @@ asset_sizing_effect
 
 Meaning: Within each theme bucket, did actual position sizing help or hurt relative to equal or policy asset sizing?
 
-Current status: not lower-level calculated. The current +0.10% value comes from fixed-share synthetic decomposition:
+Original audit status: not lower-level calculated. The then-current +0.10% value came from fixed-share synthetic decomposition:
 
 ```text
 +0.10% = active_return * 0.09
 ```
+
+Implemented local-demo status: calculated for the AI Adoption lens as +0.13% in Calculated Synthetic Attribution Engine v1.
 
 ### Residual / Unexplained
 
@@ -322,8 +330,8 @@ Current status: calculated by simple arithmetic for AI Adoption and Energy Secur
 | `manager_attribution_prerequisites.json` | Mixed. Manager relative returns and portfolio contributions are arithmetic. Manager benchmark returns are supplied synthetic inputs. Manager component effects are fixed-share synthetic allocations, not lower-level manager attribution calculations. |
 | `attribution_readiness_summary.json` | Readiness metadata. It correctly keeps timing unavailable and production/client attribution gated. |
 | `calculation_inputs/` | Follow-up local synthetic calculation-input layer. It supplies the selected AI Adoption lens policy, equal-weight and actual-weight theme benchmark states, theme benchmark return inputs, compact grouped asset inputs, manager benchmark-basis metadata, and calculated-attribution readiness. It is now the source input pack for Calculated Synthetic Attribution Engine v1. |
-| `data/simulation/attribution_calculated/synthetic_attribution_engine_v1/` | Calculated local synthetic attribution output layer. It calculates whole-portfolio theme benchmark selection/sizing, asset selection/sizing, residual/unexplained, theme benchmark detail, theme asset detail, manager component effects, manager residuals, and quality/readiness flags from the calculation-input artifacts. It is not yet wired into `attribution_v1` report fixtures or advisor flows. |
-| `attribution_v1` report input/view fixtures | Presentation metadata generated from prerequisites. They should not be treated as calculation sources. |
+| `data/simulation/attribution_calculated/synthetic_attribution_engine_v1/` | Calculated local synthetic attribution output layer. It calculates whole-portfolio theme benchmark selection/sizing, asset selection/sizing, residual/unexplained, theme benchmark detail, theme asset detail, manager component effects, manager residuals, and quality/readiness flags from the calculation-input artifacts. |
+| `attribution_v1` report input/view fixtures | Product-review presentation fixtures now regenerated from the calculated output pack where supported. They remain unwired from Advisor Preview/Populate/Present and generated reports. |
 
 The strongest currently calculated attribution quantities are:
 
@@ -334,7 +342,7 @@ The strongest currently calculated attribution quantities are:
 - lens-bucket relative contribution;
 - tie-outs and residuals.
 
-The weakest calculated quantities in the existing `attribution_v1` report mockups are:
+At the time of the original audit, the weakest calculated quantities in the then-existing `attribution_v1` report mockups were:
 
 - theme benchmark selection;
 - theme benchmark sizing;
@@ -342,24 +350,26 @@ The weakest calculated quantities in the existing `attribution_v1` report mockup
 - asset sizing;
 - manager-level component effects.
 
-Those values are deterministic in the existing `attribution_v1` mockups, but the mockups still use the older fixed-share supplied allocation layer.
+Those values were deterministic in the original `attribution_v1` mockups, but they used the older fixed-share supplied allocation layer.
 
-Follow-up status: Synthetic Attribution Calculation Inputs v1 supplies the lower-level local synthetic inputs, and Calculated Synthetic Attribution Engine v1 now calculates those effects into `data/simulation/attribution_calculated/synthetic_attribution_engine_v1/`. The current report mockups have not been regenerated from calculated effects yet.
+Follow-up status: Synthetic Attribution Calculation Inputs v1 supplies the lower-level local synthetic inputs, Calculated Synthetic Attribution Engine v1 calculates those effects into `data/simulation/attribution_calculated/synthetic_attribution_engine_v1/`, and the local `attribution_v1` mockups now consume those calculated effects where supported.
 
-## 6. Calculation Gap Analysis
+## 6. Original Calculation Gap Analysis
 
-### What Produces The +0.41% Theme Benchmark Selection Value?
+This section records the pre-calculated-output gap that existed at the time of the audit. Synthetic Attribution Calculation Inputs v1, Calculated Synthetic Attribution Engine v1, and Regenerate Attribution Mockups from Calculated Outputs v1 have since replaced these fixed-share values in supported local `attribution_v1` fixtures.
 
-Current answer:
+### What Produced The +0.41% Theme Benchmark Selection Value?
+
+Original answer:
 
 ```text
 active_return = 8.1456% - 6.9940% = 1.1516%
 theme_benchmark_selection_effect = active_return * 0.36 = 0.4146%
 ```
 
-This is a fixed-share synthetic decomposition. It is not a calculation from a selected theme-benchmark portfolio.
+This was a fixed-share synthetic decomposition. It was not a calculation from a selected theme-benchmark portfolio.
 
-Required improvement: add a theme benchmark policy portfolio and calculate:
+Implemented improvement: add a theme benchmark policy portfolio and calculate:
 
 ```text
 sum_i(w_i_policy * B_i_theme) - B_global
@@ -367,25 +377,25 @@ sum_i(w_i_policy * B_i_theme) - B_global
 
 ### What Is The Blended Theme Benchmark Portfolio?
 
-Current answer: it does not exist as a distinct artifact. The current detail row total uses actual AI Adoption bucket weights and theme benchmark returns, but there is no separate policy or equal-weight theme benchmark portfolio.
+Original answer: it did not exist as a distinct artifact. The original detail row total used actual AI Adoption bucket weights and theme benchmark returns, but there was no separate policy or equal-weight theme benchmark portfolio.
 
-Required improvement: add explicit theme benchmark portfolio weights for the selected attribution lens.
+Implemented improvement: add explicit theme benchmark portfolio weights for the selected attribution lens.
 
 ### What Is It Compared Against?
 
 Recommended v1: compare the policy theme benchmark portfolio to the global benchmark for selection. Then compare the actual-weight theme benchmark portfolio to the policy theme benchmark portfolio for sizing.
 
-Current answer: summary selection and sizing are compared only through active-return allocation, not through explicit benchmark portfolios.
+Original answer: summary selection and sizing were compared only through active-return allocation, not through explicit benchmark portfolios.
 
 ### What Produces Theme Benchmark Sizing?
 
-Current answer:
+Original answer:
 
 ```text
 theme_benchmark_sizing_effect = active_return * 0.22
 ```
 
-Required improvement:
+Implemented improvement:
 
 ```text
 sum_i(w_i_actual * B_i_theme) - sum_i(w_i_policy * B_i_theme)
@@ -393,7 +403,7 @@ sum_i(w_i_actual * B_i_theme) - sum_i(w_i_policy * B_i_theme)
 
 ### What Produces Asset Selection?
 
-Current answer:
+Original answer:
 
 ```text
 asset_selection_effect = active_return * 0.28
@@ -558,7 +568,7 @@ If unavailable:
 Future attribution reports should change as follows:
 
 - Summary should include a benchmark-basis note: global benchmark, selected lens, and whether effects are calculated or supplied.
-- Detail should show calculated theme-benchmark rows. The current `Not separately measured` component columns are honest but should be replaced only after calculated inputs exist.
+- Detail now shows calculated theme-benchmark rows in supported local `attribution_v1` fixtures. `Not separately measured` component columns should remain absent from client-facing calculated mockups unless a future advisor/internal gap view deliberately needs them.
 - Manager reports should disclose manager benchmark basis: mandate benchmark, broad policy benchmark, or theme-benchmark blend.
 - Lens-based reports should clarify theme benchmark construction and proxy status.
 - Residual caveats should stay precise: residual may include unmeasured timing/data/flow/reconciliation effects.
@@ -571,6 +581,7 @@ Follow-ups implemented:
 ```text
 Synthetic Attribution Calculation Inputs v1
 Calculated Synthetic Attribution Engine v1
+Regenerate Attribution Mockups from Calculated Outputs v1
 ```
 
 The implemented calculation-input pack supplies:
@@ -590,17 +601,17 @@ The implemented calculated engine outputs:
 - manager calculated attribution summary;
 - quality/readiness summary for future local report mockups.
 
-Recommended next tranche:
+Recommended next step:
 
 ```text
-Regenerate Attribution Mockups from Calculated Outputs v1
+Frank review of regenerated calculated attribution mockups
 ```
 
-The next tranche should:
+Follow-up work should:
 
-- use the calculated output pack, not fixed-share supplied allocations, as the source for attribution report input/view fixtures;
+- use the calculated output pack, not fixed-share supplied allocations, as the source for any additional attribution report input/view fixtures;
 - keep residual as an explicit reconciler and timing unavailable unless clean timing inputs are added;
-- regenerate local attribution mockups only from calculated outputs;
+- keep local attribution mockups generated only from view fixtures;
 - preserve the gated/deferred status for timing attribution, production/client attribution, scenario-versus-benchmark, probabilistic range, and current-versus-proposed attribution;
 - keep Advisor Preview, Populate, Present, generated reports, backend endpoints, Docker/deployment, real data, external APIs, and production attribution modeling out of scope.
 
@@ -627,7 +638,7 @@ Implemented calculated outputs:
 
 The whole-portfolio output ties Global benchmark return 0.069940 to Actual portfolio return 0.081456 through calculated theme benchmark selection -0.001225, theme benchmark sizing 0.003713, asset selection 0.005601, asset sizing 0.001329, and residual/unexplained 0.002098. Theme and manager detail outputs carry their own tie-out checks. Timing remains unavailable and `timing_used_as_residual` remains false.
 
-The next durable report step is to regenerate the local attribution report fixtures and Markdown mockups from these calculated outputs. Until that happens, the existing `attribution_v1` mockups should still be treated as product-review fixtures that predate the calculated engine.
+The durable report-regeneration step is now complete for the calculated-supported local reports: Integrated Performance Attribution Summary/Detail, Manager Attribution Summary, and Lens-Based Performance Attribution - AI Adoption. Energy Security remains gated for calculated attribution until calculation inputs and calculated outputs exist for that lens.
 
 ## 14. Open Questions For Frank
 

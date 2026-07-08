@@ -137,6 +137,8 @@ After Synthetic Attribution Calculation Inputs v1, future local calculated attri
 
 After Calculated Synthetic Attribution Engine v1, calculated local synthetic attribution outputs exist under `data/simulation/attribution_calculated/synthetic_attribution_engine_v1/`. Future attribution report fixtures should source whole-portfolio attribution, theme benchmark detail, theme asset detail, manager attribution, residual policy, tie-outs, and readiness flags from that calculated output pack rather than the older supplied fixed-share attribution allocation fields. This does not satisfy production/client attribution, scenario-versus-benchmark, probabilistic range, proposed-allocation, or timing-attribution gates.
 
+After Regenerate Attribution Mockups from Calculated Outputs v1, local `attribution_v1` report inputs/views/mockups use the calculated output pack where supported. The calculated-supported set is Integrated Performance Attribution Summary, Integrated Performance Attribution Detail, Manager Attribution Summary, and Lens-Based Performance Attribution - AI Adoption. Energy Security attribution is gated for calculated attribution until calculated outputs exist for that lens.
+
 Additional anti-clutter checks:
 
 - Do not mix asset type, manager/sleeve, lens/theme, and coverage/review statuses in one additive table.

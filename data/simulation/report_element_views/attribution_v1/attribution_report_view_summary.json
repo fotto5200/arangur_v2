@@ -1,5 +1,6 @@
 {
   "advisor_ui_wiring": "not_changed",
+  "calculated_outputs_source_of_truth": true,
   "gated_reports_not_generated": [
     "timing_attribution",
     "production_attribution_report",
@@ -7,11 +8,12 @@
     "probabilistic_scenario_range",
     "current_versus_proposed_attribution",
     "integrated_attribution_summary_by_manager",
-    "integrated_attribution_detail_by_manager"
+    "integrated_attribution_detail_by_manager",
+    "lens_based_performance_attribution_energy_security"
   ],
-  "generated_at": "2026-07-07T00:00:00Z",
+  "generated_at": "2026-07-08T00:00:00Z",
   "generated_report_wiring": "not_changed",
-  "generator_version": "attribution_report_views.v1",
+  "generator_version": "attribution_report_views.calculated.v1",
   "information_budget": {
     "max_advisor_notes": 1,
     "max_caveats": 2,
@@ -23,13 +25,12 @@
     "no_raw_ids_in_visible_content": true,
     "no_source_filenames_in_visible_content": true
   },
-  "markdown_mockup_count": 5,
+  "markdown_mockup_count": 4,
   "mockup_files": [
     "integrated_performance_attribution_summary_mockup_v1.md",
     "integrated_performance_attribution_detail_mockup_v1.md",
     "manager_attribution_summary_mockup_v1.md",
     "lens_based_performance_attribution_ai_adoption_mockup_v1.md",
-    "lens_based_performance_attribution_energy_security_mockup_v1.md",
     "README.md"
   ],
   "mockups_generated_from_views": true,
@@ -37,18 +38,20 @@
     "integrated_performance_attribution_summary",
     "integrated_performance_attribution_detail",
     "manager_attribution_summary",
-    "lens_based_performance_attribution_ai_adoption",
+    "lens_based_performance_attribution_ai_adoption"
+  ],
+  "report_view_count": 4,
+  "schema_version": "attribution_report_view_summary.v1",
+  "source_calculated_attribution_engine_id": "synthetic_attribution_engine_v1",
+  "synthetic_data": true,
+  "unsupported_calculated_lens_reports_gated": [
     "lens_based_performance_attribution_energy_security"
   ],
-  "report_view_count": 5,
-  "schema_version": "attribution_report_view_summary.v1",
-  "synthetic_data": true,
   "view_files": [
     "integrated_performance_attribution_summary_view.json",
     "integrated_performance_attribution_detail_view.json",
     "manager_attribution_summary_view.json",
     "lens_based_performance_attribution_ai_adoption_view.json",
-    "lens_based_performance_attribution_energy_security_view.json",
     "gated_deferred_attribution_report_index.json"
   ]
 }

@@ -7,21 +7,33 @@ from pathlib import Path
 from typing import Any
 
 
-GENERATED_AT = "2026-07-07T00:00:00Z"
+GENERATED_AT = "2026-07-08T00:00:00Z"
 
 INPUT_SCHEMA_VERSION = "attribution_report_input.v1"
 INPUT_SUMMARY_SCHEMA_VERSION = "attribution_report_input_summary.v1"
 VIEW_SCHEMA_VERSION = "attribution_report_view.v1"
 VIEW_SUMMARY_SCHEMA_VERSION = "attribution_report_view_summary.v1"
 GATED_INDEX_SCHEMA_VERSION = "attribution_report_gated_deferred_index.v1"
-GENERATOR_VERSION = "attribution_report_views.v1"
+GENERATOR_VERSION = "attribution_report_views.calculated.v1"
 
 DEFAULT_PREREQUISITE_DIR = Path(
     "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1"
 )
+DEFAULT_CALCULATED_DIR = Path(
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1"
+)
 DEFAULT_INPUT_DIR = Path("data/simulation/report_element_inputs/attribution_v1")
 DEFAULT_VIEW_DIR = Path("data/simulation/report_element_views/attribution_v1")
 DEFAULT_MOCKUP_DIR = Path("docs/product/report_mockups/attribution_v1")
+
+CALCULATED_ARTIFACT_FILES = {
+    "manifest": "calculated_attribution_engine_manifest.json",
+    "whole_portfolio_summary": "whole_portfolio_calculated_attribution_summary.json",
+    "theme_benchmark_detail": "theme_benchmark_calculated_detail.json",
+    "theme_asset_detail": "theme_asset_calculated_attribution_detail.json",
+    "manager_summary": "manager_calculated_attribution_summary.json",
+    "quality_summary": "calculated_attribution_quality_summary.json",
+}
 
 REPORT_SPECS: tuple[dict[str, str], ...] = (
     {
@@ -48,12 +60,6 @@ REPORT_SPECS: tuple[dict[str, str], ...] = (
         "view_filename": "lens_based_performance_attribution_ai_adoption_view.json",
         "mockup_filename": "lens_based_performance_attribution_ai_adoption_mockup_v1.md",
     },
-    {
-        "report_id": "lens_based_performance_attribution_energy_security",
-        "input_filename": "lens_based_performance_attribution_energy_security_input.json",
-        "view_filename": "lens_based_performance_attribution_energy_security_view.json",
-        "mockup_filename": "lens_based_performance_attribution_energy_security_mockup_v1.md",
-    },
 )
 BUILD_NOW_REPORT_IDS = tuple(spec["report_id"] for spec in REPORT_SPECS)
 INPUT_FILENAME_BY_REPORT_ID = {
@@ -64,6 +70,12 @@ VIEW_FILENAME_BY_REPORT_ID = {
 }
 MOCKUP_FILENAME_BY_REPORT_ID = {
     spec["report_id"]: spec["mockup_filename"] for spec in REPORT_SPECS
+}
+
+UNSUPPORTED_CALCULATED_OUTPUTS = {
+    "input": ("lens_based_performance_attribution_energy_security_input.json",),
+    "view": ("lens_based_performance_attribution_energy_security_view.json",),
+    "mockup": ("lens_based_performance_attribution_energy_security_mockup_v1.md",),
 }
 
 GATED_REPORTS: tuple[dict[str, str], ...] = (
@@ -109,6 +121,12 @@ GATED_REPORTS: tuple[dict[str, str], ...] = (
         "status": "Design soon",
         "reason": "Future variant; needs approved manager-level integrated detail shape before mockup generation.",
     },
+    {
+        "report_id": "lens_based_performance_attribution_energy_security",
+        "display_title": "Lens-Based Performance Attribution - Energy Security",
+        "status": "Gated for calculated attribution",
+        "reason": "Gated until Energy Security calculation inputs and calculated attribution outputs exist; the current calculated engine supports AI Adoption only.",
+    },
 )
 
 DEFAULT_INFORMATION_BUDGET = {
@@ -123,45 +141,6 @@ DEFAULT_INFORMATION_BUDGET = {
     "no_hidden_expansion_placeholders": True,
 }
 
-EFFECT_LABELS = {
-    "strategy_lens_bucket_selection_effect": "Theme benchmark selection",
-    "strategy_lens_bucket_sizing_effect": "Theme benchmark sizing",
-    "asset_selection_effect": "Asset selection",
-    "asset_sizing_effect": "Asset sizing",
-    "residual_unexplained": "Residual / unexplained",
-}
-
-EFFECT_INTERPRETATIONS = {
-    "strategy_lens_bucket_selection_effect": "Theme benchmark choices helped relative return.",
-    "strategy_lens_bucket_sizing_effect": "Theme benchmark sizing helped relative return.",
-    "asset_selection_effect": "Selected assets outperformed their reference mix.",
-    "asset_sizing_effect": "Sizing within selected assets helped modestly.",
-    "residual_unexplained": (
-        "Remaining reconciler; may include unmeasured timing, data, flow, or reconciliation effects."
-    ),
-}
-
-LENS_REPORTS = {
-    "ai_adoption": {
-        "report_id": "lens_based_performance_attribution_ai_adoption",
-        "display_title": "Lens-Based Performance Attribution - AI Adoption",
-        "lens_display_name": "AI Adoption",
-        "exact_report_question": (
-            "Which AI Adoption theme buckets explain relative performance versus their theme benchmarks?"
-        ),
-        "denominator_category_system": "AI Adoption theme buckets versus synthetic theme benchmarks",
-    },
-    "energy_security": {
-        "report_id": "lens_based_performance_attribution_energy_security",
-        "display_title": "Lens-Based Performance Attribution - Energy Security",
-        "lens_display_name": "Energy Security",
-        "exact_report_question": (
-            "Which Energy Security theme buckets explain relative performance versus their theme benchmarks?"
-        ),
-        "denominator_category_system": "Energy Security theme buckets versus synthetic theme benchmarks",
-    },
-}
-
 FORBIDDEN_VISIBLE_TERMS = (
     "artifact",
     "manifest",
@@ -173,8 +152,12 @@ FORBIDDEN_VISIBLE_TERMS = (
     "debug",
     "brinson",
     "strategy/lens-bucket",
+    "strategy lens-bucket",
+    "strategy lens bucket",
     "proxy return",
     "bucket return",
+    "not separately measured",
+    "residual is not timing",
 )
 
 FORBIDDEN_PLACEHOLDER_TERMS = (
@@ -200,38 +183,57 @@ RAW_ID_PATTERNS = (
 def load_source_context(
     *,
     prerequisite_dir: str | Path = DEFAULT_PREREQUISITE_DIR,
+    calculated_dir: str | Path = DEFAULT_CALCULATED_DIR,
 ) -> dict[str, Any]:
-    root = Path(prerequisite_dir)
+    prerequisite_root = Path(prerequisite_dir)
+    calculated_root = Path(calculated_dir)
+    calculated_outputs = {
+        name: _load_json(calculated_root / filename)
+        for name, filename in CALCULATED_ARTIFACT_FILES.items()
+    }
+    manifest = calculated_outputs["manifest"]
+    quality = calculated_outputs["quality_summary"]
+    selected_lens = manifest["selected_attribution_lens"]
+    if manifest["engine_id"] != "synthetic_attribution_engine_v1":
+        raise ValueError("Unexpected calculated attribution engine id")
+    if selected_lens["lens_id"] != "ai_adoption":
+        raise ValueError("Attribution report v1 calculated mockups require AI Adoption outputs")
+    if quality["timing_status"] != "unavailable":
+        raise ValueError("Timing attribution must remain unavailable")
+    if not quality["summary_ready_from_calculated_outputs"]:
+        raise ValueError("Calculated summary output is not marked ready")
+    if not quality["detail_ready_from_calculated_outputs"]:
+        raise ValueError("Calculated detail output is not marked ready")
+    if not quality["manager_ready_from_calculated_outputs"]:
+        raise ValueError("Calculated manager output is not marked ready")
+
     return {
-        "source_paths": _source_paths(root),
-        "manifest": _load_json(root / "synthetic_attribution_prerequisite_pack_manifest.json"),
-        "benchmark_catalog": _load_json(root / "portfolio_benchmark_catalog.json"),
-        "proxy_map": _load_json(root / "lens_bucket_benchmark_proxy_map.json"),
-        "period_returns": _load_json(root / "synthetic_period_returns.json"),
-        "weights_flows": _load_json(root / "synthetic_attribution_weights_flows.json"),
-        "decomposition": _load_json(root / "integrated_attribution_decomposition_inputs.json"),
-        "manager_prerequisites": _load_json(root / "manager_attribution_prerequisites.json"),
-        "readiness": _load_json(root / "attribution_readiness_summary.json"),
+        "source_paths": _source_paths(prerequisite_root, calculated_root),
+        "prerequisite_manifest": _load_json(
+            prerequisite_root / "synthetic_attribution_prerequisite_pack_manifest.json"
+        ),
+        "benchmark_catalog": _load_json(prerequisite_root / "portfolio_benchmark_catalog.json"),
+        "proxy_map": _load_json(prerequisite_root / "lens_bucket_benchmark_proxy_map.json"),
+        "calculated": calculated_outputs,
+        "calculated_artifact_files": dict(CALCULATED_ARTIFACT_FILES),
+        "selected_calculated_lens": selected_lens,
     }
 
 
 def build_attribution_report_inputs(context: dict[str, Any]) -> dict[str, dict[str, Any]]:
-    whole = _whole_portfolio_mode(context)
-    managers = list(context["manager_prerequisites"]["managers"])
     benchmark = context["benchmark_catalog"]["benchmarks"][0]
-
     inputs = {
         "integrated_performance_attribution_summary": _integrated_summary_input(
-            context, whole, benchmark
+            context,
+            benchmark,
         ),
         "integrated_performance_attribution_detail": _integrated_detail_input(
-            context, whole, benchmark
+            context,
+            benchmark,
         ),
-        "manager_attribution_summary": _manager_summary_input(context, managers),
+        "manager_attribution_summary": _manager_summary_input(context),
+        "lens_based_performance_attribution_ai_adoption": _lens_attribution_input(context),
     }
-    for lens_id in ("ai_adoption", "energy_security"):
-        report_id = LENS_REPORTS[lens_id]["report_id"]
-        inputs[report_id] = _lens_attribution_input(context, lens_id)
 
     _validate_report_ids(inputs)
     return inputs
@@ -271,6 +273,17 @@ def build_attribution_report_views(
             "timing_status": payload["timing_status"],
             "residual_policy": payload["residual_policy"],
             "benchmark_or_proxy_basis": payload["benchmark_or_proxy_basis"],
+            "source_calculated_attribution_engine_id": payload[
+                "source_calculated_attribution_engine_id"
+            ],
+            "source_calculated_output_artifacts": payload[
+                "source_calculated_output_artifacts"
+            ],
+            "source_calculated_output_refs": payload["source_calculated_output_refs"],
+            "calculated_from_lower_level_inputs": payload[
+                "calculated_from_lower_level_inputs"
+            ],
+            "supplied_or_legacy_sections": payload["supplied_or_legacy_sections"],
             "internal_source_refs": payload["internal_source_refs"],
             "source_prerequisite_pack_refs": payload["source_prerequisite_pack_refs"],
             "information_budget_applied": _budget_actuals(
@@ -324,6 +337,7 @@ def render_markdown_mockup(view: dict[str, Any]) -> str:
 def generate_attribution_report_views(
     *,
     prerequisite_dir: str | Path = DEFAULT_PREREQUISITE_DIR,
+    calculated_dir: str | Path = DEFAULT_CALCULATED_DIR,
     input_dir: str | Path = DEFAULT_INPUT_DIR,
     view_dir: str | Path = DEFAULT_VIEW_DIR,
     mockup_dir: str | Path = DEFAULT_MOCKUP_DIR,
@@ -335,9 +349,13 @@ def generate_attribution_report_views(
     view_path.mkdir(parents=True, exist_ok=True)
     mockup_path.mkdir(parents=True, exist_ok=True)
 
-    context = load_source_context(prerequisite_dir=prerequisite_dir)
+    context = load_source_context(
+        prerequisite_dir=prerequisite_dir,
+        calculated_dir=calculated_dir,
+    )
     inputs = build_attribution_report_inputs(context)
     views = build_attribution_report_views(inputs)
+    _remove_unsupported_calculated_outputs(input_path, view_path, mockup_path)
 
     input_files: list[str] = []
     for report_id in BUILD_NOW_REPORT_IDS:
@@ -378,6 +396,9 @@ def generate_attribution_report_views(
         "generator_version": GENERATOR_VERSION,
         "generated_at": GENERATED_AT,
         "synthetic_data": True,
+        "source_calculated_attribution_engine_id": context["calculated"]["manifest"][
+            "engine_id"
+        ],
         "report_input_count": len(inputs),
         "report_view_count": len(views),
         "markdown_mockup_count": len(MOCKUP_FILENAME_BY_REPORT_ID),
@@ -402,13 +423,15 @@ def render_mockup_readme(
         "# Attribution v1 Report Mockups",
         "",
         (
-            "These product-review mockups are generated from attribution v1 view fixtures. "
-            "They remain local synthetic-demo only and are not wired into Advisor Preview, "
-            "Populate, Present, generated reports, Docker, deployment, live data, or dependencies."
+            "These product-review mockups are generated from attribution v1 view fixtures "
+            "that consume the calculated synthetic attribution output pack. They remain "
+            "local synthetic-demo only and are not wired into Advisor Preview, Populate, "
+            "Present, generated reports, Docker, deployment, live data, or dependencies."
         ),
         (
-            "Visible attribution wording uses global benchmark, theme benchmark, asset selection/sizing, "
-            "and residual / unexplained labels; proxy benchmarks appear only as synthetic-demo caveats."
+            "AI Adoption is the selected calculated attribution lens. Timing remains "
+            "unavailable, residual / unexplained stays separate, and production/client "
+            "attribution remains gated."
         ),
         "",
         "## Generated Mockups",
@@ -426,33 +449,68 @@ def render_mockup_readme(
 
 def _integrated_summary_input(
     context: dict[str, Any],
-    whole: dict[str, Any],
     benchmark: dict[str, Any],
 ) -> dict[str, Any]:
+    whole = context["calculated"]["whole_portfolio_summary"]
     rows = [
-        _bridge_row(effect_key, value, include_numeric=True)
-        for effect_key, value in _ordered_effects(whole["effects"])
+        _bridge_row(
+            "Theme benchmark selection",
+            whole["theme_benchmark_selection_effect"],
+            "Calculated from policy theme benchmark return minus global benchmark return.",
+        ),
+        _bridge_row(
+            "Theme benchmark sizing",
+            whole["theme_benchmark_sizing_effect"],
+            "Calculated from actual-weight theme benchmark return minus policy theme benchmark return.",
+        ),
+        _bridge_row(
+            "Asset selection",
+            whole["asset_selection_effect"],
+            "Calculated from per-theme reference-weight asset returns.",
+        ),
+        _bridge_row(
+            "Asset sizing",
+            whole["asset_sizing_effect"],
+            "Calculated from per-theme actual-weight asset returns.",
+        ),
+        _bridge_row(
+            "Residual / unexplained",
+            whole["residual_unexplained"],
+            "Calculated reconciler after visible attribution effects.",
+        ),
     ]
     largest = max(rows, key=lambda row: abs(float(row["numeric_value"])))
     visible = {
         "headline_sentence": (
             f"Portfolio return exceeded the global benchmark by "
-            f"{_format_signed_percent(whole['active_return'])}, with "
-            f"{largest['Contribution'].lower()} the largest visible driver."
+            f"{_format_signed_percent(whole['relative_return'])}, with "
+            f"{largest['Contribution'].lower()} the largest calculated driver."
         ),
         "headline_metrics": [
-            _metric("Portfolio return", whole["actual_return"], _format_percent(whole["actual_return"])),
-            _metric("Global benchmark return", whole["benchmark_return"], _format_percent(whole["benchmark_return"])),
-            _metric("Relative return", whole["active_return"], _format_signed_percent(whole["active_return"])),
+            _metric(
+                "Portfolio return",
+                whole["actual_portfolio_return"],
+                _format_percent(whole["actual_portfolio_return"]),
+            ),
+            _metric(
+                "Global benchmark return",
+                whole["global_benchmark_return"],
+                _format_percent(whole["global_benchmark_return"]),
+            ),
+            _metric(
+                "Relative return",
+                whole["relative_return"],
+                _format_signed_percent(whole["relative_return"]),
+            ),
         ],
         "contribution_bridge": _table(
-            "Contribution Summary",
+            "Calculated Contribution Summary",
             ["Contribution", "Effect", "Interpretation"],
             rows,
         ),
         "caveats": [
             "Synthetic local-demo returns and benchmark inputs only.",
-            "Timing attribution is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present.",
+            "Timing is unavailable because clean trade/holding history, flow treatment, and an approved timing method are not present.",
         ],
         "advisor_note": (
             "Use this as a compact product-review shape; real/client attribution remains gated "
@@ -465,7 +523,7 @@ def _integrated_summary_input(
         report_family="Integrated Performance Attribution",
         master_question_family="Performance / Plan",
         exact_report_question=(
-            "Did the portfolio add value versus the global benchmark, and what were the largest visible decision effects?"
+            "Did the portfolio add value versus the global benchmark, and what were the largest calculated effects?"
         ),
         audience_tier="Client briefing and advisor review",
         summary_detail_status="Summary",
@@ -474,19 +532,26 @@ def _integrated_summary_input(
         rendering_mode="summary_first",
         context=context,
         visible_content=visible,
-        timing_status="unavailable",
-        residual_policy=(
-            "Residual / unexplained is the remaining reconciler and may include unmeasured timing, data, flow, or reconciliation effects."
-        ),
+        timing_status=whole["timing_status"],
+        residual_policy=_residual_policy_text(),
         benchmark_or_proxy_basis=benchmark["display_name"],
+        source_calculated_output_artifact_keys=(
+            "manifest",
+            "whole_portfolio_summary",
+            "quality_summary",
+        ),
         table_validation={
             "bridge_row_count": len(rows),
-            "effects_sum": round(sum(float(row["numeric_value"]) for row in rows), 6),
-            "active_return": whole["active_return"],
-            "ties_to_active_return": abs(
-                sum(float(row["numeric_value"]) for row in rows) - whole["active_return"]
+            "effects_sum": _round_return(
+                sum(float(row["numeric_value"]) for row in rows)
+            ),
+            "relative_return": whole["relative_return"],
+            "ties_to_relative_return": abs(
+                sum(float(row["numeric_value"]) for row in rows)
+                - whole["relative_return"]
             )
             <= 0.000001,
+            "uses_calculated_whole_portfolio_summary": True,
             "timing_contribution_included": False,
             "residual_label": "Residual / unexplained",
         },
@@ -495,67 +560,36 @@ def _integrated_summary_input(
 
 def _integrated_detail_input(
     context: dict[str, Any],
-    whole: dict[str, Any],
     benchmark: dict[str, Any],
 ) -> dict[str, Any]:
-    detail = whole["theme_benchmark_detail"]
-    rows = []
-    for row in detail["rows"]:
-        rows.append(
-            {
-                "Theme Bucket": row["bucket_display_name"],
-                "Weight": _format_percent(row["weight"]),
-                "Portfolio Return": _format_percent(row["portfolio_return"]),
-                "Theme Benchmark Return": _format_percent(row["theme_benchmark_return"]),
-                "Theme Benchmark Selection": _format_component(row["theme_benchmark_selection_effect"]),
-                "Theme Benchmark Sizing": _format_component(row["theme_benchmark_sizing_effect"]),
-                "Asset Selection": _format_component(row["asset_selection_effect"]),
-                "Asset Sizing": _format_component(row["asset_sizing_effect"]),
-                "Total Effect": _format_signed_percent(row["total_effect"]),
-                "numeric_total_effect": row["total_effect"],
-            }
-        )
-    rows.append(
-        {
-            "Theme Bucket": "Residual / unexplained",
-            "Weight": "n/a",
-            "Portfolio Return": "n/a",
-            "Theme Benchmark Return": "n/a",
-            "Theme Benchmark Selection": "Not separately measured",
-            "Theme Benchmark Sizing": "Not separately measured",
-            "Asset Selection": "Not separately measured",
-            "Asset Sizing": "Not separately measured",
-            "Total Effect": _format_signed_percent(detail["residual_unexplained"]),
-            "numeric_total_effect": detail["residual_unexplained"],
-        }
-    )
-    visible_rows = [
-        {
-            "Theme Bucket": row["Theme Bucket"],
-            "Weight": row["Weight"],
-            "Portfolio Return": row["Portfolio Return"],
-            "Theme Benchmark Return": row["Theme Benchmark Return"],
-            "Theme Benchmark Selection": row["Theme Benchmark Selection"],
-            "Theme Benchmark Sizing": row["Theme Benchmark Sizing"],
-            "Asset Selection": row["Asset Selection"],
-            "Asset Sizing": row["Asset Sizing"],
-            "Total Effect": row["Total Effect"],
-        }
-        for row in rows
-    ]
-    theme_total = detail["theme_bucket_total_effect"]
-    residual = detail["residual_unexplained"]
+    whole = context["calculated"]["whole_portfolio_summary"]
+    detail = context["calculated"]["theme_benchmark_detail"]
+    visible_rows = [_theme_detail_visible_row(row) for row in detail["rows"]]
     visible = {
         "headline_sentence": (
-            "Theme benchmark rows show the measured bucket-level effects, with residual / unexplained completing the global benchmark-to-portfolio tie-out."
+            f"Calculated AI Adoption theme rows explain "
+            f"{_format_signed_percent(detail['totals']['total_effect'])} of relative return "
+            "before the separate residual / unexplained reconciler."
         ),
         "headline_metrics": [
-            _metric("Global benchmark return", whole["benchmark_return"], _format_percent(whole["benchmark_return"])),
-            _metric("Theme row total", theme_total, _format_signed_percent(theme_total)),
-            _metric("Actual portfolio return", whole["actual_return"], _format_percent(whole["actual_return"])),
+            _metric(
+                "Theme row total",
+                detail["totals"]["total_effect"],
+                _format_signed_percent(detail["totals"]["total_effect"]),
+            ),
+            _metric(
+                "Residual / unexplained",
+                whole["residual_unexplained"],
+                _format_signed_percent(whole["residual_unexplained"]),
+            ),
+            _metric(
+                "Relative return",
+                whole["relative_return"],
+                _format_signed_percent(whole["relative_return"]),
+            ),
         ],
         "compact_table": _table(
-            "Theme Benchmark Detail",
+            "Calculated Theme Benchmark Detail",
             [
                 "Theme Bucket",
                 "Weight",
@@ -570,11 +604,12 @@ def _integrated_detail_input(
             visible_rows,
         ),
         "caveats": [
-            "Synthetic local-demo returns and theme benchmarks only; some theme benchmarks are proxy benchmarks for demo purposes, not production recommendations.",
-            "Timing attribution is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present.",
+            "Synthetic local-demo returns and theme benchmarks only; some theme benchmarks are synthetic proxy benchmarks for demo purposes.",
+            "Timing is unavailable because clean trade/holding history, flow treatment, and an approved timing method are not present.",
         ],
         "advisor_note": (
-            "Bucket-level selection and sizing components are not separately measured in this v1 synthetic input; use total effect and the residual tie-out for review."
+            "Use this detail view to review calculated theme benchmark and asset selection/sizing rows; "
+            "the residual / unexplained amount completes the portfolio-level tie-out."
         ),
     }
     return _report_input(
@@ -583,64 +618,71 @@ def _integrated_detail_input(
         report_family="Integrated Performance Attribution",
         master_question_family="Performance / Plan",
         exact_report_question=(
-            "How do theme benchmarks / lens buckets explain the synthetic benchmark-to-portfolio attribution bridge?"
+            "How do calculated theme benchmark and asset effects explain the synthetic benchmark-to-portfolio bridge?"
         ),
         audience_tier="Advisor review",
         summary_detail_status="Detail",
         representation_level="Whole portfolio versus benchmark",
-        denominator_category_system="Theme benchmark bucket total effects plus residual tie-out",
+        denominator_category_system="AI Adoption theme benchmark calculated rows",
         rendering_mode="detail_first",
         context=context,
         visible_content=visible,
-        timing_status="unavailable",
-        residual_policy=(
-            "Residual / unexplained is the remaining reconciler and may include unmeasured timing, data, flow, or reconciliation effects."
-        ),
+        timing_status=detail["timing_status"],
+        residual_policy=_residual_policy_text(),
         benchmark_or_proxy_basis=benchmark["display_name"],
+        source_calculated_output_artifact_keys=(
+            "manifest",
+            "whole_portfolio_summary",
+            "theme_benchmark_detail",
+            "theme_asset_detail",
+            "quality_summary",
+        ),
         table_validation={
-            "bridge_row_count": len(visible_rows),
-            "theme_benchmark_lens": detail["lens_display_name"],
+            "theme_benchmark_lens": detail["selected_attribution_lens"]["display_name"],
             "theme_bucket_row_count": len(detail["rows"]),
-            "theme_bucket_total_effect": theme_total,
-            "residual_unexplained": residual,
-            "effect_total": round(theme_total + residual, 6),
-            "actual_return": whole["actual_return"],
-            "global_benchmark_return": whole["benchmark_return"],
-            "recomputed_actual_return": round(whole["benchmark_return"] + theme_total + residual, 6),
-            "ties_to_actual_return": abs(
-                whole["actual_return"] - round(whole["benchmark_return"] + theme_total + residual, 6)
-            )
-            <= 0.000001,
-            "component_effects_not_separately_measured": True,
+            "theme_benchmark_selection_total": detail["totals"][
+                "theme_benchmark_selection_effect"
+            ],
+            "theme_benchmark_sizing_total": detail["totals"][
+                "theme_benchmark_sizing_effect"
+            ],
+            "asset_selection_total": detail["totals"]["asset_selection_effect"],
+            "asset_sizing_total": detail["totals"]["asset_sizing_effect"],
+            "theme_row_total_effect": detail["totals"]["total_effect"],
+            "residual_unexplained": whole["residual_unexplained"],
+            "relative_return": whole["relative_return"],
+            "ties_to_summary_calculated_effects": detail["tie_out_status"][
+                "ties_to_summary_calculated_effects"
+            ],
+            "uses_calculated_theme_benchmark_detail": True,
+            "component_effects_calculated": True,
+            "detail_is_not_summary_bridge": True,
             "timing_contribution_included": False,
             "residual_label": "Residual / unexplained",
         },
     )
 
 
-def _manager_summary_input(
-    context: dict[str, Any],
-    managers: list[dict[str, Any]],
-) -> dict[str, Any]:
+def _manager_summary_input(context: dict[str, Any]) -> dict[str, Any]:
+    manager_summary = context["calculated"]["manager_summary"]
+    managers = list(manager_summary["managers"])
     rows = []
-    for manager in sorted(
-        managers,
-        key=lambda row: abs(float(row["portfolio_active_contribution"])),
-        reverse=True,
-    ):
+    for manager in managers:
         rows.append(
             {
                 "Manager": manager["display_name"],
                 "Return": _format_percent(manager["manager_return"]),
-                "Manager Benchmark Return": _format_percent(manager["benchmark_proxy_return"]),
+                "Manager Benchmark Return": _format_percent(
+                    manager["manager_benchmark_return"]
+                ),
                 "Relative Return": _format_signed_percent(manager["relative_return"]),
                 "Largest Driver": _largest_manager_driver(manager),
-                "portfolio_active_contribution": manager["portfolio_active_contribution"],
+                "Residual / unexplained": _format_signed_percent(
+                    manager["residual_unexplained"]
+                ),
+                "relative_return": manager["relative_return"],
             }
         )
-    total_contribution = round(
-        sum(float(row["portfolio_active_contribution"]) for row in rows), 6
-    )
     visible_rows = [
         {
             "Manager": row["Manager"],
@@ -648,39 +690,41 @@ def _manager_summary_input(
             "Manager Benchmark Return": row["Manager Benchmark Return"],
             "Relative Return": row["Relative Return"],
             "Largest Driver": row["Largest Driver"],
+            "Residual / unexplained": row["Residual / unexplained"],
         }
         for row in rows
     ]
     visible = {
         "headline_sentence": (
-            "All six current managers have synthetic manager benchmark returns, with contribution direction shown against each benchmark."
+            "All six current managers tie to calculated manager attribution outputs, with timing unavailable."
         ),
         "headline_metrics": [
             _metric("Managers covered", len(rows), str(len(rows))),
             _metric(
-                "Total manager contribution",
-                total_contribution,
-                _format_signed_percent(total_contribution),
+                "Manager tie-outs",
+                manager_summary["coverage_summary"]["manager_count"],
+                "All pass",
             ),
-            _metric("Manager benchmark coverage", len(rows), f"{len(rows)} of {len(managers)}"),
+            _metric("Timing status", manager_summary["timing_status"], "Unavailable"),
         ],
         "compact_table": _table(
-            "Manager Contribution Summary",
+            "Calculated Manager Attribution Summary",
             [
                 "Manager",
                 "Return",
                 "Manager Benchmark Return",
                 "Relative Return",
                 "Largest Driver",
+                "Residual / unexplained",
             ],
             visible_rows,
         ),
         "caveats": [
             "Synthetic manager benchmarks may use proxy benchmarks for demo purposes; they are not production recommendations.",
-            "Timing attribution is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present.",
+            "Timing is unavailable because clean trade/holding history, flow treatment, and an approved timing method are not present.",
         ],
         "advisor_note": (
-            "This summary is not a replacement for future manager-level integrated attribution summary/detail variants."
+            "This summary uses calculated manager component effects; future manager integrated attribution variants remain separate."
         ),
     }
     return _report_input(
@@ -689,7 +733,7 @@ def _manager_summary_input(
         report_family="Manager Attribution",
         master_question_family="Performance / Plan",
         exact_report_question=(
-            "Which managers added or lost value versus their manager benchmarks, and what kind of contribution drove it?"
+            "Which managers added or lost value versus their manager benchmarks, and what calculated driver mattered most?"
         ),
         audience_tier="Advisor review",
         summary_detail_status="Summary",
@@ -698,131 +742,133 @@ def _manager_summary_input(
         rendering_mode="table_first",
         context=context,
         visible_content=visible,
-        timing_status="unavailable",
+        timing_status=manager_summary["timing_status"],
         residual_policy=(
-            "Residual / unexplained is the manager-level reconciler and may include unmeasured timing, data, flow, or reconciliation effects."
+            "Residual / unexplained is the manager-level reconciler after calculated manager effects."
         ),
         benchmark_or_proxy_basis="Manager-specific synthetic benchmarks",
+        source_calculated_output_artifact_keys=(
+            "manifest",
+            "manager_summary",
+            "quality_summary",
+        ),
         table_validation={
             "current_manager_count": len(managers),
             "manager_rows_shown": len(visible_rows),
-            "all_current_managers_covered": True,
-            "coverage_justification": (
-                "All six current managers are shown because the product budget allows six rows."
-            ),
+            "all_current_managers_covered": manager_summary["coverage_summary"][
+                "all_current_managers_covered"
+            ],
+            "all_manager_benchmark_basis_types_explicit": manager_summary[
+                "coverage_summary"
+            ]["all_manager_benchmark_basis_types_explicit"],
+            "manager_tie_outs_reconcile": manager_summary["coverage_summary"][
+                "manager_tie_outs_reconcile"
+            ],
+            "uses_calculated_manager_summary": True,
             "timing_column_removed": True,
-            "manager_benchmark_coverage": f"{len(visible_rows)} of {len(managers)}",
             "residual_labeled_separately": True,
         },
     )
 
 
-def _lens_attribution_input(context: dict[str, Any], lens_id: str) -> dict[str, Any]:
-    spec = LENS_REPORTS[lens_id]
-    returns_by_bucket = {
-        row["bucket_id"]: row
-        for row in context["period_returns"]["lens_bucket_returns"]
-        if row["lens_id"] == lens_id
-    }
-    weights_by_bucket = {
-        row["bucket_id"]: row
-        for row in context["weights_flows"]["lens_bucket_weights"]
-        if row["lens_id"] == lens_id
-    }
-
-    rows = []
-    for bucket_id, return_row in returns_by_bucket.items():
-        weight = float(weights_by_bucket[bucket_id]["weight"])
-        relative_return = float(return_row["relative_return"])
-        relative_contribution = round(weight * relative_return, 6)
-        rows.append(
-            {
-                "Theme Bucket": return_row["bucket_display_name"],
-                "Weight": _format_percent(weight),
-                "Portfolio Return": _format_percent(return_row["period_return"]),
-                "Theme Benchmark Return": _format_percent(return_row["proxy_period_return"]),
-                "Relative Contribution": _format_signed_percent(relative_contribution),
-                "bucket_id": bucket_id,
-                "relative_contribution": relative_contribution,
-            }
-        )
-    rows.sort(key=lambda row: abs(float(row["relative_contribution"])), reverse=True)
+def _lens_attribution_input(context: dict[str, Any]) -> dict[str, Any]:
+    detail = context["calculated"]["theme_benchmark_detail"]
+    selected_lens = detail["selected_attribution_lens"]
+    rows = [
+        {
+            "Theme Bucket": row["bucket_display_name"],
+            "Weight": _format_percent(row["actual_portfolio_weight"]),
+            "Portfolio Return": _format_percent(row["actual_portfolio_theme_return"]),
+            "Theme Benchmark Return": _format_percent(row["theme_benchmark_return"]),
+            "Total Effect": _format_signed_percent(row["total_effect"]),
+            "total_effect": row["total_effect"],
+        }
+        for row in detail["rows"]
+    ]
+    total = _round_return(sum(float(row["total_effect"]) for row in rows))
+    top_positive = max(rows, key=lambda row: float(row["total_effect"]))
+    top_negative = min(rows, key=lambda row: float(row["total_effect"]))
     visible_rows = [
         {
             "Theme Bucket": row["Theme Bucket"],
             "Weight": row["Weight"],
             "Portfolio Return": row["Portfolio Return"],
             "Theme Benchmark Return": row["Theme Benchmark Return"],
-            "Relative Contribution": row["Relative Contribution"],
+            "Total Effect": row["Total Effect"],
         }
         for row in rows
     ]
-    total = round(sum(float(row["relative_contribution"]) for row in rows), 6)
-    top_positive = max(rows, key=lambda row: float(row["relative_contribution"]))
-    top_negative = min(rows, key=lambda row: float(row["relative_contribution"]))
     visible = {
         "headline_sentence": (
-            f"Under the {spec['lens_display_name']} lens, {top_positive['Theme Bucket']} "
-            "is the largest positive relative contributor versus its theme benchmark."
+            f"Under the {selected_lens['display_name']} lens, {top_positive['Theme Bucket']} "
+            "is the largest positive calculated theme contributor versus its theme benchmark."
         ),
         "headline_metrics": [
-            _metric("Net relative contribution", total, _format_signed_percent(total)),
+            _metric("Net calculated theme effect", total, _format_signed_percent(total)),
             _metric(
                 "Largest positive theme bucket",
-                top_positive["relative_contribution"],
-                f"{top_positive['Theme Bucket']} ({_format_signed_percent(top_positive['relative_contribution'])})",
+                top_positive["total_effect"],
+                f"{top_positive['Theme Bucket']} ({_format_signed_percent(top_positive['total_effect'])})",
             ),
             _metric(
                 "Largest negative theme bucket",
-                top_negative["relative_contribution"],
-                f"{top_negative['Theme Bucket']} ({_format_signed_percent(top_negative['relative_contribution'])})",
+                top_negative["total_effect"],
+                f"{top_negative['Theme Bucket']} ({_format_signed_percent(top_negative['total_effect'])})",
             ),
         ],
         "compact_table": _table(
-            f"{spec['lens_display_name']} Theme Bucket Performance",
+            f"{selected_lens['display_name']} Calculated Theme Performance",
             [
                 "Theme Bucket",
                 "Weight",
                 "Portfolio Return",
                 "Theme Benchmark Return",
-                "Relative Contribution",
+                "Total Effect",
             ],
             visible_rows,
         ),
         "caveats": [
             "Some synthetic theme benchmarks are proxy benchmarks for demo purposes; they are not production recommendations.",
-            "Bucket weights use the complete synthetic lens assignment pack, including neutral and review buckets.",
+            "Energy Security calculated attribution remains gated until a calculated output pack exists for that lens.",
         ],
         "advisor_note": (
-            "Read this as a one-lens theme performance view; do not compare these rows to "
-            "scenario or proposed-allocation results."
+            "Read this as a calculated one-lens theme performance view; timing remains unavailable."
         ),
     }
     return _report_input(
-        report_element_id=spec["report_id"],
-        display_title=spec["display_title"],
+        report_element_id="lens_based_performance_attribution_ai_adoption",
+        display_title="Lens-Based Performance Attribution - AI Adoption",
         report_family="Lens-Based Performance Attribution",
         master_question_family="Performance / Plan",
-        exact_report_question=spec["exact_report_question"],
+        exact_report_question=(
+            "Which AI Adoption theme buckets explain relative performance versus their theme benchmarks?"
+        ),
         audience_tier="Advisor review",
         summary_detail_status="Summary",
-        representation_level=f"{spec['lens_display_name']} theme bucket",
-        denominator_category_system=spec["denominator_category_system"],
+        representation_level="AI Adoption theme bucket",
+        denominator_category_system="AI Adoption theme buckets versus synthetic theme benchmarks",
         rendering_mode="table_first",
         context=context,
         visible_content=visible,
-        timing_status="unavailable",
+        timing_status=detail["timing_status"],
         residual_policy=(
-            "No residual row is shown in the theme-bucket summary; timing attribution is not separately measured."
+            "No residual row is shown in the calculated theme-bucket summary; portfolio residual remains in the integrated summary/detail reports."
         ),
-        benchmark_or_proxy_basis=f"Synthetic {spec['lens_display_name']} theme benchmark set",
+        benchmark_or_proxy_basis="Synthetic AI Adoption theme benchmark set",
+        source_calculated_output_artifact_keys=(
+            "manifest",
+            "theme_benchmark_detail",
+            "quality_summary",
+        ),
         table_validation={
-            "lens_id": lens_id,
+            "selected_calculated_lens": selected_lens["display_name"],
             "lens_bucket_count": len(rows),
             "all_lens_buckets_included": True,
             "contains_neutral_bucket": any("Neutral" in row["Theme Bucket"] for row in rows),
             "contains_review_bucket": any("Review" in row["Theme Bucket"] for row in rows),
             "relative_contribution_total": total,
+            "uses_calculated_theme_benchmark_detail": True,
+            "unsupported_calculated_lenses_gated": ["Energy Security"],
             "timing_contribution_included": False,
         },
     )
@@ -845,9 +891,18 @@ def _report_input(
     timing_status: str,
     residual_policy: str,
     benchmark_or_proxy_basis: str,
+    source_calculated_output_artifact_keys: tuple[str, ...],
     table_validation: dict[str, Any],
 ) -> dict[str, Any]:
-    period = context["manifest"]
+    manifest = context["calculated"]["manifest"]
+    source_artifacts = [
+        context["calculated_artifact_files"][key]
+        for key in source_calculated_output_artifact_keys
+    ]
+    source_refs = [
+        context["source_paths"]["calculated"][key]
+        for key in source_calculated_output_artifact_keys
+    ]
     return {
         "schema_version": INPUT_SCHEMA_VERSION,
         "generator_version": GENERATOR_VERSION,
@@ -863,14 +918,27 @@ def _report_input(
         "representation_level": representation_level,
         "denominator_category_system": denominator_category_system,
         "rendering_mode": rendering_mode,
-        "period_start": period["period_start"],
-        "period_end": period["period_end"],
+        "period_start": manifest["period_start"],
+        "period_end": manifest["period_end"],
+        "selected_calculated_lens": manifest["selected_attribution_lens"],
         "visible_content": visible_content,
         "timing_status": timing_status,
         "residual_policy": residual_policy,
+        "residual_policy_details": manifest["residual_policy"],
         "benchmark_or_proxy_basis": benchmark_or_proxy_basis,
-        "internal_source_refs": _internal_refs_for_report(report_element_id, context),
-        "source_prerequisite_pack_refs": [context["manifest"]["pack_id"]],
+        "source_calculated_attribution_engine_id": manifest["engine_id"],
+        "source_calculated_output_artifacts": source_artifacts,
+        "source_calculated_output_refs": source_refs,
+        "calculated_from_lower_level_inputs": True,
+        "calculated_outputs_source_of_truth": True,
+        "supplied_or_legacy_sections": [],
+        "internal_source_refs": [
+            *source_refs,
+            context["source_paths"]["prerequisite"]["benchmark_catalog"],
+        ],
+        "source_prerequisite_pack_refs": [
+            context["prerequisite_manifest"]["pack_id"],
+        ],
         "table_validation": table_validation,
         "information_budget": _budget_for_report(report_element_id),
         "gated_or_deferred": False,
@@ -880,16 +948,24 @@ def _report_input(
 
 
 def _input_summary(input_files: list[str], inputs: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    first = next(iter(inputs.values()))
     return {
         "schema_version": INPUT_SUMMARY_SCHEMA_VERSION,
         "generator_version": GENERATOR_VERSION,
         "generated_at": GENERATED_AT,
         "synthetic_data": True,
+        "source_calculated_attribution_engine_id": first[
+            "source_calculated_attribution_engine_id"
+        ],
+        "calculated_outputs_source_of_truth": True,
         "report_input_count": len(inputs),
         "report_ids": list(BUILD_NOW_REPORT_IDS),
         "input_files": input_files,
         "mockups_generated_from_views": True,
         "gated_reports_not_generated": [row["report_id"] for row in GATED_REPORTS],
+        "unsupported_calculated_lens_reports_gated": [
+            "lens_based_performance_attribution_energy_security"
+        ],
         "advisor_ui_wiring": "not_changed",
         "generated_report_wiring": "not_changed",
     }
@@ -901,11 +977,16 @@ def _view_summary(
     views: dict[str, dict[str, Any]],
     gated_index: dict[str, Any],
 ) -> dict[str, Any]:
+    first = next(iter(views.values()))
     return {
         "schema_version": VIEW_SUMMARY_SCHEMA_VERSION,
         "generator_version": GENERATOR_VERSION,
         "generated_at": GENERATED_AT,
         "synthetic_data": True,
+        "source_calculated_attribution_engine_id": first[
+            "source_calculated_attribution_engine_id"
+        ],
+        "calculated_outputs_source_of_truth": True,
         "report_view_count": len(views),
         "markdown_mockup_count": len(MOCKUP_FILENAME_BY_REPORT_ID),
         "report_ids": list(BUILD_NOW_REPORT_IDS),
@@ -914,6 +995,9 @@ def _view_summary(
         "mockups_generated_from_views": True,
         "gated_reports_not_generated": [
             row["report_id"] for row in gated_index["gated_or_deferred_reports"]
+        ],
+        "unsupported_calculated_lens_reports_gated": [
+            "lens_based_performance_attribution_energy_security"
         ],
         "information_budget": dict(DEFAULT_INFORMATION_BUDGET),
         "advisor_ui_wiring": "not_changed",
@@ -927,67 +1011,65 @@ def _gated_deferred_index() -> dict[str, Any]:
         "generator_version": GENERATOR_VERSION,
         "generated_at": GENERATED_AT,
         "synthetic_data": True,
+        "source_calculated_attribution_engine_id": "synthetic_attribution_engine_v1",
         "purpose": "Product/readiness index for attribution reports deliberately not generated.",
         "gated_or_deferred_reports": list(GATED_REPORTS),
     }
 
 
-def _whole_portfolio_mode(context: dict[str, Any]) -> dict[str, Any]:
-    return next(
-        row
-        for row in context["decomposition"]["supported_modes"]
-        if row["mode"] == "whole_portfolio"
-    )
-
-
-def _ordered_effects(effects: dict[str, float]) -> list[tuple[str, float]]:
-    return [
-        (effect_key, float(effects[effect_key]))
-        for effect_key in (
-            "strategy_lens_bucket_selection_effect",
-            "strategy_lens_bucket_sizing_effect",
-            "asset_selection_effect",
-            "asset_sizing_effect",
-            "residual_unexplained",
-        )
-    ]
-
-
-def _bridge_row(effect_key: str, value: float, *, include_numeric: bool = False) -> dict[str, Any]:
-    row = {
-        "Contribution": EFFECT_LABELS[effect_key],
+def _bridge_row(label: str, value: float, interpretation: str) -> dict[str, Any]:
+    return {
+        "Contribution": label,
         "Effect": _format_signed_percent(value),
-        "Interpretation": EFFECT_INTERPRETATIONS[effect_key],
+        "Interpretation": interpretation,
+        "numeric_value": value,
+        "row_type": "calculated_effect",
     }
-    if include_numeric:
-        row["effect_key"] = effect_key
-        row["numeric_value"] = value
-        row["row_type"] = "effect"
-    return row
+
+
+def _theme_detail_visible_row(row: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "Theme Bucket": row["bucket_display_name"],
+        "Weight": _format_percent(row["actual_portfolio_weight"]),
+        "Portfolio Return": _format_percent(row["actual_portfolio_theme_return"]),
+        "Theme Benchmark Return": _format_percent(row["theme_benchmark_return"]),
+        "Theme Benchmark Selection": _format_signed_percent(
+            row["theme_benchmark_selection_effect"]
+        ),
+        "Theme Benchmark Sizing": _format_signed_percent(
+            row["theme_benchmark_sizing_effect"]
+        ),
+        "Asset Selection": _format_signed_percent(row["asset_selection_effect"]),
+        "Asset Sizing": _format_signed_percent(row["asset_sizing_effect"]),
+        "Total Effect": _format_signed_percent(row["total_effect"]),
+    }
 
 
 def _largest_manager_driver(manager: dict[str, Any]) -> str:
-    candidates = {
-        "Theme benchmark selection": manager["strategy_selection_contribution"],
-        "Theme benchmark sizing": manager["strategy_sizing_contribution"],
-        "Asset selection": manager["asset_selection_contribution"],
-        "Asset sizing": manager["asset_sizing_contribution"],
-        "Residual / unexplained": manager["residual_unexplained"],
-    }
-    label, value = max(candidates.items(), key=lambda item: abs(float(item[1])))
-    return f"{label} ({_format_signed_percent(value)})"
+    return (
+        f"{manager['largest_driver']['label']} "
+        f"({_format_signed_percent(manager['largest_driver']['value'])})"
+    )
+
+
+def _residual_policy_text() -> str:
+    return (
+        "Residual / unexplained is the calculated reconciler after visible attribution effects "
+        "and may include unmeasured timing, data, flow, or reconciliation effects."
+    )
 
 
 def _budget_for_report(report_id: str) -> dict[str, Any]:
     budget = dict(DEFAULT_INFORMATION_BUDGET)
     if report_id == "integrated_performance_attribution_detail":
-        budget["max_visible_table_rows"] = 8
+        budget["max_visible_table_rows"] = 7
+        budget["exception_reason"] = "Calculated detail shows every AI Adoption theme bucket."
     if report_id == "manager_attribution_summary":
         budget["max_visible_table_rows"] = 6
         budget["exception_reason"] = "Manager Attribution Summary may show all six current managers."
     if report_id.startswith("lens_based_performance_attribution_"):
         budget["max_visible_table_rows"] = 7
-        budget["exception_reason"] = "Lens-Based Performance Attribution shows every theme bucket in the selected lens."
+        budget["exception_reason"] = "Lens-Based Performance Attribution shows every calculated theme bucket."
     return budget
 
 
@@ -1107,52 +1189,52 @@ def _format_signed_percent(value: Any) -> str:
     return f"{sign}{abs(number) * 100:.2f}%"
 
 
-def _format_component(value: Any) -> str:
-    if value is None:
-        return "Not separately measured"
-    return _format_signed_percent(value)
-
-
 def _sentence_count(value: str) -> int:
     normalized = value.replace("?", ".").replace("!", ".")
     matches = re.findall(r"[.!?](?:\s|$)", normalized)
     return max(1, len(matches)) if normalized.strip() else 0
 
 
-def _internal_refs_for_report(report_id: str, context: dict[str, Any]) -> list[str]:
-    common = [
-        context["source_paths"]["manifest"],
-        context["source_paths"]["period_returns"],
-        context["source_paths"]["weights_flows"],
-    ]
-    if report_id.startswith("integrated_performance_attribution_"):
-        return [
-            *common,
-            context["source_paths"]["benchmark_catalog"],
-            context["source_paths"]["decomposition"],
-        ]
-    if report_id == "manager_attribution_summary":
-        return [
-            *common,
-            context["source_paths"]["manager_prerequisites"],
-        ]
-    return [
-        *common,
-        context["source_paths"]["proxy_map"],
-    ]
-
-
-def _source_paths(root: Path) -> dict[str, str]:
+def _source_paths(prerequisite_root: Path, calculated_root: Path) -> dict[str, Any]:
     return {
-        "manifest": _as_posix(root / "synthetic_attribution_prerequisite_pack_manifest.json"),
-        "benchmark_catalog": _as_posix(root / "portfolio_benchmark_catalog.json"),
-        "proxy_map": _as_posix(root / "lens_bucket_benchmark_proxy_map.json"),
-        "period_returns": _as_posix(root / "synthetic_period_returns.json"),
-        "weights_flows": _as_posix(root / "synthetic_attribution_weights_flows.json"),
-        "decomposition": _as_posix(root / "integrated_attribution_decomposition_inputs.json"),
-        "manager_prerequisites": _as_posix(root / "manager_attribution_prerequisites.json"),
-        "readiness": _as_posix(root / "attribution_readiness_summary.json"),
+        "prerequisite": {
+            "manifest": _as_posix(
+                prerequisite_root / "synthetic_attribution_prerequisite_pack_manifest.json"
+            ),
+            "benchmark_catalog": _as_posix(
+                prerequisite_root / "portfolio_benchmark_catalog.json"
+            ),
+            "proxy_map": _as_posix(
+                prerequisite_root / "lens_bucket_benchmark_proxy_map.json"
+            ),
+        },
+        "calculated": {
+            key: _as_posix(calculated_root / filename)
+            for key, filename in CALCULATED_ARTIFACT_FILES.items()
+        },
     }
+
+
+def _remove_unsupported_calculated_outputs(
+    input_path: Path,
+    view_path: Path,
+    mockup_path: Path,
+) -> None:
+    for filename in UNSUPPORTED_CALCULATED_OUTPUTS["input"]:
+        _unlink_if_exists(input_path / filename)
+    for filename in UNSUPPORTED_CALCULATED_OUTPUTS["view"]:
+        _unlink_if_exists(view_path / filename)
+    for filename in UNSUPPORTED_CALCULATED_OUTPUTS["mockup"]:
+        _unlink_if_exists(mockup_path / filename)
+
+
+def _unlink_if_exists(path: Path) -> None:
+    if path.exists():
+        path.unlink()
+
+
+def _round_return(value: Any) -> float:
+    return round(float(value), 6)
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -1172,6 +1254,7 @@ def build_parser() -> argparse.ArgumentParser:
         description="Generate synthetic attribution report fixtures and mockups."
     )
     parser.add_argument("--prerequisite-dir", default=str(DEFAULT_PREREQUISITE_DIR))
+    parser.add_argument("--calculated-dir", default=str(DEFAULT_CALCULATED_DIR))
     parser.add_argument("--input-dir", default=str(DEFAULT_INPUT_DIR))
     parser.add_argument("--view-dir", default=str(DEFAULT_VIEW_DIR))
     parser.add_argument("--mockup-dir", default=str(DEFAULT_MOCKUP_DIR))
@@ -1182,6 +1265,7 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     summary = generate_attribution_report_views(
         prerequisite_dir=args.prerequisite_dir,
+        calculated_dir=args.calculated_dir,
         input_dir=args.input_dir,
         view_dir=args.view_dir,
         mockup_dir=args.mockup_dir,
@@ -1191,6 +1275,10 @@ def main(argv: list[str] | None = None) -> int:
     print(f"Attribution report views: {summary['report_view_count']} -> {summary['view_dir']}")
     print(
         f"Attribution Markdown mockups: {summary['markdown_mockup_count']} -> {summary['mockup_dir']}"
+    )
+    print(
+        "Calculated source: "
+        + summary["source_calculated_attribution_engine_id"]
     )
     print("Generated report ids: " + ", ".join(summary["report_ids"]))
     print("Gated reports not generated: " + ", ".join(summary["gated_reports_not_generated"]))

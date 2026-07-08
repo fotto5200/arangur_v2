@@ -72,28 +72,33 @@ class AttributionMethodologyAuditTests(unittest.TestCase):
             self.assertTrue(output_path.exists())
             summary = json.loads(output_path.read_text(encoding="utf-8"))
             self.assertEqual(
-                "Synthetic Attribution Calculation Inputs v1",
+                "Frank Review of Regenerated Calculated Attribution Mockups v1",
                 summary["recommended_next_tranche"],
             )
         finally:
             shutil.rmtree(scratch, ignore_errors=True)
 
-    def test_current_selection_effect_is_flagged_as_not_lower_level_calculated(self) -> None:
+    def test_current_selection_effect_is_calculated_from_lower_level_inputs(self) -> None:
         summary = build_attribution_methodology_audit()
         field = summary["field_classification"]["theme_benchmark_selection_effect"]
 
-        self.assertEqual("supplied_formula_allocation", field["classification"])
-        self.assertEqual("not_lower_level_calculated", field["current_status"])
-        self.assertGreater(field["value"], 0)
+        self.assertEqual("calculated_from_lower_level_inputs", field["classification"])
+        self.assertEqual("calculated_from_current_synthetic_inputs", field["current_status"])
+        self.assertLess(field["value"], 0)
+        self.assertTrue(summary["calculated_outputs_source_of_truth"])
+        self.assertEqual("AI Adoption", summary["selected_attribution_lens"])
 
-    def test_detail_not_separately_measured_fields_are_a_calculation_gap(self) -> None:
+    def test_detail_component_fields_are_calculated_for_supported_lens(self) -> None:
         summary = build_attribution_methodology_audit()
         gaps = summary["calculation_gaps"]
 
-        self.assertTrue(gaps["summary_effects_are_not_lower_level_calculated"])
-        self.assertGreater(gaps["detail_component_fields_not_separately_measured"], 0)
-        self.assertTrue(gaps["theme_benchmark_selection_portfolio_missing"])
-        self.assertTrue(gaps["theme_benchmark_sizing_portfolio_missing"])
+        self.assertTrue(gaps["summary_effects_are_calculated_from_lower_level_inputs"])
+        self.assertFalse(gaps["summary_effects_are_not_lower_level_calculated"])
+        self.assertEqual(0, gaps["detail_component_fields_not_separately_measured"])
+        self.assertTrue(gaps["detail_component_effects_calculated"])
+        self.assertFalse(gaps["theme_benchmark_selection_portfolio_missing"])
+        self.assertFalse(gaps["theme_benchmark_sizing_portfolio_missing"])
+        self.assertTrue(gaps["energy_security_calculated_outputs_missing"])
 
     def test_timing_remains_unavailable_and_residual_is_not_timing(self) -> None:
         summary = build_attribution_methodology_audit()
@@ -107,15 +112,18 @@ class AttributionMethodologyAuditTests(unittest.TestCase):
             summary["field_classification"],
         )
 
-    def test_manager_benchmark_basis_is_flagged_for_clarification(self) -> None:
+    def test_manager_benchmark_basis_is_explicit_for_current_outputs(self) -> None:
         summary = build_attribution_methodology_audit()
         basis = summary["manager_benchmark_basis"]
 
         self.assertEqual(
-            "supplied_synthetic_input_needs_basis_clarification",
+            "explicit_synthetic_demo_basis",
             basis["classification"],
         )
-        self.assertTrue(summary["calculation_gaps"]["manager_benchmark_basis_needs_explicit_type"])
+        self.assertTrue(basis["all_manager_benchmark_basis_types_explicit"])
+        self.assertIsNone(basis["disclosure_gap"])
+        self.assertFalse(summary["calculation_gaps"]["manager_benchmark_basis_needs_explicit_type"])
+        self.assertTrue(summary["calculation_gaps"]["manager_component_effects_calculated"])
 
     def test_audit_source_has_no_external_api_markers_or_production_data_claims(self) -> None:
         source = (

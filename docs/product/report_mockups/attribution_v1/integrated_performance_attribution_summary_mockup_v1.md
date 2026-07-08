@@ -1,6 +1,6 @@
 # Integrated Performance Attribution Summary
 
-Portfolio return exceeded the global benchmark by +1.15%, with theme benchmark selection the largest visible driver.
+Portfolio return exceeded the global benchmark by +1.15%, with asset selection the largest calculated driver.
 
 ## Key Metrics
 
@@ -8,20 +8,20 @@ Portfolio return exceeded the global benchmark by +1.15%, with theme benchmark s
 - **Global benchmark return:** 6.99%
 - **Relative return:** +1.15%
 
-## Contribution Summary
+## Calculated Contribution Summary
 
 | Contribution | Effect | Interpretation |
 | --- | --- | --- |
-| Theme benchmark selection | +0.41% | Theme benchmark choices helped relative return. |
-| Theme benchmark sizing | +0.25% | Theme benchmark sizing helped relative return. |
-| Asset selection | +0.32% | Selected assets outperformed their reference mix. |
-| Asset sizing | +0.10% | Sizing within selected assets helped modestly. |
-| Residual / unexplained | +0.06% | Remaining reconciler; may include unmeasured timing, data, flow, or reconciliation effects. |
+| Theme benchmark selection | -0.12% | Calculated from policy theme benchmark return minus global benchmark return. |
+| Theme benchmark sizing | +0.37% | Calculated from actual-weight theme benchmark return minus policy theme benchmark return. |
+| Asset selection | +0.56% | Calculated from per-theme reference-weight asset returns. |
+| Asset sizing | +0.13% | Calculated from per-theme actual-weight asset returns. |
+| Residual / unexplained | +0.21% | Calculated reconciler after visible attribution effects. |
 
 ## Caveats
 
 - Synthetic local-demo returns and benchmark inputs only.
-- Timing attribution is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present.
+- Timing is unavailable because clean trade/holding history, flow treatment, and an approved timing method are not present.
 
 ## Advisor Note
 

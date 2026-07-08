@@ -41,11 +41,18 @@
       "reason": "Future variant; needs approved manager-level integrated detail shape before mockup generation.",
       "report_id": "integrated_attribution_detail_by_manager",
       "status": "Design soon"
+    },
+    {
+      "display_title": "Lens-Based Performance Attribution - Energy Security",
+      "reason": "Gated until Energy Security calculation inputs and calculated attribution outputs exist; the current calculated engine supports AI Adoption only.",
+      "report_id": "lens_based_performance_attribution_energy_security",
+      "status": "Gated for calculated attribution"
     }
   ],
-  "generated_at": "2026-07-07T00:00:00Z",
-  "generator_version": "attribution_report_views.v1",
+  "generated_at": "2026-07-08T00:00:00Z",
+  "generator_version": "attribution_report_views.calculated.v1",
   "purpose": "Product/readiness index for attribution reports deliberately not generated.",
   "schema_version": "attribution_report_gated_deferred_index.v1",
+  "source_calculated_attribution_engine_id": "synthetic_attribution_engine_v1",
   "synthetic_data": true
 }

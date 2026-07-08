@@ -1,5 +1,6 @@
 {
   "advisor_ui_wiring": "not_changed",
+  "calculated_outputs_source_of_truth": true,
   "gated_reports_not_generated": [
     "timing_attribution",
     "production_attribution_report",
@@ -7,27 +8,30 @@
     "probabilistic_scenario_range",
     "current_versus_proposed_attribution",
     "integrated_attribution_summary_by_manager",
-    "integrated_attribution_detail_by_manager"
+    "integrated_attribution_detail_by_manager",
+    "lens_based_performance_attribution_energy_security"
   ],
-  "generated_at": "2026-07-07T00:00:00Z",
+  "generated_at": "2026-07-08T00:00:00Z",
   "generated_report_wiring": "not_changed",
-  "generator_version": "attribution_report_views.v1",
+  "generator_version": "attribution_report_views.calculated.v1",
   "input_files": [
     "integrated_performance_attribution_summary_input.json",
     "integrated_performance_attribution_detail_input.json",
     "manager_attribution_summary_input.json",
-    "lens_based_performance_attribution_ai_adoption_input.json",
-    "lens_based_performance_attribution_energy_security_input.json"
+    "lens_based_performance_attribution_ai_adoption_input.json"
   ],
   "mockups_generated_from_views": true,
   "report_ids": [
     "integrated_performance_attribution_summary",
     "integrated_performance_attribution_detail",
     "manager_attribution_summary",
-    "lens_based_performance_attribution_ai_adoption",
-    "lens_based_performance_attribution_energy_security"
+    "lens_based_performance_attribution_ai_adoption"
   ],
-  "report_input_count": 5,
+  "report_input_count": 4,
   "schema_version": "attribution_report_input_summary.v1",
-  "synthetic_data": true
+  "source_calculated_attribution_engine_id": "synthetic_attribution_engine_v1",
+  "synthetic_data": true,
+  "unsupported_calculated_lens_reports_gated": [
+    "lens_based_performance_attribution_energy_security"
+  ]
 }

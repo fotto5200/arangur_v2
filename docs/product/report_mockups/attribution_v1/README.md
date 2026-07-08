@@ -1,7 +1,7 @@
 # Attribution v1 Report Mockups
 
-These product-review mockups are generated from attribution v1 view fixtures. They remain local synthetic-demo only and are not wired into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
-Visible attribution wording uses global benchmark, theme benchmark, asset selection/sizing, and residual / unexplained labels; proxy benchmarks appear only as synthetic-demo caveats.
+These product-review mockups are generated from attribution v1 view fixtures that consume the calculated synthetic attribution output pack. They remain local synthetic-demo only and are not wired into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
+AI Adoption is the selected calculated attribution lens. Timing remains unavailable, residual / unexplained stays separate, and production/client attribution remains gated.
 
 ## Generated Mockups
 
@@ -9,7 +9,6 @@ Visible attribution wording uses global benchmark, theme benchmark, asset select
 - [Integrated Performance Attribution Detail](integrated_performance_attribution_detail_mockup_v1.md)
 - [Manager Attribution Summary](manager_attribution_summary_mockup_v1.md)
 - [Lens-Based Performance Attribution - AI Adoption](lens_based_performance_attribution_ai_adoption_mockup_v1.md)
-- [Lens-Based Performance Attribution - Energy Security](lens_based_performance_attribution_energy_security_mockup_v1.md)
 
 ## Gated Or Deferred
 
@@ -20,3 +19,4 @@ Visible attribution wording uses global benchmark, theme benchmark, asset select
 - Current Versus Proposed Attribution (Gated): Gated on proposed allocation data, comparison methodology, and approval.
 - Integrated Attribution Summary - By Manager (Design soon): Future variant; keep separate from Manager Attribution Summary until manager-level integrated summary shape is approved.
 - Integrated Attribution Detail - By Manager (Design soon): Future variant; needs approved manager-level integrated detail shape before mockup generation.
+- Lens-Based Performance Attribution - Energy Security (Gated for calculated attribution): Gated until Energy Security calculation inputs and calculated attribution outputs exist; the current calculated engine supports AI Adoption only.

@@ -1,31 +1,30 @@
 # Integrated Performance Attribution Detail
 
-Theme benchmark rows show the measured bucket-level effects, with residual / unexplained completing the global benchmark-to-portfolio tie-out.
+Calculated AI Adoption theme rows explain +0.94% of relative return before the separate residual / unexplained reconciler.
 
 ## Key Metrics
 
-- **Global benchmark return:** 6.99%
-- **Theme row total:** +0.69%
-- **Actual portfolio return:** 8.15%
+- **Theme row total:** +0.94%
+- **Residual / unexplained:** +0.21%
+- **Relative return:** +1.15%
 
-## Theme Benchmark Detail
+## Calculated Theme Benchmark Detail
 
 | Theme Bucket | Weight | Portfolio Return | Theme Benchmark Return | Theme Benchmark Selection | Theme Benchmark Sizing | Asset Selection | Asset Sizing | Total Effect |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Core AI Infrastructure / Hardware | 21.03% | 11.70% | 10.30% | Not separately measured | Not separately measured | Not separately measured | Not separately measured | +0.29% |
-| AI Model / Platform Exposure | 17.18% | 10.40% | 9.20% | Not separately measured | Not separately measured | Not separately measured | Not separately measured | +0.21% |
-| Data Center / Power Bottleneck Exposure | 10.73% | 9.50% | 8.50% | Not separately measured | Not separately measured | Not separately measured | Not separately measured | +0.11% |
-| Neutral / Low Direct AI Exposure | 33.30% | 5.40% | 5.20% | Not separately measured | Not separately measured | Not separately measured | Not separately measured | +0.07% |
-| AI Downstream Productivity Beneficiary | 4.73% | 7.70% | 7.10% | Not separately measured | Not separately measured | Not separately measured | Not separately measured | +0.03% |
-| AI-Disrupted Incumbent | 2.52% | 3.40% | 3.80% | Not separately measured | Not separately measured | Not separately measured | Not separately measured | -0.01% |
-| Unclassified / Review Required | 10.50% | 4.00% | 4.00% | Not separately measured | Not separately measured | Not separately measured | Not separately measured | +0.00% |
-| Residual / unexplained | n/a | n/a | n/a | Not separately measured | Not separately measured | Not separately measured | Not separately measured | +0.46% |
+| Core AI Infrastructure / Hardware | 21.03% | 11.70% | 10.30% | +0.47% | +0.70% | +0.30% | -0.00% | +1.46% |
+| AI Model / Platform Exposure | 17.18% | 10.40% | 9.20% | +0.32% | +0.27% | +0.23% | -0.03% | +0.79% |
+| AI Downstream Productivity Beneficiary | 4.73% | 7.70% | 7.10% | +0.02% | -0.68% | +0.03% | -0.00% | -0.64% |
+| AI-Disrupted Incumbent | 2.52% | 3.40% | 3.80% | -0.46% | -0.45% | -0.01% | -0.00% | -0.91% |
+| Data Center / Power Bottleneck Exposure | 10.73% | 9.50% | 8.50% | +0.22% | -0.30% | +0.09% | +0.02% | +0.02% |
+| Neutral / Low Direct AI Exposure | 33.30% | 5.40% | 5.20% | -0.26% | +0.99% | -0.05% | +0.12% | +0.80% |
+| Unclassified / Review Required | 10.50% | 4.00% | 4.00% | -0.43% | -0.15% | -0.02% | +0.02% | -0.58% |
 
 ## Caveats
 
-- Synthetic local-demo returns and theme benchmarks only; some theme benchmarks are proxy benchmarks for demo purposes, not production recommendations.
-- Timing attribution is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present.
+- Synthetic local-demo returns and theme benchmarks only; some theme benchmarks are synthetic proxy benchmarks for demo purposes.
+- Timing is unavailable because clean trade/holding history, flow treatment, and an approved timing method are not present.
 
 ## Advisor Note
 
-Bucket-level selection and sizing components are not separately measured in this v1 synthetic input; use total effect and the residual tie-out for review.
+Use this detail view to review calculated theme benchmark and asset selection/sizing rows; the residual / unexplained amount completes the portfolio-level tie-out.

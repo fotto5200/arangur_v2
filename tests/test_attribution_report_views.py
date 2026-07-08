@@ -17,6 +17,7 @@ if str(SRC) not in sys.path:
 
 from arangur.analytics.attribution_report_views import (
     BUILD_NOW_REPORT_IDS,
+    CALCULATED_ARTIFACT_FILES,
     GATED_REPORTS,
     INPUT_FILENAME_BY_REPORT_ID,
     MOCKUP_FILENAME_BY_REPORT_ID,
@@ -35,6 +36,13 @@ PACK_DIR = (
     / "simulation"
     / "attribution_prerequisites"
     / "synthetic_attribution_prerequisite_pack_v1"
+)
+CALCULATED_DIR = (
+    ROOT
+    / "data"
+    / "simulation"
+    / "attribution_calculated"
+    / "synthetic_attribution_engine_v1"
 )
 
 FORBIDDEN_PLACEHOLDER_TERMS = (
@@ -94,6 +102,11 @@ REQUIRED_VIEW_FIELDS = {
     "benchmark_or_proxy_basis",
     "synthetic_data",
     "internal_source_refs",
+    "source_calculated_attribution_engine_id",
+    "source_calculated_output_artifacts",
+    "source_calculated_output_refs",
+    "calculated_from_lower_level_inputs",
+    "supplied_or_legacy_sections",
     "information_budget_applied",
     "gated_or_deferred",
 }
@@ -137,9 +150,10 @@ class AttributionReportViewsTests(unittest.TestCase):
         )
 
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertIn("Attribution report inputs: 5", result.stdout)
-        self.assertIn("Attribution report views: 5", result.stdout)
-        self.assertIn("Attribution Markdown mockups: 5", result.stdout)
+        self.assertIn("Attribution report inputs: 4", result.stdout)
+        self.assertIn("Attribution report views: 4", result.stdout)
+        self.assertIn("Attribution Markdown mockups: 4", result.stdout)
+        self.assertIn("Calculated source: synthetic_attribution_engine_v1", result.stdout)
         self.assertIn("Generated report ids:", result.stdout)
         self.assertIn("Gated reports not generated:", result.stdout)
         self.assertTrue(
@@ -175,9 +189,14 @@ class AttributionReportViewsTests(unittest.TestCase):
     def test_required_outputs_and_view_shape_exist(self) -> None:
         summary = _load_json(VIEW_DIR / "attribution_report_view_summary.json")
         self.assertEqual(set(BUILD_NOW_REPORT_IDS), set(summary["report_ids"]))
-        self.assertEqual(5, summary["report_view_count"])
-        self.assertEqual(5, summary["markdown_mockup_count"])
+        self.assertEqual(4, summary["report_view_count"])
+        self.assertEqual(4, summary["markdown_mockup_count"])
         self.assertTrue(summary["mockups_generated_from_views"])
+        self.assertEqual(
+            "synthetic_attribution_engine_v1",
+            summary["source_calculated_attribution_engine_id"],
+        )
+        self.assertTrue(summary["calculated_outputs_source_of_truth"])
 
         for report_id in BUILD_NOW_REPORT_IDS:
             with self.subTest(report_id=report_id):
@@ -191,7 +210,24 @@ class AttributionReportViewsTests(unittest.TestCase):
                 self.assertFalse(view["gated_or_deferred"])
                 self.assertEqual("unavailable", view["timing_status"])
                 self.assertIn("synthetic", view["benchmark_or_proxy_basis"].lower())
+                self.assertEqual(
+                    "synthetic_attribution_engine_v1",
+                    view["source_calculated_attribution_engine_id"],
+                )
+                self.assertTrue(view["calculated_from_lower_level_inputs"])
+                self.assertEqual([], view["supplied_or_legacy_sections"])
+                self.assertTrue(view["source_calculated_output_artifacts"])
                 self.assertTrue(view.get("compact_table") or view.get("contribution_bridge"))
+
+        self.assertFalse(
+            (INPUT_DIR / "lens_based_performance_attribution_energy_security_input.json").exists()
+        )
+        self.assertFalse(
+            (VIEW_DIR / "lens_based_performance_attribution_energy_security_view.json").exists()
+        )
+        self.assertFalse(
+            (MOCKUP_DIR / "lens_based_performance_attribution_energy_security_mockup_v1.md").exists()
+        )
 
     def test_markdown_mockups_are_generated_from_view_fixtures(self) -> None:
         for report_id in BUILD_NOW_REPORT_IDS:
@@ -237,10 +273,9 @@ class AttributionReportViewsTests(unittest.TestCase):
     def test_information_budgets_are_enforced(self) -> None:
         expected_max_rows = {
             "integrated_performance_attribution_summary": 5,
-            "integrated_performance_attribution_detail": 8,
+            "integrated_performance_attribution_detail": 7,
             "manager_attribution_summary": 6,
             "lens_based_performance_attribution_ai_adoption": 7,
-            "lens_based_performance_attribution_energy_security": 7,
         }
         for report_id, max_rows in expected_max_rows.items():
             view = _load_json(VIEW_DIR / VIEW_FILENAME_BY_REPORT_ID[report_id])
@@ -296,92 +331,177 @@ class AttributionReportViewsTests(unittest.TestCase):
                 self.assertFalse(view["table_validation"]["timing_contribution_included"])
                 self.assertNotIn("| timing |", row_text)
                 self.assertNotIn("not timing", row_text)
-                self.assertIn("residual / unexplained", row_text)
+                self.assertIn("residual / unexplained", _visible_text(view).lower())
                 self.assertIn("may include unmeasured timing", view["residual_policy"].lower())
 
-    def test_detail_bridge_ties_to_actual_return(self) -> None:
+    def test_summary_visible_effects_match_calculated_whole_portfolio_output(self) -> None:
+        whole = _load_calculated("whole_portfolio_summary")
+        view = _load_json(VIEW_DIR / "integrated_performance_attribution_summary_view.json")
+        table = view["contribution_bridge"]
+        effects = {row["Contribution"]: row["Effect"] for row in table["rows"]}
+
+        self.assertTrue(view["table_validation"]["uses_calculated_whole_portfolio_summary"])
+        self.assertTrue(view["table_validation"]["ties_to_relative_return"])
+        self.assertEqual(
+            _format_signed_percent(whole["theme_benchmark_selection_effect"]),
+            effects["Theme benchmark selection"],
+        )
+        self.assertEqual(
+            _format_signed_percent(whole["theme_benchmark_sizing_effect"]),
+            effects["Theme benchmark sizing"],
+        )
+        self.assertEqual(
+            _format_signed_percent(whole["asset_selection_effect"]),
+            effects["Asset selection"],
+        )
+        self.assertEqual(
+            _format_signed_percent(whole["asset_sizing_effect"]),
+            effects["Asset sizing"],
+        )
+        self.assertEqual(
+            _format_signed_percent(whole["residual_unexplained"]),
+            effects["Residual / unexplained"],
+        )
+        self.assertIn(
+            CALCULATED_ARTIFACT_FILES["whole_portfolio_summary"],
+            view["source_calculated_output_artifacts"],
+        )
+
+    def test_detail_rows_match_calculated_theme_benchmark_detail(self) -> None:
+        detail = _load_calculated("theme_benchmark_detail")
         view = _load_json(VIEW_DIR / "integrated_performance_attribution_detail_view.json")
         validation = view["table_validation"]
-        self.assertTrue(validation["ties_to_actual_return"])
-        self.assertAlmostEqual(
-            validation["actual_return"],
-            validation["global_benchmark_return"] + validation["effect_total"],
-            places=6,
+
+        self.assertTrue(validation["uses_calculated_theme_benchmark_detail"])
+        self.assertTrue(validation["component_effects_calculated"])
+        self.assertTrue(validation["detail_is_not_summary_bridge"])
+        self.assertTrue(validation["ties_to_summary_calculated_effects"])
+        self.assertEqual(len(detail["rows"]), validation["theme_bucket_row_count"])
+        self.assertEqual(
+            detail["totals"]["theme_benchmark_selection_effect"],
+            validation["theme_benchmark_selection_total"],
         )
-        self.assertAlmostEqual(
-            validation["actual_return"],
-            validation["recomputed_actual_return"],
-            places=6,
+        self.assertEqual(
+            detail["totals"]["asset_selection_effect"],
+            validation["asset_selection_total"],
         )
-        self.assertAlmostEqual(
-            validation["effect_total"],
-            validation["theme_bucket_total_effect"] + validation["residual_unexplained"],
-            places=6,
-        )
-        self.assertGreater(validation["theme_bucket_row_count"], 0)
-        self.assertTrue(validation["component_effects_not_separately_measured"])
+
         table = view["compact_table"]
-        self.assertEqual("Theme Benchmark Detail", table["title"])
+        self.assertEqual("Calculated Theme Benchmark Detail", table["title"])
         self.assertIn("Theme Bucket", table["columns"])
         self.assertIn("Theme Benchmark Return", table["columns"])
         self.assertIn("Theme Benchmark Selection", table["columns"])
+        self.assertIn("Theme Benchmark Sizing", table["columns"])
         self.assertIn("Asset Selection", table["columns"])
+        self.assertIn("Asset Sizing", table["columns"])
+        self.assertNotIn("Contribution", table["columns"])
         self.assertNotEqual(
-            "Contribution Summary",
+            "Calculated Contribution Summary",
             table["title"],
         )
+        self.assertNotIn("Not separately measured", _visible_text(view))
+
+        by_bucket = {row["bucket_display_name"]: row for row in detail["rows"]}
+        for row in table["rows"]:
+            with self.subTest(bucket=row["Theme Bucket"]):
+                source = by_bucket[row["Theme Bucket"]]
+                self.assertEqual(
+                    _format_signed_percent(source["theme_benchmark_selection_effect"]),
+                    row["Theme Benchmark Selection"],
+                )
+                self.assertEqual(
+                    _format_signed_percent(source["theme_benchmark_sizing_effect"]),
+                    row["Theme Benchmark Sizing"],
+                )
+                self.assertEqual(
+                    _format_signed_percent(source["asset_selection_effect"]),
+                    row["Asset Selection"],
+                )
+                self.assertEqual(
+                    _format_signed_percent(source["asset_sizing_effect"]),
+                    row["Asset Sizing"],
+                )
+                self.assertEqual(
+                    _format_signed_percent(source["total_effect"]),
+                    row["Total Effect"],
+                )
 
     def test_manager_summary_covers_all_managers_or_justifies_scope(self) -> None:
-        prerequisites = _load_json(PACK_DIR / "manager_attribution_prerequisites.json")
+        calculated = _load_calculated("manager_summary")
         view = _load_json(VIEW_DIR / "manager_attribution_summary_view.json")
         table = view["compact_table"]
-        expected_names = {row["display_name"] for row in prerequisites["managers"]}
+        expected_names = {row["display_name"] for row in calculated["managers"]}
         actual_names = {row["Manager"] for row in table["rows"]}
 
         self.assertEqual(expected_names, actual_names)
         self.assertEqual(6, view["table_validation"]["manager_rows_shown"])
         self.assertTrue(view["table_validation"]["all_current_managers_covered"])
+        self.assertTrue(view["table_validation"]["uses_calculated_manager_summary"])
+        self.assertTrue(view["table_validation"]["manager_tie_outs_reconcile"])
         self.assertTrue(view["table_validation"]["timing_column_removed"])
-        self.assertEqual("6 of 6", view["table_validation"]["manager_benchmark_coverage"])
         self.assertIn("All six", view["headline_sentence"])
         self.assertIn("Manager Benchmark Return", table["columns"])
+        self.assertIn("Residual / unexplained", table["columns"])
         self.assertNotIn("Proxy return", table["columns"])
         self.assertNotIn("Timing", table["columns"])
         self.assertIn("proxy benchmarks", "\n".join(view["caveats"]))
         self.assertIn("not production recommendations", "\n".join(view["caveats"]))
+        by_manager = {row["display_name"]: row for row in calculated["managers"]}
         for row in table["rows"]:
             with self.subTest(manager=row["Manager"]):
-                self.assertIn("Manager Benchmark Return", row)
-                self.assertIn("Theme benchmark", row["Largest Driver"])
+                source = by_manager[row["Manager"]]
+                self.assertEqual(
+                    _format_percent(source["manager_benchmark_return"]),
+                    row["Manager Benchmark Return"],
+                )
+                self.assertEqual(
+                    _format_signed_percent(source["relative_return"]),
+                    row["Relative Return"],
+                )
+                self.assertEqual(
+                    _format_signed_percent(source["residual_unexplained"]),
+                    row["Residual / unexplained"],
+                )
 
-    def test_lens_reports_cover_all_ai_and_energy_buckets(self) -> None:
-        returns = _load_json(PACK_DIR / "synthetic_period_returns.json")
-        cases = {
-            "ai_adoption": "lens_based_performance_attribution_ai_adoption",
-            "energy_security": "lens_based_performance_attribution_energy_security",
-        }
-        for lens_id, report_id in cases.items():
-            view = _load_json(VIEW_DIR / VIEW_FILENAME_BY_REPORT_ID[report_id])
-            table = view["compact_table"]
-            expected_buckets = {
-                row["bucket_display_name"]
-                for row in returns["lens_bucket_returns"]
-                if row["lens_id"] == lens_id
-            }
-            actual_buckets = {row["Theme Bucket"] for row in table["rows"]}
-            with self.subTest(report_id=report_id):
-                self.assertEqual(expected_buckets, actual_buckets)
-                self.assertEqual(7, len(table["rows"]))
-                self.assertTrue(view["table_validation"]["all_lens_buckets_included"])
-                self.assertTrue(view["table_validation"]["contains_neutral_bucket"])
-                self.assertTrue(view["table_validation"]["contains_review_bucket"])
-                self.assertIn("Theme Bucket", table["columns"])
-                self.assertIn("Portfolio Return", table["columns"])
-                self.assertIn("Theme Benchmark Return", table["columns"])
-                self.assertNotIn("Lens Bucket", table["columns"])
-                self.assertNotIn("Proxy return", table["columns"])
-                self.assertIn("proxy benchmarks", "\n".join(view["caveats"]))
-                self.assertIn("not production recommendations", "\n".join(view["caveats"]))
+    def test_lens_report_uses_calculated_ai_adoption_rows_and_gates_energy_security(self) -> None:
+        detail = _load_calculated("theme_benchmark_detail")
+        view = _load_json(
+            VIEW_DIR / "lens_based_performance_attribution_ai_adoption_view.json"
+        )
+        table = view["compact_table"]
+        expected_buckets = {row["bucket_display_name"] for row in detail["rows"]}
+        actual_buckets = {row["Theme Bucket"] for row in table["rows"]}
+
+        self.assertEqual(expected_buckets, actual_buckets)
+        self.assertEqual(7, len(table["rows"]))
+        self.assertTrue(view["table_validation"]["all_lens_buckets_included"])
+        self.assertTrue(view["table_validation"]["contains_neutral_bucket"])
+        self.assertTrue(view["table_validation"]["contains_review_bucket"])
+        self.assertTrue(view["table_validation"]["uses_calculated_theme_benchmark_detail"])
+        self.assertEqual(
+            ["Energy Security"],
+            view["table_validation"]["unsupported_calculated_lenses_gated"],
+        )
+        self.assertIn("Theme Bucket", table["columns"])
+        self.assertIn("Portfolio Return", table["columns"])
+        self.assertIn("Theme Benchmark Return", table["columns"])
+        self.assertIn("Total Effect", table["columns"])
+        self.assertNotIn("Lens Bucket", table["columns"])
+        self.assertNotIn("Proxy return", table["columns"])
+        self.assertIn("proxy benchmarks", "\n".join(view["caveats"]))
+        self.assertIn(
+            "Energy Security calculated attribution remains gated",
+            "\n".join(view["caveats"]),
+        )
+
+        gated_index = _load_json(VIEW_DIR / "gated_deferred_attribution_report_index.json")
+        energy_row = next(
+            row
+            for row in gated_index["gated_or_deferred_reports"]
+            if row["report_id"] == "lens_based_performance_attribution_energy_security"
+        )
+        self.assertEqual("Gated for calculated attribution", energy_row["status"])
+        self.assertIn("AI Adoption only", energy_row["reason"])
 
     def test_polished_attribution_terms_are_visible(self) -> None:
         summary = _load_json(
@@ -398,6 +518,7 @@ class AttributionReportViewsTests(unittest.TestCase):
         self.assertIn("Residual / unexplained", combined)
         self.assertNotIn("Strategy/lens-bucket", combined)
         self.assertNotIn("Proxy return", combined)
+        self.assertNotIn("Not separately measured", combined)
         self.assertNotIn("Remaining reconciler, not timing", combined)
 
     def test_source_module_has_no_external_api_or_secret_markers(self) -> None:
@@ -441,6 +562,20 @@ def _visible_text(view: dict[str, object]) -> str:
 
 def _load_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _load_calculated(name: str) -> dict:
+    return _load_json(CALCULATED_DIR / CALCULATED_ARTIFACT_FILES[name])
+
+
+def _format_percent(value: object) -> str:
+    return f"{float(value) * 100:.2f}%"
+
+
+def _format_signed_percent(value: object) -> str:
+    number = float(value)
+    sign = "+" if number >= 0 else "-"
+    return f"{sign}{abs(number) * 100:.2f}%"
 
 
 if __name__ == "__main__":

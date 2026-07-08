@@ -1,10 +1,11 @@
 {
-  "advisor_note": "This summary is not a replacement for future manager-level integrated attribution summary/detail variants.",
+  "advisor_note": "This summary uses calculated manager component effects; future manager integrated attribution variants remain separate.",
   "audience_tier": "Advisor review",
   "benchmark_or_proxy_basis": "Manager-specific synthetic benchmarks",
+  "calculated_from_lower_level_inputs": true,
   "caveats": [
     "Synthetic manager benchmarks may use proxy benchmarks for demo purposes; they are not production recommendations.",
-    "Timing attribution is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present."
+    "Timing is unavailable because clean trade/holding history, flow treatment, and an approved timing method are not present."
   ],
   "compact_table": {
     "columns": [
@@ -12,61 +13,68 @@
       "Return",
       "Manager Benchmark Return",
       "Relative Return",
-      "Largest Driver"
+      "Largest Driver",
+      "Residual / unexplained"
     ],
     "rows": [
       {
-        "Largest Driver": "Theme benchmark selection (+0.76%)",
+        "Largest Driver": "Theme benchmark sizing (+2.78%)",
         "Manager": "Manager A - Growth / AI Infrastructure",
         "Manager Benchmark Return": "9.50%",
         "Relative Return": "+2.10%",
+        "Residual / unexplained": "+0.68%",
         "Return": "11.60%"
       },
       {
-        "Largest Driver": "Theme benchmark selection (+0.29%)",
-        "Manager": "Manager D - Private Markets / Real Assets",
-        "Manager Benchmark Return": "6.30%",
-        "Relative Return": "+0.80%",
-        "Return": "7.10%"
-      },
-      {
-        "Largest Driver": "Theme benchmark selection (+0.29%)",
+        "Largest Driver": "Theme benchmark selection (-0.73%)",
         "Manager": "Manager B - Core Quality Equity",
         "Manager Benchmark Return": "7.60%",
         "Relative Return": "+0.80%",
+        "Residual / unexplained": "+0.55%",
         "Return": "8.40%"
       },
       {
-        "Largest Driver": "Theme benchmark selection (+0.50%)",
-        "Manager": "Manager F - Opportunistic Macro / Hedge",
-        "Manager Benchmark Return": "7.50%",
-        "Relative Return": "+1.40%",
-        "Return": "8.90%"
-      },
-      {
-        "Largest Driver": "Theme benchmark selection (+0.14%)",
+        "Largest Driver": "Theme benchmark selection (+2.57%)",
         "Manager": "Manager C - Income and Cash Generation",
         "Manager Benchmark Return": "4.30%",
         "Relative Return": "+0.40%",
+        "Residual / unexplained": "-0.56%",
         "Return": "4.70%"
       },
       {
-        "Largest Driver": "Theme benchmark selection (+0.11%)",
+        "Largest Driver": "Theme benchmark selection (+0.57%)",
+        "Manager": "Manager D - Private Markets / Real Assets",
+        "Manager Benchmark Return": "6.30%",
+        "Relative Return": "+0.80%",
+        "Residual / unexplained": "-0.05%",
+        "Return": "7.10%"
+      },
+      {
+        "Largest Driver": "Theme benchmark selection (+3.77%)",
         "Manager": "Manager E - Liquidity Reserve / Defensive Ballast",
         "Manager Benchmark Return": "3.10%",
         "Relative Return": "+0.30%",
+        "Residual / unexplained": "-2.00%",
         "Return": "3.40%"
+      },
+      {
+        "Largest Driver": "Residual / unexplained (+2.83%)",
+        "Manager": "Manager F - Opportunistic Macro / Hedge",
+        "Manager Benchmark Return": "7.50%",
+        "Relative Return": "+1.40%",
+        "Residual / unexplained": "+2.83%",
+        "Return": "8.90%"
       }
     ],
-    "title": "Manager Contribution Summary"
+    "title": "Calculated Manager Attribution Summary"
   },
   "contribution_bridge": null,
   "denominator_category_system": "Manager-specific benchmark relative returns",
   "display_title": "Manager Attribution Summary",
-  "exact_report_question": "Which managers added or lost value versus their manager benchmarks, and what kind of contribution drove it?",
+  "exact_report_question": "Which managers added or lost value versus their manager benchmarks, and what calculated driver mattered most?",
   "gated_or_deferred": false,
-  "generated_at": "2026-07-07T00:00:00Z",
-  "generator_version": "attribution_report_views.v1",
+  "generated_at": "2026-07-08T00:00:00Z",
+  "generator_version": "attribution_report_views.calculated.v1",
   "headline_metrics": [
     {
       "formatted_value": "6",
@@ -74,17 +82,17 @@
       "value": 6
     },
     {
-      "formatted_value": "+1.15%",
-      "label": "Total manager contribution",
-      "value": 0.011516
+      "formatted_value": "All pass",
+      "label": "Manager tie-outs",
+      "value": 6
     },
     {
-      "formatted_value": "6 of 6",
-      "label": "Manager benchmark coverage",
-      "value": 6
+      "formatted_value": "Unavailable",
+      "label": "Timing status",
+      "value": "unavailable"
     }
   ],
-  "headline_sentence": "All six current managers have synthetic manager benchmark returns, with contribution direction shown against each benchmark.",
+  "headline_sentence": "All six current managers tie to calculated manager attribution outputs, with timing unavailable.",
   "information_budget_applied": {
     "actual_advisor_notes": 1,
     "actual_caveats": 2,
@@ -104,10 +112,10 @@
     "rendering_mode": "table_first"
   },
   "internal_source_refs": [
-    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_attribution_prerequisite_pack_manifest.json",
-    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_period_returns.json",
-    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_attribution_weights_flows.json",
-    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/manager_attribution_prerequisites.json"
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/calculated_attribution_engine_manifest.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/manager_calculated_attribution_summary.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/calculated_attribution_quality_summary.json",
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/portfolio_benchmark_catalog.json"
   ],
   "master_question_family": "Performance / Plan",
   "period_end": "2026-06-30",
@@ -116,21 +124,34 @@
   "report_element_id": "manager_attribution_summary",
   "report_family": "Manager Attribution",
   "representation_level": "Manager versus manager-specific benchmark",
-  "residual_policy": "Residual / unexplained is the manager-level reconciler and may include unmeasured timing, data, flow, or reconciliation effects.",
+  "residual_policy": "Residual / unexplained is the manager-level reconciler after calculated manager effects.",
   "schema_version": "attribution_report_view.v1",
+  "source_calculated_attribution_engine_id": "synthetic_attribution_engine_v1",
+  "source_calculated_output_artifacts": [
+    "calculated_attribution_engine_manifest.json",
+    "manager_calculated_attribution_summary.json",
+    "calculated_attribution_quality_summary.json"
+  ],
+  "source_calculated_output_refs": [
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/calculated_attribution_engine_manifest.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/manager_calculated_attribution_summary.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/calculated_attribution_quality_summary.json"
+  ],
   "source_prerequisite_pack_refs": [
     "synthetic_attribution_prerequisite_pack_v1"
   ],
   "summary_detail_status": "Summary",
+  "supplied_or_legacy_sections": [],
   "synthetic_data": true,
   "table_validation": {
     "all_current_managers_covered": true,
-    "coverage_justification": "All six current managers are shown because the product budget allows six rows.",
+    "all_manager_benchmark_basis_types_explicit": true,
     "current_manager_count": 6,
-    "manager_benchmark_coverage": "6 of 6",
     "manager_rows_shown": 6,
+    "manager_tie_outs_reconcile": true,
     "residual_labeled_separately": true,
-    "timing_column_removed": true
+    "timing_column_removed": true,
+    "uses_calculated_manager_summary": true
   },
   "timing_status": "unavailable"
 }

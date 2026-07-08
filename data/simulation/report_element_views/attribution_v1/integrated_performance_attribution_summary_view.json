@@ -2,9 +2,10 @@
   "advisor_note": "Use this as a compact product-review shape; real/client attribution remains gated until production returns, benchmark maps, flows, and methodology are approved.",
   "audience_tier": "Client briefing and advisor review",
   "benchmark_or_proxy_basis": "Northstar Synthetic Policy Benchmark",
+  "calculated_from_lower_level_inputs": true,
   "caveats": [
     "Synthetic local-demo returns and benchmark inputs only.",
-    "Timing attribution is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present."
+    "Timing is unavailable because clean trade/holding history, flow treatment, and an approved timing method are not present."
   ],
   "compact_table": null,
   "contribution_bridge": {
@@ -16,38 +17,38 @@
     "rows": [
       {
         "Contribution": "Theme benchmark selection",
-        "Effect": "+0.41%",
-        "Interpretation": "Theme benchmark choices helped relative return."
+        "Effect": "-0.12%",
+        "Interpretation": "Calculated from policy theme benchmark return minus global benchmark return."
       },
       {
         "Contribution": "Theme benchmark sizing",
-        "Effect": "+0.25%",
-        "Interpretation": "Theme benchmark sizing helped relative return."
+        "Effect": "+0.37%",
+        "Interpretation": "Calculated from actual-weight theme benchmark return minus policy theme benchmark return."
       },
       {
         "Contribution": "Asset selection",
-        "Effect": "+0.32%",
-        "Interpretation": "Selected assets outperformed their reference mix."
+        "Effect": "+0.56%",
+        "Interpretation": "Calculated from per-theme reference-weight asset returns."
       },
       {
         "Contribution": "Asset sizing",
-        "Effect": "+0.10%",
-        "Interpretation": "Sizing within selected assets helped modestly."
+        "Effect": "+0.13%",
+        "Interpretation": "Calculated from per-theme actual-weight asset returns."
       },
       {
         "Contribution": "Residual / unexplained",
-        "Effect": "+0.06%",
-        "Interpretation": "Remaining reconciler; may include unmeasured timing, data, flow, or reconciliation effects."
+        "Effect": "+0.21%",
+        "Interpretation": "Calculated reconciler after visible attribution effects."
       }
     ],
-    "title": "Contribution Summary"
+    "title": "Calculated Contribution Summary"
   },
   "denominator_category_system": "Benchmark-relative contribution bridge",
   "display_title": "Integrated Performance Attribution Summary",
-  "exact_report_question": "Did the portfolio add value versus the global benchmark, and what were the largest visible decision effects?",
+  "exact_report_question": "Did the portfolio add value versus the global benchmark, and what were the largest calculated effects?",
   "gated_or_deferred": false,
-  "generated_at": "2026-07-07T00:00:00Z",
-  "generator_version": "attribution_report_views.v1",
+  "generated_at": "2026-07-08T00:00:00Z",
+  "generator_version": "attribution_report_views.calculated.v1",
   "headline_metrics": [
     {
       "formatted_value": "8.15%",
@@ -65,7 +66,7 @@
       "value": 0.011516
     }
   ],
-  "headline_sentence": "Portfolio return exceeded the global benchmark by +1.15%, with theme benchmark selection the largest visible driver.",
+  "headline_sentence": "Portfolio return exceeded the global benchmark by +1.15%, with asset selection the largest calculated driver.",
   "information_budget_applied": {
     "actual_advisor_notes": 1,
     "actual_caveats": 2,
@@ -84,11 +85,10 @@
     "rendering_mode": "summary_first"
   },
   "internal_source_refs": [
-    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_attribution_prerequisite_pack_manifest.json",
-    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_period_returns.json",
-    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_attribution_weights_flows.json",
-    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/portfolio_benchmark_catalog.json",
-    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/integrated_attribution_decomposition_inputs.json"
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/calculated_attribution_engine_manifest.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/whole_portfolio_calculated_attribution_summary.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/calculated_attribution_quality_summary.json",
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/portfolio_benchmark_catalog.json"
   ],
   "master_question_family": "Performance / Plan",
   "period_end": "2026-06-30",
@@ -97,20 +97,33 @@
   "report_element_id": "integrated_performance_attribution_summary",
   "report_family": "Integrated Performance Attribution",
   "representation_level": "Whole portfolio versus benchmark",
-  "residual_policy": "Residual / unexplained is the remaining reconciler and may include unmeasured timing, data, flow, or reconciliation effects.",
+  "residual_policy": "Residual / unexplained is the calculated reconciler after visible attribution effects and may include unmeasured timing, data, flow, or reconciliation effects.",
   "schema_version": "attribution_report_view.v1",
+  "source_calculated_attribution_engine_id": "synthetic_attribution_engine_v1",
+  "source_calculated_output_artifacts": [
+    "calculated_attribution_engine_manifest.json",
+    "whole_portfolio_calculated_attribution_summary.json",
+    "calculated_attribution_quality_summary.json"
+  ],
+  "source_calculated_output_refs": [
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/calculated_attribution_engine_manifest.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/whole_portfolio_calculated_attribution_summary.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/calculated_attribution_quality_summary.json"
+  ],
   "source_prerequisite_pack_refs": [
     "synthetic_attribution_prerequisite_pack_v1"
   ],
   "summary_detail_status": "Summary",
+  "supplied_or_legacy_sections": [],
   "synthetic_data": true,
   "table_validation": {
-    "active_return": 0.011516,
     "bridge_row_count": 5,
     "effects_sum": 0.011516,
+    "relative_return": 0.011516,
     "residual_label": "Residual / unexplained",
-    "ties_to_active_return": true,
-    "timing_contribution_included": false
+    "ties_to_relative_return": true,
+    "timing_contribution_included": false,
+    "uses_calculated_whole_portfolio_summary": true
   },
   "timing_status": "unavailable"
 }

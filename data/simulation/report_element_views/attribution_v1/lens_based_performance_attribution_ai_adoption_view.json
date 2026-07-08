@@ -1,10 +1,11 @@
 {
-  "advisor_note": "Read this as a one-lens theme performance view; do not compare these rows to scenario or proposed-allocation results.",
+  "advisor_note": "Read this as a calculated one-lens theme performance view; timing remains unavailable.",
   "audience_tier": "Advisor review",
   "benchmark_or_proxy_basis": "Synthetic AI Adoption theme benchmark set",
+  "calculated_from_lower_level_inputs": true,
   "caveats": [
     "Some synthetic theme benchmarks are proxy benchmarks for demo purposes; they are not production recommendations.",
-    "Bucket weights use the complete synthetic lens assignment pack, including neutral and review buckets."
+    "Energy Security calculated attribution remains gated until a calculated output pack exists for that lens."
   ],
   "compact_table": {
     "columns": [
@@ -12,93 +13,93 @@
       "Weight",
       "Portfolio Return",
       "Theme Benchmark Return",
-      "Relative Contribution"
+      "Total Effect"
     ],
     "rows": [
       {
         "Portfolio Return": "11.70%",
-        "Relative Contribution": "+0.29%",
         "Theme Benchmark Return": "10.30%",
         "Theme Bucket": "Core AI Infrastructure / Hardware",
+        "Total Effect": "+1.46%",
         "Weight": "21.03%"
       },
       {
         "Portfolio Return": "10.40%",
-        "Relative Contribution": "+0.21%",
         "Theme Benchmark Return": "9.20%",
         "Theme Bucket": "AI Model / Platform Exposure",
+        "Total Effect": "+0.79%",
         "Weight": "17.18%"
       },
       {
-        "Portfolio Return": "9.50%",
-        "Relative Contribution": "+0.11%",
-        "Theme Benchmark Return": "8.50%",
-        "Theme Bucket": "Data Center / Power Bottleneck Exposure",
-        "Weight": "10.73%"
-      },
-      {
-        "Portfolio Return": "5.40%",
-        "Relative Contribution": "+0.07%",
-        "Theme Benchmark Return": "5.20%",
-        "Theme Bucket": "Neutral / Low Direct AI Exposure",
-        "Weight": "33.30%"
-      },
-      {
         "Portfolio Return": "7.70%",
-        "Relative Contribution": "+0.03%",
         "Theme Benchmark Return": "7.10%",
         "Theme Bucket": "AI Downstream Productivity Beneficiary",
+        "Total Effect": "-0.64%",
         "Weight": "4.73%"
       },
       {
         "Portfolio Return": "3.40%",
-        "Relative Contribution": "-0.01%",
         "Theme Benchmark Return": "3.80%",
         "Theme Bucket": "AI-Disrupted Incumbent",
+        "Total Effect": "-0.91%",
         "Weight": "2.52%"
       },
       {
+        "Portfolio Return": "9.50%",
+        "Theme Benchmark Return": "8.50%",
+        "Theme Bucket": "Data Center / Power Bottleneck Exposure",
+        "Total Effect": "+0.02%",
+        "Weight": "10.73%"
+      },
+      {
+        "Portfolio Return": "5.40%",
+        "Theme Benchmark Return": "5.20%",
+        "Theme Bucket": "Neutral / Low Direct AI Exposure",
+        "Total Effect": "+0.80%",
+        "Weight": "33.30%"
+      },
+      {
         "Portfolio Return": "4.00%",
-        "Relative Contribution": "+0.00%",
         "Theme Benchmark Return": "4.00%",
         "Theme Bucket": "Unclassified / Review Required",
+        "Total Effect": "-0.58%",
         "Weight": "10.50%"
       }
     ],
-    "title": "AI Adoption Theme Bucket Performance"
+    "title": "AI Adoption Calculated Theme Performance"
   },
   "contribution_bridge": null,
   "denominator_category_system": "AI Adoption theme buckets versus synthetic theme benchmarks",
   "display_title": "Lens-Based Performance Attribution - AI Adoption",
   "exact_report_question": "Which AI Adoption theme buckets explain relative performance versus their theme benchmarks?",
   "gated_or_deferred": false,
-  "generated_at": "2026-07-07T00:00:00Z",
-  "generator_version": "attribution_report_views.v1",
+  "generated_at": "2026-07-08T00:00:00Z",
+  "generator_version": "attribution_report_views.calculated.v1",
   "headline_metrics": [
     {
-      "formatted_value": "+0.69%",
-      "label": "Net relative contribution",
-      "value": 0.006929
+      "formatted_value": "+0.94%",
+      "label": "Net calculated theme effect",
+      "value": 0.009418
     },
     {
-      "formatted_value": "Core AI Infrastructure / Hardware (+0.29%)",
+      "formatted_value": "Core AI Infrastructure / Hardware (+1.46%)",
       "label": "Largest positive theme bucket",
-      "value": 0.002945
+      "value": 0.014621
     },
     {
-      "formatted_value": "AI-Disrupted Incumbent (-0.01%)",
+      "formatted_value": "AI-Disrupted Incumbent (-0.91%)",
       "label": "Largest negative theme bucket",
-      "value": -0.000101
+      "value": -0.009134
     }
   ],
-  "headline_sentence": "Under the AI Adoption lens, Core AI Infrastructure / Hardware is the largest positive relative contributor versus its theme benchmark.",
+  "headline_sentence": "Under the AI Adoption lens, Core AI Infrastructure / Hardware is the largest positive calculated theme contributor versus its theme benchmark.",
   "information_budget_applied": {
     "actual_advisor_notes": 1,
     "actual_caveats": 2,
     "actual_headline_metrics": 3,
     "actual_headline_sentences": 1,
     "actual_visible_table_rows": 7,
-    "exception_reason": "Lens-Based Performance Attribution shows every theme bucket in the selected lens.",
+    "exception_reason": "Lens-Based Performance Attribution shows every calculated theme bucket.",
     "max_advisor_notes": 1,
     "max_caveats": 2,
     "max_headline_metrics": 3,
@@ -111,10 +112,10 @@
     "rendering_mode": "table_first"
   },
   "internal_source_refs": [
-    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_attribution_prerequisite_pack_manifest.json",
-    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_period_returns.json",
-    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_attribution_weights_flows.json",
-    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/lens_bucket_benchmark_proxy_map.json"
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/calculated_attribution_engine_manifest.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/theme_benchmark_calculated_detail.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/calculated_attribution_quality_summary.json",
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/portfolio_benchmark_catalog.json"
   ],
   "master_question_family": "Performance / Plan",
   "period_end": "2026-06-30",
@@ -123,21 +124,37 @@
   "report_element_id": "lens_based_performance_attribution_ai_adoption",
   "report_family": "Lens-Based Performance Attribution",
   "representation_level": "AI Adoption theme bucket",
-  "residual_policy": "No residual row is shown in the theme-bucket summary; timing attribution is not separately measured.",
+  "residual_policy": "No residual row is shown in the calculated theme-bucket summary; portfolio residual remains in the integrated summary/detail reports.",
   "schema_version": "attribution_report_view.v1",
+  "source_calculated_attribution_engine_id": "synthetic_attribution_engine_v1",
+  "source_calculated_output_artifacts": [
+    "calculated_attribution_engine_manifest.json",
+    "theme_benchmark_calculated_detail.json",
+    "calculated_attribution_quality_summary.json"
+  ],
+  "source_calculated_output_refs": [
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/calculated_attribution_engine_manifest.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/theme_benchmark_calculated_detail.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/calculated_attribution_quality_summary.json"
+  ],
   "source_prerequisite_pack_refs": [
     "synthetic_attribution_prerequisite_pack_v1"
   ],
   "summary_detail_status": "Summary",
+  "supplied_or_legacy_sections": [],
   "synthetic_data": true,
   "table_validation": {
     "all_lens_buckets_included": true,
     "contains_neutral_bucket": true,
     "contains_review_bucket": true,
     "lens_bucket_count": 7,
-    "lens_id": "ai_adoption",
-    "relative_contribution_total": 0.006929,
-    "timing_contribution_included": false
+    "relative_contribution_total": 0.009418,
+    "selected_calculated_lens": "AI Adoption",
+    "timing_contribution_included": false,
+    "unsupported_calculated_lenses_gated": [
+      "Energy Security"
+    ],
+    "uses_calculated_theme_benchmark_detail": true
   },
   "timing_status": "unavailable"
 }

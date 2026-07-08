@@ -1,10 +1,11 @@
 {
-  "advisor_note": "Bucket-level selection and sizing components are not separately measured in this v1 synthetic input; use total effect and the residual tie-out for review.",
+  "advisor_note": "Use this detail view to review calculated theme benchmark and asset selection/sizing rows; the residual / unexplained amount completes the portfolio-level tie-out.",
   "audience_tier": "Advisor review",
   "benchmark_or_proxy_basis": "Northstar Synthetic Policy Benchmark",
+  "calculated_from_lower_level_inputs": true,
   "caveats": [
-    "Synthetic local-demo returns and theme benchmarks only; some theme benchmarks are proxy benchmarks for demo purposes, not production recommendations.",
-    "Timing attribution is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present."
+    "Synthetic local-demo returns and theme benchmarks only; some theme benchmarks are synthetic proxy benchmarks for demo purposes.",
+    "Timing is unavailable because clean trade/holding history, flow treatment, and an approved timing method are not present."
   ],
   "compact_table": {
     "columns": [
@@ -20,132 +21,122 @@
     ],
     "rows": [
       {
-        "Asset Selection": "Not separately measured",
-        "Asset Sizing": "Not separately measured",
+        "Asset Selection": "+0.30%",
+        "Asset Sizing": "-0.00%",
         "Portfolio Return": "11.70%",
         "Theme Benchmark Return": "10.30%",
-        "Theme Benchmark Selection": "Not separately measured",
-        "Theme Benchmark Sizing": "Not separately measured",
+        "Theme Benchmark Selection": "+0.47%",
+        "Theme Benchmark Sizing": "+0.70%",
         "Theme Bucket": "Core AI Infrastructure / Hardware",
-        "Total Effect": "+0.29%",
+        "Total Effect": "+1.46%",
         "Weight": "21.03%"
       },
       {
-        "Asset Selection": "Not separately measured",
-        "Asset Sizing": "Not separately measured",
+        "Asset Selection": "+0.23%",
+        "Asset Sizing": "-0.03%",
         "Portfolio Return": "10.40%",
         "Theme Benchmark Return": "9.20%",
-        "Theme Benchmark Selection": "Not separately measured",
-        "Theme Benchmark Sizing": "Not separately measured",
+        "Theme Benchmark Selection": "+0.32%",
+        "Theme Benchmark Sizing": "+0.27%",
         "Theme Bucket": "AI Model / Platform Exposure",
-        "Total Effect": "+0.21%",
+        "Total Effect": "+0.79%",
         "Weight": "17.18%"
       },
       {
-        "Asset Selection": "Not separately measured",
-        "Asset Sizing": "Not separately measured",
-        "Portfolio Return": "9.50%",
-        "Theme Benchmark Return": "8.50%",
-        "Theme Benchmark Selection": "Not separately measured",
-        "Theme Benchmark Sizing": "Not separately measured",
-        "Theme Bucket": "Data Center / Power Bottleneck Exposure",
-        "Total Effect": "+0.11%",
-        "Weight": "10.73%"
-      },
-      {
-        "Asset Selection": "Not separately measured",
-        "Asset Sizing": "Not separately measured",
-        "Portfolio Return": "5.40%",
-        "Theme Benchmark Return": "5.20%",
-        "Theme Benchmark Selection": "Not separately measured",
-        "Theme Benchmark Sizing": "Not separately measured",
-        "Theme Bucket": "Neutral / Low Direct AI Exposure",
-        "Total Effect": "+0.07%",
-        "Weight": "33.30%"
-      },
-      {
-        "Asset Selection": "Not separately measured",
-        "Asset Sizing": "Not separately measured",
+        "Asset Selection": "+0.03%",
+        "Asset Sizing": "-0.00%",
         "Portfolio Return": "7.70%",
         "Theme Benchmark Return": "7.10%",
-        "Theme Benchmark Selection": "Not separately measured",
-        "Theme Benchmark Sizing": "Not separately measured",
+        "Theme Benchmark Selection": "+0.02%",
+        "Theme Benchmark Sizing": "-0.68%",
         "Theme Bucket": "AI Downstream Productivity Beneficiary",
-        "Total Effect": "+0.03%",
+        "Total Effect": "-0.64%",
         "Weight": "4.73%"
       },
       {
-        "Asset Selection": "Not separately measured",
-        "Asset Sizing": "Not separately measured",
+        "Asset Selection": "-0.01%",
+        "Asset Sizing": "-0.00%",
         "Portfolio Return": "3.40%",
         "Theme Benchmark Return": "3.80%",
-        "Theme Benchmark Selection": "Not separately measured",
-        "Theme Benchmark Sizing": "Not separately measured",
+        "Theme Benchmark Selection": "-0.46%",
+        "Theme Benchmark Sizing": "-0.45%",
         "Theme Bucket": "AI-Disrupted Incumbent",
-        "Total Effect": "-0.01%",
+        "Total Effect": "-0.91%",
         "Weight": "2.52%"
       },
       {
-        "Asset Selection": "Not separately measured",
-        "Asset Sizing": "Not separately measured",
-        "Portfolio Return": "4.00%",
-        "Theme Benchmark Return": "4.00%",
-        "Theme Benchmark Selection": "Not separately measured",
-        "Theme Benchmark Sizing": "Not separately measured",
-        "Theme Bucket": "Unclassified / Review Required",
-        "Total Effect": "+0.00%",
-        "Weight": "10.50%"
+        "Asset Selection": "+0.09%",
+        "Asset Sizing": "+0.02%",
+        "Portfolio Return": "9.50%",
+        "Theme Benchmark Return": "8.50%",
+        "Theme Benchmark Selection": "+0.22%",
+        "Theme Benchmark Sizing": "-0.30%",
+        "Theme Bucket": "Data Center / Power Bottleneck Exposure",
+        "Total Effect": "+0.02%",
+        "Weight": "10.73%"
       },
       {
-        "Asset Selection": "Not separately measured",
-        "Asset Sizing": "Not separately measured",
-        "Portfolio Return": "n/a",
-        "Theme Benchmark Return": "n/a",
-        "Theme Benchmark Selection": "Not separately measured",
-        "Theme Benchmark Sizing": "Not separately measured",
-        "Theme Bucket": "Residual / unexplained",
-        "Total Effect": "+0.46%",
-        "Weight": "n/a"
+        "Asset Selection": "-0.05%",
+        "Asset Sizing": "+0.12%",
+        "Portfolio Return": "5.40%",
+        "Theme Benchmark Return": "5.20%",
+        "Theme Benchmark Selection": "-0.26%",
+        "Theme Benchmark Sizing": "+0.99%",
+        "Theme Bucket": "Neutral / Low Direct AI Exposure",
+        "Total Effect": "+0.80%",
+        "Weight": "33.30%"
+      },
+      {
+        "Asset Selection": "-0.02%",
+        "Asset Sizing": "+0.02%",
+        "Portfolio Return": "4.00%",
+        "Theme Benchmark Return": "4.00%",
+        "Theme Benchmark Selection": "-0.43%",
+        "Theme Benchmark Sizing": "-0.15%",
+        "Theme Bucket": "Unclassified / Review Required",
+        "Total Effect": "-0.58%",
+        "Weight": "10.50%"
       }
     ],
-    "title": "Theme Benchmark Detail"
+    "title": "Calculated Theme Benchmark Detail"
   },
   "contribution_bridge": null,
-  "denominator_category_system": "Theme benchmark bucket total effects plus residual tie-out",
+  "denominator_category_system": "AI Adoption theme benchmark calculated rows",
   "display_title": "Integrated Performance Attribution Detail",
-  "exact_report_question": "How do theme benchmarks / lens buckets explain the synthetic benchmark-to-portfolio attribution bridge?",
+  "exact_report_question": "How do calculated theme benchmark and asset effects explain the synthetic benchmark-to-portfolio bridge?",
   "gated_or_deferred": false,
-  "generated_at": "2026-07-07T00:00:00Z",
-  "generator_version": "attribution_report_views.v1",
+  "generated_at": "2026-07-08T00:00:00Z",
+  "generator_version": "attribution_report_views.calculated.v1",
   "headline_metrics": [
     {
-      "formatted_value": "6.99%",
-      "label": "Global benchmark return",
-      "value": 0.06994
-    },
-    {
-      "formatted_value": "+0.69%",
+      "formatted_value": "+0.94%",
       "label": "Theme row total",
-      "value": 0.006929
+      "value": 0.009418
     },
     {
-      "formatted_value": "8.15%",
-      "label": "Actual portfolio return",
-      "value": 0.081456
+      "formatted_value": "+0.21%",
+      "label": "Residual / unexplained",
+      "value": 0.002098
+    },
+    {
+      "formatted_value": "+1.15%",
+      "label": "Relative return",
+      "value": 0.011516
     }
   ],
-  "headline_sentence": "Theme benchmark rows show the measured bucket-level effects, with residual / unexplained completing the global benchmark-to-portfolio tie-out.",
+  "headline_sentence": "Calculated AI Adoption theme rows explain +0.94% of relative return before the separate residual / unexplained reconciler.",
   "information_budget_applied": {
     "actual_advisor_notes": 1,
     "actual_caveats": 2,
     "actual_headline_metrics": 3,
     "actual_headline_sentences": 1,
-    "actual_visible_table_rows": 8,
+    "actual_visible_table_rows": 7,
+    "exception_reason": "Calculated detail shows every AI Adoption theme bucket.",
     "max_advisor_notes": 1,
     "max_caveats": 2,
     "max_headline_metrics": 3,
     "max_headline_sentences": 1,
-    "max_visible_table_rows": 8,
+    "max_visible_table_rows": 7,
     "no_hidden_expansion_placeholders": true,
     "no_internal_jargon_in_visible_content": true,
     "no_raw_ids_in_visible_content": true,
@@ -153,11 +144,12 @@
     "rendering_mode": "detail_first"
   },
   "internal_source_refs": [
-    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_attribution_prerequisite_pack_manifest.json",
-    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_period_returns.json",
-    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/synthetic_attribution_weights_flows.json",
-    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/portfolio_benchmark_catalog.json",
-    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/integrated_attribution_decomposition_inputs.json"
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/calculated_attribution_engine_manifest.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/whole_portfolio_calculated_attribution_summary.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/theme_benchmark_calculated_detail.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/theme_asset_calculated_attribution_detail.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/calculated_attribution_quality_summary.json",
+    "data/simulation/attribution_prerequisites/synthetic_attribution_prerequisite_pack_v1/portfolio_benchmark_catalog.json"
   ],
   "master_question_family": "Performance / Plan",
   "period_end": "2026-06-30",
@@ -166,27 +158,45 @@
   "report_element_id": "integrated_performance_attribution_detail",
   "report_family": "Integrated Performance Attribution",
   "representation_level": "Whole portfolio versus benchmark",
-  "residual_policy": "Residual / unexplained is the remaining reconciler and may include unmeasured timing, data, flow, or reconciliation effects.",
+  "residual_policy": "Residual / unexplained is the calculated reconciler after visible attribution effects and may include unmeasured timing, data, flow, or reconciliation effects.",
   "schema_version": "attribution_report_view.v1",
+  "source_calculated_attribution_engine_id": "synthetic_attribution_engine_v1",
+  "source_calculated_output_artifacts": [
+    "calculated_attribution_engine_manifest.json",
+    "whole_portfolio_calculated_attribution_summary.json",
+    "theme_benchmark_calculated_detail.json",
+    "theme_asset_calculated_attribution_detail.json",
+    "calculated_attribution_quality_summary.json"
+  ],
+  "source_calculated_output_refs": [
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/calculated_attribution_engine_manifest.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/whole_portfolio_calculated_attribution_summary.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/theme_benchmark_calculated_detail.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/theme_asset_calculated_attribution_detail.json",
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/calculated_attribution_quality_summary.json"
+  ],
   "source_prerequisite_pack_refs": [
     "synthetic_attribution_prerequisite_pack_v1"
   ],
   "summary_detail_status": "Detail",
+  "supplied_or_legacy_sections": [],
   "synthetic_data": true,
   "table_validation": {
-    "actual_return": 0.081456,
-    "bridge_row_count": 8,
-    "component_effects_not_separately_measured": true,
-    "effect_total": 0.011516,
-    "global_benchmark_return": 0.06994,
-    "recomputed_actual_return": 0.081456,
+    "asset_selection_total": 0.005601,
+    "asset_sizing_total": 0.001329,
+    "component_effects_calculated": true,
+    "detail_is_not_summary_bridge": true,
+    "relative_return": 0.011516,
     "residual_label": "Residual / unexplained",
-    "residual_unexplained": 0.004587,
+    "residual_unexplained": 0.002098,
     "theme_benchmark_lens": "AI Adoption",
+    "theme_benchmark_selection_total": -0.001225,
+    "theme_benchmark_sizing_total": 0.003713,
     "theme_bucket_row_count": 7,
-    "theme_bucket_total_effect": 0.006929,
-    "ties_to_actual_return": true,
-    "timing_contribution_included": false
+    "theme_row_total_effect": 0.009418,
+    "ties_to_summary_calculated_effects": true,
+    "timing_contribution_included": false,
+    "uses_calculated_theme_benchmark_detail": true
   },
   "timing_status": "unavailable"
 }
