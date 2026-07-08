@@ -35,6 +35,7 @@
   "table_validation": {
     "base_value": 44858991.4,
     "category_system": "representation_status",
+    "future_manager_level_representation_view_possible": true,
     "review_required_value": 5825000.0,
     "row_share_total": 1.0,
     "row_value_total": 44858991.4

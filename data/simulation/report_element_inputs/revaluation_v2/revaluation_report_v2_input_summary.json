@@ -19,7 +19,8 @@
     "concentration_by_manager_sleeve_input.json",
     "current_portfolio_scenario_downside_input.json",
     "manager_role_summary_input.json",
-    "cash_flow_support_summary_input.json",
+    "cash_flow_delivered_input.json",
+    "cash_flow_support_outlook_input.json",
     "full_lens_exposure_ai_adoption_input.json",
     "full_lens_exposure_energy_security_input.json",
     "manager_by_lens_exposure_ai_adoption_input.json",
@@ -35,13 +36,14 @@
     "concentration_by_manager_sleeve",
     "current_portfolio_scenario_downside",
     "manager_role_summary",
-    "cash_flow_support_summary",
+    "cash_flow_delivered",
+    "cash_flow_support_outlook",
     "full_lens_exposure_ai_adoption",
     "full_lens_exposure_energy_security",
     "manager_by_lens_exposure_ai_adoption",
     "manager_by_lens_exposure_energy_security"
   ],
-  "report_input_count": 13,
+  "report_input_count": 14,
   "schema_version": "revaluation_report_input_summary.v2",
   "synthetic_data": true
 }

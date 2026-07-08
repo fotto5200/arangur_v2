@@ -1,4 +1,4 @@
-# Cash-Flow Support Summary
+# Cash-Flow Support Outlook
 
 Projected cash generation exceeds the stated annual need by $115K in the synthetic local demo.
 
@@ -8,21 +8,20 @@ Projected cash generation exceeds the stated annual need by $115K in the synthet
 - **Projected generation:** $1.3M
 - **Projected surplus:** $115K
 
-## Cash-Flow Support Inputs
+## Cash-Flow Support Outlook
 
-| Measure | Amount |
+| Measure | Amount / Label |
 | --- | --- |
 | Stated annual cash need | $1.2M |
-| Last-period cash generated | $1.4M |
-| Last-period cash paid out | $1.1M |
 | Projected next-period generation | $1.3M |
 | Projected surplus versus need | $115K |
+| Projection period | 12 months ended 2027-06-30 |
 
 ## Caveats
 
-- Synthetic cash history is explicit enough for a whole-portfolio demo summary, but it is not a reliable manager/sleeve cash-flow source.
 - Projection is a deterministic synthetic demo input, not a production forecast.
+- Do not infer support from cash balances alone; this outlook uses the stated need and projected generation inputs.
 
 ## Advisor Note
 
-Funding policy: use income and distributions first, then the liquidity reserve buffer, with advisor review rebalancing if needed.
+Funding policy: use income and distributions first, then liquidity reserve buffer, with advisor review rebalancing if needed.

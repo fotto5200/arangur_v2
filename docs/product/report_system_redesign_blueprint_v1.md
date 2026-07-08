@@ -68,7 +68,8 @@ This family covers thesis/lens positioning, current-versus-proposed portfolio vi
 - Integrated Performance Attribution Summary
 - Integrated Performance Attribution Detail
 - Performance Attribution by Lens
-- Cash-Flow Support Summary
+- Cash Flow Delivered
+- Cash-Flow Support Outlook
 - Cash Flow by Manager/Sleeve
 - Goal / Liability Matching
 
@@ -98,7 +99,7 @@ This family covers thesis/lens positioning, current-versus-proposed portfolio vi
 | --- | --- | --- | --- | --- |
 | Portfolio Status | Keep, revise representation language | Useful as a high-level anchor, but must not imply every underlying position is fully known | Show current state and completeness of view; distinguish direct holdings, fund/NAV positions, manager-level holdings, look-through holdings, and review-required exposure | Build now in revised mockup spec |
 | Aggregated Asset Allocation | Keep | Broad allocation is useful, but manager detail should not be stuffed into this table | Keep broad asset-type buckets, small row count, and Other grouping; add a separate Allocation by Manager report | Build now for asset allocation; design soon for manager allocation |
-| Cash-Flow Support Readiness | Replace as client/advisor report | "Cannot show because missing inputs" is readiness, not a report | Treat readiness as internal/advisor setup. Create Cash-Flow Support Summary only when stated cash need and cash-flow evidence exist | Defer report until inputs exist; keep readiness gate internal |
+| Cash-Flow Support Readiness | Replace as client/advisor report | "Cannot show because missing inputs" is readiness, not a report | Treat readiness as internal/advisor setup. Split report content into Cash Flow Delivered for prior-period generated/paid-out cash and Cash-Flow Support Outlook for stated-need support | Build only when matching cash-flow prerequisites exist; keep real/client readiness gated |
 | Concentration Review | Redesign | Current table mixes asset type, theme/manager/sleeve, review-required status, and held-at-mark status in one Area column | Use one grouping system at a time: asset type, manager/sleeve, geography, selected lens, or selected theme. Move review/mark/confidence rows to Coverage and Confidence or Opaque Exposure reports | Build revised design now; implement later |
 | Coverage and Confidence Warning | Keep | Useful and conceptually coherent | Show coverage summary, review-required count/value, held-at-mark exposure, approved policy exposure, and one or two practical caveats. Advisor-review default; client-facing only when material | Build now / advisor first |
 | Manager Role Summary | Redesign as manager-centered family | Current role field repeats manager label and does not explain mandate or expression | Portfolio-level Manager Role Summary, Single-Manager Detail, and Manager-by-Lens Exposure. Show intended role, portfolio share, actual exposure, larger downside/key risk, and mandate leakage warning when supported | Design now; build when manager mandate data is approved |
@@ -274,7 +275,7 @@ Visual-first does not mean chart-heavy. A visual report should still have one qu
 
 ### Defer
 
-- Client-facing Cash-Flow Support Summary until stated cash need, cash generated, cash paid, projected generation, and funding-source logic exist.
+- Real/client Cash Flow Delivered or Cash-Flow Support Outlook until reliable cash-flow history, stated need, projection basis, and funding-source logic exist.
 - Cash Flow by Manager/Sleeve until cash-flow source data is reliable.
 - Goal / Liability Matching until explicit plan/liability data exists.
 - Current vs Proposed Portfolio until proposed allocation objects exist.
@@ -308,4 +309,3 @@ E. Revised fixtures/mockups implementation.
 - Only after Frank accepts the design direction, update fixture generators and mockups.
 - Keep first implementation local/synthetic.
 - Keep advisor UI/report wiring paused until separately approved.
-

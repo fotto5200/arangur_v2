@@ -121,9 +121,9 @@ class RevaluationReportViewsV2Tests(unittest.TestCase):
         )
 
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertIn("V2 report inputs: 13", result.stdout)
-        self.assertIn("V2 report views: 13", result.stdout)
-        self.assertIn("V2 Markdown mockups: 13", result.stdout)
+        self.assertIn("V2 report inputs: 14", result.stdout)
+        self.assertIn("V2 report views: 14", result.stdout)
+        self.assertIn("V2 Markdown mockups: 14", result.stdout)
         self.assertIn("Gated reports not generated:", result.stdout)
         self.assertTrue((command_dir / "inputs" / "revaluation_report_v2_input_summary.json").exists())
         self.assertTrue((command_dir / "views" / "revaluation_report_v2_view_summary.json").exists())
@@ -158,8 +158,8 @@ class RevaluationReportViewsV2Tests(unittest.TestCase):
     def test_required_v2_reports_and_view_shape_exist(self) -> None:
         summary = _load_json(VIEW_DIR / "revaluation_report_v2_view_summary.json")
         self.assertEqual(set(BUILD_NOW_REPORT_IDS), set(summary["report_ids"]))
-        self.assertEqual(13, summary["report_view_count"])
-        self.assertEqual(13, summary["markdown_mockup_count"])
+        self.assertEqual(14, summary["report_view_count"])
+        self.assertEqual(14, summary["markdown_mockup_count"])
         self.assertTrue(summary["mockups_generated_from_views"])
 
         for report_id in BUILD_NOW_REPORT_IDS:
@@ -257,6 +257,24 @@ class RevaluationReportViewsV2Tests(unittest.TestCase):
         for row in gated_index["gated_or_deferred_reports"]:
             self.assertIn(row["display_title"], readme)
             self.assertIn(row["reason"], readme)
+            if row.get("status"):
+                self.assertIn(row["status"], readme)
+
+    def test_gated_index_marks_attribution_and_probabilistic_ranges_design_soon(self) -> None:
+        gated_index = _load_json(VIEW_DIR / "gated_deferred_report_index.json")
+        rows = {row["report_id"]: row for row in gated_index["gated_or_deferred_reports"]}
+
+        for report_id in (
+            "integrated_performance_attribution_summary",
+            "integrated_performance_attribution_detail",
+            "probabilistic_scenario_range",
+        ):
+            with self.subTest(report_id=report_id):
+                self.assertIn("Design soon / prerequisite soon", rows[report_id]["status"])
+
+        probabilistic_reason = rows["probabilistic_scenario_range"]["reason"].lower()
+        self.assertIn("deterministic stress", probabilistic_reason)
+        self.assertIn("not probability ranges", probabilistic_reason)
 
     def test_category_systems_are_not_mixed(self) -> None:
         cases = {
@@ -293,9 +311,9 @@ class RevaluationReportViewsV2Tests(unittest.TestCase):
                 self.assertNotIn(manager, role)
                 self.assertGreater(len(role.split()), 4)
 
-    def test_cash_flow_support_summary_uses_explicit_need_and_surplus(self) -> None:
-        view = _load_json(VIEW_DIR / "cash_flow_support_summary_view.json")
-        markdown = (MOCKUP_DIR / "cash_flow_support_summary_mockup_v2.md").read_text(
+    def test_cash_flow_delivered_is_backward_looking_and_separate(self) -> None:
+        view = _load_json(VIEW_DIR / "cash_flow_delivered_view.json")
+        markdown = (MOCKUP_DIR / "cash_flow_delivered_mockup_v2.md").read_text(
             encoding="utf-8"
         )
         table_text = "\n".join(
@@ -304,16 +322,71 @@ class RevaluationReportViewsV2Tests(unittest.TestCase):
             for value in row.values()
         ).lower()
 
+        self.assertEqual("Cash Flow Delivered", view["display_title"])
+        self.assertEqual(
+            "What cash did the portfolio actually generate and make available during the last period?",
+            view["exact_report_question"],
+        )
+        self.assertTrue(view["table_validation"]["backward_looking"])
+        self.assertFalse(view["table_validation"]["next_period_projection_included"])
+        self.assertIn("Cash generated", markdown)
+        self.assertIn("Cash paid out", markdown)
+        self.assertIn("Retained/reinvested", markdown)
+        self.assertIn("$1.4M", markdown)
+        self.assertIn("$1.1M", markdown)
+        self.assertIn("12 months ended 2026-06-30", table_text)
+        self.assertIn("cash_flow_delivered", BUILD_NOW_REPORT_IDS)
+        self.assertIn("cash_flow_support_outlook", BUILD_NOW_REPORT_IDS)
+        self.assertNotEqual(
+            view["report_element_id"],
+            _load_json(VIEW_DIR / "cash_flow_support_outlook_view.json")["report_element_id"],
+        )
+
+    def test_cash_flow_support_outlook_uses_projection_need_and_surplus(self) -> None:
+        view = _load_json(VIEW_DIR / "cash_flow_support_outlook_view.json")
+        markdown = (MOCKUP_DIR / "cash_flow_support_outlook_mockup_v2.md").read_text(
+            encoding="utf-8"
+        )
+        table_text = "\n".join(
+            str(value)
+            for row in view["compact_table"]["rows"]
+            for value in row.values()
+        ).lower()
+
+        self.assertEqual("Cash-Flow Support Outlook", view["display_title"])
+        self.assertEqual(
+            "Will projected cash generation support the stated annual or quarterly cash need?",
+            view["exact_report_question"],
+        )
+        self.assertTrue(view["table_validation"]["forward_looking"])
+        self.assertFalse(view["table_validation"]["last_period_generated_or_paid_out_included"])
         self.assertIn("Annual cash need", markdown)
         self.assertIn("Projected surplus", markdown)
         self.assertIn("stated annual cash need", table_text)
         self.assertIn("projected surplus versus need", table_text)
+        self.assertIn("projected next-period generation", table_text)
+        self.assertNotIn("last-period cash generated", table_text)
+        self.assertNotIn("last-period cash paid out", table_text)
         self.assertEqual(
             "ready_for_synthetic_demo_whole_portfolio_summary",
             view["table_validation"]["cash_flow_support_status"],
         )
         self.assertFalse(view["table_validation"]["cash_flow_by_manager_sleeve_ready"])
         self.assertIn("not a production forecast", markdown.lower())
+
+    def test_manager_grouped_rows_do_not_use_bare_other_label(self) -> None:
+        for report_id in ("allocation_by_manager", "concentration_by_manager_sleeve"):
+            view = _load_json(VIEW_DIR / f"{report_id}_view.json")
+            table = view["compact_table"]
+            manager_labels = [row["Manager/Sleeve"] for row in table["rows"]]
+            with self.subTest(report_id=report_id):
+                self.assertNotIn("Other", manager_labels)
+                self.assertIn("Smaller managers / sleeves", manager_labels)
+                self.assertEqual(
+                    "Smaller managers / sleeves",
+                    view["table_validation"]["grouped_row_label"],
+                )
+                self.assertIn("grouped", "\n".join(view["caveats"]).lower())
 
     def test_full_lens_exposure_includes_all_buckets_and_reconciles(self) -> None:
         for report_id, lens_file in (

@@ -111,7 +111,8 @@
       "held_at_mark_with_caveat",
       "review_required",
       "not_valued"
-    ]
+    ],
+    "future_coverage_by_manager_slice_possible": true
   },
   "visual_placeholder": null
 }

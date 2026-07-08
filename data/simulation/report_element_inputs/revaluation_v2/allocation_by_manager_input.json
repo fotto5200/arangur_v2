@@ -36,13 +36,15 @@
   "table_validation": {
     "base_value": 44858991.4,
     "category_system": "manager_sleeve",
+    "future_full_manager_detail_possible": true,
+    "grouped_row_label": "Smaller managers / sleeves",
     "row_share_total": 1.0,
     "row_value_total": 44858991.4
   },
   "visible_content": {
     "advisor_note": null,
     "caveats": [
-      "Rows are grouped to keep allocation separate from manager role explanation."
+      "Smaller managers and sleeves are grouped; the grouped row is material enough for separate review if this becomes the meeting focus."
     ],
     "compact_table": {
       "columns": [
@@ -72,7 +74,7 @@
           "Value": "$5.7M"
         },
         {
-          "Manager/Sleeve": "Other",
+          "Manager/Sleeve": "Smaller managers / sleeves",
           "Portfolio Share": "19.9%",
           "Value": "$8.9M"
         }

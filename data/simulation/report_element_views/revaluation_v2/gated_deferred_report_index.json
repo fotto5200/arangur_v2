@@ -2,38 +2,45 @@
   "gated_or_deferred_reports": [
     {
       "display_title": "Scenario Versus Benchmark",
-      "reason": "Needs approved benchmark maps and benchmark scenario values.",
-      "report_id": "scenario_versus_benchmark"
+      "reason": "Needs approved benchmark maps and benchmark scenario values before any comparison is generated.",
+      "report_id": "scenario_versus_benchmark",
+      "status": "Design soon / prerequisite soon"
     },
     {
       "display_title": "Integrated Performance Attribution Summary",
-      "reason": "Needs historical returns, benchmark returns, weights, flows, and an attribution method.",
-      "report_id": "integrated_performance_attribution_summary"
+      "reason": "Important report family; needs historical returns, benchmark returns, weights, flows, and an approved attribution method before mockups are generated.",
+      "report_id": "integrated_performance_attribution_summary",
+      "status": "Design soon / prerequisite soon"
     },
     {
       "display_title": "Integrated Performance Attribution Detail",
-      "reason": "Needs summary prerequisites plus detailed holding, trade, and reconciliation policy.",
-      "report_id": "integrated_performance_attribution_detail"
+      "reason": "Important report family; needs summary prerequisites plus detailed holding, trade, and reconciliation policy before mockups are generated.",
+      "report_id": "integrated_performance_attribution_detail",
+      "status": "Design soon / prerequisite soon"
     },
     {
       "display_title": "Probabilistic Scenario Range",
-      "reason": "Needs approved probabilistic analytics and range methodology.",
-      "report_id": "probabilistic_scenario_range"
+      "reason": "Needs approved range analytics and methodology; deterministic stress reports are not probability ranges or forecasts.",
+      "report_id": "probabilistic_scenario_range",
+      "status": "Design soon / prerequisite soon"
     },
     {
       "display_title": "Current Versus Proposed Portfolio",
       "reason": "Needs an explicit proposed allocation workflow and data object.",
-      "report_id": "current_versus_proposed_portfolio"
+      "report_id": "current_versus_proposed_portfolio",
+      "status": "Gated"
     },
     {
       "display_title": "Timing Attribution",
-      "reason": "Needs clean timing methodology plus trade and holding history.",
-      "report_id": "timing_attribution"
+      "reason": "Needs clean timing methodology plus trade and holding history; residual/noise should not be labeled timing.",
+      "report_id": "timing_attribution",
+      "status": "Gated on clean methodology"
     },
     {
       "display_title": "Custom Benchmark Construction",
       "reason": "Intentionally not part of the v2 mockup set.",
-      "report_id": "custom_benchmark_construction"
+      "report_id": "custom_benchmark_construction",
+      "status": "Deferred"
     }
   ],
   "generated_at": "2026-07-07T00:00:00Z",

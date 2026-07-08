@@ -1,8 +1,8 @@
 {
   "audience_tier": "client_briefing",
-  "denominator_category_system": "stated annual cash need versus cash generation",
-  "display_title": "Cash-Flow Support Summary",
-  "exact_report_question": "Can the portfolio support the stated annual cash need?",
+  "denominator_category_system": "stated cash need versus projected cash generation",
+  "display_title": "Cash-Flow Support Outlook",
+  "exact_report_question": "Will projected cash generation support the stated annual or quarterly cash need?",
   "gated_or_deferred": false,
   "generated_at": "2026-07-07T00:00:00Z",
   "generator_version": "lean_report_views_v2.v1",
@@ -20,20 +20,18 @@
   "internal_source_refs": [
     "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/cash_flow_support_inputs.json",
     "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/cash_flow_need_profile.json",
-    "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/cash_flow_history_summary.json",
     "data/simulation/report_prerequisites/synthetic_report_prerequisite_pack_v1/cash_flow_projection_summary.json"
   ],
   "master_question_family": "Performance / Plan",
   "not_wired_into_advisor_ui": true,
   "not_wired_into_generated_reports": true,
   "rendering_mode": "summary_first",
-  "report_element_id": "cash_flow_support_summary",
-  "representation_level": "whole portfolio cash-flow support",
+  "report_element_id": "cash_flow_support_outlook",
+  "representation_level": "whole portfolio forward cash-flow support outlook",
   "schema_version": "revaluation_report_input.v2",
   "source_prerequisite_pack_refs": [
     "cash_flow_support_inputs.json",
     "cash_flow_need_profile.json",
-    "cash_flow_history_summary.json",
     "cash_flow_projection_summary.json"
   ],
   "summary_detail_status": "summary",
@@ -41,43 +39,45 @@
   "table_validation": {
     "cash_flow_by_manager_sleeve_ready": false,
     "cash_flow_support_status": "ready_for_synthetic_demo_whole_portfolio_summary",
+    "forward_looking": true,
+    "future_cash_flow_by_manager_sleeve_view_possible_when_source_data_supports": true,
+    "last_period_generated_or_paid_out_included": false,
     "need_coverage_ratio": 1.095833,
+    "projected_cash_generation": 1315000.0,
+    "projected_surplus_shortfall": 115000.0,
+    "stated_annual_cash_need": 1200000.0,
     "support_logic": "projected_cash_generation - stated_annual_cash_need"
   },
   "visible_content": {
-    "advisor_note": "Funding policy: use income and distributions first, then the liquidity reserve buffer, with advisor review rebalancing if needed.",
+    "advisor_note": "Funding policy: use income and distributions first, then liquidity reserve buffer, with advisor review rebalancing if needed.",
     "caveats": [
-      "Synthetic cash history is explicit enough for a whole-portfolio demo summary, but it is not a reliable manager/sleeve cash-flow source.",
-      "Projection is a deterministic synthetic demo input, not a production forecast."
+      "Projection is a deterministic synthetic demo input, not a production forecast.",
+      "Do not infer support from cash balances alone; this outlook uses the stated need and projected generation inputs."
     ],
     "compact_table": {
       "columns": [
         "Measure",
-        "Amount"
+        "Amount / Label"
       ],
       "rows": [
         {
-          "Amount": "$1.2M",
+          "Amount / Label": "$1.2M",
           "Measure": "Stated annual cash need"
         },
         {
-          "Amount": "$1.4M",
-          "Measure": "Last-period cash generated"
-        },
-        {
-          "Amount": "$1.1M",
-          "Measure": "Last-period cash paid out"
-        },
-        {
-          "Amount": "$1.3M",
+          "Amount / Label": "$1.3M",
           "Measure": "Projected next-period generation"
         },
         {
-          "Amount": "$115K",
+          "Amount / Label": "$115K",
           "Measure": "Projected surplus versus need"
+        },
+        {
+          "Amount / Label": "12 months ended 2027-06-30",
+          "Measure": "Projection period"
         }
       ],
-      "title": "Cash-Flow Support Inputs"
+      "title": "Cash-Flow Support Outlook"
     },
     "headline_metrics": [
       {

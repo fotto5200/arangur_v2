@@ -229,7 +229,7 @@ This writes:
 
 ## Generate Synthetic Report Prerequisite Pack
 
-The prerequisite-pack generator writes local-only synthetic inputs for the next v2 mockup tranche: Cash-Flow Support Summary, Manager Role Summary, and Full Lens Exposure. It does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
+The prerequisite-pack generator writes local-only synthetic inputs for the next v2 mockup tranche: cash-flow delivered/support inputs, Manager Role Summary, and Full Lens Exposure. It does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
 
 ```cmd
 set PYTHONPATH=src
@@ -242,7 +242,7 @@ This writes deterministic JSON under:
 
 ## Generate Revaluation v2 Report Mockups
 
-The v2 report-view generator turns full-revaluation outputs, attribution outputs, and the synthetic prerequisite pack into v2 report input fixtures, v2 report view fixtures, and Markdown product-review mockups. It preserves v1 mockups and does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
+The v2 report-view generator turns full-revaluation outputs, attribution outputs, and the synthetic prerequisite pack into v2 report input fixtures, v2 report view fixtures, and Markdown product-review mockups, including separate Cash Flow Delivered and Cash-Flow Support Outlook reports. It preserves v1 mockups and does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
 
 ```cmd
 set PYTHONPATH=src

@@ -24,6 +24,7 @@ Available now in the repo:
 - thesis-bucket attribution readiness output, not real thesis-bucket attribution;
 - Synthetic Report Prerequisite Pack v1 with local-only cash-flow support inputs, approved synthetic manager mandate catalog, and complete synthetic AI Adoption / Energy Security lens assignments;
 - lean local product-review mockups for Portfolio Status, Aggregated Asset Allocation, Manager Role Summary, Concentration Review, Scenario Downside Summary, Coverage and Confidence Warning, and Cash-Flow Support Readiness;
+- v2 local product-review mockups for Cash Flow Delivered and Cash-Flow Support Outlook, generated from the synthetic prerequisite pack and kept separate from Advisor Preview/Populate/Present wiring;
 - analytic pack choices and committed analytic-derived fragments for the current local demo path.
 
 Missing or deferred:
@@ -47,7 +48,7 @@ Missing or deferred:
 | Denominator gate | All rows in an additive table share one denominator/category system | Split the report or show as non-additive diagnostic |
 | Lens gate | Each in-scope position has an approved assignment, neutral bucket, or review bucket for the selected lens | Show readiness/review status, not lens exposure claims |
 | Benchmark gate | Benchmark or proxy map is approved for the report scope | Defer benchmark-relative report |
-| Cash need gate | Stated need, period, funding policy, cash generated, cash paid, and projection basis exist | Keep Cash-Flow Support as readiness only |
+| Cash need gate | For delivered cash: period, generated cash, paid-out cash, and retained/reinvested cash. For support outlook: stated need, period, funding policy, projected generation, and projection basis | Generate only local synthetic delivered/outlook summaries when these inputs exist; keep real/client support readiness gated |
 | Performance history gate | Returns, holdings, flows, and benchmark history are available for the selected period | Defer performance attribution |
 | Timing gate | Two clearly specified portfolio states and enough trade/flow history exist | Omit timing; do not relabel residual/noise |
 | Probabilistic gate | Approved range methodology and inputs exist | Do not create ranges from deterministic scenarios |
@@ -64,7 +65,8 @@ Missing or deferred:
 | Manager by Lens Exposure | Required | Required | Required | Required | Not required | Not required | Not required | Not required | Optional | Optional later | Manager mappings and complete synthetic AI Adoption / Energy Security assignments exist | Approved report shape and any non-synthetic lens assignments | Cross-manager lens claims without same lens |
 | Manager Role Summary | Required | Useful | Required with mandate/role | Optional for role expression | Optional manager benchmark later | Optional | Optional | Optional | Scenario downside by manager available | Not required | Manager value, scenario attribution, and approved synthetic mandate catalog | Real/client mandate approval beyond synthetic demo | Why a manager is owned when mandate absent |
 | Integrated Performance Attribution | Required | Required over period | Required for manager mode | Required for lens mode | Required | Required | Required | Required for flow-adjusted returns | Optional scenario overlay | Not required | Not available as report-ready system | Benchmark maps, return history, holdings/trades, flows | Value-add, timing, or benchmark-relative claims |
-| Cash-Flow Support Summary | Required | Required where income/distributions matter | Optional manager rollup | Not required | Not required | Optional | Useful | Required: need, generated, paid out, projected generation | Optional stress overlay | Optional later | Synthetic prerequisite pack supplies whole-portfolio demo inputs | Real/client cash-flow sources, liability schedule, and production projection basis | Real support/sufficiency conclusion |
+| Cash Flow Delivered | Required | Required where income/distributions matter | Optional manager rollup | Not required | Not required | Optional | Useful | Required: period, generated cash, paid-out cash, retained/reinvested cash | Optional stress overlay | Optional later | Synthetic prerequisite pack supplies whole-portfolio trailing-period demo inputs | Real/client cash-flow sources and reliable source history | Real delivered-cash claims |
+| Cash-Flow Support Outlook | Required | Required where income/distributions matter | Optional manager rollup | Not required | Not required | Optional | Useful | Required: stated need, projected generation, surplus/shortfall, funding policy | Optional stress overlay | Optional later | Synthetic prerequisite pack supplies whole-portfolio support outlook inputs | Real/client cash-flow sources, liability schedule, and production projection basis | Real support/sufficiency conclusion |
 | Cash Flow by Manager/Sleeve | Required | Required income/distribution records | Required | Not required | Optional | Optional | Useful | Required | Optional | Optional later | Not report-ready | Reliable cash-flow source data | Manager cash generation claims |
 | Current Portfolio Scenario Downside | Required | Required with valuation coverage | Optional for contributor detail | Optional for lens variant | Not required | Not required | Not required | Not required | Required | Not required | Two full-revaluation scenarios and summaries | More scenarios, product caveat policy | Probability or forecast claim |
 | Scenario by Manager | Required | Required | Required | Optional | Not required | Not required | Not required | Not required | Required manager attribution | Not required | Manager attribution for two scenarios | Client/advisor display policy | Manager causality beyond attribution |
@@ -83,18 +85,25 @@ Missing or deferred:
 
 ## Report-Specific Notes
 
-### Cash-Flow Support
+### Cash Flow Delivered And Support Outlook
 
-Minimum report evidence:
+Minimum Cash Flow Delivered evidence:
 
-- stated annual cash need;
+- prior-period label;
 - cash generated last period;
 - cash paid out last period;
-- projected cash generation for the next period or periods;
-- surplus/shortfall versus need;
+- retained/reinvested cash or surplus if supported;
 - one confidence caveat.
 
-The older Cash-Flow Support Readiness note does not satisfy this. Synthetic Report Prerequisite Pack v1 now satisfies the minimum fields for a local-only whole-portfolio demo summary, but real/client cash-flow support remains gated until real cash-flow sources, plan data, and projection policy exist.
+Minimum Cash-Flow Support Outlook evidence:
+
+- stated annual or quarterly cash need;
+- projected cash generation for the next period or periods;
+- surplus/shortfall versus need;
+- funding policy;
+- one confidence caveat.
+
+The older Cash-Flow Support Readiness note does not satisfy either report. Synthetic Report Prerequisite Pack v1 now satisfies the minimum fields for local-only whole-portfolio demo delivered/outlook summaries, but real/client cash-flow support remains gated until real cash-flow sources, plan data, and projection policy exist. Do not infer support from cash balances alone.
 
 ### Integrated Performance Attribution
 
@@ -141,7 +150,7 @@ Lens reports should show unavailable/review buckets rather than silently forcing
 - Revised mockups should declare report family id, audience tier, representation level, denominator, and data readiness.
 - Tests for future report views should block mixed category systems in additive tables.
 - Benchmark-relative report fixtures should not be generated until benchmark/proxy maps exist.
-- Cash-flow support may be generated only for the local synthetic demo from the prerequisite pack; real/client cash-flow support stays readiness-only until real cash-need and cash-flow inputs exist.
+- Cash Flow Delivered and Cash-Flow Support Outlook may be generated only for the local synthetic demo from the prerequisite pack; real/client cash-flow support stays readiness-only until real cash-need and cash-flow inputs exist.
 - Full Lens Exposure may be generated for the complete synthetic AI Adoption and Energy Security assignments; any other lens remains readiness/design-only until complete assignments exist.
 - Probabilistic ranges should wait for explicit range analytics.
 - Advisor UI wiring remains a later separate decision.

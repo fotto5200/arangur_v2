@@ -10,7 +10,9 @@ This spec determines what the revised mockups should show, what current mockups 
 
 This tranche does not implement code, modify advisor UI, add report views, wire report elements, regenerate report fixtures, regenerate Markdown mockups, generate analytics outputs, add backend endpoints, change runtime behavior, use live or real data, or add dependencies.
 
-Update after Synthetic Report Prerequisite Pack v1: local-only synthetic prerequisites now exist for a whole-portfolio Cash-Flow Support Summary, approved synthetic manager mandate language, and complete AI Adoption / Energy Security lens assignments. This updates v2 mockup readiness only; it does not wire reports into Advisor Preview, Populate, Present, or generated reports, and it does not create real-client cash-flow, benchmark, performance, probabilistic, proposed-portfolio, or deployment readiness.
+Update after Synthetic Report Prerequisite Pack v1: local-only synthetic prerequisites now exist for whole-portfolio cash-flow delivered/support views, approved synthetic manager mandate language, and complete AI Adoption / Energy Security lens assignments. This updates v2 mockup readiness only; it does not wire reports into Advisor Preview, Populate, Present, or generated reports, and it does not create real-client cash-flow, benchmark, performance, probabilistic, proposed-portfolio, or deployment readiness.
+
+Update after first v2 mockup review: the cash-flow report shape is split into Cash Flow Delivered for prior-period advisor value delivered and Cash-Flow Support Outlook for forward-looking need support. The split keeps delivered cash, paid-out cash, projected generation, and surplus/shortfall from being overpacked into one report.
 
 ## 2. Governing Design Rules
 
@@ -33,7 +35,7 @@ Update after Synthetic Report Prerequisite Pack v1: local-only synthetic prerequ
 | Current v1 mockup | v1 verdict | Problem found | v2 direction | Mockup v2? | Variant |
 | --- | --- | --- | --- | --- | --- |
 | Aggregated Asset Allocation | Keep / revise lightly | It is a good simple Ownership / Exposure report, but it should not carry manager detail | Keep broad asset-type allocation, small table, and Other grouping. Add companion Allocation by Manager. Do not mix asset type and manager rows in one table unless intentionally designed | Yes | `aggregated_asset_allocation_mockup_v2.md` |
-| Cash-Flow Support Readiness | Kill / demote as report | Readiness is not a client/advisor report; v1 says inputs are missing rather than answering a cash-flow question | Move to internal/advisor setup status only. Replace later with Cash-Flow Support Summary when explicit annual cash need and cash-flow inputs exist | No data-backed mockup | Gated readiness note only, not a report mockup |
+| Cash-Flow Support Readiness | Kill / demote as report | Readiness is not a client/advisor report; v1 says inputs are missing rather than answering a cash-flow question | Move readiness to internal/advisor setup. When synthetic prerequisites exist, split report content into Cash Flow Delivered and Cash-Flow Support Outlook | Yes, as split v2 reports | `cash_flow_delivered_mockup_v2.md`; `cash_flow_support_outlook_mockup_v2.md` |
 | Concentration Review | Redesign / split | v1 mixes asset type, theme/manager/sleeve, review-required status, and held-at-mark status in one Area column | Concentration must use one grouping system at a time. Create variants by asset type and by manager/sleeve; possibly by selected lens later. Move review-required and held-at-mark exposure to Coverage and Confidence | Yes | `concentration_by_asset_type_mockup_v2.md`; `concentration_by_manager_sleeve_mockup_v2.md` |
 | Coverage and Confidence Warning | Keep / revise | Conceptually consistent, but should stay advisor-review default and avoid becoming a full audit table | Keep compact coverage summary, review-required count/value, held-at-mark exposure, approved policy exposure, and practical caveats. Add possible manager slice later | Yes | `coverage_confidence_warning_mockup_v2.md` |
 | Manager Role Summary | Redesign | v1 role field repeats manager label and does not explain why the manager is owned or whether mandate is expressed | Make manager-centered: intended role, portfolio share, actual exposure, material downside/key risk, and mandate-fit/leakage warning when supported. Consider single-manager detail later | Yes | `manager_role_summary_mockup_v2.md` |
@@ -55,7 +57,8 @@ These are the exact v2 mockups or v2 mockup specs the next implementation tranch
 | Concentration by Asset Type | Generate v2 Markdown mockup from v2 view fixture | Corrects v1 mixed-category concentration |
 | Concentration by Manager/Sleeve | Generate v2 Markdown mockup from v2 view fixture | Separate concentration view using one manager/sleeve grouping |
 | Current Portfolio Scenario Downside | Generate v2 Markdown mockup from v2 view fixture | Existing two-scenario full-revaluation outputs support this honestly |
-| Cash-Flow Support Summary | Generate v2 Markdown mockup from v2 view fixture using the synthetic prerequisite pack | Explicit synthetic need, generated cash, paid cash, projected generation, surplus logic, and caveat now exist for a local demo whole-portfolio summary |
+| Cash Flow Delivered | Generate v2 Markdown mockup from v2 view fixture using the synthetic cash-flow history prerequisite | Backward-looking advisor-value report showing what cash was generated, paid out, and retained/reinvested last period |
+| Cash-Flow Support Outlook | Generate v2 Markdown mockup from v2 view fixture using the synthetic cash-flow need/projection prerequisites | Forward-looking support report showing stated need, projected generation, projected surplus/shortfall, funding policy, and caveat |
 | Manager Role Summary | Generate v2 Markdown mockup using the approved synthetic manager mandate catalog | Needed to explain why managers are in the portfolio without role text that merely repeats manager names |
 | Full Lens Exposure | Generate v2 Markdown mockup for the complete synthetic AI Adoption and Energy Security assignments | Complete synthetic lens definitions and one primary assignment per in-scope position now exist; show neutral and review buckets |
 
@@ -76,9 +79,9 @@ These should not be generated as data-backed v2 mockups until their gates are sa
 | Gated mockup | Gate |
 | --- | --- |
 | Scenario Versus Benchmark | Approved benchmark/proxy maps and benchmark scenario values or approved scenario proxy methodology |
-| Integrated Performance Attribution Summary | Historical portfolio returns, benchmark returns, weights/flows, benchmark map, and attribution method |
-| Integrated Performance Attribution Detail | Summary prerequisites plus detailed position/holding/trade history and reconciliation policy |
-| Probabilistic Scenario Range | Approved probabilistic/range analytics and, for comparison, approved benchmark/proxy range |
+| Integrated Performance Attribution Summary | Design-soon / prerequisite-soon; needs historical portfolio returns, benchmark returns, weights/flows, benchmark map, and attribution method |
+| Integrated Performance Attribution Detail | Design-soon / prerequisite-soon; needs summary prerequisites plus detailed position/holding/trade history and reconciliation policy |
+| Probabilistic Scenario Range | Design-soon / prerequisite-soon; needs approved probabilistic/range analytics and, for comparison, approved benchmark/proxy range |
 | Current Versus Proposed Portfolio | Explicit proposed allocation workflow/object and revaluation or exposure outputs for current and proposed states |
 
 ### D. Do-Not-Generate-Yet Mockups
@@ -266,6 +269,48 @@ These should not be generated as data-backed v2 mockups until their gates are sa
 - Acceptable visible content example: "Illustrative design example only: AI / Chip Selloff and Rate Shock appear as deterministic stress rows, not probability-weighted forecasts."
 - Anti-clutter rule: Do not include manager, lens, or benchmark comparisons in this base report.
 
+### Cash Flow Delivered
+
+- Mockup filename: `cash_flow_delivered_mockup_v2.md`
+- Report display title: Cash Flow Delivered
+- Master question family: Performance / Plan
+- Exact report question: What cash did the portfolio actually generate and make available during the last period?
+- Audience options: Client briefing and advisor review when the meeting includes spending, distributions, or advisor value delivered.
+- Summary/detail status: Summary.
+- Representation level: Whole portfolio trailing-period cash flow.
+- Denominator/category system: Cash generated and paid out over the same prior period.
+- Recommended rendering form: Summary-first with one compact table.
+- One-sentence job: Show prior-period cash generation and payouts without implying next-period support.
+- Maximum headline metrics: 3.
+- Maximum table rows: 3, with one preferred summary row when the period is clear.
+- Maximum caveats: 1.
+- Required visible fields: Period label, cash generated last period, cash paid out last period, net retained/reinvested or surplus if supported, one practical caveat.
+- Forbidden visible fields: Next-period projection as the main evidence, manager/sleeve cash-flow claims without reliable source detail, raw transaction/source labels.
+- Advisor-only fields: Source coverage note, manager/sleeve readiness note.
+- Missing prerequisite behavior: If prior-period generated/paid-out cash is absent, keep this report unavailable or advisor-readiness only.
+- Anti-clutter rule: Do not combine this with the forward-looking support outlook.
+
+### Cash-Flow Support Outlook
+
+- Mockup filename: `cash_flow_support_outlook_mockup_v2.md`
+- Report display title: Cash-Flow Support Outlook
+- Master question family: Performance / Plan
+- Exact report question: Will projected cash generation support the stated annual or quarterly cash need?
+- Audience options: Client briefing and advisor review when the stated cash need is explicit.
+- Summary/detail status: Summary.
+- Representation level: Whole portfolio forward cash-flow support outlook.
+- Denominator/category system: Stated cash need versus projected cash generation.
+- Recommended rendering form: Summary-first with a compact support table.
+- One-sentence job: Show whether projected cash generation covers the stated need without relying on cash balances alone.
+- Maximum headline metrics: 3.
+- Maximum table rows: 5.
+- Maximum caveats: 2.
+- Required visible fields: Stated annual or quarterly need, projected next-period generation, projected surplus/shortfall, confidence/caveat, funding policy note.
+- Forbidden visible fields: Prior-period generated/paid-out values as core outlook rows, production forecast language, manager/sleeve support claims without reliable source detail.
+- Advisor-only fields: Projection basis note, manager/sleeve readiness note.
+- Missing prerequisite behavior: If stated need or projected generation is absent, keep support outlook gated rather than inferring support from cash balances.
+- Anti-clutter rule: Keep the backward-looking delivered report separate.
+
 ### Manager Role Summary
 
 - Mockup filename: `manager_role_summary_mockup_v2.md`
@@ -414,7 +459,8 @@ Do not generate performance attribution mockups until historical return, benchma
 
 | Gated report | Missing data / prerequisite | Required behavior |
 | --- | --- | --- |
-| Cash-Flow Support Summary | For synthetic demo: prerequisite pack now supplies stated annual cash need, period, cash generated, cash paid out, projected generation, funding policy, surplus/shortfall, and confidence caveat. For real/client mode: real cash-flow sources and plan data remain absent | Generate only synthetic-demo mockup content from the pack; keep real/client cash-flow readiness gated |
+| Cash Flow Delivered | For synthetic demo: prerequisite pack now supplies period, cash generated, cash paid out, retained/reinvested cash, and confidence caveat. For real/client mode: real cash-flow sources remain absent | Generate only synthetic-demo prior-period mockup content from the pack; keep real/client cash-flow readiness gated |
+| Cash-Flow Support Outlook | For synthetic demo: prerequisite pack now supplies stated annual cash need, projected generation, funding policy, surplus/shortfall, and confidence caveat. For real/client mode: real cash-flow sources and plan data remain absent | Generate only synthetic-demo outlook content from the pack; keep real/client cash-flow readiness gated |
 | Cash Flow by Manager/Sleeve | Reliable cash-flow history/projection by manager/sleeve | Gate until source data and period logic exist |
 | Scenario Versus Benchmark | Approved benchmark/proxy map and benchmark scenario value or proxy methodology | Defer benchmark comparison |
 | Manager by Lens Exposure | Published complete position-to-lens assignments plus manager mapping | Possible next for synthetic AI Adoption and Energy Security; defer for any lens without complete assignments |
@@ -473,7 +519,7 @@ It should:
 - enforce information budgets with tests;
 - avoid advisor UI wiring;
 - avoid generated-report wiring;
-- use the synthetic prerequisite pack for Cash-Flow Support Summary, Manager Role Summary, and Full Lens Exposure rather than inventing report values inside mockups;
+- use the synthetic prerequisite pack for Cash Flow Delivered, Cash-Flow Support Outlook, Manager Role Summary, and Full Lens Exposure rather than inventing report values inside mockups;
 - avoid generating still-gated reports as if data exists;
 - preserve v1 artifacts if useful for comparison, or write v2 artifacts to a separate path;
 - keep synthetic/local-only boundaries;

@@ -2,7 +2,8 @@
   "advisor_note": "The largest manager/sleeve is above a quarter of portfolio value, so size alone deserves review.",
   "audience_tier": "advisor_review",
   "caveats": [
-    "This concentration view uses manager/sleeve only; asset type and coverage are separate."
+    "This concentration view uses manager/sleeve only; asset type and coverage are separate.",
+    "Smaller managers and sleeves are grouped; the grouped row is material enough for separate review if needed."
   ],
   "compact_table": {
     "columns": [
@@ -37,8 +38,8 @@
         "Value": "$5.7M"
       },
       {
-        "Interpretation": "Part of the same manager/sleeve grouping.",
-        "Manager/Sleeve": "Other",
+        "Interpretation": "Grouped smaller managers/sleeves.",
+        "Manager/Sleeve": "Smaller managers / sleeves",
         "Portfolio Share": "19.9%",
         "Value": "$8.9M"
       }
@@ -66,7 +67,7 @@
   "headline_sentence": "Manager A - Growth / AI Infrastructure is the largest manager/sleeve concentration at 31.8%.",
   "information_budget_applied": {
     "actual_advisor_notes": 1,
-    "actual_caveats": 1,
+    "actual_caveats": 2,
     "actual_headline_metrics": 2,
     "actual_headline_sentences": 1,
     "actual_visible_table_rows": 5,
@@ -97,6 +98,8 @@
   "synthetic_data": true,
   "table_validation": {
     "category_system": "manager_sleeve",
+    "future_full_manager_detail_possible": true,
+    "grouped_row_label": "Smaller managers / sleeves",
     "mixed_category_systems": false,
     "row_share_total": 1.0
   },

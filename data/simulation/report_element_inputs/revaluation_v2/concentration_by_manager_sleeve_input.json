@@ -35,13 +35,16 @@
   "synthetic_data": true,
   "table_validation": {
     "category_system": "manager_sleeve",
+    "future_full_manager_detail_possible": true,
+    "grouped_row_label": "Smaller managers / sleeves",
     "mixed_category_systems": false,
     "row_share_total": 1.0
   },
   "visible_content": {
     "advisor_note": "The largest manager/sleeve is above a quarter of portfolio value, so size alone deserves review.",
     "caveats": [
-      "This concentration view uses manager/sleeve only; asset type and coverage are separate."
+      "This concentration view uses manager/sleeve only; asset type and coverage are separate.",
+      "Smaller managers and sleeves are grouped; the grouped row is material enough for separate review if needed."
     ],
     "compact_table": {
       "columns": [
@@ -76,8 +79,8 @@
           "Value": "$5.7M"
         },
         {
-          "Interpretation": "Part of the same manager/sleeve grouping.",
-          "Manager/Sleeve": "Other",
+          "Interpretation": "Grouped smaller managers/sleeves.",
+          "Manager/Sleeve": "Smaller managers / sleeves",
           "Portfolio Share": "19.9%",
           "Value": "$8.9M"
         }

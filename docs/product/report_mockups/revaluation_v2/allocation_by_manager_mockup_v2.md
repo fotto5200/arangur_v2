@@ -15,8 +15,8 @@ Manager A - Growth / AI Infrastructure is the largest manager/sleeve at 31.8% of
 | Manager D - Private Markets / Real Assets | $8.3M | 18.4% |
 | Manager B - Core Quality Equity | $7.7M | 17.1% |
 | Manager E - Liquidity Reserve / Defensive Ballast | $5.7M | 12.7% |
-| Other | $8.9M | 19.9% |
+| Smaller managers / sleeves | $8.9M | 19.9% |
 
 ## Caveats
 
-- Rows are grouped to keep allocation separate from manager role explanation.
+- Smaller managers and sleeves are grouped; the grouped row is material enough for separate review if this becomes the meeting focus.

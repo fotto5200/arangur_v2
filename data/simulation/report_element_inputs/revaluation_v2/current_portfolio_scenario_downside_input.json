@@ -35,7 +35,9 @@
   "table_validation": {
     "benchmark_comparison_included": false,
     "category_system": "deterministic_scenario",
+    "deterministic_stress_not_forecast": true,
     "probabilistic_range_included": false,
+    "probabilistic_range_status": "design_soon_prerequisite_soon_not_included",
     "scenario_count": 2
   },
   "visible_content": {

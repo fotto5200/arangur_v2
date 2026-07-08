@@ -66,8 +66,12 @@ REPORT_SPECS: tuple[dict[str, str], ...] = (
         "mockup_filename": "manager_role_summary_mockup_v2.md",
     },
     {
-        "report_id": "cash_flow_support_summary",
-        "mockup_filename": "cash_flow_support_summary_mockup_v2.md",
+        "report_id": "cash_flow_delivered",
+        "mockup_filename": "cash_flow_delivered_mockup_v2.md",
+    },
+    {
+        "report_id": "cash_flow_support_outlook",
+        "mockup_filename": "cash_flow_support_outlook_mockup_v2.md",
     },
     {
         "report_id": "full_lens_exposure_ai_adoption",
@@ -95,36 +99,43 @@ GATED_REPORTS = (
     {
         "report_id": "scenario_versus_benchmark",
         "display_title": "Scenario Versus Benchmark",
-        "reason": "Needs approved benchmark maps and benchmark scenario values.",
+        "status": "Design soon / prerequisite soon",
+        "reason": "Needs approved benchmark maps and benchmark scenario values before any comparison is generated.",
     },
     {
         "report_id": "integrated_performance_attribution_summary",
         "display_title": "Integrated Performance Attribution Summary",
-        "reason": "Needs historical returns, benchmark returns, weights, flows, and an attribution method.",
+        "status": "Design soon / prerequisite soon",
+        "reason": "Important report family; needs historical returns, benchmark returns, weights, flows, and an approved attribution method before mockups are generated.",
     },
     {
         "report_id": "integrated_performance_attribution_detail",
         "display_title": "Integrated Performance Attribution Detail",
-        "reason": "Needs summary prerequisites plus detailed holding, trade, and reconciliation policy.",
+        "status": "Design soon / prerequisite soon",
+        "reason": "Important report family; needs summary prerequisites plus detailed holding, trade, and reconciliation policy before mockups are generated.",
     },
     {
         "report_id": "probabilistic_scenario_range",
         "display_title": "Probabilistic Scenario Range",
-        "reason": "Needs approved probabilistic analytics and range methodology.",
+        "status": "Design soon / prerequisite soon",
+        "reason": "Needs approved range analytics and methodology; deterministic stress reports are not probability ranges or forecasts.",
     },
     {
         "report_id": "current_versus_proposed_portfolio",
         "display_title": "Current Versus Proposed Portfolio",
+        "status": "Gated",
         "reason": "Needs an explicit proposed allocation workflow and data object.",
     },
     {
         "report_id": "timing_attribution",
         "display_title": "Timing Attribution",
-        "reason": "Needs clean timing methodology plus trade and holding history.",
+        "status": "Gated on clean methodology",
+        "reason": "Needs clean timing methodology plus trade and holding history; residual/noise should not be labeled timing.",
     },
     {
         "report_id": "custom_benchmark_construction",
         "display_title": "Custom Benchmark Construction",
+        "status": "Deferred",
         "reason": "Intentionally not part of the v2 mockup set.",
     },
 )
@@ -351,7 +362,8 @@ def build_revaluation_report_inputs_v2(context: dict[str, Any]) -> dict[str, dic
         "manager_role_summary": _manager_role_summary_input(
             mandates, manager_rows, context
         ),
-        "cash_flow_support_summary": _cash_flow_support_input(context),
+        "cash_flow_delivered": _cash_flow_delivered_input(context),
+        "cash_flow_support_outlook": _cash_flow_support_outlook_input(context),
         "full_lens_exposure_ai_adoption": _full_lens_exposure_input(
             "ai_adoption", context
         ),
@@ -534,7 +546,9 @@ def render_mockup_readme(views: dict[str, dict[str, Any]], gated_index: dict[str
 
     lines.extend(["", "## Gated Or Deferred", ""])
     for row in gated_index["gated_or_deferred_reports"]:
-        lines.append(f"- {row['display_title']}: {row['reason']}")
+        status = row.get("status")
+        prefix = f"{row['display_title']} ({status})" if status else row["display_title"]
+        lines.append(f"- {prefix}: {row['reason']}")
 
     lines.append("")
     return "\n".join(lines)
@@ -629,6 +643,7 @@ def _portfolio_representation_input(
             "row_share_total": 1.0,
             "category_system": "representation_status",
             "review_required_value": round(review_value, 2),
+            "future_manager_level_representation_view_possible": True,
         },
     )
 
@@ -731,7 +746,9 @@ def _allocation_by_manager_input(
                 ["Manager/Sleeve", "Value", "Portfolio Share"],
                 table_rows,
             ),
-            "caveats": ["Rows are grouped to keep allocation separate from manager role explanation."],
+            "caveats": [
+                "Smaller managers and sleeves are grouped; the grouped row is material enough for separate review if this becomes the meeting focus."
+            ],
             "advisor_note": None,
         },
         table_validation={
@@ -739,6 +756,8 @@ def _allocation_by_manager_input(
             "base_value": round(base_value, 2),
             "row_share_total": round(sum(row["share"] for row in manager_rows), 6),
             "category_system": "manager_sleeve",
+            "grouped_row_label": "Smaller managers / sleeves",
+            "future_full_manager_detail_possible": True,
         },
     )
 
@@ -803,6 +822,7 @@ def _coverage_confidence_warning_input(
             "contains_review_required": True,
             "contains_held_at_mark": True,
             "contains_approved_policy": True,
+            "future_coverage_by_manager_slice_possible": True,
         },
     )
 
@@ -874,7 +894,11 @@ def _concentration_by_manager_sleeve_input(
             "Interpretation": (
                 "Largest manager/sleeve exposure."
                 if index == 0
-                else "Part of the same manager/sleeve grouping."
+                else (
+                    "Grouped smaller managers/sleeves."
+                    if row["label"] == "Smaller managers / sleeves"
+                    else "Part of the same manager/sleeve grouping."
+                )
             ),
         }
         for index, row in enumerate(manager_rows)
@@ -908,7 +932,10 @@ def _concentration_by_manager_sleeve_input(
                 ["Manager/Sleeve", "Portfolio Share", "Value", "Interpretation"],
                 table_rows,
             ),
-            "caveats": ["This concentration view uses manager/sleeve only; asset type and coverage are separate."],
+            "caveats": [
+                "This concentration view uses manager/sleeve only; asset type and coverage are separate.",
+                "Smaller managers and sleeves are grouped; the grouped row is material enough for separate review if needed.",
+            ],
             "advisor_note": (
                 "The largest manager/sleeve is above a quarter of portfolio value, so size alone deserves review."
             ),
@@ -917,6 +944,8 @@ def _concentration_by_manager_sleeve_input(
             "category_system": "manager_sleeve",
             "row_share_total": round(sum(row["share"] for row in manager_rows), 6),
             "mixed_category_systems": False,
+            "grouped_row_label": "Smaller managers / sleeves",
+            "future_full_manager_detail_possible": True,
         },
     )
 
@@ -995,6 +1024,8 @@ def _scenario_downside_input(
             "scenario_count": len(scenario_rows),
             "benchmark_comparison_included": False,
             "probabilistic_range_included": False,
+            "deterministic_stress_not_forecast": True,
+            "probabilistic_range_status": "design_soon_prerequisite_soon_not_included",
         },
     )
 
@@ -1078,56 +1109,116 @@ def _manager_role_summary_input(
     )
 
 
-def _cash_flow_support_input(context: dict[str, Any]) -> dict[str, Any]:
+def _cash_flow_delivered_input(context: dict[str, Any]) -> dict[str, Any]:
+    history = context["cash_flow_history_summary"]
+    generated = float(history["cash_generated_last_period"]["amount"])
+    paid_out = float(history["cash_paid_out_last_period"]["amount"])
+    retained = float(history["net_cash_after_paid_out"]["amount"])
+    period_label = _period_label(history["history_period"])
+    table_rows = [
+        {
+            "Period": period_label,
+            "Generated": _format_money(generated),
+            "Paid Out": _format_money(paid_out),
+            "Retained/Reinvested": _format_money(retained),
+        }
+    ]
+    return _report_input(
+        report_element_id="cash_flow_delivered",
+        display_title="Cash Flow Delivered",
+        master_question_family="Performance / Plan",
+        exact_report_question=(
+            "What cash did the portfolio actually generate and make available during the last period?"
+        ),
+        audience_tier="client_briefing",
+        summary_detail_status="summary",
+        representation_level="whole portfolio trailing-period cash flow",
+        denominator_category_system="cash generated and paid out over the same trailing period",
+        rendering_mode="summary_first",
+        internal_source_refs=[
+            context["source_paths"]["cash_flow_history_summary"],
+        ],
+        source_prerequisite_pack_refs=["cash_flow_history_summary.json"],
+        visible_content={
+            "headline_sentence": (
+                f"During the {period_label}, the portfolio generated {_format_money(generated)} "
+                f"and made {_format_money(paid_out)} available for payouts."
+            ),
+            "headline_metrics": [
+                _metric("Cash generated", generated, _format_money(generated)),
+                _metric("Cash paid out", paid_out, _format_money(paid_out)),
+                _metric("Retained/reinvested", retained, _format_money(retained)),
+            ],
+            "compact_table": _compact_table(
+                "Cash Delivered Last Period",
+                ["Period", "Generated", "Paid Out", "Retained/Reinvested"],
+                table_rows,
+            ),
+            "caveats": [history["confidence_caveat"]],
+            "advisor_note": (
+                "Forward-looking cash support is a separate report; manager/sleeve cash-flow detail waits for reliable source data."
+            ),
+        },
+        table_validation={
+            "cash_generated_last_period": generated,
+            "cash_paid_out_last_period": paid_out,
+            "net_cash_after_paid_out": retained,
+            "period_label": period_label,
+            "backward_looking": True,
+            "next_period_projection_included": False,
+            "cash_flow_by_manager_sleeve_ready": history["cash_flow_by_manager_sleeve_ready"],
+            "future_cash_flow_by_manager_sleeve_view_possible_when_source_data_supports": True,
+        },
+    )
+
+
+def _cash_flow_support_outlook_input(context: dict[str, Any]) -> dict[str, Any]:
     cash = context["cash_flow_support_inputs"]
     need = context["cash_flow_need_profile"]
-    history = context["cash_flow_history_summary"]
     projection = context["cash_flow_projection_summary"]
     required = cash["required_inputs"]
     support = cash["support_logic"]
     surplus = float(required["projected_surplus_shortfall"])
+    projection_period = _period_label(projection["projection_period"])
+    funding_policy = need["funding_policy"]
     table_rows = [
         {
             "Measure": "Stated annual cash need",
-            "Amount": _format_money(required["stated_annual_cash_need"]),
-        },
-        {
-            "Measure": "Last-period cash generated",
-            "Amount": _format_money(required["cash_generated_last_period"]),
-        },
-        {
-            "Measure": "Last-period cash paid out",
-            "Amount": _format_money(required["cash_paid_out_last_period"]),
+            "Amount / Label": _format_money(required["stated_annual_cash_need"]),
         },
         {
             "Measure": "Projected next-period generation",
-            "Amount": _format_money(required["projected_cash_generation"]),
+            "Amount / Label": _format_money(required["projected_cash_generation"]),
         },
         {
             "Measure": "Projected surplus versus need",
-            "Amount": _format_money(surplus),
+            "Amount / Label": _format_money(surplus),
+        },
+        {
+            "Measure": "Projection period",
+            "Amount / Label": projection_period,
         },
     ]
     return _report_input(
-        report_element_id="cash_flow_support_summary",
-        display_title="Cash-Flow Support Summary",
+        report_element_id="cash_flow_support_outlook",
+        display_title="Cash-Flow Support Outlook",
         master_question_family="Performance / Plan",
-        exact_report_question="Can the portfolio support the stated annual cash need?",
+        exact_report_question=(
+            "Will projected cash generation support the stated annual or quarterly cash need?"
+        ),
         audience_tier="client_briefing",
         summary_detail_status="summary",
-        representation_level="whole portfolio cash-flow support",
-        denominator_category_system="stated annual cash need versus cash generation",
+        representation_level="whole portfolio forward cash-flow support outlook",
+        denominator_category_system="stated cash need versus projected cash generation",
         rendering_mode="summary_first",
         internal_source_refs=[
             context["source_paths"]["cash_flow_support_inputs"],
             context["source_paths"]["cash_flow_need_profile"],
-            context["source_paths"]["cash_flow_history_summary"],
             context["source_paths"]["cash_flow_projection_summary"],
         ],
         source_prerequisite_pack_refs=[
             "cash_flow_support_inputs.json",
             "cash_flow_need_profile.json",
-            "cash_flow_history_summary.json",
             "cash_flow_projection_summary.json",
         ],
         visible_content={
@@ -1149,21 +1240,30 @@ def _cash_flow_support_input(context: dict[str, Any]) -> dict[str, Any]:
                 _metric("Projected surplus", surplus, _format_money(surplus)),
             ],
             "compact_table": _compact_table(
-                "Cash-Flow Support Inputs",
-                ["Measure", "Amount"],
+                "Cash-Flow Support Outlook",
+                ["Measure", "Amount / Label"],
                 table_rows,
             ),
             "caveats": [
-                history["confidence_caveat"],
                 projection["confidence_caveat"],
+                "Do not infer support from cash balances alone; this outlook uses the stated need and projected generation inputs.",
             ],
-            "advisor_note": "Funding policy: use income and distributions first, then the liquidity reserve buffer, with advisor review rebalancing if needed.",
+            "advisor_note": (
+                "Funding policy: use income and distributions first, then "
+                f"{funding_policy['secondary_source'].replace('_', ' ')}, with advisor review rebalancing if needed."
+            ),
         },
         table_validation={
             "cash_flow_support_status": cash["status"],
             "support_logic": support["calculation"],
             "need_coverage_ratio": support["need_coverage_ratio"],
-            "cash_flow_by_manager_sleeve_ready": history["cash_flow_by_manager_sleeve_ready"],
+            "projected_cash_generation": float(required["projected_cash_generation"]),
+            "stated_annual_cash_need": float(required["stated_annual_cash_need"]),
+            "projected_surplus_shortfall": surplus,
+            "forward_looking": True,
+            "last_period_generated_or_paid_out_included": False,
+            "cash_flow_by_manager_sleeve_ready": False,
+            "future_cash_flow_by_manager_sleeve_view_possible_when_source_data_supports": True,
         },
     )
 
@@ -1518,7 +1618,7 @@ def _manager_allocation_rows(context: dict[str, Any], base_value: float) -> list
         for row in mandates
     ]
     rows.sort(key=lambda row: row["value"], reverse=True)
-    return _group_with_other(rows, max_rows=5)
+    return _group_with_other(rows, max_rows=5, other_label="Smaller managers / sleeves")
 
 
 def _coverage_rows(portfolio_summary: dict[str, Any], base_value: float) -> list[dict[str, Any]]:
@@ -1559,7 +1659,12 @@ def _manager_mandates_by_id(context: dict[str, Any]) -> dict[str, dict[str, Any]
     }
 
 
-def _group_with_other(rows: list[dict[str, Any]], *, max_rows: int) -> list[dict[str, Any]]:
+def _group_with_other(
+    rows: list[dict[str, Any]],
+    *,
+    max_rows: int,
+    other_label: str = "Other",
+) -> list[dict[str, Any]]:
     if len(rows) <= max_rows:
         total = sum(row["share"] for row in rows)
         if total:
@@ -1573,7 +1678,7 @@ def _group_with_other(rows: list[dict[str, Any]], *, max_rows: int) -> list[dict
     other_share = round(1.0 - sum(row["share"] for row in visible), 6)
     visible.append(
         {
-            "label": "Other",
+            "label": other_label,
             "value": other_value,
             "count": other_count,
             "share": other_share,
@@ -1596,6 +1701,10 @@ def _metric(label: str, value: Any, formatted_value: str) -> dict[str, Any]:
         "value": value,
         "formatted_value": formatted_value,
     }
+
+
+def _period_label(period: dict[str, Any]) -> str:
+    return f"{int(period['period_months'])} months ended {period['end_date']}"
 
 
 def _budget_for_report(report_id: str) -> dict[str, Any]:

@@ -133,6 +133,7 @@ Additional anti-clutter checks:
 
 - Do not mix asset type, manager/sleeve, lens/theme, and coverage/review statuses in one additive table.
 - Do not show benchmark-relative, lens-bucket, cash-flow support, proposed-allocation, timing-attribution, or probabilistic range claims unless the matching data/analytics prerequisites are satisfied.
+- Keep prior-period cash delivered and forward-looking cash support outlook as separate report shapes unless a future approved detail variant explicitly combines them.
 - Do not use readiness artifacts as client-facing reports. They may explain why a report is unavailable.
 - Visual-first reports must state the range, benchmark/proxy, horizon, and caveat needed to interpret the picture.
 
