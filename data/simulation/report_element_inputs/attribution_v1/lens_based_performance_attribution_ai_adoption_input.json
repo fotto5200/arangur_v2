@@ -36,7 +36,7 @@
   "report_element_id": "lens_based_performance_attribution_ai_adoption",
   "report_family": "Lens-Based Performance Attribution",
   "representation_level": "AI Adoption theme bucket",
-  "residual_policy": "No residual row is shown in the calculated theme-bucket summary; portfolio residual remains in the integrated summary/detail reports.",
+  "residual_policy": "No residual row is shown in the calculated theme-bucket summary; portfolio residual remains in the integrated summary/detail reports. Residual / unexplained may include unmeasured timing, data, flow, rounding, or reconciliation effects.",
   "residual_policy_details": {
     "policy": "explicit_reconciler_after_calculated_effects",
     "timing_used_as_residual": false,
@@ -66,6 +66,8 @@
   "supplied_or_legacy_sections": [],
   "synthetic_data": true,
   "table_validation": {
+    "active_return_bridge_included": true,
+    "active_return_definition": "portfolio_return_minus_theme_benchmark_return",
     "all_lens_buckets_included": true,
     "contains_neutral_bucket": true,
     "contains_review_bucket": true,
@@ -73,6 +75,7 @@
     "relative_contribution_total": 0.009418,
     "selected_calculated_lens": "AI Adoption",
     "timing_contribution_included": false,
+    "total_effect_distinguished_from_active_return": true,
     "unsupported_calculated_lenses_gated": [
       "Energy Security"
     ],
@@ -80,7 +83,7 @@
   },
   "timing_status": "unavailable",
   "visible_content": {
-    "advisor_note": "Read this as a calculated one-lens theme performance view; timing remains unavailable.",
+    "advisor_note": "Theme benchmarks apply bucket-by-bucket inside AI Adoption. Active Return is Portfolio Return minus Theme Benchmark Return; Total Attribution Effect also reflects benchmark selection/sizing and asset effects. Timing is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present.",
     "caveats": [
       "Some synthetic theme benchmarks are proxy benchmarks for demo purposes; they are not production recommendations.",
       "Energy Security calculated attribution remains gated until a calculated output pack exists for that lens."
@@ -91,56 +94,64 @@
         "Weight",
         "Portfolio Return",
         "Theme Benchmark Return",
-        "Total Effect"
+        "Active Return",
+        "Total Attribution Effect"
       ],
       "rows": [
         {
+          "Active Return": "+1.40%",
           "Portfolio Return": "11.70%",
           "Theme Benchmark Return": "10.30%",
           "Theme Bucket": "Core AI Infrastructure / Hardware",
-          "Total Effect": "+1.46%",
+          "Total Attribution Effect": "+1.46%",
           "Weight": "21.03%"
         },
         {
+          "Active Return": "+1.20%",
           "Portfolio Return": "10.40%",
           "Theme Benchmark Return": "9.20%",
           "Theme Bucket": "AI Model / Platform Exposure",
-          "Total Effect": "+0.79%",
+          "Total Attribution Effect": "+0.79%",
           "Weight": "17.18%"
         },
         {
+          "Active Return": "+0.60%",
           "Portfolio Return": "7.70%",
           "Theme Benchmark Return": "7.10%",
           "Theme Bucket": "AI Downstream Productivity Beneficiary",
-          "Total Effect": "-0.64%",
+          "Total Attribution Effect": "-0.64%",
           "Weight": "4.73%"
         },
         {
+          "Active Return": "-0.40%",
           "Portfolio Return": "3.40%",
           "Theme Benchmark Return": "3.80%",
           "Theme Bucket": "AI-Disrupted Incumbent",
-          "Total Effect": "-0.91%",
+          "Total Attribution Effect": "-0.91%",
           "Weight": "2.52%"
         },
         {
+          "Active Return": "+1.00%",
           "Portfolio Return": "9.50%",
           "Theme Benchmark Return": "8.50%",
           "Theme Bucket": "Data Center / Power Bottleneck Exposure",
-          "Total Effect": "+0.02%",
+          "Total Attribution Effect": "+0.02%",
           "Weight": "10.73%"
         },
         {
+          "Active Return": "+0.20%",
           "Portfolio Return": "5.40%",
           "Theme Benchmark Return": "5.20%",
           "Theme Bucket": "Neutral / Low Direct AI Exposure",
-          "Total Effect": "+0.80%",
+          "Total Attribution Effect": "+0.80%",
           "Weight": "33.30%"
         },
         {
+          "Active Return": "+0.00%",
           "Portfolio Return": "4.00%",
           "Theme Benchmark Return": "4.00%",
           "Theme Bucket": "Unclassified / Review Required",
-          "Total Effect": "-0.58%",
+          "Total Attribution Effect": "-0.58%",
           "Weight": "10.50%"
         }
       ],
@@ -163,6 +174,6 @@
         "value": -0.009134
       }
     ],
-    "headline_sentence": "Under the AI Adoption lens, Core AI Infrastructure / Hardware is the largest positive calculated theme contributor versus its theme benchmark."
+    "headline_sentence": "Under the AI Adoption lens, Core AI Infrastructure / Hardware is the largest positive total attribution effect; active return is shown separately."
   }
 }

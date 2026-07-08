@@ -26,6 +26,8 @@ Update after Calculated Synthetic Attribution Engine v1: calculated local synthe
 
 Update after Regenerate Attribution Mockups from Calculated Outputs v1: `attribution_v1` report inputs, views, and Markdown mockups now consume `data/simulation/attribution_calculated/synthetic_attribution_engine_v1/` where supported. Integrated Performance Attribution Summary/Detail, Manager Attribution Summary, and Lens-Based Performance Attribution - AI Adoption are regenerated from calculated outputs. Lens-Based Performance Attribution - Energy Security is gated for calculated attribution until calculation inputs and calculated outputs exist for that lens. Timing remains unavailable and production/client attribution remains gated.
 
+Update after Attribution Calculation Explanation Polish v1: calculated `attribution_v1` mockups now distinguish Active Return from Total Attribution Effect in the detail and AI Adoption lens tables. Active Return is the return gap versus the theme benchmark; Total Attribution Effect is the calculated attribution effect after benchmark selection/sizing and asset effects. Manager Attribution Summary now separates Largest Driver, Other Measured Effects, and Residual / unexplained, with explicit manager benchmark-basis language. Timing remains unavailable and is not shown as a contribution.
+
 ## 2. Governing Design Rules
 
 - One report, one question.

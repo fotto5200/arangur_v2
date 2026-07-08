@@ -26,6 +26,11 @@ DEFAULT_INPUT_DIR = Path("data/simulation/report_element_inputs/attribution_v1")
 DEFAULT_VIEW_DIR = Path("data/simulation/report_element_views/attribution_v1")
 DEFAULT_MOCKUP_DIR = Path("docs/product/report_mockups/attribution_v1")
 
+TIMING_UNAVAILABLE_TEXT = (
+    "Timing is not shown separately because clean trade/holding history, flow treatment, "
+    "and an approved timing method are not present."
+)
+
 CALCULATED_ARTIFACT_FILES = {
     "manifest": "calculated_attribution_engine_manifest.json",
     "whole_portfolio_summary": "whole_portfolio_calculated_attribution_summary.json",
@@ -157,6 +162,7 @@ FORBIDDEN_VISIBLE_TERMS = (
     "proxy return",
     "bucket return",
     "not separately measured",
+    "not timing",
     "residual is not timing",
 )
 
@@ -433,6 +439,11 @@ def render_mockup_readme(
             "unavailable, residual / unexplained stays separate, and production/client "
             "attribution remains gated."
         ),
+        (
+            "Detail and lens tables distinguish Active Return from Total Attribution "
+            "Effect, and Manager Attribution Summary separates largest driver, other "
+            "measured effects, and residual / unexplained."
+        ),
         "",
         "## Generated Mockups",
         "",
@@ -510,11 +521,13 @@ def _integrated_summary_input(
         ),
         "caveats": [
             "Synthetic local-demo returns and benchmark inputs only.",
-            "Timing is unavailable because clean trade/holding history, flow treatment, and an approved timing method are not present.",
+            TIMING_UNAVAILABLE_TEXT,
         ],
         "advisor_note": (
-            "Use this as a compact product-review shape; real/client attribution remains gated "
-            "until production returns, benchmark maps, flows, and methodology are approved."
+            "Global benchmark is the whole-portfolio benchmark; theme benchmarks are "
+            "bucket-level benchmarks inside the selected AI Adoption lens. Real/client "
+            "attribution remains gated until production returns, benchmark maps, flows, "
+            "and methodology are approved."
         ),
     }
     return _report_input(
@@ -595,21 +608,24 @@ def _integrated_detail_input(
                 "Weight",
                 "Portfolio Return",
                 "Theme Benchmark Return",
+                "Active Return",
                 "Theme Benchmark Selection",
                 "Theme Benchmark Sizing",
                 "Asset Selection",
                 "Asset Sizing",
-                "Total Effect",
+                "Total Attribution Effect",
             ],
             visible_rows,
         ),
         "caveats": [
             "Synthetic local-demo returns and theme benchmarks only; some theme benchmarks are synthetic proxy benchmarks for demo purposes.",
-            "Timing is unavailable because clean trade/holding history, flow treatment, and an approved timing method are not present.",
+            TIMING_UNAVAILABLE_TEXT,
         ],
         "advisor_note": (
-            "Use this detail view to review calculated theme benchmark and asset selection/sizing rows; "
-            "the residual / unexplained amount completes the portfolio-level tie-out."
+            "Theme benchmark is the bucket benchmark inside AI Adoption. Active Return is "
+            "Portfolio Return minus Theme Benchmark Return; Total Attribution Effect "
+            "combines theme benchmark selection, theme benchmark sizing, asset selection, "
+            "and asset sizing, so it may differ."
         ),
     }
     return _report_input(
@@ -657,6 +673,9 @@ def _integrated_detail_input(
             "uses_calculated_theme_benchmark_detail": True,
             "component_effects_calculated": True,
             "detail_is_not_summary_bridge": True,
+            "active_return_bridge_included": True,
+            "active_return_definition": "portfolio_return_minus_theme_benchmark_return",
+            "total_effect_distinguished_from_active_return": True,
             "timing_contribution_included": False,
             "residual_label": "Residual / unexplained",
         },
@@ -677,6 +696,9 @@ def _manager_summary_input(context: dict[str, Any]) -> dict[str, Any]:
                 ),
                 "Relative Return": _format_signed_percent(manager["relative_return"]),
                 "Largest Driver": _largest_manager_driver(manager),
+                "Other Measured Effects": _format_signed_percent(
+                    _manager_other_measured_effects(manager)
+                ),
                 "Residual / unexplained": _format_signed_percent(
                     manager["residual_unexplained"]
                 ),
@@ -690,6 +712,7 @@ def _manager_summary_input(context: dict[str, Any]) -> dict[str, Any]:
             "Manager Benchmark Return": row["Manager Benchmark Return"],
             "Relative Return": row["Relative Return"],
             "Largest Driver": row["Largest Driver"],
+            "Other Measured Effects": row["Other Measured Effects"],
             "Residual / unexplained": row["Residual / unexplained"],
         }
         for row in rows
@@ -715,16 +738,20 @@ def _manager_summary_input(context: dict[str, Any]) -> dict[str, Any]:
                 "Manager Benchmark Return",
                 "Relative Return",
                 "Largest Driver",
+                "Other Measured Effects",
                 "Residual / unexplained",
             ],
             visible_rows,
         ),
         "caveats": [
             "Synthetic manager benchmarks may use proxy benchmarks for demo purposes; they are not production recommendations.",
-            "Timing is unavailable because clean trade/holding history, flow treatment, and an approved timing method are not present.",
+            TIMING_UNAVAILABLE_TEXT,
         ],
         "advisor_note": (
-            "This summary uses calculated manager component effects; future manager integrated attribution variants remain separate."
+            "Manager Benchmark Return is the manager/sleeve benchmark; this synthetic demo "
+            "uses an explicit manager-specific mandate proxy plus an AI Adoption "
+            "theme-benchmark blend. The table shows each manager's largest driver; other "
+            "measured effects and residual complete the tie-out."
         ),
     }
     return _report_input(
@@ -743,9 +770,7 @@ def _manager_summary_input(context: dict[str, Any]) -> dict[str, Any]:
         context=context,
         visible_content=visible,
         timing_status=manager_summary["timing_status"],
-        residual_policy=(
-            "Residual / unexplained is the manager-level reconciler after calculated manager effects."
-        ),
+        residual_policy=_manager_residual_policy_text(),
         benchmark_or_proxy_basis="Manager-specific synthetic benchmarks",
         source_calculated_output_artifact_keys=(
             "manifest",
@@ -767,6 +792,10 @@ def _manager_summary_input(context: dict[str, Any]) -> dict[str, Any]:
             "uses_calculated_manager_summary": True,
             "timing_column_removed": True,
             "residual_labeled_separately": True,
+            "other_measured_effects_column_included": True,
+            "largest_driver_plus_other_measured_plus_residual_ties": all(
+                _manager_driver_tie_out(manager) for manager in managers
+            ),
         },
     )
 
@@ -780,7 +809,8 @@ def _lens_attribution_input(context: dict[str, Any]) -> dict[str, Any]:
             "Weight": _format_percent(row["actual_portfolio_weight"]),
             "Portfolio Return": _format_percent(row["actual_portfolio_theme_return"]),
             "Theme Benchmark Return": _format_percent(row["theme_benchmark_return"]),
-            "Total Effect": _format_signed_percent(row["total_effect"]),
+            "Active Return": _format_signed_percent(_theme_active_return(row)),
+            "Total Attribution Effect": _format_signed_percent(row["total_effect"]),
             "total_effect": row["total_effect"],
         }
         for row in detail["rows"]
@@ -794,14 +824,15 @@ def _lens_attribution_input(context: dict[str, Any]) -> dict[str, Any]:
             "Weight": row["Weight"],
             "Portfolio Return": row["Portfolio Return"],
             "Theme Benchmark Return": row["Theme Benchmark Return"],
-            "Total Effect": row["Total Effect"],
+            "Active Return": row["Active Return"],
+            "Total Attribution Effect": row["Total Attribution Effect"],
         }
         for row in rows
     ]
     visible = {
         "headline_sentence": (
             f"Under the {selected_lens['display_name']} lens, {top_positive['Theme Bucket']} "
-            "is the largest positive calculated theme contributor versus its theme benchmark."
+            "is the largest positive total attribution effect; active return is shown separately."
         ),
         "headline_metrics": [
             _metric("Net calculated theme effect", total, _format_signed_percent(total)),
@@ -823,7 +854,8 @@ def _lens_attribution_input(context: dict[str, Any]) -> dict[str, Any]:
                 "Weight",
                 "Portfolio Return",
                 "Theme Benchmark Return",
-                "Total Effect",
+                "Active Return",
+                "Total Attribution Effect",
             ],
             visible_rows,
         ),
@@ -832,7 +864,9 @@ def _lens_attribution_input(context: dict[str, Any]) -> dict[str, Any]:
             "Energy Security calculated attribution remains gated until a calculated output pack exists for that lens.",
         ],
         "advisor_note": (
-            "Read this as a calculated one-lens theme performance view; timing remains unavailable."
+            "Theme benchmarks apply bucket-by-bucket inside AI Adoption. Active Return is "
+            "Portfolio Return minus Theme Benchmark Return; Total Attribution Effect also "
+            f"reflects benchmark selection/sizing and asset effects. {TIMING_UNAVAILABLE_TEXT}"
         ),
     }
     return _report_input(
@@ -852,7 +886,8 @@ def _lens_attribution_input(context: dict[str, Any]) -> dict[str, Any]:
         visible_content=visible,
         timing_status=detail["timing_status"],
         residual_policy=(
-            "No residual row is shown in the calculated theme-bucket summary; portfolio residual remains in the integrated summary/detail reports."
+            "No residual row is shown in the calculated theme-bucket summary; portfolio residual remains in the integrated summary/detail reports. "
+            "Residual / unexplained may include unmeasured timing, data, flow, rounding, or reconciliation effects."
         ),
         benchmark_or_proxy_basis="Synthetic AI Adoption theme benchmark set",
         source_calculated_output_artifact_keys=(
@@ -869,6 +904,9 @@ def _lens_attribution_input(context: dict[str, Any]) -> dict[str, Any]:
             "relative_contribution_total": total,
             "uses_calculated_theme_benchmark_detail": True,
             "unsupported_calculated_lenses_gated": ["Energy Security"],
+            "active_return_bridge_included": True,
+            "active_return_definition": "portfolio_return_minus_theme_benchmark_return",
+            "total_effect_distinguished_from_active_return": True,
             "timing_contribution_included": False,
         },
     )
@@ -1033,6 +1071,7 @@ def _theme_detail_visible_row(row: dict[str, Any]) -> dict[str, Any]:
         "Weight": _format_percent(row["actual_portfolio_weight"]),
         "Portfolio Return": _format_percent(row["actual_portfolio_theme_return"]),
         "Theme Benchmark Return": _format_percent(row["theme_benchmark_return"]),
+        "Active Return": _format_signed_percent(_theme_active_return(row)),
         "Theme Benchmark Selection": _format_signed_percent(
             row["theme_benchmark_selection_effect"]
         ),
@@ -1041,8 +1080,14 @@ def _theme_detail_visible_row(row: dict[str, Any]) -> dict[str, Any]:
         ),
         "Asset Selection": _format_signed_percent(row["asset_selection_effect"]),
         "Asset Sizing": _format_signed_percent(row["asset_sizing_effect"]),
-        "Total Effect": _format_signed_percent(row["total_effect"]),
+        "Total Attribution Effect": _format_signed_percent(row["total_effect"]),
     }
+
+
+def _theme_active_return(row: dict[str, Any]) -> float:
+    return _round_return(
+        row["actual_portfolio_theme_return"] - row["theme_benchmark_return"]
+    )
 
 
 def _largest_manager_driver(manager: dict[str, Any]) -> str:
@@ -1052,10 +1097,41 @@ def _largest_manager_driver(manager: dict[str, Any]) -> str:
     )
 
 
+def _manager_other_measured_effects(manager: dict[str, Any]) -> float:
+    measured_fields = (
+        "theme_benchmark_selection_effect",
+        "theme_benchmark_sizing_effect",
+        "asset_selection_effect",
+        "asset_sizing_effect",
+    )
+    measured_total = _round_return(sum(float(manager[field]) for field in measured_fields))
+    if manager["largest_driver"]["label"] == "Residual / unexplained":
+        return measured_total
+    return _round_return(measured_total - float(manager["largest_driver"]["value"]))
+
+
+def _manager_driver_tie_out(manager: dict[str, Any]) -> bool:
+    largest_value = float(manager["largest_driver"]["value"])
+    other_measured = _manager_other_measured_effects(manager)
+    residual = float(manager["residual_unexplained"])
+    if manager["largest_driver"]["label"] == "Residual / unexplained":
+        total = other_measured + residual
+    else:
+        total = largest_value + other_measured + residual
+    return abs(_round_return(total) - manager["relative_return"]) <= 0.000001
+
+
 def _residual_policy_text() -> str:
     return (
-        "Residual / unexplained is the calculated reconciler after visible attribution effects "
-        "and may include unmeasured timing, data, flow, or reconciliation effects."
+        "Residual / unexplained is the calculated reconciler after visible attribution effects. "
+        "Residual / unexplained may include unmeasured timing, data, flow, rounding, or reconciliation effects."
+    )
+
+
+def _manager_residual_policy_text() -> str:
+    return (
+        "Residual / unexplained is the manager-level reconciler after calculated manager effects. "
+        "Residual / unexplained may include unmeasured timing, data, flow, rounding, or reconciliation effects."
     )
 
 

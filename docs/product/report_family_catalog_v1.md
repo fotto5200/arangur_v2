@@ -53,6 +53,8 @@ Status update after Calculated Synthetic Attribution Engine v1: calculated local
 
 Status update after Regenerate Attribution Mockups from Calculated Outputs v1: local `attribution_v1` report fixtures and Markdown mockups now consume the calculated output pack where supported. Integrated Performance Attribution Summary/Detail, Manager Attribution Summary, and Lens-Based Performance Attribution - AI Adoption are generated from calculated outputs. Lens-Based Performance Attribution - Energy Security is gated for calculated attribution until inputs and calculated outputs exist for that lens. Timing, production/client attribution, scenario-versus-benchmark, probabilistic range, and generated-report/advisor-flow wiring remain gated.
 
+Status update after Attribution Calculation Explanation Polish v1: calculated attribution mockups now clarify benchmark basis and arithmetic. Detail and AI Adoption lens reports show Active Return separately from Total Attribution Effect so a bucket's return gap versus its theme benchmark is not confused with its full attribution effect. Manager Attribution Summary states manager benchmark basis and separates Largest Driver, Other Measured Effects, and Residual / unexplained.
+
 ## Catalog Rules
 
 - A family may have multiple report instances, but each instance should answer one question.

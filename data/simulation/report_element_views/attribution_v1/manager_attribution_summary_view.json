@@ -1,11 +1,11 @@
 {
-  "advisor_note": "This summary uses calculated manager component effects; future manager integrated attribution variants remain separate.",
+  "advisor_note": "Manager Benchmark Return is the manager/sleeve benchmark; this synthetic demo uses an explicit manager-specific mandate proxy plus an AI Adoption theme-benchmark blend. The table shows each manager's largest driver; other measured effects and residual complete the tie-out.",
   "audience_tier": "Advisor review",
   "benchmark_or_proxy_basis": "Manager-specific synthetic benchmarks",
   "calculated_from_lower_level_inputs": true,
   "caveats": [
     "Synthetic manager benchmarks may use proxy benchmarks for demo purposes; they are not production recommendations.",
-    "Timing is unavailable because clean trade/holding history, flow treatment, and an approved timing method are not present."
+    "Timing is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present."
   ],
   "compact_table": {
     "columns": [
@@ -14,6 +14,7 @@
       "Manager Benchmark Return",
       "Relative Return",
       "Largest Driver",
+      "Other Measured Effects",
       "Residual / unexplained"
     ],
     "rows": [
@@ -21,6 +22,7 @@
         "Largest Driver": "Theme benchmark sizing (+2.78%)",
         "Manager": "Manager A - Growth / AI Infrastructure",
         "Manager Benchmark Return": "9.50%",
+        "Other Measured Effects": "-1.36%",
         "Relative Return": "+2.10%",
         "Residual / unexplained": "+0.68%",
         "Return": "11.60%"
@@ -29,6 +31,7 @@
         "Largest Driver": "Theme benchmark selection (-0.73%)",
         "Manager": "Manager B - Core Quality Equity",
         "Manager Benchmark Return": "7.60%",
+        "Other Measured Effects": "+0.98%",
         "Relative Return": "+0.80%",
         "Residual / unexplained": "+0.55%",
         "Return": "8.40%"
@@ -37,6 +40,7 @@
         "Largest Driver": "Theme benchmark selection (+2.57%)",
         "Manager": "Manager C - Income and Cash Generation",
         "Manager Benchmark Return": "4.30%",
+        "Other Measured Effects": "-1.61%",
         "Relative Return": "+0.40%",
         "Residual / unexplained": "-0.56%",
         "Return": "4.70%"
@@ -45,6 +49,7 @@
         "Largest Driver": "Theme benchmark selection (+0.57%)",
         "Manager": "Manager D - Private Markets / Real Assets",
         "Manager Benchmark Return": "6.30%",
+        "Other Measured Effects": "+0.27%",
         "Relative Return": "+0.80%",
         "Residual / unexplained": "-0.05%",
         "Return": "7.10%"
@@ -53,6 +58,7 @@
         "Largest Driver": "Theme benchmark selection (+3.77%)",
         "Manager": "Manager E - Liquidity Reserve / Defensive Ballast",
         "Manager Benchmark Return": "3.10%",
+        "Other Measured Effects": "-1.47%",
         "Relative Return": "+0.30%",
         "Residual / unexplained": "-2.00%",
         "Return": "3.40%"
@@ -61,6 +67,7 @@
         "Largest Driver": "Residual / unexplained (+2.83%)",
         "Manager": "Manager F - Opportunistic Macro / Hedge",
         "Manager Benchmark Return": "7.50%",
+        "Other Measured Effects": "-1.43%",
         "Relative Return": "+1.40%",
         "Residual / unexplained": "+2.83%",
         "Return": "8.90%"
@@ -124,7 +131,7 @@
   "report_element_id": "manager_attribution_summary",
   "report_family": "Manager Attribution",
   "representation_level": "Manager versus manager-specific benchmark",
-  "residual_policy": "Residual / unexplained is the manager-level reconciler after calculated manager effects.",
+  "residual_policy": "Residual / unexplained is the manager-level reconciler after calculated manager effects. Residual / unexplained may include unmeasured timing, data, flow, rounding, or reconciliation effects.",
   "schema_version": "attribution_report_view.v1",
   "source_calculated_attribution_engine_id": "synthetic_attribution_engine_v1",
   "source_calculated_output_artifacts": [
@@ -147,8 +154,10 @@
     "all_current_managers_covered": true,
     "all_manager_benchmark_basis_types_explicit": true,
     "current_manager_count": 6,
+    "largest_driver_plus_other_measured_plus_residual_ties": true,
     "manager_rows_shown": 6,
     "manager_tie_outs_reconcile": true,
+    "other_measured_effects_column_included": true,
     "residual_labeled_separately": true,
     "timing_column_removed": true,
     "uses_calculated_manager_summary": true

@@ -569,9 +569,11 @@ Future attribution reports should change as follows:
 
 - Summary should include a benchmark-basis note: global benchmark, selected lens, and whether effects are calculated or supplied.
 - Detail now shows calculated theme-benchmark rows in supported local `attribution_v1` fixtures. `Not separately measured` component columns should remain absent from client-facing calculated mockups unless a future advisor/internal gap view deliberately needs them.
+- Detail and lens reports should distinguish Active Return, meaning portfolio return minus theme benchmark return, from Total Attribution Effect, meaning the calculated attribution effect after benchmark selection/sizing and asset effects.
 - Manager reports should disclose manager benchmark basis: mandate benchmark, broad policy benchmark, or theme-benchmark blend.
+- Manager summary reports should not imply residual is the only non-largest-driver effect; show or explain other measured effects separately from residual.
 - Lens-based reports should clarify theme benchmark construction and proxy status.
-- Residual caveats should stay precise: residual may include unmeasured timing/data/flow/reconciliation effects.
+- Residual caveats should stay precise: residual may include unmeasured timing, data, flow, rounding, or reconciliation effects.
 - Reports should not imply production attribution readiness from synthetic fixture readiness.
 
 ## 11. Implementation Sequencing Recommendation
@@ -582,6 +584,7 @@ Follow-ups implemented:
 Synthetic Attribution Calculation Inputs v1
 Calculated Synthetic Attribution Engine v1
 Regenerate Attribution Mockups from Calculated Outputs v1
+Attribution Calculation Explanation Polish v1
 ```
 
 The implemented calculation-input pack supplies:

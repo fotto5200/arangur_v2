@@ -21,8 +21,8 @@ Portfolio return exceeded the global benchmark by +1.15%, with asset selection t
 ## Caveats
 
 - Synthetic local-demo returns and benchmark inputs only.
-- Timing is unavailable because clean trade/holding history, flow treatment, and an approved timing method are not present.
+- Timing is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present.
 
 ## Advisor Note
 
-Use this as a compact product-review shape; real/client attribution remains gated until production returns, benchmark maps, flows, and methodology are approved.
+Global benchmark is the whole-portfolio benchmark; theme benchmarks are bucket-level benchmarks inside the selected AI Adoption lens. Real/client attribution remains gated until production returns, benchmark maps, flows, and methodology are approved.

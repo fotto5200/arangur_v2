@@ -67,6 +67,7 @@ FORBIDDEN_VISIBLE_TERMS = (
     "strategy/lens-bucket",
     "proxy return",
     "bucket return",
+    "not timing",
 )
 
 RAW_ID_PATTERNS = (
@@ -315,10 +316,7 @@ class AttributionReportViewsTests(unittest.TestCase):
             self.assertIn(row["status"], readme)
 
     def test_timing_is_unavailable_and_not_a_contribution_row(self) -> None:
-        for report_id in (
-            "integrated_performance_attribution_summary",
-            "integrated_performance_attribution_detail",
-        ):
+        for report_id in BUILD_NOW_REPORT_IDS:
             view = _load_json(VIEW_DIR / VIEW_FILENAME_BY_REPORT_ID[report_id])
             table = view.get("contribution_bridge") or view["compact_table"]
             row_text = "\n".join(
@@ -326,13 +324,37 @@ class AttributionReportViewsTests(unittest.TestCase):
                 for row in table["rows"]
                 for value in row.values()
             ).lower()
+            column_text = "\n".join(str(column) for column in table["columns"]).lower()
+            visible_text = _visible_text(view).lower()
             with self.subTest(report_id=report_id):
                 self.assertEqual("unavailable", view["timing_status"])
-                self.assertFalse(view["table_validation"]["timing_contribution_included"])
+                if "timing_contribution_included" in view["table_validation"]:
+                    self.assertFalse(view["table_validation"]["timing_contribution_included"])
                 self.assertNotIn("| timing |", row_text)
-                self.assertNotIn("not timing", row_text)
-                self.assertIn("residual / unexplained", _visible_text(view).lower())
-                self.assertIn("may include unmeasured timing", view["residual_policy"].lower())
+                self.assertNotIn("timing", column_text)
+                self.assertNotIn("not timing", visible_text)
+                self.assertIn("timing is not shown separately", visible_text)
+                self.assertIn("residual / unexplained", visible_text + "\n" + view["residual_policy"].lower())
+                self.assertIn(
+                    "may include unmeasured timing, data, flow, rounding, or reconciliation effects",
+                    view["residual_policy"].lower(),
+                )
+
+    def test_benchmark_basis_explanations_are_visible(self) -> None:
+        summary = _load_json(
+            VIEW_DIR / "integrated_performance_attribution_summary_view.json"
+        )
+        detail = _load_json(VIEW_DIR / "integrated_performance_attribution_detail_view.json")
+        manager = _load_json(VIEW_DIR / "manager_attribution_summary_view.json")
+        lens = _load_json(
+            VIEW_DIR / "lens_based_performance_attribution_ai_adoption_view.json"
+        )
+
+        self.assertIn("whole-portfolio benchmark", _visible_text(summary))
+        self.assertIn("bucket benchmark inside AI Adoption", _visible_text(detail))
+        self.assertIn("Manager Benchmark Return is the manager/sleeve benchmark", _visible_text(manager))
+        self.assertIn("explicit manager-specific mandate proxy", _visible_text(manager))
+        self.assertIn("Theme benchmarks apply bucket-by-bucket inside AI Adoption", _visible_text(lens))
 
     def test_summary_visible_effects_match_calculated_whole_portfolio_output(self) -> None:
         whole = _load_calculated("whole_portfolio_summary")
@@ -390,21 +412,39 @@ class AttributionReportViewsTests(unittest.TestCase):
         self.assertEqual("Calculated Theme Benchmark Detail", table["title"])
         self.assertIn("Theme Bucket", table["columns"])
         self.assertIn("Theme Benchmark Return", table["columns"])
+        self.assertIn("Active Return", table["columns"])
         self.assertIn("Theme Benchmark Selection", table["columns"])
         self.assertIn("Theme Benchmark Sizing", table["columns"])
         self.assertIn("Asset Selection", table["columns"])
         self.assertIn("Asset Sizing", table["columns"])
+        self.assertIn("Total Attribution Effect", table["columns"])
+        self.assertNotIn("Total Effect", table["columns"])
         self.assertNotIn("Contribution", table["columns"])
         self.assertNotEqual(
             "Calculated Contribution Summary",
             table["title"],
         )
         self.assertNotIn("Not separately measured", _visible_text(view))
+        self.assertTrue(validation["active_return_bridge_included"])
+        self.assertEqual(
+            "portfolio_return_minus_theme_benchmark_return",
+            validation["active_return_definition"],
+        )
+        self.assertTrue(validation["total_effect_distinguished_from_active_return"])
+        self.assertIn("Active Return is Portfolio Return minus Theme Benchmark Return", _visible_text(view))
+        self.assertIn("Total Attribution Effect combines", _visible_text(view))
 
         by_bucket = {row["bucket_display_name"]: row for row in detail["rows"]}
         for row in table["rows"]:
             with self.subTest(bucket=row["Theme Bucket"]):
                 source = by_bucket[row["Theme Bucket"]]
+                self.assertEqual(
+                    _format_signed_percent(
+                        source["actual_portfolio_theme_return"]
+                        - source["theme_benchmark_return"]
+                    ),
+                    row["Active Return"],
+                )
                 self.assertEqual(
                     _format_signed_percent(source["theme_benchmark_selection_effect"]),
                     row["Theme Benchmark Selection"],
@@ -423,7 +463,7 @@ class AttributionReportViewsTests(unittest.TestCase):
                 )
                 self.assertEqual(
                     _format_signed_percent(source["total_effect"]),
-                    row["Total Effect"],
+                    row["Total Attribution Effect"],
                 )
 
     def test_manager_summary_covers_all_managers_or_justifies_scope(self) -> None:
@@ -441,11 +481,17 @@ class AttributionReportViewsTests(unittest.TestCase):
         self.assertTrue(view["table_validation"]["timing_column_removed"])
         self.assertIn("All six", view["headline_sentence"])
         self.assertIn("Manager Benchmark Return", table["columns"])
+        self.assertIn("Other Measured Effects", table["columns"])
         self.assertIn("Residual / unexplained", table["columns"])
         self.assertNotIn("Proxy return", table["columns"])
         self.assertNotIn("Timing", table["columns"])
         self.assertIn("proxy benchmarks", "\n".join(view["caveats"]))
         self.assertIn("not production recommendations", "\n".join(view["caveats"]))
+        self.assertTrue(view["table_validation"]["other_measured_effects_column_included"])
+        self.assertTrue(
+            view["table_validation"]["largest_driver_plus_other_measured_plus_residual_ties"]
+        )
+        self.assertIn("other measured effects and residual complete the tie-out", _visible_text(view))
         by_manager = {row["display_name"]: row for row in calculated["managers"]}
         for row in table["rows"]:
             with self.subTest(manager=row["Manager"]):
@@ -457,6 +503,10 @@ class AttributionReportViewsTests(unittest.TestCase):
                 self.assertEqual(
                     _format_signed_percent(source["relative_return"]),
                     row["Relative Return"],
+                )
+                self.assertEqual(
+                    _format_signed_percent(_manager_other_measured_effects(source)),
+                    row["Other Measured Effects"],
                 )
                 self.assertEqual(
                     _format_signed_percent(source["residual_unexplained"]),
@@ -485,14 +535,36 @@ class AttributionReportViewsTests(unittest.TestCase):
         self.assertIn("Theme Bucket", table["columns"])
         self.assertIn("Portfolio Return", table["columns"])
         self.assertIn("Theme Benchmark Return", table["columns"])
-        self.assertIn("Total Effect", table["columns"])
+        self.assertIn("Active Return", table["columns"])
+        self.assertIn("Total Attribution Effect", table["columns"])
+        self.assertNotIn("Total Effect", table["columns"])
         self.assertNotIn("Lens Bucket", table["columns"])
         self.assertNotIn("Proxy return", table["columns"])
+        self.assertTrue(view["table_validation"]["active_return_bridge_included"])
+        self.assertTrue(view["table_validation"]["total_effect_distinguished_from_active_return"])
+        self.assertIn("active return is shown separately", view["headline_sentence"])
+        self.assertIn("Total Attribution Effect also reflects", _visible_text(view))
         self.assertIn("proxy benchmarks", "\n".join(view["caveats"]))
         self.assertIn(
             "Energy Security calculated attribution remains gated",
             "\n".join(view["caveats"]),
         )
+
+        by_bucket = {row["bucket_display_name"]: row for row in detail["rows"]}
+        for row in table["rows"]:
+            with self.subTest(bucket=row["Theme Bucket"]):
+                source = by_bucket[row["Theme Bucket"]]
+                self.assertEqual(
+                    _format_signed_percent(
+                        source["actual_portfolio_theme_return"]
+                        - source["theme_benchmark_return"]
+                    ),
+                    row["Active Return"],
+                )
+                self.assertEqual(
+                    _format_signed_percent(source["total_effect"]),
+                    row["Total Attribution Effect"],
+                )
 
         gated_index = _load_json(VIEW_DIR / "gated_deferred_attribution_report_index.json")
         energy_row = next(
@@ -516,6 +588,8 @@ class AttributionReportViewsTests(unittest.TestCase):
         self.assertIn("Asset selection", combined)
         self.assertIn("Asset sizing", combined)
         self.assertIn("Residual / unexplained", combined)
+        self.assertIn("Active Return", combined)
+        self.assertIn("Total Attribution Effect", combined)
         self.assertNotIn("Strategy/lens-bucket", combined)
         self.assertNotIn("Proxy return", combined)
         self.assertNotIn("Not separately measured", combined)
@@ -576,6 +650,21 @@ def _format_signed_percent(value: object) -> str:
     number = float(value)
     sign = "+" if number >= 0 else "-"
     return f"{sign}{abs(number) * 100:.2f}%"
+
+
+def _manager_other_measured_effects(manager: dict) -> float:
+    measured_total = sum(
+        float(manager[field])
+        for field in (
+            "theme_benchmark_selection_effect",
+            "theme_benchmark_sizing_effect",
+            "asset_selection_effect",
+            "asset_sizing_effect",
+        )
+    )
+    if manager["largest_driver"]["label"] == "Residual / unexplained":
+        return measured_total
+    return measured_total - float(manager["largest_driver"]["value"])
 
 
 if __name__ == "__main__":

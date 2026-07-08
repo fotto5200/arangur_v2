@@ -1,11 +1,11 @@
 {
-  "advisor_note": "Use this as a compact product-review shape; real/client attribution remains gated until production returns, benchmark maps, flows, and methodology are approved.",
+  "advisor_note": "Global benchmark is the whole-portfolio benchmark; theme benchmarks are bucket-level benchmarks inside the selected AI Adoption lens. Real/client attribution remains gated until production returns, benchmark maps, flows, and methodology are approved.",
   "audience_tier": "Client briefing and advisor review",
   "benchmark_or_proxy_basis": "Northstar Synthetic Policy Benchmark",
   "calculated_from_lower_level_inputs": true,
   "caveats": [
     "Synthetic local-demo returns and benchmark inputs only.",
-    "Timing is unavailable because clean trade/holding history, flow treatment, and an approved timing method are not present."
+    "Timing is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present."
   ],
   "compact_table": null,
   "contribution_bridge": {
@@ -97,7 +97,7 @@
   "report_element_id": "integrated_performance_attribution_summary",
   "report_family": "Integrated Performance Attribution",
   "representation_level": "Whole portfolio versus benchmark",
-  "residual_policy": "Residual / unexplained is the calculated reconciler after visible attribution effects and may include unmeasured timing, data, flow, or reconciliation effects.",
+  "residual_policy": "Residual / unexplained is the calculated reconciler after visible attribution effects. Residual / unexplained may include unmeasured timing, data, flow, rounding, or reconciliation effects.",
   "schema_version": "attribution_report_view.v1",
   "source_calculated_attribution_engine_id": "synthetic_attribution_engine_v1",
   "source_calculated_output_artifacts": [

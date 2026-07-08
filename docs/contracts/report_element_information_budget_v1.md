@@ -139,6 +139,8 @@ After Calculated Synthetic Attribution Engine v1, calculated local synthetic att
 
 After Regenerate Attribution Mockups from Calculated Outputs v1, local `attribution_v1` report inputs/views/mockups use the calculated output pack where supported. The calculated-supported set is Integrated Performance Attribution Summary, Integrated Performance Attribution Detail, Manager Attribution Summary, and Lens-Based Performance Attribution - AI Adoption. Energy Security attribution is gated for calculated attribution until calculated outputs exist for that lens.
 
+After Attribution Calculation Explanation Polish v1, calculated local attribution reports should distinguish Active Return from Total Attribution Effect where a theme-bucket return gap could otherwise be confused with the full attribution result. Manager summaries should not imply residual is the only non-largest-driver effect; they should show or explain Other Measured Effects separately from Residual / unexplained.
+
 Additional anti-clutter checks:
 
 - Do not mix asset type, manager/sleeve, lens/theme, and coverage/review statuses in one additive table.
@@ -147,8 +149,9 @@ Additional anti-clutter checks:
 - Do not use readiness artifacts as client-facing reports. They may explain why a report is unavailable.
 - Visual-first reports must state the range, benchmark/proxy, horizon, and caveat needed to interpret the picture.
 - Performance attribution visible labels should prefer Global benchmark, Theme benchmark, Manager Benchmark Return, Portfolio Return, Asset selection/sizing, and `Residual / unexplained`; do not show raw proxy ids, proxy-return labels, or strategy/lens-bucket construction language in product-facing mockups.
+- Performance attribution detail/lens tables should distinguish Active Return, meaning portfolio return minus theme benchmark return, from Total Attribution Effect, meaning the calculated attribution effect after benchmark selection/sizing and asset effects.
 - Benchmark-relative attribution effects must not imply lower-level calculation unless the required benchmark portfolio, asset, weight, manager benchmark-basis inputs, and calculated engine outputs exist. For the local calculated synthetic path, prefer the calculated output pack over supplied allocation fields; if an effect is supplied for synthetic demo review, label or caveat that provenance instead of hiding it.
-- Timing attribution should stay unavailable unless clean trade/holding history, flow treatment, and an approved timing method exist; residual may include unmeasured timing/data/flow/reconciliation effects but must not be labeled timing.
+- Timing attribution should stay unavailable unless clean trade/holding history, flow treatment, and an approved timing method exist; residual may include unmeasured timing, data, flow, rounding, or reconciliation effects but must not be labeled timing.
 
 ## Kill Switch
 

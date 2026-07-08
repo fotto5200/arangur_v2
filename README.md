@@ -255,7 +255,7 @@ This writes deterministic JSON under:
 
 ## Generate Calculated Synthetic Attribution Report Mockups
 
-The attribution report-view generator turns the calculated synthetic attribution outputs into local-only attribution report input fixtures, view fixtures, and Markdown product-review mockups using the polished global/theme/manager benchmark wording. AI Adoption is the selected calculated attribution lens; Energy Security calculated attribution is gated until calculated outputs exist for that lens. Timing remains unavailable and production attribution remains gated. This does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
+The attribution report-view generator turns the calculated synthetic attribution outputs into local-only attribution report input fixtures, view fixtures, and Markdown product-review mockups using the polished global/theme/manager benchmark wording. The mockups distinguish Active Return from Total Attribution Effect and clarify manager largest-driver, other-measured-effect, and residual tie-outs. AI Adoption is the selected calculated attribution lens; Energy Security calculated attribution is gated until calculated outputs exist for that lens. Timing remains unavailable and production attribution remains gated. This does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
 
 ```cmd
 set PYTHONPATH=src

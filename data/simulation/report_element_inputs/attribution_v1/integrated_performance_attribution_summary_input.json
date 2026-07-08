@@ -35,7 +35,7 @@
   "report_element_id": "integrated_performance_attribution_summary",
   "report_family": "Integrated Performance Attribution",
   "representation_level": "Whole portfolio versus benchmark",
-  "residual_policy": "Residual / unexplained is the calculated reconciler after visible attribution effects and may include unmeasured timing, data, flow, or reconciliation effects.",
+  "residual_policy": "Residual / unexplained is the calculated reconciler after visible attribution effects. Residual / unexplained may include unmeasured timing, data, flow, rounding, or reconciliation effects.",
   "residual_policy_details": {
     "policy": "explicit_reconciler_after_calculated_effects",
     "timing_used_as_residual": false,
@@ -75,10 +75,10 @@
   },
   "timing_status": "unavailable",
   "visible_content": {
-    "advisor_note": "Use this as a compact product-review shape; real/client attribution remains gated until production returns, benchmark maps, flows, and methodology are approved.",
+    "advisor_note": "Global benchmark is the whole-portfolio benchmark; theme benchmarks are bucket-level benchmarks inside the selected AI Adoption lens. Real/client attribution remains gated until production returns, benchmark maps, flows, and methodology are approved.",
     "caveats": [
       "Synthetic local-demo returns and benchmark inputs only.",
-      "Timing is unavailable because clean trade/holding history, flow treatment, and an approved timing method are not present."
+      "Timing is not shown separately because clean trade/holding history, flow treatment, and an approved timing method are not present."
     ],
     "contribution_bridge": {
       "columns": [
