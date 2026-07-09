@@ -1,0 +1,54 @@
+{
+  "advisor_handoff_residual_status": "pass",
+  "approval_status": "synthetic_demo_approved",
+  "calculations_gated": [
+    "full_manager_by_manager_driver_detail",
+    "timing_attribution",
+    "dollar_pnl_attribution",
+    "production_client_manager_attribution",
+    "blended_all_in_attribution",
+    "position_level_manager_attribution"
+  ],
+  "calculations_supported": [
+    "manager_active_return_vs_mandate",
+    "manager_implementation_effect",
+    "within_manager_driver_rows",
+    "selected_manager_detail",
+    "advisor_policy_attribution_v2_handoff",
+    "row_tie_outs"
+  ],
+  "engine_id": "manager_mandate_attribution_engine_v1",
+  "engine_version": "2026-07-09",
+  "generated_artifacts": {
+    "driver_rows": "within_manager_driver_rows.json",
+    "manager_rows": "manager_mandate_attribution_rows.json",
+    "manifest": "manager_mandate_attribution_manifest.json",
+    "quality_summary": "manager_mandate_attribution_quality_summary.json",
+    "selected_manager_detail": "selected_manager_detail_artifact.json",
+    "summary": "manager_mandate_attribution_summary.json"
+  },
+  "generated_at": "2026-07-09T00:00:00Z",
+  "generator_version": "manager_mandate_attribution.v1",
+  "limitations": [
+    "Synthetic local demo only.",
+    "Driver categories are diagnostics for product review, not production-approved diagnostics.",
+    "Timing, dollar P&L, production client data, blended, and position-level outputs are gated."
+  ],
+  "local_only": true,
+  "methodology_summary": {
+    "advisor_handoff": "Total manager implementation effect reconciles to advisor policy attribution v2 handoff.",
+    "driver_rows": "Synthetic local driver components scaled by actual manager weight.",
+    "manager_active_return": "Manager actual return minus manager mandate benchmark return.",
+    "manager_implementation_effect": "Actual manager weight times manager active return."
+  },
+  "quality_summary_status": "pass",
+  "schema_version": "manager_mandate_attribution_manifest.v1",
+  "source_advisor_policy_attribution_dir": "data/simulation/policy_level_attribution/advisor_policy_attribution_engine_v2",
+  "source_advisor_policy_attribution_engine_id": "advisor_policy_attribution_engine_v2",
+  "source_manager_calculated_dir": "data/simulation/attribution_calculated/synthetic_attribution_engine_v1",
+  "source_manager_calculated_engine_id": "synthetic_attribution_engine_v1",
+  "source_policy_mandate_pack": "synthetic_policy_mandate_pack_v1",
+  "source_policy_mandate_pack_dir": "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1",
+  "synthetic_data": true,
+  "total_manager_implementation_effect": 0.010545519
+}

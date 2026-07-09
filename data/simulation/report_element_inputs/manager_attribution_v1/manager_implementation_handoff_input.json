@@ -1,0 +1,110 @@
+{
+  "advisor_policy_effects_visible_in_manager_reports": false,
+  "audience_tier": "internal_product_review_and_advisor_quality_control",
+  "denominator_category_system": "percentage_points_of_total_portfolio_return",
+  "display_title": "Manager Implementation Handoff",
+  "exact_report_question": "Does manager mandate attribution tie to the manager implementation handoff in advisor policy attribution?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-09T00:00:00Z",
+  "generator_version": "manager_mandate_attribution.v1",
+  "information_budget": {
+    "max_advisor_notes": 1,
+    "max_benchmark_basis_items": 4,
+    "max_caveats": 1,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 3,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true
+  },
+  "internal_source_metadata": {
+    "calculated_engine_id": "manager_mandate_attribution_engine_v1",
+    "source_advisor_policy_attribution_engine_id": "advisor_policy_attribution_engine_v2",
+    "source_manager_calculated_engine_id": "synthetic_attribution_engine_v1",
+    "source_policy_mandate_pack_id": "synthetic_policy_mandate_pack_v1"
+  },
+  "internal_source_refs": [
+    "data/simulation/policy_level_attribution/advisor_policy_attribution_engine_v2/advisor_policy_attribution_summary_v2.json",
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/policy_level_attribution_inputs.json"
+  ],
+  "local_only": true,
+  "manager_implementation_visible_in_advisor_policy_report": false,
+  "master_question_family": "Performance / Plan",
+  "not_wired_into_advisor_ui": true,
+  "not_wired_into_generated_report_flow": true,
+  "rendering_mode": "compact_handoff_table",
+  "report_element_id": "manager_implementation_handoff",
+  "report_family": "manager_mandate_attribution",
+  "representation_level": "portfolio_manager_implementation_handoff",
+  "schema_version": "manager_mandate_attribution_report_input.v1",
+  "source_advisor_policy_attribution_engine_id": "advisor_policy_attribution_engine_v2",
+  "source_manager_calculated_engine_id": "synthetic_attribution_engine_v1",
+  "source_policy_mandate_pack_id": "synthetic_policy_mandate_pack_v1",
+  "summary_detail_status": "handoff_control_check",
+  "synthetic_data": true,
+  "table_validation": {
+    "advisor_policy_effect_columns_visible": false,
+    "handoff_rows_shown": 3,
+    "manager_implementation_handoff_visible": true,
+    "residual_status": "pass"
+  },
+  "visible_content": {
+    "advisor_note": "Read this after the Advisor Policy Attribution report when manager implementation needs explanation.",
+    "benchmark_basis": {
+      "actual_allocation_benchmark_return": 0.067375351,
+      "actual_portfolio_return_context": 0.07792087,
+      "advisor_policy_attribution_v2_handoff": 0.010545519,
+      "visible": true
+    },
+    "benchmark_basis_note": "The handoff starts from actual manager capital and mandate benchmarks; advisor policy effects remain in the separate advisor report.",
+    "caveats": [
+      "This handoff is a local synthetic control check, not a production client report."
+    ],
+    "compact_table": {
+      "columns": [
+        "Tie-Out Item",
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "Meaning": "Sum of actual weight times active return versus each mandate benchmark.",
+          "Tie-Out Item": "Manager reports total",
+          "Value": "+1.05 pp"
+        },
+        {
+          "Meaning": "Manager implementation amount excluded from Advisor Policy Attribution.",
+          "Tie-Out Item": "Advisor v2 handoff",
+          "Value": "+1.05 pp"
+        },
+        {
+          "Meaning": "Passes local synthetic tie-out tolerance.",
+          "Tie-Out Item": "Residual",
+          "Value": "+0.00 pp"
+        }
+      ],
+      "title": "Manager Implementation Handoff"
+    },
+    "effect_basis_note": "Both totals are percentage points of total portfolio return, so the handoff can reconcile without combining decision layers.",
+    "headline_metrics": [
+      {
+        "formatted_value": "+1.05 pp",
+        "label": "Total manager effect",
+        "raw_value": 0.010545519
+      },
+      {
+        "formatted_value": "+1.05 pp",
+        "label": "Advisor handoff",
+        "raw_value": 0.010545519
+      },
+      {
+        "formatted_value": "+0.00 pp",
+        "label": "Residual",
+        "raw_value": 0.0
+      }
+    ],
+    "headline_sentence": "Manager implementation ties to the Advisor Policy Attribution v2 handoff with a +0.00 pp residual."
+  }
+}

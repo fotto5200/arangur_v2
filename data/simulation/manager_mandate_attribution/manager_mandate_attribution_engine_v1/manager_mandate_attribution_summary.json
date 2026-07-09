@@ -1,0 +1,75 @@
+{
+  "above_mandate_manager_count": 6,
+  "actual_allocation_benchmark_return": 0.067375351,
+  "actual_portfolio_return_context": 0.07792087,
+  "actual_weight_sum": 1.0,
+  "advisor_handoff_residual": 0.0,
+  "advisor_handoff_residual_status": "pass",
+  "advisor_policy_attribution_v2_handoff": 0.010545519,
+  "below_mandate_manager_count": 0,
+  "caveats": [
+    "Synthetic local-demo attribution only; production use needs approved real manager returns and benchmarks.",
+    "Driver categories are local synthetic diagnostics and are not production-approved."
+  ],
+  "effect_basis": "percentage_points_of_total_portfolio_return",
+  "engine_id": "manager_mandate_attribution_engine_v1",
+  "engine_version": "2026-07-09",
+  "gated_calculations_not_included": [
+    "full_manager_by_manager_driver_detail",
+    "timing_attribution",
+    "dollar_pnl_attribution",
+    "production_client_manager_attribution",
+    "blended_all_in_attribution",
+    "position_level_manager_attribution"
+  ],
+  "generated_at": "2026-07-09T00:00:00Z",
+  "handoff_to_advisor_policy_attribution_v2": {
+    "advisor_policy_report_excludes_manager_implementation": true,
+    "manager_implementation_effect_handoff": 0.010545519,
+    "manager_report_total_effect": 0.010545519,
+    "residual": 0.0,
+    "source_engine_id": "advisor_policy_attribution_engine_v2",
+    "status": "pass"
+  },
+  "headline_interpretation": "Managers finished above mandate benchmarks on the actual capital they controlled.",
+  "largest_negative_manager": null,
+  "largest_negative_manager_driver": {
+    "display_name": "Manager A - Growth / AI Infrastructure",
+    "driver_id": "mandate_sub_benchmark_selection",
+    "driver_label": "Mandate sub-benchmark selection",
+    "manager_id": "mgr_a_growth_ai_infrastructure",
+    "manager_return_effect": -0.026285,
+    "portfolio_effect": -0.00653329446
+  },
+  "largest_positive_manager": {
+    "active_return_vs_mandate": 0.021,
+    "actual_weight": 0.248556,
+    "display_name": "Manager A - Growth / AI Infrastructure",
+    "manager_id": "mgr_a_growth_ai_infrastructure",
+    "manager_implementation_effect": 0.005219676,
+    "status": "above_mandate"
+  },
+  "largest_positive_manager_driver": {
+    "display_name": "Manager A - Growth / AI Infrastructure",
+    "driver_id": "mandate_sub_benchmark_sizing",
+    "driver_label": "Mandate sub-benchmark sizing",
+    "manager_id": "mgr_a_growth_ai_infrastructure",
+    "manager_return_effect": 0.027848,
+    "portfolio_effect": 0.006921787488
+  },
+  "local_only": true,
+  "manager_count": 6,
+  "manager_return_basis": "manager_return_minus_manager_mandate_benchmark_return",
+  "near_mandate_manager_count": 0,
+  "review_manager_count": 0,
+  "schema_version": "manager_mandate_attribution_calculated_output.v1",
+  "selected_manager_for_detail": "Manager A - Growth / AI Infrastructure",
+  "selected_manager_id_for_detail": "mgr_a_growth_ai_infrastructure",
+  "source_advisor_policy_attribution_engine_id": "advisor_policy_attribution_engine_v2",
+  "source_manager_calculated_engine_id": "synthetic_attribution_engine_v1",
+  "source_policy_mandate_pack_id": "synthetic_policy_mandate_pack_v1",
+  "source_readiness_status": "ready_to_align_future_reports_to_mandate_benchmarks",
+  "synthetic_data": true,
+  "total_active_return_weighted": 0.010545519,
+  "total_manager_implementation_effect": 0.010545519
+}

@@ -1,0 +1,47 @@
+{
+  "gated_or_deferred_reports": [
+    {
+      "display_title": "Full Manager-by-Manager Driver Detail",
+      "reason": "Requires a separate review surface before expanding all driver rows.",
+      "report_id": "full_manager_by_manager_driver_detail",
+      "status": "Gated"
+    },
+    {
+      "display_title": "Timing Attribution",
+      "reason": "Unavailable because clean timing inputs and an approved method are absent.",
+      "report_id": "timing_attribution",
+      "status": "Unavailable"
+    },
+    {
+      "display_title": "Dollar P&L Attribution",
+      "reason": "Gated unless reliable beginning portfolio value exists.",
+      "report_id": "dollar_pnl_attribution",
+      "status": "Gated"
+    },
+    {
+      "display_title": "Production Client Manager Attribution",
+      "reason": "Gated on approved real manager returns and mandate benchmarks.",
+      "report_id": "production_client_manager_attribution",
+      "status": "Gated"
+    },
+    {
+      "display_title": "Blended / All-In Attribution",
+      "reason": "Deferred so advisor policy and manager implementation remain separate.",
+      "report_id": "blended_all_in_attribution",
+      "status": "Deferred"
+    },
+    {
+      "display_title": "Position-Level Manager Attribution",
+      "reason": "Requires approved position-level attribution inputs and review design.",
+      "report_id": "position_level_manager_attribution",
+      "status": "Gated"
+    }
+  ],
+  "generated_at": "2026-07-09T00:00:00Z",
+  "generator_version": "manager_mandate_attribution.v1",
+  "local_only": true,
+  "purpose": "Product/readiness index for manager attribution reports deliberately not generated in v1.",
+  "schema_version": "manager_mandate_attribution_gated_deferred_index.v1",
+  "source_manager_mandate_attribution_engine_id": "manager_mandate_attribution_engine_v1",
+  "synthetic_data": true
+}

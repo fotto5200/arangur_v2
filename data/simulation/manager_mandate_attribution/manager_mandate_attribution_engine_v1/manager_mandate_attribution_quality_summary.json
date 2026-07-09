@@ -1,0 +1,118 @@
+{
+  "coverage": {
+    "advisor_policy_v2_source_loaded": true,
+    "all_current_managers_covered": true,
+    "driver_rows_generated": 30,
+    "manager_calculated_driver_source_loaded": true,
+    "manager_rows_generated": 6,
+    "policy_pack_manager_count": 6,
+    "source_data_synthetic_local_only": true
+  },
+  "engine_id": "manager_mandate_attribution_engine_v1",
+  "engine_version": "2026-07-09",
+  "formula_checks": {
+    "actual_weight_sum_status": "pass",
+    "advisor_handoff_residual_status": "pass",
+    "all_manager_driver_tie_outs_pass": true,
+    "driver_residual_status": "pass",
+    "manager_effect_row_sum_status": "pass"
+  },
+  "generated_at": "2026-07-09T00:00:00Z",
+  "largest_negative_manager": null,
+  "largest_positive_manager": {
+    "active_return_vs_mandate": 0.021,
+    "actual_weight": 0.248556,
+    "display_name": "Manager A - Growth / AI Infrastructure",
+    "manager_id": "mgr_a_growth_ai_infrastructure",
+    "manager_implementation_effect": 0.005219676,
+    "status": "above_mandate"
+  },
+  "limitations": [
+    "Synthetic local-demo manager attribution only.",
+    "Timing and dollar P&L are unavailable in this tranche.",
+    "Production client manager attribution requires approved real inputs."
+  ],
+  "local_only": true,
+  "manager_driver_tie_outs": {
+    "mgr_a_growth_ai_infrastructure": {
+      "active_return_difference": 0.0,
+      "display_name": "Manager A - Growth / AI Infrastructure",
+      "driver_active_return": 0.021,
+      "driver_portfolio_effect": 0.005219676,
+      "manager_active_return": 0.021,
+      "manager_implementation_effect": 0.005219676,
+      "portfolio_effect_difference": 0.0,
+      "status": "pass",
+      "timing_used_as_residual": false
+    },
+    "mgr_b_core_quality_equity": {
+      "active_return_difference": 0.0,
+      "display_name": "Manager B - Core Quality Equity",
+      "driver_active_return": 0.008,
+      "driver_portfolio_effect": 0.001504856,
+      "manager_active_return": 0.008,
+      "manager_implementation_effect": 0.001504856,
+      "portfolio_effect_difference": 0.0,
+      "status": "pass",
+      "timing_used_as_residual": false
+    },
+    "mgr_c_income_cash_generation": {
+      "active_return_difference": 0.0,
+      "display_name": "Manager C - Income and Cash Generation",
+      "driver_active_return": 0.004,
+      "driver_portfolio_effect": 0.000520948,
+      "manager_active_return": 0.004,
+      "manager_implementation_effect": 0.000520948,
+      "portfolio_effect_difference": 0.0,
+      "status": "pass",
+      "timing_used_as_residual": false
+    },
+    "mgr_d_private_real_assets": {
+      "active_return_difference": 0.0,
+      "display_name": "Manager D - Private Markets / Real Assets",
+      "driver_active_return": 0.008,
+      "driver_portfolio_effect": 0.001624768,
+      "manager_active_return": 0.008,
+      "manager_implementation_effect": 0.001624768,
+      "portfolio_effect_difference": 0.0,
+      "status": "pass",
+      "timing_used_as_residual": false
+    },
+    "mgr_e_liquidity_defensive": {
+      "active_return_difference": 0.0,
+      "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+      "driver_active_return": 0.003,
+      "driver_portfolio_effect": 0.000421305,
+      "manager_active_return": 0.003,
+      "manager_implementation_effect": 0.000421305,
+      "portfolio_effect_difference": 0.0,
+      "status": "pass",
+      "timing_used_as_residual": false
+    },
+    "mgr_f_opportunistic_macro": {
+      "active_return_difference": 0.0,
+      "display_name": "Manager F - Opportunistic Macro / Hedge",
+      "driver_active_return": 0.014,
+      "driver_portfolio_effect": 0.001253966,
+      "manager_active_return": 0.014,
+      "manager_implementation_effect": 0.001253966,
+      "portfolio_effect_difference": 0.0,
+      "status": "pass",
+      "timing_used_as_residual": false
+    }
+  },
+  "output_scope": {
+    "advisor_policy_effects_excluded_from_manager_reports": true,
+    "no_blended_all_in_report": true,
+    "no_dollar_pnl_attribution": true,
+    "no_external_or_live_data": true,
+    "no_new_backend_or_ui_wiring": true,
+    "no_position_level_manager_attribution": true,
+    "no_production_client_manager_attribution": true,
+    "no_timing_attribution": true
+  },
+  "overall_status": "pass",
+  "recommended_next_tranche": "Full Manager-by-Manager Driver Detail",
+  "schema_version": "manager_mandate_attribution_quality_summary.v1",
+  "synthetic_data": true
+}

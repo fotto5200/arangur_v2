@@ -1,0 +1,53 @@
+{
+  "advisor_policy_effects_visible_in_manager_reports": false,
+  "advisor_ui_wiring": "not_changed",
+  "gated_reports_not_generated": [
+    "full_manager_by_manager_driver_detail",
+    "timing_attribution",
+    "dollar_pnl_attribution",
+    "production_client_manager_attribution",
+    "blended_all_in_attribution",
+    "position_level_manager_attribution"
+  ],
+  "generated_at": "2026-07-09T00:00:00Z",
+  "generated_report_wiring": "not_changed",
+  "generator_version": "manager_mandate_attribution.v1",
+  "information_budget": {
+    "max_advisor_notes": 1,
+    "max_benchmark_basis_items": 4,
+    "max_caveats": 1,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 5,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true
+  },
+  "local_only": true,
+  "manager_implementation_visible_in_advisor_policy_report": false,
+  "markdown_mockup_count": 3,
+  "mockup_files": [
+    "manager_mandate_attribution_summary_mockup_v1.md",
+    "within_manager_attribution_detail_mockup_v1.md",
+    "manager_implementation_handoff_mockup_v1.md",
+    "README.md"
+  ],
+  "mockups_generated_from_views": true,
+  "report_ids": [
+    "manager_mandate_attribution_summary",
+    "within_manager_attribution_detail",
+    "manager_implementation_handoff"
+  ],
+  "report_view_count": 3,
+  "schema_version": "manager_mandate_attribution_report_view_index.v1",
+  "source_advisor_policy_attribution_engine_id": "advisor_policy_attribution_engine_v2",
+  "source_policy_mandate_pack_id": "synthetic_policy_mandate_pack_v1",
+  "synthetic_data": true,
+  "view_files": [
+    "manager_mandate_attribution_summary_view.json",
+    "within_manager_attribution_detail_view.json",
+    "manager_implementation_handoff_view.json",
+    "gated_deferred_manager_mandate_attribution_index.json"
+  ]
+}
