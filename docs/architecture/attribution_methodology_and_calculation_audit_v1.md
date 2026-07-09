@@ -674,3 +674,9 @@ Policy Allocation Review Mockups v1 and Policy-Level Attribution Calculation and
 Policy-Level Attribution Calculation and Mockups v1 now exists under `data/simulation/policy_level_attribution/policy_level_attribution_engine_v1/`, `data/simulation/report_element_inputs/policy_attribution_v1/`, `data/simulation/report_element_views/policy_attribution_v1/`, and `docs/product/report_mockups/policy_attribution_v1/`.
 
 The local synthetic bridge uses target manager weights with mandate benchmark returns for Target policy benchmark return, actual manager weights with mandate benchmark returns for Actual allocation benchmark return, and actual manager weights with manager actual returns for Actual portfolio return. It reports effects in percentage points of total portfolio return and ties residual to zero for the synthetic pack. Within-manager detail, blended/all-in attribution, timing attribution, dollar P&L attribution, production client attribution, and current-vs-proposed policy attribution remain gated or future work.
+
+## 17. Follow-Up: Advisor Policy Attribution Redesign v2
+
+Advisor Policy Attribution Redesign v2 now provides the primary local product-review surface for advisor policy attribution under `policy_attribution_v2`.
+
+The v2 method measures advisor policy effect before manager implementation as Actual allocation benchmark return minus Global benchmark return, then decomposes it into selected mandate effect, target weighting effect, and funding drift effect. Selected mandate effect compares the neutral selected-mandate basket against the Global benchmark; target weighting effect compares target policy weights against that neutral basket; funding drift effect compares actual allocation weights against target policy weights. Manager implementation is recorded only as context and handoff metadata for future Manager / Within-Mandate Attribution Detail work.

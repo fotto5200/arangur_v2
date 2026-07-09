@@ -1,0 +1,53 @@
+{
+  "gated_or_deferred_reports": [
+    {
+      "display_title": "Manager / Within-Mandate Attribution Detail",
+      "reason": "Requires a separate manager-driver report using manager mandate responsibility.",
+      "report_id": "manager_within_mandate_attribution_detail",
+      "status": "Future tranche"
+    },
+    {
+      "display_title": "Blended / All-In Attribution",
+      "reason": "Deferred so advisor policy and manager implementation stay separate.",
+      "report_id": "blended_all_in_attribution",
+      "status": "Deferred"
+    },
+    {
+      "display_title": "Timing Attribution",
+      "reason": "Unavailable because clean timing inputs and an approved method are absent.",
+      "report_id": "timing_attribution",
+      "status": "Unavailable"
+    },
+    {
+      "display_title": "Dollar P&L Attribution",
+      "reason": "Gated unless reliable beginning portfolio value exists.",
+      "report_id": "dollar_pnl_attribution",
+      "status": "Gated"
+    },
+    {
+      "display_title": "Production Client Attribution",
+      "reason": "Gated on approved real policy targets and benchmarks.",
+      "report_id": "production_client_attribution",
+      "status": "Gated"
+    },
+    {
+      "display_title": "Current-vs-Proposed Policy Attribution",
+      "reason": "Gated on a proposed allocation workflow.",
+      "report_id": "current_vs_proposed_policy_attribution",
+      "status": "Gated"
+    },
+    {
+      "display_title": "Old Bridge Summary",
+      "reason": "Superseded as the primary report surface by the manager/sleeve advisor policy report.",
+      "report_id": "old_bridge_summary",
+      "status": "Superseded"
+    }
+  ],
+  "generated_at": "2026-07-09T00:00:00Z",
+  "generator_version": "advisor_policy_attribution_v2.v2",
+  "local_only": true,
+  "purpose": "Product/readiness index for advisor policy attribution reports deliberately not generated as primary v2 reports.",
+  "schema_version": "advisor_policy_attribution_gated_deferred_index.v2",
+  "source_advisor_policy_attribution_engine_id": "advisor_policy_attribution_engine_v2",
+  "synthetic_data": true
+}

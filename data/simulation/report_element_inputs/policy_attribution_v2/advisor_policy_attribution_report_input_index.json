@@ -1,0 +1,22 @@
+{
+  "advisor_ui_wiring": "not_changed",
+  "generated_at": "2026-07-09T00:00:00Z",
+  "generated_report_wiring": "not_changed",
+  "generator_version": "advisor_policy_attribution_v2.v2",
+  "input_files": [
+    "advisor_policy_attribution_by_manager_input.json",
+    "advisor_policy_effect_totals_input.json"
+  ],
+  "local_only": true,
+  "manager_implementation_visible_in_primary_report": false,
+  "mockups_generated_from_views": true,
+  "report_ids": [
+    "advisor_policy_attribution_by_manager",
+    "advisor_policy_effect_totals"
+  ],
+  "report_input_count": 2,
+  "schema_version": "advisor_policy_attribution_report_input_index.v2",
+  "source_advisor_policy_attribution_engine_id": "advisor_policy_attribution_engine_v2",
+  "source_policy_mandate_pack_id": "synthetic_policy_mandate_pack_v1",
+  "synthetic_data": true
+}

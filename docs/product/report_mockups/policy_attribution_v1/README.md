@@ -14,6 +14,12 @@ They are not wired into Advisor Preview, Populate, Present, generated reports, D
 Policy-Level Attribution bridges Global benchmark -> Target policy benchmark -> Actual allocation benchmark -> Actual portfolio.
 Policy allocation review remains allocation hygiene; this set separates return effects from target-versus-actual drift review.
 
+## Superseded Primary Surface
+
+Policy-Level Attribution Summary v1 is superseded for product review by Advisor Policy Attribution by Manager/Sleeve v2.
+V1 remains a local calculation reference but should not be treated as the primary report surface.
+The v2 report separates selected mandate, target weighting, and funding drift effects and excludes manager implementation from the primary advisor report.
+
 ## Gated Or Deferred
 
 - Within-Manager Attribution Detail (Future tranche): Requires separate manager-driver report design and lower-level inputs.

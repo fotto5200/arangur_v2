@@ -1,0 +1,168 @@
+{
+  "effect_basis": "percentage_points_of_total_portfolio_return",
+  "engine_id": "advisor_policy_attribution_engine_v2",
+  "engine_version": "2026-07-09",
+  "generated_at": "2026-07-09T00:00:00Z",
+  "local_only": true,
+  "manager_count": 6,
+  "manager_implementation_visible_in_primary_report": false,
+  "manager_rows": [
+    {
+      "actual_manager_return_context": 0.116,
+      "actual_weight": 0.248556,
+      "advisor_policy_effect": 0.006678720849,
+      "benchmark_basis": "Synthetic Growth / AI Infrastructure Mandate Benchmark",
+      "benchmark_basis_type": "hybrid_synthetic_demo",
+      "caveats": [
+        "Synthetic local-demo mandate benchmark basis.",
+        "Actual return is context for a separate manager implementation review."
+      ],
+      "display_name": "Manager A - Growth / AI Infrastructure",
+      "drift_status": "within_tolerance",
+      "effect_basis": "percentage_points_of_total_portfolio_return",
+      "funding_drift_effect": 0.00083983196,
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "mandate_benchmark_return": 0.095,
+      "neutral_weight": 0.166666667,
+      "selected_mandate_effect": 0.004176666667,
+      "target_weight": 0.22,
+      "target_weighting_effect": 0.001662222222,
+      "weight_drift": 0.028556
+    },
+    {
+      "actual_manager_return_context": 0.084,
+      "actual_weight": 0.188107,
+      "advisor_policy_effect": 0.001274182759,
+      "benchmark_basis": "Synthetic Core Quality Equity Mandate Benchmark",
+      "benchmark_basis_type": "hybrid_synthetic_demo",
+      "caveats": [
+        "Synthetic local-demo mandate benchmark basis.",
+        "Actual return is context for a separate manager implementation review."
+      ],
+      "display_name": "Manager B - Core Quality Equity",
+      "drift_status": "within_tolerance",
+      "effect_basis": "percentage_points_of_total_portfolio_return",
+      "funding_drift_effect": -1.970613e-05,
+      "manager_id": "mgr_b_core_quality_equity",
+      "mandate_benchmark_return": 0.076,
+      "neutral_weight": 0.166666667,
+      "selected_mandate_effect": 0.00101,
+      "target_weight": 0.19,
+      "target_weighting_effect": 0.000283888889,
+      "weight_drift": -0.001893
+    },
+    {
+      "actual_manager_return_context": 0.047,
+      "actual_weight": 0.130237,
+      "advisor_policy_effect": -0.003661198274,
+      "benchmark_basis": "Synthetic Income and Cash Generation Mandate Benchmark",
+      "benchmark_basis_type": "hybrid_synthetic_demo",
+      "caveats": [
+        "Synthetic local-demo mandate benchmark basis.",
+        "Actual return is context for a separate manager implementation review."
+      ],
+      "display_name": "Manager C - Income and Cash Generation",
+      "drift_status": "review",
+      "effect_basis": "percentage_points_of_total_portfolio_return",
+      "funding_drift_effect": 0.00089824617,
+      "manager_id": "mgr_c_income_cash_generation",
+      "mandate_benchmark_return": 0.043,
+      "neutral_weight": 0.166666667,
+      "selected_mandate_effect": -0.00449,
+      "target_weight": 0.17,
+      "target_weighting_effect": -6.9444444e-05,
+      "weight_drift": -0.039763
+    },
+    {
+      "actual_manager_return_context": 0.071,
+      "actual_weight": 0.203096,
+      "advisor_policy_effect": -0.001192463084,
+      "benchmark_basis": "Synthetic Private Markets / Real Assets Mandate Benchmark",
+      "benchmark_basis_type": "hybrid_synthetic_demo",
+      "caveats": [
+        "Synthetic local-demo mandate benchmark basis.",
+        "Actual return is context for a separate manager implementation review."
+      ],
+      "display_name": "Manager D - Private Markets / Real Assets",
+      "drift_status": "within_tolerance",
+      "effect_basis": "percentage_points_of_total_portfolio_return",
+      "funding_drift_effect": -8.01864e-06,
+      "manager_id": "mgr_d_private_real_assets",
+      "mandate_benchmark_return": 0.063,
+      "neutral_weight": 0.166666667,
+      "selected_mandate_effect": -0.001156666667,
+      "target_weight": 0.2,
+      "target_weighting_effect": -2.7777778e-05,
+      "weight_drift": 0.003096
+    },
+    {
+      "actual_manager_return_context": 0.034,
+      "actual_weight": 0.140435,
+      "advisor_policy_effect": -0.005629491094,
+      "benchmark_basis": "Synthetic Liquidity Reserve / Defensive Ballast Mandate Benchmark",
+      "benchmark_basis_type": "hybrid_synthetic_demo",
+      "caveats": [
+        "Synthetic local-demo mandate benchmark basis.",
+        "Actual return is context for a separate manager implementation review."
+      ],
+      "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+      "drift_status": "within_tolerance",
+      "effect_basis": "percentage_points_of_total_portfolio_return",
+      "funding_drift_effect": -1.504665e-05,
+      "manager_id": "mgr_e_liquidity_defensive",
+      "mandate_benchmark_return": 0.031,
+      "neutral_weight": 0.166666667,
+      "selected_mandate_effect": -0.00649,
+      "target_weight": 0.14,
+      "target_weighting_effect": 0.000875555556,
+      "weight_drift": 0.000435
+    },
+    {
+      "actual_manager_return_context": 0.089,
+      "actual_weight": 0.089569,
+      "advisor_policy_effect": -3.4400154e-05,
+      "benchmark_basis": "Synthetic Opportunistic Macro / Hedge Mandate Benchmark",
+      "benchmark_basis_type": "hybrid_synthetic_demo",
+      "caveats": [
+        "Synthetic local-demo mandate benchmark basis.",
+        "Actual return is context for a separate manager implementation review."
+      ],
+      "display_name": "Manager F - Opportunistic Macro / Hedge",
+      "drift_status": "within_tolerance",
+      "effect_basis": "percentage_points_of_total_portfolio_return",
+      "funding_drift_effect": 9.004429e-05,
+      "manager_id": "mgr_f_opportunistic_macro",
+      "mandate_benchmark_return": 0.075,
+      "neutral_weight": 0.166666667,
+      "selected_mandate_effect": 0.000843333333,
+      "target_weight": 0.08,
+      "target_weighting_effect": -0.000967777778,
+      "weight_drift": 0.009569
+    }
+  ],
+  "schema_version": "advisor_policy_attribution_calculated_output.v2",
+  "synthetic_data": true,
+  "tie_out": {
+    "advisor_policy_effect_from_rows": -0.002564649,
+    "funding_drift_effect_from_rows": 0.001785351,
+    "selected_mandate_effect_from_rows": -0.006106666667,
+    "status": "pass",
+    "target_weighting_effect_from_rows": 0.001756666667
+  },
+  "total_row": {
+    "actual_manager_return_context": null,
+    "actual_weight": 1.0,
+    "advisor_policy_effect": -0.002564649,
+    "benchmark_basis": "Selected manager mandate basket",
+    "caveats": [],
+    "display_name": "Total advisor policy effect",
+    "drift_status": "total",
+    "funding_drift_effect": 0.001785351,
+    "mandate_benchmark_return": null,
+    "neutral_weight": 1.0,
+    "selected_mandate_effect": -0.006106666667,
+    "target_weight": 1.0,
+    "target_weighting_effect": 0.001756666667,
+    "weight_drift": 0.0
+  }
+}

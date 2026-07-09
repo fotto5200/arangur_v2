@@ -1,0 +1,36 @@
+{
+  "actual_allocation_benchmark_return": 0.067375351,
+  "actual_portfolio_return_context": 0.07792087,
+  "advisor_policy_effect": -0.002564649,
+  "advisor_policy_effect_equivalent": -0.002564649,
+  "caveats": [
+    "Synthetic demo attribution only; production use needs approved real policy targets and benchmarks.",
+    "Manager implementation belongs to a separate within-manager attribution report."
+  ],
+  "effect_basis": "percentage_points_of_total_portfolio_return",
+  "engine_id": "advisor_policy_attribution_engine_v2",
+  "engine_version": "2026-07-09",
+  "funding_drift_effect": 0.001785351,
+  "generated_at": "2026-07-09T00:00:00Z",
+  "global_benchmark_return": 0.06994,
+  "headline_interpretation": "Advisor policy decisions finished below the global benchmark before manager implementation, with target weighting and funding drift offsetting part of the selected mandate drag.",
+  "local_only": true,
+  "manager_implementation_effect_handoff": 0.010545519,
+  "manager_implementation_visible_in_primary_report": false,
+  "neutral_selected_mandate_basket_return": 0.063833333333,
+  "residual": 0.0,
+  "residual_status": "pass",
+  "schema_version": "advisor_policy_attribution_calculated_output.v2",
+  "selected_mandate_effect": -0.006106666667,
+  "source_actual_portfolio_return_reconciliation": {
+    "calculated_actual_portfolio_return": 0.081456,
+    "difference": 0.003535,
+    "meaning": "The policy scaffold uses current revaluation marks for actual weights; the existing calculated attribution pack uses its own synthetic period return basis.",
+    "return_from_current_snapshot_weights": 0.077921,
+    "status": "scaffold_reconciliation_needed"
+  },
+  "source_reported_actual_portfolio_return_context": 0.081456,
+  "synthetic_data": true,
+  "target_policy_benchmark_return": 0.06559,
+  "target_weighting_effect": 0.001756666667
+}

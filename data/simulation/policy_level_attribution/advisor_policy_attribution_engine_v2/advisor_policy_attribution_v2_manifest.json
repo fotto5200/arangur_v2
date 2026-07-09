@@ -1,0 +1,59 @@
+{
+  "advisor_policy_effect": -0.002564649,
+  "approval_status": "synthetic_demo_approved",
+  "calculations_gated": [
+    "within_manager_attribution_detail",
+    "timing_attribution",
+    "dollar_pnl_attribution",
+    "production_client_attribution",
+    "current_vs_proposed_policy_attribution",
+    "blended_all_in_attribution"
+  ],
+  "calculations_supported": [
+    "global_benchmark_return",
+    "neutral_selected_mandate_basket_return",
+    "target_policy_benchmark_return",
+    "actual_allocation_benchmark_return",
+    "selected_mandate_effect",
+    "target_weighting_effect",
+    "funding_drift_effect",
+    "advisor_policy_effect_before_manager_implementation",
+    "manager_implementation_effect_handoff_metadata",
+    "row_tie_outs"
+  ],
+  "dollar_pnl_status": "gated_no_reliable_beginning_portfolio_value",
+  "engine_id": "advisor_policy_attribution_engine_v2",
+  "engine_version": "2026-07-09",
+  "generated_artifacts": {
+    "manager_rows": "advisor_policy_attribution_manager_rows_v2.json",
+    "manifest": "advisor_policy_attribution_v2_manifest.json",
+    "quality_summary": "advisor_policy_attribution_quality_summary_v2.json",
+    "summary": "advisor_policy_attribution_summary_v2.json"
+  },
+  "generated_at": "2026-07-09T00:00:00Z",
+  "generator_version": "advisor_policy_attribution_v2.v2",
+  "limitations": [
+    "Synthetic local demo only.",
+    "Neutral selected-mandate weighting is a decomposition baseline, not a client policy allocation.",
+    "Actual manager returns are context for later manager implementation review.",
+    "Production use requires approved real targets, benchmarks, and return methodology."
+  ],
+  "local_only": true,
+  "manager_implementation_visible_in_primary_report": false,
+  "methodology_summary": {
+    "actual_allocation_benchmark_return": "Sum of actual manager weights times manager mandate benchmark returns.",
+    "advisor_policy_effect": "Actual allocation benchmark return minus global benchmark return.",
+    "global_benchmark_return": "Whole-portfolio comparator selected for advisor policy attribution.",
+    "manager_implementation": "Calculated only as handoff metadata and excluded from the primary report.",
+    "neutral_selected_mandate_basket_return": "Neutral basket of selected manager mandate benchmark returns.",
+    "target_policy_benchmark_return": "Sum of target manager weights times manager mandate benchmark returns."
+  },
+  "quality_summary_status": "pass",
+  "schema_version": "advisor_policy_attribution_manifest.v2",
+  "source_policy_level_v1_outputs": [],
+  "source_policy_level_v1_outputs_used": false,
+  "source_policy_mandate_pack": "synthetic_policy_mandate_pack_v1",
+  "source_policy_mandate_pack_dir": "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1",
+  "synthetic_data": true,
+  "timing_status": "unavailable"
+}

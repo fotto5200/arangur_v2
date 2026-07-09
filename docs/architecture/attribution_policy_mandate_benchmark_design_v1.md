@@ -372,3 +372,9 @@ The calculated bridge separates:
 - Actual portfolio return.
 
 It reports policy design effect, allocation drift effect, and manager implementation effect in percentage points of total portfolio return, with a zero residual tie-out for the synthetic pack. The manager detail report shows all six manager/sleeve rows, and the imputed-current variant suppresses allocation drift effect while making clear that current allocation is not proven ideal. Within-manager attribution detail, blended/all-in attribution, timing attribution, dollar P&L attribution, production client attribution, and current-vs-proposed policy attribution remain future or gated work.
+
+## 18. Follow-Up: Advisor Policy Attribution Redesign v2
+
+Advisor Policy Attribution Redesign v2 now supersedes the v1 policy-level attribution summary as the primary product-review surface for advisor policy attribution. It writes local-only calculated artifacts under `data/simulation/policy_level_attribution/advisor_policy_attribution_engine_v2/`, report fixtures under `policy_attribution_v2`, and Markdown mockups under `docs/product/report_mockups/policy_attribution_v2/`.
+
+The v2 surface decomposes advisor policy effect before manager implementation into selected mandate effect, target weighting effect, and funding drift effect. Actual Return remains context only, and manager implementation is excluded from the primary advisor policy report with a separate handoff marker for future Manager / Within-Mandate Attribution Detail work. Blended/all-in attribution, timing attribution, dollar P&L attribution, production client attribution, and current-vs-proposed policy attribution remain gated or deferred.

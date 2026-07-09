@@ -683,6 +683,22 @@ def render_mockup_readme(
                 "separates return effects from target-versus-actual drift review."
             ),
             "",
+            "## Superseded Primary Surface",
+            "",
+            (
+                "Policy-Level Attribution Summary v1 is superseded for product "
+                "review by Advisor Policy Attribution by Manager/Sleeve v2."
+            ),
+            (
+                "V1 remains a local calculation reference but should not be "
+                "treated as the primary report surface."
+            ),
+            (
+                "The v2 report separates selected mandate, target weighting, and "
+                "funding drift effects and excludes manager implementation from "
+                "the primary advisor report."
+            ),
+            "",
             "## Gated Or Deferred",
             "",
         ]

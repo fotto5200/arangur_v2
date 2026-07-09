@@ -138,6 +138,8 @@ Synthetic Policy Allocation / Mandate Benchmark Pack v1 now satisfies those loca
 
 Policy Allocation Review Mockups v1 now consumes those prerequisite artifacts for local product review. The generated Policy Allocation Review shows target weight, actual weight, drift, tolerance, and status for all six managers. Policy Allocation Drift Summary shows only review/material watch-list rows. Imputed Current Allocation Baseline is a setup/readiness note that accepts current weights as the baseline and suppresses drift attribution. Manager Mandate Benchmark Basis shows the benchmark basis for all six current managers. Policy Attribution v1 now consumes the same prerequisite pack plus manager actual returns to calculate policy design effect, allocation drift effect, and manager implementation effect in percentage points of total portfolio return; within-manager detail, timing, dollar P&L, production client attribution, and current-vs-proposed policy attribution remain gated or future work.
 
+Advisor Policy Attribution Redesign v2 now consumes the same local synthetic prerequisite pack to calculate neutral selected mandate basket return, target policy benchmark return, actual allocation benchmark return, selected mandate effect, target weighting effect, funding drift effect, and advisor policy effect before manager implementation. The generated `policy_attribution_v2` manager/sleeve report supersedes the v1 summary as the primary product-review surface. It labels actual manager return as context and leaves manager implementation for a future Manager / Within-Mandate Attribution Detail tranche rather than blending it into the advisor policy report.
+
 ### Probabilistic Scenario Range
 
 Minimum report evidence:

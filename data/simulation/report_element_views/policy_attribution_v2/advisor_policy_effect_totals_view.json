@@ -1,0 +1,105 @@
+{
+  "advisor_note": "Use the manager/sleeve report when row-level explanation is needed.",
+  "audience_tier": "advisor_review_and_client_briefing_when_sophisticated",
+  "baseline_type": "neutral_selected_mandate_to_target_to_actual_allocation",
+  "caveats": [
+    "This totals note is a companion to the manager/sleeve report, not the old bridge summary."
+  ],
+  "compact_table": {
+    "columns": [
+      "Effect",
+      "Value",
+      "Meaning"
+    ],
+    "rows": [
+      {
+        "Effect": "Selected mandate effect",
+        "Meaning": "Neutral selected mandate exposure versus the global benchmark.",
+        "Value": "-0.61 pp"
+      },
+      {
+        "Effect": "Target weighting effect",
+        "Meaning": "Target weights versus neutral selected-mandate weights.",
+        "Value": "+0.18 pp"
+      },
+      {
+        "Effect": "Funding drift effect",
+        "Meaning": "Actual weights versus target weights.",
+        "Value": "+0.18 pp"
+      }
+    ],
+    "title": "Advisor Policy Effect Totals"
+  },
+  "denominator_category_system": "percentage_points_of_total_portfolio_return",
+  "display_title": "Advisor Policy Effect Totals",
+  "effect_basis_note": "Selected mandate, target weighting, and funding drift effects are percentage points of total portfolio return before manager implementation.",
+  "exact_report_question": "What are the total advisor-level effects before manager implementation?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-09T00:00:00Z",
+  "generator_version": "advisor_policy_attribution_v2.v2",
+  "headline_metrics": [
+    {
+      "formatted_value": "-0.26 pp",
+      "label": "Advisor policy effect before manager implementation",
+      "value": -0.002564649
+    },
+    {
+      "formatted_value": "-0.61 pp",
+      "label": "Selected mandate effect",
+      "value": -0.006106666667
+    },
+    {
+      "formatted_value": "+0.18 pp",
+      "label": "Funding drift effect",
+      "value": 0.001785351
+    }
+  ],
+  "headline_sentence": "Advisor policy effects totaled -0.26 pp before manager implementation.",
+  "information_budget_applied": {
+    "actual_advisor_notes": 1,
+    "actual_caveats": 1,
+    "actual_headline_metrics": 3,
+    "actual_headline_sentences": 1,
+    "actual_visible_table_rows": 4,
+    "max_advisor_notes": 1,
+    "max_caveats": 1,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 4,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true,
+    "rendering_mode": "concise_totals_note"
+  },
+  "internal_source_metadata": {
+    "calculated_engine_id": "advisor_policy_attribution_engine_v2",
+    "source_policy_level_v1_outputs_used": false,
+    "source_policy_mandate_pack_id": "synthetic_policy_mandate_pack_v1"
+  },
+  "internal_source_refs": [
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/synthetic_policy_mandate_pack_manifest.json",
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/policy_level_attribution_inputs.json"
+  ],
+  "local_only": true,
+  "manager_implementation_visible_in_primary_report": false,
+  "master_question_family": "Performance / Plan",
+  "policy_allocation_mode": "explicit_policy_allocation",
+  "rendering_mode": "concise_totals_note",
+  "report_element_id": "advisor_policy_effect_totals",
+  "report_family": "advisor_policy_attribution",
+  "representation_level": "portfolio_advisor_policy_effect_totals",
+  "schema_version": "advisor_policy_attribution_report_view.v2",
+  "summary_detail_status": "concise_totals_note",
+  "synthetic_data": true,
+  "table_validation": {
+    "manager_implementation_effect_primary_column": false,
+    "old_bridge_grid_primary": false,
+    "total_effect_visible": true
+  },
+  "total_row": {
+    "Effect": "Total advisor policy effect",
+    "Meaning": "Actual allocation benchmark return minus global benchmark return.",
+    "Value": "-0.26 pp"
+  }
+}

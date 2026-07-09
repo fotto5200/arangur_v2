@@ -149,6 +149,8 @@ After Synthetic Policy Allocation / Mandate Benchmark Pack v1, future local attr
 
 After Policy Allocation Review Mockups v1, local `policy_allocation_v1` report fixtures and mockups demonstrate the policy allocation budget. Policy Allocation Review may show all six current manager/sleeve rows because the report's job is to compare target weight, actual weight, drift, tolerance, and status across the current manager set. Policy Allocation Drift Summary should stay smaller and show only review/material watch-list rows. Imputed Current Allocation Baseline is a setup/readiness note, not a standard client report, and should suppress drift attribution until explicit targets exist. Manager Mandate Benchmark Basis may show all six current manager/sleeve benchmark-basis rows as advisor reference content.
 
+After Advisor Policy Attribution Redesign v2, local `policy_attribution_v2` fixtures may show all six manager/sleeve rows plus a total row because the primary report's job is row-level advisor policy explanation. The visible table should keep Selected Mandate Effect before Target Weighting Effect, label Actual Return as context, and exclude Manager Implementation Effect as a primary column. Manager implementation may appear only as handoff metadata or a note that it belongs to a future within-manager report.
+
 Additional anti-clutter checks:
 
 - Do not mix asset type, manager/sleeve, lens/theme, and coverage/review statuses in one additive table.

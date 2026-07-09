@@ -1,0 +1,74 @@
+{
+  "advisor_policy_effect_equivalent_tie_out": {
+    "difference": 0.0,
+    "expected": -0.002564649,
+    "observed": -0.002564649,
+    "status": "pass",
+    "tolerance": 1e-06
+  },
+  "engine_id": "advisor_policy_attribution_engine_v2",
+  "engine_version": "2026-07-09",
+  "generated_at": "2026-07-09T00:00:00Z",
+  "local_only": true,
+  "manager_implementation_handoff_status": {
+    "handoff_value": 0.010545519,
+    "manager_implementation_visible_in_primary_report": false,
+    "next_report_family": "manager_within_mandate_attribution_detail",
+    "status": "metadata_only"
+  },
+  "no_blended_report": true,
+  "old_bridge_summary_not_primary": true,
+  "overall_status": "pass",
+  "production_readiness_caveats": [
+    "Requires approved real policy targets.",
+    "Requires approved real manager mandate benchmarks.",
+    "Requires production performance and flow methodology review."
+  ],
+  "recommended_next_tranche": "Manager / Within-Mandate Attribution Detail",
+  "residual_tie_out_check": {
+    "residual": 0.0,
+    "status": "pass",
+    "tolerance": 1e-06
+  },
+  "row_tie_out_checks": {
+    "advisor_policy_effect_tie_out": {
+      "difference": -0.0,
+      "expected": -0.002564649,
+      "observed": -0.002564649,
+      "status": "pass",
+      "tolerance": 1e-06
+    },
+    "funding_drift_effect_tie_out": {
+      "difference": 0.0,
+      "expected": 0.001785351,
+      "observed": 0.001785351,
+      "status": "pass",
+      "tolerance": 1e-06
+    },
+    "selected_mandate_effect_tie_out": {
+      "difference": 0.0,
+      "expected": -0.006106666667,
+      "observed": -0.006106666667,
+      "status": "pass",
+      "tolerance": 1e-06
+    },
+    "target_weighting_effect_tie_out": {
+      "difference": -0.0,
+      "expected": 0.001756666667,
+      "observed": 0.001756666667,
+      "status": "pass",
+      "tolerance": 1e-06
+    }
+  },
+  "schema_version": "advisor_policy_attribution_calculated_output.v2",
+  "source_policy_mandate_pack_id": "synthetic_policy_mandate_pack_v1",
+  "synthetic_data": true,
+  "weight_sum_checks": {
+    "actual_weight_sum": 1.0,
+    "actual_weight_sum_status": "pass",
+    "neutral_weight_sum": 1.0,
+    "neutral_weight_sum_status": "pass",
+    "target_weight_sum": 1.0,
+    "target_weight_sum_status": "pass"
+  }
+}

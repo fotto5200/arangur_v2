@@ -339,6 +339,8 @@ This writes:
 
 The policy-level attribution generator calculates the local synthetic bridge from Global benchmark to Target policy benchmark to Actual allocation benchmark to Actual portfolio, then writes local-only report input fixtures, view fixtures, and Markdown product-review mockups for Policy-Level Attribution Summary, Policy-Level Manager Effect Detail, and Imputed Baseline Policy Attribution Variant. It does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
 
+Advisor Policy Attribution v2 supersedes this v1 summary as the primary product-review surface. Keep v1 available as a calculation/reference artifact.
+
 ```cmd
 set PYTHONPATH=src
 python -m arangur.analytics.policy_level_attribution
@@ -350,6 +352,22 @@ This writes:
 - `data/simulation/report_element_inputs/policy_attribution_v1/`
 - `data/simulation/report_element_views/policy_attribution_v1/`
 - `docs/product/report_mockups/policy_attribution_v1/`
+
+## Generate Advisor Policy Attribution v2 Outputs And Mockups
+
+The advisor policy attribution v2 generator calculates advisor policy effect before manager implementation, decomposed into selected mandate effect, target weighting effect, and funding drift effect. It writes local-only calculated artifacts, report input fixtures, view fixtures, and Markdown product-review mockups. Actual Return is context only, manager implementation is excluded from the primary advisor policy report, and future manager-level detail remains gated. It does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, external APIs, secrets, or dependencies.
+
+```cmd
+set PYTHONPATH=src
+python -m arangur.analytics.advisor_policy_attribution_v2
+```
+
+This writes:
+
+- `data/simulation/policy_level_attribution/advisor_policy_attribution_engine_v2/`
+- `data/simulation/report_element_inputs/policy_attribution_v2/`
+- `data/simulation/report_element_views/policy_attribution_v2/`
+- `docs/product/report_mockups/policy_attribution_v2/`
 
 ## Generate Revaluation v2 Report Mockups
 
