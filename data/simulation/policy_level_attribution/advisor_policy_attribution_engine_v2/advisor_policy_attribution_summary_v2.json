@@ -3,6 +3,14 @@
   "actual_portfolio_return_context": 0.07792087,
   "advisor_policy_effect": -0.002564649,
   "advisor_policy_effect_equivalent": -0.002564649,
+  "benchmark_basis": {
+    "actual_allocation_benchmark_return": 0.067375351,
+    "global_benchmark_display_name": "Synthetic Global Policy Benchmark",
+    "global_benchmark_return": 0.06994,
+    "neutral_selected_mandate_basket_return": 0.063833333333,
+    "target_policy_benchmark_return": 0.06559,
+    "visible": true
+  },
   "caveats": [
     "Synthetic demo attribution only; production use needs approved real policy targets and benchmarks.",
     "Manager implementation belongs to a separate within-manager attribution report."
@@ -12,6 +20,7 @@
   "engine_version": "2026-07-09",
   "funding_drift_effect": 0.001785351,
   "generated_at": "2026-07-09T00:00:00Z",
+  "global_benchmark_display_name": "Synthetic Global Policy Benchmark",
   "global_benchmark_return": 0.06994,
   "headline_interpretation": "Advisor policy decisions finished below the global benchmark before manager implementation, with target weighting and funding drift offsetting part of the selected mandate drag.",
   "local_only": true,

@@ -64,6 +64,8 @@ REQUIRED_VIEW_FIELDS = {
     "rendering_mode",
     "headline_sentence",
     "headline_metrics",
+    "benchmark_basis",
+    "benchmark_basis_note",
     "compact_table",
     "total_row",
     "effect_basis_note",
@@ -92,6 +94,15 @@ PRIMARY_COLUMNS = [
     "Advisor Policy Effect",
     "Status",
 ]
+
+BENCHMARK_BASIS_KEYS = {
+    "global_benchmark_display_name",
+    "global_benchmark_return",
+    "neutral_selected_mandate_basket_return",
+    "target_policy_benchmark_return",
+    "actual_allocation_benchmark_return",
+    "visible",
+}
 
 FORBIDDEN_PLACEHOLDER_TERMS = (
     "todo",
@@ -353,6 +364,71 @@ class AdvisorPolicyAttributionV2Tests(unittest.TestCase):
                     view["effect_basis_note"],
                 )
 
+    def test_visible_benchmark_basis_is_in_views_and_mockups(self) -> None:
+        summary = _load_json(CALC_DIR / CALCULATED_ARTIFACT_FILES["summary"])
+
+        for report_id in BUILD_NOW_REPORT_IDS:
+            view = _load_json(VIEW_DIR / VIEW_FILENAME_BY_REPORT_ID[report_id])
+            markdown = (MOCKUP_DIR / MOCKUP_FILENAME_BY_REPORT_ID[report_id]).read_text(
+                encoding="utf-8"
+            )
+            basis = view["benchmark_basis"]
+            with self.subTest(report_id=report_id):
+                self.assertEqual(BENCHMARK_BASIS_KEYS, set(basis))
+                self.assertTrue(basis["visible"])
+                self.assertEqual(
+                    "Synthetic Global Policy Benchmark",
+                    basis["global_benchmark_display_name"],
+                )
+                self.assertAlmostEqual(
+                    summary["global_benchmark_return"],
+                    basis["global_benchmark_return"],
+                    places=12,
+                )
+                self.assertAlmostEqual(
+                    summary["neutral_selected_mandate_basket_return"],
+                    basis["neutral_selected_mandate_basket_return"],
+                    places=12,
+                )
+                self.assertAlmostEqual(
+                    summary["target_policy_benchmark_return"],
+                    basis["target_policy_benchmark_return"],
+                    places=12,
+                )
+                self.assertAlmostEqual(
+                    summary["actual_allocation_benchmark_return"],
+                    basis["actual_allocation_benchmark_return"],
+                    places=12,
+                )
+                self.assertIn("## Benchmark Basis", markdown)
+                self.assertIn(
+                    "**Global benchmark:** Synthetic Global Policy Benchmark, 6.99%",
+                    markdown,
+                )
+                self.assertIn("**Neutral selected mandate basket:** 6.38%", markdown)
+                self.assertIn("**Target policy benchmark:** 6.56%", markdown)
+                self.assertIn("**Actual allocation benchmark:** 6.74%", markdown)
+                self.assertIn(
+                    "Selected mandate effect starts by comparing the neutral selected mandate basket with the global benchmark",
+                    markdown,
+                )
+                self.assertIn(
+                    "target weighting compares target weights with neutral selected-mandate weights",
+                    markdown,
+                )
+                self.assertIn(
+                    "funding drift compares actual weights with target weights",
+                    markdown,
+                )
+                self.assertLess(
+                    markdown.index("## Key Metrics"),
+                    markdown.index("## Benchmark Basis"),
+                )
+                self.assertLess(
+                    markdown.index("## Benchmark Basis"),
+                    markdown.index(f"## {view['compact_table']['title']}"),
+                )
+
     def test_primary_report_columns_and_metric_contract(self) -> None:
         view = _load_json(VIEW_DIR / VIEW_FILENAME_BY_REPORT_ID[PRIMARY_REPORT_ID])
         table = view["compact_table"]
@@ -380,6 +456,7 @@ class AdvisorPolicyAttributionV2Tests(unittest.TestCase):
         self.assertIn("Actual return is shown only as context", view["advisor_note"])
         self.assertFalse(view["table_validation"]["manager_implementation_effect_primary_column"])
         self.assertTrue(view["table_validation"]["actual_return_labeled_context"])
+        self.assertTrue(view["benchmark_basis"]["visible"])
 
     def test_markdown_mockups_are_generated_from_view_fixtures(self) -> None:
         for report_id in BUILD_NOW_REPORT_IDS:
@@ -393,6 +470,7 @@ class AdvisorPolicyAttributionV2Tests(unittest.TestCase):
                 for metric in view["headline_metrics"]:
                     self.assertIn(metric["label"], markdown)
                     self.assertIn(metric["formatted_value"], markdown)
+                self.assertIn(view["benchmark_basis_note"], markdown)
                 table = view["compact_table"]
                 self.assertIn(table["title"], markdown)
                 for row in table["rows"]:
@@ -409,12 +487,15 @@ class AdvisorPolicyAttributionV2Tests(unittest.TestCase):
             MOCKUP_DIR / "advisor_policy_attribution_by_manager_mockup_v2.md"
         ).read_text(encoding="utf-8")
         self.assertIn("Selected Mandate Effect", markdown)
+        self.assertIn("## Benchmark Basis", markdown)
         self.assertLess(
             markdown.index("Selected Mandate Effect"),
             markdown.index("Target Weighting Effect"),
         )
         self.assertNotIn("| Manager Implementation Effect |", markdown)
         self.assertNotIn("Actual Return Effect", markdown)
+        self.assertNotIn("Global benchmark -> Target policy benchmark", markdown)
+        self.assertNotIn("| Global benchmark |", markdown)
         self.assertIn("Actual return is shown only as context", markdown)
         self.assertIn("Manager implementation is not attributed in this report.", markdown)
 
@@ -462,6 +543,10 @@ class AdvisorPolicyAttributionV2Tests(unittest.TestCase):
         primary = _load_json(VIEW_DIR / VIEW_FILENAME_BY_REPORT_ID[PRIMARY_REPORT_ID])
         self.assertNotIn("bridge_table", primary)
         self.assertFalse(primary["table_validation"]["old_bridge_grid_primary"])
+        primary_markdown = (
+            MOCKUP_DIR / "advisor_policy_attribution_by_manager_mockup_v2.md"
+        ).read_text(encoding="utf-8")
+        self.assertNotIn("Global benchmark -> Target policy benchmark", primary_markdown)
 
     def test_information_budgets_and_language_rules_are_enforced(self) -> None:
         for report_id in BUILD_NOW_REPORT_IDS:
@@ -474,6 +559,10 @@ class AdvisorPolicyAttributionV2Tests(unittest.TestCase):
             with self.subTest(report_id=report_id):
                 self.assertLessEqual(budget["actual_headline_sentences"], 1)
                 self.assertLessEqual(len(view["headline_metrics"]), 3)
+                self.assertLessEqual(
+                    budget["actual_benchmark_basis_items"],
+                    budget["max_benchmark_basis_items"],
+                )
                 self.assertLessEqual(
                     budget["actual_visible_table_rows"],
                     budget["max_visible_table_rows"],

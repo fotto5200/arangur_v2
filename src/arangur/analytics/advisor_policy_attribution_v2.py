@@ -13,6 +13,7 @@ GENERATED_AT = "2026-07-09T00:00:00Z"
 ENGINE_ID = "advisor_policy_attribution_engine_v2"
 ENGINE_VERSION = "2026-07-09"
 GENERATOR_VERSION = "advisor_policy_attribution_v2.v2"
+GLOBAL_BENCHMARK_DISPLAY_NAME = "Synthetic Global Policy Benchmark"
 
 CALCULATION_SCHEMA_VERSION = "advisor_policy_attribution_calculated_output.v2"
 REPORT_INPUT_SCHEMA_VERSION = "advisor_policy_attribution_report_input.v2"
@@ -129,6 +130,7 @@ GATED_REPORTS: tuple[dict[str, str], ...] = (
 DEFAULT_INFORMATION_BUDGET = {
     "max_headline_sentences": 1,
     "max_headline_metrics": 3,
+    "max_benchmark_basis_items": 4,
     "max_visible_table_rows": 5,
     "max_caveats": 1,
     "max_advisor_notes": 1,
@@ -315,14 +317,8 @@ def calculate_advisor_policy_attribution(context: dict[str, Any]) -> dict[str, A
         actual_portfolio_return_context - actual_allocation_benchmark_return
     )
     residual = advisor_policy_effect - advisor_policy_effect_equivalent
-
-    summary = {
-        "schema_version": CALCULATION_SCHEMA_VERSION,
-        "engine_id": ENGINE_ID,
-        "engine_version": ENGINE_VERSION,
-        "generated_at": GENERATED_AT,
-        "synthetic_data": True,
-        "local_only": True,
+    benchmark_basis = {
+        "global_benchmark_display_name": GLOBAL_BENCHMARK_DISPLAY_NAME,
         "global_benchmark_return": _return_number(global_benchmark_return),
         "neutral_selected_mandate_basket_return": _return_number(
             neutral_selected_mandate_basket_return
@@ -333,6 +329,28 @@ def calculate_advisor_policy_attribution(context: dict[str, Any]) -> dict[str, A
         "actual_allocation_benchmark_return": _return_number(
             actual_allocation_benchmark_return
         ),
+        "visible": True,
+    }
+
+    summary = {
+        "schema_version": CALCULATION_SCHEMA_VERSION,
+        "engine_id": ENGINE_ID,
+        "engine_version": ENGINE_VERSION,
+        "generated_at": GENERATED_AT,
+        "synthetic_data": True,
+        "local_only": True,
+        "global_benchmark_display_name": GLOBAL_BENCHMARK_DISPLAY_NAME,
+        "global_benchmark_return": benchmark_basis["global_benchmark_return"],
+        "neutral_selected_mandate_basket_return": benchmark_basis[
+            "neutral_selected_mandate_basket_return"
+        ],
+        "target_policy_benchmark_return": benchmark_basis[
+            "target_policy_benchmark_return"
+        ],
+        "actual_allocation_benchmark_return": benchmark_basis[
+            "actual_allocation_benchmark_return"
+        ],
+        "benchmark_basis": benchmark_basis,
         "selected_mandate_effect": _return_number(selected_mandate_effect),
         "target_weighting_effect": _return_number(target_weighting_effect),
         "funding_drift_effect": _return_number(funding_drift_effect),
@@ -468,6 +486,8 @@ def build_advisor_policy_attribution_report_views(
             "rendering_mode": payload["rendering_mode"],
             "headline_sentence": visible["headline_sentence"],
             "headline_metrics": visible["headline_metrics"],
+            "benchmark_basis": visible["benchmark_basis"],
+            "benchmark_basis_note": visible["benchmark_basis_note"],
             "compact_table": visible["compact_table"],
             "total_row": visible["total_row"],
             "effect_basis_note": visible["effect_basis_note"],
@@ -499,6 +519,14 @@ def render_markdown_mockup(view: dict[str, Any]) -> str:
         for metric in view["headline_metrics"]:
             lines.append(f"- **{metric['label']}:** {metric['formatted_value']}")
         lines.append("")
+
+    benchmark_basis = view.get("benchmark_basis")
+    if benchmark_basis and benchmark_basis.get("visible"):
+        lines.extend(["## Benchmark Basis", ""])
+        lines.extend(_render_benchmark_basis(benchmark_basis))
+        lines.append("")
+        if view.get("benchmark_basis_note"):
+            lines.extend([view["benchmark_basis_note"], ""])
 
     table = view.get("compact_table")
     if table:
@@ -645,6 +673,16 @@ def render_mockup_readme(
     lines.extend(
         [
             "",
+            "## Benchmark Basis",
+            "",
+            (
+                "Both v2 mockups now show a compact Benchmark Basis section. "
+                "The primary report names Synthetic Global Policy Benchmark and "
+                "shows the global benchmark, neutral selected mandate basket, "
+                "target policy benchmark, and actual allocation benchmark returns "
+                "so selected mandate effect has a visible comparator."
+            ),
+            "",
             "## V1 Supersession",
             "",
             (
@@ -741,6 +779,8 @@ def _by_manager_report_input(
             ],
             rows,
         ),
+        "benchmark_basis": _benchmark_basis_from_summary(summary),
+        "benchmark_basis_note": _benchmark_basis_note(),
         "total_row": total_row,
         "effect_basis_note": (
             "Selected mandate effect compares neutral selected mandate exposure with the global benchmark. "
@@ -843,6 +883,8 @@ def _effect_totals_report_input(
             ["Effect", "Value", "Meaning"],
             rows,
         ),
+        "benchmark_basis": _benchmark_basis_from_summary(summary),
+        "benchmark_basis_note": _benchmark_basis_note(),
         "total_row": total_row,
         "effect_basis_note": (
             "Selected mandate, target weighting, and funding drift effects are percentage points of total portfolio return before manager implementation."
@@ -1156,12 +1198,14 @@ def _budget_actuals(
     table = visible.get("compact_table")
     total_row = visible.get("total_row")
     advisor_note = visible.get("advisor_note")
+    benchmark_basis = visible.get("benchmark_basis") or {}
     budget = _budget_for_report(report_id)
     visible_table_rows = (len(table["rows"]) if table else 0) + (1 if total_row else 0)
     return {
         **budget,
         "actual_headline_sentences": _sentence_count(visible["headline_sentence"]),
         "actual_headline_metrics": len(visible["headline_metrics"]),
+        "actual_benchmark_basis_items": _benchmark_basis_item_count(benchmark_basis),
         "actual_visible_table_rows": visible_table_rows,
         "actual_caveats": len(visible.get("caveats") or []),
         "actual_advisor_notes": 1 if advisor_note else 0,
@@ -1182,6 +1226,8 @@ def _validate_view_budget(view: dict[str, Any]) -> None:
         raise ValueError(f"{view['report_element_id']} exceeds headline sentence budget")
     if budget["actual_headline_metrics"] > budget["max_headline_metrics"]:
         raise ValueError(f"{view['report_element_id']} exceeds headline metric budget")
+    if budget["actual_benchmark_basis_items"] > budget["max_benchmark_basis_items"]:
+        raise ValueError(f"{view['report_element_id']} exceeds benchmark basis budget")
     if budget["actual_visible_table_rows"] > budget["max_visible_table_rows"]:
         raise ValueError(f"{view['report_element_id']} exceeds table row budget")
     if budget["actual_caveats"] > budget["max_caveats"]:
@@ -1202,6 +1248,7 @@ def _validate_view_budget(view: dict[str, Any]) -> None:
     for pattern in RAW_ID_PATTERNS:
         if re.search(pattern, visible_text):
             raise ValueError(f"{view['report_element_id']} leaks raw id pattern: {pattern}")
+    _validate_benchmark_basis(view)
     if "selected mandate effect" not in visible_text:
         raise ValueError(f"{view['report_element_id']} lacks selected mandate effect")
     if "percentage points of total portfolio return" not in view["effect_basis_note"]:
@@ -1218,6 +1265,8 @@ def _validate_markdown(view: dict[str, Any], markdown: str) -> None:
     for pattern in RAW_ID_PATTERNS:
         if re.search(pattern, lowered):
             raise ValueError(f"{view['report_element_id']} markdown leaks raw id pattern: {pattern}")
+    if view.get("benchmark_basis", {}).get("visible") and "## benchmark basis" not in lowered:
+        raise ValueError(f"{view['report_element_id']} markdown lacks benchmark basis")
 
 
 def _visible_text(view: dict[str, Any]) -> str:
@@ -1226,6 +1275,20 @@ def _visible_text(view: dict[str, Any]) -> str:
         f"{metric['label']} {metric['formatted_value']}"
         for metric in view["headline_metrics"]
     )
+    benchmark_basis = view.get("benchmark_basis")
+    if benchmark_basis and benchmark_basis.get("visible"):
+        parts.append("Benchmark Basis")
+        parts.append(benchmark_basis["global_benchmark_display_name"])
+        parts.append(_format_percent(benchmark_basis["global_benchmark_return"]))
+        parts.append(
+            _format_percent(benchmark_basis["neutral_selected_mandate_basket_return"])
+        )
+        parts.append(_format_percent(benchmark_basis["target_policy_benchmark_return"]))
+        parts.append(
+            _format_percent(benchmark_basis["actual_allocation_benchmark_return"])
+        )
+    if view.get("benchmark_basis_note"):
+        parts.append(view["benchmark_basis_note"])
     table = view.get("compact_table")
     if table:
         parts.append(table["title"])
@@ -1317,6 +1380,102 @@ def _format_effect_pp(value: Any) -> str:
     number = float(value)
     sign = "+" if number >= 0 else "-"
     return f"{sign}{abs(number) * 100:.2f} pp"
+
+
+def _benchmark_basis_from_summary(summary: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "global_benchmark_display_name": summary.get(
+            "global_benchmark_display_name", GLOBAL_BENCHMARK_DISPLAY_NAME
+        ),
+        "global_benchmark_return": summary["global_benchmark_return"],
+        "neutral_selected_mandate_basket_return": summary[
+            "neutral_selected_mandate_basket_return"
+        ],
+        "target_policy_benchmark_return": summary["target_policy_benchmark_return"],
+        "actual_allocation_benchmark_return": summary[
+            "actual_allocation_benchmark_return"
+        ],
+        "visible": True,
+    }
+
+
+def _benchmark_basis_note() -> str:
+    return (
+        "Selected mandate effect starts by comparing the neutral selected mandate basket "
+        "with the global benchmark; target weighting compares target weights with "
+        "neutral selected-mandate weights; funding drift compares actual weights with "
+        "target weights."
+    )
+
+
+def _benchmark_basis_item_count(benchmark_basis: dict[str, Any]) -> int:
+    if not benchmark_basis.get("visible"):
+        return 0
+    return sum(
+        1
+        for key in (
+            "global_benchmark_return",
+            "neutral_selected_mandate_basket_return",
+            "target_policy_benchmark_return",
+            "actual_allocation_benchmark_return",
+        )
+        if key in benchmark_basis
+    )
+
+
+def _render_benchmark_basis(benchmark_basis: dict[str, Any]) -> list[str]:
+    return [
+        (
+            "- **Global benchmark:** "
+            f"{benchmark_basis['global_benchmark_display_name']}, "
+            f"{_format_percent(benchmark_basis['global_benchmark_return'])}"
+        ),
+        (
+            "- **Neutral selected mandate basket:** "
+            f"{_format_percent(benchmark_basis['neutral_selected_mandate_basket_return'])}"
+        ),
+        (
+            "- **Target policy benchmark:** "
+            f"{_format_percent(benchmark_basis['target_policy_benchmark_return'])}"
+        ),
+        (
+            "- **Actual allocation benchmark:** "
+            f"{_format_percent(benchmark_basis['actual_allocation_benchmark_return'])}"
+        ),
+    ]
+
+
+def _validate_benchmark_basis(view: dict[str, Any]) -> None:
+    benchmark_basis = view.get("benchmark_basis")
+    if not benchmark_basis:
+        raise ValueError(f"{view['report_element_id']} lacks benchmark basis")
+    required_keys = {
+        "global_benchmark_display_name",
+        "global_benchmark_return",
+        "neutral_selected_mandate_basket_return",
+        "target_policy_benchmark_return",
+        "actual_allocation_benchmark_return",
+        "visible",
+    }
+    missing = required_keys - set(benchmark_basis)
+    if missing:
+        raise ValueError(
+            f"{view['report_element_id']} benchmark basis missing {sorted(missing)}"
+        )
+    if benchmark_basis["visible"] is not True:
+        raise ValueError(f"{view['report_element_id']} benchmark basis is hidden")
+    if not str(benchmark_basis["global_benchmark_display_name"]).strip():
+        raise ValueError(f"{view['report_element_id']} lacks global benchmark name")
+    note = view.get("benchmark_basis_note", "")
+    for phrase in (
+        "neutral selected mandate basket with the global benchmark",
+        "target weights with neutral selected-mandate weights",
+        "actual weights with target weights",
+    ):
+        if phrase not in note:
+            raise ValueError(
+                f"{view['report_element_id']} benchmark note lacks {phrase}"
+            )
 
 
 def _metric(label: str, value: Any, formatted_value: str) -> dict[str, Any]:

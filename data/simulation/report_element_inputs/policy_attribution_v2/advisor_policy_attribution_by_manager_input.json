@@ -10,6 +10,7 @@
   "information_budget": {
     "exception_reason": "Primary advisor policy report shows all six manager/sleeve rows plus a total row.",
     "max_advisor_notes": 1,
+    "max_benchmark_basis_items": 4,
     "max_caveats": 1,
     "max_headline_metrics": 3,
     "max_headline_sentences": 1,
@@ -59,6 +60,15 @@
   },
   "visible_content": {
     "advisor_note": "Actual return is shown only as context for a separate manager implementation review.",
+    "benchmark_basis": {
+      "actual_allocation_benchmark_return": 0.067375351,
+      "global_benchmark_display_name": "Synthetic Global Policy Benchmark",
+      "global_benchmark_return": 0.06994,
+      "neutral_selected_mandate_basket_return": 0.063833333333,
+      "target_policy_benchmark_return": 0.06559,
+      "visible": true
+    },
+    "benchmark_basis_note": "Selected mandate effect starts by comparing the neutral selected mandate basket with the global benchmark; target weighting compares target weights with neutral selected-mandate weights; funding drift compares actual weights with target weights.",
     "caveats": [
       "Neutral selected-mandate weights are a decomposition baseline, not the client policy allocation."
     ],

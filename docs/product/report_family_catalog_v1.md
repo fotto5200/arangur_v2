@@ -72,6 +72,8 @@ Status update after Policy-Level Attribution Calculation and Mockups v1: local `
 
 Status update after Advisor Policy Attribution Redesign v2: local `policy_attribution_v2` report inputs, views, and Markdown mockups now exist for Advisor Policy Attribution by Manager/Sleeve and Advisor Policy Effect Totals. The v2 primary report separates selected mandate effect, target weighting effect, and funding drift effect; it labels actual manager return as context and excludes manager implementation from the primary advisor report. Policy-Level Attribution Summary v1 remains a local calculation reference but is superseded as the primary product-review surface.
 
+Benchmark basis polish update: the v2 report family now visibly names Synthetic Global Policy Benchmark and shows global benchmark, neutral selected mandate basket, target policy benchmark, and actual allocation benchmark returns in a compact Benchmark Basis section.
+
 ## Catalog Rules
 
 - A family may have multiple report instances, but each instance should answer one question.

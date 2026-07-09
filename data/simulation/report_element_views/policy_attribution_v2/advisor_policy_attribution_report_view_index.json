@@ -15,6 +15,7 @@
   "generator_version": "advisor_policy_attribution_v2.v2",
   "information_budget": {
     "max_advisor_notes": 1,
+    "max_benchmark_basis_items": 4,
     "max_caveats": 1,
     "max_headline_metrics": 3,
     "max_headline_sentences": 1,

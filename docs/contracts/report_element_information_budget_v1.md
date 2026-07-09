@@ -151,6 +151,8 @@ After Policy Allocation Review Mockups v1, local `policy_allocation_v1` report f
 
 After Advisor Policy Attribution Redesign v2, local `policy_attribution_v2` fixtures may show all six manager/sleeve rows plus a total row because the primary report's job is row-level advisor policy explanation. The visible table should keep Selected Mandate Effect before Target Weighting Effect, label Actual Return as context, and exclude Manager Implementation Effect as a primary column. Manager implementation may appear only as handoff metadata or a note that it belongs to a future within-manager report.
 
+The v2 primary report and totals note may also show a compact four-item Benchmark Basis section: global benchmark name/return, neutral selected mandate basket return, target policy benchmark return, and actual allocation benchmark return. This is allowed because selected mandate effect needs a visible comparator, but it should stay separate from the manager/sleeve table and should not recreate the old bridge-grid summary.
+
 Additional anti-clutter checks:
 
 - Do not mix asset type, manager/sleeve, lens/theme, and coverage/review statuses in one additive table.

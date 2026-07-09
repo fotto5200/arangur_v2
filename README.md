@@ -355,7 +355,7 @@ This writes:
 
 ## Generate Advisor Policy Attribution v2 Outputs And Mockups
 
-The advisor policy attribution v2 generator calculates advisor policy effect before manager implementation, decomposed into selected mandate effect, target weighting effect, and funding drift effect. It writes local-only calculated artifacts, report input fixtures, view fixtures, and Markdown product-review mockups. Actual Return is context only, manager implementation is excluded from the primary advisor policy report, and future manager-level detail remains gated. It does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, external APIs, secrets, or dependencies.
+The advisor policy attribution v2 generator calculates advisor policy effect before manager implementation, decomposed into selected mandate effect, target weighting effect, and funding drift effect. It writes local-only calculated artifacts, report input fixtures, view fixtures, and Markdown product-review mockups. The v2 mockups include a compact Benchmark Basis section naming the synthetic global benchmark and showing the comparator returns. Actual Return is context only, manager implementation is excluded from the primary advisor policy report, and future manager-level detail remains gated. It does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, external APIs, secrets, or dependencies.
 
 ```cmd
 set PYTHONPATH=src

@@ -9,6 +9,10 @@ They are not wired into Advisor Preview, Populate, Present, generated reports, D
 - [Advisor Policy Attribution by Manager/Sleeve](advisor_policy_attribution_by_manager_mockup_v2.md)
 - [Advisor Policy Effect Totals](advisor_policy_effect_totals_mockup_v2.md)
 
+## Benchmark Basis
+
+Both v2 mockups now show a compact Benchmark Basis section. The primary report names Synthetic Global Policy Benchmark and shows the global benchmark, neutral selected mandate basket, target policy benchmark, and actual allocation benchmark returns so selected mandate effect has a visible comparator.
+
 ## V1 Supersession
 
 Policy-Level Attribution Summary v1 remains a local calculation reference, but it is superseded as the primary product-review surface.

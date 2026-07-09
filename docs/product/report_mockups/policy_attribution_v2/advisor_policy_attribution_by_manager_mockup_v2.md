@@ -8,6 +8,15 @@ Advisor policy decisions were -0.26 pp versus the global benchmark before manage
 - **Selected mandate effect:** -0.61 pp
 - **Funding drift effect:** +0.18 pp
 
+## Benchmark Basis
+
+- **Global benchmark:** Synthetic Global Policy Benchmark, 6.99%
+- **Neutral selected mandate basket:** 6.38%
+- **Target policy benchmark:** 6.56%
+- **Actual allocation benchmark:** 6.74%
+
+Selected mandate effect starts by comparing the neutral selected mandate basket with the global benchmark; target weighting compares target weights with neutral selected-mandate weights; funding drift compares actual weights with target weights.
+
 ## Advisor Policy Attribution by Manager/Sleeve
 
 | Manager/Sleeve | Neutral Weight | Target Weight | Actual Weight | Weight Drift | Mandate Benchmark Return | Actual Return | Selected Mandate Effect | Target Weighting Effect | Funding Drift Effect | Advisor Policy Effect | Status |

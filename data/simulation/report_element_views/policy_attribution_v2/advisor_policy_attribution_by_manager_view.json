@@ -2,6 +2,15 @@
   "advisor_note": "Actual return is shown only as context for a separate manager implementation review.",
   "audience_tier": "advisor_review_and_client_briefing_when_sophisticated",
   "baseline_type": "neutral_selected_mandate_to_target_to_actual_allocation",
+  "benchmark_basis": {
+    "actual_allocation_benchmark_return": 0.067375351,
+    "global_benchmark_display_name": "Synthetic Global Policy Benchmark",
+    "global_benchmark_return": 0.06994,
+    "neutral_selected_mandate_basket_return": 0.063833333333,
+    "target_policy_benchmark_return": 0.06559,
+    "visible": true
+  },
+  "benchmark_basis_note": "Selected mandate effect starts by comparing the neutral selected mandate basket with the global benchmark; target weighting compares target weights with neutral selected-mandate weights; funding drift compares actual weights with target weights.",
   "caveats": [
     "Neutral selected-mandate weights are a decomposition baseline, not the client policy allocation."
   ],
@@ -135,12 +144,14 @@
   "headline_sentence": "Advisor policy decisions were -0.26 pp versus the global benchmark before manager implementation, as target weighting and funding drift partly offset selected mandate drag.",
   "information_budget_applied": {
     "actual_advisor_notes": 1,
+    "actual_benchmark_basis_items": 4,
     "actual_caveats": 1,
     "actual_headline_metrics": 3,
     "actual_headline_sentences": 1,
     "actual_visible_table_rows": 7,
     "exception_reason": "Primary advisor policy report shows all six manager/sleeve rows plus a total row.",
     "max_advisor_notes": 1,
+    "max_benchmark_basis_items": 4,
     "max_caveats": 1,
     "max_headline_metrics": 3,
     "max_headline_sentences": 1,
