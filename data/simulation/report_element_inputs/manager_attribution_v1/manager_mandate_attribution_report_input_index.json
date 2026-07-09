@@ -6,6 +6,7 @@
   "generator_version": "manager_mandate_attribution.v1",
   "input_files": [
     "manager_mandate_attribution_summary_input.json",
+    "manager_driver_attribution_matrix_input.json",
     "within_manager_attribution_detail_input.json",
     "manager_implementation_handoff_input.json"
   ],
@@ -14,10 +15,11 @@
   "mockups_generated_from_views": true,
   "report_ids": [
     "manager_mandate_attribution_summary",
+    "manager_driver_attribution_matrix",
     "within_manager_attribution_detail",
     "manager_implementation_handoff"
   ],
-  "report_input_count": 3,
+  "report_input_count": 4,
   "schema_version": "manager_mandate_attribution_report_input_index.v1",
   "source_advisor_policy_attribution_engine_id": "advisor_policy_attribution_engine_v2",
   "source_policy_mandate_pack_id": "synthetic_policy_mandate_pack_v1",

@@ -2,7 +2,7 @@
   "advisor_handoff_residual_status": "pass",
   "approval_status": "synthetic_demo_approved",
   "calculations_gated": [
-    "full_manager_by_manager_driver_detail",
+    "full_manager_by_manager_driver_detail_with_position_drilldown",
     "timing_attribution",
     "dollar_pnl_attribution",
     "production_client_manager_attribution",
@@ -13,6 +13,7 @@
     "manager_active_return_vs_mandate",
     "manager_implementation_effect",
     "within_manager_driver_rows",
+    "manager_driver_attribution_matrix",
     "selected_manager_detail",
     "advisor_policy_attribution_v2_handoff",
     "row_tie_outs"
@@ -20,6 +21,7 @@
   "engine_id": "manager_mandate_attribution_engine_v1",
   "engine_version": "2026-07-09",
   "generated_artifacts": {
+    "driver_matrix": "manager_driver_attribution_matrix.json",
     "driver_rows": "within_manager_driver_rows.json",
     "manager_rows": "manager_mandate_attribution_rows.json",
     "manifest": "manager_mandate_attribution_manifest.json",
@@ -37,6 +39,7 @@
   "local_only": true,
   "methodology_summary": {
     "advisor_handoff": "Total manager implementation effect reconciles to advisor policy attribution v2 handoff.",
+    "driver_matrix": "All manager driver components shown on portfolio-effect basis with row and total tie-outs.",
     "driver_rows": "Synthetic local driver components scaled by actual manager weight.",
     "manager_active_return": "Manager actual return minus manager mandate benchmark return.",
     "manager_implementation_effect": "Actual manager weight times manager active return."

@@ -18,6 +18,7 @@ SOURCE_MANAGER_CALCULATED_ENGINE_ID = "synthetic_attribution_engine_v1"
 
 CALCULATION_SCHEMA_VERSION = "manager_mandate_attribution_calculated_output.v1"
 DRIVER_ROWS_SCHEMA_VERSION = "within_manager_driver_rows.v1"
+DRIVER_MATRIX_SCHEMA_VERSION = "manager_driver_attribution_matrix.v1"
 SELECTED_MANAGER_SCHEMA_VERSION = "selected_manager_detail_artifact.v1"
 REPORT_INPUT_SCHEMA_VERSION = "manager_mandate_attribution_report_input.v1"
 REPORT_INPUT_INDEX_SCHEMA_VERSION = "manager_mandate_attribution_report_input_index.v1"
@@ -69,6 +70,7 @@ CALCULATED_ARTIFACT_FILES = {
     "summary": "manager_mandate_attribution_summary.json",
     "manager_rows": "manager_mandate_attribution_rows.json",
     "driver_rows": "within_manager_driver_rows.json",
+    "driver_matrix": "manager_driver_attribution_matrix.json",
     "selected_manager_detail": "selected_manager_detail_artifact.json",
     "quality_summary": "manager_mandate_attribution_quality_summary.json",
 }
@@ -79,6 +81,12 @@ REPORT_SPECS: tuple[dict[str, str], ...] = (
         "input_filename": "manager_mandate_attribution_summary_input.json",
         "view_filename": "manager_mandate_attribution_summary_view.json",
         "mockup_filename": "manager_mandate_attribution_summary_mockup_v1.md",
+    },
+    {
+        "report_id": "manager_driver_attribution_matrix",
+        "input_filename": "manager_driver_attribution_matrix_input.json",
+        "view_filename": "manager_driver_attribution_matrix_view.json",
+        "mockup_filename": "manager_driver_attribution_matrix_mockup_v1.md",
     },
     {
         "report_id": "within_manager_attribution_detail",
@@ -107,10 +115,10 @@ MOCKUP_FILENAME_BY_REPORT_ID = {
 
 GATED_REPORTS: tuple[dict[str, str], ...] = (
     {
-        "report_id": "full_manager_by_manager_driver_detail",
-        "display_title": "Full Manager-by-Manager Driver Detail",
+        "report_id": "full_manager_by_manager_driver_detail_with_position_drilldown",
+        "display_title": "Full Manager-by-Manager Driver Detail with Position Drilldown",
         "status": "Gated",
-        "reason": "Requires a separate review surface before expanding all driver rows.",
+        "reason": "Requires approved position-level driver inputs and drilldown design.",
     },
     {
         "report_id": "timing_attribution",
@@ -231,6 +239,67 @@ DRIVER_COMPONENTS: tuple[dict[str, str], ...] = (
         "meaning": "Local synthetic remainder after named driver categories.",
     },
 )
+
+MATRIX_COMPONENT_FIELDS: tuple[dict[str, str], ...] = (
+    {
+        "driver_id": "mandate_sub_benchmark_selection",
+        "field": "mandate_sub_benchmark_selection_effect",
+        "column": "Mandate Sub-Benchmark Selection",
+        "manager_return_field": "mandate_sub_benchmark_selection_return_effect",
+    },
+    {
+        "driver_id": "mandate_sub_benchmark_sizing",
+        "field": "mandate_sub_benchmark_sizing_effect",
+        "column": "Mandate Sub-Benchmark Sizing",
+        "manager_return_field": "mandate_sub_benchmark_sizing_return_effect",
+    },
+    {
+        "driver_id": "asset_selection",
+        "field": "asset_selection_effect",
+        "column": "Asset Selection",
+        "manager_return_field": "asset_selection_return_effect",
+    },
+    {
+        "driver_id": "asset_sizing",
+        "field": "asset_sizing_effect",
+        "column": "Asset Sizing",
+        "manager_return_field": "asset_sizing_return_effect",
+    },
+    {
+        "driver_id": "residual_unexplained",
+        "field": "residual_unexplained_effect",
+        "column": "Residual / Unexplained",
+        "manager_return_field": "residual_unexplained_return_effect",
+    },
+)
+
+MATRIX_ROW_FIELDS = [
+    "display_name",
+    "actual_weight",
+    "active_return",
+    "mandate_sub_benchmark_selection_effect",
+    "mandate_sub_benchmark_sizing_effect",
+    "asset_selection_effect",
+    "asset_sizing_effect",
+    "residual_unexplained_effect",
+    "total_manager_effect",
+    "status",
+    "tie_out_status",
+    "caveats",
+]
+
+MATRIX_TABLE_COLUMNS = [
+    "Manager/Sleeve",
+    "Actual Weight",
+    "Active Return",
+    "Mandate Sub-Benchmark Selection",
+    "Mandate Sub-Benchmark Sizing",
+    "Asset Selection",
+    "Asset Sizing",
+    "Residual / Unexplained",
+    "Total Manager Effect",
+    "Status",
+]
 
 
 def load_source_context(
@@ -485,6 +554,14 @@ def calculate_manager_mandate_attribution(context: dict[str, Any]) -> dict[str, 
         "driver_residual_status": _residual_status(driver_residual),
     }
 
+    driver_matrix_payload = _manager_driver_matrix_payload(
+        decimal_rows=decimal_rows,
+        driver_decimal_rows=driver_decimal_rows,
+        manager_driver_tie_outs=manager_driver_tie_outs,
+        summary_total=total_manager_implementation_effect,
+        advisor_handoff=advisor_handoff,
+    )
+
     selected_driver_rows = [
         row for row in driver_decimal_rows if row["manager_id"] == selected_manager["manager_id"]
     ]
@@ -561,6 +638,7 @@ def calculate_manager_mandate_attribution(context: dict[str, Any]) -> dict[str, 
         ],
         "effect_basis": "percentage_points_of_total_portfolio_return",
         "manager_return_basis": "manager_return_minus_manager_mandate_benchmark_return",
+        "manager_driver_matrix_generated": True,
         "largest_positive_manager": _manager_summary_row(largest_positive_manager),
         "largest_negative_manager": (
             _manager_summary_row(largest_negative_manager)
@@ -612,6 +690,7 @@ def calculate_manager_mandate_attribution(context: dict[str, Any]) -> dict[str, 
         "summary": summary,
         "manager_rows": manager_rows_payload,
         "driver_rows": driver_rows_payload,
+        "driver_matrix": driver_matrix_payload,
         "selected_manager_detail": selected_manager_detail,
         "quality_summary": quality_summary,
     }
@@ -623,6 +702,9 @@ def build_manager_mandate_report_inputs(
 ) -> dict[str, dict[str, Any]]:
     inputs = {
         "manager_mandate_attribution_summary": _summary_report_input(
+            artifacts, context
+        ),
+        "manager_driver_attribution_matrix": _driver_matrix_report_input(
             artifacts, context
         ),
         "within_manager_attribution_detail": _within_manager_detail_report_input(
@@ -663,6 +745,14 @@ def build_manager_mandate_report_views(
             "headline_sentence": visible["headline_sentence"],
             "headline_metrics": visible["headline_metrics"],
             "benchmark_basis": visible["benchmark_basis"],
+            "manager_benchmark_basis": visible.get(
+                "manager_benchmark_basis",
+                {
+                    "basis": "Manager mandate benchmark",
+                    "effect_basis": "Percentage points of total portfolio return",
+                    "visible": False,
+                },
+            ),
             "benchmark_basis_note": visible["benchmark_basis_note"],
             "compact_table": visible.get("compact_table"),
             "driver_table": visible.get("driver_table"),
@@ -673,6 +763,9 @@ def build_manager_mandate_report_views(
             "advisor_note": visible["advisor_note"],
             "source_advisor_policy_attribution_engine_id": SOURCE_ADVISOR_ENGINE_ID,
             "manager_implementation_visible_in_advisor_policy_report": False,
+            "advisor_policy_effects_visible": visible.get(
+                "advisor_policy_effects_visible", False
+            ),
             "advisor_policy_effects_visible_in_manager_reports": False,
             "internal_source_refs": payload["internal_source_refs"],
             "internal_source_metadata": payload["internal_source_metadata"],
@@ -856,7 +949,10 @@ def render_mockup_readme(
             "These local product-review mockups show manager implementation against manager mandate benchmarks."
         ),
         (
-            "They keep manager implementation separate from advisor selected mandate, target weighting, and funding drift effects."
+            "They keep manager implementation separate from advisor-level policy effects."
+        ),
+        (
+            "The Manager Driver Attribution Matrix is the all-manager component view; selected-manager detail is its drill-down."
         ),
         (
             "They are not wired into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, external data, or production reporting."
@@ -969,7 +1065,7 @@ def _summary_report_input(
             "Synthetic local-demo manager attribution only; production use needs approved real manager returns and benchmarks."
         ],
         "advisor_note": (
-            "Use Advisor Policy Attribution for selected mandate, target weighting, and funding drift."
+            "Use Advisor Policy Attribution for advisor-level policy decisions."
         ),
     }
     return _report_input(
@@ -997,6 +1093,119 @@ def _summary_report_input(
             "advisor_policy_effect_columns_visible": False,
             "global_benchmark_columns_visible": False,
             "manager_implementation_effect_visible": True,
+        },
+    )
+
+
+def _driver_matrix_report_input(
+    artifacts: dict[str, Any],
+    context: dict[str, Any],
+) -> dict[str, Any]:
+    summary = artifacts["summary"]
+    matrix = artifacts["driver_matrix"]
+    rows = [_matrix_visible_row(row) for row in matrix["manager_rows"]]
+    total_row = _matrix_visible_row(matrix["total_row"])
+    largest_positive = summary["largest_positive_manager_driver"]
+    largest_negative = summary["largest_negative_manager_driver"]
+    visible_content = {
+        "headline_sentence": (
+            "The manager driver matrix explains +1.05 pp of manager implementation across all managers on portfolio-effect basis."
+        ),
+        "headline_metrics": [
+            _metric(
+                "Total manager implementation effect",
+                summary["total_manager_implementation_effect"],
+                _format_effect_pp(summary["total_manager_implementation_effect"]),
+            ),
+            _metric(
+                "Largest positive driver",
+                largest_positive["portfolio_effect"],
+                (
+                    f"{largest_positive['display_name']} "
+                    f"{largest_positive['driver_label']}: "
+                    f"{_format_effect_pp(largest_positive['portfolio_effect'])}"
+                ),
+            ),
+            _metric(
+                "Largest negative driver",
+                largest_negative["portfolio_effect"],
+                (
+                    f"{largest_negative['display_name']} "
+                    f"{largest_negative['driver_label']}: "
+                    f"{_format_effect_pp(largest_negative['portfolio_effect'])}"
+                ),
+            ),
+        ],
+        "compact_table": _table(
+            "Manager Driver Attribution Matrix",
+            list(MATRIX_TABLE_COLUMNS),
+            rows,
+        ),
+        "benchmark_basis": _matrix_benchmark_basis(summary),
+        "manager_benchmark_basis": {
+            "basis": "Each manager's own mandate benchmark",
+            "effect_basis": "Percentage points of total portfolio return",
+            "visible": True,
+        },
+        "advisor_policy_effects_visible": False,
+        "benchmark_basis_note": (
+            "Active Return is manager actual return minus that manager's mandate benchmark return."
+        ),
+        "total_row": total_row,
+        "tie_out_note": (
+            "Component totals tie to the manager attribution summary and Advisor Policy Attribution handoff at +1.05 pp."
+        ),
+        "effect_basis_note": (
+            "Component columns are percentage points of total portfolio return. "
+            "Total Manager Effect equals actual weight times Active Return."
+        ),
+        "caveats": [
+            "Driver categories are synthetic local-demo diagnostics and are not production-approved."
+        ],
+        "advisor_note": (
+            "Advisor-level policy effects remain in Advisor Policy Attribution."
+        ),
+    }
+    return _report_input(
+        report_element_id="manager_driver_attribution_matrix",
+        display_title="Manager Driver Attribution Matrix",
+        exact_report_question=(
+            "Across all managers, which internal mandate/selection/sizing effects explain manager implementation?"
+        ),
+        audience_tier="advisor_review_and_internal_product_review",
+        summary_detail_status="all_manager_component_matrix",
+        representation_level="manager_sleeve_component_effect_matrix",
+        denominator_category_system="percentage_points_of_total_portfolio_return",
+        rendering_mode="manager_driver_component_matrix",
+        visible_content=visible_content,
+        context=context,
+        source_keys=(
+            "manager_calculated.manager_calculated_summary",
+            "policy_pack.actual_manager_allocation_snapshot",
+            "policy_pack.manager_mandate_benchmark_catalog",
+            "policy_pack.policy_level_attribution_inputs",
+            "advisor_policy.advisor_policy_summary",
+        ),
+        table_validation={
+            "manager_rows_shown": len(rows),
+            "total_row_visible": True,
+            "component_columns_present": True,
+            "portfolio_effect_basis": True,
+            "summary_total_tie_out_status": matrix["tie_outs"][
+                "summary_total_tie_out"
+            ]["status"],
+            "advisor_policy_handoff_tie_out_status": matrix["tie_outs"][
+                "advisor_policy_handoff_tie_out"
+            ]["status"],
+            "advisor_policy_effect_columns_visible": False,
+            "advisor_policy_effects_visible": False,
+            "advisor_target_weight_visible": False,
+            "selected_mandate_effect_visible": False,
+            "target_weighting_effect_visible": False,
+            "funding_drift_visible": False,
+            "policy_allocation_drift_visible": False,
+            "global_benchmark_responsibility_benchmark_visible": False,
+            "synthetic_driver_categories_production_approved": False,
         },
     )
 
@@ -1075,7 +1284,7 @@ def _within_manager_detail_report_input(
             "Driver categories are synthetic local-demo diagnostics and are not production-approved."
         ],
         "advisor_note": (
-            "Use the manager summary to see how this row contributes to the total manager effect."
+            "This selected-manager detail is a drill-down from the Manager Driver Attribution Matrix."
         ),
     }
     return _report_input(
@@ -1233,6 +1442,9 @@ def _report_input(
         "source_advisor_policy_attribution_engine_id": SOURCE_ADVISOR_ENGINE_ID,
         "source_manager_calculated_engine_id": SOURCE_MANAGER_CALCULATED_ENGINE_ID,
         "manager_implementation_visible_in_advisor_policy_report": False,
+        "advisor_policy_effects_visible": visible_content.get(
+            "advisor_policy_effects_visible", False
+        ),
         "advisor_policy_effects_visible_in_manager_reports": False,
         "internal_source_refs": source_refs,
         "internal_source_metadata": {
@@ -1273,12 +1485,14 @@ def _manifest(
             "manager_active_return": "Manager actual return minus manager mandate benchmark return.",
             "manager_implementation_effect": "Actual manager weight times manager active return.",
             "driver_rows": "Synthetic local driver components scaled by actual manager weight.",
+            "driver_matrix": "All manager driver components shown on portfolio-effect basis with row and total tie-outs.",
             "advisor_handoff": "Total manager implementation effect reconciles to advisor policy attribution v2 handoff.",
         },
         "calculations_supported": [
             "manager_active_return_vs_mandate",
             "manager_implementation_effect",
             "within_manager_driver_rows",
+            "manager_driver_attribution_matrix",
             "selected_manager_detail",
             "advisor_policy_attribution_v2_handoff",
             "row_tie_outs",
@@ -1343,6 +1557,7 @@ def _quality_summary(
         "no_external_or_live_data": True,
         "no_new_backend_or_ui_wiring": True,
         "advisor_policy_effects_excluded_from_manager_reports": True,
+        "all_manager_driver_matrix_generated": True,
     }
     overall_status = (
         "pass"
@@ -1370,7 +1585,7 @@ def _quality_summary(
         "output_scope": output_scope,
         "largest_positive_manager": summary["largest_positive_manager"],
         "largest_negative_manager": summary["largest_negative_manager"],
-        "recommended_next_tranche": "Full Manager-by-Manager Driver Detail",
+        "recommended_next_tranche": "Full Manager-by-Manager Driver Detail with Position Drilldown",
         "limitations": [
             "Synthetic local-demo manager attribution only.",
             "Timing and dollar P&L are unavailable in this tranche.",
@@ -1452,11 +1667,19 @@ def _gated_deferred_index() -> dict[str, Any]:
 
 def _budget_for_report(report_id: str) -> dict[str, Any]:
     budget = dict(DEFAULT_INFORMATION_BUDGET)
-    if report_id == "manager_mandate_attribution_summary":
+    if report_id in {
+        "manager_mandate_attribution_summary",
+        "manager_driver_attribution_matrix",
+    }:
         budget["max_visible_table_rows"] = 7
-        budget["exception_reason"] = (
-            "Summary report shows all six managers plus a total row."
-        )
+        if report_id == "manager_mandate_attribution_summary":
+            budget["exception_reason"] = (
+                "Summary report shows all six managers plus a total row."
+            )
+        else:
+            budget["exception_reason"] = (
+                "Matrix report shows all six managers plus a total row."
+            )
     elif report_id == "manager_implementation_handoff":
         budget["max_visible_table_rows"] = 3
     return budget
@@ -1550,6 +1773,12 @@ def _visible_text(view: dict[str, Any]) -> str:
                 parts.append(str(value))
     if view.get("benchmark_basis_note"):
         parts.append(str(view["benchmark_basis_note"]))
+    manager_benchmark_basis = view.get("manager_benchmark_basis")
+    if manager_benchmark_basis and manager_benchmark_basis.get("visible"):
+        parts.append("Manager Benchmark Basis")
+        for value in manager_benchmark_basis.values():
+            if value is not True:
+                parts.append(str(value))
     for table_key in ("compact_table", "driver_table"):
         table = view.get(table_key)
         if table:
@@ -1567,6 +1796,156 @@ def _visible_text(view: dict[str, Any]) -> str:
     if view.get("advisor_note"):
         parts.append(str(view["advisor_note"]))
     return "\n".join(parts)
+
+
+def _manager_driver_matrix_payload(
+    *,
+    decimal_rows: list[dict[str, Any]],
+    driver_decimal_rows: list[dict[str, Any]],
+    manager_driver_tie_outs: dict[str, dict[str, Any]],
+    summary_total: Decimal,
+    advisor_handoff: Decimal,
+) -> dict[str, Any]:
+    drivers_by_manager: dict[str, dict[str, dict[str, Any]]] = {}
+    for row in driver_decimal_rows:
+        drivers_by_manager.setdefault(row["manager_id"], {})[row["driver_id"]] = row
+
+    manager_rows: list[dict[str, Any]] = []
+    component_totals = {
+        component["field"]: Decimal("0") for component in MATRIX_COMPONENT_FIELDS
+    }
+
+    for manager_row in decimal_rows:
+        manager_id = manager_row["manager_id"]
+        component_values: dict[str, Decimal] = {}
+        manager_return_basis: dict[str, float] = {
+            "active_return": _return_number(manager_row["active_return_vs_mandate"])
+        }
+        for component in MATRIX_COMPONENT_FIELDS:
+            driver_row = drivers_by_manager[manager_id][component["driver_id"]]
+            component_values[component["field"]] = driver_row["portfolio_effect"]
+            manager_return_basis[component["manager_return_field"]] = _return_number(
+                driver_row["manager_return_effect"]
+            )
+            component_totals[component["field"]] += driver_row["portfolio_effect"]
+
+        total_manager_effect = sum(component_values.values(), Decimal("0"))
+        row_residual = total_manager_effect - manager_row["manager_implementation_effect"]
+        source_tie_out_status = manager_driver_tie_outs[manager_id]["status"]
+        tie_out_status = (
+            "pass"
+            if _residual_status(row_residual) == "pass"
+            and source_tie_out_status == "pass"
+            else "fail"
+        )
+        manager_rows.append(
+            {
+                "manager_id": manager_id,
+                "display_name": manager_row["display_name"],
+                "actual_weight": _weight_number(manager_row["actual_weight"]),
+                "active_return": _return_number(
+                    manager_row["active_return_vs_mandate"]
+                ),
+                **{
+                    field: _return_number(value)
+                    for field, value in component_values.items()
+                },
+                "total_manager_effect": _return_number(total_manager_effect),
+                "status": manager_row["status"],
+                "tie_out_status": tie_out_status,
+                "caveats": [
+                    "Synthetic local-demo driver categories are not production-approved."
+                ],
+                "internal_manager_return_basis": manager_return_basis,
+            }
+        )
+
+    component_total_sum = sum(component_totals.values(), Decimal("0"))
+    component_residual = component_total_sum - summary_total
+    advisor_handoff_residual = component_total_sum - advisor_handoff
+    total_tie_out_status = (
+        "pass"
+        if _residual_status(component_residual) == "pass"
+        and _residual_status(advisor_handoff_residual) == "pass"
+        and all(row["tie_out_status"] == "pass" for row in manager_rows)
+        else "fail"
+    )
+    total_row = {
+        "display_name": "Total",
+        "actual_weight": _weight_number(
+            sum(row["actual_weight"] for row in decimal_rows)
+        ),
+        "active_return": None,
+        **{
+            field: _return_number(value)
+            for field, value in component_totals.items()
+        },
+        "total_manager_effect": _return_number(component_total_sum),
+        "status": "total",
+        "tie_out_status": total_tie_out_status,
+        "caveats": [],
+        "summary_total_tie_out_status": _residual_status(component_residual),
+        "advisor_policy_handoff_tie_out_status": _residual_status(
+            advisor_handoff_residual
+        ),
+        "weighted_active_return_total": _return_number(summary_total),
+    }
+
+    return {
+        "schema_version": DRIVER_MATRIX_SCHEMA_VERSION,
+        "engine_id": ENGINE_ID,
+        "engine_version": ENGINE_VERSION,
+        "generated_at": GENERATED_AT,
+        "synthetic_data": True,
+        "local_only": True,
+        "driver_basis": "synthetic_local_demo_manager_driver_components",
+        "effect_basis": "percentage_points_of_total_portfolio_return",
+        "manager_return_basis_metadata_included": True,
+        "manager_count": len(manager_rows),
+        "matrix_row_fields": list(MATRIX_ROW_FIELDS),
+        "component_columns": [
+            {
+                "field": component["field"],
+                "driver_id": component["driver_id"],
+                "display_column": component["column"],
+            }
+            for component in MATRIX_COMPONENT_FIELDS
+        ],
+        "manager_rows": manager_rows,
+        "total_row": total_row,
+        "tie_outs": {
+            "all_manager_rows_tie_out": all(
+                row["tie_out_status"] == "pass" for row in manager_rows
+            ),
+            "component_totals_sum_to_total_manager_effect": {
+                "component_total_sum": _return_number(component_total_sum),
+                "total_manager_effect": _return_number(summary_total),
+                "residual": _return_number(component_residual),
+                "status": _residual_status(component_residual),
+            },
+            "summary_total_tie_out": {
+                "manager_driver_matrix_total": _return_number(component_total_sum),
+                "manager_mandate_attribution_summary_total": _return_number(
+                    summary_total
+                ),
+                "residual": _return_number(component_residual),
+                "status": _residual_status(component_residual),
+            },
+            "advisor_policy_handoff_tie_out": {
+                "manager_driver_matrix_total": _return_number(component_total_sum),
+                "advisor_policy_attribution_v2_handoff": _return_number(
+                    advisor_handoff
+                ),
+                "residual": _return_number(advisor_handoff_residual),
+                "status": _residual_status(advisor_handoff_residual),
+            },
+            "status": total_tie_out_status,
+        },
+        "advisor_policy_effects_excluded": True,
+        "manager_benchmark_is_mandate_benchmark": True,
+        "global_benchmark_not_manager_responsibility_benchmark": True,
+        "synthetic_driver_categories_production_approved": False,
+    }
 
 
 def _driver_decimal_rows_for_manager(
@@ -1683,6 +2062,17 @@ def _portfolio_benchmark_basis(summary: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _matrix_benchmark_basis(summary: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "manager_benchmark_basis": "Each manager's mandate benchmark",
+        "effect_basis": "Percentage points of total portfolio return",
+        "advisor_policy_attribution_handoff": summary[
+            "advisor_policy_attribution_v2_handoff"
+        ],
+        "visible": True,
+    }
+
+
 def _selected_manager_benchmark_basis(manager_row: dict[str, Any]) -> dict[str, Any]:
     return {
         "manager": manager_row["display_name"],
@@ -1703,6 +2093,12 @@ def _render_benchmark_basis(benchmark_basis: dict[str, Any]) -> list[str]:
             f"- **Manager actual return:** {_format_percent(benchmark_basis['manager_actual_return'])}",
             f"- **Actual weight:** {_format_percent(benchmark_basis['actual_weight'])}",
         ]
+    if "manager_benchmark_basis" in benchmark_basis:
+        return [
+            f"- **Manager benchmark basis:** {benchmark_basis['manager_benchmark_basis']}",
+            f"- **Effect basis:** {benchmark_basis['effect_basis']}",
+            f"- **Advisor handoff:** {_format_effect_pp(benchmark_basis['advisor_policy_attribution_handoff'])}",
+        ]
     return [
         f"- **Actual allocation benchmark:** {_format_percent(benchmark_basis['actual_allocation_benchmark_return'])}",
         f"- **Actual manager return context:** {_format_percent(benchmark_basis['actual_portfolio_return_context'])}",
@@ -1713,7 +2109,7 @@ def _render_benchmark_basis(benchmark_basis: dict[str, Any]) -> list[str]:
 def _manager_benchmark_basis_note() -> str:
     return (
         "Each manager is compared with that manager's mandate benchmark and actual weight. "
-        "Allocation policy choices and the global benchmark are handled in Advisor Policy Attribution."
+        "Advisor-level policy choices are handled in Advisor Policy Attribution."
     )
 
 
@@ -1722,7 +2118,40 @@ def _benchmark_basis_item_count(benchmark_basis: dict[str, Any]) -> int:
         return 0
     if "manager" in benchmark_basis:
         return 4
+    if "manager_benchmark_basis" in benchmark_basis:
+        return 3
     return 3
+
+
+def _matrix_visible_row(row: dict[str, Any]) -> dict[str, str]:
+    active_return = (
+        "N/A"
+        if row["active_return"] is None
+        else _format_signed_percent(row["active_return"])
+    )
+    status = (
+        _status_label(row["status"])
+        if row["tie_out_status"] == "pass"
+        else "Review tie-out"
+    )
+    return {
+        "Manager/Sleeve": row["display_name"],
+        "Actual Weight": _format_percent(row["actual_weight"]),
+        "Active Return": active_return,
+        "Mandate Sub-Benchmark Selection": _format_effect_pp(
+            row["mandate_sub_benchmark_selection_effect"]
+        ),
+        "Mandate Sub-Benchmark Sizing": _format_effect_pp(
+            row["mandate_sub_benchmark_sizing_effect"]
+        ),
+        "Asset Selection": _format_effect_pp(row["asset_selection_effect"]),
+        "Asset Sizing": _format_effect_pp(row["asset_sizing_effect"]),
+        "Residual / Unexplained": _format_effect_pp(
+            row["residual_unexplained_effect"]
+        ),
+        "Total Manager Effect": _format_effect_pp(row["total_manager_effect"]),
+        "Status": status,
+    }
 
 
 def _table(title: str, columns: list[str], rows: list[dict[str, str]]) -> dict[str, Any]:

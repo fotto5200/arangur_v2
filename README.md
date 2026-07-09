@@ -369,6 +369,22 @@ This writes:
 - `data/simulation/report_element_views/policy_attribution_v2/`
 - `docs/product/report_mockups/policy_attribution_v2/`
 
+## Generate Manager Mandate Attribution Outputs And Mockups
+
+The manager mandate attribution generator consumes the policy/mandate prerequisite pack, Advisor Policy Attribution v2 handoff, and calculated synthetic manager-driver outputs. It writes local-only manager implementation artifacts, including the all-manager Manager Driver Attribution Matrix, selected-manager drill-down, report input fixtures, view fixtures, and Markdown product-review mockups. The manager reports evaluate managers against their own mandate benchmarks and keep advisor-level policy effects in Advisor Policy Attribution. They are not wired into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, external APIs, secrets, or dependencies.
+
+```cmd
+set PYTHONPATH=src
+python -m arangur.analytics.manager_mandate_attribution
+```
+
+This writes:
+
+- `data/simulation/manager_mandate_attribution/manager_mandate_attribution_engine_v1/`
+- `data/simulation/report_element_inputs/manager_attribution_v1/`
+- `data/simulation/report_element_views/manager_attribution_v1/`
+- `docs/product/report_mockups/manager_attribution_v1/`
+
 ## Generate Revaluation v2 Report Mockups
 
 The v2 report-view generator turns full-revaluation outputs, attribution outputs, and the synthetic prerequisite pack into v2 report input fixtures, v2 report view fixtures, and Markdown product-review mockups, including separate Cash Flow Delivered and Cash-Flow Support Outlook reports. It preserves v1 mockups and does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.

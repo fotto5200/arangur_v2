@@ -2,7 +2,7 @@
   "advisor_policy_effects_visible_in_manager_reports": false,
   "advisor_ui_wiring": "not_changed",
   "gated_reports_not_generated": [
-    "full_manager_by_manager_driver_detail",
+    "full_manager_by_manager_driver_detail_with_position_drilldown",
     "timing_attribution",
     "dollar_pnl_attribution",
     "production_client_manager_attribution",
@@ -26,9 +26,10 @@
   },
   "local_only": true,
   "manager_implementation_visible_in_advisor_policy_report": false,
-  "markdown_mockup_count": 3,
+  "markdown_mockup_count": 4,
   "mockup_files": [
     "manager_mandate_attribution_summary_mockup_v1.md",
+    "manager_driver_attribution_matrix_mockup_v1.md",
     "within_manager_attribution_detail_mockup_v1.md",
     "manager_implementation_handoff_mockup_v1.md",
     "README.md"
@@ -36,16 +37,18 @@
   "mockups_generated_from_views": true,
   "report_ids": [
     "manager_mandate_attribution_summary",
+    "manager_driver_attribution_matrix",
     "within_manager_attribution_detail",
     "manager_implementation_handoff"
   ],
-  "report_view_count": 3,
+  "report_view_count": 4,
   "schema_version": "manager_mandate_attribution_report_view_index.v1",
   "source_advisor_policy_attribution_engine_id": "advisor_policy_attribution_engine_v2",
   "source_policy_mandate_pack_id": "synthetic_policy_mandate_pack_v1",
   "synthetic_data": true,
   "view_files": [
     "manager_mandate_attribution_summary_view.json",
+    "manager_driver_attribution_matrix_view.json",
     "within_manager_attribution_detail_view.json",
     "manager_implementation_handoff_view.json",
     "gated_deferred_manager_mandate_attribution_index.json"

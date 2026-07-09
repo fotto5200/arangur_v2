@@ -42,4 +42,4 @@ Manager return effects are sleeve-level return components. Portfolio effects mul
 
 ## Advisor Note
 
-Use the manager summary to see how this row contributes to the total manager effect.
+This selected-manager detail is a drill-down from the Manager Driver Attribution Matrix.

@@ -1,9 +1,9 @@
 {
   "gated_or_deferred_reports": [
     {
-      "display_title": "Full Manager-by-Manager Driver Detail",
-      "reason": "Requires a separate review surface before expanding all driver rows.",
-      "report_id": "full_manager_by_manager_driver_detail",
+      "display_title": "Full Manager-by-Manager Driver Detail with Position Drilldown",
+      "reason": "Requires approved position-level driver inputs and drilldown design.",
+      "report_id": "full_manager_by_manager_driver_detail_with_position_drilldown",
       "status": "Gated"
     },
     {

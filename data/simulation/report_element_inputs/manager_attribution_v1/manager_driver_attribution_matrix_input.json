@@ -1,0 +1,209 @@
+{
+  "advisor_policy_effects_visible": false,
+  "advisor_policy_effects_visible_in_manager_reports": false,
+  "audience_tier": "advisor_review_and_internal_product_review",
+  "denominator_category_system": "percentage_points_of_total_portfolio_return",
+  "display_title": "Manager Driver Attribution Matrix",
+  "exact_report_question": "Across all managers, which internal mandate/selection/sizing effects explain manager implementation?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-09T00:00:00Z",
+  "generator_version": "manager_mandate_attribution.v1",
+  "information_budget": {
+    "exception_reason": "Matrix report shows all six managers plus a total row.",
+    "max_advisor_notes": 1,
+    "max_benchmark_basis_items": 4,
+    "max_caveats": 1,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 7,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true
+  },
+  "internal_source_metadata": {
+    "calculated_engine_id": "manager_mandate_attribution_engine_v1",
+    "source_advisor_policy_attribution_engine_id": "advisor_policy_attribution_engine_v2",
+    "source_manager_calculated_engine_id": "synthetic_attribution_engine_v1",
+    "source_policy_mandate_pack_id": "synthetic_policy_mandate_pack_v1"
+  },
+  "internal_source_refs": [
+    "data/simulation/attribution_calculated/synthetic_attribution_engine_v1/manager_calculated_attribution_summary.json",
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/actual_manager_allocation_snapshot.json",
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/manager_mandate_benchmark_catalog.json",
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/policy_level_attribution_inputs.json",
+    "data/simulation/policy_level_attribution/advisor_policy_attribution_engine_v2/advisor_policy_attribution_summary_v2.json"
+  ],
+  "local_only": true,
+  "manager_implementation_visible_in_advisor_policy_report": false,
+  "master_question_family": "Performance / Plan",
+  "not_wired_into_advisor_ui": true,
+  "not_wired_into_generated_report_flow": true,
+  "rendering_mode": "manager_driver_component_matrix",
+  "report_element_id": "manager_driver_attribution_matrix",
+  "report_family": "manager_mandate_attribution",
+  "representation_level": "manager_sleeve_component_effect_matrix",
+  "schema_version": "manager_mandate_attribution_report_input.v1",
+  "source_advisor_policy_attribution_engine_id": "advisor_policy_attribution_engine_v2",
+  "source_manager_calculated_engine_id": "synthetic_attribution_engine_v1",
+  "source_policy_mandate_pack_id": "synthetic_policy_mandate_pack_v1",
+  "summary_detail_status": "all_manager_component_matrix",
+  "synthetic_data": true,
+  "table_validation": {
+    "advisor_policy_effect_columns_visible": false,
+    "advisor_policy_effects_visible": false,
+    "advisor_policy_handoff_tie_out_status": "pass",
+    "advisor_target_weight_visible": false,
+    "component_columns_present": true,
+    "funding_drift_visible": false,
+    "global_benchmark_responsibility_benchmark_visible": false,
+    "manager_rows_shown": 6,
+    "policy_allocation_drift_visible": false,
+    "portfolio_effect_basis": true,
+    "selected_mandate_effect_visible": false,
+    "summary_total_tie_out_status": "pass",
+    "synthetic_driver_categories_production_approved": false,
+    "target_weighting_effect_visible": false,
+    "total_row_visible": true
+  },
+  "visible_content": {
+    "advisor_note": "Advisor-level policy effects remain in Advisor Policy Attribution.",
+    "advisor_policy_effects_visible": false,
+    "benchmark_basis": {
+      "advisor_policy_attribution_handoff": 0.010545519,
+      "effect_basis": "Percentage points of total portfolio return",
+      "manager_benchmark_basis": "Each manager's mandate benchmark",
+      "visible": true
+    },
+    "benchmark_basis_note": "Active Return is manager actual return minus that manager's mandate benchmark return.",
+    "caveats": [
+      "Driver categories are synthetic local-demo diagnostics and are not production-approved."
+    ],
+    "compact_table": {
+      "columns": [
+        "Manager/Sleeve",
+        "Actual Weight",
+        "Active Return",
+        "Mandate Sub-Benchmark Selection",
+        "Mandate Sub-Benchmark Sizing",
+        "Asset Selection",
+        "Asset Sizing",
+        "Residual / Unexplained",
+        "Total Manager Effect",
+        "Status"
+      ],
+      "rows": [
+        {
+          "Active Return": "+2.10%",
+          "Actual Weight": "24.86%",
+          "Asset Selection": "+0.32 pp",
+          "Asset Sizing": "-0.01 pp",
+          "Manager/Sleeve": "Manager A - Growth / AI Infrastructure",
+          "Mandate Sub-Benchmark Selection": "-0.65 pp",
+          "Mandate Sub-Benchmark Sizing": "+0.69 pp",
+          "Residual / Unexplained": "+0.17 pp",
+          "Status": "Above mandate",
+          "Total Manager Effect": "+0.52 pp"
+        },
+        {
+          "Active Return": "+0.80%",
+          "Actual Weight": "18.81%",
+          "Asset Selection": "+0.11 pp",
+          "Asset Sizing": "+0.01 pp",
+          "Manager/Sleeve": "Manager B - Core Quality Equity",
+          "Mandate Sub-Benchmark Selection": "-0.14 pp",
+          "Mandate Sub-Benchmark Sizing": "+0.06 pp",
+          "Residual / Unexplained": "+0.10 pp",
+          "Status": "Above mandate",
+          "Total Manager Effect": "+0.15 pp"
+        },
+        {
+          "Active Return": "+0.40%",
+          "Actual Weight": "13.02%",
+          "Asset Selection": "-0.02 pp",
+          "Asset Sizing": "+0.05 pp",
+          "Manager/Sleeve": "Manager C - Income and Cash Generation",
+          "Mandate Sub-Benchmark Selection": "+0.33 pp",
+          "Mandate Sub-Benchmark Sizing": "-0.23 pp",
+          "Residual / Unexplained": "-0.07 pp",
+          "Status": "Above mandate",
+          "Total Manager Effect": "+0.05 pp"
+        },
+        {
+          "Active Return": "+0.80%",
+          "Actual Weight": "20.31%",
+          "Asset Selection": "+0.09 pp",
+          "Asset Sizing": "+0.03 pp",
+          "Manager/Sleeve": "Manager D - Private Markets / Real Assets",
+          "Mandate Sub-Benchmark Selection": "+0.12 pp",
+          "Mandate Sub-Benchmark Sizing": "-0.06 pp",
+          "Residual / Unexplained": "-0.01 pp",
+          "Status": "Above mandate",
+          "Total Manager Effect": "+0.16 pp"
+        },
+        {
+          "Active Return": "+0.30%",
+          "Actual Weight": "14.04%",
+          "Asset Selection": "-0.02 pp",
+          "Asset Sizing": "+0.05 pp",
+          "Manager/Sleeve": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "Mandate Sub-Benchmark Selection": "+0.53 pp",
+          "Mandate Sub-Benchmark Sizing": "-0.23 pp",
+          "Residual / Unexplained": "-0.28 pp",
+          "Status": "Above mandate",
+          "Total Manager Effect": "+0.04 pp"
+        },
+        {
+          "Active Return": "+1.40%",
+          "Actual Weight": "8.96%",
+          "Asset Selection": "+0.00 pp",
+          "Asset Sizing": "+0.03 pp",
+          "Manager/Sleeve": "Manager F - Opportunistic Macro / Hedge",
+          "Mandate Sub-Benchmark Selection": "-0.06 pp",
+          "Mandate Sub-Benchmark Sizing": "-0.10 pp",
+          "Residual / Unexplained": "+0.25 pp",
+          "Status": "Above mandate",
+          "Total Manager Effect": "+0.13 pp"
+        }
+      ],
+      "title": "Manager Driver Attribution Matrix"
+    },
+    "effect_basis_note": "Component columns are percentage points of total portfolio return. Total Manager Effect equals actual weight times Active Return.",
+    "headline_metrics": [
+      {
+        "formatted_value": "+1.05 pp",
+        "label": "Total manager implementation effect",
+        "raw_value": 0.010545519
+      },
+      {
+        "formatted_value": "Manager A - Growth / AI Infrastructure Mandate sub-benchmark sizing: +0.69 pp",
+        "label": "Largest positive driver",
+        "raw_value": 0.006921787488
+      },
+      {
+        "formatted_value": "Manager A - Growth / AI Infrastructure Mandate sub-benchmark selection: -0.65 pp",
+        "label": "Largest negative driver",
+        "raw_value": -0.00653329446
+      }
+    ],
+    "headline_sentence": "The manager driver matrix explains +1.05 pp of manager implementation across all managers on portfolio-effect basis.",
+    "manager_benchmark_basis": {
+      "basis": "Each manager's own mandate benchmark",
+      "effect_basis": "Percentage points of total portfolio return",
+      "visible": true
+    },
+    "tie_out_note": "Component totals tie to the manager attribution summary and Advisor Policy Attribution handoff at +1.05 pp.",
+    "total_row": {
+      "Active Return": "N/A",
+      "Actual Weight": "100.00%",
+      "Asset Selection": "+0.48 pp",
+      "Asset Sizing": "+0.15 pp",
+      "Manager/Sleeve": "Total",
+      "Mandate Sub-Benchmark Selection": "+0.13 pp",
+      "Mandate Sub-Benchmark Sizing": "+0.12 pp",
+      "Residual / Unexplained": "+0.16 pp",
+      "Status": "Manager total",
+      "Total Manager Effect": "+1.05 pp"
+    }
+  }
+}

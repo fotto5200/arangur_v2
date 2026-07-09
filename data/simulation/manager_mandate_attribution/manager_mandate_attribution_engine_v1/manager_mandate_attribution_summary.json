@@ -15,7 +15,7 @@
   "engine_id": "manager_mandate_attribution_engine_v1",
   "engine_version": "2026-07-09",
   "gated_calculations_not_included": [
-    "full_manager_by_manager_driver_detail",
+    "full_manager_by_manager_driver_detail_with_position_drilldown",
     "timing_attribution",
     "dollar_pnl_attribution",
     "production_client_manager_attribution",
@@ -59,6 +59,7 @@
   },
   "local_only": true,
   "manager_count": 6,
+  "manager_driver_matrix_generated": true,
   "manager_return_basis": "manager_return_minus_manager_mandate_benchmark_return",
   "near_mandate_manager_count": 0,
   "review_manager_count": 0,

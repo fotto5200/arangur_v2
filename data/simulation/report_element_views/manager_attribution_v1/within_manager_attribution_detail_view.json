@@ -1,5 +1,6 @@
 {
-  "advisor_note": "Use the manager summary to see how this row contributes to the total manager effect.",
+  "advisor_note": "This selected-manager detail is a drill-down from the Manager Driver Attribution Matrix.",
+  "advisor_policy_effects_visible": false,
   "advisor_policy_effects_visible_in_manager_reports": false,
   "audience_tier": "advisor_review_and_internal_product_review",
   "benchmark_basis": {
@@ -118,6 +119,11 @@
     "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/policy_level_attribution_inputs.json"
   ],
   "local_only": true,
+  "manager_benchmark_basis": {
+    "basis": "Manager mandate benchmark",
+    "effect_basis": "Percentage points of total portfolio return",
+    "visible": false
+  },
   "manager_implementation_visible_in_advisor_policy_report": false,
   "master_question_family": "Performance / Plan",
   "rendering_mode": "selected_manager_driver_table",

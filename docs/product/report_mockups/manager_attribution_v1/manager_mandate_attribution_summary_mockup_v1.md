@@ -14,7 +14,7 @@ Managers added +1.05 pp versus their mandate benchmarks on actual capital contro
 - **Actual manager return context:** 7.79%
 - **Advisor handoff:** +1.05 pp
 
-Each manager is compared with that manager's mandate benchmark and actual weight. Allocation policy choices and the global benchmark are handled in Advisor Policy Attribution.
+Each manager is compared with that manager's mandate benchmark and actual weight. Advisor-level policy choices are handled in Advisor Policy Attribution.
 
 ## Manager Mandate Attribution Summary
 
@@ -38,4 +38,4 @@ Active return is manager return minus mandate benchmark return. Manager Effect e
 
 ## Advisor Note
 
-Use Advisor Policy Attribution for selected mandate, target weighting, and funding drift.
+Use Advisor Policy Attribution for advisor-level policy decisions.

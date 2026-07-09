@@ -1,4 +1,5 @@
 {
+  "advisor_policy_effects_visible": false,
   "advisor_policy_effects_visible_in_manager_reports": false,
   "audience_tier": "advisor_review_and_client_briefing_when_sophisticated",
   "denominator_category_system": "percentage_points_of_total_portfolio_return",
@@ -55,14 +56,14 @@
     "total_row_visible": true
   },
   "visible_content": {
-    "advisor_note": "Use Advisor Policy Attribution for selected mandate, target weighting, and funding drift.",
+    "advisor_note": "Use Advisor Policy Attribution for advisor-level policy decisions.",
     "benchmark_basis": {
       "actual_allocation_benchmark_return": 0.067375351,
       "actual_portfolio_return_context": 0.07792087,
       "advisor_policy_attribution_v2_handoff": 0.010545519,
       "visible": true
     },
-    "benchmark_basis_note": "Each manager is compared with that manager's mandate benchmark and actual weight. Allocation policy choices and the global benchmark are handled in Advisor Policy Attribution.",
+    "benchmark_basis_note": "Each manager is compared with that manager's mandate benchmark and actual weight. Advisor-level policy choices are handled in Advisor Policy Attribution.",
     "caveats": [
       "Synthetic local-demo manager attribution only; production use needs approved real manager returns and benchmarks."
     ],

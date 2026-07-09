@@ -103,6 +103,7 @@
   },
   "output_scope": {
     "advisor_policy_effects_excluded_from_manager_reports": true,
+    "all_manager_driver_matrix_generated": true,
     "no_blended_all_in_report": true,
     "no_dollar_pnl_attribution": true,
     "no_external_or_live_data": true,
@@ -112,7 +113,7 @@
     "no_timing_attribution": true
   },
   "overall_status": "pass",
-  "recommended_next_tranche": "Full Manager-by-Manager Driver Detail",
+  "recommended_next_tranche": "Full Manager-by-Manager Driver Detail with Position Drilldown",
   "schema_version": "manager_mandate_attribution_quality_summary.v1",
   "synthetic_data": true
 }

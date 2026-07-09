@@ -55,6 +55,7 @@ ADVISOR_DIR = (
 )
 
 SUMMARY_REPORT_ID = "manager_mandate_attribution_summary"
+MATRIX_REPORT_ID = "manager_driver_attribution_matrix"
 DETAIL_REPORT_ID = "within_manager_attribution_detail"
 HANDOFF_REPORT_ID = "manager_implementation_handoff"
 
@@ -73,6 +74,7 @@ REQUIRED_VIEW_FIELDS = {
     "headline_sentence",
     "headline_metrics",
     "benchmark_basis",
+    "manager_benchmark_basis",
     "benchmark_basis_note",
     "compact_table",
     "driver_table",
@@ -84,6 +86,7 @@ REQUIRED_VIEW_FIELDS = {
     "synthetic_data",
     "local_only",
     "internal_source_refs",
+    "advisor_policy_effects_visible",
     "information_budget_applied",
     "table_validation",
     "gated_or_deferred",
@@ -106,6 +109,27 @@ DRIVER_COLUMNS = [
     "Manager Return Effect",
     "Portfolio Effect",
     "Meaning",
+]
+
+MATRIX_COLUMNS = [
+    "Manager/Sleeve",
+    "Actual Weight",
+    "Active Return",
+    "Mandate Sub-Benchmark Selection",
+    "Mandate Sub-Benchmark Sizing",
+    "Asset Selection",
+    "Asset Sizing",
+    "Residual / Unexplained",
+    "Total Manager Effect",
+    "Status",
+]
+
+MATRIX_COMPONENT_FIELDS = [
+    "mandate_sub_benchmark_selection_effect",
+    "mandate_sub_benchmark_sizing_effect",
+    "asset_selection_effect",
+    "asset_sizing_effect",
+    "residual_unexplained_effect",
 ]
 
 FORBIDDEN_PLACEHOLDER_TERMS = (
@@ -132,6 +156,12 @@ FORBIDDEN_VISIBLE_TERMS = (
     "full within-manager",
     "all-in attribution",
     "bridge grid",
+    "selected mandate effect",
+    "target weighting effect",
+    "advisor target weight",
+    "funding drift",
+    "policy allocation drift",
+    "global benchmark",
     ".json",
 )
 
@@ -188,10 +218,10 @@ class ManagerMandateAttributionTests(unittest.TestCase):
         )
 
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertIn("Manager mandate attribution outputs: 6", result.stdout)
-        self.assertIn("Manager mandate attribution report inputs: 3", result.stdout)
-        self.assertIn("Manager mandate attribution report views: 3", result.stdout)
-        self.assertIn("Manager mandate attribution Markdown mockups: 3", result.stdout)
+        self.assertIn("Manager mandate attribution outputs: 7", result.stdout)
+        self.assertIn("Manager mandate attribution report inputs: 4", result.stdout)
+        self.assertIn("Manager mandate attribution report views: 4", result.stdout)
+        self.assertIn("Manager mandate attribution Markdown mockups: 4", result.stdout)
         self.assertIn("Advisor handoff tie-out passed: True", result.stdout)
         self.assertIn("Driver tie-outs passed: True", result.stdout)
         self.assertTrue(
@@ -262,6 +292,7 @@ class ManagerMandateAttributionTests(unittest.TestCase):
         self.assertIsNone(summary["largest_negative_manager"])
         self.assertIn("largest_positive_manager_driver", summary)
         self.assertIn("largest_negative_manager_driver", summary)
+        self.assertTrue(summary["manager_driver_matrix_generated"])
         self.assertIn("timing_attribution", summary["gated_calculations_not_included"])
         self.assertIn("blended_all_in_attribution", summary["gated_calculations_not_included"])
 
@@ -320,11 +351,114 @@ class ManagerMandateAttributionTests(unittest.TestCase):
         self.assertAlmostEqual(0.021, detail["tie_out"]["active_return_vs_mandate"], places=12)
         self.assertAlmostEqual(0.005219676, detail["tie_out"]["manager_implementation_effect"], places=12)
 
+    def test_manager_driver_matrix_artifact_ties_out_and_covers_all_managers(self) -> None:
+        source = _load_json(PACK_DIR / "policy_level_attribution_inputs.json")
+        summary = _load_json(CALC_DIR / "manager_mandate_attribution_summary.json")
+        matrix = _load_json(CALC_DIR / "manager_driver_attribution_matrix.json")
+
+        self.assertEqual("manager_driver_attribution_matrix.v1", matrix["schema_version"])
+        self.assertTrue(matrix["synthetic_data"])
+        self.assertTrue(matrix["local_only"])
+        self.assertEqual("percentage_points_of_total_portfolio_return", matrix["effect_basis"])
+        self.assertTrue(matrix["advisor_policy_effects_excluded"])
+        self.assertTrue(matrix["global_benchmark_not_manager_responsibility_benchmark"])
+        self.assertFalse(matrix["synthetic_driver_categories_production_approved"])
+
+        source_manager_ids = {row["manager_id"] for row in source["input_rows"]}
+        matrix_manager_ids = {row["manager_id"] for row in matrix["manager_rows"]}
+        self.assertEqual(source_manager_ids, matrix_manager_ids)
+        self.assertEqual(6, matrix["manager_count"])
+        self.assertEqual("Total", matrix["total_row"]["display_name"])
+        self.assertEqual("pass", matrix["total_row"]["tie_out_status"])
+
+        for field in MATRIX_COMPONENT_FIELDS:
+            self.assertIn(field, matrix["matrix_row_fields"])
+        for row in matrix["manager_rows"]:
+            with self.subTest(manager=row["display_name"]):
+                for field in [
+                    "display_name",
+                    "actual_weight",
+                    "active_return",
+                    *MATRIX_COMPONENT_FIELDS,
+                    "total_manager_effect",
+                    "status",
+                    "tie_out_status",
+                    "caveats",
+                ]:
+                    self.assertIn(field, row)
+                component_sum = sum(_d(row[field]) for field in MATRIX_COMPONENT_FIELDS)
+                self.assertAlmostEqual(
+                    float(component_sum),
+                    row["total_manager_effect"],
+                    places=12,
+                )
+                self.assertEqual("pass", row["tie_out_status"])
+                self.assertNotIn("advisor_policy_effect", row)
+                self.assertNotIn("target_weighting_effect", row)
+                self.assertNotIn("selected_mandate_effect", row)
+                self.assertNotIn("funding_drift_effect", row)
+
+        total_row = matrix["total_row"]
+        component_total_sum = sum(_d(total_row[field]) for field in MATRIX_COMPONENT_FIELDS)
+        self.assertAlmostEqual(
+            float(component_total_sum),
+            total_row["total_manager_effect"],
+            places=12,
+        )
+        self.assertAlmostEqual(
+            summary["total_manager_implementation_effect"],
+            total_row["total_manager_effect"],
+            places=12,
+        )
+        self.assertEqual("pass", matrix["tie_outs"]["status"])
+        self.assertEqual("pass", matrix["tie_outs"]["summary_total_tie_out"]["status"])
+        self.assertEqual("pass", matrix["tie_outs"]["advisor_policy_handoff_tie_out"]["status"])
+        self.assertEqual("pass", matrix["tie_outs"]["component_totals_sum_to_total_manager_effect"]["status"])
+
+    def test_manager_driver_matrix_report_view_and_mockup_scope(self) -> None:
+        source = _load_json(PACK_DIR / "policy_level_attribution_inputs.json")
+        view = _load_json(VIEW_DIR / VIEW_FILENAME_BY_REPORT_ID[MATRIX_REPORT_ID])
+        markdown = (MOCKUP_DIR / MOCKUP_FILENAME_BY_REPORT_ID[MATRIX_REPORT_ID]).read_text(
+            encoding="utf-8"
+        )
+
+        self.assertEqual("Manager Driver Attribution Matrix", view["display_title"])
+        self.assertEqual(
+            "Across all managers, which internal mandate/selection/sizing effects explain manager implementation?",
+            view["exact_report_question"],
+        )
+        self.assertEqual(MATRIX_COLUMNS, view["compact_table"]["columns"])
+        self.assertEqual(6, len(view["compact_table"]["rows"]))
+        self.assertEqual("Total", view["total_row"]["Manager/Sleeve"])
+        self.assertEqual("+1.05 pp", view["total_row"]["Total Manager Effect"])
+        self.assertIsNone(view["driver_table"])
+        self.assertTrue(view["manager_benchmark_basis"]["visible"])
+        self.assertFalse(view["advisor_policy_effects_visible"])
+        self.assertFalse(view["table_validation"]["advisor_policy_effect_columns_visible"])
+        self.assertFalse(view["table_validation"]["advisor_policy_effects_visible"])
+        self.assertFalse(view["table_validation"]["global_benchmark_responsibility_benchmark_visible"])
+        self.assertFalse(view["table_validation"]["synthetic_driver_categories_production_approved"])
+        self.assertEqual("pass", view["table_validation"]["summary_total_tie_out_status"])
+        self.assertEqual("pass", view["table_validation"]["advisor_policy_handoff_tie_out_status"])
+        self.assertEqual(render_markdown_mockup(view), markdown)
+
+        for source_row in source["input_rows"]:
+            self.assertIn(source_row["display_name"], markdown)
+        for column in MATRIX_COLUMNS:
+            self.assertIn(column, markdown)
+        lowered = f"{_visible_text(view)}\n{markdown}".lower()
+        self.assertNotIn("advisor target weight", lowered)
+        self.assertNotIn("selected mandate effect", lowered)
+        self.assertNotIn("target weighting effect", lowered)
+        self.assertNotIn("funding drift", lowered)
+        self.assertNotIn("policy allocation drift", lowered)
+        self.assertNotIn("global benchmark", lowered)
+
     def test_report_fixtures_views_and_markdown_shape(self) -> None:
         index = _load_json(VIEW_DIR / "manager_mandate_attribution_report_view_index.json")
         self.assertEqual(set(BUILD_NOW_REPORT_IDS), set(index["report_ids"]))
-        self.assertEqual(3, index["report_view_count"])
-        self.assertEqual(3, index["markdown_mockup_count"])
+        self.assertEqual(4, index["report_view_count"])
+        self.assertEqual(4, index["markdown_mockup_count"])
         self.assertTrue(index["mockups_generated_from_views"])
         self.assertFalse(index["manager_implementation_visible_in_advisor_policy_report"])
         self.assertFalse(index["advisor_policy_effects_visible_in_manager_reports"])
@@ -380,6 +514,10 @@ class ManagerMandateAttributionTests(unittest.TestCase):
         self.assertEqual(5, len(detail_view["driver_table"]["rows"]))
         self.assertEqual("Within-Manager Attribution Detail", detail_view["display_title"])
         self.assertIn("Driver rows tie to +2.10% active return", detail_view["tie_out_note"])
+        self.assertEqual(
+            "This selected-manager detail is a drill-down from the Manager Driver Attribution Matrix.",
+            detail_view["advisor_note"],
+        )
         self.assertFalse(detail_view["table_validation"]["timing_attribution_visible"])
         self.assertFalse(detail_view["table_validation"]["position_level_rows_visible"])
 
@@ -401,7 +539,7 @@ class ManagerMandateAttributionTests(unittest.TestCase):
             row["display_title"]: row for row in gated_index["gated_or_deferred_reports"]
         }
         required_titles = {
-            "Full Manager-by-Manager Driver Detail",
+            "Full Manager-by-Manager Driver Detail with Position Drilldown",
             "Timing Attribution",
             "Dollar P&L Attribution",
             "Production Client Manager Attribution",
@@ -434,7 +572,7 @@ class ManagerMandateAttributionTests(unittest.TestCase):
                 )
                 self.assertLessEqual(len(view["caveats"]), 1)
                 self.assertEqual(1, 1 if view.get("advisor_note") else 0)
-                if report_id == SUMMARY_REPORT_ID:
+                if report_id in {SUMMARY_REPORT_ID, MATRIX_REPORT_ID}:
                     self.assertIn("exception_reason", budget)
                     self.assertEqual(7, budget["actual_visible_table_rows"])
                 for marker in FORBIDDEN_PLACEHOLDER_TERMS:
@@ -445,6 +583,10 @@ class ManagerMandateAttributionTests(unittest.TestCase):
                     self.assertIsNone(re.search(pattern, combined))
                 self.assertNotIn("advisor target weight", combined)
                 self.assertNotIn("global benchmark return", combined)
+                self.assertNotIn("selected mandate effect", combined)
+                self.assertNotIn("target weighting effect", combined)
+                self.assertNotIn("funding drift", combined)
+                self.assertNotIn("policy allocation drift", combined)
                 self.assertNotIn("timing attribution", combined)
 
     def test_quality_summary_confirms_scope_gates_and_no_external_data(self) -> None:
@@ -462,6 +604,11 @@ class ManagerMandateAttributionTests(unittest.TestCase):
         self.assertTrue(quality["output_scope"]["no_position_level_manager_attribution"])
         self.assertTrue(quality["output_scope"]["no_external_or_live_data"])
         self.assertTrue(quality["output_scope"]["no_new_backend_or_ui_wiring"])
+        self.assertTrue(quality["output_scope"]["all_manager_driver_matrix_generated"])
+        self.assertEqual(
+            "Full Manager-by-Manager Driver Detail with Position Drilldown",
+            quality["recommended_next_tranche"],
+        )
 
     def test_source_module_has_no_external_api_secret_or_wiring_markers(self) -> None:
         source = (
@@ -508,6 +655,14 @@ def _visible_text(view: dict[str, object]) -> str:
         parts.extend(str(value) for value in benchmark_basis.values() if value is not True)
     if view.get("benchmark_basis_note"):
         parts.append(str(view["benchmark_basis_note"]))
+    manager_benchmark_basis = view.get("manager_benchmark_basis")
+    if isinstance(manager_benchmark_basis, dict) and manager_benchmark_basis.get("visible"):
+        parts.append("Manager Benchmark Basis")
+        parts.extend(
+            str(value)
+            for value in manager_benchmark_basis.values()
+            if value is not True
+        )
     for table_key in ("compact_table", "driver_table"):
         table = view.get(table_key)
         if isinstance(table, dict):

@@ -1,5 +1,6 @@
 {
   "advisor_note": "Read this after the Advisor Policy Attribution report when manager implementation needs explanation.",
+  "advisor_policy_effects_visible": false,
   "advisor_policy_effects_visible_in_manager_reports": false,
   "audience_tier": "internal_product_review_and_advisor_quality_control",
   "benchmark_basis": {
@@ -93,6 +94,11 @@
     "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/policy_level_attribution_inputs.json"
   ],
   "local_only": true,
+  "manager_benchmark_basis": {
+    "basis": "Manager mandate benchmark",
+    "effect_basis": "Percentage points of total portfolio return",
+    "visible": false
+  },
   "manager_implementation_visible_in_advisor_policy_report": false,
   "master_question_family": "Performance / Plan",
   "rendering_mode": "compact_handoff_table",

@@ -1,0 +1,248 @@
+{
+  "advisor_policy_effects_excluded": true,
+  "component_columns": [
+    {
+      "display_column": "Mandate Sub-Benchmark Selection",
+      "driver_id": "mandate_sub_benchmark_selection",
+      "field": "mandate_sub_benchmark_selection_effect"
+    },
+    {
+      "display_column": "Mandate Sub-Benchmark Sizing",
+      "driver_id": "mandate_sub_benchmark_sizing",
+      "field": "mandate_sub_benchmark_sizing_effect"
+    },
+    {
+      "display_column": "Asset Selection",
+      "driver_id": "asset_selection",
+      "field": "asset_selection_effect"
+    },
+    {
+      "display_column": "Asset Sizing",
+      "driver_id": "asset_sizing",
+      "field": "asset_sizing_effect"
+    },
+    {
+      "display_column": "Residual / Unexplained",
+      "driver_id": "residual_unexplained",
+      "field": "residual_unexplained_effect"
+    }
+  ],
+  "driver_basis": "synthetic_local_demo_manager_driver_components",
+  "effect_basis": "percentage_points_of_total_portfolio_return",
+  "engine_id": "manager_mandate_attribution_engine_v1",
+  "engine_version": "2026-07-09",
+  "generated_at": "2026-07-09T00:00:00Z",
+  "global_benchmark_not_manager_responsibility_benchmark": true,
+  "local_only": true,
+  "manager_benchmark_is_mandate_benchmark": true,
+  "manager_count": 6,
+  "manager_return_basis_metadata_included": true,
+  "manager_rows": [
+    {
+      "active_return": 0.021,
+      "actual_weight": 0.248556,
+      "asset_selection_effect": 0.003220788648,
+      "asset_sizing_effect": -6.7607232e-05,
+      "caveats": [
+        "Synthetic local-demo driver categories are not production-approved."
+      ],
+      "display_name": "Manager A - Growth / AI Infrastructure",
+      "internal_manager_return_basis": {
+        "active_return": 0.021,
+        "asset_selection_return_effect": 0.012958,
+        "asset_sizing_return_effect": -0.000272,
+        "mandate_sub_benchmark_selection_return_effect": -0.026285,
+        "mandate_sub_benchmark_sizing_return_effect": 0.027848,
+        "residual_unexplained_return_effect": 0.006751
+      },
+      "manager_id": "mgr_a_growth_ai_infrastructure",
+      "mandate_sub_benchmark_selection_effect": -0.00653329446,
+      "mandate_sub_benchmark_sizing_effect": 0.006921787488,
+      "residual_unexplained_effect": 0.001678001556,
+      "status": "above_mandate",
+      "tie_out_status": "pass",
+      "total_manager_effect": 0.005219676
+    },
+    {
+      "active_return": 0.008,
+      "actual_weight": 0.188107,
+      "asset_selection_effect": 0.001144066774,
+      "asset_sizing_effect": 6.2827738e-05,
+      "caveats": [
+        "Synthetic local-demo driver categories are not production-approved."
+      ],
+      "display_name": "Manager B - Core Quality Equity",
+      "internal_manager_return_basis": {
+        "active_return": 0.008,
+        "asset_selection_return_effect": 0.006082,
+        "asset_sizing_return_effect": 0.000334,
+        "mandate_sub_benchmark_selection_return_effect": -0.007285,
+        "mandate_sub_benchmark_sizing_return_effect": 0.00336,
+        "residual_unexplained_return_effect": 0.005509
+      },
+      "manager_id": "mgr_b_core_quality_equity",
+      "mandate_sub_benchmark_selection_effect": -0.001370359495,
+      "mandate_sub_benchmark_sizing_effect": 0.00063203952,
+      "residual_unexplained_effect": 0.001036281463,
+      "status": "above_mandate",
+      "tie_out_status": "pass",
+      "total_manager_effect": 0.001504856
+    },
+    {
+      "active_return": 0.004,
+      "actual_weight": 0.130237,
+      "asset_selection_effect": -0.000223616929,
+      "asset_sizing_effect": 0.000457652818,
+      "caveats": [
+        "Synthetic local-demo driver categories are not production-approved."
+      ],
+      "display_name": "Manager C - Income and Cash Generation",
+      "internal_manager_return_basis": {
+        "active_return": 0.004,
+        "asset_selection_return_effect": -0.001717,
+        "asset_sizing_return_effect": 0.003514,
+        "mandate_sub_benchmark_selection_return_effect": 0.025715,
+        "mandate_sub_benchmark_sizing_return_effect": -0.017938,
+        "residual_unexplained_return_effect": -0.005574
+      },
+      "manager_id": "mgr_c_income_cash_generation",
+      "mandate_sub_benchmark_selection_effect": 0.003349044455,
+      "mandate_sub_benchmark_sizing_effect": -0.002336191306,
+      "residual_unexplained_effect": -0.000725941038,
+      "status": "above_mandate",
+      "tie_out_status": "pass",
+      "total_manager_effect": 0.000520948
+    },
+    {
+      "active_return": 0.008,
+      "actual_weight": 0.203096,
+      "asset_selection_effect": 0.000891388344,
+      "asset_sizing_effect": 0.000266868144,
+      "caveats": [
+        "Synthetic local-demo driver categories are not production-approved."
+      ],
+      "display_name": "Manager D - Private Markets / Real Assets",
+      "internal_manager_return_basis": {
+        "active_return": 0.008,
+        "asset_selection_return_effect": 0.004389,
+        "asset_sizing_return_effect": 0.001314,
+        "mandate_sub_benchmark_selection_return_effect": 0.005715,
+        "mandate_sub_benchmark_sizing_return_effect": -0.002957,
+        "residual_unexplained_return_effect": -0.000461
+      },
+      "manager_id": "mgr_d_private_real_assets",
+      "mandate_sub_benchmark_selection_effect": 0.00116069364,
+      "mandate_sub_benchmark_sizing_effect": -0.000600554872,
+      "residual_unexplained_effect": -9.3627256e-05,
+      "status": "above_mandate",
+      "tie_out_status": "pass",
+      "total_manager_effect": 0.001624768
+    },
+    {
+      "active_return": 0.003,
+      "actual_weight": 0.140435,
+      "asset_selection_effect": -0.000230734705,
+      "asset_sizing_effect": 0.000511604705,
+      "caveats": [
+        "Synthetic local-demo driver categories are not production-approved."
+      ],
+      "display_name": "Manager E - Liquidity Reserve / Defensive Ballast",
+      "internal_manager_return_basis": {
+        "active_return": 0.003,
+        "asset_selection_return_effect": -0.001643,
+        "asset_sizing_return_effect": 0.003643,
+        "mandate_sub_benchmark_selection_return_effect": 0.037715,
+        "mandate_sub_benchmark_sizing_return_effect": -0.016715,
+        "residual_unexplained_return_effect": -0.02
+      },
+      "manager_id": "mgr_e_liquidity_defensive",
+      "mandate_sub_benchmark_selection_effect": 0.005296506025,
+      "mandate_sub_benchmark_sizing_effect": -0.002347371025,
+      "residual_unexplained_effect": -0.0028087,
+      "status": "above_mandate",
+      "tie_out_status": "pass",
+      "total_manager_effect": 0.000421305
+    },
+    {
+      "active_return": 0.014,
+      "actual_weight": 0.089569,
+      "asset_selection_effect": 4.5948897e-05,
+      "asset_sizing_effect": 0.000260735359,
+      "caveats": [
+        "Synthetic local-demo driver categories are not production-approved."
+      ],
+      "display_name": "Manager F - Opportunistic Macro / Hedge",
+      "internal_manager_return_basis": {
+        "active_return": 0.014,
+        "asset_selection_return_effect": 0.000513,
+        "asset_sizing_return_effect": 0.002911,
+        "mandate_sub_benchmark_selection_return_effect": -0.006285,
+        "mandate_sub_benchmark_sizing_return_effect": -0.011456,
+        "residual_unexplained_return_effect": 0.028317
+      },
+      "manager_id": "mgr_f_opportunistic_macro",
+      "mandate_sub_benchmark_selection_effect": -0.000562941165,
+      "mandate_sub_benchmark_sizing_effect": -0.001026102464,
+      "residual_unexplained_effect": 0.002536325373,
+      "status": "above_mandate",
+      "tie_out_status": "pass",
+      "total_manager_effect": 0.001253966
+    }
+  ],
+  "matrix_row_fields": [
+    "display_name",
+    "actual_weight",
+    "active_return",
+    "mandate_sub_benchmark_selection_effect",
+    "mandate_sub_benchmark_sizing_effect",
+    "asset_selection_effect",
+    "asset_sizing_effect",
+    "residual_unexplained_effect",
+    "total_manager_effect",
+    "status",
+    "tie_out_status",
+    "caveats"
+  ],
+  "schema_version": "manager_driver_attribution_matrix.v1",
+  "synthetic_data": true,
+  "synthetic_driver_categories_production_approved": false,
+  "tie_outs": {
+    "advisor_policy_handoff_tie_out": {
+      "advisor_policy_attribution_v2_handoff": 0.010545519,
+      "manager_driver_matrix_total": 0.010545519,
+      "residual": 0.0,
+      "status": "pass"
+    },
+    "all_manager_rows_tie_out": true,
+    "component_totals_sum_to_total_manager_effect": {
+      "component_total_sum": 0.010545519,
+      "residual": 0.0,
+      "status": "pass",
+      "total_manager_effect": 0.010545519
+    },
+    "status": "pass",
+    "summary_total_tie_out": {
+      "manager_driver_matrix_total": 0.010545519,
+      "manager_mandate_attribution_summary_total": 0.010545519,
+      "residual": 0.0,
+      "status": "pass"
+    }
+  },
+  "total_row": {
+    "active_return": null,
+    "actual_weight": 1.0,
+    "advisor_policy_handoff_tie_out_status": "pass",
+    "asset_selection_effect": 0.004847841029,
+    "asset_sizing_effect": 0.001492081532,
+    "caveats": [],
+    "display_name": "Total",
+    "mandate_sub_benchmark_selection_effect": 0.001339649,
+    "mandate_sub_benchmark_sizing_effect": 0.001243607341,
+    "residual_unexplained_effect": 0.001622340098,
+    "status": "total",
+    "summary_total_tie_out_status": "pass",
+    "tie_out_status": "pass",
+    "total_manager_effect": 0.010545519,
+    "weighted_active_return_total": 0.010545519
+  }
+}
