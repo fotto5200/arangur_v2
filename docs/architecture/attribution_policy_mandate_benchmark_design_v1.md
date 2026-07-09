@@ -358,4 +358,17 @@ Generated reports:
 - Imputed Current Allocation Baseline: setup/readiness note that accepts current weights as the baseline, suppresses drift attribution, supports quick-start use, and does not prove the current allocation is ideal.
 - Manager Mandate Benchmark Basis: all six current manager mandate benchmark-basis rows.
 
-Policy-Level Attribution remains gated on a calculated engine. Blended / All-In Attribution remains deferred until separate policy allocation and manager mandate reports are understood. Production policy allocation reporting, current-vs-proposed allocation, timing attribution, Advisor Preview/Populate/Present wiring, generated-report integration, live/real data, external APIs, deployment, and production attribution modeling remain out of scope.
+Policy-Level Attribution Calculation and Mockups v1 now exists under `policy_attribution_v1` and calculates the local synthetic bridge from Global benchmark to Target policy benchmark to Actual allocation benchmark to Actual portfolio. Blended / All-In Attribution remains deferred until separate policy-level and manager-level reports are understood. Production policy allocation reporting, current-vs-proposed allocation, timing attribution, Advisor Preview/Populate/Present wiring, generated-report integration, live/real data, external APIs, deployment, and production attribution modeling remain out of scope.
+
+## 17. Follow-Up: Policy-Level Attribution Calculation and Mockups v1
+
+Policy-Level Attribution Calculation and Mockups v1 now turns the synthetic policy/mandate prerequisite pack into calculated local product-review outputs under `data/simulation/policy_level_attribution/policy_level_attribution_engine_v1/` plus report fixtures and Markdown mockups under `policy_attribution_v1`.
+
+The calculated bridge separates:
+
+- Global benchmark return;
+- Target policy benchmark return;
+- Actual allocation benchmark return;
+- Actual portfolio return.
+
+It reports policy design effect, allocation drift effect, and manager implementation effect in percentage points of total portfolio return, with a zero residual tie-out for the synthetic pack. The manager detail report shows all six manager/sleeve rows, and the imputed-current variant suppresses allocation drift effect while making clear that current allocation is not proven ideal. Within-manager attribution detail, blended/all-in attribution, timing attribution, dollar P&L attribution, production client attribution, and current-vs-proposed policy attribution remain future or gated work.

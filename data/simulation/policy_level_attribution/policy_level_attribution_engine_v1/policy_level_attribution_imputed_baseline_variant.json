@@ -1,0 +1,70 @@
+{
+  "actual_allocation_benchmark_return": 0.067375351,
+  "actual_portfolio_return": 0.07792087,
+  "allocation_drift_effect": 0.0,
+  "allocation_drift_effect_status": "suppressed",
+  "baseline_type": "accepted_current_manager_weights",
+  "caveats": [
+    "The imputed-current variant is a setup/readiness view, not proof that current weights are ideal."
+  ],
+  "current_allocation_not_proven_ideal": true,
+  "engine_id": "policy_level_attribution_engine_v1",
+  "engine_version": "2026-07-08",
+  "generated_at": "2026-07-08T00:00:00Z",
+  "local_only": true,
+  "manager_implementation_effect": 0.010545519,
+  "manager_rows": [
+    {
+      "actual_weight": 0.248556,
+      "allocation_drift_effect": 0.0,
+      "manager_implementation_effect": 0.005219676,
+      "manager_sleeve": "Manager A - Growth / AI Infrastructure",
+      "target_weight": 0.248556
+    },
+    {
+      "actual_weight": 0.188107,
+      "allocation_drift_effect": 0.0,
+      "manager_implementation_effect": 0.001504856,
+      "manager_sleeve": "Manager B - Core Quality Equity",
+      "target_weight": 0.188107
+    },
+    {
+      "actual_weight": 0.130237,
+      "allocation_drift_effect": 0.0,
+      "manager_implementation_effect": 0.000520948,
+      "manager_sleeve": "Manager C - Income and Cash Generation",
+      "target_weight": 0.130237
+    },
+    {
+      "actual_weight": 0.203096,
+      "allocation_drift_effect": 0.0,
+      "manager_implementation_effect": 0.001624768,
+      "manager_sleeve": "Manager D - Private Markets / Real Assets",
+      "target_weight": 0.203096
+    },
+    {
+      "actual_weight": 0.140435,
+      "allocation_drift_effect": 0.0,
+      "manager_implementation_effect": 0.000421305,
+      "manager_sleeve": "Manager E - Liquidity Reserve / Defensive Ballast",
+      "target_weight": 0.140435
+    },
+    {
+      "actual_weight": 0.089569,
+      "allocation_drift_effect": 0.0,
+      "manager_implementation_effect": 0.001253966,
+      "manager_sleeve": "Manager F - Opportunistic Macro / Hedge",
+      "target_weight": 0.089569
+    }
+  ],
+  "not_default_client_report": true,
+  "policy_allocation_mode": "imputed_current_allocation",
+  "policy_design_effect": -0.002564649,
+  "residual": 0.0,
+  "residual_status": "pass",
+  "schema_version": "policy_level_attribution_calculated_output.v1",
+  "synthetic_data": true,
+  "target_policy_benchmark_return": 0.067375351,
+  "target_weights_set_equal_to_actual_weights": true,
+  "total_relative_effect": 0.00798087
+}

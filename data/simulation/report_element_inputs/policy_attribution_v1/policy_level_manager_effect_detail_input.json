@@ -1,0 +1,162 @@
+{
+  "audience_tier": "advisor_review_default_client_briefing_on_request",
+  "baseline_type": "explicit_policy_target_vs_current_actual",
+  "calculation_trace": {
+    "manager_count": 6,
+    "row_effect_basis": "percentage_points_of_total_portfolio_return"
+  },
+  "denominator_category_system": "total_portfolio_return",
+  "display_title": "Policy-Level Manager Effect Detail",
+  "effect_basis_note": "Effect values are percentage points of total portfolio return.",
+  "exact_report_question": "Which manager/sleeve target weights, actual weights, benchmark returns, and actual returns drove the policy-level attribution bridge?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-08T00:00:00Z",
+  "generator_version": "policy_level_attribution.v1",
+  "information_budget": {
+    "exception_reason": "Manager effect detail shows all six current manager/sleeve rows.",
+    "max_advisor_notes": 1,
+    "max_caveats": 1,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 6,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true
+  },
+  "internal_source_refs": [
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/policy_level_attribution_inputs.json",
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/policy_allocation_profile.json",
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/actual_manager_allocation_snapshot.json",
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/manager_mandate_benchmark_catalog.json",
+    "data/simulation/policy_level_attribution/policy_level_attribution_engine_v1/policy_level_manager_effect_rows.json",
+    "data/simulation/policy_level_attribution/policy_level_attribution_engine_v1/policy_level_attribution_summary.json",
+    "data/simulation/policy_level_attribution/policy_level_attribution_engine_v1/policy_level_attribution_quality_summary.json"
+  ],
+  "local_only": true,
+  "master_question_family": "Performance / Plan",
+  "not_wired_into_advisor_ui": true,
+  "not_wired_into_generated_report_flow": true,
+  "policy_allocation_mode": "explicit_policy_allocation",
+  "rendering_mode": "compact_manager_effect_table",
+  "report_element_id": "policy_level_manager_effect_detail",
+  "report_family": "policy_level_attribution",
+  "representation_level": "manager_sleeve_policy_effect_rows",
+  "schema_version": "policy_attribution_report_input.v1",
+  "source_calculated_artifacts": [
+    "policy_level_manager_effect_rows.json",
+    "policy_level_attribution_summary.json",
+    "policy_level_attribution_quality_summary.json"
+  ],
+  "source_policy_level_attribution_engine_id": "policy_level_attribution_engine_v1",
+  "source_policy_mandate_pack_id": "synthetic_policy_mandate_pack_v1",
+  "summary_detail_status": "detail",
+  "synthetic_data": true,
+  "table_validation": {
+    "all_six_managers_visible": true,
+    "manager_a_actual_weight": 0.248556,
+    "manager_a_allocation_drift_effect": 0.00271282,
+    "manager_a_manager_effect": 0.005219676,
+    "manager_a_target_weight": 0.22,
+    "target_actual_performance_effect_visible": true
+  },
+  "visible_content": {
+    "advisor_note": "Use this table to see how target versus actual weight changes return impact before moving to detailed manager-driver analysis.",
+    "caveats": [
+      "Drift effect measures target-to-actual weight difference at the mandate benchmark return; it does not assign cause."
+    ],
+    "compact_table": {
+      "columns": [
+        "Manager/Sleeve",
+        "Target Weight",
+        "Actual Weight",
+        "Benchmark Return",
+        "Actual Return",
+        "Drift Effect",
+        "Manager Effect",
+        "Status"
+      ],
+      "rows": [
+        {
+          "Actual Return": "11.60%",
+          "Actual Weight": "24.86%",
+          "Benchmark Return": "9.50%",
+          "Drift Effect": "+0.27 pp",
+          "Manager Effect": "+0.52 pp",
+          "Manager/Sleeve": "Manager A - Growth / AI Infrastructure",
+          "Status": "Within tolerance",
+          "Target Weight": "22.00%"
+        },
+        {
+          "Actual Return": "8.40%",
+          "Actual Weight": "18.81%",
+          "Benchmark Return": "7.60%",
+          "Drift Effect": "-0.01 pp",
+          "Manager Effect": "+0.15 pp",
+          "Manager/Sleeve": "Manager B - Core Quality Equity",
+          "Status": "Within tolerance",
+          "Target Weight": "19.00%"
+        },
+        {
+          "Actual Return": "4.70%",
+          "Actual Weight": "13.02%",
+          "Benchmark Return": "4.30%",
+          "Drift Effect": "-0.17 pp",
+          "Manager Effect": "+0.05 pp",
+          "Manager/Sleeve": "Manager C - Income and Cash Generation",
+          "Status": "Review",
+          "Target Weight": "17.00%"
+        },
+        {
+          "Actual Return": "7.10%",
+          "Actual Weight": "20.31%",
+          "Benchmark Return": "6.30%",
+          "Drift Effect": "+0.02 pp",
+          "Manager Effect": "+0.16 pp",
+          "Manager/Sleeve": "Manager D - Private Markets / Real Assets",
+          "Status": "Within tolerance",
+          "Target Weight": "20.00%"
+        },
+        {
+          "Actual Return": "3.40%",
+          "Actual Weight": "14.04%",
+          "Benchmark Return": "3.10%",
+          "Drift Effect": "+0.00 pp",
+          "Manager Effect": "+0.04 pp",
+          "Manager/Sleeve": "Manager E - Liquidity Reserve / Defensive Ballast",
+          "Status": "Within tolerance",
+          "Target Weight": "14.00%"
+        },
+        {
+          "Actual Return": "8.90%",
+          "Actual Weight": "8.96%",
+          "Benchmark Return": "7.50%",
+          "Drift Effect": "+0.07 pp",
+          "Manager Effect": "+0.13 pp",
+          "Manager/Sleeve": "Manager F - Opportunistic Macro / Hedge",
+          "Status": "Within tolerance",
+          "Target Weight": "8.00%"
+        }
+      ],
+      "title": "Manager Effect Detail"
+    },
+    "headline_metrics": [
+      {
+        "formatted_value": "6 of 6",
+        "label": "Managers covered",
+        "value": 6
+      },
+      {
+        "formatted_value": "+1.05 pp",
+        "label": "Manager implementation effect",
+        "value": 0.010545519
+      },
+      {
+        "formatted_value": "Manager A +0.27 pp",
+        "label": "Largest allocation drift effect",
+        "value": 0.00271282
+      }
+    ],
+    "headline_sentence": "Manager A shows the largest allocation drift effect because 24.86% actual weight exceeded its 22.00% target while its mandate benchmark return was 9.50%."
+  }
+}

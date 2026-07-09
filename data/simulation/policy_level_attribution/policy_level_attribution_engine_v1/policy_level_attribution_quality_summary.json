@@ -1,0 +1,43 @@
+{
+  "benchmark_coverage": {
+    "manager_mandate_benchmark_coverage": "6_of_6",
+    "status": "pass"
+  },
+  "dollar_pnl_availability": {
+    "reason": "Current synthetic inputs do not provide a reliable beginning portfolio value for dollar attribution.",
+    "status": "gated_no_reliable_beginning_portfolio_value"
+  },
+  "engine_id": "policy_level_attribution_engine_v1",
+  "engine_version": "2026-07-08",
+  "generated_at": "2026-07-08T00:00:00Z",
+  "local_only": true,
+  "next_recommended_tranche": "Frank review of policy_attribution_v1 mockups, then optional within-manager detail or report-content polish.",
+  "production_readiness_caveats": [
+    "Requires approved real policy targets.",
+    "Requires approved real manager mandate benchmarks.",
+    "Requires production review before client use."
+  ],
+  "residual_tie_out_check": {
+    "residual": 0.0,
+    "status": "pass",
+    "tolerance": 1e-06
+  },
+  "return_input_coverage": {
+    "global_benchmark_return_present": true,
+    "manager_actual_return_coverage": "6_of_6",
+    "source_actual_portfolio_formula": "sum_actual_weight_times_manager_actual_return"
+  },
+  "schema_version": "policy_level_attribution_calculated_output.v1",
+  "source_policy_mandate_pack_id": "synthetic_policy_mandate_pack_v1",
+  "synthetic_data": true,
+  "timing_availability": {
+    "reason": "Clean timing inputs and an approved timing method are absent.",
+    "status": "unavailable"
+  },
+  "weight_sum_checks": {
+    "actual_weight_sum": 1.0,
+    "actual_weight_sum_status": "pass",
+    "target_weight_sum": 1.0,
+    "target_weight_sum_status": "pass"
+  }
+}

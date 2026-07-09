@@ -1,0 +1,47 @@
+{
+  "gated_or_deferred_reports": [
+    {
+      "display_title": "Within-Manager Attribution Detail",
+      "reason": "Requires separate manager-driver report design and lower-level inputs.",
+      "report_id": "within_manager_attribution_detail",
+      "status": "Future tranche"
+    },
+    {
+      "display_title": "Blended / All-In Attribution",
+      "reason": "Deferred until separate policy-level and manager-level reports are understood.",
+      "report_id": "blended_all_in_attribution",
+      "status": "Deferred"
+    },
+    {
+      "display_title": "Timing Attribution",
+      "reason": "Unavailable because clean timing inputs and an approved method are absent.",
+      "report_id": "timing_attribution",
+      "status": "Unavailable"
+    },
+    {
+      "display_title": "Dollar P&L Attribution",
+      "reason": "Gated unless reliable beginning portfolio value exists.",
+      "report_id": "dollar_pnl_attribution",
+      "status": "Gated"
+    },
+    {
+      "display_title": "Production Client Attribution",
+      "reason": "Gated on approved real policy targets, real benchmarks, and production review.",
+      "report_id": "production_client_attribution",
+      "status": "Gated"
+    },
+    {
+      "display_title": "Current-vs-Proposed Policy Attribution",
+      "reason": "Gated on a proposed allocation workflow.",
+      "report_id": "current_vs_proposed_policy_attribution",
+      "status": "Gated"
+    }
+  ],
+  "generated_at": "2026-07-08T00:00:00Z",
+  "generator_version": "policy_level_attribution.v1",
+  "local_only": true,
+  "purpose": "Product/readiness index for policy attribution reports deliberately not generated.",
+  "schema_version": "policy_attribution_gated_deferred_index.v1",
+  "source_policy_level_attribution_engine_id": "policy_level_attribution_engine_v1",
+  "synthetic_data": true
+}

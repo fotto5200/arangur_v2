@@ -322,7 +322,7 @@ This writes deterministic JSON under:
 
 ## Generate Policy Allocation Report Mockups
 
-The policy allocation report-view generator turns the synthetic policy/mandate prerequisite pack into local-only report input fixtures, view fixtures, and Markdown product-review mockups for Policy Allocation Review, Policy Allocation Drift Summary, Imputed Current Allocation Baseline, and Manager Mandate Benchmark Basis. Policy-Level Attribution, blended/all-in attribution, production policy reporting, current-vs-proposed allocation, and timing attribution remain gated or deferred. This does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
+The policy allocation report-view generator turns the synthetic policy/mandate prerequisite pack into local-only report input fixtures, view fixtures, and Markdown product-review mockups for Policy Allocation Review, Policy Allocation Drift Summary, Imputed Current Allocation Baseline, and Manager Mandate Benchmark Basis. Policy-level return attribution is generated separately by the Policy Attribution v1 generator; blended/all-in attribution, production policy reporting, current-vs-proposed allocation, and timing attribution remain gated or deferred. This does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
 
 ```cmd
 set PYTHONPATH=src
@@ -334,6 +334,22 @@ This writes:
 - `data/simulation/report_element_inputs/policy_allocation_v1/`
 - `data/simulation/report_element_views/policy_allocation_v1/`
 - `docs/product/report_mockups/policy_allocation_v1/`
+
+## Generate Policy-Level Attribution Outputs And Mockups
+
+The policy-level attribution generator calculates the local synthetic bridge from Global benchmark to Target policy benchmark to Actual allocation benchmark to Actual portfolio, then writes local-only report input fixtures, view fixtures, and Markdown product-review mockups for Policy-Level Attribution Summary, Policy-Level Manager Effect Detail, and Imputed Baseline Policy Attribution Variant. It does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.
+
+```cmd
+set PYTHONPATH=src
+python -m arangur.analytics.policy_level_attribution
+```
+
+This writes:
+
+- `data/simulation/policy_level_attribution/policy_level_attribution_engine_v1/`
+- `data/simulation/report_element_inputs/policy_attribution_v1/`
+- `data/simulation/report_element_views/policy_attribution_v1/`
+- `docs/product/report_mockups/policy_attribution_v1/`
 
 ## Generate Revaluation v2 Report Mockups
 

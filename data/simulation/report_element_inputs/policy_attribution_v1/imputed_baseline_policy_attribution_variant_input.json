@@ -1,0 +1,114 @@
+{
+  "audience_tier": "advisor_setup_and_advisor_review",
+  "baseline_type": "accepted_current_manager_weights",
+  "calculation_trace": {
+    "allocation_drift_effect": 0.0,
+    "allocation_drift_effect_suppressed": true
+  },
+  "denominator_category_system": "total_portfolio_return",
+  "display_title": "Imputed Baseline Policy Attribution Variant",
+  "effect_basis_note": "Effect values are percentage points of total portfolio return.",
+  "exact_report_question": "What changes when current manager weights are accepted as the policy baseline?",
+  "gated_or_deferred": false,
+  "generated_at": "2026-07-08T00:00:00Z",
+  "generator_version": "policy_level_attribution.v1",
+  "information_budget": {
+    "max_advisor_notes": 1,
+    "max_caveats": 1,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 4,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true
+  },
+  "internal_source_refs": [
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/policy_level_attribution_inputs.json",
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/policy_allocation_profile.json",
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/actual_manager_allocation_snapshot.json",
+    "data/simulation/policy_mandate_prerequisites/synthetic_policy_mandate_pack_v1/manager_mandate_benchmark_catalog.json",
+    "data/simulation/policy_level_attribution/policy_level_attribution_engine_v1/policy_level_attribution_imputed_baseline_variant.json",
+    "data/simulation/policy_level_attribution/policy_level_attribution_engine_v1/policy_level_attribution_summary.json",
+    "data/simulation/policy_level_attribution/policy_level_attribution_engine_v1/policy_level_attribution_quality_summary.json"
+  ],
+  "local_only": true,
+  "master_question_family": "Performance / Plan",
+  "not_wired_into_advisor_ui": true,
+  "not_wired_into_generated_report_flow": true,
+  "policy_allocation_mode": "imputed_current_allocation",
+  "rendering_mode": "setup_variant_note",
+  "report_element_id": "imputed_baseline_policy_attribution_variant",
+  "report_family": "policy_level_attribution",
+  "representation_level": "policy_level_setup_variant",
+  "schema_version": "policy_attribution_report_input.v1",
+  "source_calculated_artifacts": [
+    "policy_level_attribution_imputed_baseline_variant.json",
+    "policy_level_attribution_summary.json",
+    "policy_level_attribution_quality_summary.json"
+  ],
+  "source_policy_level_attribution_engine_id": "policy_level_attribution_engine_v1",
+  "source_policy_mandate_pack_id": "synthetic_policy_mandate_pack_v1",
+  "summary_detail_status": "setup_variant",
+  "synthetic_data": true,
+  "table_validation": {
+    "allocation_drift_effect_zero_or_suppressed": true,
+    "current_allocation_not_proven_ideal": true,
+    "current_weights_accepted_as_baseline": true,
+    "not_standard_client_report": true
+  },
+  "visible_content": {
+    "advisor_note": "Use the explicit policy report when advisor/family target weights are available.",
+    "caveats": [
+      "This variant is a setup/readiness view, not proof that the current allocation is ideal."
+    ],
+    "compact_table": {
+      "columns": [
+        "Item",
+        "Status",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "Item": "Baseline",
+          "Meaning": "Actual weights are treated as target weights for setup review.",
+          "Status": "Current manager weights"
+        },
+        {
+          "Item": "Allocation drift effect",
+          "Meaning": "Target-versus-actual policy drift is not shown in this variant.",
+          "Status": "Suppressed"
+        },
+        {
+          "Item": "Manager implementation effect",
+          "Meaning": "Actual manager returns are compared with mandate benchmark returns.",
+          "Status": "Available"
+        },
+        {
+          "Item": "Use",
+          "Meaning": "This variant is not the standard client report and does not prove the current allocation is ideal.",
+          "Status": "Advisor setup"
+        }
+      ],
+      "title": "Imputed Baseline Variant"
+    },
+    "headline_metrics": [
+      {
+        "formatted_value": "0.00 pp (suppressed)",
+        "label": "Allocation drift effect",
+        "value": 0.0
+      },
+      {
+        "formatted_value": "Current manager weights",
+        "label": "Baseline",
+        "value": "current_manager_weights"
+      },
+      {
+        "formatted_value": "+1.05 pp",
+        "label": "Manager implementation effect",
+        "value": 0.010545519
+      }
+    ],
+    "headline_sentence": "When current manager weights are accepted as the baseline, allocation drift effect is suppressed and manager implementation remains measurable."
+  }
+}

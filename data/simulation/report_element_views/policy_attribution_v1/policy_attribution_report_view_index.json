@@ -1,0 +1,50 @@
+{
+  "advisor_ui_wiring": "not_changed",
+  "gated_reports_not_generated": [
+    "within_manager_attribution_detail",
+    "blended_all_in_attribution",
+    "timing_attribution",
+    "dollar_pnl_attribution",
+    "production_client_attribution",
+    "current_vs_proposed_policy_attribution"
+  ],
+  "generated_at": "2026-07-08T00:00:00Z",
+  "generated_report_wiring": "not_changed",
+  "generator_version": "policy_level_attribution.v1",
+  "information_budget": {
+    "max_advisor_notes": 1,
+    "max_caveats": 1,
+    "max_headline_metrics": 3,
+    "max_headline_sentences": 1,
+    "max_visible_table_rows": 5,
+    "no_hidden_expansion_placeholders": true,
+    "no_internal_jargon_in_visible_content": true,
+    "no_raw_ids_in_visible_content": true,
+    "no_source_filenames_in_visible_content": true
+  },
+  "local_only": true,
+  "markdown_mockup_count": 3,
+  "mockup_files": [
+    "policy_level_attribution_summary_mockup_v1.md",
+    "policy_level_manager_effect_detail_mockup_v1.md",
+    "imputed_baseline_policy_attribution_variant_mockup_v1.md",
+    "README.md"
+  ],
+  "mockups_generated_from_views": true,
+  "report_ids": [
+    "policy_level_attribution_summary",
+    "policy_level_manager_effect_detail",
+    "imputed_baseline_policy_attribution_variant"
+  ],
+  "report_view_count": 3,
+  "schema_version": "policy_attribution_report_view_index.v1",
+  "source_policy_level_attribution_engine_id": "policy_level_attribution_engine_v1",
+  "source_policy_mandate_pack_id": "synthetic_policy_mandate_pack_v1",
+  "synthetic_data": true,
+  "view_files": [
+    "policy_level_attribution_summary_view.json",
+    "policy_level_manager_effect_detail_view.json",
+    "imputed_baseline_policy_attribution_variant_view.json",
+    "gated_deferred_policy_attribution_index.json"
+  ]
+}
