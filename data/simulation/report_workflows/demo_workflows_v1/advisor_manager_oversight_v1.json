@@ -1,0 +1,159 @@
+{
+  "advisor_only_status": "advisor_only_diagnostic_workflow",
+  "audience": "Advisor/internal investment team",
+  "audience_depth": "advisor_internal_diagnostic",
+  "client_facing_status": "not_default_client_facing",
+  "conversation_goal": "Monitor mandates, manager performance, implementation quality, drift, and review flags.",
+  "core_user_question": "Which mandates, managers, implementation effects, and review flags need attention before client conversations?",
+  "diagnostic_reports": [
+    "manager_driver_attribution_matrix",
+    "within_manager_attribution_detail",
+    "manager_implementation_handoff"
+  ],
+  "display_name": "Advisor / Manager Oversight",
+  "gated_or_deferred_reports": [
+    "coverage_confidence_by_manager"
+  ],
+  "not_production_recommendation": true,
+  "ordered_steps": [
+    {
+      "audience_visibility": "advisor_only",
+      "caveat": "Local synthetic product-review report; not production reporting.",
+      "display_title": "Policy Allocation Drift Summary",
+      "report_family": "policy_allocation_drift_summary",
+      "report_id": "policy_allocation_drift_summary",
+      "source_mockup_path": "docs/product/report_mockups/policy_allocation_v1/policy_allocation_drift_summary_mockup_v1.md",
+      "source_view_path": "data/simulation/report_element_views/policy_allocation_v1/policy_allocation_drift_summary_view.json",
+      "status": "accepted",
+      "step_number": 1,
+      "step_role": "primary",
+      "visible_question_answered": "Which allocation drifts need attention?",
+      "why_included": "Starts with allocation drift needing review."
+    },
+    {
+      "audience_visibility": "advisor_only",
+      "caveat": "Local synthetic product-review report; not production reporting.",
+      "display_title": "Manager Mandate Benchmark Basis",
+      "report_family": "manager_mandate_benchmark_basis",
+      "report_id": "manager_mandate_benchmark_basis",
+      "source_mockup_path": "docs/product/report_mockups/policy_allocation_v1/manager_mandate_benchmark_basis_mockup_v1.md",
+      "source_view_path": "data/simulation/report_element_views/policy_allocation_v1/manager_mandate_benchmark_basis_view.json",
+      "status": "accepted",
+      "step_number": 2,
+      "step_role": "setup_readiness",
+      "visible_question_answered": "What benchmark frames each manager?",
+      "why_included": "Confirms the benchmark basis for manager review."
+    },
+    {
+      "audience_visibility": "advisor_review",
+      "caveat": "Local synthetic product-review report; not production reporting.",
+      "display_title": "Advisor Policy Attribution by Manager/Sleeve",
+      "report_family": "advisor_policy_attribution",
+      "report_id": "advisor_policy_attribution_by_manager",
+      "source_mockup_path": "docs/product/report_mockups/policy_attribution_v2/advisor_policy_attribution_by_manager_mockup_v2.md",
+      "source_view_path": "data/simulation/report_element_views/policy_attribution_v2/advisor_policy_attribution_by_manager_view.json",
+      "status": "accepted",
+      "step_number": 3,
+      "step_role": "primary",
+      "visible_question_answered": "What did advisor-level policy choices do?",
+      "why_included": "Separates advisor-level policy effects."
+    },
+    {
+      "audience_visibility": "advisor_review",
+      "caveat": "Local synthetic product-review report; not production reporting.",
+      "display_title": "Manager Mandate Attribution Summary",
+      "report_family": "manager_mandate_attribution",
+      "report_id": "manager_mandate_attribution_summary",
+      "source_mockup_path": "docs/product/report_mockups/manager_attribution_v1/manager_mandate_attribution_summary_mockup_v1.md",
+      "source_view_path": "data/simulation/report_element_views/manager_attribution_v1/manager_mandate_attribution_summary_view.json",
+      "status": "accepted",
+      "step_number": 4,
+      "step_role": "primary",
+      "visible_question_answered": "Which managers added value versus mandate?",
+      "why_included": "Summarizes manager results versus mandate."
+    },
+    {
+      "audience_visibility": "advisor_only",
+      "caveat": "Local synthetic product-review report; not production reporting.",
+      "display_title": "Manager Driver Attribution Matrix",
+      "report_family": "manager_mandate_attribution",
+      "report_id": "manager_driver_attribution_matrix",
+      "source_mockup_path": "docs/product/report_mockups/manager_attribution_v1/manager_driver_attribution_matrix_mockup_v1.md",
+      "source_view_path": "data/simulation/report_element_views/manager_attribution_v1/manager_driver_attribution_matrix_view.json",
+      "status": "accepted",
+      "step_number": 5,
+      "step_role": "primary",
+      "visible_question_answered": "Which internal manager drivers explain implementation?",
+      "why_included": "Shows all manager driver components before drilldown."
+    },
+    {
+      "audience_visibility": "advisor_only",
+      "caveat": "Local synthetic product-review report; not production reporting.",
+      "display_title": "Within-Manager Attribution Detail",
+      "report_family": "manager_mandate_attribution",
+      "report_id": "within_manager_attribution_detail",
+      "source_mockup_path": "docs/product/report_mockups/manager_attribution_v1/within_manager_attribution_detail_mockup_v1.md",
+      "source_view_path": "data/simulation/report_element_views/manager_attribution_v1/within_manager_attribution_detail_view.json",
+      "status": "accepted",
+      "step_number": 6,
+      "step_role": "diagnostic",
+      "visible_question_answered": "What explains the selected manager's active return?",
+      "why_included": "Drills into the selected manager from the matrix."
+    },
+    {
+      "audience_visibility": "internal_control",
+      "caveat": "Local synthetic product-review report; not production reporting.",
+      "display_title": "Manager Implementation Handoff",
+      "report_family": "manager_mandate_attribution",
+      "report_id": "manager_implementation_handoff",
+      "source_mockup_path": "docs/product/report_mockups/manager_attribution_v1/manager_implementation_handoff_mockup_v1.md",
+      "source_view_path": "data/simulation/report_element_views/manager_attribution_v1/manager_implementation_handoff_view.json",
+      "status": "accepted",
+      "step_number": 7,
+      "step_role": "handoff",
+      "visible_question_answered": "Does the layer handoff tie out?",
+      "why_included": "Reconciles manager total to Advisor Policy Attribution handoff."
+    },
+    {
+      "audience_visibility": "advisor_review",
+      "caveat": "Local synthetic product-review report; not production reporting.",
+      "display_title": "Coverage and Confidence Warning",
+      "report_family": "coverage_confidence_warning",
+      "report_id": "coverage_confidence_warning",
+      "source_mockup_path": "docs/product/report_mockups/revaluation_v2/coverage_confidence_warning_mockup_v2.md",
+      "source_view_path": "data/simulation/report_element_views/revaluation_v2/coverage_confidence_warning_view.json",
+      "status": "accepted",
+      "step_number": 8,
+      "step_role": "supporting",
+      "visible_question_answered": "What coverage issues affect interpretation?",
+      "why_included": "Keeps data confidence visible before client use."
+    },
+    {
+      "audience_visibility": "advisor_only",
+      "caveat": "No generated manager-sliced coverage report exists yet.",
+      "display_title": "Coverage/Confidence by Manager",
+      "report_family": "coverage_confidence_warning",
+      "report_id": "coverage_confidence_by_manager",
+      "status": "gated",
+      "step_number": 9,
+      "step_role": "diagnostic",
+      "visible_question_answered": "Unavailable until its data and report shape are approved.",
+      "why_included": "Represents the next report needed to complete this conversation."
+    }
+  ],
+  "schema_version": "report_workflow.v1",
+  "setup_or_readiness_notes": [
+    "manager_mandate_benchmark_basis"
+  ],
+  "superseded_reports_excluded": [
+    "policy_level_attribution_summary_v1",
+    "policy_level_manager_effect_detail_v1"
+  ],
+  "supporting_reports": [
+    "coverage_confidence_warning"
+  ],
+  "synthetic_data": true,
+  "what_this_workflow_proves": "Arangur can keep advisor oversight separate from client-facing briefing workflows.",
+  "why_this_workflow_exists": "Advisors need dense mandate and implementation review before deciding what belongs in a client meeting.",
+  "workflow_id": "advisor_manager_oversight_v1"
+}

@@ -1,0 +1,60 @@
+{
+  "candidate_proxy_rows": [
+    {
+      "bucket_id": "direct_ai_enablers",
+      "candidate_proxy_description": "Candidate synthetic AI enabler basket",
+      "driver_category": "growth / AI / semiconductor basket",
+      "lens_id": "ai_supercycle_exposure",
+      "not_recommendation": true,
+      "requires_approval": true,
+      "synthetic_candidate_only": true
+    },
+    {
+      "bucket_id": "power_and_grid_bottleneck",
+      "candidate_proxy_description": "Candidate power/grid bottleneck basket",
+      "driver_category": "commodities / strategic inputs",
+      "lens_id": "ai_infrastructure_bottleneck",
+      "not_recommendation": true,
+      "requires_approval": true,
+      "synthetic_candidate_only": true
+    },
+    {
+      "bucket_id": "energy_beneficiaries",
+      "candidate_proxy_description": "Candidate energy equity or commodity proxy",
+      "driver_category": "oil / energy",
+      "lens_id": "energy_oil_shock_exposure",
+      "not_recommendation": true,
+      "requires_approval": true,
+      "synthetic_candidate_only": true
+    },
+    {
+      "bucket_id": "long_duration_growth",
+      "candidate_proxy_description": "Candidate duration/rate sensitivity proxy",
+      "driver_category": "rates / yield curve",
+      "lens_id": "inflation_rates_duration_exposure",
+      "not_recommendation": true,
+      "requires_approval": true,
+      "synthetic_candidate_only": true
+    },
+    {
+      "bucket_id": "import_cost_exposed",
+      "candidate_proxy_description": "Candidate tariff and currency pressure proxy",
+      "driver_category": "USD / FX",
+      "lens_id": "trade_war_tariff_exposure",
+      "not_recommendation": true,
+      "requires_approval": true,
+      "synthetic_candidate_only": true
+    },
+    {
+      "bucket_id": "china_asia_supply_chain_exposure",
+      "candidate_proxy_description": "Candidate geography or supply-chain proxy",
+      "driver_category": "broad equity index",
+      "lens_id": "geography_bloc_exposure",
+      "not_recommendation": true,
+      "requires_approval": true,
+      "synthetic_candidate_only": true
+    }
+  ],
+  "schema_version": "external_story_candidate_benchmark_proxy_map.v1",
+  "synthetic_data": true
+}

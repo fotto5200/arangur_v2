@@ -1,0 +1,128 @@
+{
+  "scenarios": [
+    {
+      "display_name": "Hormuz Reclosure / Oil Shock",
+      "expected_directional_moves": {
+        "broad equity index": "down",
+        "credit spreads": "wider",
+        "oil / energy": "up",
+        "volatility / risk appetite": "risk appetite down"
+      },
+      "key_price_drivers": [
+        "oil / energy",
+        "commodities / strategic inputs",
+        "broad equity index",
+        "credit spreads",
+        "volatility / risk appetite"
+      ],
+      "not_forecast": true,
+      "not_recommendation": true,
+      "reports_that_would_use_it": [
+        "Scenario Downside under External Story",
+        "Scenario by Lens",
+        "Portfolio Through External Lens"
+      ],
+      "scenario_id": "hormuz_reclosure_oil_shock",
+      "story_link": "Energy disruption branch of the story"
+    },
+    {
+      "display_name": "Higher-for-Longer Rates",
+      "expected_directional_moves": {
+        "credit spreads": "modestly wider",
+        "growth / AI / semiconductor basket": "valuation pressure",
+        "private liquidity / alternatives": "liquidity pressure",
+        "rates / yield curve": "higher front and intermediate rates"
+      },
+      "key_price_drivers": [
+        "rates / yield curve",
+        "growth / AI / semiconductor basket",
+        "credit spreads",
+        "private liquidity / alternatives"
+      ],
+      "not_forecast": true,
+      "not_recommendation": true,
+      "reports_that_would_use_it": [
+        "Scenario Downside under External Story",
+        "Scenario by Lens",
+        "Portfolio Through External Lens"
+      ],
+      "scenario_id": "higher_for_longer_rates",
+      "story_link": "Inflation, rate, and duration branch of the story"
+    },
+    {
+      "display_name": "AI Capex Acceleration",
+      "expected_directional_moves": {
+        "broad equity index": "up",
+        "commodities / strategic inputs": "up",
+        "growth / AI / semiconductor basket": "up",
+        "rates / yield curve": "possibly higher"
+      },
+      "key_price_drivers": [
+        "growth / AI / semiconductor basket",
+        "commodities / strategic inputs",
+        "oil / energy",
+        "broad equity index"
+      ],
+      "not_forecast": true,
+      "not_recommendation": true,
+      "reports_that_would_use_it": [
+        "Scenario Downside under External Story",
+        "Scenario by Lens",
+        "Portfolio Through External Lens"
+      ],
+      "scenario_id": "ai_capex_acceleration",
+      "story_link": "AI growth upside branch of the story"
+    },
+    {
+      "display_name": "AI Bottleneck / Valuation Reversal",
+      "expected_directional_moves": {
+        "credit spreads": "wider",
+        "growth / AI / semiconductor basket": "down",
+        "volatility / risk appetite": "risk appetite down"
+      },
+      "key_price_drivers": [
+        "growth / AI / semiconductor basket",
+        "rates / yield curve",
+        "credit spreads",
+        "volatility / risk appetite"
+      ],
+      "not_forecast": true,
+      "not_recommendation": true,
+      "reports_that_would_use_it": [
+        "Scenario Downside under External Story",
+        "Scenario by Lens",
+        "Portfolio Through External Lens"
+      ],
+      "scenario_id": "ai_bottleneck_valuation_reversal",
+      "story_link": "AI bottleneck and valuation-risk branch of the story"
+    },
+    {
+      "display_name": "Trade-War / Tariff Escalation",
+      "expected_directional_moves": {
+        "USD / FX": "stronger USD stress",
+        "broad equity index": "down",
+        "commodities / strategic inputs": "mixed/up",
+        "credit spreads": "wider"
+      },
+      "key_price_drivers": [
+        "broad equity index",
+        "USD / FX",
+        "commodities / strategic inputs",
+        "credit spreads",
+        "growth / AI / semiconductor basket"
+      ],
+      "not_forecast": true,
+      "not_recommendation": true,
+      "reports_that_would_use_it": [
+        "Scenario Downside under External Story",
+        "Scenario by Lens",
+        "Portfolio Through External Lens"
+      ],
+      "scenario_id": "trade_war_tariff_escalation",
+      "story_link": "Trade and geography branch of the story"
+    }
+  ],
+  "schema_version": "external_story_key_price_scenario_set.v1",
+  "source_basis": "externally_inspired_manager_story_summary",
+  "synthetic_data": true
+}

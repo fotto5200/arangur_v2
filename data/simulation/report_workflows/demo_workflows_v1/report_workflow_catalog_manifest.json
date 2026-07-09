@@ -1,0 +1,53 @@
+{
+  "catalog_id": "demo_report_workflows_v1",
+  "catalog_version": "2026-07-09",
+  "deterministic_generation_note": "Generated from arangur.analytics.report_workflow_catalog with fixed local synthetic inputs.",
+  "external_story_pack_ref": "data/simulation/external_story_translation/external_manager_story_translation_pack_v1",
+  "generated_at": "2026-07-09T00:00:00Z",
+  "limitations": [
+    "Catalog only; not wired to Advisor Home, Preview, Populate, Present, generated reports, backend endpoints, Docker, or deployment.",
+    "Synthetic local product-review artifacts only.",
+    "External story translation is not verified and not a recommendation."
+  ],
+  "not_production_reporting": true,
+  "not_wired_to_ui": true,
+  "primary_demo_goal": "Consolidate generated reports into audience-specific demo workflows before advisor UI or deployment wiring.",
+  "report_source_directories": {
+    "attribution_v1_mockups": "docs/product/report_mockups/attribution_v1",
+    "attribution_v1_views": "data/simulation/report_element_views/attribution_v1",
+    "manager_attribution_v1_mockups": "docs/product/report_mockups/manager_attribution_v1",
+    "manager_attribution_v1_views": "data/simulation/report_element_views/manager_attribution_v1",
+    "policy_allocation_v1_mockups": "docs/product/report_mockups/policy_allocation_v1",
+    "policy_allocation_v1_views": "data/simulation/report_element_views/policy_allocation_v1",
+    "policy_attribution_v2_mockups": "docs/product/report_mockups/policy_attribution_v2",
+    "policy_attribution_v2_views": "data/simulation/report_element_views/policy_attribution_v2",
+    "revaluation_v2_mockups": "docs/product/report_mockups/revaluation_v2",
+    "revaluation_v2_views": "data/simulation/report_element_views/revaluation_v2"
+  },
+  "schema_version": "report_workflow_catalog_manifest.v1",
+  "synthetic_data": true,
+  "workflow_count": 4,
+  "workflow_dir": "data/simulation/report_workflows/demo_workflows_v1",
+  "workflows": [
+    {
+      "display_name": "Principal / Family Office Briefing",
+      "filename": "principal_family_office_briefing_minimal_v1.json",
+      "workflow_id": "principal_family_office_briefing_minimal_v1"
+    },
+    {
+      "display_name": "Engaged Client / Investment Committee Review",
+      "filename": "engaged_client_investment_committee_review_v1.json",
+      "workflow_id": "engaged_client_investment_committee_review_v1"
+    },
+    {
+      "display_name": "Advisor / Manager Oversight",
+      "filename": "advisor_manager_oversight_v1.json",
+      "workflow_id": "advisor_manager_oversight_v1"
+    },
+    {
+      "display_name": "External Manager Story Translation",
+      "filename": "external_manager_story_translation_v1.json",
+      "workflow_id": "external_manager_story_translation_v1"
+    }
+  ]
+}

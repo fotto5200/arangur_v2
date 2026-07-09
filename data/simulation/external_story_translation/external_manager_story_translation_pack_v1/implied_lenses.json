@@ -1,0 +1,120 @@
+{
+  "lenses": [
+    {
+      "approval_status": "synthetic_demo_translation",
+      "core_question": "Where does the portfolio benefit if AI-driven growth and capital formation accelerate?",
+      "display_name": "AI Supercycle Exposure",
+      "lens_id": "ai_supercycle_exposure",
+      "not_recommendation": true,
+      "secondary_flags": [
+        "valuation_sensitivity",
+        "capex_intensity"
+      ],
+      "suggested_primary_buckets": [
+        "Direct AI enablers",
+        "AI adopters",
+        "Neutral exposure",
+        "Review required"
+      ],
+      "translation_note": "Candidate lens for structuring the story; requires approval before client use."
+    },
+    {
+      "approval_status": "synthetic_demo_translation",
+      "core_question": "Where could power, chips, data centers, or financing bottlenecks constrain AI upside?",
+      "display_name": "AI Infrastructure Bottleneck",
+      "lens_id": "ai_infrastructure_bottleneck",
+      "not_recommendation": true,
+      "secondary_flags": [
+        "supply_chain_dependency",
+        "energy_intensity"
+      ],
+      "suggested_primary_buckets": [
+        "Power and grid bottleneck",
+        "Semiconductor supply",
+        "Data-center capacity",
+        "Financing bottleneck",
+        "Neutral exposure"
+      ],
+      "translation_note": "Candidate lens for structuring the story; requires approval before client use."
+    },
+    {
+      "approval_status": "synthetic_demo_translation",
+      "core_question": "Which holdings are hurt or helped by energy supply shock or oil-price spikes?",
+      "display_name": "Energy / Oil Shock Exposure",
+      "lens_id": "energy_oil_shock_exposure",
+      "not_recommendation": true,
+      "secondary_flags": [
+        "oil_beta",
+        "margin_pressure"
+      ],
+      "suggested_primary_buckets": [
+        "Energy beneficiaries",
+        "Energy cost sensitive",
+        "Transport/logistics exposed",
+        "Neutral exposure",
+        "Review required"
+      ],
+      "translation_note": "Candidate lens for structuring the story; requires approval before client use."
+    },
+    {
+      "approval_status": "synthetic_demo_translation",
+      "core_question": "Where is the portfolio sensitive to inflation, rates, and duration?",
+      "display_name": "Inflation / Rates / Duration Exposure",
+      "lens_id": "inflation_rates_duration_exposure",
+      "not_recommendation": true,
+      "secondary_flags": [
+        "duration_proxy",
+        "spread_sensitivity"
+      ],
+      "suggested_primary_buckets": [
+        "Long-duration growth",
+        "Rate-sensitive credit",
+        "Inflation pass-through",
+        "Floating-rate or short-duration",
+        "Neutral exposure"
+      ],
+      "translation_note": "Candidate lens for structuring the story; requires approval before client use."
+    },
+    {
+      "approval_status": "synthetic_demo_translation",
+      "core_question": "Where could tariffs, trade restrictions, or supply-chain friction change outcomes?",
+      "display_name": "Trade War / Tariff Exposure",
+      "lens_id": "trade_war_tariff_exposure",
+      "not_recommendation": true,
+      "secondary_flags": [
+        "tariff_sensitivity",
+        "china_supply_chain_link"
+      ],
+      "suggested_primary_buckets": [
+        "Import-cost exposed",
+        "Reshoring beneficiary",
+        "Export restriction exposed",
+        "Supply-chain diversified",
+        "Neutral exposure"
+      ],
+      "translation_note": "Candidate lens for structuring the story; requires approval before client use."
+    },
+    {
+      "approval_status": "synthetic_demo_translation",
+      "core_question": "How does the portfolio map to geography, strategic blocs, and geopolitical disruption?",
+      "display_name": "Geography / Bloc Exposure",
+      "lens_id": "geography_bloc_exposure",
+      "not_recommendation": true,
+      "secondary_flags": [
+        "geopolitical_safe_haven_exposure",
+        "sanctions_sensitivity"
+      ],
+      "suggested_primary_buckets": [
+        "US-aligned exposure",
+        "China/Asia supply-chain exposure",
+        "Europe exposure",
+        "Commodity-security exposure",
+        "Neutral or unclear"
+      ],
+      "translation_note": "Candidate lens for structuring the story; requires approval before client use."
+    }
+  ],
+  "schema_version": "external_story_implied_lenses.v1",
+  "source_basis": "externally_inspired_manager_story_summary",
+  "synthetic_data": true
+}

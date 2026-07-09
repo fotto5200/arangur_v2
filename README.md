@@ -385,6 +385,24 @@ This writes:
 - `data/simulation/report_element_views/manager_attribution_v1/`
 - `docs/product/report_mockups/manager_attribution_v1/`
 
+## Generate Report Workflow Catalog And External Story Pack
+
+The workflow catalog generator consolidates current local product-review reports into four audience-specific demo workflows and creates a synthetic external manager story translation pack. It is catalog/product structure only; it does not wire Advisor Home, Preview, Populate, Present, generated reports, backend endpoints, Docker, deployment, live data, external APIs, real data, or recommendations.
+
+```cmd
+set PYTHONPATH=src
+python -m arangur.analytics.report_workflow_catalog
+```
+
+This writes:
+
+- `data/simulation/report_workflows/demo_workflows_v1/`
+- `data/simulation/external_story_translation/external_manager_story_translation_pack_v1/`
+- `docs/product/report_workflow_catalog_v1.md`
+- `docs/product/demo_report_suite_v1.md`
+- `docs/product/report_family_acceptance_status_v1.md`
+- `docs/product/external_manager_story_workflow_v1.md`
+
 ## Generate Revaluation v2 Report Mockups
 
 The v2 report-view generator turns full-revaluation outputs, attribution outputs, and the synthetic prerequisite pack into v2 report input fixtures, v2 report view fixtures, and Markdown product-review mockups, including separate Cash Flow Delivered and Cash-Flow Support Outlook reports. It preserves v1 mockups and does not wire anything into Advisor Preview, Populate, Present, generated reports, Docker, deployment, live data, or dependencies.

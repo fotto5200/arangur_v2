@@ -1,0 +1,14 @@
+{
+  "caveats": {
+    "candidate_proxies_need_approval": true,
+    "external_manager_views_may_be_incomplete_or_wrong": true,
+    "no_live_data": true,
+    "not_recommendation": true,
+    "not_verified": true,
+    "requires_review_before_client_use": true,
+    "synthetic_demo_only": true,
+    "translate_do_not_endorse": true
+  },
+  "schema_version": "external_story_governance_caveats.v1",
+  "synthetic_data": true
+}

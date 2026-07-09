@@ -1,0 +1,128 @@
+{
+  "advisor_only_status": "advisor_uses_setup_notes_before_showing",
+  "audience": "Principal / family office member",
+  "audience_depth": "minimal_client_briefing",
+  "client_facing_status": "client_facing_minimal",
+  "conversation_goal": "Answer where we are, whether cash/spending is covered, what the biggest risks are, what to watch next, and what the advisor is planning to do.",
+  "core_user_question": "What do I need to know without reading every analytic report?",
+  "diagnostic_reports": [],
+  "display_name": "Principal / Family Office Briefing",
+  "gated_or_deferred_reports": [
+    "high_level_advisor_plan_next_year_positioning"
+  ],
+  "not_production_recommendation": true,
+  "ordered_steps": [
+    {
+      "audience_visibility": "client_facing",
+      "caveat": "Local synthetic product-review report; not production reporting.",
+      "display_title": "Portfolio Representation Status",
+      "report_family": "portfolio_representation_status",
+      "report_id": "portfolio_representation_status",
+      "source_mockup_path": "docs/product/report_mockups/revaluation_v2/portfolio_representation_status_mockup_v2.md",
+      "source_view_path": "data/simulation/report_element_views/revaluation_v2/portfolio_representation_status_view.json",
+      "status": "accepted",
+      "step_number": 1,
+      "step_role": "primary",
+      "visible_question_answered": "Where are we?",
+      "why_included": "Starts with portfolio scale and completeness."
+    },
+    {
+      "audience_visibility": "client_facing",
+      "caveat": "Local synthetic product-review report; not production reporting.",
+      "display_title": "Cash Flow Delivered",
+      "report_family": "cash_flow_delivered",
+      "report_id": "cash_flow_delivered",
+      "source_mockup_path": "docs/product/report_mockups/revaluation_v2/cash_flow_delivered_mockup_v2.md",
+      "source_view_path": "data/simulation/report_element_views/revaluation_v2/cash_flow_delivered_view.json",
+      "status": "accepted",
+      "step_number": 2,
+      "step_role": "primary",
+      "visible_question_answered": "What cash did the portfolio deliver?",
+      "why_included": "Shows recent cash generated and paid out before discussing projections."
+    },
+    {
+      "audience_visibility": "client_facing",
+      "caveat": "Local synthetic product-review report; not production reporting.",
+      "display_title": "Cash-Flow Support Outlook",
+      "report_family": "cash_flow_support_outlook",
+      "report_id": "cash_flow_support_outlook",
+      "source_mockup_path": "docs/product/report_mockups/revaluation_v2/cash_flow_support_outlook_mockup_v2.md",
+      "source_view_path": "data/simulation/report_element_views/revaluation_v2/cash_flow_support_outlook_view.json",
+      "status": "accepted",
+      "step_number": 3,
+      "step_role": "primary",
+      "visible_question_answered": "Is cash/spending covered?",
+      "why_included": "Separates stated cash need support from trailing cash delivery."
+    },
+    {
+      "audience_visibility": "advisor_review",
+      "caveat": "Local synthetic product-review report; not production reporting.",
+      "display_title": "Coverage and Confidence Warning",
+      "report_family": "coverage_confidence_warning",
+      "report_id": "coverage_confidence_warning",
+      "source_mockup_path": "docs/product/report_mockups/revaluation_v2/coverage_confidence_warning_mockup_v2.md",
+      "source_view_path": "data/simulation/report_element_views/revaluation_v2/coverage_confidence_warning_view.json",
+      "status": "accepted_with_minor_polish",
+      "step_number": 4,
+      "step_role": "supporting",
+      "visible_question_answered": "Can we trust the numbers enough to show them?",
+      "why_included": "Warns when data confidence changes interpretation."
+    },
+    {
+      "audience_visibility": "client_facing",
+      "caveat": "Local synthetic product-review report; not production reporting.",
+      "display_title": "Aggregated Asset Allocation",
+      "report_family": "aggregated_asset_allocation",
+      "report_id": "aggregated_asset_allocation",
+      "source_mockup_path": "docs/product/report_mockups/revaluation_v2/aggregated_asset_allocation_mockup_v2.md",
+      "source_view_path": "data/simulation/report_element_views/revaluation_v2/aggregated_asset_allocation_view.json",
+      "status": "accepted",
+      "step_number": 5,
+      "step_role": "supporting",
+      "visible_question_answered": "What does the portfolio own broadly?",
+      "why_included": "Keeps broad ownership legible without manager detail."
+    },
+    {
+      "audience_visibility": "client_facing",
+      "caveat": "Local synthetic product-review report; not production reporting.",
+      "display_title": "Current Portfolio Scenario Downside",
+      "report_family": "current_portfolio_scenario_downside",
+      "report_id": "current_portfolio_scenario_downside",
+      "source_mockup_path": "docs/product/report_mockups/revaluation_v2/current_portfolio_scenario_downside_mockup_v2.md",
+      "source_view_path": "data/simulation/report_element_views/revaluation_v2/current_portfolio_scenario_downside_view.json",
+      "status": "accepted",
+      "step_number": 6,
+      "step_role": "supporting",
+      "visible_question_answered": "What are the biggest portfolio risks?",
+      "why_included": "Shows the few biggest current downside cases."
+    },
+    {
+      "audience_visibility": "client_facing",
+      "caveat": "No generated plan mockup exists yet; future UI/demo wiring should collect advisor plan language.",
+      "display_title": "High-Level Advisor Plan / Next-Year Positioning",
+      "report_family": "positioning_forward_view",
+      "report_id": "high_level_advisor_plan_next_year_positioning",
+      "status": "gated",
+      "step_number": 7,
+      "step_role": "handoff",
+      "visible_question_answered": "Unavailable until its data and report shape are approved.",
+      "why_included": "Represents the next report needed to complete this conversation."
+    }
+  ],
+  "schema_version": "report_workflow.v1",
+  "setup_or_readiness_notes": [
+    "coverage_confidence_warning"
+  ],
+  "superseded_reports_excluded": [
+    "policy_level_attribution_summary_v1",
+    "policy_level_manager_effect_detail_v1"
+  ],
+  "supporting_reports": [
+    "aggregated_asset_allocation",
+    "current_portfolio_scenario_downside"
+  ],
+  "synthetic_data": true,
+  "what_this_workflow_proves": "Arangur can order accepted reports into a concise principal briefing and leave dense attribution out unless needed.",
+  "why_this_workflow_exists": "Some principals want the smallest useful conversation, not the full analytic library.",
+  "workflow_id": "principal_family_office_briefing_minimal_v1"
+}

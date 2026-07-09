@@ -1,0 +1,28 @@
+{
+  "approval_status": "synthetic_demo_translation",
+  "generated_artifacts": [
+    "candidate_benchmark_proxy_map.json",
+    "external_story_report_workflow_map.json",
+    "external_story_translation_manifest.json",
+    "governance_caveats.json",
+    "implied_lenses.json",
+    "key_price_scenario_set.json",
+    "manager_story_summary.json"
+  ],
+  "generated_at": "2026-07-09T00:00:00Z",
+  "intended_workflow": "external_manager_story_translation_v1",
+  "limitations": [
+    "Synthetic demo translation only.",
+    "External manager views may be incomplete or wrong.",
+    "Candidate lenses, scenarios, benchmarks, and proxies require review before any client use.",
+    "No live market data, external APIs, or real client data were used."
+  ],
+  "not_recommendation": true,
+  "not_verified": true,
+  "pack_id": "external_manager_story_translation_pack_v1",
+  "pack_version": "2026-07-09",
+  "schema_version": "external_story_translation_manifest.v1",
+  "source_basis": "externally_inspired_manager_story_summary",
+  "synthetic_data": true,
+  "translate_do_not_endorse": true
+}

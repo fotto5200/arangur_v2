@@ -1,0 +1,23 @@
+{
+  "core_worldview": [
+    "AI infrastructure and capital formation may create growth upside.",
+    "Energy supply, trade conflict, inflation, rates, and duration can pressure portfolios.",
+    "The same portfolio can be reviewed through growth, bottleneck, macro, and geopolitical lenses."
+  ],
+  "not_recommendation": true,
+  "not_verified": true,
+  "plain_english_summary": "An external manager frames the world as AI-driven growth and capital formation upside occurring alongside geopolitical, energy, trade, inflation, rate, and duration risks.",
+  "schema_version": "external_manager_story_summary.v1",
+  "story_title": "Synthetic AI Growth and Macro-Risk Manager Worldview",
+  "what_not_to_copy": [
+    "Do not copy position recommendations.",
+    "Do not treat candidate proxies as approved benchmarks.",
+    "Do not treat the worldview as verified or complete."
+  ],
+  "what_the_story_emphasizes": [
+    "AI-related growth and infrastructure demand.",
+    "Energy and oil shock sensitivity.",
+    "Higher-for-longer rates and duration exposure.",
+    "Trade-war, tariff, geography, and bloc-fragmentation risks."
+  ]
+}

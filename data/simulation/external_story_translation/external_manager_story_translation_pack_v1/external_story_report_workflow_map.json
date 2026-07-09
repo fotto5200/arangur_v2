@@ -1,0 +1,63 @@
+{
+  "schema_version": "external_story_report_workflow_map.v1",
+  "synthetic_data": true,
+  "workflow_id": "external_manager_story_translation_v1",
+  "workflow_rows": [
+    {
+      "not_recommendation": true,
+      "not_verified": true,
+      "source_artifact_path": "data/simulation/external_story_translation/external_manager_story_translation_pack_v1/manager_story_summary.json",
+      "status": "synthetic_pack_artifact",
+      "workflow_item": "Manager Story Summary"
+    },
+    {
+      "not_recommendation": true,
+      "not_verified": true,
+      "source_artifact_path": "data/simulation/external_story_translation/external_manager_story_translation_pack_v1/implied_lenses.json",
+      "status": "synthetic_pack_artifact",
+      "workflow_item": "Implied Lenses"
+    },
+    {
+      "not_recommendation": true,
+      "not_verified": true,
+      "source_artifact_path": "data/simulation/external_story_translation/external_manager_story_translation_pack_v1/key_price_scenario_set.json",
+      "status": "synthetic_pack_artifact",
+      "workflow_item": "Key-Price Scenario Set"
+    },
+    {
+      "not_recommendation": true,
+      "not_verified": true,
+      "source_artifact_path": null,
+      "status": "gated",
+      "workflow_item": "Portfolio Through External Lens"
+    },
+    {
+      "not_recommendation": true,
+      "not_verified": true,
+      "source_artifact_path": null,
+      "status": "gated",
+      "workflow_item": "Manager by External Lens"
+    },
+    {
+      "not_recommendation": true,
+      "not_verified": true,
+      "source_artifact_path": null,
+      "status": "gated",
+      "workflow_item": "Scenario Downside under External Story"
+    },
+    {
+      "not_recommendation": true,
+      "not_verified": true,
+      "source_artifact_path": null,
+      "status": "gated",
+      "workflow_item": "Scenario by Lens"
+    },
+    {
+      "not_recommendation": true,
+      "not_verified": true,
+      "source_artifact_path": "data/simulation/external_story_translation/external_manager_story_translation_pack_v1/governance_caveats.json",
+      "status": "synthetic_pack_artifact",
+      "workflow_item": "Governance/Caveat note"
+    }
+  ]
+}

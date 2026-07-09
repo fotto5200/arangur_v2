@@ -1,0 +1,154 @@
+{
+  "advisor_only_status": "advisor_review_translation_workflow",
+  "audience": "Advisor, investment committee, or manager-facing discussion",
+  "audience_depth": "advisor_or_committee_translation",
+  "client_facing_status": "not_client_facing_until_reviewed",
+  "conversation_goal": "Translate an external investment narrative into Arangur structures without endorsing or verifying it.",
+  "core_user_question": "How would Arangur translate an outside manager worldview into lenses, scenarios, proxies, and report workflows?",
+  "diagnostic_reports": [],
+  "display_name": "External Manager Story Translation",
+  "gated_or_deferred_reports": [
+    "portfolio_through_external_lens",
+    "manager_by_external_lens",
+    "scenario_downside_under_external_story",
+    "scenario_by_lens_external_story"
+  ],
+  "not_production_recommendation": true,
+  "ordered_steps": [
+    {
+      "audience_visibility": "advisor_review",
+      "caveat": "Synthetic translation only; not verified and not a recommendation.",
+      "display_title": "Manager Story Summary",
+      "report_family": "external_story_translation",
+      "report_id": "external_manager_story_summary",
+      "source_artifact_path": "data/simulation/external_story_translation/external_manager_story_translation_pack_v1/manager_story_summary.json",
+      "status": "setup_note",
+      "step_number": 1,
+      "step_role": "primary",
+      "visible_question_answered": "What is the external story saying?",
+      "why_included": "Summarizes the outside worldview in plain English without endorsing it."
+    },
+    {
+      "audience_visibility": "advisor_review",
+      "caveat": "Synthetic translation only; not verified and not a recommendation.",
+      "display_title": "Implied Lenses",
+      "report_family": "external_story_translation",
+      "report_id": "external_story_implied_lenses",
+      "source_artifact_path": "data/simulation/external_story_translation/external_manager_story_translation_pack_v1/implied_lenses.json",
+      "status": "setup_note",
+      "step_number": 2,
+      "step_role": "primary",
+      "visible_question_answered": "What lenses does this worldview imply?",
+      "why_included": "Translates the story into candidate lens questions."
+    },
+    {
+      "audience_visibility": "advisor_review",
+      "caveat": "Synthetic translation only; not verified and not a recommendation.",
+      "display_title": "Key-Price Scenario Set",
+      "report_family": "external_story_translation",
+      "report_id": "external_story_key_price_scenarios",
+      "source_artifact_path": "data/simulation/external_story_translation/external_manager_story_translation_pack_v1/key_price_scenario_set.json",
+      "status": "setup_note",
+      "step_number": 3,
+      "step_role": "primary",
+      "visible_question_answered": "Which scenarios would test this worldview?",
+      "why_included": "Turns the story into synthetic key-price scenario candidates."
+    },
+    {
+      "audience_visibility": "internal_control",
+      "caveat": "Synthetic translation only; not verified and not a recommendation.",
+      "display_title": "Candidate Benchmark/Proxy Map",
+      "report_family": "external_story_translation",
+      "report_id": "external_story_candidate_proxies",
+      "source_artifact_path": "data/simulation/external_story_translation/external_manager_story_translation_pack_v1/candidate_benchmark_proxy_map.json",
+      "status": "setup_note",
+      "step_number": 4,
+      "step_role": "setup_readiness",
+      "visible_question_answered": "What proxies might be reviewed later?",
+      "why_included": "Lists candidate proxies that require approval before any use."
+    },
+    {
+      "audience_visibility": "advisor_review",
+      "caveat": "No generated portfolio-through-external-lens report exists yet.",
+      "display_title": "Portfolio Through External Lens",
+      "report_family": "external_story_translation",
+      "report_id": "portfolio_through_external_lens",
+      "status": "gated",
+      "step_number": 5,
+      "step_role": "primary",
+      "visible_question_answered": "Unavailable until its data and report shape are approved.",
+      "why_included": "Represents the next report needed to complete this conversation."
+    },
+    {
+      "audience_visibility": "advisor_review",
+      "caveat": "No generated manager-by-external-lens report exists yet.",
+      "display_title": "Manager by External Lens",
+      "report_family": "external_story_translation",
+      "report_id": "manager_by_external_lens",
+      "status": "gated",
+      "step_number": 6,
+      "step_role": "supporting",
+      "visible_question_answered": "Unavailable until its data and report shape are approved.",
+      "why_included": "Represents the next report needed to complete this conversation."
+    },
+    {
+      "audience_visibility": "advisor_review",
+      "caveat": "No generated external-story scenario downside report exists yet.",
+      "display_title": "Scenario Downside under External Story",
+      "report_family": "external_story_translation",
+      "report_id": "scenario_downside_under_external_story",
+      "status": "gated",
+      "step_number": 7,
+      "step_role": "supporting",
+      "visible_question_answered": "Unavailable until its data and report shape are approved.",
+      "why_included": "Represents the next report needed to complete this conversation."
+    },
+    {
+      "audience_visibility": "advisor_review",
+      "caveat": "Scenario-by-lens report remains gated until approved lens assignments and scenario aggregation exist.",
+      "display_title": "Scenario by Lens",
+      "report_family": "external_story_translation",
+      "report_id": "scenario_by_lens_external_story",
+      "status": "gated",
+      "step_number": 8,
+      "step_role": "supporting",
+      "visible_question_answered": "Unavailable until its data and report shape are approved.",
+      "why_included": "Represents the next report needed to complete this conversation."
+    },
+    {
+      "audience_visibility": "advisor_review",
+      "caveat": "Synthetic translation only; not verified and not a recommendation.",
+      "display_title": "Governance/Caveat Note",
+      "report_family": "external_story_translation",
+      "report_id": "external_story_governance_caveat_note",
+      "source_artifact_path": "data/simulation/external_story_translation/external_manager_story_translation_pack_v1/governance_caveats.json",
+      "status": "setup_note",
+      "step_number": 9,
+      "step_role": "handoff",
+      "visible_question_answered": "What does this translation not prove?",
+      "why_included": "Closes the translation with governance boundaries."
+    }
+  ],
+  "schema_version": "report_workflow.v1",
+  "setup_or_readiness_notes": [
+    "external_manager_story_summary",
+    "external_story_implied_lenses",
+    "external_story_key_price_scenarios",
+    "external_story_candidate_proxies",
+    "external_story_governance_caveat_note"
+  ],
+  "superseded_reports_excluded": [
+    "policy_level_attribution_summary_v1",
+    "policy_level_manager_effect_detail_v1"
+  ],
+  "supporting_reports": [
+    "portfolio_through_external_lens",
+    "manager_by_external_lens",
+    "scenario_downside_under_external_story",
+    "scenario_by_lens_external_story"
+  ],
+  "synthetic_data": true,
+  "what_this_workflow_proves": "Arangur can structure an external worldview without accepting it as true or recommending its proxies.",
+  "why_this_workflow_exists": "Outside manager stories often arrive as narrative; Arangur needs to translate them into governed lenses and scenarios.",
+  "workflow_id": "external_manager_story_translation_v1"
+}
