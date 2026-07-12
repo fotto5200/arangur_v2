@@ -15,27 +15,32 @@ echo Private-demo smoke checks against %BASE_URL%
 echo This script expects the Docker Compose stack to already be running.
 echo.
 
-echo [1/5] GET /api/health
+echo [1/6] GET /api/health
 curl.exe --fail --silent --show-error --output NUL "%BASE_URL%/api/health" || goto failed
 echo OK
 echo.
 
-echo [2/5] GET /app/
+echo [2/6] GET /app/
 curl.exe --fail --silent --show-error --output NUL "%BASE_URL%/app/" || goto failed
 echo OK
 echo.
 
-echo [3/5] GET /api/report-elements
+echo [3/6] GET /api/report-elements
 curl.exe --fail --silent --show-error --output NUL "%BASE_URL%/api/report-elements" || goto failed
 echo OK
 echo.
 
-echo [4/5] POST /api/briefing-spec-sets
+echo [4/6] GET /api/advisor-workflows
+curl.exe --fail --silent --show-error --output NUL "%BASE_URL%/api/advisor-workflows" || goto failed
+echo OK
+echo.
+
+echo [5/6] POST /api/briefing-spec-sets
 curl.exe --fail --silent --show-error --output NUL -X POST "%BASE_URL%/api/briefing-spec-sets" -H "Content-Type: application/json" --data-binary "@%PAYLOAD%" || goto failed
 echo OK
 echo.
 
-echo [5/5] GET /api/briefing-spec-sets
+echo [6/6] GET /api/briefing-spec-sets
 curl.exe --fail --silent --show-error --output NUL "%BASE_URL%/api/briefing-spec-sets" || goto failed
 echo OK
 echo.

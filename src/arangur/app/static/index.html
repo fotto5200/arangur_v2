@@ -70,21 +70,30 @@
     body.app-route-home .builder-surface,
     body.app-route-home #workflow-mode-region,
     body.app-route-home #current-set-preview-region,
+    body.app-route-home #journey-detail-region,
     body.app-route-builder .home-surface,
     body.app-route-builder #workflow-mode-region,
     body.app-route-builder #current-set-preview-region,
+    body.app-route-builder #journey-detail-region,
     body.app-route-preview .home-surface,
     body.app-route-preview .builder-surface,
     body.app-route-preview #workflow-mode-region,
+    body.app-route-preview #journey-detail-region,
     body.app-route-workflow-mode .home-surface,
     body.app-route-workflow-mode .builder-surface,
-    body.app-route-workflow-mode #current-set-preview-region {
+    body.app-route-workflow-mode #current-set-preview-region,
+    body.app-route-workflow-mode #journey-detail-region,
+    body.app-route-journey .home-surface,
+    body.app-route-journey .builder-surface,
+    body.app-route-journey #workflow-mode-region,
+    body.app-route-journey #current-set-preview-region {
       display: none !important;
     }
 
     body.app-route-builder .builder-surface,
     body.app-route-preview #current-set-preview-region,
-    body.app-route-workflow-mode #workflow-mode-region {
+    body.app-route-workflow-mode #workflow-mode-region,
+    body.app-route-journey #journey-detail-region {
       display: grid !important;
     }
 
@@ -128,6 +137,141 @@
       display: grid;
       gap: 10px;
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .journey-chooser {
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      gap: 12px;
+      padding-bottom: 18px;
+    }
+
+    .journey-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .journey-choice {
+      align-items: start;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      color: var(--ink);
+      cursor: pointer;
+      display: grid;
+      gap: 5px;
+      min-height: 128px;
+      padding: 16px;
+      text-align: left;
+    }
+
+    .journey-choice:hover,
+    .journey-choice:focus {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      outline: 2px solid rgba(15, 118, 110, 0.12);
+    }
+
+    .journey-choice strong {
+      color: var(--strong);
+      font-size: 16px;
+    }
+
+    .journey-choice span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .journey-surface {
+      display: grid;
+      gap: 14px;
+    }
+
+    .journey-topbar {
+      align-items: start;
+      display: flex;
+      gap: 14px;
+      justify-content: space-between;
+    }
+
+    .journey-panel {
+      display: grid;
+      gap: 18px;
+    }
+
+    .journey-steps {
+      display: grid;
+      gap: 10px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .journey-step {
+      align-items: start;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 36px minmax(0, 1fr) auto;
+      padding: 14px;
+    }
+
+    .journey-step-number {
+      align-items: center;
+      background: var(--accent-soft);
+      border-radius: 999px;
+      color: var(--accent);
+      display: flex;
+      font-weight: 800;
+      height: 32px;
+      justify-content: center;
+      width: 32px;
+    }
+
+    .journey-step-copy {
+      display: grid;
+      gap: 4px;
+    }
+
+    .journey-step-copy strong {
+      color: var(--strong);
+    }
+
+    .journey-step-copy p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .journey-step-meta {
+      align-items: end;
+      display: grid;
+      gap: 7px;
+      justify-items: end;
+    }
+
+    .journey-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      justify-content: flex-end;
+    }
+
+    .journey-caveats {
+      background: var(--amber-soft);
+      border: 1px solid var(--amber-line);
+      border-radius: 9px;
+      color: #713f12;
+      display: grid;
+      gap: 7px;
+      padding: 13px;
+    }
+
+    .journey-caveats ul {
+      margin: 0;
+      padding-left: 20px;
     }
 
     .home-choice-button.is-active {
@@ -979,8 +1123,10 @@
       .calculation-fields,
       .home-actions,
       .home-primary-actions,
+      .journey-grid,
       .workflow-name-grid,
-      .saved-workflow-row {
+      .saved-workflow-row,
+      .journey-step {
         grid-template-columns: 1fr;
       }
 
@@ -991,6 +1137,15 @@
 
       .preview-shell-header {
         grid-template-columns: 1fr;
+      }
+
+      .journey-step-meta {
+        align-items: start;
+        justify-items: start;
+      }
+
+      .journey-badges {
+        justify-content: flex-start;
       }
 
       h1 {
@@ -1010,7 +1165,22 @@
         <div class="panel-header">
           <p class="helper">Advisor Home</p>
           <h1 id="advisor-home-title">Manage briefing workflows</h1>
-          <p class="helper">Choose one workflow step. Builder, preview, and technical tools stay one layer deeper.</p>
+          <p class="helper">Choose the journey that matches the next advisor or client conversation.</p>
+        </div>
+
+        <section class="journey-chooser" aria-labelledby="journey-chooser-title">
+          <div class="home-flow-title">
+            <p class="helper">Report journeys</p>
+            <h2 id="journey-chooser-title">Choose a conversation</h2>
+          </div>
+          <div id="journey-choice-list" class="journey-grid" aria-label="Advisor report journeys"></div>
+          <p id="journey-choice-status" class="status">Loading report journeys…</p>
+        </section>
+
+        <div class="home-flow-title">
+          <p class="helper">Workflow tools</p>
+          <h2>Design and manage workflows</h2>
+          <p class="helper">Builder, saved workflows, and generated report tools remain available below.</p>
         </div>
 
         <div id="home-primary-actions" class="home-primary-actions" aria-label="Advisor workflow choices">
@@ -1079,6 +1249,27 @@
         </details>
       </section>
       <!-- first-screen-end -->
+    </section>
+
+    <section id="journey-detail-region" class="journey-surface" aria-labelledby="journey-detail-title">
+      <div class="journey-topbar">
+        <div>
+          <p class="brand">Arangur</p>
+          <p class="context-line"><strong>Northstar Family Office</strong> &middot; Demo portfolio &middot; Synthetic report journey</p>
+        </div>
+        <button id="journey-detail-back-button" class="secondary-button" type="button">All report journeys</button>
+      </div>
+      <section class="panel journey-panel">
+        <div class="panel-header">
+          <p id="journey-detail-audience" class="helper"></p>
+          <h1 id="journey-detail-title">Report journey</h1>
+          <p id="journey-detail-description" class="helper"></p>
+        </div>
+        <p id="journey-detail-question" class="current-preview-context"></p>
+        <div id="journey-detail-caveats" class="journey-caveats hidden"></div>
+        <ol id="journey-detail-steps" class="journey-steps"></ol>
+        <p id="journey-detail-status" class="status"></p>
+      </section>
     </section>
 
     <div id="builder-surface" class="builder-surface">
@@ -1296,6 +1487,7 @@
 
   <script>
     const CATALOG_ENDPOINT = "/api/report-elements";
+    const ADVISOR_WORKFLOW_ENDPOINT = "/api/advisor-workflows";
     const BRIEFING_SPEC_SETS_ENDPOINT = "/api/briefing-spec-sets";
     const GENERATED_REPORT_POPULATE_ENDPOINT = "/api/generated-reports/demo-populate";
     const VIEW_SUMMARY_ENDPOINT = "/simulation/report_element_views/report_element_view_summary.json";
@@ -1328,6 +1520,10 @@
       "workflow/existing": "#workflow/existing",
       "workflow/populate": "#workflow/populate",
       "workflow/present": "#workflow/present",
+      "journey/principal_family_office_briefing_minimal_v1": "#journey/principal_family_office_briefing_minimal_v1",
+      "journey/engaged_client_investment_committee_review_v1": "#journey/engaged_client_investment_committee_review_v1",
+      "journey/advisor_manager_oversight_v1": "#journey/advisor_manager_oversight_v1",
+      "journey/external_manager_story_translation_v1": "#journey/external_manager_story_translation_v1",
       builder: "#builder",
       populate: "#populate",
       presentation: "#presentation",
@@ -1347,7 +1543,7 @@
       populate: "workflow/populate",
       present: "workflow/present"
     };
-    const ROUTE_BODY_CLASSES = ["app-route-home", "app-route-builder", "app-route-preview", "app-route-workflow-mode"];
+    const ROUTE_BODY_CLASSES = ["app-route-home", "app-route-builder", "app-route-preview", "app-route-workflow-mode", "app-route-journey"];
     const DEMO_SELECTED_ENTITY_OPTIONS = {
       managers: [
         "Manager A - Growth / AI Infrastructure",
@@ -1594,6 +1790,7 @@
 
     const state = {
       templates: [],
+      advisorWorkflows: [],
       targetSet: "Client Briefing Set",
       previewTemplate: null,
       mode: "empty",
@@ -1626,6 +1823,17 @@
 
     const els = {
       advisorHome: document.getElementById("advisor-home"),
+      journeyChoiceList: document.getElementById("journey-choice-list"),
+      journeyChoiceStatus: document.getElementById("journey-choice-status"),
+      journeyDetailRegion: document.getElementById("journey-detail-region"),
+      journeyDetailBack: document.getElementById("journey-detail-back-button"),
+      journeyDetailAudience: document.getElementById("journey-detail-audience"),
+      journeyDetailTitle: document.getElementById("journey-detail-title"),
+      journeyDetailDescription: document.getElementById("journey-detail-description"),
+      journeyDetailQuestion: document.getElementById("journey-detail-question"),
+      journeyDetailCaveats: document.getElementById("journey-detail-caveats"),
+      journeyDetailSteps: document.getElementById("journey-detail-steps"),
+      journeyDetailStatus: document.getElementById("journey-detail-status"),
       homePrimaryActions: document.getElementById("home-primary-actions"),
       homeCreateWorkflow: document.getElementById("home-create-workflow-button"),
       homeExistingWorkflow: document.getElementById("home-existing-workflow-button"),
@@ -1718,6 +1926,86 @@
       closeElementPreview: document.getElementById("close-element-preview-button")
     };
 
+    async function loadAdvisorWorkflows() {
+      try {
+        const response = await fetch(ADVISOR_WORKFLOW_ENDPOINT);
+        if (!response.ok) throw new Error(`Workflow request failed: ${response.status}`);
+        const payload = await response.json();
+        state.advisorWorkflows = Array.isArray(payload.workflows) ? payload.workflows : [];
+        if (state.advisorWorkflows.length !== 4) throw new Error("Four report journeys are required.");
+        els.journeyChoiceStatus.textContent = "";
+      } catch (error) {
+        state.advisorWorkflows = [
+          ["principal_family_office_briefing_minimal_v1", "Principal Briefing", "A concise principal conversation about portfolio standing, cash needs, the largest risks, and next actions."],
+          ["engaged_client_investment_committee_review_v1", "Engaged Client Review", "A detailed client or investment-committee review of allocation, managers, exposures, and downside."],
+          ["advisor_manager_oversight_v1", "Advisor Oversight", "An advisor-oriented review of policy drift, mandates, attribution, implementation, and confidence."],
+          ["external_manager_story_translation_v1", "External Manager Story Translation", "A translation of an outside worldview into lenses, scenarios, candidate proxies, and workflows."]
+        ].map(([workflow_id, display_name, description]) => ({
+          workflow_id, display_name, description, ordered_steps: [], available: false,
+          audience: "Advisor review", core_question: "Journey details are temporarily unavailable.",
+          caveats: workflow_id === "external_manager_story_translation_v1" ? [
+            "Translation, not endorsement.", "Synthetic and not verified.", "Not a recommendation.",
+            "Candidate proxies require approval.", "Review is required before any production client use."
+          ] : []
+        }));
+        els.journeyChoiceStatus.textContent = "Journey details are temporarily unavailable. The rest of the advisor app remains usable.";
+      }
+      renderJourneyChoices();
+      if (String(state.route).startsWith("journey/")) renderJourneyDetail(state.route.slice("journey/".length));
+    }
+
+    function renderJourneyChoices() {
+      els.journeyChoiceList.innerHTML = state.advisorWorkflows.map((workflow) => `
+        <button class="journey-choice" type="button" data-journey-id="${escapeAttr(workflow.workflow_id)}">
+          <strong>${escapeHtml(workflow.display_name)}</strong>
+          <span>${escapeHtml(workflow.description)}</span>
+        </button>
+      `).join("");
+    }
+
+    function renderJourneyDetail(workflowId) {
+      const workflow = state.advisorWorkflows.find((row) => row.workflow_id === workflowId);
+      if (!workflow) {
+        els.journeyDetailTitle.textContent = "Report journey unavailable";
+        els.journeyDetailDescription.textContent = "Return to Advisor Home and choose another journey.";
+        els.journeyDetailQuestion.textContent = "The requested journey could not be loaded.";
+        els.journeyDetailCaveats.classList.add("hidden");
+        els.journeyDetailSteps.innerHTML = "";
+        els.journeyDetailStatus.textContent = "";
+        return;
+      }
+      els.journeyDetailAudience.textContent = workflow.audience || "Advisor report journey";
+      els.journeyDetailTitle.textContent = workflow.display_name;
+      els.journeyDetailDescription.textContent = workflow.description;
+      els.journeyDetailQuestion.textContent = workflow.core_question;
+      const caveats = Array.isArray(workflow.caveats) ? workflow.caveats : [];
+      els.journeyDetailCaveats.innerHTML = caveats.length
+        ? `<strong>Translation boundaries</strong><ul>${caveats.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
+        : "";
+      els.journeyDetailCaveats.classList.toggle("hidden", !caveats.length);
+      const steps = Array.isArray(workflow.ordered_steps) ? workflow.ordered_steps : [];
+      els.journeyDetailSteps.innerHTML = steps.map((step) => `
+        <li class="journey-step">
+          <span class="journey-step-number">${escapeHtml(step.step_number)}</span>
+          <div class="journey-step-copy">
+            <strong>${escapeHtml(step.display_title)}</strong>
+            <p>${escapeHtml(step.question)}</p>
+            <p>${escapeHtml(step.availability_note)}</p>
+          </div>
+          <div class="journey-step-meta">
+            <div class="journey-badges">
+              <span class="badge">${escapeHtml(step.role_label)}</span>
+              <span class="badge">${escapeHtml(step.status_label)}</span>
+            </div>
+            ${step.preview_url ? `<a class="tiny-button" href="${escapeAttr(step.preview_url)}" target="_blank" rel="noopener">Open preview</a>` : ""}
+          </div>
+        </li>
+      `).join("");
+      els.journeyDetailStatus.textContent = steps.length
+        ? `${steps.length} reports and stages, shown in conversation order.`
+        : (workflow.availability_message || "Journey details are temporarily unavailable.");
+    }
+
     async function loadCatalog() {
       try {
         const response = await fetch(CATALOG_ENDPOINT);
@@ -1781,6 +2069,14 @@
       const normalized = normalizeRoute(route);
       state.route = normalized;
       document.body.classList.remove(...ROUTE_BODY_CLASSES);
+      if (normalized.startsWith("journey/")) {
+        document.body.classList.add("app-route-journey");
+        hideCurrentSetPreview({ skipScroll: true });
+        closeElementPreview();
+        setBrowseAllOpen(false);
+        renderJourneyDetail(normalized.slice("journey/".length));
+        return;
+      }
       if (normalized === "home" || HOME_MODE_ROUTES[normalized]) {
         document.body.classList.add("app-route-home");
         hideCurrentSetPreview({ skipScroll: true });
@@ -4586,6 +4882,11 @@
       if (!button) return;
       navigateToRoute(HOME_MODE_ROUTE_BY_MODE[button.dataset.homeMode] || "home");
     });
+    els.journeyChoiceList.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-journey-id]");
+      if (button) navigateToRoute(`journey/${button.dataset.journeyId}`);
+    });
+    els.journeyDetailBack.addEventListener("click", () => navigateToRoute("home"));
     els.homeBuildClient.addEventListener("click", () => startNewWorkflow("Client Briefing Set"));
     els.homeBuildAdvisor.addEventListener("click", () => startNewWorkflow("Advisor Review Set"));
     els.homeAdvancedTools.addEventListener("click", () => navigateToRoute("advanced"));
@@ -4690,6 +4991,7 @@
     loadLocalNamedWorkflows();
     loadLocalGeneratedReports();
     initializeRoute();
+    loadAdvisorWorkflows();
     loadCatalog();
     loadPreviewArtifacts();
   </script>

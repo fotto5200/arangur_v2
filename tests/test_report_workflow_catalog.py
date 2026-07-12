@@ -260,7 +260,7 @@ class ReportWorkflowCatalogTests(unittest.TestCase):
                 self.assertNotIn("TODO", text)
                 self.assertNotIn("TBD", text)
 
-    def test_no_ui_backend_docker_or_deployment_files_changed(self) -> None:
+    def test_no_docker_or_deployment_files_changed(self) -> None:
         result = subprocess.run(
             ["git", "status", "--short"],
             cwd=ROOT,
@@ -274,8 +274,6 @@ class ReportWorkflowCatalogTests(unittest.TestCase):
             if line.strip()
         ]
         forbidden_prefixes = (
-            "src/arangur/app/",
-            "src/arangur/report_elements/generated_report",
             "docs/deployment/",
         )
         forbidden_exact = {
