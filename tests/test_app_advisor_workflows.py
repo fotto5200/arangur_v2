@@ -88,6 +88,14 @@ class BuiltinBriefingTemplateAppTests(unittest.TestCase):
                 self.assertEqual("rendered", artifact["ordered_sections"][0]["status"])
                 if template["workflow_id"] == "external_manager_story_translation_v1":
                     self.assertIn("Core Worldview", artifact["ordered_sections"][0]["html"])
+                    visible_caveats = " ".join(artifact["caveats"]).lower()
+                    for phrase in (
+                        "translation, not endorsement", "synthetic", "not verified", "not a recommendation",
+                        "require approval", "production client use",
+                    ):
+                        self.assertIn(phrase, visible_caveats)
+                        self.assertIn(phrase, artifact["text_content"].lower())
+                        self.assertIn(phrase, artifact["html_content"].lower())
                 else:
                     self.assertIn("<table", artifact["ordered_sections"][0]["html"])
                 self.assertEqual("built_in", artifact["metadata_json"]["source_template_kind"])

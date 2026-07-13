@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import html
 import json
 import uuid
 from pathlib import Path
@@ -18,7 +19,7 @@ from arangur.report_elements.generated_report_artifact import (
 )
 
 from .briefing_spec_sets import BriefingSpecSetError, validate_briefing_spec_set_payload
-from .advisor_workflows import BriefingTemplateError, render_catalog_report_element
+from .advisor_workflows import EXTERNAL_STORY_CAVEATS, BriefingTemplateError, render_catalog_report_element
 
 
 GENERATED_REPORT_POPULATE_ENDPOINT = "/api/generated-reports/demo-populate"
@@ -139,10 +140,29 @@ def build_demo_populated_report_artifact(
             "artifact_persistence": "ephemeral_local_demo",
         }
     )
+    _apply_template_caveats(artifact, workflow_id)
     artifact["validation"] = validate_generated_report_artifact(artifact)
     if artifact["validation"]["status"] != "valid":
         raise GeneratedReportError("generated_report_invalid", "Generated report artifact failed demo validation.")
     return artifact
+
+
+def _apply_template_caveats(artifact: dict[str, Any], workflow_id: str | None) -> None:
+    if workflow_id != "external_manager_story_translation_v1":
+        return
+    existing = [str(value).strip() for value in artifact.get("caveats", []) if str(value).strip()]
+    governance = [value for value in EXTERNAL_STORY_CAVEATS if value not in existing]
+    artifact["caveats"] = [*existing, *governance]
+    governance_text = "Governance caveats:\n" + "\n".join(f"- {value}" for value in governance)
+    artifact["text_content"] = f"{str(artifact.get('text_content') or '').rstrip()}\n\n{governance_text}\n"
+    governance_html = (
+        '<section aria-labelledby="external-story-governance-caveats">'
+        '<h2 id="external-story-governance-caveats">Governance caveats</h2><ul>'
+        + "".join(f"<li>{html.escape(value)}</li>" for value in governance)
+        + "</ul></section>"
+    )
+    artifact_html = str(artifact.get("html_content") or "")
+    artifact["html_content"] = artifact_html.replace("</main>", f"{governance_html}\n</main>", 1)
 
 
 def _build_preview_payload(

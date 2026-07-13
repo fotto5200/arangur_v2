@@ -2456,9 +2456,9 @@
     function renderGeneratedReportPresentationHtml(artifact, sectionIndex) {
       const sections = Array.isArray(artifact.ordered_sections) ? artifact.ordered_sections : [];
       const section = sections[sectionIndex];
-      const caveat = Array.isArray(artifact.caveats) && artifact.caveats.length
-        ? artifact.caveats[0]
-        : SYNTHETIC_PREVIEW_NOTICE;
+      const caveats = Array.isArray(artifact.caveats) && artifact.caveats.length
+        ? artifact.caveats
+        : [SYNTHETIC_PREVIEW_NOTICE];
       return `
         <div class="current-preview-document" data-artifact-schema="${escapeAttr(artifact.schema_version || "")}">
           <header class="preview-header">
@@ -2467,7 +2467,7 @@
             <p class="current-preview-context"><strong>Source template:</strong> ${escapeHtml(artifact.source_workflow_display_name || "Briefing template")} | <strong>Generated:</strong> ${escapeHtml(artifact.generated_at || "")} | <strong>Data as of:</strong> ${escapeHtml(artifact.data_as_of || "")}</p>
           </header>
           ${section ? renderGeneratedReportSectionHtml(section) : '<p class="empty">This generated report has no rendered sections.</p>'}
-          <footer class="preview-footer-note">${escapeHtml(caveat)}</footer>
+          <footer class="preview-footer-note">${caveats.map((caveat) => `<p>${escapeHtml(caveat)}</p>`).join("")}</footer>
         </div>
       `;
     }
@@ -2581,9 +2581,9 @@
 
     function renderGeneratedReportArtifactHtml(artifact) {
       const sections = Array.isArray(artifact.ordered_sections) ? artifact.ordered_sections : [];
-      const caveat = Array.isArray(artifact.caveats) && artifact.caveats.length
-        ? artifact.caveats[0]
-        : SYNTHETIC_PREVIEW_NOTICE;
+      const caveats = Array.isArray(artifact.caveats) && artifact.caveats.length
+        ? artifact.caveats
+        : [SYNTHETIC_PREVIEW_NOTICE];
       return `
         <div class="current-preview-document" data-artifact-schema="${escapeAttr(artifact.schema_version || "")}">
           <header class="preview-header">
@@ -2594,7 +2594,7 @@
             <p class="current-preview-context"><strong>Generated:</strong> ${escapeHtml(artifact.generated_at || "")} | <strong>Data as of:</strong> ${escapeHtml(artifact.data_as_of || "")} | <strong>Snapshot:</strong> ${escapeHtml(artifact.data_snapshot_label || DEMO_DATA_SNAPSHOT_LABEL)}</p>
           </header>
           ${sections.map(renderGeneratedReportSectionHtml).join("")}
-          <footer class="preview-footer-note">${escapeHtml(caveat)}</footer>
+          <footer class="preview-footer-note">${caveats.map((caveat) => `<p>${escapeHtml(caveat)}</p>`).join("")}</footer>
         </div>
       `;
     }

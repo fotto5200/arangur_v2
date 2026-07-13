@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "127.0.0.1:8000:8000"
     environment:
       APP_ENV: "${APP_ENV:-private_demo}"
       PUBLIC_ORIGIN: "${PUBLIC_ORIGIN:-http://127.0.0.1:8000}"

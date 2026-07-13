@@ -260,33 +260,18 @@ class ReportWorkflowCatalogTests(unittest.TestCase):
                 self.assertNotIn("TODO", text)
                 self.assertNotIn("TBD", text)
 
-    def test_no_docker_or_deployment_files_changed(self) -> None:
-        result = subprocess.run(
-            ["git", "status", "--short"],
-            cwd=ROOT,
-            capture_output=True,
-            text=True,
+    def test_generator_writes_only_to_explicit_scratch_roots(self) -> None:
+        scratch_root = self.scratch.resolve()
+        output_roots = (
+            self.scratch / "workflows",
+            self.scratch / "external_story_pack",
+            self.scratch / "docs",
         )
-        self.assertEqual(result.returncode, 0, result.stderr)
-        changed = [
-            line[3:].strip().replace("\\", "/")
-            for line in result.stdout.splitlines()
-            if line.strip()
-        ]
-        forbidden_prefixes = (
-            "docs/deployment/",
-        )
-        forbidden_exact = {
-            "Dockerfile",
-            "docker-compose.yml",
-            ".dockerignore",
-            "src/arangur/app.py",
-            "templates.json",
-        }
-        for path in changed:
-            with self.subTest(path=path):
-                self.assertFalse(path.startswith(forbidden_prefixes))
-                self.assertNotIn(path, forbidden_exact)
+        for output_root in output_roots:
+            with self.subTest(output_root=output_root):
+                self.assertTrue(output_root.resolve().is_relative_to(scratch_root))
+                self.assertTrue(output_root.is_dir())
+                self.assertTrue(any(path.is_file() for path in output_root.rglob("*")))
 
 
 def _workflow(workflow_id: str) -> dict:

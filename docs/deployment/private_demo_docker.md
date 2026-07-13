@@ -19,6 +19,7 @@ This verifies local/private-demo runtime readiness only. It does not mean public
 ## Files
 
 - `Dockerfile` builds the FastAPI app image from the repo and serves `arangur.app.main:app` with `uvicorn` on `0.0.0.0:8000`.
+- Compose publishes the app on host loopback only at `127.0.0.1:8000`; a later remote deployment must keep this binding behind its approved reverse proxy and private-access control.
 - `docker-compose.yml` defines the `app` and internal `postgres` services plus a named Postgres data volume.
 - `.env.private-demo.example` provides demo-only local values for Compose. Copy it before running the stack; do not commit a real `.env.private-demo`.
 
@@ -114,3 +115,8 @@ curl.exe http://127.0.0.1:8000/api/briefing-spec-sets
 - No live Plaid, live market data, external APIs, DNS, Caddy, Cloudflare, or Lightsail setup.
 - Do not put real secrets in `.env.private-demo`.
 - Do not commit `.env.private-demo`.
+
+For the current deployment audit and draft next-tranche procedure, see:
+
+- `docs/deployment/private_demo_deployment_readiness_v1.md`
+- `docs/deployment/private_demo_deployment_runbook_draft_v1.md`
