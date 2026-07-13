@@ -70,30 +70,21 @@
     body.app-route-home .builder-surface,
     body.app-route-home #workflow-mode-region,
     body.app-route-home #current-set-preview-region,
-    body.app-route-home #journey-detail-region,
     body.app-route-builder .home-surface,
     body.app-route-builder #workflow-mode-region,
     body.app-route-builder #current-set-preview-region,
-    body.app-route-builder #journey-detail-region,
     body.app-route-preview .home-surface,
     body.app-route-preview .builder-surface,
     body.app-route-preview #workflow-mode-region,
-    body.app-route-preview #journey-detail-region,
     body.app-route-workflow-mode .home-surface,
     body.app-route-workflow-mode .builder-surface,
-    body.app-route-workflow-mode #current-set-preview-region,
-    body.app-route-workflow-mode #journey-detail-region,
-    body.app-route-journey .home-surface,
-    body.app-route-journey .builder-surface,
-    body.app-route-journey #workflow-mode-region,
-    body.app-route-journey #current-set-preview-region {
+    body.app-route-workflow-mode #current-set-preview-region {
       display: none !important;
     }
 
     body.app-route-builder .builder-surface,
     body.app-route-preview #current-set-preview-region,
-    body.app-route-workflow-mode #workflow-mode-region,
-    body.app-route-journey #journey-detail-region {
+    body.app-route-workflow-mode #workflow-mode-region {
       display: grid !important;
     }
 
@@ -127,158 +118,6 @@
       max-width: 980px;
     }
 
-    .home-actions {
-      display: grid;
-      gap: 10px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .home-primary-actions {
-      display: grid;
-      gap: 10px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .journey-chooser {
-      border-bottom: 1px solid var(--line);
-      display: grid;
-      gap: 12px;
-      padding-bottom: 18px;
-    }
-
-    .journey-grid {
-      display: grid;
-      gap: 10px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .journey-choice {
-      align-items: start;
-      background: var(--surface-soft);
-      border: 1px solid var(--line);
-      border-radius: 9px;
-      color: var(--ink);
-      cursor: pointer;
-      display: grid;
-      gap: 5px;
-      min-height: 128px;
-      padding: 16px;
-      text-align: left;
-    }
-
-    .journey-choice:hover,
-    .journey-choice:focus {
-      background: var(--accent-soft);
-      border-color: var(--accent);
-      outline: 2px solid rgba(15, 118, 110, 0.12);
-    }
-
-    .journey-choice strong {
-      color: var(--strong);
-      font-size: 16px;
-    }
-
-    .journey-choice span {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .journey-surface {
-      display: grid;
-      gap: 14px;
-    }
-
-    .journey-topbar {
-      align-items: start;
-      display: flex;
-      gap: 14px;
-      justify-content: space-between;
-    }
-
-    .journey-panel {
-      display: grid;
-      gap: 18px;
-    }
-
-    .journey-steps {
-      display: grid;
-      gap: 10px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .journey-step {
-      align-items: start;
-      background: var(--surface-soft);
-      border: 1px solid var(--line);
-      border-radius: 9px;
-      display: grid;
-      gap: 12px;
-      grid-template-columns: 36px minmax(0, 1fr) auto;
-      padding: 14px;
-    }
-
-    .journey-step-number {
-      align-items: center;
-      background: var(--accent-soft);
-      border-radius: 999px;
-      color: var(--accent);
-      display: flex;
-      font-weight: 800;
-      height: 32px;
-      justify-content: center;
-      width: 32px;
-    }
-
-    .journey-step-copy {
-      display: grid;
-      gap: 4px;
-    }
-
-    .journey-step-copy strong {
-      color: var(--strong);
-    }
-
-    .journey-step-copy p {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .journey-step-meta {
-      align-items: end;
-      display: grid;
-      gap: 7px;
-      justify-items: end;
-    }
-
-    .journey-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      justify-content: flex-end;
-    }
-
-    .journey-caveats {
-      background: var(--amber-soft);
-      border: 1px solid var(--amber-line);
-      border-radius: 9px;
-      color: #713f12;
-      display: grid;
-      gap: 7px;
-      padding: 13px;
-    }
-
-    .journey-caveats ul {
-      margin: 0;
-      padding-left: 20px;
-    }
-
-    .home-choice-button.is-active {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.14);
-    }
-
     .home-flow-section,
     .home-detail-panel,
     .saved-workflow-panel,
@@ -298,21 +137,6 @@
     .home-flow-title {
       display: grid;
       gap: 4px;
-    }
-
-    .home-staged-steps {
-      display: grid;
-      gap: 8px;
-      margin: 0;
-      padding: 0;
-    }
-
-    .home-staged-steps li {
-      background: var(--surface-soft);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      list-style: none;
-      padding: 10px;
     }
 
     .workflow-name-grid {
@@ -344,6 +168,23 @@
       font-size: 14px;
     }
 
+    .template-name-line {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .report-position {
+      align-items: center;
+      color: var(--muted);
+      display: inline-flex;
+      font-size: 13px;
+      font-weight: 700;
+      min-height: 38px;
+      padding: 0 4px;
+    }
+
     .saved-workflow-actions {
       display: flex;
       flex-wrap: wrap;
@@ -351,10 +192,16 @@
       justify-content: flex-end;
     }
 
-    .developer-tools-panel > summary {
+    .developer-tools-panel > summary,
+    .template-tools-panel > summary {
       color: var(--strong);
       cursor: pointer;
       font-weight: 700;
+    }
+
+    .template-tools-panel {
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
     }
 
     .builder-topbar {
@@ -1121,12 +968,8 @@
       .sets-grid,
       .finder-grid,
       .calculation-fields,
-      .home-actions,
-      .home-primary-actions,
-      .journey-grid,
       .workflow-name-grid,
-      .saved-workflow-row,
-      .journey-step {
+      .saved-workflow-row {
         grid-template-columns: 1fr;
       }
 
@@ -1137,15 +980,6 @@
 
       .preview-shell-header {
         grid-template-columns: 1fr;
-      }
-
-      .journey-step-meta {
-        align-items: start;
-        justify-items: start;
-      }
-
-      .journey-badges {
-        justify-content: flex-start;
       }
 
       h1 {
@@ -1164,78 +998,36 @@
       <section class="panel home-panel">
         <div class="panel-header">
           <p class="helper">Advisor Home</p>
-          <h1 id="advisor-home-title">Manage briefing workflows</h1>
-          <p class="helper">Choose the journey that matches the next advisor or client conversation.</p>
+          <h1 id="advisor-home-title">Briefings</h1>
+          <p class="helper">Open or generate a briefing from a reusable template.</p>
         </div>
 
-        <section class="journey-chooser" aria-labelledby="journey-chooser-title">
+        <section class="home-detail-panel briefing-template-section" aria-labelledby="briefing-templates-title">
           <div class="home-flow-title">
-            <p class="helper">Report journeys</p>
-            <h2 id="journey-chooser-title">Choose a conversation</h2>
+            <h2 id="briefing-templates-title">Briefing Templates</h2>
+            <p class="helper">Built-in and custom templates use the same workflow, duplication, editing, and generation lifecycle.</p>
           </div>
-          <div id="journey-choice-list" class="journey-grid" aria-label="Advisor report journeys"></div>
-          <p id="journey-choice-status" class="status">Loading report journeys…</p>
+          <div id="home-saved-workflow-list" class="saved-workflow-list" aria-label="Built-in and custom briefing templates"></div>
+          <p id="home-saved-workflow-status" class="status">Loading briefing templates…</p>
         </section>
 
-        <div class="home-flow-title">
-          <p class="helper">Workflow tools</p>
-          <h2>Design and manage workflows</h2>
-          <p class="helper">Builder, saved workflows, and generated report tools remain available below.</p>
-        </div>
-
-        <div id="home-primary-actions" class="home-primary-actions" aria-label="Advisor workflow choices">
-          <button id="home-create-workflow-button" class="secondary-button home-choice-button" type="button" data-home-mode="create">Create a new workflow</button>
-          <button id="home-existing-workflow-button" class="secondary-button home-choice-button" type="button" data-home-mode="existing">Work with an existing workflow</button>
-          <button id="home-populate-workflow-button" class="secondary-button home-choice-button" type="button" data-home-mode="populate">Populate a workflow with data</button>
-          <button id="home-present-reports-button" class="secondary-button home-choice-button" type="button" data-home-mode="present">Present / view reports</button>
-        </div>
-
-        <section id="home-create-panel" class="home-detail-panel hidden" aria-labelledby="create-workflow-title">
+        <section class="home-detail-panel generated-report-section" aria-labelledby="generated-reports-title">
           <div class="home-flow-title">
-            <p class="helper">Create</p>
-            <h2 id="create-workflow-title">Create a new workflow</h2>
-            <p class="helper">Start with the workflow type that matches the meeting surface.</p>
+            <h2 id="generated-reports-title">Generated Reports</h2>
+            <p class="helper">Dated reports populated from briefing templates with the current synthetic demo data.</p>
           </div>
-          <div class="home-actions" aria-label="Design or edit workflow choices">
-            <button id="home-build-client-button" class="primary-button" type="button">New Client Briefing Workflow</button>
-            <button id="home-build-advisor-button" class="primary-button" type="button">New Advisor Review Workflow</button>
-          </div>
-        </section>
-
-        <section id="home-existing-panel" class="home-detail-panel hidden" aria-labelledby="existing-workflows-title">
-          <div class="home-flow-title">
-            <p class="helper">Existing</p>
-            <h2 id="existing-workflows-title">Work with an existing workflow</h2>
-            <p class="helper">Open a browser-local saved workflow to edit its design, or copy/delete saved drafts.</p>
-          </div>
-          <div id="home-saved-workflow-list" class="saved-workflow-list" aria-label="Saved workflows for edit, copy, or delete"></div>
-          <p id="home-saved-workflow-status" class="status"></p>
-        </section>
-
-        <section id="home-populate-panel" class="home-detail-panel hidden" aria-labelledby="populate-workflow-title">
-          <div class="home-flow-title">
-            <p class="helper">Populate</p>
-            <h2 id="populate-workflow-title">Populate a workflow with data</h2>
-            <p class="helper">Choose a saved workflow, use the current synthetic demo data snapshot, and create a demo populated report.</p>
-          </div>
-          <ol class="home-staged-steps">
-            <li><strong>Choose a saved workflow.</strong> This path keeps the workflow design unchanged.</li>
-            <li><strong>Use current demo data.</strong> Current synthetic demo snapshot is available for this demo.</li>
-            <li><strong>Create the report.</strong> The generated artifact opens here and is not saved to a report library.</li>
-          </ol>
-          <div id="home-populate-workflow-list" class="saved-workflow-list" aria-label="Saved workflows for demo data population"></div>
-          <p id="home-populate-workflow-status" class="status"></p>
-        </section>
-
-        <section id="home-present-panel" class="home-detail-panel hidden" aria-labelledby="present-report-title">
-          <div class="home-flow-title">
-            <p class="helper">Present</p>
-            <h2 id="present-report-title">Present / view reports</h2>
-            <p class="helper">Open generated reports created from Populate. These artifacts are stored only in this browser for the private demo.</p>
-          </div>
-          <div id="home-present-workflow-list" class="saved-workflow-list" aria-label="Browser-local generated reports for presentation view"></div>
+          <div id="home-present-workflow-list" class="saved-workflow-list" aria-label="Generated reports"></div>
           <p id="home-present-workflow-status" class="status"></p>
         </section>
+
+        <details class="template-tools-panel">
+          <summary>Create or manage templates</summary>
+          <p class="helper">Template construction is secondary to opening and generating briefings.</p>
+          <div class="button-row">
+            <button id="home-build-client-button" class="secondary-button" type="button">Create client briefing template</button>
+            <button id="home-build-advisor-button" class="secondary-button" type="button">Create advisor review template</button>
+          </div>
+        </details>
 
         <details class="developer-tools-panel">
           <summary>Developer / QA tools</summary>
@@ -1249,27 +1041,6 @@
         </details>
       </section>
       <!-- first-screen-end -->
-    </section>
-
-    <section id="journey-detail-region" class="journey-surface" aria-labelledby="journey-detail-title">
-      <div class="journey-topbar">
-        <div>
-          <p class="brand">Arangur</p>
-          <p class="context-line"><strong>Northstar Family Office</strong> &middot; Demo portfolio &middot; Synthetic report journey</p>
-        </div>
-        <button id="journey-detail-back-button" class="secondary-button" type="button">All report journeys</button>
-      </div>
-      <section class="panel journey-panel">
-        <div class="panel-header">
-          <p id="journey-detail-audience" class="helper"></p>
-          <h1 id="journey-detail-title">Report journey</h1>
-          <p id="journey-detail-description" class="helper"></p>
-        </div>
-        <p id="journey-detail-question" class="current-preview-context"></p>
-        <div id="journey-detail-caveats" class="journey-caveats hidden"></div>
-        <ol id="journey-detail-steps" class="journey-steps"></ol>
-        <p id="journey-detail-status" class="status"></p>
-      </section>
     </section>
 
     <div id="builder-surface" class="builder-surface">
@@ -1487,7 +1258,7 @@
 
   <script>
     const CATALOG_ENDPOINT = "/api/report-elements";
-    const ADVISOR_WORKFLOW_ENDPOINT = "/api/advisor-workflows";
+    const BUILTIN_BRIEFING_TEMPLATE_ENDPOINT = "/api/briefing-templates";
     const BRIEFING_SPEC_SETS_ENDPOINT = "/api/briefing-spec-sets";
     const GENERATED_REPORT_POPULATE_ENDPOINT = "/api/generated-reports/demo-populate";
     const VIEW_SUMMARY_ENDPOINT = "/simulation/report_element_views/report_element_view_summary.json";
@@ -1516,14 +1287,6 @@
     };
     const ROUTE_HASHES = {
       home: "#home",
-      "workflow/create": "#workflow/create",
-      "workflow/existing": "#workflow/existing",
-      "workflow/populate": "#workflow/populate",
-      "workflow/present": "#workflow/present",
-      "journey/principal_family_office_briefing_minimal_v1": "#journey/principal_family_office_briefing_minimal_v1",
-      "journey/engaged_client_investment_committee_review_v1": "#journey/engaged_client_investment_committee_review_v1",
-      "journey/advisor_manager_oversight_v1": "#journey/advisor_manager_oversight_v1",
-      "journey/external_manager_story_translation_v1": "#journey/external_manager_story_translation_v1",
       builder: "#builder",
       populate: "#populate",
       presentation: "#presentation",
@@ -1531,19 +1294,7 @@
       "preview/client": "#preview/client",
       "preview/advisor": "#preview/advisor"
     };
-    const HOME_MODE_ROUTES = {
-      "workflow/create": "create",
-      "workflow/existing": "existing",
-      "workflow/populate": "populate",
-      "workflow/present": "present"
-    };
-    const HOME_MODE_ROUTE_BY_MODE = {
-      create: "workflow/create",
-      existing: "workflow/existing",
-      populate: "workflow/populate",
-      present: "workflow/present"
-    };
-    const ROUTE_BODY_CLASSES = ["app-route-home", "app-route-builder", "app-route-preview", "app-route-workflow-mode", "app-route-journey"];
+    const ROUTE_BODY_CLASSES = ["app-route-home", "app-route-builder", "app-route-preview", "app-route-workflow-mode"];
     const DEMO_SELECTED_ENTITY_OPTIONS = {
       managers: [
         "Manager A - Growth / AI Infrastructure",
@@ -1790,7 +1541,7 @@
 
     const state = {
       templates: [],
-      advisorWorkflows: [],
+      builtInTemplates: [],
       targetSet: "Client Briefing Set",
       previewTemplate: null,
       mode: "empty",
@@ -1803,13 +1554,13 @@
       currentPreviewKind: null,
       currentPreviewReady: false,
       route: "home",
-      homeMode: null,
       workflowModeIntent: null,
       workflowModeWorkflowId: null,
       workflowModeWorkflowName: "",
       workflowModePreviewKind: null,
       workflowModeArtifact: null,
       currentGeneratedReportId: null,
+      currentGeneratedSectionIndex: 0,
       currentWorkflowId: null,
       currentWorkflowName: "",
       workflowNameDraft: "",
@@ -1823,34 +1574,12 @@
 
     const els = {
       advisorHome: document.getElementById("advisor-home"),
-      journeyChoiceList: document.getElementById("journey-choice-list"),
-      journeyChoiceStatus: document.getElementById("journey-choice-status"),
-      journeyDetailRegion: document.getElementById("journey-detail-region"),
-      journeyDetailBack: document.getElementById("journey-detail-back-button"),
-      journeyDetailAudience: document.getElementById("journey-detail-audience"),
-      journeyDetailTitle: document.getElementById("journey-detail-title"),
-      journeyDetailDescription: document.getElementById("journey-detail-description"),
-      journeyDetailQuestion: document.getElementById("journey-detail-question"),
-      journeyDetailCaveats: document.getElementById("journey-detail-caveats"),
-      journeyDetailSteps: document.getElementById("journey-detail-steps"),
-      journeyDetailStatus: document.getElementById("journey-detail-status"),
-      homePrimaryActions: document.getElementById("home-primary-actions"),
-      homeCreateWorkflow: document.getElementById("home-create-workflow-button"),
-      homeExistingWorkflow: document.getElementById("home-existing-workflow-button"),
-      homePopulateWorkflow: document.getElementById("home-populate-workflow-button"),
-      homePresentReports: document.getElementById("home-present-reports-button"),
-      homeCreatePanel: document.getElementById("home-create-panel"),
-      homeExistingPanel: document.getElementById("home-existing-panel"),
-      homePopulatePanel: document.getElementById("home-populate-panel"),
-      homePresentPanel: document.getElementById("home-present-panel"),
       homeBuildClient: document.getElementById("home-build-client-button"),
       homeBuildAdvisor: document.getElementById("home-build-advisor-button"),
       homeAdvancedTools: document.getElementById("home-advanced-tools-button"),
       clearGeneratedReports: document.getElementById("clear-generated-reports-button"),
       homeSavedWorkflowList: document.getElementById("home-saved-workflow-list"),
       homeSavedWorkflowStatus: document.getElementById("home-saved-workflow-status"),
-      homePopulateWorkflowList: document.getElementById("home-populate-workflow-list"),
-      homePopulateWorkflowStatus: document.getElementById("home-populate-workflow-status"),
       homePresentWorkflowList: document.getElementById("home-present-workflow-list"),
       homePresentWorkflowStatus: document.getElementById("home-present-workflow-status"),
       builderSurface: document.getElementById("builder-surface"),
@@ -1926,84 +1655,20 @@
       closeElementPreview: document.getElementById("close-element-preview-button")
     };
 
-    async function loadAdvisorWorkflows() {
+    async function loadBuiltinBriefingTemplates() {
       try {
-        const response = await fetch(ADVISOR_WORKFLOW_ENDPOINT);
-        if (!response.ok) throw new Error(`Workflow request failed: ${response.status}`);
+        const response = await fetch(BUILTIN_BRIEFING_TEMPLATE_ENDPOINT);
+        if (!response.ok) throw new Error(`Template request failed: ${response.status}`);
         const payload = await response.json();
-        state.advisorWorkflows = Array.isArray(payload.workflows) ? payload.workflows : [];
-        if (state.advisorWorkflows.length !== 4) throw new Error("Four report journeys are required.");
-        els.journeyChoiceStatus.textContent = "";
+        state.builtInTemplates = Array.isArray(payload.templates)
+          ? payload.templates.map(normalizeSavedWorkflowRecord).filter(Boolean)
+          : [];
+        if (state.builtInTemplates.length !== 4) throw new Error("Four built-in briefing templates are required.");
       } catch (error) {
-        state.advisorWorkflows = [
-          ["principal_family_office_briefing_minimal_v1", "Principal Briefing", "A concise principal conversation about portfolio standing, cash needs, the largest risks, and next actions."],
-          ["engaged_client_investment_committee_review_v1", "Engaged Client Review", "A detailed client or investment-committee review of allocation, managers, exposures, and downside."],
-          ["advisor_manager_oversight_v1", "Advisor Oversight", "An advisor-oriented review of policy drift, mandates, attribution, implementation, and confidence."],
-          ["external_manager_story_translation_v1", "External Manager Story Translation", "A translation of an outside worldview into lenses, scenarios, candidate proxies, and workflows."]
-        ].map(([workflow_id, display_name, description]) => ({
-          workflow_id, display_name, description, ordered_steps: [], available: false,
-          audience: "Advisor review", core_question: "Journey details are temporarily unavailable.",
-          caveats: workflow_id === "external_manager_story_translation_v1" ? [
-            "Translation, not endorsement.", "Synthetic and not verified.", "Not a recommendation.",
-            "Candidate proxies require approval.", "Review is required before any production client use."
-          ] : []
-        }));
-        els.journeyChoiceStatus.textContent = "Journey details are temporarily unavailable. The rest of the advisor app remains usable.";
+        state.builtInTemplates = [];
+        els.homeSavedWorkflowStatus.textContent = "Built-in templates are temporarily unavailable. Custom templates remain usable.";
       }
-      renderJourneyChoices();
-      if (String(state.route).startsWith("journey/")) renderJourneyDetail(state.route.slice("journey/".length));
-    }
-
-    function renderJourneyChoices() {
-      els.journeyChoiceList.innerHTML = state.advisorWorkflows.map((workflow) => `
-        <button class="journey-choice" type="button" data-journey-id="${escapeAttr(workflow.workflow_id)}">
-          <strong>${escapeHtml(workflow.display_name)}</strong>
-          <span>${escapeHtml(workflow.description)}</span>
-        </button>
-      `).join("");
-    }
-
-    function renderJourneyDetail(workflowId) {
-      const workflow = state.advisorWorkflows.find((row) => row.workflow_id === workflowId);
-      if (!workflow) {
-        els.journeyDetailTitle.textContent = "Report journey unavailable";
-        els.journeyDetailDescription.textContent = "Return to Advisor Home and choose another journey.";
-        els.journeyDetailQuestion.textContent = "The requested journey could not be loaded.";
-        els.journeyDetailCaveats.classList.add("hidden");
-        els.journeyDetailSteps.innerHTML = "";
-        els.journeyDetailStatus.textContent = "";
-        return;
-      }
-      els.journeyDetailAudience.textContent = workflow.audience || "Advisor report journey";
-      els.journeyDetailTitle.textContent = workflow.display_name;
-      els.journeyDetailDescription.textContent = workflow.description;
-      els.journeyDetailQuestion.textContent = workflow.core_question;
-      const caveats = Array.isArray(workflow.caveats) ? workflow.caveats : [];
-      els.journeyDetailCaveats.innerHTML = caveats.length
-        ? `<strong>Translation boundaries</strong><ul>${caveats.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
-        : "";
-      els.journeyDetailCaveats.classList.toggle("hidden", !caveats.length);
-      const steps = Array.isArray(workflow.ordered_steps) ? workflow.ordered_steps : [];
-      els.journeyDetailSteps.innerHTML = steps.map((step) => `
-        <li class="journey-step">
-          <span class="journey-step-number">${escapeHtml(step.step_number)}</span>
-          <div class="journey-step-copy">
-            <strong>${escapeHtml(step.display_title)}</strong>
-            <p>${escapeHtml(step.question)}</p>
-            <p>${escapeHtml(step.availability_note)}</p>
-          </div>
-          <div class="journey-step-meta">
-            <div class="journey-badges">
-              <span class="badge">${escapeHtml(step.role_label)}</span>
-              <span class="badge">${escapeHtml(step.status_label)}</span>
-            </div>
-            ${step.preview_url ? `<a class="tiny-button" href="${escapeAttr(step.preview_url)}" target="_blank" rel="noopener">Open preview</a>` : ""}
-          </div>
-        </li>
-      `).join("");
-      els.journeyDetailStatus.textContent = steps.length
-        ? `${steps.length} reports and stages, shown in conversation order.`
-        : (workflow.availability_message || "Journey details are temporarily unavailable.");
+      renderSavedWorkflows();
     }
 
     async function loadCatalog() {
@@ -2069,21 +1734,14 @@
       const normalized = normalizeRoute(route);
       state.route = normalized;
       document.body.classList.remove(...ROUTE_BODY_CLASSES);
-      if (normalized.startsWith("journey/")) {
-        document.body.classList.add("app-route-journey");
-        hideCurrentSetPreview({ skipScroll: true });
-        closeElementPreview();
-        setBrowseAllOpen(false);
-        renderJourneyDetail(normalized.slice("journey/".length));
-        return;
-      }
-      if (normalized === "home" || HOME_MODE_ROUTES[normalized]) {
+      if (normalized === "home") {
         document.body.classList.add("app-route-home");
         hideCurrentSetPreview({ skipScroll: true });
         closeElementPreview();
         setBrowseAllOpen(false);
         if (els.advancedTools) els.advancedTools.open = false;
-        setHomeMode(HOME_MODE_ROUTES[normalized] || null);
+        renderSavedWorkflows();
+        renderGeneratedReports();
         return;
       }
       if (normalized === "builder" || normalized === "advanced") {
@@ -2113,26 +1771,6 @@
     function openBuilderForTarget(targetSet) {
       setTargetSet(targetSet);
       navigateToRoute("builder");
-    }
-
-    function setHomeMode(mode) {
-      const normalized = ["create", "existing", "populate", "present"].includes(mode) ? mode : null;
-      state.homeMode = normalized;
-      [
-        ["create", els.homeCreatePanel],
-        ["existing", els.homeExistingPanel],
-        ["populate", els.homePopulatePanel],
-        ["present", els.homePresentPanel]
-      ].forEach(([panelMode, panel]) => {
-        if (panel) panel.classList.toggle("hidden", normalized !== panelMode);
-      });
-      els.homePrimaryActions.querySelectorAll("[data-home-mode]").forEach((button) => {
-        button.classList.toggle("is-active", button.dataset.homeMode === normalized);
-      });
-      if (normalized) {
-        renderSavedWorkflows();
-        renderGeneratedReports();
-      }
     }
 
     function startNewWorkflow(targetSet) {
@@ -2279,55 +1917,52 @@
     }
 
     function renderSavedWorkflows() {
-      renderSavedWorkflowContainer(els.homeSavedWorkflowList, els.homeSavedWorkflowStatus, "existing");
-      renderSavedWorkflowContainer(els.homePopulateWorkflowList, els.homePopulateWorkflowStatus, "populate");
+      renderSavedWorkflowContainer(els.homeSavedWorkflowList, els.homeSavedWorkflowStatus);
     }
 
     function renderGeneratedReports() {
       renderGeneratedReportContainer(els.homePresentWorkflowList, els.homePresentWorkflowStatus);
     }
 
-    function renderSavedWorkflowContainer(listEl, statusEl, intent) {
+    function allBriefingTemplates() {
+      return [...state.builtInTemplates, ...state.savedWorkflows];
+    }
+
+    function renderSavedWorkflowContainer(listEl, statusEl) {
       if (!listEl || !statusEl) return;
-      if (!state.savedWorkflows.length) {
-        listEl.innerHTML = `<p class="empty">${escapeHtml(emptySavedWorkflowMessage(intent))}</p>`;
+      const workflows = allBriefingTemplates();
+      if (!workflows.length) {
+        listEl.innerHTML = '<p class="empty">No briefing templates are available.</p>';
         statusEl.textContent = "";
         return;
       }
-      listEl.innerHTML = state.savedWorkflows.map((workflow) => {
+      listEl.innerHTML = workflows.map((workflow) => {
         const workflowId = workflowRecordId(workflow);
         const displayName = workflowDisplayName(workflow);
         return `
         <div class="saved-workflow-row" data-workflow-id="${escapeAttr(workflowId)}">
           <div>
-            <strong>${escapeHtml(displayName)}</strong>
+            <div class="template-name-line">
+              <strong>${escapeHtml(displayName)}</strong>
+              <span class="badge">${workflow.is_builtin ? "Built-in" : "Custom"}</span>
+            </div>
+            ${workflow.description ? `<p class="meta">${escapeHtml(workflow.description)}</p>` : ""}
             <p class="meta">${escapeHtml(savedWorkflowMeta(workflow))}</p>
           </div>
-          ${savedWorkflowActionHtml(intent, workflowId)}
+          ${savedWorkflowActionHtml(workflow, workflowId)}
         </div>
       `;
       }).join("");
-      statusEl.textContent = `${state.savedWorkflows.length} named saved ${state.savedWorkflows.length === 1 ? "workflow" : "workflows"} in this browser.`;
+      statusEl.textContent = `${state.builtInTemplates.length} built-in and ${state.savedWorkflows.length} custom ${state.savedWorkflows.length === 1 ? "template" : "templates"}.`;
     }
 
-    function emptySavedWorkflowMessage(intent) {
-      if (intent === "populate") return "No saved workflows yet. Create and save a workflow before populating it.";
-      return "No saved workflows yet. Create a new workflow first.";
-    }
-
-    function savedWorkflowActionHtml(intent, workflowId) {
-      if (intent === "populate") {
-        return `
-          <div class="saved-workflow-actions">
-            <button class="tiny-button" type="button" data-workflow-action="populate" data-workflow-id="${escapeAttr(workflowId)}">Populate</button>
-          </div>
-        `;
-      }
+    function savedWorkflowActionHtml(workflow, workflowId) {
       return `
         <div class="saved-workflow-actions">
-          <button class="tiny-button" type="button" data-workflow-action="edit" data-workflow-id="${escapeAttr(workflowId)}">Open to edit</button>
-          <button class="tiny-button" type="button" data-workflow-action="copy" data-workflow-id="${escapeAttr(workflowId)}">Copy Workflow</button>
-          <button class="tiny-button" type="button" data-workflow-action="delete" data-workflow-id="${escapeAttr(workflowId)}">Delete</button>
+          <button class="primary-button tiny-button" type="button" data-workflow-action="generate" data-workflow-id="${escapeAttr(workflowId)}">Generate with current data</button>
+          <button class="tiny-button" type="button" data-workflow-action="edit" data-workflow-id="${escapeAttr(workflowId)}">Open / edit</button>
+          <button class="tiny-button" type="button" data-workflow-action="copy" data-workflow-id="${escapeAttr(workflowId)}">Duplicate / Save as</button>
+          ${workflow.is_builtin ? "" : `<button class="tiny-button" type="button" data-workflow-action="delete" data-workflow-id="${escapeAttr(workflowId)}">Delete</button>`}
         </div>
       `;
     }
@@ -2406,7 +2041,7 @@
     function renderGeneratedReportContainer(listEl, statusEl) {
       if (!listEl || !statusEl) return;
       if (!state.generatedReports.length) {
-        listEl.innerHTML = '<p class="empty">No generated reports yet. Generated reports are created from saved workflows when you populate them with demo data.</p>';
+        listEl.innerHTML = '<p class="empty">No generated reports yet. Generate one from a briefing template above.</p>';
         statusEl.textContent = "";
         return;
       }
@@ -2424,12 +2059,12 @@
         </div>
       `;
       }).join("");
-      statusEl.textContent = `${state.generatedReports.length} generated ${state.generatedReports.length === 1 ? "report" : "reports"} stored only in this browser.`;
+      statusEl.textContent = `${state.generatedReports.length} generated ${state.generatedReports.length === 1 ? "report" : "reports"} in this browser.`;
     }
 
     function generatedReportMeta(record) {
       const parts = [
-        `Source workflow: ${record.source_workflow_display_name || "Saved workflow"}`,
+        `Source template: ${record.source_workflow_display_name || "Briefing template"}`,
         `Generated: ${record.updated_at || record.saved_at || record.generated_at || ""}`,
         record.data_snapshot_label || DEMO_DATA_SNAPSHOT_LABEL,
         `Data as of ${record.data_as_of || DEMO_DATA_AS_OF}`,
@@ -2568,12 +2203,21 @@
       const workflow = findSavedWorkflow(workflowId);
       if (!workflow) return;
       applyWorkflowPayload(workflow.payload || {});
-      state.currentWorkflowId = workflowRecordId(workflow);
-      state.currentWorkflowName = workflowDisplayName(workflow);
-      state.workflowNameDraft = state.currentWorkflowName;
-      state.workflowDirty = false;
+      if (workflow.is_builtin) {
+        state.currentWorkflowId = null;
+        state.currentWorkflowName = "";
+        state.workflowNameDraft = uniqueWorkflowName(`${workflowDisplayName(workflow)} Copy`);
+        state.workflowDirty = true;
+      } else {
+        state.currentWorkflowId = workflowRecordId(workflow);
+        state.currentWorkflowName = workflowDisplayName(workflow);
+        state.workflowNameDraft = state.currentWorkflowName;
+        state.workflowDirty = false;
+      }
       renderWorkflowChrome();
-      els.homeSavedWorkflowStatus.textContent = `Opened saved workflow to edit: ${state.currentWorkflowName}.`;
+      els.homeSavedWorkflowStatus.textContent = workflow.is_builtin
+        ? `Opened a working copy of ${workflowDisplayName(workflow)}. Save it under a new name to keep your changes.`
+        : `Opened saved template to edit: ${state.currentWorkflowName}.`;
       navigateToRoute("builder");
     }
 
@@ -2591,11 +2235,18 @@
         display_name: displayName,
         name: displayName,
         workflow_type: workflow.workflow_type || workflowTypeForPayload(workflow.payload || {}),
+        template_kind: "custom",
+        is_builtin: false,
+        description: "",
+        ordered_steps: undefined,
+        caveats: undefined,
+        available: undefined,
+        availability_message: undefined,
         created_at: now,
         updated_at: now,
         saved_at: now,
         payload: {
-          ...(workflow.payload || {}),
+          ...JSON.parse(JSON.stringify(workflow.payload || {})),
           exported_at: now
         }
       };
@@ -2610,6 +2261,7 @@
 
     function deleteSavedWorkflow(workflowId) {
       const workflow = findSavedWorkflow(workflowId);
+      if (workflow && workflow.is_builtin) return;
       const displayName = workflowDisplayName(workflow);
       state.savedWorkflows = state.savedWorkflows.filter((candidate) => workflowRecordId(candidate) !== workflowId);
       if (state.currentWorkflowId === workflowId) {
@@ -2637,6 +2289,7 @@
       state.workflowModeWorkflowId = record.source_workflow_id || null;
       state.workflowModeWorkflowName = record.source_workflow_display_name || "";
       state.workflowModePreviewKind = record.report_type === "advisor_review" ? "advisor" : "client";
+      state.currentGeneratedSectionIndex = 0;
       navigateToRoute("presentation");
     }
 
@@ -2691,12 +2344,50 @@
       navigateToRoute("populate");
     }
 
+    async function generateBriefingTemplate(workflowId) {
+      const workflow = findSavedWorkflow(workflowId);
+      if (!workflow) return false;
+      const kind = preferredPreviewKindForPayload(workflow.payload || {});
+      const list = listForKindFromPayload(kind, workflow.payload || {});
+      const displayName = workflowDisplayName(workflow);
+      if (!list.length) {
+        els.homeSavedWorkflowStatus.textContent = `${displayName} has no available report elements to generate.`;
+        return false;
+      }
+      els.homeSavedWorkflowStatus.textContent = `Generating ${displayName} with the current demo data…`;
+      try {
+        const response = await fetch(GENERATED_REPORT_POPULATE_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(buildDemoPopulateRequest(kind, workflow))
+        });
+        const artifact = await readJsonResponse(response);
+        if (!response.ok) {
+          throw new Error(errorMessageFromPayload(artifact, "Could not generate this briefing."));
+        }
+        saveGeneratedReportArtifact(artifact);
+        state.workflowModeArtifact = artifact;
+        state.workflowModeIntent = "present";
+        state.workflowModeWorkflowId = workflowRecordId(workflow);
+        state.workflowModeWorkflowName = displayName;
+        state.workflowModePreviewKind = kind;
+        state.currentGeneratedReportId = artifact.report_id;
+        state.currentGeneratedSectionIndex = 0;
+        navigateToRoute("presentation");
+        return true;
+      } catch (error) {
+        els.homeSavedWorkflowStatus.textContent = error.message || "Could not generate this briefing.";
+        return false;
+      }
+    }
+
     function renderWorkflowModeSurface() {
       const intent = state.workflowModeIntent;
       if (intent === "present") {
         renderGeneratedReportPresentationSurface();
         return;
       }
+      els.workflowModeBack.classList.remove("hidden");
       const workflow = state.workflowModeWorkflowId ? findSavedWorkflow(state.workflowModeWorkflowId) : null;
       const displayName = workflow ? workflowDisplayName(workflow) : "";
       const payload = workflow ? workflow.payload || {} : {};
@@ -2729,7 +2420,7 @@
             <h1>${escapeHtml(displayName)}</h1>
             <p class="current-preview-context"><strong>Source workflow:</strong> ${escapeHtml(displayName)} | ${escapeHtml(selectedWorkflowSectionCountText(payload))}</p>
             <p class="current-preview-context"><strong>Current demo data snapshot:</strong> ${escapeHtml(DEMO_DATA_SNAPSHOT_LABEL)} | Data as of ${escapeHtml(DEMO_DATA_AS_OF)}</p>
-            <p class="current-preview-note">Create a demo generated report artifact from this saved workflow and the current synthetic demo data. The artifact is saved only in this browser for Present / view reports and is not saved to a report library.</p>
+            <p class="current-preview-note">Create a generated report from this briefing template and the current synthetic demo data. The report is saved only in this browser under Generated Reports.</p>
           </header>
         </div>
       `;
@@ -2737,26 +2428,48 @@
 
     function renderGeneratedReportPresentationSurface() {
       const artifact = state.workflowModeArtifact;
-      els.workflowModeKicker.textContent = "Presentation view";
-      els.workflowModeTitle.textContent = "Generated report presentation";
-      els.workflowModeEdit.textContent = "Back to Reports";
+      els.workflowModeKicker.textContent = "Generated report";
+      els.workflowModeTitle.textContent = artifact ? (artifact.report_title || "Generated report") : "Generated Reports";
+      els.workflowModeEdit.textContent = "Back to Briefings";
       els.workflowModeEdit.classList.remove("hidden");
+      els.workflowModeBack.classList.add("hidden");
       els.workflowModeActions.innerHTML = "";
       els.workflowModeStatus.textContent = "";
       if (!artifact) {
         state.currentGeneratedReportId = null;
-        els.workflowModeSummary.textContent = "Choose a generated report from Present / view reports.";
+        els.workflowModeSummary.textContent = "Choose a generated report from Briefings.";
         els.workflowModeBody.innerHTML = `
           <div class="preview-empty-state">
-            <p class="empty">Choose a generated report from Present / view reports.</p>
+            <p class="empty">Choose a generated report from Briefings.</p>
           </div>
         `;
         return;
       }
       state.currentGeneratedReportId = artifact.report_id || state.currentGeneratedReportId;
       els.workflowModeSummary.textContent = `${artifact.source_workflow_display_name || "Saved workflow"} | ${renderGeneratedReportTypeLabel(artifact)} | ${clientContextSummary()}`;
-      els.workflowModeBody.innerHTML = renderGeneratedReportArtifactHtml(artifact);
+      const sections = Array.isArray(artifact.ordered_sections) ? artifact.ordered_sections : [];
+      state.currentGeneratedSectionIndex = Math.min(Math.max(state.currentGeneratedSectionIndex, 0), Math.max(sections.length - 1, 0));
+      els.workflowModeBody.innerHTML = renderGeneratedReportPresentationHtml(artifact, state.currentGeneratedSectionIndex);
       renderGeneratedReportArtifactActions();
+    }
+
+    function renderGeneratedReportPresentationHtml(artifact, sectionIndex) {
+      const sections = Array.isArray(artifact.ordered_sections) ? artifact.ordered_sections : [];
+      const section = sections[sectionIndex];
+      const caveat = Array.isArray(artifact.caveats) && artifact.caveats.length
+        ? artifact.caveats[0]
+        : SYNTHETIC_PREVIEW_NOTICE;
+      return `
+        <div class="current-preview-document" data-artifact-schema="${escapeAttr(artifact.schema_version || "")}">
+          <header class="preview-header">
+            <p class="preview-section-label">Report ${sections.length ? sectionIndex + 1 : 0} of ${sections.length}</p>
+            <h1>${escapeHtml((section && section.title) || artifact.report_title || "Generated report")}</h1>
+            <p class="current-preview-context"><strong>Source template:</strong> ${escapeHtml(artifact.source_workflow_display_name || "Briefing template")} | <strong>Generated:</strong> ${escapeHtml(artifact.generated_at || "")} | <strong>Data as of:</strong> ${escapeHtml(artifact.data_as_of || "")}</p>
+          </header>
+          ${section ? renderGeneratedReportSectionHtml(section) : '<p class="empty">This generated report has no rendered sections.</p>'}
+          <footer class="preview-footer-note">${escapeHtml(caveat)}</footer>
+        </div>
+      `;
     }
 
     function workflowModePreviewButtons(payload = null) {
@@ -2830,11 +2543,10 @@
         }
         state.workflowModeArtifact = artifact;
         const persisted = saveGeneratedReportArtifact(artifact);
-        els.workflowModeBody.innerHTML = renderGeneratedReportArtifactHtml(artifact);
-        renderGeneratedReportArtifactActions();
-        els.workflowModeStatus.textContent = persisted
-          ? `Created a demo populated report for ${displayName}. Saved in this browser for Present / view reports.`
-          : `Created a demo populated report for ${displayName}, but this browser could not persist it for Present / view reports.`;
+        state.workflowModeIntent = "present";
+        state.currentGeneratedSectionIndex = 0;
+        els.workflowModeStatus.textContent = persisted ? "Generated report saved in this browser." : "Generated report created for this session.";
+        navigateToRoute("presentation");
         return true;
       } catch (error) {
         state.workflowModeArtifact = null;
@@ -2858,6 +2570,8 @@
         workflow_id: workflowId || null,
         workflow_display_name: displayName,
         workflow_name: displayName,
+        source_template_kind: workflow && workflow.is_builtin ? "built_in" : "custom",
+        source_template_version: workflow && workflow.is_builtin ? "demo_workflows_v1" : "browser_local",
         report_type: kind === "advisor" ? "advisor_review" : "client_briefing",
         data_snapshot_label: DEMO_DATA_SNAPSHOT_LABEL,
         data_as_of: DEMO_DATA_AS_OF,
@@ -2905,8 +2619,15 @@
     }
 
     function renderGeneratedReportArtifactActions() {
+      const sections = Array.isArray(state.workflowModeArtifact && state.workflowModeArtifact.ordered_sections)
+        ? state.workflowModeArtifact.ordered_sections
+        : [];
+      const index = state.currentGeneratedSectionIndex;
       els.workflowModeActions.innerHTML = `
         <div class="button-row">
+          <button class="secondary-button" type="button" data-workflow-mode-action="previous-report" ${index <= 0 ? "disabled" : ""}>Previous</button>
+          <span class="report-position">Report ${sections.length ? index + 1 : 0} of ${sections.length}</span>
+          <button class="primary-button" type="button" data-workflow-mode-action="next-report" ${index >= sections.length - 1 ? "disabled" : ""}>Next</button>
           <button class="secondary-button" type="button" data-workflow-mode-action="print-generated-report">Print</button>
           <button class="secondary-button" type="button" data-workflow-mode-action="download-generated-html">Export HTML</button>
           <button class="secondary-button" type="button" data-workflow-mode-action="copy-generated-text">Copy text</button>
@@ -2918,6 +2639,16 @@
       const artifact = state.workflowModeArtifact;
       if (!artifact) {
         els.workflowModeStatus.textContent = "Create a demo populated report before using report actions.";
+        return;
+      }
+      if (action === "previous-report" || action === "next-report") {
+        const delta = action === "next-report" ? 1 : -1;
+        const sections = Array.isArray(artifact.ordered_sections) ? artifact.ordered_sections : [];
+        state.currentGeneratedSectionIndex = Math.min(
+          Math.max(state.currentGeneratedSectionIndex + delta, 0),
+          Math.max(sections.length - 1, 0)
+        );
+        renderGeneratedReportPresentationSurface();
         return;
       }
       if (action === "print-generated-report") {
@@ -2965,6 +2696,7 @@
       const button = event.target.closest("[data-workflow-action]");
       if (!button) return;
       const workflowId = button.dataset.workflowId;
+      if (button.dataset.workflowAction === "generate") generateBriefingTemplate(workflowId);
       if (button.dataset.workflowAction === "edit") openSavedWorkflow(workflowId);
       if (button.dataset.workflowAction === "populate") openWorkflowActionMode(workflowId, "populate");
       if (button.dataset.workflowAction === "copy") duplicateSavedWorkflow(workflowId);
@@ -2987,7 +2719,7 @@
     function workflowDisplayNameExists(name, options = {}) {
       const key = normalize(readableWorkflowName(name));
       if (!key) return false;
-      return state.savedWorkflows.some((workflow) => {
+      return allBriefingTemplates().some((workflow) => {
         if (options.excludeWorkflowId && workflowRecordId(workflow) === options.excludeWorkflowId) return false;
         return normalize(workflowDisplayName(workflow)) === key;
       });
@@ -2995,7 +2727,7 @@
 
     function uniqueWorkflowName(baseName) {
       const readableBase = readableWorkflowName(baseName) || "Untitled Briefing Workflow";
-      const existingNames = new Set(state.savedWorkflows.map((workflow) => normalize(workflowDisplayName(workflow))));
+      const existingNames = new Set(allBriefingTemplates().map((workflow) => normalize(workflowDisplayName(workflow))));
       if (!existingNames.has(normalize(readableBase))) return readableBase;
       let index = 2;
       while (existingNames.has(normalize(`${readableBase} ${index}`))) {
@@ -3005,7 +2737,7 @@
     }
 
     function findSavedWorkflow(workflowId) {
-      return state.savedWorkflows.find((candidate) => workflowRecordId(candidate) === workflowId);
+      return allBriefingTemplates().find((candidate) => workflowRecordId(candidate) === workflowId);
     }
 
     function newLocalId(prefix) {
@@ -3808,6 +3540,8 @@
         placement: spec.placement || "",
         advisor_internal_purpose: spec.internal_purpose || null,
         configured_parameters: spec.parameters || {},
+        catalog_workflow_id: spec.catalog_workflow_id || null,
+        catalog_status: spec.catalog_status || null,
         preview_available: Boolean(match),
         matched_rendered_view: match
           ? {
@@ -4104,6 +3838,8 @@
           placement: item.placement || "",
           internal_purpose: item.advisor_internal_purpose || null,
           parameters: { ...(item.configured_parameters || {}) },
+          catalog_workflow_id: item.catalog_workflow_id || null,
+          catalog_status: item.catalog_status || null,
           warning: null
         };
       });
@@ -4877,16 +4613,6 @@
       return escapeHtml(value);
     }
 
-    els.homePrimaryActions.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-home-mode]");
-      if (!button) return;
-      navigateToRoute(HOME_MODE_ROUTE_BY_MODE[button.dataset.homeMode] || "home");
-    });
-    els.journeyChoiceList.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-journey-id]");
-      if (button) navigateToRoute(`journey/${button.dataset.journeyId}`);
-    });
-    els.journeyDetailBack.addEventListener("click", () => navigateToRoute("home"));
     els.homeBuildClient.addEventListener("click", () => startNewWorkflow("Client Briefing Set"));
     els.homeBuildAdvisor.addEventListener("click", () => startNewWorkflow("Advisor Review Set"));
     els.homeAdvancedTools.addEventListener("click", () => navigateToRoute("advanced"));
@@ -4901,13 +4627,12 @@
     els.saveAsWorkflow.addEventListener("click", saveCurrentWorkflowAsNew);
     els.copyCurrentWorkflow.addEventListener("click", copyCurrentWorkflow);
     els.homeSavedWorkflowList.addEventListener("click", handleSavedWorkflowAction);
-    els.homePopulateWorkflowList.addEventListener("click", handleSavedWorkflowAction);
     els.homePresentWorkflowList.addEventListener("click", handleGeneratedReportListAction);
     els.workflowModeActions.addEventListener("click", async (event) => {
       const button = event.target.closest("[data-workflow-mode-action]");
       if (!button) return;
       const action = button.dataset.workflowModeAction;
-      if (["print-generated-report", "download-generated-html", "copy-generated-text"].includes(action)) {
+      if (action !== "create-demo-report") {
         await handleGeneratedReportArtifactAction(action);
         return;
       }
@@ -4918,7 +4643,7 @@
     });
     els.workflowModeEdit.addEventListener("click", () => {
       if (state.workflowModeIntent === "present") {
-        navigateToRoute("workflow/present");
+        navigateToRoute("home");
         return;
       }
       if (state.workflowModeWorkflowId) {
@@ -4991,7 +4716,7 @@
     loadLocalNamedWorkflows();
     loadLocalGeneratedReports();
     initializeRoute();
-    loadAdvisorWorkflows();
+    loadBuiltinBriefingTemplates();
     loadCatalog();
     loadPreviewArtifacts();
   </script>

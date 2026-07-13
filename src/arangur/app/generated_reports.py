@@ -18,6 +18,7 @@ from arangur.report_elements.generated_report_artifact import (
 )
 
 from .briefing_spec_sets import BriefingSpecSetError, validate_briefing_spec_set_payload
+from .advisor_workflows import BriefingTemplateError, render_catalog_report_element
 
 
 GENERATED_REPORT_POPULATE_ENDPOINT = "/api/generated-reports/demo-populate"
@@ -127,6 +128,8 @@ def build_demo_populated_report_artifact(
             "endpoint": GENERATED_REPORT_POPULATE_ENDPOINT,
             "artifact_persistence": "ephemeral_local_demo",
             "populate_request_id": populate_request_id,
+            "source_template_kind": _clean_optional_string(payload.get("source_template_kind")) or "custom",
+            "source_template_version": _clean_optional_string(payload.get("source_template_version")) or "browser_local",
         }
     )
     artifact["summary"].update(
@@ -204,6 +207,22 @@ def _preview_element_from_spec(
 ) -> dict[str, Any]:
     if item.get("element_kind") == "narrative":
         return _narrative_preview_element(item, order)
+
+    catalog_workflow_id = _clean_optional_string(item.get("catalog_workflow_id"))
+    catalog_report_id = _clean_optional_string(item.get("element_id"))
+    if catalog_workflow_id and catalog_report_id:
+        try:
+            catalog_element = render_catalog_report_element(catalog_workflow_id, catalog_report_id)
+        except (BriefingTemplateError, OSError, ValueError, TypeError, json.JSONDecodeError):
+            catalog_element = None
+        if catalog_element:
+            return {
+                **catalog_element,
+                "order": order,
+                "placement": _clean_string(item.get("placement")),
+                "selection_summary": "",
+            }
+        return _unsupported_preview_element(item, order)
 
     computed_view_key = _view_key_for_spec_item(item)
     view_key = computed_view_key

@@ -30,8 +30,8 @@ curl.exe --fail --silent --show-error --output NUL "%BASE_URL%/api/report-elemen
 echo OK
 echo.
 
-echo [4/6] GET /api/advisor-workflows
-curl.exe --fail --silent --show-error --output NUL "%BASE_URL%/api/advisor-workflows" || goto failed
+echo [4/6] GET /api/briefing-templates
+curl.exe --fail --silent --show-error --output NUL "%BASE_URL%/api/briefing-templates" || goto failed
 echo OK
 echo.
 

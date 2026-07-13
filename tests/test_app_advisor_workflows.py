@@ -15,51 +15,99 @@ if str(SRC) not in sys.path:
 from fastapi.testclient import TestClient
 
 from arangur.analytics.report_workflow_catalog import WORKFLOW_FILENAMES
-from arangur.app.advisor_workflows import ADVISOR_WORKFLOW_COPY, list_advisor_workflows
+from arangur.app.advisor_workflows import BUILTIN_TEMPLATE_COPY, list_builtin_briefing_templates
 from arangur.app.main import create_app
 from arangur.app.settings import AppSettings
 
 
-class AdvisorWorkflowAppTests(unittest.TestCase):
+class BuiltinBriefingTemplateAppTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.client = TestClient(create_app(settings=AppSettings()))
-        response = cls.client.get("/api/advisor-workflows")
+        response = cls.client.get("/api/briefing-templates")
         if response.status_code != 200:
             raise AssertionError(response.text)
         cls.payload = response.json()
 
-    def test_exactly_four_advisor_visible_journeys_use_product_names(self) -> None:
-        self.assertEqual(4, self.payload["workflow_count"])
+    def test_exactly_four_builtins_use_briefing_template_names(self) -> None:
+        self.assertEqual(4, self.payload["template_count"])
         self.assertEqual(
             ["Principal Briefing", "Engaged Client Review", "Advisor Oversight", "External Manager Story Translation"],
-            [workflow["display_name"] for workflow in self.payload["workflows"]],
+            [template["display_name"] for template in self.payload["templates"]],
         )
+        self.assertTrue(all(template["is_builtin"] for template in self.payload["templates"]))
+        self.assertTrue(all(template["template_kind"] == "built_in" for template in self.payload["templates"]))
 
-    def test_step_order_matches_authoritative_workflow_json(self) -> None:
-        by_id = {workflow["workflow_id"]: workflow for workflow in self.payload["workflows"]}
+    def test_builtins_use_the_ordinary_saved_workflow_payload_shape(self) -> None:
+        for template in self.payload["templates"]:
+            payload = template["payload"]
+            self.assertEqual("arangur.local_named_briefing_workflows.v1", template["schema_version"])
+            self.assertEqual("arangur.local_briefing_spec_set.v1", payload["schema_version"])
+            self.assertIsInstance(payload["client_briefing_set"], list)
+            self.assertIsInstance(payload["advisor_review_set"], list)
+            self.assertEqual(template["display_name"], payload["workflow_name"])
+            specs = payload["client_briefing_set"] + payload["advisor_review_set"]
+            self.assertTrue(specs)
+            self.assertTrue(all(spec["element_kind"] == "analytic" for spec in specs))
+            self.assertTrue(all(spec["catalog_workflow_id"] == template["workflow_id"] for spec in specs))
+
+    def test_template_spec_order_matches_authoritative_workflow_json(self) -> None:
         source_dir = ROOT / "data" / "simulation" / "report_workflows" / "demo_workflows_v1"
+        by_id = {template["workflow_id"]: template for template in self.payload["templates"]}
         for workflow_id, filename in WORKFLOW_FILENAMES.items():
             source = json.loads((source_dir / filename).read_text(encoding="utf-8"))
             expected = [(step["step_number"], step["report_id"]) for step in source["ordered_steps"]]
-            actual = [(step["step_number"], step["report_id"]) for step in by_id[workflow_id]["ordered_steps"]]
+            template = by_id[workflow_id]
+            specs = template["payload"]["client_briefing_set"] + template["payload"]["advisor_review_set"]
+            actual = [(spec["order"], spec["element_id"]) for spec in specs]
             self.assertEqual(expected, actual, workflow_id)
 
-    def test_superseded_policy_attribution_is_not_a_primary_step(self) -> None:
-        superseded = {"policy_level_attribution_summary_v1", "policy_level_manager_effect_detail_v1"}
-        primary_ids = {
-            step["report_id"]
-            for workflow in self.payload["workflows"]
-            for step in workflow["ordered_steps"]
-            if step["step_role"] == "primary"
-        }
-        self.assertTrue(primary_ids.isdisjoint(superseded))
-        self.assertIn("advisor_policy_attribution_by_manager", primary_ids)
+    def test_each_builtin_generates_an_actual_ordered_report(self) -> None:
+        for template in self.payload["templates"]:
+            with self.subTest(template=template["display_name"]):
+                payload = template["payload"]
+                report_type = "advisor_review" if payload["advisor_review_set"] else "client_briefing"
+                response = self.client.post(
+                    "/api/generated-reports/demo-populate",
+                    json={
+                        **payload,
+                        "workflow_id": template["workflow_id"],
+                        "workflow_display_name": template["display_name"],
+                        "report_type": report_type,
+                        "data_as_of": "2026-06-30",
+                        "data_snapshot_label": "Current synthetic demo snapshot",
+                        "populate_request_id": f"test_{template['workflow_id']}",
+                        "source_template_kind": "built_in",
+                        "source_template_version": "demo_workflows_v1",
+                    },
+                )
+                self.assertEqual(200, response.status_code, response.text)
+                artifact = response.json()
+                specs = payload["client_briefing_set"] + payload["advisor_review_set"]
+                self.assertEqual([spec["element_title"] for spec in specs], [row["title"] for row in artifact["ordered_sections"]])
+                self.assertEqual("rendered", artifact["ordered_sections"][0]["status"])
+                if template["workflow_id"] == "external_manager_story_translation_v1":
+                    self.assertIn("Core Worldview", artifact["ordered_sections"][0]["html"])
+                else:
+                    self.assertIn("<table", artifact["ordered_sections"][0]["html"])
+                self.assertEqual("built_in", artifact["metadata_json"]["source_template_kind"])
 
-    def test_external_story_boundaries_remain_visible(self) -> None:
-        workflow = next(
-            row for row in self.payload["workflows"] if row["workflow_id"] == "external_manager_story_translation_v1"
-        )
+    def test_gated_steps_render_as_unavailable_not_fake_results(self) -> None:
+        principal = next(row for row in self.payload["templates"] if row["workflow_id"] == "principal_family_office_briefing_minimal_v1")
+        request = {
+            **principal["payload"],
+            "workflow_id": principal["workflow_id"],
+            "workflow_display_name": principal["display_name"],
+            "report_type": "client_briefing",
+            "populate_request_id": "gated_test",
+        }
+        artifact = self.client.post("/api/generated-reports/demo-populate", json=request).json()
+        gated = artifact["ordered_sections"][-1]
+        self.assertEqual("placeholder", gated["status"])
+        self.assertIn("not available", gated["text"].lower())
+
+    def test_external_story_boundaries_remain_available(self) -> None:
+        workflow = next(row for row in self.payload["templates"] if row["workflow_id"] == "external_manager_story_translation_v1")
         caveats = " ".join(workflow["caveats"]).lower()
         for phrase in (
             "translation, not endorsement", "synthetic", "not verified", "not a recommendation",
@@ -67,57 +115,34 @@ class AdvisorWorkflowAppTests(unittest.TestCase):
         ):
             self.assertIn(phrase, caveats)
 
-    def test_gated_steps_and_missing_content_do_not_get_primary_links(self) -> None:
-        for workflow in self.payload["workflows"]:
-            for step in workflow["ordered_steps"]:
-                if step["status"] in {"gated", "deferred"}:
-                    self.assertFalse(step["available_now"])
-                    self.assertIsNone(step["preview_url"])
-
-        with patch("arangur.app.advisor_workflows._safe_existing_preview_path", return_value=None):
-            payload = list_advisor_workflows(ROOT)
-            self.assertEqual(4, payload["workflow_count"])
-            self.assertFalse(any(step["preview_url"] for workflow in payload["workflows"] for step in workflow["ordered_steps"]))
-
-    def test_invalid_workflow_content_degrades_without_internal_paths(self) -> None:
+    def test_invalid_catalog_degrades_to_four_unavailable_templates(self) -> None:
         with patch("arangur.app.advisor_workflows.Path.read_text", return_value="not json"):
-            payload = list_advisor_workflows(ROOT)
-            self.assertEqual(4, payload["workflow_count"])
-            self.assertTrue(all(not workflow["available"] for workflow in payload["workflows"]))
-            self.assertEqual(set(ADVISOR_WORKFLOW_COPY), {row["workflow_id"] for row in payload["workflows"]})
-            self.assertNotIn(str(ROOT), json.dumps(payload))
+            payload = list_builtin_briefing_templates(ROOT)
+        self.assertEqual(4, payload["template_count"])
+        self.assertTrue(all(not template["available"] for template in payload["templates"]))
+        self.assertEqual(set(BUILTIN_TEMPLATE_COPY), {row["workflow_id"] for row in payload["templates"]})
+        self.assertNotIn(str(ROOT), json.dumps(payload))
 
-    def test_preview_route_serves_allowlisted_content_and_rejects_gated_step(self) -> None:
-        preview = self.client.get(
-            "/api/advisor-workflows/principal_family_office_briefing_minimal_v1/reports/portfolio_representation_status/preview"
-        )
-        self.assertEqual(200, preview.status_code)
-        self.assertIn("text/html", preview.headers["content-type"])
-        self.assertIn("Portfolio Representation Status", preview.text)
-        self.assertNotIn("source_mockup_path", preview.text)
-
-        external_preview = self.client.get(
-            "/api/advisor-workflows/external_manager_story_translation_v1/reports/external_manager_story_summary/preview"
-        )
-        self.assertEqual(200, external_preview.status_code)
-        self.assertNotIn("Schema Version", external_preview.text)
-        self.assertNotIn("source_artifact_path", external_preview.text)
-
-        gated = self.client.get(
-            "/api/advisor-workflows/principal_family_office_briefing_minimal_v1/reports/high_level_advisor_plan_next_year_positioning/preview"
-        )
-        self.assertEqual(404, gated.status_code)
-
-    def test_existing_advisor_entry_path_loads_with_chooser_wiring(self) -> None:
+    def test_home_has_one_template_list_and_separate_generated_reports(self) -> None:
         response = self.client.get("/app/")
         self.assertEqual(200, response.status_code)
-        self.assertIn('id="journey-choice-list"', response.text)
-        self.assertIn("/api/advisor-workflows", response.text)
-        for name in ("Principal Briefing", "Engaged Client Review", "Advisor Oversight", "External Manager Story Translation"):
-            self.assertIn(name, response.text)
+        html = response.text
+        self.assertIn("<h1 id=\"advisor-home-title\">Briefings</h1>", html)
+        self.assertIn("Briefing Templates", html)
+        self.assertIn("Generated Reports", html)
+        self.assertIn("Generate with current data", html)
+        self.assertIn("Open / edit", html)
+        self.assertIn("Duplicate / Save as", html)
+        self.assertIn("Create or manage templates", html)
+        self.assertIn("Report ${sections.length ? index + 1 : 0} of ${sections.length}", html)
+        self.assertNotIn("Choose a conversation", html)
+        self.assertNotIn("journey-detail-region", html)
+        self.assertNotIn("home-primary-actions", html)
+        self.assertNotIn("Present / view reports", html)
+        self.assertNotIn("/api/advisor-workflows", html)
 
-    def test_normalized_endpoint_is_deterministic(self) -> None:
-        second = self.client.get("/api/advisor-workflows")
+    def test_template_endpoint_is_deterministic(self) -> None:
+        second = self.client.get("/api/briefing-templates")
         self.assertEqual(200, second.status_code)
         self.assertEqual(self.payload, second.json())
 

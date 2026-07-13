@@ -5,7 +5,6 @@ from __future__ import annotations
 from typing import Any
 
 from fastapi import APIRouter, HTTPException, Query, Request
-from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 
 from arangur.report_elements import ReportElementCatalogError, filter_templates, get_template
@@ -17,7 +16,7 @@ from .briefing_spec_sets import (
     list_briefing_spec_sets,
     save_briefing_spec_set,
 )
-from .advisor_workflows import AdvisorWorkflowError, list_advisor_workflows, render_report_preview
+from .advisor_workflows import list_builtin_briefing_templates
 from .generated_reports import GeneratedReportError, build_demo_populated_report_artifact
 from .persistence import PersistenceError, persistence_enabled
 from .run_service import (
@@ -49,24 +48,9 @@ def workflows() -> dict[str, Any]:
     return {"workflows": list_workflows()}
 
 
-@router.get("/advisor-workflows")
-def advisor_workflows() -> dict[str, Any]:
-    return list_advisor_workflows()
-
-
-@router.get(
-    "/advisor-workflows/{workflow_id}/reports/{report_id}/preview",
-    response_class=HTMLResponse,
-    include_in_schema=False,
-)
-def advisor_workflow_report_preview(workflow_id: str, report_id: str) -> HTMLResponse:
-    try:
-        return HTMLResponse(render_report_preview(workflow_id, report_id))
-    except AdvisorWorkflowError as exc:
-        raise HTTPException(
-            status_code=404,
-            detail={"code": "advisor_report_preview_unavailable", "message": str(exc)},
-        ) from exc
+@router.get("/briefing-templates")
+def briefing_templates() -> dict[str, Any]:
+    return list_builtin_briefing_templates()
 
 
 @router.get("/report-elements")

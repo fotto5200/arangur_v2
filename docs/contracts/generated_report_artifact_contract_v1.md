@@ -29,7 +29,7 @@ The endpoint validates the local workflow payload, uses only committed synthetic
 
 ## Browser-Local Presentation Shelf
 
-The static private-demo UI stores successful Populate responses in browser `localStorage` under `arangur.local_generated_reports.v1`. Shelf records are keyed by artifact `report_id`, carry compact display metadata plus the full returned artifact payload, and are used by Present / view reports to list, open, and delete browser-local generated report artifacts. Shelf rows show the generated report title, source workflow name, local generated timestamp, and data snapshot label so repeated generated reports from the same source workflow remain distinguishable.
+The static private-demo UI stores successful template-generation responses in browser `localStorage` under `arangur.local_generated_reports.v1`. Records are keyed by artifact `report_id`, carry compact display metadata plus the full returned artifact payload, and appear under Generated Reports for direct open or delete. Rows show the generated report title, source briefing template, local generated timestamp, and data-as-of label so repeated reports from the same template remain distinguishable. Opening a record presents one actual ordered report section at a time with Previous/Next navigation; print and export continue to use the complete artifact.
 
 Deleting a shelf record removes only that browser-local generated report record. It does not delete or mutate the source saved workflow. This shelf is not backend persistence, production report history, a report library, an immutable archive, cross-browser sync, or a production records system.
 
