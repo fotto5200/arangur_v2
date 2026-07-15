@@ -2,6 +2,10 @@
 
 Status: recommended action sequence after documentation/UI discovery, 2026-07-15
 
+Canonical naming note: the product name is **Arangur**. This historical `ARRANGER_...` filename is retained for path stability.
+
+Blueprint status update, 2026-07-15: the Advisor Workflow UI Integration Blueprint v1 draft and companion contracts have been created. Frank review is now the exit gate; UI wiring must not begin until the blocking decisions in `docs/project_control/ARANGUR_UI_BLUEPRINT_FRANK_REVIEW_ITEMS_v1.md` are approved or revised.
+
 ## 1. Immediate next tranche
 
 ### Advisor Workflow UI Integration Blueprint v1
@@ -21,6 +25,8 @@ Expected outputs:
 - a list of design-lab ideas accepted, rejected, or deferred.
 
 Exit gate: Frank approves the blueprint decisions. Do not treat an unselected lab direction as implicit authorization.
+
+Created draft: `docs/product/advisor_workflow_ui_integration_blueprint_v1.md`, with application architecture, vocabulary/lifecycle, state-map, visibility/gating, machine-summary, and Frank-review companions.
 
 ## 2. Inputs needed
 

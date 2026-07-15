@@ -4,6 +4,10 @@ Status: documentation-discovery handoff
 
 Prepared: 2026-07-15
 
+Canonical naming note: the product name is **Arangur**. The `ARRANGER_...` filename and older prose are retained as historical artifacts and should not be propagated into new product prose.
+
+Blueprint update, 2026-07-15: `docs/product/advisor_workflow_ui_integration_blueprint_v1.md` and its companion architecture, vocabulary/lifecycle, state-map, and visibility contracts have been created as drafts for Frank review. Advisor-facing UI wiring remains blocked until the listed product decisions are approved.
+
 Primary audience: Frank, ChatGPT strategy/controller threads, and future Codex implementation tranches
 
 ## 1. Executive summary
@@ -158,6 +162,8 @@ Accepted for the client report narrative: The Plan Check. Preferred but not froz
 ## 9. Immediate next phase
 
 Recommended next tranche: **Advisor Workflow UI Integration Blueprint v1**.
+
+Status update: the blueprint draft is now complete. The immediate control step is Frank review of `docs/project_control/ARANGUR_UI_BLUEPRINT_FRANK_REVIEW_ITEMS_v1.md`; after approval, the next implementation tranche is **Advisor Workflow UI Wiring v1**.
 
 Its job is to reconcile the four canonical workflow families, current advisor app behavior, accepted report classifications, and external design-lab inputs into one repo-canonical interaction blueprint and implementation contract. It should make the unresolved product choices explicit before code changes.
 

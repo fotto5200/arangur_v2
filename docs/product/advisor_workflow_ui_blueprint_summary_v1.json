@@ -1,0 +1,43 @@
+{
+  "schema_version": "arangur.advisor_workflow_ui_blueprint_summary.v1",
+  "generated_at": "2026-07-15",
+  "product_name": "Arangur",
+  "status": "draft_for_frank_review",
+  "implementation_authorized": false,
+  "recommended_application_architecture": {
+    "name": "Conversation Briefing Desk",
+    "status": "recommended_for_frank_review",
+    "first_screen_question": "What conversation are you preparing?",
+    "choice_label": "Briefing types"
+  },
+  "canonical_user_objects": [
+    "briefing_template",
+    "briefing"
+  ],
+  "canonical_user_terms": {
+    "workflow": "Briefing type",
+    "reusable_definition": "Briefing template",
+    "generated_dated_output": "Briefing",
+    "advisor_approval_state": "Advisor Review",
+    "client_rehearsal_state": "Client Preview",
+    "audience_delivery_state": "Presentation",
+    "claim_support": "Explain / Verify"
+  },
+  "workflow_count": 4,
+  "workflow_ids": [
+    "principal_family_office_briefing_minimal_v1",
+    "engaged_client_investment_committee_review_v1",
+    "advisor_manager_oversight_v1",
+    "external_manager_story_translation_v1"
+  ],
+  "custom_creation_recommendation": "Use built-ins and allow bounded duplicate/edit/save-as-custom; defer ordinary from-scratch creation.",
+  "generated_briefing_immutable": true,
+  "current_data_creates_new_briefing": true,
+  "durable_production_history_in_scope": false,
+  "external_story_default_audience": "advisor_internal",
+  "external_story_caveats_locked": true,
+  "plan_check_scope": "first_client_how_am_i_doing_story_only",
+  "objective_horizon_status": "preferred_for_refinement_not_global_or_frozen",
+  "frank_approval_required": true,
+  "recommended_next_tranche_after_approval": "Advisor Workflow UI Wiring v1"
+}
