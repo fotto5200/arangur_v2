@@ -100,6 +100,7 @@ def build_demo_populated_report_artifact(
         or "Saved workflow"
     )
     data_as_of = _clean_optional_string(payload.get("data_as_of")) or DEMO_DATA_AS_OF
+    generated_at = _clean_optional_string(payload.get("generated_at")) or GENERATED_AT
     data_snapshot_label = _clean_optional_string(payload.get("data_snapshot_label")) or DEMO_DATA_SNAPSHOT_LABEL
     populate_request_id = _clean_optional_string(payload.get("populate_request_id")) or uuid.uuid4().hex[:12]
     views = load_report_element_views(view_dir)
@@ -110,6 +111,7 @@ def build_demo_populated_report_artifact(
         workflow_id=workflow_id,
         workflow_display_name=workflow_display_name,
         data_as_of=data_as_of,
+        generated_at=generated_at,
         data_snapshot_label=data_snapshot_label,
         views=views,
     )
@@ -172,6 +174,7 @@ def _build_preview_payload(
     workflow_id: str | None,
     workflow_display_name: str,
     data_as_of: str,
+    generated_at: str,
     data_snapshot_label: str,
     views: dict[str, dict[str, Any]],
 ) -> dict[str, Any]:
@@ -182,7 +185,7 @@ def _build_preview_payload(
     ]
     return {
         "schema_version": "briefing_set_preview.v1",
-        "generated_at": GENERATED_AT,
+        "generated_at": generated_at,
         "builder_version": "generated_report_populate_service.v1",
         "preview_id": f"demo_populate_{report_type}_{_slug(workflow_id or workflow_display_name)}",
         "preview_type": config["preview_type"],

@@ -1,6 +1,6 @@
 # Advisor Workflow UI State Map v1
 
-Status: implementation-oriented product contract for Frank review; no UI implementation authorized
+Status: approved implementation contract; locally wired 2026-07-15
 
 Architecture assumption: **Conversation Briefing Desk**, recommended but not final. If Frank selects another architecture, this map must be revised before wiring.
 

@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Arangur Report Element Finder</title>
+  <link rel="icon" href="data:,">
+  <title>Arangur Conversation Briefing Desk</title>
   <style>
     :root {
       --bg: #f6f8f7;
@@ -96,6 +97,26 @@
       display: grid !important;
     }
 
+    .briefing-desk-surface {
+      display: none;
+    }
+
+    body.app-route-desk .home-surface,
+    body.app-route-desk .builder-surface,
+    body.app-route-desk #workflow-mode-region,
+    body.app-route-desk #current-set-preview-region,
+    body.app-route-presentation .home-surface,
+    body.app-route-presentation .builder-surface,
+    body.app-route-presentation #workflow-mode-region,
+    body.app-route-presentation #current-set-preview-region {
+      display: none !important;
+    }
+
+    body.app-route-desk .briefing-desk-surface,
+    body.app-route-presentation .briefing-desk-surface {
+      display: grid !important;
+    }
+
     .brand {
       color: var(--accent);
       font-size: 14px;
@@ -116,6 +137,256 @@
       display: grid;
       gap: 18px;
       max-width: 980px;
+    }
+
+    .conversation-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .conversation-card {
+      align-content: start;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      display: grid;
+      gap: 10px;
+      min-height: 250px;
+      padding: 20px;
+    }
+
+    .conversation-card .primary-button {
+      align-self: end;
+      justify-self: start;
+      margin-top: auto;
+    }
+
+    .eyebrow,
+    .visibility-label {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .quiet-sections {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .quiet-panel {
+      background: transparent;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+
+    .quiet-panel > summary {
+      color: var(--strong);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .desk-shell {
+      display: grid;
+      gap: 18px;
+    }
+
+    .desk-topbar {
+      align-items: center;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+    }
+
+    .desk-panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 18px;
+      padding: 26px;
+    }
+
+    .desk-intro {
+      display: grid;
+      gap: 8px;
+      max-width: 820px;
+    }
+
+    .summary-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .summary-tile {
+      background: var(--surface-soft);
+      border-radius: 9px;
+      padding: 12px;
+    }
+
+    .summary-tile strong {
+      color: var(--strong);
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .journey-list,
+    .template-list,
+    .history-list {
+      display: grid;
+      gap: 9px;
+    }
+
+    .journey-row,
+    .template-row,
+    .history-row {
+      align-items: start;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      padding: 13px;
+    }
+
+    .journey-row.is-gated {
+      background: var(--amber-soft);
+      border-color: var(--amber-line);
+    }
+
+    .journey-copy {
+      display: grid;
+      gap: 4px;
+    }
+
+    .journey-index {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .governance-banner {
+      background: var(--amber-soft);
+      border: 1px solid var(--amber-line);
+      border-radius: 10px;
+      display: grid;
+      gap: 6px;
+      padding: 14px;
+    }
+
+    .governance-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .governance-chip {
+      background: var(--surface);
+      border: 1px solid var(--amber-line);
+      border-radius: 999px;
+      color: #713f12;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 8px;
+    }
+
+    .bounded-builder {
+      display: grid;
+      gap: 18px;
+    }
+
+    .bounded-fields {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .section-choice-row {
+      align-items: center;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      padding: 11px;
+    }
+
+    .section-choice-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .briefing-reader {
+      display: grid;
+      gap: 16px;
+    }
+
+    .reader-header {
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      gap: 7px;
+      padding-bottom: 15px;
+    }
+
+    .reader-section {
+      display: grid;
+      gap: 12px;
+      min-height: 320px;
+    }
+
+    .reader-section table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .reader-section th,
+    .reader-section td {
+      border-bottom: 1px solid var(--line);
+      padding: 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .reader-navigation {
+      align-items: center;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: space-between;
+      padding-top: 14px;
+    }
+
+    .presentation-shell {
+      background: var(--surface);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 22px;
+      min-height: calc(100vh - 66px);
+      padding: clamp(24px, 5vw, 58px);
+    }
+
+    .presentation-shell .reader-section {
+      align-content: start;
+    }
+
+    .evidence-panel {
+      background: var(--accent-soft);
+      border: 1px solid #a7f3d0;
+      border-radius: 10px;
+      display: grid;
+      gap: 10px;
+      padding: 16px;
     }
 
     .home-flow-section,
@@ -964,6 +1235,20 @@
     }
 
     @media (max-width: 920px) {
+      .conversation-grid,
+      .quiet-sections,
+      .summary-grid,
+      .bounded-fields {
+        grid-template-columns: 1fr;
+      }
+
+      .journey-row,
+      .template-row,
+      .history-row,
+      .section-choice-row {
+        grid-template-columns: 1fr;
+      }
+
       .workspace,
       .sets-grid,
       .finder-grid,
@@ -993,55 +1278,44 @@
     <section id="advisor-home" class="home-surface" aria-labelledby="advisor-home-title">
       <!-- first-screen-start -->
       <p class="brand">Arangur</p>
-      <p class="context-line"><strong>Northstar Family Office</strong> &middot; Demo portfolio &middot; Data loaded &middot; Confidence: Mixed &middot; 1 review item</p>
+      <p class="context-line"><strong>Northstar Family Office</strong> &middot; Current synthetic data through June 30, 2026</p>
 
       <section class="panel home-panel">
         <div class="panel-header">
-          <p class="helper">Advisor Home</p>
-          <h1 id="advisor-home-title">Briefings</h1>
-          <p class="helper">Open or generate a briefing from a reusable template.</p>
+          <p class="helper">Conversation Briefing Desk</p>
+          <h1 id="advisor-home-title">What conversation are you preparing?</h1>
+          <p class="helper">Choose the audience and business question. Arangur will keep the approved journey, review, client rehearsal, and presentation connected.</p>
         </div>
 
-        <section class="home-detail-panel briefing-template-section" aria-labelledby="briefing-templates-title">
-          <div class="home-flow-title">
-            <h2 id="briefing-templates-title">Briefing Templates</h2>
-            <p class="helper">Built-in and custom templates use the same workflow, duplication, editing, and generation lifecycle.</p>
-          </div>
-          <div id="home-saved-workflow-list" class="saved-workflow-list" aria-label="Built-in and custom briefing templates"></div>
-          <p id="home-saved-workflow-status" class="status">Loading briefing templates…</p>
-        </section>
+        <div id="briefing-type-list" class="conversation-grid" aria-label="Briefing types">
+          <p class="empty">Loading approved briefing types…</p>
+        </div>
 
-        <section class="home-detail-panel generated-report-section" aria-labelledby="generated-reports-title">
-          <div class="home-flow-title">
-            <h2 id="generated-reports-title">Generated Reports</h2>
-            <p class="helper">Dated reports populated from briefing templates with the current synthetic demo data.</p>
-          </div>
-          <div id="home-present-workflow-list" class="saved-workflow-list" aria-label="Generated reports"></div>
-          <p id="home-present-workflow-status" class="status"></p>
-        </section>
+        <div class="quiet-sections">
+          <details class="quiet-panel">
+            <summary>Recent briefings</summary>
+            <div id="home-present-workflow-list" class="history-list" aria-label="Recent briefings"></div>
+            <p id="home-present-workflow-status" class="status"></p>
+            <button class="tiny-button" type="button" data-desk-action="history">Open briefing history</button>
+          </details>
+          <details class="quiet-panel">
+            <summary>Saved briefing templates</summary>
+            <div id="home-saved-workflow-list" class="template-list" aria-label="Saved briefing templates"></div>
+            <p id="home-saved-workflow-status" class="status">Loading briefing templates…</p>
+          </details>
+        </div>
 
-        <details class="template-tools-panel">
-          <summary>Create or manage templates</summary>
-          <p class="helper">Template construction is secondary to opening and generating briefings.</p>
-          <div class="button-row">
-            <button id="home-build-client-button" class="secondary-button" type="button">Create client briefing template</button>
-            <button id="home-build-advisor-button" class="secondary-button" type="button">Create advisor review template</button>
-          </div>
-        </details>
-
-        <details class="developer-tools-panel">
-          <summary>Developer / QA tools</summary>
-          <p class="helper">QA references and technical transfer tools stay outside the advisor workflow.</p>
-          <div class="button-row">
-            <a class="tiny-button" href="/simulation/briefing_set_previews/client_briefing_set_preview.html" target="_blank" rel="noopener">Open QA Client reference</a>
-            <a class="tiny-button" href="/simulation/briefing_set_previews/advisor_review_set_preview.html" target="_blank" rel="noopener">Open QA Advisor reference</a>
-            <button id="home-advanced-tools-button" class="secondary-button" type="button">Open Developer / QA tools</button>
-            <button id="clear-generated-reports-button" class="secondary-button" type="button">Clear local generated reports</button>
-          </div>
-        </details>
+        <div class="button-row">
+          <button id="home-advanced-tools-button" class="tiny-button" type="button">Developer / QA</button>
+          <button id="home-build-client-button" class="hidden" type="button" aria-hidden="true" tabindex="-1">Legacy client builder</button>
+          <button id="home-build-advisor-button" class="hidden" type="button" aria-hidden="true" tabindex="-1">Legacy advisor builder</button>
+          <button id="clear-generated-reports-button" class="hidden" type="button" aria-hidden="true" tabindex="-1">Clear local generated reports</button>
+        </div>
       </section>
       <!-- first-screen-end -->
     </section>
+
+    <section id="briefing-desk-region" class="briefing-desk-surface" aria-live="polite"></section>
 
     <div id="builder-surface" class="builder-surface">
       <div class="builder-topbar">
@@ -1270,6 +1544,8 @@
     const LOCAL_WORKFLOW_SCHEMA_VERSION = "arangur.local_named_briefing_workflows.v1";
     const LOCAL_GENERATED_REPORT_STORAGE_KEY = "arangur.local_generated_reports.v1";
     const LOCAL_GENERATED_REPORT_SCHEMA_VERSION = "arangur.local_generated_reports.v1";
+    const LOCAL_BRIEFING_STORAGE_KEY = "arangur.local_briefings.v1";
+    const LOCAL_BRIEFING_SCHEMA_VERSION = "arangur.local_briefings.v1";
     const CLIENT_CONTEXT = {
       client_family: "Northstar Family Office",
       portfolio_context: "Demo portfolio",
@@ -1291,10 +1567,20 @@
       populate: "#populate",
       presentation: "#presentation",
       advanced: "#advanced",
+      developer: "#developer",
+      "briefing-type": "#briefing-type",
+      templates: "#templates",
+      "template-preview": "#template-preview",
+      "template-builder": "#template-builder",
+      configure: "#configure",
+      review: "#review",
+      "review-evidence": "#review-evidence",
+      "client-preview": "#client-preview",
+      history: "#history",
       "preview/client": "#preview/client",
       "preview/advisor": "#preview/advisor"
     };
-    const ROUTE_BODY_CLASSES = ["app-route-home", "app-route-builder", "app-route-preview", "app-route-workflow-mode"];
+    const ROUTE_BODY_CLASSES = ["app-route-home", "app-route-builder", "app-route-preview", "app-route-workflow-mode", "app-route-desk", "app-route-presentation"];
     const DEMO_SELECTED_ENTITY_OPTIONS = {
       managers: [
         "Manager A - Growth / AI Infrastructure",
@@ -1567,6 +1853,15 @@
       workflowDirty: false,
       savedWorkflows: [],
       generatedReports: [],
+      briefings: [],
+      deskSelectedTypeId: null,
+      deskSelectedTemplateId: null,
+      deskDraftTemplate: null,
+      deskCurrentBriefingId: null,
+      deskSectionIndex: 0,
+      deskEvidenceMode: null,
+      deskEvidenceReturnRoute: null,
+      deskGenerating: false,
       savedSpecSets: [],
       clientSet: [],
       advisorSet: []
@@ -1574,6 +1869,8 @@
 
     const els = {
       advisorHome: document.getElementById("advisor-home"),
+      briefingTypeList: document.getElementById("briefing-type-list"),
+      briefingDeskRegion: document.getElementById("briefing-desk-region"),
       homeBuildClient: document.getElementById("home-build-client-button"),
       homeBuildAdvisor: document.getElementById("home-build-advisor-button"),
       homeAdvancedTools: document.getElementById("home-advanced-tools-button"),
@@ -1669,6 +1966,9 @@
         els.homeSavedWorkflowStatus.textContent = "Built-in templates are temporarily unavailable. Custom templates remain usable.";
       }
       renderSavedWorkflows();
+      if (["briefing-type", "templates", "template-preview", "template-builder", "configure", "review", "review-evidence", "client-preview", "presentation"].includes(state.route)) {
+        renderDeskRoute(state.route);
+      }
     }
 
     async function loadCatalog() {
@@ -1740,17 +2040,26 @@
         closeElementPreview();
         setBrowseAllOpen(false);
         if (els.advancedTools) els.advancedTools.open = false;
-        renderSavedWorkflows();
-        renderGeneratedReports();
+        renderConversationHome();
         return;
       }
-      if (normalized === "builder" || normalized === "advanced") {
+      if (normalized === "builder" || normalized === "advanced" || normalized === "developer") {
         document.body.classList.add("app-route-builder");
         hideCurrentSetPreview({ skipScroll: options.skipScroll });
-        if (els.advancedTools) els.advancedTools.open = normalized === "advanced";
-        if (normalized === "advanced" && els.advancedTools && !options.skipScroll) {
+        if (els.advancedTools) els.advancedTools.open = normalized === "advanced" || normalized === "developer";
+        if ((normalized === "advanced" || normalized === "developer") && els.advancedTools && !options.skipScroll) {
           setTimeout(() => els.advancedTools.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
         }
+        return;
+      }
+      if (normalized === "presentation" && currentDeskBriefing()) {
+        document.body.classList.add("app-route-presentation");
+        renderDeskRoute(normalized);
+        return;
+      }
+      if (["briefing-type", "templates", "template-preview", "template-builder", "configure", "review", "review-evidence", "client-preview", "history"].includes(normalized)) {
+        document.body.classList.add("app-route-desk");
+        renderDeskRoute(normalized);
         return;
       }
       if (normalized === "populate" || normalized === "presentation") {
@@ -1815,6 +2124,19 @@
       renderGeneratedReports();
     }
 
+    function loadLocalBriefings() {
+      try {
+        const raw = window.localStorage ? window.localStorage.getItem(LOCAL_BRIEFING_STORAGE_KEY) : null;
+        const payload = raw ? JSON.parse(raw) : null;
+        state.briefings = Array.isArray(payload && payload.briefings)
+          ? payload.briefings.map(normalizeBriefingRecord).filter(Boolean)
+          : [];
+      } catch (error) {
+        state.briefings = [];
+      }
+      renderGeneratedReports();
+    }
+
     function persistLocalNamedWorkflows() {
       try {
         if (!window.localStorage) return false;
@@ -1837,6 +2159,19 @@
           reports: state.generatedReports
         };
         window.localStorage.setItem(LOCAL_GENERATED_REPORT_STORAGE_KEY, JSON.stringify(payload));
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function persistLocalBriefings() {
+      try {
+        if (!window.localStorage) return false;
+        window.localStorage.setItem(LOCAL_BRIEFING_STORAGE_KEY, JSON.stringify({
+          schema_version: LOCAL_BRIEFING_SCHEMA_VERSION,
+          briefings: state.briefings
+        }));
         return true;
       } catch (error) {
         return false;
@@ -1917,15 +2252,566 @@
     }
 
     function renderSavedWorkflows() {
+      if (state.route === "home") {
+        renderConversationHome();
+        return;
+      }
       renderSavedWorkflowContainer(els.homeSavedWorkflowList, els.homeSavedWorkflowStatus);
     }
 
     function renderGeneratedReports() {
+      if (state.route === "home") {
+        renderConversationHome();
+        return;
+      }
       renderGeneratedReportContainer(els.homePresentWorkflowList, els.homePresentWorkflowStatus);
     }
 
     function allBriefingTemplates() {
       return [...state.builtInTemplates, ...state.savedWorkflows];
+    }
+
+    function renderConversationHome() {
+      if (!els.briefingTypeList) return;
+      const types = state.builtInTemplates;
+      els.briefingTypeList.innerHTML = types.length ? types.map((type) => `
+        <article class="conversation-card">
+          <p class="eyebrow">${escapeHtml(type.audience || "Advisor conversation")}</p>
+          <h2>${escapeHtml(type.briefing_type_name || workflowDisplayName(type))}</h2>
+          <p>${escapeHtml(type.conversation_goal || type.description || "Prepare an approved briefing journey.")}</p>
+          <p class="meta"><strong>Main question:</strong> ${escapeHtml(type.core_user_question || "What should this conversation answer?")}</p>
+          <button class="primary-button" type="button" data-desk-action="select-type" data-type-id="${escapeAttr(workflowRecordId(type))}">${type.advisor_internal_default ? "Review workflow" : "Prepare briefing"}</button>
+        </article>
+      `).join("") : '<p class="empty">Approved briefing types are temporarily unavailable.</p>';
+
+      const recent = state.briefings.slice(0, 3);
+      els.homePresentWorkflowList.innerHTML = recent.length ? recent.map((briefing) => `
+        <div class="history-row">
+          <div class="journey-copy">
+            <strong>${escapeHtml(briefing.title)}</strong>
+            <p class="meta">${escapeHtml(briefing.briefing_type_name)} &middot; ${escapeHtml(formatBriefingDate(briefing.generated_at))}</p>
+          </div>
+          <button class="tiny-button" type="button" data-desk-action="open-briefing" data-briefing-id="${escapeAttr(briefing.briefing_id)}">Open</button>
+        </div>
+      `).join("") : '<p class="empty">No dated briefings yet.</p>';
+      els.homePresentWorkflowStatus.textContent = state.briefings.length ? `${state.briefings.length} immutable ${state.briefings.length === 1 ? "briefing" : "briefings"} saved in this browser.` : "Create a briefing to begin local history.";
+
+      const customTemplates = state.savedWorkflows.filter((template) => !template.is_builtin);
+      els.homeSavedWorkflowList.innerHTML = customTemplates.length ? customTemplates.slice(0, 4).map((template) => `
+        <div class="template-row">
+          <div class="journey-copy">
+            <strong>${escapeHtml(workflowDisplayName(template))}</strong>
+            <p class="meta">${escapeHtml(template.briefing_type_name || "Custom briefing template")}</p>
+          </div>
+          <button class="tiny-button" type="button" data-desk-action="open-template-type" data-template-id="${escapeAttr(workflowRecordId(template))}">Open</button>
+        </div>
+      `).join("") : '<p class="empty">No custom briefing templates yet. Duplicate a built-in to make bounded edits.</p>';
+      els.homeSavedWorkflowStatus.textContent = `${state.builtInTemplates.length} approved built-ins and ${customTemplates.length} custom ${customTemplates.length === 1 ? "template" : "templates"}.`;
+    }
+
+    function selectedBriefingType() {
+      return state.builtInTemplates.find((type) => workflowRecordId(type) === state.deskSelectedTypeId) || state.builtInTemplates[0] || null;
+    }
+
+    function templateTypeId(template) {
+      if (!template) return "";
+      if (template.briefing_type_id) return template.briefing_type_id;
+      if (template.is_builtin) return workflowRecordId(template);
+      const specs = listForKindFromPayload("advisor", template.payload || {}).concat(listForKindFromPayload("client", template.payload || {}));
+      return (specs.find((spec) => spec.catalog_workflow_id) || {}).catalog_workflow_id || "";
+    }
+
+    function templatesForSelectedType() {
+      const type = selectedBriefingType();
+      if (!type) return [];
+      const typeId = workflowRecordId(type);
+      return [type, ...state.savedWorkflows.filter((template) => templateTypeId(template) === typeId)];
+    }
+
+    function selectedDeskTemplate() {
+      const templates = allBriefingTemplates();
+      return templates.find((template) => workflowRecordId(template) === state.deskSelectedTemplateId) || selectedBriefingType();
+    }
+
+    function selectBriefingType(typeId) {
+      const type = state.builtInTemplates.find((candidate) => workflowRecordId(candidate) === typeId);
+      if (!type) return;
+      state.deskSelectedTypeId = typeId;
+      state.deskSelectedTemplateId = typeId;
+      state.deskDraftTemplate = null;
+      navigateToRoute("briefing-type");
+    }
+
+    function renderDeskRoute(route) {
+      if (!els.briefingDeskRegion) return;
+      if (!selectedBriefingType() && route !== "history") {
+        els.briefingDeskRegion.innerHTML = deskShell("Briefing types are loading", '<p class="empty">Return to the desk after the approved catalog loads.</p>');
+        return;
+      }
+      if (route === "briefing-type" || route === "templates") return renderBriefingTypeDetail();
+      if (route === "template-preview") return renderTemplatePreview();
+      if (route === "template-builder") return renderBoundedTemplateBuilder();
+      if (route === "configure") return renderBriefingConfiguration();
+      if (route === "review") return renderAdvisorReview();
+      if (route === "review-evidence") return renderReviewEvidence();
+      if (route === "client-preview") return renderBriefingReader("client-preview");
+      if (route === "presentation") return renderBriefingReader("presentation");
+      if (route === "history") return renderBriefingHistory();
+      renderBriefingTypeDetail();
+    }
+
+    function deskShell(title, body, options = {}) {
+      const presentation = options.presentation === true;
+      if (presentation) return `<div class="presentation-shell">${body}</div>`;
+      return `
+        <div class="desk-shell">
+          <div class="desk-topbar">
+            <div><p class="brand">Arangur</p><p class="context-line"><strong>Northstar Family Office</strong> &middot; Synthetic demo</p></div>
+            <button class="secondary-button" type="button" data-desk-action="home">Conversation Briefing Desk</button>
+          </div>
+          <section class="desk-panel" aria-label="${escapeAttr(title)}">${body}</section>
+        </div>
+      `;
+    }
+
+    function externalGovernanceHtml(type = selectedBriefingType()) {
+      if (!type || workflowRecordId(type) !== "external_manager_story_translation_v1") return "";
+      const caveats = ["Translated external viewpoint", "Not verified", "Not endorsed", "Not a recommendation", "Candidate proxies require approval"];
+      return `<aside class="governance-banner"><strong>External-story governance</strong><div class="governance-chips">${caveats.map((value) => `<span class="governance-chip">${escapeHtml(value)}</span>`).join("")}</div></aside>`;
+    }
+
+    function renderBriefingTypeDetail() {
+      const type = selectedBriefingType();
+      if (!type) return;
+      const journey = Array.isArray(type.ordered_journey) ? type.ordered_journey : [];
+      const templates = templatesForSelectedType();
+      const body = `
+        <div class="desk-intro">
+          <p class="eyebrow">Briefing type</p>
+          <h1>${escapeHtml(type.briefing_type_name || workflowDisplayName(type))}</h1>
+          <p>${escapeHtml(type.conversation_goal || type.description || "")}</p>
+        </div>
+        <div class="summary-grid">
+          <div class="summary-tile"><strong>Audience</strong>${escapeHtml(type.audience || "Advisor audience")}</div>
+          <div class="summary-tile"><strong>Main question</strong>${escapeHtml(type.core_user_question || "")}</div>
+          <div class="summary-tile"><strong>Character</strong>${escapeHtml(type.audience_character || "Advisor Review before client use")}</div>
+        </div>
+        ${externalGovernanceHtml(type)}
+        <section>
+          <h2>Ordered journey</h2>
+          <div class="journey-list">${journey.map(renderJourneySummaryRow).join("")}</div>
+        </section>
+        <section>
+          <h2>Available briefing templates</h2>
+          <p class="helper">Built-ins are approved and read-only. Duplicate one to make bounded edits for future briefings.</p>
+          <div class="template-list">${templates.map((template) => renderTemplateSelectionRow(template)).join("")}</div>
+        </section>
+        <div class="button-row"><button class="secondary-button" type="button" data-desk-action="home">Return to briefing types</button></div>
+      `;
+      els.briefingDeskRegion.innerHTML = deskShell(type.briefing_type_name || "Briefing type", body);
+    }
+
+    function renderJourneySummaryRow(step) {
+      const gated = step.status === "gated" || step.status === "deferred";
+      const visibility = friendlyVisibility(step.audience_visibility);
+      return `
+        <div class="journey-row ${gated ? "is-gated" : ""}">
+          <div class="journey-copy">
+            <span class="journey-index">${escapeHtml(step.step_number || "")} &middot; ${escapeHtml(visibility)}</span>
+            <strong>${escapeHtml(step.display_title || "Briefing section")}</strong>
+            <p class="meta">${escapeHtml(step.visible_question_answered || "")}</p>
+            ${gated ? `<p class="meta"><strong>${escapeHtml(step.gate_explanation || "Not yet available — an approved prerequisite is missing.")}</strong></p>` : ""}
+          </div>
+          ${step.optional ? '<span class="badge">Optional</span>' : ""}
+        </div>
+      `;
+    }
+
+    function renderTemplateSelectionRow(template) {
+      const templateId = workflowRecordId(template);
+      return `
+        <article class="template-row">
+          <div class="journey-copy">
+            <div class="template-name-line"><strong>${escapeHtml(workflowDisplayName(template))}</strong><span class="badge">${template.is_builtin ? "Built-in" : "Custom"}</span></div>
+            <p class="meta">${escapeHtml(template.description || template.briefing_purpose || template.conversation_goal || "Reusable approved briefing definition.")}</p>
+            <p class="meta">${escapeHtml(templateSectionSummary(template))}</p>
+          </div>
+          <div class="saved-workflow-actions">
+            <button class="primary-button tiny-button" type="button" data-desk-action="use-template" data-template-id="${escapeAttr(templateId)}">Use this template</button>
+            <button class="tiny-button" type="button" data-desk-action="preview-template" data-template-id="${escapeAttr(templateId)}">Preview template</button>
+            ${template.is_builtin ? `<button class="tiny-button" type="button" data-desk-action="duplicate-template" data-template-id="${escapeAttr(templateId)}">Duplicate</button>` : `<button class="tiny-button" type="button" data-desk-action="edit-template" data-template-id="${escapeAttr(templateId)}">Edit custom copy</button>`}
+          </div>
+        </article>
+      `;
+    }
+
+    function templateSectionSummary(template) {
+      const payload = template.payload || {};
+      const advisorCount = listForKindFromPayload("advisor", payload).length;
+      const clientCount = listForKindFromPayload("client", payload).length;
+      return `${advisorCount} Advisor Review ${advisorCount === 1 ? "section" : "sections"}; ${clientCount} client-visible ${clientCount === 1 ? "section" : "sections"}`;
+    }
+
+    function renderTemplatePreview() {
+      const template = selectedDeskTemplate();
+      if (!template) return renderBriefingTypeDetail();
+      const sections = templateJourneySteps(template);
+      const body = `
+        <div class="desk-intro"><p class="eyebrow">Template preview &middot; reusable definition</p><h1>${escapeHtml(workflowDisplayName(template))}</h1><p>${escapeHtml(template.briefing_purpose || template.conversation_goal || template.description || "")}</p></div>
+        <p class="meta"><strong>This is not a dated briefing.</strong> It shows the intended order and visibility for future briefings.</p>
+        ${externalGovernanceHtml()}
+        <div class="journey-list">${sections.map(renderJourneySummaryRow).join("")}</div>
+        <div class="button-row">
+          <button class="primary-button" type="button" data-desk-action="use-template" data-template-id="${escapeAttr(workflowRecordId(template))}">Use this template</button>
+          ${template.is_builtin ? `<button class="secondary-button" type="button" data-desk-action="duplicate-template" data-template-id="${escapeAttr(workflowRecordId(template))}">Duplicate</button>` : `<button class="secondary-button" type="button" data-desk-action="edit-template" data-template-id="${escapeAttr(workflowRecordId(template))}">Edit custom copy</button>`}
+          <button class="secondary-button" type="button" data-desk-action="back-templates">Back to templates</button>
+        </div>
+      `;
+      els.briefingDeskRegion.innerHTML = deskShell("Template preview", body);
+    }
+
+    function templateJourneySteps(template) {
+      const specs = listForKindFromPayload("advisor", template && template.payload || {});
+      return specs.map((spec, index) => ({
+        step_number: index + 1,
+        display_title: spec.element_title || "Briefing section",
+        visible_question_answered: spec.visible_question_answered || "",
+        why_included: spec.why_included || "",
+        audience_visibility: spec.client_visible || listForKindFromPayload("client", template.payload || {}).some((item) => item.element_id === spec.element_id) ? "client_facing" : (spec.audience_visibility || "advisor_review"),
+        step_role: spec.step_role || "supporting",
+        status: spec.catalog_status || "accepted",
+        optional: Boolean(spec.optional),
+        gate_explanation: spec.catalog_status === "gated" ? friendlyGateForSpec(spec) : ""
+      }));
+    }
+
+    function beginTemplateEdit(templateId) {
+      const source = allBriefingTemplates().find((template) => workflowRecordId(template) === templateId);
+      if (!source) return;
+      state.deskSelectedTemplateId = templateId;
+      const copy = JSON.parse(JSON.stringify(source));
+      const clientIds = new Set(listForKindFromPayload("client", copy.payload || {}).map((spec) => spec.element_id));
+      copy.id = source.is_builtin ? newLocalId("template") : workflowRecordId(source);
+      copy.workflow_id = copy.id;
+      copy.is_builtin = false;
+      copy.template_kind = "custom";
+      copy.display_name = source.is_builtin ? uniqueWorkflowName(`${workflowDisplayName(source)} Custom`) : workflowDisplayName(source);
+      copy.briefing_type_id = templateTypeId(source) || state.deskSelectedTypeId;
+      copy.briefing_type_name = selectedBriefingType().briefing_type_name;
+      copy.briefing_purpose = source.briefing_purpose || source.conversation_goal || source.description || "";
+      copy.audience_choice = source.audience_choice || source.audience || selectedBriefingType().audience;
+      copy.briefing_notes = source.briefing_notes || (copy.payload || {}).briefing_notes || "";
+      copy.editor_sections = listForKindFromPayload("advisor", copy.payload || {}).map((spec) => ({
+        ...spec,
+        included: true,
+        client_visible: clientIds.has(spec.element_id)
+      }));
+      state.deskDraftTemplate = copy;
+      navigateToRoute("template-builder");
+    }
+
+    function renderBoundedTemplateBuilder() {
+      const draft = state.deskDraftTemplate;
+      if (!draft) return renderBriefingTypeDetail();
+      const type = selectedBriefingType();
+      const sections = Array.isArray(draft.editor_sections) ? draft.editor_sections : [];
+      const body = `
+        <div class="desk-intro"><p class="eyebrow">Bounded briefing-template builder</p><h1>${escapeHtml(draft.display_name)}</h1><p>Adjust the reusable intent and approved sections. Changes affect future briefings only.</p></div>
+        ${externalGovernanceHtml(type)}
+        <div class="bounded-builder">
+          <div class="bounded-fields">
+            <label class="field"><span>Template name</span><input type="text" value="${escapeAttr(draft.display_name)}" data-desk-field="display_name"></label>
+            <label class="field"><span>Audience / depth</span><select data-desk-field="audience_choice">${audienceOptions(draft.audience_choice).map((option) => `<option${option === draft.audience_choice ? " selected" : ""}>${escapeHtml(option)}</option>`).join("")}</select></label>
+          </div>
+          <label class="field"><span>Briefing purpose</span><textarea rows="3" data-desk-field="briefing_purpose">${escapeHtml(draft.briefing_purpose)}</textarea></label>
+          <label class="field"><span>Material briefing notes or caveats</span><textarea rows="3" data-desk-field="briefing_notes">${escapeHtml(draft.briefing_notes)}</textarea></label>
+          <section><h2>Approved sections and order</h2><p class="helper">Primary and gated journey steps stay in context. Optional supporting depth can be included or excluded. Client visibility is bounded by the approved audience rules.</p><div class="journey-list">${sections.map(renderBuilderSectionRow).join("")}</div></section>
+          <p id="desk-builder-status" class="status"></p>
+          <div class="button-row"><button class="primary-button" type="button" data-desk-action="save-template">Save template</button><button class="secondary-button" type="button" data-desk-action="back-templates">Discard changes</button></div>
+        </div>
+      `;
+      els.briefingDeskRegion.innerHTML = deskShell("Bounded template builder", body);
+    }
+
+    function audienceOptions(current) {
+      return uniqueValues([current, "Principal / family office member", "Engaged client / investment committee", "Advisor / internal investment team"].filter(Boolean));
+    }
+
+    function renderBuilderSectionRow(spec, index, list) {
+      const gated = spec.catalog_status === "gated" || spec.catalog_status === "deferred";
+      const optional = Boolean(spec.optional);
+      const type = selectedBriefingType();
+      const clientPermitted = !type.advisor_internal_default && !gated && ["client_facing", "advisor_review"].includes(spec.audience_visibility);
+      return `
+        <div class="section-choice-row ${gated ? "is-gated" : ""}">
+          <label><input type="checkbox" data-desk-section-field="included" data-section-index="${index}" ${spec.included !== false ? "checked" : ""} ${optional ? "" : "disabled"}> ${optional ? "Include" : "Required"}</label>
+          <div class="journey-copy"><strong>${escapeHtml(spec.element_title || "Briefing section")}</strong><p class="meta">${escapeHtml(spec.visible_question_answered || (gated ? friendlyGateForSpec(spec) : friendlyVisibility(spec.audience_visibility)))}</p>${gated ? `<span class="badge">Not yet available</span>` : ""}</div>
+          <div class="section-choice-actions">
+            ${clientPermitted ? `<label><input type="checkbox" data-desk-section-field="client_visible" data-section-index="${index}" ${spec.client_visible ? "checked" : ""}> Client-visible</label>` : `<span class="meta">${type.advisor_internal_default ? "Advisor-only" : friendlyVisibility(spec.audience_visibility)}</span>`}
+            <button class="tiny-button" type="button" data-desk-action="move-section" data-section-index="${index}" data-direction="-1" ${index === 0 ? "disabled" : ""}>Up</button>
+            <button class="tiny-button" type="button" data-desk-action="move-section" data-section-index="${index}" data-direction="1" ${index === list.length - 1 ? "disabled" : ""}>Down</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function saveBoundedTemplate() {
+      const draft = state.deskDraftTemplate;
+      if (!draft) return;
+      const name = readableWorkflowName(draft.display_name);
+      const status = document.getElementById("desk-builder-status");
+      if (!name) {
+        if (status) status.textContent = "Name this briefing template before saving.";
+        return;
+      }
+      const now = new Date().toISOString();
+      const included = draft.editor_sections.filter((spec) => spec.included !== false).map((spec, index) => ({ ...spec, order: index + 1 }));
+      const advisorSet = included.map((spec) => cleanEditorSpec(spec, "advisor"));
+      const clientSet = included.filter((spec) => spec.client_visible && !["gated", "deferred"].includes(spec.catalog_status)).map((spec, index) => ({ ...cleanEditorSpec(spec, "client"), order: index + 1 }));
+      const saved = normalizeSavedWorkflowRecord({
+        ...draft,
+        display_name: name,
+        name,
+        description: "",
+        briefing_type_id: draft.briefing_type_id,
+        briefing_type_name: draft.briefing_type_name,
+        briefing_purpose: draft.briefing_purpose,
+        briefing_notes: draft.briefing_notes,
+        audience: draft.audience_choice,
+        created_at: draft.created_at || now,
+        updated_at: now,
+        saved_at: now,
+        editor_sections: undefined,
+        payload: {
+          ...(draft.payload || {}),
+          workflow_name: name,
+          briefing_purpose: draft.briefing_purpose,
+          briefing_notes: draft.briefing_notes,
+          client_briefing_set: clientSet,
+          advisor_review_set: advisorSet
+        }
+      });
+      const existing = state.savedWorkflows.findIndex((template) => workflowRecordId(template) === workflowRecordId(saved));
+      if (existing >= 0) state.savedWorkflows[existing] = saved;
+      else state.savedWorkflows.unshift(saved);
+      persistLocalNamedWorkflows();
+      state.deskSelectedTemplateId = workflowRecordId(saved);
+      state.deskDraftTemplate = null;
+      navigateToRoute("configure");
+    }
+
+    function cleanEditorSpec(spec, branch) {
+      const clean = { ...spec };
+      delete clean.included;
+      clean.client_visible = branch === "client";
+      clean.target_set = branch === "client" ? "Client Briefing Set" : "Advisor Review Set";
+      clean.target_branch = branch === "client" ? "Client Briefing" : "Advisor Review";
+      clean.placement = branch === "client" ? "Main client presentation" : "Main advisor review";
+      clean.local_spec_id = `${spec.local_spec_id || newLocalId("section")}:${branch}`;
+      return clean;
+    }
+
+    function renderBriefingConfiguration() {
+      const template = selectedDeskTemplate();
+      const type = selectedBriefingType();
+      if (!template || !type) return renderBriefingTypeDetail();
+      const steps = templateJourneySteps(template);
+      const gated = steps.filter((step) => step.status === "gated" || step.status === "deferred");
+      const body = `
+        <div class="desk-intro"><p class="eyebrow">Briefing configuration</p><h1>Confirm this dated briefing</h1><p>Only consequential context is shown. The reusable template remains separate from the briefing created next.</p></div>
+        <div class="summary-grid">
+          <div class="summary-tile"><strong>Client / portfolio</strong>Northstar Family Office<br>Demo portfolio</div>
+          <div class="summary-tile"><strong>Briefing template</strong>${escapeHtml(workflowDisplayName(template))}</div>
+          <div class="summary-tile"><strong>Current synthetic data</strong>Data through ${escapeHtml(formatBriefingDate(DEMO_DATA_AS_OF))}</div>
+        </div>
+        ${externalGovernanceHtml(type)}
+        <div class="summary-tile"><strong>Visibility summary</strong>${escapeHtml(templateSectionSummary(template))}. ${type.advisor_internal_default ? "This briefing remains advisor/internal." : "Client content will be rehearsed separately in Client Preview."}</div>
+        ${gated.length ? `<div class="governance-banner"><strong>${gated.length} intended ${gated.length === 1 ? "step is" : "steps are"} not yet available</strong><p>${gated.map((step) => escapeHtml(`${step.display_title}: ${step.gate_explanation || "approved prerequisite required"}`)).join(" ")}</p><p class="meta">No unavailable output will be generated or shown to the client.</p></div>` : ""}
+        <p id="desk-generation-status" class="status"></p>
+        <div class="button-row"><button class="primary-button" type="button" data-desk-action="create-briefing" ${state.deskGenerating ? "disabled" : ""}>Create briefing with current data</button><button class="secondary-button" type="button" data-desk-action="back-templates">Change template</button></div>
+      `;
+      els.briefingDeskRegion.innerHTML = deskShell("Briefing configuration", body);
+    }
+
+    async function createDatedBriefing() {
+      if (state.deskGenerating) return;
+      const template = selectedDeskTemplate();
+      const type = selectedBriefingType();
+      if (!template || !type) return;
+      state.deskGenerating = true;
+      renderBriefingConfiguration();
+      const status = document.getElementById("desk-generation-status");
+      if (status) status.textContent = "Creating a new immutable briefing…";
+      const generatedAt = new Date().toISOString();
+      try {
+        const advisorArtifact = await requestGeneratedArtifact("advisor", template, generatedAt);
+        const clientArtifact = listForKindFromPayload("client", template.payload || {}).length
+          ? await requestGeneratedArtifact("client", template, generatedAt)
+          : null;
+        const briefingId = newLocalId("briefing");
+        const briefing = normalizeBriefingRecord({
+          schema_version: LOCAL_BRIEFING_SCHEMA_VERSION,
+          briefing_id: briefingId,
+          title: `${type.briefing_type_name || workflowDisplayName(type)} — ${formatBriefingDate(generatedAt)}`,
+          briefing_type_id: workflowRecordId(type),
+          briefing_type_name: type.briefing_type_name || workflowDisplayName(type),
+          audience: template.audience_choice || template.audience || type.audience,
+          template_id: workflowRecordId(template),
+          template_name: workflowDisplayName(template),
+          template_kind: template.is_builtin ? "built_in" : "custom",
+          generated_at: generatedAt,
+          data_as_of: DEMO_DATA_AS_OF,
+          data_snapshot_label: DEMO_DATA_SNAPSHOT_LABEL,
+          advisor_internal_default: Boolean(type.advisor_internal_default),
+          caveats: Array.isArray(type.caveats) ? type.caveats : [],
+          journey_steps: templateJourneySteps(template),
+          advisor_artifact: advisorArtifact,
+          client_artifact: clientArtifact,
+          immutable: true
+        });
+        state.briefings.unshift(briefing);
+        persistLocalBriefings();
+        state.deskCurrentBriefingId = briefingId;
+        state.deskSectionIndex = 0;
+        state.deskEvidenceMode = null;
+        navigateToRoute("review");
+      } catch (error) {
+        if (status) status.textContent = error.message || "The briefing could not be created.";
+      } finally {
+        state.deskGenerating = false;
+      }
+    }
+
+    async function requestGeneratedArtifact(kind, template, generatedAt) {
+      const response = await fetch(GENERATED_REPORT_POPULATE_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...buildDemoPopulateRequest(kind, template), generated_at: generatedAt })
+      });
+      const artifact = await readJsonResponse(response);
+      if (!response.ok) throw new Error(errorMessageFromPayload(artifact, "Could not create this briefing."));
+      return artifact;
+    }
+
+    function normalizeBriefingRecord(briefing) {
+      if (!briefing || typeof briefing !== "object" || !briefing.briefing_id || !briefing.advisor_artifact) return null;
+      return {
+        ...briefing,
+        schema_version: LOCAL_BRIEFING_SCHEMA_VERSION,
+        title: readableWorkflowName(briefing.title || "Dated briefing"),
+        journey_steps: Array.isArray(briefing.journey_steps) ? briefing.journey_steps : [],
+        caveats: Array.isArray(briefing.caveats) ? briefing.caveats : [],
+        immutable: true
+      };
+    }
+
+    function currentDeskBriefing() {
+      return state.briefings.find((briefing) => briefing.briefing_id === state.deskCurrentBriefingId) || null;
+    }
+
+    function renderAdvisorReview() {
+      const briefing = currentDeskBriefing();
+      if (!briefing) return renderBriefingHistory();
+      const sections = Array.isArray(briefing.advisor_artifact.ordered_sections) ? briefing.advisor_artifact.ordered_sections : [];
+      const steps = briefing.journey_steps;
+      const rows = steps.map((step, index) => {
+        const section = sections[index];
+        const gated = step.status === "gated" || step.status === "deferred" || (section && section.status === "placeholder");
+        return `<article class="journey-row ${gated ? "is-gated" : ""}"><div class="journey-copy"><span class="journey-index">${index + 1} &middot; ${escapeHtml(friendlyVisibility(step.audience_visibility))}</span><strong>${escapeHtml(step.display_title)}</strong><p>${escapeHtml(step.visible_question_answered || "")}</p>${gated ? `<p class="meta"><strong>${escapeHtml(step.gate_explanation || "Not yet available — an approved prerequisite is missing.")}</strong> No report has been fabricated.</p>` : `<details><summary>Read generated section</summary><div class="reader-section">${sanitizePreviewFragment(section && section.html || "")}</div></details><div class="button-row"><button class="tiny-button" type="button" data-desk-action="review-evidence" data-section-index="${index}" data-evidence="explain">Explain</button>${canVerifySection(section) ? `<button class="tiny-button" type="button" data-desk-action="review-evidence" data-section-index="${index}" data-evidence="verify">Verify</button>` : ""}</div>`}</div>${step.optional ? '<span class="badge">Optional</span>' : ""}</article>`;
+      }).join("");
+      const body = `
+        <div class="desk-intro"><p class="eyebrow">Advisor Review &middot; internal approval</p><h1>${escapeHtml(briefing.title)}</h1><p>Review accuracy, visibility, caveats, and unavailable steps. Generated content is immutable; change the template and create a new briefing when content must change.</p></div>
+        <div class="summary-grid"><div class="summary-tile"><strong>Generated</strong>${escapeHtml(formatBriefingDate(briefing.generated_at))}</div><div class="summary-tile"><strong>Data date</strong>${escapeHtml(formatBriefingDate(briefing.data_as_of))}</div><div class="summary-tile"><strong>Audience</strong>${escapeHtml(briefing.audience || "Advisor audience")}</div></div>
+        ${briefing.briefing_type_id === "external_manager_story_translation_v1" ? externalGovernanceHtml(state.builtInTemplates.find((type) => workflowRecordId(type) === briefing.briefing_type_id)) : ""}
+        <section><h2>Ordered report journey</h2><div class="journey-list">${rows}</div></section>
+        <div class="button-row">${briefing.client_artifact ? '<button class="primary-button" type="button" data-desk-action="client-preview">Open Client Preview</button>' : '<button class="primary-button" type="button" data-desk-action="present">Present advisor briefing</button>'}<button class="secondary-button" type="button" data-desk-action="modify-template">Return to briefing template</button><button class="secondary-button" type="button" data-desk-action="history">Briefing history</button></div>
+      `;
+      els.briefingDeskRegion.innerHTML = deskShell("Advisor Review", body);
+    }
+
+    function renderReviewEvidence() {
+      const briefing = currentDeskBriefing();
+      if (!briefing) return renderBriefingHistory();
+      const sections = Array.isArray(briefing.advisor_artifact.ordered_sections) ? briefing.advisor_artifact.ordered_sections : [];
+      state.deskSectionIndex = Math.min(Math.max(state.deskSectionIndex, 0), Math.max(sections.length - 1, 0));
+      const section = sections[state.deskSectionIndex];
+      const step = briefing.journey_steps[state.deskSectionIndex] || {};
+      const body = `<div class="desk-intro"><p class="eyebrow">Advisor Review evidence</p><h1>${escapeHtml(briefing.title)}</h1><p>Evidence remains fixed to this Briefing and returns to the same journey step.</p></div>${renderEvidenceDepth(section, step, briefing)}`;
+      els.briefingDeskRegion.innerHTML = deskShell("Advisor Review evidence", body);
+    }
+
+    function readerArtifactFor(briefing) {
+      return briefing.client_artifact || briefing.advisor_artifact;
+    }
+
+    function renderBriefingReader(mode) {
+      const briefing = currentDeskBriefing();
+      if (!briefing) return renderBriefingHistory();
+      const artifact = mode === "client-preview" ? briefing.client_artifact : readerArtifactFor(briefing);
+      if (!artifact) return renderAdvisorReview();
+      const rawSections = Array.isArray(artifact.ordered_sections) ? artifact.ordered_sections : [];
+      const sections = mode === "presentation"
+        ? rawSections.filter((item) => {
+            const journeyStep = briefing.journey_steps.find((candidate) => candidate.display_title === (item && item.title));
+            return !["placeholder", "unsupported"].includes(item && item.status)
+              && (!journeyStep || journeyStep.audience_visibility !== "internal_control");
+          })
+        : rawSections;
+      state.deskSectionIndex = Math.min(Math.max(state.deskSectionIndex, 0), Math.max(sections.length - 1, 0));
+      const index = state.deskSectionIndex;
+      const section = sections[index];
+      const step = briefing.journey_steps.find((candidate) => candidate.display_title === (section && section.title)) || {};
+      const evidence = renderEvidenceDepth(section, step, briefing);
+      const sectionBody = state.deskEvidenceMode ? evidence : `<div class="reader-section"><p class="eyebrow">Conclusion</p><h2>${escapeHtml(section && section.title || "Briefing section")}</h2>${step.visible_question_answered ? `<p>${escapeHtml(step.visible_question_answered)}</p>` : ""}<div>${sanitizePreviewFragment(section && section.html || "")}</div></div>`;
+      const evidenceButtons = `<button class="tiny-button" type="button" data-desk-action="evidence" data-evidence="explain">Explain</button>${canVerifySection(section) ? '<button class="tiny-button" type="button" data-desk-action="evidence" data-evidence="verify">Verify</button>' : ""}`;
+      const header = `<header class="reader-header"><p class="brand">Arangur</p><h1>${escapeHtml(briefing.title)}</h1><p class="meta">${escapeHtml(formatBriefingDate(briefing.generated_at))} &middot; Data through ${escapeHtml(formatBriefingDate(briefing.data_as_of))}</p></header>`;
+      const navigation = `<div class="reader-navigation"><button class="secondary-button" type="button" data-desk-action="previous" ${index <= 0 ? "disabled" : ""}>Previous</button><span class="report-position">Section ${sections.length ? index + 1 : 0} of ${sections.length}</span><button class="primary-button" type="button" data-desk-action="next" ${index >= sections.length - 1 ? "disabled" : ""}>Next</button></div>`;
+      if (mode === "presentation") {
+        els.briefingDeskRegion.innerHTML = deskShell("Presentation", `${header}${sectionBody}<div class="button-row">${evidenceButtons}</div>${navigation}<button class="secondary-button" type="button" data-desk-action="exit-presentation">Exit presentation</button>`, { presentation: true });
+        return;
+      }
+      const body = `<div class="briefing-reader"><p class="eyebrow">Client Preview &middot; exact client-visible sequence</p>${header}<p class="meta">Advisor-only preparation, diagnostics, internal controls, and gated steps are excluded.</p>${sectionBody}<div class="button-row">${evidenceButtons}</div>${navigation}<div class="button-row"><button class="primary-button" type="button" data-desk-action="present">Present briefing</button><button class="secondary-button" type="button" data-desk-action="advisor-review">Back to Advisor Review</button></div></div>`;
+      els.briefingDeskRegion.innerHTML = deskShell("Client Preview", body);
+    }
+
+    function renderEvidenceDepth(section, step, briefing) {
+      if (state.deskEvidenceMode === "verify" && canVerifySection(section)) {
+        return `<div class="evidence-panel"><p class="eyebrow">Verify</p><h2>Exact supporting evidence</h2><p class="meta">Fixed to data through ${escapeHtml(formatBriefingDate(briefing.data_as_of))}. Exact tables remain intact where reconciliation is the job.</p><div class="reader-section">${sanitizePreviewFragment(section.html || "")}</div><button class="secondary-button" type="button" data-desk-action="evidence-back">Back to conclusion</button></div>`;
+      }
+      return `<div class="evidence-panel"><p class="eyebrow">Explain</p><h2>${escapeHtml(section && section.title || "Briefing section")}</h2><p>${escapeHtml(step.why_included || step.visible_question_answered || "This section supports the current briefing conclusion.")}</p>${step.gate_explanation ? `<p>${escapeHtml(step.gate_explanation)}</p>` : ""}<div class="button-row">${canVerifySection(section) ? '<button class="primary-button" type="button" data-desk-action="evidence" data-evidence="verify">Verify exact evidence</button>' : ""}<button class="secondary-button" type="button" data-desk-action="evidence-back">Back to conclusion</button></div></div>`;
+    }
+
+    function canVerifySection(section) {
+      return Boolean(section && section.status === "rendered" && String(section.html || "").trim());
+    }
+
+    function renderBriefingHistory() {
+      const rows = state.briefings.map((briefing) => `
+        <article class="history-row"><div class="journey-copy"><strong>${escapeHtml(briefing.title)}</strong><p class="meta">${escapeHtml(briefing.briefing_type_name)} &middot; ${escapeHtml(briefing.audience || "Advisor audience")}</p><p class="meta">Generated ${escapeHtml(formatBriefingDate(briefing.generated_at))} &middot; Data through ${escapeHtml(formatBriefingDate(briefing.data_as_of))} &middot; Template: ${escapeHtml(briefing.template_name)}</p><span class="badge">Immutable</span></div><div class="saved-workflow-actions"><button class="primary-button tiny-button" type="button" data-desk-action="open-briefing" data-briefing-id="${escapeAttr(briefing.briefing_id)}">Open / read</button><button class="tiny-button" type="button" data-desk-action="present-briefing" data-briefing-id="${escapeAttr(briefing.briefing_id)}">Present</button></div></article>
+      `).join("");
+      const legacy = state.generatedReports.map((record) => `<article class="history-row"><div class="journey-copy"><strong>${escapeHtml(record.report_title)}</strong><p class="meta">Earlier local generated report &middot; Data through ${escapeHtml(formatBriefingDate(record.data_as_of))}</p></div><button class="tiny-button" type="button" data-desk-action="open-legacy-report" data-report-id="${escapeAttr(record.report_id)}">Open</button></article>`).join("");
+      const body = `<div class="desk-intro"><p class="eyebrow">Briefing history</p><h1>Prior briefings</h1><p>Each dated briefing remains fixed. Creating with current data always adds a new briefing.</p></div><div class="history-list">${rows || legacy ? rows + legacy : '<p class="empty">No prior briefings in this browser.</p>'}</div><button class="secondary-button" type="button" data-desk-action="home">Return to briefing types</button>`;
+      els.briefingDeskRegion.innerHTML = deskShell("Briefing history", body);
+    }
+
+    function friendlyVisibility(value) {
+      const labels = { client_facing: "Client-visible", advisor_review: "Advisor Review", advisor_only: "Advisor-only", setup_readiness: "Preparation", internal_control: "Internal control", diagnostic: "Advisor diagnostic" };
+      return labels[value] || "Advisor Review";
+    }
+
+    function friendlyGateForSpec(spec) {
+      const text = String(spec.caveat || "").toLowerCase();
+      if (text.includes("benchmark") || text.includes("proxy")) return "Not yet available — benchmark or proxy approval is required.";
+      if (text.includes("method") || text.includes("aggregation")) return "Not yet available — an approved method is required.";
+      if (text.includes("data") || text.includes("input") || text.includes("assignment")) return "Not yet available — a data prerequisite is missing.";
+      return "Not yet available — the briefing section shape is not approved.";
+    }
+
+    function formatBriefingDate(value) {
+      const text = String(value || "");
+      const date = new Date(/^\d{4}-\d{2}-\d{2}$/.test(text) ? `${text}T12:00:00` : text);
+      if (Number.isNaN(date.getTime())) return text;
+      return new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(date);
     }
 
     function renderSavedWorkflowContainer(listEl, statusEl) {
@@ -4613,9 +5499,116 @@
       return escapeHtml(value);
     }
 
+    async function handleDeskAction(event) {
+      const button = event.target.closest("[data-desk-action]");
+      if (!button) return;
+      const action = button.dataset.deskAction;
+      if (action === "home") return navigateToRoute("home");
+      if (action === "history") return navigateToRoute("history");
+      if (action === "select-type") return selectBriefingType(button.dataset.typeId);
+      if (action === "open-template-type") {
+        const template = allBriefingTemplates().find((candidate) => workflowRecordId(candidate) === button.dataset.templateId);
+        if (!template) return;
+        state.deskSelectedTypeId = templateTypeId(template);
+        state.deskSelectedTemplateId = workflowRecordId(template);
+        return navigateToRoute("briefing-type");
+      }
+      if (action === "back-templates") return navigateToRoute("briefing-type");
+      if (["use-template", "preview-template", "duplicate-template", "edit-template"].includes(action)) {
+        state.deskSelectedTemplateId = button.dataset.templateId;
+        const template = selectedDeskTemplate();
+        if (template) state.deskSelectedTypeId = templateTypeId(template) || state.deskSelectedTypeId;
+        if (action === "use-template") return navigateToRoute("configure");
+        if (action === "preview-template") return navigateToRoute("template-preview");
+        return beginTemplateEdit(button.dataset.templateId);
+      }
+      if (action === "move-section") {
+        const draft = state.deskDraftTemplate;
+        const index = Number(button.dataset.sectionIndex);
+        const target = index + Number(button.dataset.direction);
+        if (!draft || !Array.isArray(draft.editor_sections) || target < 0 || target >= draft.editor_sections.length) return;
+        const [moved] = draft.editor_sections.splice(index, 1);
+        draft.editor_sections.splice(target, 0, moved);
+        return renderBoundedTemplateBuilder();
+      }
+      if (action === "save-template") return saveBoundedTemplate();
+      if (action === "create-briefing") return createDatedBriefing();
+      if (action === "client-preview") {
+        state.deskSectionIndex = 0;
+        state.deskEvidenceMode = null;
+        return navigateToRoute("client-preview");
+      }
+      if (action === "advisor-review") {
+        state.deskEvidenceMode = null;
+        return navigateToRoute("review");
+      }
+      if (action === "present") {
+        state.deskEvidenceMode = null;
+        return navigateToRoute("presentation");
+      }
+      if (action === "exit-presentation") {
+        state.deskEvidenceMode = null;
+        return navigateToRoute(currentDeskBriefing() && currentDeskBriefing().client_artifact ? "client-preview" : "review");
+      }
+      if (action === "previous" || action === "next") {
+        state.deskSectionIndex += action === "next" ? 1 : -1;
+        state.deskEvidenceMode = null;
+        return renderDeskRoute(state.route);
+      }
+      if (action === "evidence") {
+        state.deskEvidenceMode = button.dataset.evidence || "explain";
+        return renderDeskRoute(state.route);
+      }
+      if (action === "evidence-back") {
+        state.deskEvidenceMode = null;
+        if (state.route === "review-evidence") return navigateToRoute("review");
+        return renderDeskRoute(state.route);
+      }
+      if (action === "review-evidence") {
+        state.deskSectionIndex = Number(button.dataset.sectionIndex) || 0;
+        state.deskEvidenceMode = button.dataset.evidence || "explain";
+        return navigateToRoute("review-evidence");
+      }
+      if (action === "modify-template") {
+        const briefing = currentDeskBriefing();
+        if (!briefing) return;
+        state.deskSelectedTypeId = briefing.briefing_type_id;
+        state.deskSelectedTemplateId = briefing.template_id;
+        return navigateToRoute("briefing-type");
+      }
+      if (action === "open-briefing" || action === "present-briefing") {
+        const briefing = state.briefings.find((candidate) => candidate.briefing_id === button.dataset.briefingId);
+        if (!briefing) return;
+        state.deskCurrentBriefingId = briefing.briefing_id;
+        state.deskSelectedTypeId = briefing.briefing_type_id;
+        state.deskSelectedTemplateId = briefing.template_id;
+        state.deskSectionIndex = 0;
+        state.deskEvidenceMode = null;
+        return navigateToRoute(action === "present-briefing" ? "presentation" : "review");
+      }
+      if (action === "open-legacy-report") return openGeneratedReport(button.dataset.reportId);
+    }
+
+    function handleDeskFieldChange(event) {
+      const draft = state.deskDraftTemplate;
+      if (!draft) return;
+      const field = event.target.dataset.deskField;
+      if (field) {
+        draft[field] = event.target.value;
+        return;
+      }
+      const sectionField = event.target.dataset.deskSectionField;
+      if (!sectionField) return;
+      const index = Number(event.target.dataset.sectionIndex);
+      const spec = draft.editor_sections && draft.editor_sections[index];
+      if (!spec) return;
+      spec[sectionField] = Boolean(event.target.checked);
+      if (sectionField === "included" && !spec.included) spec.client_visible = false;
+    }
+
     els.homeBuildClient.addEventListener("click", () => startNewWorkflow("Client Briefing Set"));
     els.homeBuildAdvisor.addEventListener("click", () => startNewWorkflow("Advisor Review Set"));
-    els.homeAdvancedTools.addEventListener("click", () => navigateToRoute("advanced"));
+    els.homeAdvancedTools.addEventListener("click", () => navigateToRoute("developer"));
     els.clearGeneratedReports.addEventListener("click", clearLocalGeneratedReports);
     els.builderHome.addEventListener("click", () => navigateToRoute("home"));
     els.workflowNameInput.addEventListener("input", () => {
@@ -4680,6 +5673,9 @@
       if (!state.browseAllOpen || event.target.closest(".browse-picker")) return;
       setBrowseAllOpen(false);
     });
+    document.addEventListener("click", handleDeskAction);
+    document.addEventListener("input", handleDeskFieldChange);
+    document.addEventListener("change", handleDeskFieldChange);
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && state.browseAllOpen) setBrowseAllOpen(false);
     });
@@ -4715,6 +5711,7 @@
     renderWorkflowChrome();
     loadLocalNamedWorkflows();
     loadLocalGeneratedReports();
+    loadLocalBriefings();
     initializeRoute();
     loadBuiltinBriefingTemplates();
     loadCatalog();

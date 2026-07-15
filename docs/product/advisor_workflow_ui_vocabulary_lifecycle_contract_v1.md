@@ -1,6 +1,6 @@
 # Advisor Workflow UI Vocabulary and Lifecycle Contract v1
 
-Status: recommended contract for Frank review; not production implementation
+Status: approved by Frank and locally implemented for the synthetic demo, 2026-07-15
 
 Canonical product name: **Arangur**. Existing filenames, directories, commits, and historical artifacts containing `ARRANGER` are not renamed.
 

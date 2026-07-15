@@ -1,6 +1,6 @@
 # Advisor Workflow UI Visibility and Gating Matrix v1
 
-Status: recommended product contract for Frank review; derived from the committed workflow JSON
+Status: approved product contract; locally wired from the committed workflow JSON, 2026-07-15
 
 ## Legend
 

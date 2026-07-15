@@ -1,5 +1,15 @@
 # Next Actions
 
+## Advisor Workflow UI Wiring v1 — completed 2026-07-15
+
+- The approved Conversation Briefing Desk, canonical Briefing vocabulary, two-object lifecycle, bounded template builder, dated immutable Briefings, Advisor Review, Client Preview, Presentation, Explain/Verify, browser-local history, external-story governance, calm gating, and Developer / QA separation are locally wired.
+- Focused app/catalog/generation tests and the full repository test discovery pass. The non-Docker local browser walkthrough passes with two successive current-data Briefings, prior-history preservation, Previous/Next navigation, client-visibility filtering, external-story gates, and no console errors.
+- See `docs/demo/advisor_workflow_ui_wiring_v1.md` for architecture, lifecycle, limitations, run instructions, and manual QA evidence.
+
+## Recommended next tranche
+
+**Advisor Briefing Demo Polish v1**: conduct product-owner rehearsal on the locally wired synthetic journey, then make only observed copy, spacing, accessibility, report-depth, and evidence-return refinements. Keep durable backend history, production export/share, deployment, real data, new analytics, live market/custodian connections, and privacy/tenant architecture in separately authorized tranches.
+
 ## Immediate Architecture / Simulation Kernel Batches
 
 - Completed baseline: deterministic synthetic position universe generator with 74 synthetic positions across public, private, cash, manager-level, and opaque assets, six managers, accounts, sleeves, 90-day transaction/history traces, themes, data-quality flags, and human-review flags.

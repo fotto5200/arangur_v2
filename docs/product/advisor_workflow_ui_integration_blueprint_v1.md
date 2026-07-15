@@ -1,6 +1,6 @@
 # Advisor Workflow UI Integration Blueprint v1
 
-Status: repo-canonical UI/product contract **draft for Frank review**; not final and not production implementation authorization
+Status: **approved by Frank and locally implemented** in `Advisor Workflow UI Wiring v1`, 2026-07-15
 
 Prepared: 2026-07-15
 
@@ -361,4 +361,4 @@ UI wiring is blocked on approval of:
 
 ## Approval statement
 
-This draft becomes the implementation contract only after Frank records approval or requested revisions. Until then, the architecture, vocabulary, lifecycle, custom-creation scope, and visibility defaults are recommendations—not authorization for Codex to modify the advisor-facing UI.
+Frank approved the architecture, vocabulary, lifecycle, custom-creation scope, and visibility defaults for the bounded local implementation tranche on 2026-07-15. The local implementation and acceptance evidence are recorded in `docs/demo/advisor_workflow_ui_wiring_v1.md`; production persistence, deployment, real data, and new analytics remain separately gated.

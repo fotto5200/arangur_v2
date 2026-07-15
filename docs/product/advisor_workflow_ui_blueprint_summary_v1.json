@@ -2,11 +2,11 @@
   "schema_version": "arangur.advisor_workflow_ui_blueprint_summary.v1",
   "generated_at": "2026-07-15",
   "product_name": "Arangur",
-  "status": "draft_for_frank_review",
-  "implementation_authorized": false,
+  "status": "approved_and_locally_implemented",
+  "implementation_authorized": true,
   "recommended_application_architecture": {
     "name": "Conversation Briefing Desk",
-    "status": "recommended_for_frank_review",
+    "status": "approved_and_locally_implemented",
     "first_screen_question": "What conversation are you preparing?",
     "choice_label": "Briefing types"
   },
@@ -38,6 +38,7 @@
   "external_story_caveats_locked": true,
   "plan_check_scope": "first_client_how_am_i_doing_story_only",
   "objective_horizon_status": "preferred_for_refinement_not_global_or_frozen",
-  "frank_approval_required": true,
-  "recommended_next_tranche_after_approval": "Advisor Workflow UI Wiring v1"
+  "frank_approval_required": false,
+  "implemented_tranche": "Advisor Workflow UI Wiring v1",
+  "recommended_next_tranche": "Advisor Briefing Demo Polish v1"
 }

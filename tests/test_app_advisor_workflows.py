@@ -58,15 +58,28 @@ class BuiltinBriefingTemplateAppTests(unittest.TestCase):
             source = json.loads((source_dir / filename).read_text(encoding="utf-8"))
             expected = [(step["step_number"], step["report_id"]) for step in source["ordered_steps"]]
             template = by_id[workflow_id]
-            specs = template["payload"]["client_briefing_set"] + template["payload"]["advisor_review_set"]
+            specs = template["payload"]["advisor_review_set"]
             actual = [(spec["order"], spec["element_id"]) for spec in specs]
             self.assertEqual(expected, actual, workflow_id)
+
+            expected_client = [
+                (step["step_number"], step["report_id"])
+                for step in source["ordered_steps"]
+                if step["audience_visibility"] == "client_facing"
+                and step["status"] in {"accepted", "accepted_with_minor_polish", "available", "setup_note"}
+                and workflow_id not in {"advisor_manager_oversight_v1", "external_manager_story_translation_v1"}
+            ]
+            actual_client = [
+                (spec["order"], spec["element_id"])
+                for spec in template["payload"]["client_briefing_set"]
+            ]
+            self.assertEqual(expected_client, actual_client, workflow_id)
 
     def test_each_builtin_generates_an_actual_ordered_report(self) -> None:
         for template in self.payload["templates"]:
             with self.subTest(template=template["display_name"]):
                 payload = template["payload"]
-                report_type = "advisor_review" if payload["advisor_review_set"] else "client_briefing"
+                report_type = "advisor_review"
                 response = self.client.post(
                     "/api/generated-reports/demo-populate",
                     json={
@@ -83,14 +96,14 @@ class BuiltinBriefingTemplateAppTests(unittest.TestCase):
                 )
                 self.assertEqual(200, response.status_code, response.text)
                 artifact = response.json()
-                specs = payload["client_briefing_set"] + payload["advisor_review_set"]
+                specs = payload["advisor_review_set"]
                 self.assertEqual([spec["element_title"] for spec in specs], [row["title"] for row in artifact["ordered_sections"]])
                 self.assertEqual("rendered", artifact["ordered_sections"][0]["status"])
                 if template["workflow_id"] == "external_manager_story_translation_v1":
                     self.assertIn("Core Worldview", artifact["ordered_sections"][0]["html"])
                     visible_caveats = " ".join(artifact["caveats"]).lower()
                     for phrase in (
-                        "translation, not endorsement", "synthetic", "not verified", "not a recommendation",
+                        "translated external viewpoint", "not verified", "not endorsed", "not a recommendation",
                         "require approval", "production client use",
                     ):
                         self.assertIn(phrase, visible_caveats)
@@ -106,7 +119,7 @@ class BuiltinBriefingTemplateAppTests(unittest.TestCase):
             **principal["payload"],
             "workflow_id": principal["workflow_id"],
             "workflow_display_name": principal["display_name"],
-            "report_type": "client_briefing",
+            "report_type": "advisor_review",
             "populate_request_id": "gated_test",
         }
         artifact = self.client.post("/api/generated-reports/demo-populate", json=request).json()
@@ -118,7 +131,7 @@ class BuiltinBriefingTemplateAppTests(unittest.TestCase):
         workflow = next(row for row in self.payload["templates"] if row["workflow_id"] == "external_manager_story_translation_v1")
         caveats = " ".join(workflow["caveats"]).lower()
         for phrase in (
-            "translation, not endorsement", "synthetic", "not verified", "not a recommendation",
+            "translated external viewpoint", "not verified", "not endorsed", "not a recommendation",
             "require approval", "production client use",
         ):
             self.assertIn(phrase, caveats)
@@ -131,22 +144,22 @@ class BuiltinBriefingTemplateAppTests(unittest.TestCase):
         self.assertEqual(set(BUILTIN_TEMPLATE_COPY), {row["workflow_id"] for row in payload["templates"]})
         self.assertNotIn(str(ROOT), json.dumps(payload))
 
-    def test_home_has_one_template_list_and_separate_generated_reports(self) -> None:
+    def test_home_is_conversation_first_and_keeps_history_and_templates_secondary(self) -> None:
         response = self.client.get("/app/")
         self.assertEqual(200, response.status_code)
         html = response.text
-        self.assertIn("<h1 id=\"advisor-home-title\">Briefings</h1>", html)
-        self.assertIn("Briefing Templates", html)
-        self.assertIn("Generated Reports", html)
-        self.assertIn("Generate with current data", html)
-        self.assertIn("Open / edit", html)
-        self.assertIn("Duplicate / Save as", html)
-        self.assertIn("Create or manage templates", html)
-        self.assertIn("Report ${sections.length ? index + 1 : 0} of ${sections.length}", html)
-        self.assertNotIn("Choose a conversation", html)
-        self.assertNotIn("journey-detail-region", html)
-        self.assertNotIn("home-primary-actions", html)
-        self.assertNotIn("Present / view reports", html)
+        self.assertIn('<h1 id="advisor-home-title">What conversation are you preparing?</h1>', html)
+        self.assertIn("Conversation Briefing Desk", html)
+        self.assertIn("Recent briefings", html)
+        self.assertIn("Saved briefing templates", html)
+        self.assertIn("Create briefing with current data", html)
+        self.assertIn("Advisor Review", html)
+        self.assertIn("Client Preview", html)
+        self.assertIn("Presentation", html)
+        self.assertIn("LOCAL_BRIEFING_STORAGE_KEY", html)
+        self.assertIn("renderConversationHome", html)
+        self.assertIn("renderBoundedTemplateBuilder", html)
+        self.assertIn("createDatedBriefing", html)
         self.assertNotIn("/api/advisor-workflows", html)
 
     def test_template_endpoint_is_deterministic(self) -> None:

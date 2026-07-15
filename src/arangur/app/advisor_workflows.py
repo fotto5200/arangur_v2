@@ -21,23 +21,28 @@ BUILTIN_TEMPLATE_COPY = {
     "principal_family_office_briefing_minimal_v1": {
         "display_name": "Principal Briefing",
         "description": "A concise principal conversation about portfolio standing, cash needs, the largest risks, and what the advisor plans to watch or do next.",
+        "audience_character": "Client-facing, with a short advisor readiness review.",
     },
     "engaged_client_investment_committee_review_v1": {
         "display_name": "Engaged Client Review",
         "description": "A detailed client or investment-committee review of allocation, policy decisions, managers, lens exposures, and scenario downside.",
+        "audience_character": "Client-facing after advisor approval of committee-level depth.",
     },
     "advisor_manager_oversight_v1": {
         "display_name": "Advisor Oversight",
         "description": "An advisor-oriented review of policy drift, mandate benchmarks, attribution, manager implementation, and coverage confidence.",
+        "audience_character": "Advisor/internal by default.",
     },
     "external_manager_story_translation_v1": {
         "display_name": "External Manager Story Translation",
         "description": "A translation of an outside manager worldview into structured lenses, scenarios, candidate proxies, and report workflows.",
+        "audience_character": "Advisor/internal by default; translated, not verified or endorsed.",
     },
 }
 EXTERNAL_STORY_CAVEATS = (
-    "Translation, not endorsement.",
-    "Synthetic and not verified.",
+    "Translated external viewpoint.",
+    "Not verified.",
+    "Not endorsed.",
     "Not a recommendation.",
     "Candidate proxies require approval.",
     "Review is required before any production client use.",
@@ -137,6 +142,14 @@ def _load_template(workflow_id: str, path: Path, root: Path) -> dict[str, Any]:
             "display_name": copy["display_name"],
             "name": copy["display_name"],
             "description": copy["description"],
+            "briefing_type_name": workflow["display_name"],
+            "audience": workflow["audience"],
+            "audience_depth": workflow["audience_depth"],
+            "audience_character": copy["audience_character"],
+            "conversation_goal": workflow["conversation_goal"],
+            "core_user_question": workflow["core_user_question"],
+            "advisor_internal_default": target_branch == "advisor",
+            "ordered_journey": [_advisor_safe_step(step) for step in workflow["ordered_steps"]],
             "workflow_type": "Advisor Review Workflow" if target_branch == "advisor" else "Client Briefing Workflow",
             "template_kind": "built_in",
             "is_builtin": True,
@@ -173,6 +186,8 @@ def _empty_workflow_payload(display_name: str) -> dict[str, Any]:
         "client_context": {},
         "client_briefing_set": [],
         "advisor_review_set": [],
+        "briefing_purpose": "",
+        "briefing_notes": "",
     }
 
 
@@ -184,35 +199,81 @@ def _workflow_payload(
     root: Path,
 ) -> dict[str, Any]:
     payload = _empty_workflow_payload(display_name)
-    target_set = "Advisor Review Set" if target_branch == "advisor" else "Client Briefing Set"
-    specs = []
+    client_specs = []
+    advisor_specs = []
     for step in ordered_steps:
         source = step.get("source_mockup_path") or step.get("source_artifact_path")
         preview_available = bool(
             step.get("status") in AVAILABLE_STATUSES and source and _safe_existing_preview_path(root, str(source))
         )
-        specs.append(
-            {
-                "order": int(step["step_number"]),
-                "local_spec_id": f"builtin:{workflow_id}:{step['report_id']}",
-                "element_kind": "analytic",
-                "element_id": step["report_id"],
-                "element_title": step["display_title"],
-                "target_set": target_set,
-                "target_branch": "Advisor Review" if target_branch == "advisor" else "Client Briefing",
-                "placement": "Main advisor review" if target_branch == "advisor" else "Main client presentation",
-                "advisor_internal_purpose": None,
-                "configured_parameters": {},
-                "preview_available": preview_available,
-                "matched_rendered_view": None,
-                "confidence_badge": "catalog_report_available" if preview_available else "not_available",
-                "catalog_workflow_id": workflow_id,
-                "catalog_status": step["status"],
-                "caveat": step.get("caveat", "Synthetic demo content."),
-            }
-        )
-    payload["advisor_review_set" if target_branch == "advisor" else "client_briefing_set"] = specs
+        advisor_specs.append(_workflow_spec(workflow_id, step, "advisor", preview_available))
+        if (
+            target_branch == "client"
+            and step.get("audience_visibility") == "client_facing"
+            and step.get("status") in AVAILABLE_STATUSES
+        ):
+            client_specs.append(_workflow_spec(workflow_id, step, "client", preview_available))
+    payload["client_briefing_set"] = client_specs
+    payload["advisor_review_set"] = advisor_specs
     return payload
+
+
+def _workflow_spec(
+    workflow_id: str,
+    step: dict[str, Any],
+    branch: str,
+    preview_available: bool,
+) -> dict[str, Any]:
+    is_client = branch == "client"
+    return {
+        "order": int(step["step_number"]),
+        "local_spec_id": f"builtin:{workflow_id}:{step['report_id']}:{branch}",
+        "element_kind": "analytic",
+        "element_id": step["report_id"],
+        "element_title": step["display_title"],
+        "target_set": "Client Briefing Set" if is_client else "Advisor Review Set",
+        "target_branch": "Client Briefing" if is_client else "Advisor Review",
+        "placement": "Main client presentation" if is_client else "Main advisor review",
+        "advisor_internal_purpose": None,
+        "configured_parameters": {},
+        "preview_available": preview_available,
+        "matched_rendered_view": None,
+        "confidence_badge": "catalog_report_available" if preview_available else "not_available",
+        "catalog_workflow_id": workflow_id,
+        "catalog_status": step["status"],
+        "audience_visibility": step["audience_visibility"],
+        "step_role": step["step_role"],
+        "visible_question_answered": step["visible_question_answered"],
+        "why_included": step["why_included"],
+        "optional": step.get("step_role") == "supporting" and step.get("audience_visibility") == "advisor_review",
+        "client_visible": is_client,
+        "caveat": step.get("caveat", "Synthetic demo content."),
+    }
+
+
+def _advisor_safe_step(step: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "step_number": int(step["step_number"]),
+        "display_title": step["display_title"],
+        "visible_question_answered": step["visible_question_answered"],
+        "why_included": step["why_included"],
+        "audience_visibility": step["audience_visibility"],
+        "step_role": step["step_role"],
+        "status": step["status"],
+        "optional": step.get("step_role") == "supporting" and step.get("audience_visibility") == "advisor_review",
+        "gate_explanation": _gate_explanation(step) if step.get("status") in {"gated", "deferred"} else "",
+    }
+
+
+def _gate_explanation(step: dict[str, Any]) -> str:
+    caveat = str(step.get("caveat") or "").lower()
+    if "benchmark" in caveat or "proxy" in caveat:
+        return "Not yet available — benchmark or proxy approval is required."
+    if "method" in caveat or "calculation" in caveat or "aggregation" in caveat:
+        return "Not yet available — an approved method is required."
+    if "data" in caveat or "input" in caveat or "assignment" in caveat:
+        return "Not yet available — a data prerequisite is missing."
+    return "Not yet available — the briefing section shape is not approved."
 
 
 def _source_path_for_step(workflow_id: str, report_id: str, root: Path) -> Path:

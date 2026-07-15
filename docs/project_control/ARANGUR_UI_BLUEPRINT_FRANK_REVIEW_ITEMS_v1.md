@@ -1,10 +1,12 @@
 # Arangur UI Blueprint Frank Review Items v1
 
-Status: prioritized approval queue for `Advisor Workflow UI Integration Blueprint v1`
+Status: approved by Frank for `Advisor Workflow UI Wiring v1`, 2026-07-15
 
-The blueprint is complete as a review draft. No advisor-facing UI wiring should begin until the blocking decisions below are approved or revised.
+Frank approved the recommended answers as binding for the bounded local synthetic-demo tranche. The implementation and acceptance evidence are recorded in `docs/demo/advisor_workflow_ui_wiring_v1.md`. Production persistence, deployment, real data, and new analytics were not authorized by this approval.
 
-| Priority | Decision needed | Recommended answer | Alternatives and consequences | Blocks UI wiring? |
+The review queue is closed. The table preserves the approved choices and the tradeoffs Frank reviewed before authorizing the bounded local UI wiring.
+
+| Priority | Decision needed | Approved answer | Alternatives and consequences | Blocked UI wiring before approval? |
 | ---: | --- | --- | --- | --- |
 | 1 | Application architecture | Approve **Conversation Briefing Desk**: business-conversation chooser first; dated briefing becomes the center after generation. | Pure Briefing Desk weakens first-time/job entry; free-form Arangur Guide adds interpretation risk; Investment Library makes objects/collections primary. A different named composite requires an explicit job/behavior map. | Yes |
 | 2 | Canonical vocabulary | Use **Briefing type** for the four built-ins, **Briefing template** for reusable definitions, and **Briefing** for dated immutable outputs. Keep `workflow` and `generated report` internal/legacy. | Keeping Workflow visible is technically direct but conflicts with design principles. Keeping Generated Reports preserves current UI but weakens template/output identity. | Yes |

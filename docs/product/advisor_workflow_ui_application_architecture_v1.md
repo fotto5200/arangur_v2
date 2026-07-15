@@ -1,6 +1,6 @@
 # Advisor Workflow UI Application Architecture v1
 
-Status: recommended for Frank review; not final and not implementation authorization
+Status: approved by Frank and locally implemented, 2026-07-15
 
 Canonical product name: **Arangur**. Older `ARRANGER_...` filenames and historical artifacts retain their existing names, but the transcription error is not propagated in new prose.
 
