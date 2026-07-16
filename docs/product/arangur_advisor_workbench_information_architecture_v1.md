@@ -135,10 +135,13 @@ The same underlying record and action wording are used when an item appears in m
 | --- | --- |
 | Briefing Plan Draft | Continue plan |
 | Saved Briefing Plan | Open/revise, create a copy, or create a Dated Briefing |
-| Dated Briefing — in review | View populated Briefing Sections, Explain/Verify, complete review |
-| Ready Dated Briefing | View, compare, preview, or present |
+| Dated Briefing — in review | View populated Briefing Sections, Explain/Verify, Complete Advisor Review |
+| Reviewed Dated Briefing | Preview the audience-visible sequence; Mark Ready to Present when eligible |
+| Ready to Present | Preview or present the same eligible Dated Briefing record |
 
 Status determines actions. The advisor is not required to infer technical completeness rules.
+
+Selection feedback, object identity, the Reviewed/Ready transition, Preview/Presentation eligibility, explicit comparison, and object-bound return navigation are governed by `docs/product/arangur_advisor_workbench_state_navigation_correction_v1.md`.
 
 ## Developer / QA boundary
 

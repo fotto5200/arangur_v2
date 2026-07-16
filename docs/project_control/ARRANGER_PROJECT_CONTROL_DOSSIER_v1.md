@@ -8,6 +8,8 @@ Canonical naming note: the product name is **Arangur**. The `ARRANGER_...` filen
 
 Blueprint update, 2026-07-15: `docs/product/advisor_workflow_ui_integration_blueprint_v1.md` and its companion architecture, vocabulary/lifecycle, state-map, and visibility contracts have been created as drafts for Frank review. Advisor-facing UI wiring remains blocked until the listed product decisions are approved.
 
+Workbench state/navigation update, 2026-07-16: `docs/product/arangur_advisor_workbench_state_navigation_correction_v1.md` is the controlling correction for selection feedback, Draft/Saved Plan/Dated Briefing identity, Reviewed versus Ready-to-Present status, audience Preview eligibility, Presentation return context, explicit comparison, and predictable Back behavior. The accepted four-activity information architecture and advanced builder remain unchanged; populated Briefing Section visual integration remains the next separate visual tranche.
+
 Primary audience: Frank, ChatGPT strategy/controller threads, and future Codex implementation tranches
 
 ## 1. Executive summary

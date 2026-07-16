@@ -2,7 +2,7 @@
 
 ## Current checkpoint — 2026-07-16
 
-Arangur Advisor Workbench Information Architecture v1 is implemented locally. Preserve the four primary activities, canonical Briefing Plan/Dated Briefing vocabulary, status-aware actions, deterministic Ask Arangur routing, Legacy filtering, and the restored advanced builder/lifecycle. The recommended next tranche is **Arangur Dated Briefing Reader and Design-Lab Visual Integration v1**. That later tranche may redesign populated Briefing Section reading and visuals; it must not reopen the stabilized top-level information architecture or invent new analytics.
+Arangur Advisor Workbench Information Architecture v1 and the bounded State and Navigation Correction v1 are implemented locally. Preserve the four primary activities, canonical Briefing Plan/Dated Briefing vocabulary, immediate Included/Available feedback, meaningful Draft/Saved Plan/Dated Briefing identity, the Dated Briefing → Reviewed → Ready-to-Present transition, presentable-implies-previewable eligibility, object-bound Presentation exit/resume, explicit comparison, deterministic Ask Arangur routing, Legacy filtering, and the restored advanced builder/lifecycle. The recommended next tranche is **Arangur Dated Briefing Reader and Design-Lab Visual Integration v1**. That later tranche may redesign populated Briefing Section reading and visuals; it must not reopen stabilized state/navigation or invent new analytics.
 
 ## Current checkpoint — 2026-07-15
 

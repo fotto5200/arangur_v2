@@ -377,6 +377,40 @@
       padding: 13px;
     }
 
+    .builder-catalog-card.is-included {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      box-shadow: inset 4px 0 0 var(--accent);
+    }
+
+    .plan-outline {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      display: grid;
+      gap: 10px;
+      padding: 13px;
+      position: sticky;
+      top: 12px;
+    }
+
+    .plan-outline ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .selection-layout {
+      align-items: start;
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
+    }
+
+    .selection-confirmation {
+      border-left: 4px solid var(--accent);
+      padding-left: 10px;
+    }
+
     .builder-parameter-grid {
       display: grid;
       gap: 10px;
@@ -1348,6 +1382,8 @@
 
       .workspace,
       .sets-grid,
+      .selection-layout,
+      .builder-catalog-grid,
       .finder-grid,
       .calculation-fields,
       .workflow-name-grid,
@@ -2010,6 +2046,8 @@
       workbenchSearchQuery: "",
       compareLeftId: "",
       compareRightId: "",
+      compareRequested: false,
+      datedBriefingTitleDraft: "",
       deskSelectedTypeId: null,
       deskSelectedTemplateId: null,
       deskDraftTemplate: null,
@@ -2017,11 +2055,14 @@
       deskBuilderMode: "customize",
       deskCatalogQuery: "",
       deskCatalogFamily: "",
+      builderSelectionMessage: "",
       deskEditingSectionIndex: null,
       deskCurrentBriefingId: null,
       deskSectionIndex: 0,
       deskEvidenceMode: null,
       deskEvidenceReturnRoute: null,
+      deskReturnRoute: "dated-list",
+      presentationReturnContext: null,
       deskGenerating: false,
       savedSpecSets: [],
       clientSet: [],
@@ -2292,11 +2333,49 @@
         const raw = window.localStorage ? window.localStorage.getItem(LOCAL_PLAN_DRAFT_STORAGE_KEY) : null;
         const payload = raw ? JSON.parse(raw) : null;
         state.planDrafts = Array.isArray(payload && payload.drafts)
-          ? payload.drafts.filter((draft) => draft && draft.draft_id && draft.template)
+          ? payload.drafts.filter((draft) => draft && draft.draft_id && draft.template).map(normalizePlanDraftRecord)
           : [];
       } catch (error) {
         state.planDrafts = [];
       }
+    }
+
+    function normalizePlanDraftRecord(draft) {
+      const lastEdited = draft.last_edited || draft.updated_at || new Date().toISOString();
+      const createdAt = draft.created_at || (draft.template && draft.template.created_at) || lastEdited;
+      const template = { ...(draft.template || {}) };
+      template.display_name = meaningfulDraftName(template, draft.draft_id);
+      return {
+        ...draft,
+        template,
+        created_at: createdAt,
+        last_edited: lastEdited,
+        builder_step: Number(draft.builder_step) || 1,
+        current_stage: draft.current_stage || "Purpose",
+        selected_section_count: Number.isFinite(Number(draft.selected_section_count))
+          ? Number(draft.selected_section_count)
+          : (template.editor_sections || []).filter((section) => section.included !== false).length,
+        save_status: draft.save_status || "Autosaved",
+        source_template: draft.source_template || template.source_template_name || null
+      };
+    }
+
+    function meaningfulDraftName(template, draftId = "") {
+      const current = readableWorkflowName(template && template.display_name);
+      if (current && !current.startsWith("Custom ") && current !== "Untitled Briefing Workflow") return current;
+      const audience = normalize(template && template.audience_choice);
+      const base = audience.includes("manager") ? "Untitled Manager Discussion Plan"
+        : audience.includes("advisor") || audience.includes("internal") ? "Untitled Advisor Briefing Plan"
+        : "Untitled Client Briefing Plan";
+      const siblings = state.planDrafts.filter((draft) => draft.draft_id !== draftId && normalize(workflowDisplayName(draft.template)).startsWith(normalize(base))).length;
+      return siblings ? `${base} ${siblings + 1}` : base;
+    }
+
+    function draftPersistenceEligible(template) {
+      if (!template || template.is_builtin) return false;
+      if (template.draft_persistence_eligible) return true;
+      const sections = Array.isArray(template.editor_sections) ? template.editor_sections : [];
+      return sections.length > 0 || state.deskBuilderStep > 1;
     }
 
     function loadLocalGeneratedReports() {
@@ -2382,21 +2461,49 @@
 
     function persistCurrentPlanDraft() {
       const template = state.deskDraftTemplate;
-      if (!template || template.is_builtin) return;
+      if (!draftPersistenceEligible(template)) return;
       const draftId = template.draft_id || workflowRecordId(template) || newLocalId("plan-draft");
       template.draft_id = draftId;
+      template.display_name = meaningfulDraftName(template, draftId);
+      const existing = state.planDrafts.find((candidate) => candidate.draft_id === draftId);
+      const now = new Date().toISOString();
       const record = {
         draft_id: draftId,
         template: JSON.parse(JSON.stringify(template)),
         builder_step: state.deskBuilderStep,
         current_stage: ["Purpose", "Briefing Sections", "Configure", "Order & visibility", "Preview"][state.deskBuilderStep - 1] || "Purpose",
-        last_edited: new Date().toISOString(),
-        work_remaining: Math.max(0, 5 - state.deskBuilderStep)
+        created_at: existing ? existing.created_at : (template.created_at || now),
+        last_edited: now,
+        work_remaining: Math.max(0, 5 - state.deskBuilderStep),
+        selected_section_count: (template.editor_sections || []).filter((section) => section.included !== false).length,
+        save_status: "Autosaved",
+        source_template: template.source_template_name || null
       };
       const index = state.planDrafts.findIndex((candidate) => candidate.draft_id === draftId);
       if (index >= 0) state.planDrafts[index] = record;
       else state.planDrafts.unshift(record);
       persistLocalPlanDrafts();
+    }
+
+    function discardPlanDraft(draftId) {
+      const draft = state.planDrafts.find((candidate) => candidate.draft_id === draftId);
+      if (!draft) return;
+      if (!window.confirm(`Discard the Briefing Plan Draft "${workflowDisplayName(draft.template)}"? This cannot be undone.`)) return;
+      state.planDrafts = state.planDrafts.filter((candidate) => candidate.draft_id !== draftId);
+      persistLocalPlanDrafts();
+      renderPlanDraftList();
+    }
+
+    function renamePlanDraft(draftId) {
+      const draft = state.planDrafts.find((candidate) => candidate.draft_id === draftId);
+      if (!draft) return;
+      const nextName = readableWorkflowName(window.prompt("Rename this Briefing Plan Draft", workflowDisplayName(draft.template)) || "");
+      if (!nextName) return;
+      draft.template.display_name = nextName;
+      draft.last_edited = new Date().toISOString();
+      draft.save_status = "Autosaved";
+      persistLocalPlanDrafts();
+      renderPlanDraftList();
     }
 
     function removeCurrentPlanDraft() {
@@ -2504,7 +2611,7 @@
     }
 
     function savedBriefingPlans() {
-      return state.savedWorkflows.filter((record) => !record.legacy_incompatible && !record.is_builtin);
+      return state.savedWorkflows.filter((record) => !record.legacy_incompatible && !record.is_builtin && !record.archived_at);
     }
 
     function renderConversationHome() {
@@ -2519,7 +2626,7 @@
       }));
       state.briefings.slice(0, 3).forEach((briefing) => recentItems.push({
         sort: briefing.last_activity_at || briefing.generated_at,
-        html: `<div class="history-row"><div class="journey-copy"><span class="status-label">${briefing.review_status === "reviewed" ? "Ready to Present" : "Dated Briefing"}</span><strong>${escapeHtml(briefing.title)}</strong><p class="meta">Data through ${escapeHtml(formatBriefingDate(briefing.data_as_of))}</p></div><button class="tiny-button" type="button" data-desk-action="open-briefing" data-briefing-id="${escapeAttr(briefing.briefing_id)}">View briefing</button></div>`
+        html: `<div class="history-row"><div class="journey-copy"><span class="status-label">${escapeHtml(briefingDisplayStatus(briefing))}</span><strong>${escapeHtml(briefing.title)}</strong><p class="meta">Data through ${escapeHtml(formatBriefingDate(briefing.data_as_of))}</p></div><button class="tiny-button" type="button" data-desk-action="open-briefing" data-briefing-id="${escapeAttr(briefing.briefing_id)}">View briefing</button></div>`
       }));
       recentItems.sort((a, b) => String(b.sort || "").localeCompare(String(a.sort || "")));
       els.homeRecentWorkList.innerHTML = recentItems.slice(0, 4).map((item) => item.html).join("") || '<p class="empty">No recent work in this browser.</p>';
@@ -2528,7 +2635,7 @@
       els.homePresentWorkflowList.innerHTML = ready.length ? ready.map((briefing) => `
         <div class="history-row"><div class="journey-copy"><span class="status-label">Ready to Present</span><strong>${escapeHtml(briefing.title)}</strong><p class="meta">${escapeHtml(briefing.audience || "Advisor audience")} &middot; ${escapeHtml(formatBriefingDate(briefing.data_as_of))}</p></div><div class="saved-workflow-actions"><button class="tiny-button" type="button" data-desk-action="preview-briefing" data-briefing-id="${escapeAttr(briefing.briefing_id)}">Preview</button><button class="tiny-button" type="button" data-desk-action="present-briefing" data-briefing-id="${escapeAttr(briefing.briefing_id)}">Present</button></div></div>
       `).join("") : '<p class="empty">No reviewed Dated Briefings are ready yet.</p>';
-      els.homePresentWorkflowStatus.textContent = ready.length ? `${ready.length} reviewed ${ready.length === 1 ? "Dated Briefing" : "Dated Briefings"}.` : "Complete Advisor Review to make a Dated Briefing ready.";
+      els.homePresentWorkflowStatus.textContent = ready.length ? `${ready.length} Ready-to-Present ${ready.length === 1 ? "Dated Briefing" : "Dated Briefings"}.` : "Complete Advisor Review and mark a previewable Dated Briefing Ready to Present.";
 
       const recentBriefings = state.briefings.slice(0, 3);
       els.homeRecentBriefingsList.innerHTML = recentBriefings.length ? recentBriefings.map((briefing) => `
@@ -2540,7 +2647,35 @@
     }
 
     function readyDatedBriefings() {
-      return state.briefings.filter((briefing) => briefing.review_status === "reviewed");
+      return state.briefings.filter(isPresentationEligible);
+    }
+
+    function audienceVisibleSections(briefing) {
+      const artifact = briefing && briefing.client_artifact;
+      return artifact && Array.isArray(artifact.ordered_sections)
+        ? artifact.ordered_sections.filter((section) => section && section.status === "rendered" && String(section.html || "").trim())
+        : [];
+    }
+
+    function isPreviewEligible(briefing) {
+      return Boolean(briefing && ["reviewed", "ready_to_present"].includes(briefing.review_status) && audienceVisibleSections(briefing).length && !briefing.blocking_condition);
+    }
+
+    function isPresentationEligible(briefing) {
+      return Boolean(briefing && briefing.review_status === "ready_to_present" && isPreviewEligible(briefing));
+    }
+
+    function briefingDisplayStatus(briefing) {
+      if (briefing.review_status === "ready_to_present") return "Ready to Present";
+      if (briefing.review_status === "reviewed") return "Reviewed";
+      return "Dated Briefing";
+    }
+
+    function audiencePreviewLabel(briefing) {
+      const audience = normalize(briefing && briefing.audience);
+      if (audience.includes("manager")) return "Manager Preview";
+      if (audience.includes("client") || audience.includes("family") || audience.includes("committee") || audience.includes("principal")) return "Client Preview";
+      return "Audience Preview";
     }
 
     function selectedBriefingType() {
@@ -2671,6 +2806,9 @@
       state.deskDraftTemplate.audience_choice = state.newPlanSetup.audience;
       state.deskDraftTemplate.briefing_purpose = state.newPlanSetup.purpose;
       state.deskDraftTemplate.audience_depth = state.newPlanSetup.detail;
+      state.deskDraftTemplate.display_name = "Untitled Briefing Workflow";
+      state.deskDraftTemplate.display_name = meaningfulDraftName(state.deskDraftTemplate);
+      state.deskDraftTemplate.draft_persistence_eligible = true;
       state.deskBuilderStep = 2;
       persistCurrentPlanDraft();
       navigateToRoute("template-builder");
@@ -2707,14 +2845,23 @@
     }
 
     function renderPlanDraftList() {
-      const rows = state.planDrafts.map((draft) => `<article class="template-row"><div class="journey-copy"><span class="status-label">Briefing Plan Draft</span><strong>${escapeHtml(workflowDisplayName(draft.template))}</strong><p class="meta">${escapeHtml(draft.template.audience_choice || "Advisor audience")} &middot; Last edited ${escapeHtml(formatBriefingDate(draft.last_edited))}</p><p class="meta">Current stage: ${escapeHtml(draft.current_stage)} &middot; ${draft.work_remaining} stages remaining</p></div><button class="primary-button" type="button" data-desk-action="continue-draft" data-draft-id="${escapeAttr(draft.draft_id)}">Continue plan</button></article>`).join("");
-      els.briefingDeskRegion.innerHTML = deskShell("Briefing Plan Drafts", `<div class="desk-intro"><p class="eyebrow">Draft list</p><h1>Continue an unfinished briefing plan draft</h1></div><div class="template-list">${rows || '<p class="empty">No unfinished Briefing Plan Drafts in this browser.</p>'}</div>`);
+      const rows = state.planDrafts.map((draft) => `<article class="template-row"><div class="journey-copy"><span class="status-label">Briefing Plan Draft</span><strong>${escapeHtml(workflowDisplayName(draft.template))}</strong><p class="meta"><strong>Audience:</strong> ${escapeHtml(draft.template.audience_choice || "Advisor/internal")}</p><p class="meta">Created ${escapeHtml(formatBriefingDateTime(draft.created_at))} &middot; Last edited ${escapeHtml(formatBriefingDateTime(draft.last_edited))}</p><p class="meta">${escapeHtml(draft.current_stage)} &middot; ${draft.selected_section_count} ${draft.selected_section_count === 1 ? "section" : "sections"} &middot; ${escapeHtml(draft.save_status)}</p>${draft.source_template ? `<p class="meta"><strong>Source template:</strong> ${escapeHtml(draft.source_template)}</p>` : ""}</div><div class="saved-workflow-actions"><button class="primary-button" type="button" data-desk-action="continue-draft" data-draft-id="${escapeAttr(draft.draft_id)}">Continue</button><button class="tiny-button" type="button" data-desk-action="rename-draft" data-draft-id="${escapeAttr(draft.draft_id)}">Rename</button><button class="tiny-button" type="button" data-desk-action="discard-draft" data-draft-id="${escapeAttr(draft.draft_id)}">Discard Draft</button></div></article>`).join("");
+      const empty = '<div class="empty"><strong>No Briefing Plan Drafts</strong><p>No unfinished Briefing Plans yet.</p><div class="button-row"><button class="primary-button" type="button" data-desk-action="new-plan-setup">Build a New Briefing Plan</button><button class="secondary-button" type="button" data-desk-action="template-library">Start from a Template</button></div></div>';
+      els.briefingDeskRegion.innerHTML = deskShell("Briefing Plan Drafts", `<div class="desk-intro"><p class="eyebrow">Draft list</p><h1>Continue an unfinished briefing plan draft</h1></div><div class="template-list">${rows || empty}</div>`);
     }
 
     function renderPlanList() {
-      const drafts = state.planDrafts.map((draft) => `<article class="template-row"><div class="journey-copy"><span class="status-label">Briefing Plan Draft</span><strong>${escapeHtml(workflowDisplayName(draft.template))}</strong><p class="meta">Continue editing at ${escapeHtml(draft.current_stage)}</p></div><button class="primary-button" type="button" data-desk-action="continue-draft" data-draft-id="${escapeAttr(draft.draft_id)}">Open plan</button></article>`).join("");
-      const saved = savedBriefingPlans().map((plan) => `<article class="template-row"><div class="journey-copy"><span class="status-label">Saved Briefing Plan</span><strong>${escapeHtml(workflowDisplayName(plan))}</strong><p class="meta">${escapeHtml(templateSectionSummary(plan))}</p></div><div class="saved-workflow-actions"><button class="primary-button" type="button" data-desk-action="customize-template" data-template-id="${escapeAttr(workflowRecordId(plan))}">Open plan</button><button class="tiny-button" type="button" data-desk-action="duplicate-plan" data-template-id="${escapeAttr(workflowRecordId(plan))}">Create a copy</button></div></article>`).join("");
+      const drafts = state.planDrafts.map((draft) => `<article class="template-row"><div class="journey-copy"><span class="status-label">Briefing Plan Draft</span><strong>${escapeHtml(workflowDisplayName(draft.template))}</strong><p class="meta">${escapeHtml(draft.current_stage)} &middot; ${draft.selected_section_count} sections &middot; ${escapeHtml(draft.save_status)}</p></div><button class="primary-button" type="button" data-desk-action="continue-draft" data-draft-id="${escapeAttr(draft.draft_id)}">Continue Plan</button></article>`).join("");
+      const saved = savedBriefingPlans().map((plan) => { const latest = latestBriefingForPlan(workflowRecordId(plan)); return `<article class="template-row"><div class="journey-copy"><span class="status-label">Saved Briefing Plan</span><strong>${escapeHtml(workflowDisplayName(plan))}</strong><p class="meta"><strong>Audience:</strong> ${escapeHtml(plan.audience_choice || plan.audience || "Advisor/internal")} &middot; ${sectionCountForPlan(plan)} sections</p><p class="meta">Saved ${escapeHtml(formatBriefingDateTime(plan.saved_at))} &middot; Last edited ${escapeHtml(formatBriefingDateTime(plan.updated_at))}</p><p class="meta"><strong>Lineage:</strong> ${escapeHtml(plan.source_template_name || "Created by advisor")}${latest ? ` &middot; <strong>Latest Dated Briefing:</strong> ${escapeHtml(latest.title)}` : ""}</p></div><div class="saved-workflow-actions"><button class="primary-button" type="button" data-desk-action="customize-template" data-template-id="${escapeAttr(workflowRecordId(plan))}">Revise</button><button class="tiny-button" type="button" data-desk-action="duplicate-plan" data-template-id="${escapeAttr(workflowRecordId(plan))}">Duplicate</button><button class="tiny-button" type="button" data-desk-action="use-template" data-template-id="${escapeAttr(workflowRecordId(plan))}">Create Dated Briefing</button><button class="tiny-button" type="button" data-desk-action="archive-plan" data-template-id="${escapeAttr(workflowRecordId(plan))}">Archive</button></div></article>`; }).join("");
       els.briefingDeskRegion.innerHTML = deskShell("Existing Briefing Plans", `<div class="desk-intro"><p class="eyebrow">Status-aware Briefing Plan list</p><h1>Revise or continue a briefing plan</h1></div><div class="template-list">${drafts + saved || '<p class="empty">No Briefing Plans are available yet.</p>'}</div>`);
+    }
+
+    function sectionCountForPlan(plan) {
+      return listForKindFromPayload("advisor", plan && plan.payload || {}).length;
+    }
+
+    function latestBriefingForPlan(planId) {
+      return state.briefings.filter((briefing) => briefing.template_id === planId).sort((a, b) => String(b.generated_at).localeCompare(String(a.generated_at)))[0] || null;
     }
 
     function renderCreateDatedPlanSelection() {
@@ -2724,7 +2871,8 @@
     }
 
     function datedBriefingRow(briefing, action = "open-briefing", label = "View briefing") {
-      return `<article class="history-row"><div class="journey-copy"><span class="status-label">${briefing.review_status === "reviewed" ? "Ready Dated Briefing" : "Dated Briefing"}</span><strong>${escapeHtml(briefing.title)}</strong><p class="meta">${escapeHtml(briefing.audience || "Advisor audience")} &middot; Briefing ${escapeHtml(formatBriefingDate(briefing.generated_at))} &middot; Data ${escapeHtml(formatBriefingDate(briefing.data_as_of))}</p><p class="meta">Briefing Plan: ${escapeHtml(briefing.template_name || "Earlier saved plan")}</p></div><button class="primary-button tiny-button" type="button" data-desk-action="${escapeAttr(action)}" data-briefing-id="${escapeAttr(briefing.briefing_id)}">${escapeHtml(label)}</button></article>`;
+      const activity = briefing.last_presented_at ? `Last presented ${formatBriefingDateTime(briefing.last_presented_at)}` : briefing.reviewed_at ? `Last reviewed ${formatBriefingDateTime(briefing.reviewed_at)}` : "Not yet reviewed";
+      return `<article class="history-row"><div class="journey-copy"><span class="status-label">${escapeHtml(briefingDisplayStatus(briefing))}</span><strong>${escapeHtml(briefing.title)}</strong><p class="meta"><strong>Audience:</strong> ${escapeHtml(briefing.audience || "Advisor/internal")} &middot; <strong>Briefing date:</strong> ${escapeHtml(formatBriefingDate(briefing.briefing_date || briefing.generated_at))} &middot; <strong>Data date:</strong> ${escapeHtml(formatBriefingDate(briefing.data_as_of))}</p><p class="meta"><strong>Source Briefing Plan:</strong> ${escapeHtml(briefing.template_name || "Earlier saved plan")} &middot; ${Number(briefing.section_count || (briefing.journey_steps || []).length)} sections</p><p class="meta">${escapeHtml(activity)}</p></div><button class="primary-button tiny-button" type="button" data-desk-action="${escapeAttr(action)}" data-briefing-id="${escapeAttr(briefing.briefing_id)}">${escapeHtml(label)}</button></article>`;
     }
 
     function renderDatedBriefingList() {
@@ -2732,19 +2880,30 @@
     }
 
     function renderDatedComparison() {
+      if (state.briefings.length < 2) {
+        els.briefingDeskRegion.innerHTML = deskShell("Compare Dated Briefings", '<div class="desk-intro"><p class="eyebrow">Dated Briefing comparison</p><h1>No Dated Briefings to Compare</h1></div><div class="empty"><p>Create at least two Dated Briefings before comparing them.</p><button class="primary-button" type="button" data-desk-action="create-dated-list">Create a Dated Briefing</button></div>');
+        return;
+      }
       const options = state.briefings.map((briefing) => `<option value="${escapeAttr(briefing.briefing_id)}">${escapeHtml(briefing.title)} — ${escapeHtml(formatBriefingDate(briefing.data_as_of))}</option>`).join("");
       const left = state.briefings.find((item) => item.briefing_id === state.compareLeftId);
       const right = state.briefings.find((item) => item.briefing_id === state.compareRightId);
-      let result = '<p class="empty">Choose two Dated Briefings. Arangur will compare only information stored in their immutable artifacts.</p>';
-      if (left && right && left.briefing_id !== right.briefing_id) {
+      const selection = `<section><h2>Review selection</h2><div class="summary-grid"><div class="summary-tile"><strong>First Dated Briefing</strong>${left ? `${escapeHtml(left.title)}<br>${escapeHtml(formatBriefingDate(left.briefing_date))} · Data ${escapeHtml(formatBriefingDate(left.data_as_of))}` : "Not selected"}</div><div class="summary-tile"><strong>Second Dated Briefing</strong>${right ? `${escapeHtml(right.title)}<br>${escapeHtml(formatBriefingDate(right.briefing_date))} · Data ${escapeHtml(formatBriefingDate(right.data_as_of))}` : "Not selected"}</div></div><button class="primary-button" type="button" data-desk-action="compare-briefings" ${left && right && left.briefing_id !== right.briefing_id ? "" : "disabled"}>Compare Briefings</button></section>`;
+      let result = '<p class="empty">Select the first and second Dated Briefings, review the selection, then click Compare Briefings.</p>';
+      if (state.compareRequested && left && right && left.briefing_id !== right.briefing_id) {
         const leftTitles = new Set((left.journey_steps || []).map((item) => item.display_title));
         const rightTitles = new Set((right.journey_steps || []).map((item) => item.display_title));
         const common = [...leftTitles].filter((title) => rightTitles.has(title));
         const removed = [...leftTitles].filter((title) => !rightTitles.has(title));
         const added = [...rightTitles].filter((title) => !leftTitles.has(title));
-        result = `<div class="summary-grid"><div class="summary-tile"><strong>Briefing dates</strong>${escapeHtml(formatBriefingDate(left.generated_at))}<br>${escapeHtml(formatBriefingDate(right.generated_at))}</div><div class="summary-tile"><strong>Data dates</strong>${escapeHtml(formatBriefingDate(left.data_as_of))}<br>${escapeHtml(formatBriefingDate(right.data_as_of))}</div><div class="summary-tile"><strong>Briefing Plans</strong>${escapeHtml(left.template_name)}<br>${escapeHtml(right.template_name)}</div></div><div class="summary-tile"><strong>Common Briefing Sections</strong>${escapeHtml(common.join(", ") || "None")}</div><div class="summary-tile"><strong>Sections added or removed</strong>Added: ${escapeHtml(added.join(", ") || "None")}<br>Removed: ${escapeHtml(removed.join(", ") || "None")}</div><aside class="governance-banner"><strong>Supported comparison only</strong><p>Stored dates, plan identity, section sequence, and saved configuration can be compared. Complete historical position reconstruction and unrecorded value differences are not available and are not inferred.</p></aside>`;
+        const changedConfig = common.filter((title) => {
+          const a = (left.journey_steps || []).find((step) => step.display_title === title) || {};
+          const b = (right.journey_steps || []).find((step) => step.display_title === title) || {};
+          return JSON.stringify(a.configured_parameters || {}) !== JSON.stringify(b.configured_parameters || {}) || a.audience_visibility !== b.audience_visibility;
+        });
+        const noCommon = !common.length ? `<div class="empty"><strong>These Dated Briefings do not contain comparable Briefing Sections.</strong><p>Select Briefings created from the same or similar Briefing Plan for a more useful comparison.</p></div>` : `<div class="summary-tile"><strong>Common Briefing Sections</strong>${escapeHtml(common.join(", "))}</div>`;
+        result = `${noCommon}<div class="summary-grid"><div class="summary-tile"><strong>Only in ${escapeHtml(left.title)}</strong>${escapeHtml(removed.join(", ") || "None")}</div><div class="summary-tile"><strong>Only in ${escapeHtml(right.title)}</strong>${escapeHtml(added.join(", ") || "None")}</div><div class="summary-tile"><strong>Changed Plan configuration</strong>${escapeHtml(changedConfig.join(", ") || "No supported configuration changes")}</div></div><aside class="governance-banner"><strong>Supported comparison only</strong><p>Stored dates, Plan identity, section sequence, visibility, and saved configuration are compared. Complete historical position reconstruction and unrecorded value differences are not available and are not inferred. Unsupported values are never fabricated.</p></aside>`;
       }
-      const body = `<div class="desk-intro"><p class="eyebrow">Dated Briefing comparison selection</p><h1>Compare dated briefings</h1></div><div class="bounded-fields"><label class="field"><span>Earlier Dated Briefing</span><select data-workbench-field="compare-left"><option value="">Choose one</option>${options}</select></label><label class="field"><span>Later Dated Briefing</span><select data-workbench-field="compare-right"><option value="">Choose one</option>${options}</select></label></div>${result}`;
+      const body = `<div class="desk-intro"><p class="eyebrow">Dated Briefing comparison selection</p><h1>Compare dated briefings</h1></div><div class="bounded-fields"><label class="field"><span>1. Select first Dated Briefing</span><select data-workbench-field="compare-left"><option value="">Choose one</option>${options}</select></label><label class="field"><span>2. Select second Dated Briefing</span><select data-workbench-field="compare-right"><option value="">Choose one</option>${options}</select></label></div>${selection}${result}<button class="secondary-button" type="button" data-desk-action="work-existing">Back to Existing Plans or Briefings</button>`;
       els.briefingDeskRegion.innerHTML = deskShell("Compare Dated Briefings", body);
       const leftSelect = els.briefingDeskRegion.querySelector('[data-workbench-field="compare-left"]');
       const rightSelect = els.briefingDeskRegion.querySelector('[data-workbench-field="compare-right"]');
@@ -2754,21 +2913,21 @@
 
     function renderReadyBriefingList() {
       const ready = readyDatedBriefings();
-      els.briefingDeskRegion.innerHTML = deskShell("Ready to Present", `<div class="desk-intro"><p class="eyebrow">Reviewed Dated Briefings</p><h1>Open a briefing ready to present</h1></div><div class="history-list">${ready.map((item) => datedBriefingRow(item, "open-briefing", "Open briefing")).join("") || '<p class="empty">No Dated Briefings are ready. Complete Advisor Review first.</p>'}</div>`);
+      els.briefingDeskRegion.innerHTML = deskShell("Ready to Present", `<div class="desk-intro"><p class="eyebrow">Ready-to-present Dated Briefings</p><h1>Open a briefing ready to present</h1></div><div class="history-list">${ready.map((item) => datedBriefingRow(item, "preview-briefing", "Preview")).join("") || '<div class="empty"><strong>No Ready-to-Present Briefings</strong><p>Complete Advisor Review and mark a Dated Briefing Ready to Present.</p></div>'}</div>`);
     }
 
     function renderAudiencePreviewList() {
-      const ready = readyDatedBriefings().filter((item) => item.client_artifact);
-      els.briefingDeskRegion.innerHTML = deskShell("Audience Preview", `<div class="desk-intro"><p class="eyebrow">Exact audience-visible sequence</p><h1>Preview what the audience will see</h1></div><div class="history-list">${ready.map((item) => datedBriefingRow(item, "preview-briefing", "Start preview")).join("") || '<p class="empty">No reviewed client-visible Dated Briefings are ready to preview.</p>'}</div>`);
+      const previewable = state.briefings.filter(isPreviewEligible);
+      els.briefingDeskRegion.innerHTML = deskShell("Audience Preview", `<div class="desk-intro"><p class="eyebrow">Exact audience-visible sequence</p><h1>Preview what the audience will see</h1></div><div class="history-list">${previewable.map((item) => datedBriefingRow(item, "preview-briefing", audiencePreviewLabel(item))).join("") || '<div class="empty"><strong>No Audience Preview Available</strong><p>No reviewed Dated Briefing currently has audience-visible Briefing Sections.</p><button class="secondary-button" type="button" data-desk-action="view-dated-list">Return to Dated Briefings</button></div>'}</div>`);
     }
 
     function renderLaunchPresentationList() {
       const ready = readyDatedBriefings();
-      els.briefingDeskRegion.innerHTML = deskShell("Launch Presentation", `<div class="desk-intro"><p class="eyebrow">Clean presentation mode</p><h1>Launch a presentation</h1></div><div class="history-list">${ready.map((item) => datedBriefingRow(item, "present-briefing", "Present briefing")).join("") || '<p class="empty">No reviewed Dated Briefings are ready to present.</p>'}</div>`);
+      els.briefingDeskRegion.innerHTML = deskShell("Launch Presentation", `<div class="desk-intro"><p class="eyebrow">Clean presentation mode</p><h1>Launch a presentation</h1></div><div class="history-list">${ready.map((item) => datedBriefingRow(item, "present-briefing", "Present briefing")).join("") || '<p class="empty">No Ready-to-Present Briefings. Complete Advisor Review, preview the audience sequence, and mark a Dated Briefing Ready to Present.</p>'}</div>`);
     }
 
     function renderResumePresentationList() {
-      const recent = state.briefings.filter((item) => item.last_presented_at);
+      const recent = state.briefings.filter((item) => item.last_presented_at && isPresentationEligible(item));
       const rows = recent.map((briefing) => `<article class="history-row"><div class="journey-copy"><span class="status-label">Recent Presentation</span><strong>${escapeHtml(briefing.title)}</strong><p class="meta">${escapeHtml(briefing.audience || "Advisor audience")} &middot; Last Briefing Section ${Number(briefing.presentation_position || 0) + 1} &middot; ${escapeHtml(formatBriefingDate(briefing.last_presented_at))}</p></div><button class="primary-button tiny-button" type="button" data-desk-action="resume-presentation" data-briefing-id="${escapeAttr(briefing.briefing_id)}">Resume presentation</button></article>`).join("");
       els.briefingDeskRegion.innerHTML = deskShell("Resume Presentation", `<div class="desk-intro"><p class="eyebrow">Recent presentation activity</p><h1>Resume a recent presentation</h1></div><div class="history-list">${rows || '<p class="empty">No presentation position has been saved yet.</p>'}</div>`);
     }
@@ -2799,15 +2958,30 @@
     function deskShell(title, body, options = {}) {
       const presentation = options.presentation === true;
       if (presentation) return `<div class="presentation-shell">${body}</div>`;
+      const backRoute = deskBackRoute(state.route);
       return `
         <div class="desk-shell">
           <div class="desk-topbar">
             <div><p class="brand">Arangur</p><p class="context-line"><strong>Northstar Family Office</strong> &middot; Synthetic demo</p></div>
-            <button class="secondary-button" type="button" data-desk-action="home">Advisor Workbench</button>
+            <div class="button-row"><button class="secondary-button" type="button" data-desk-action="navigate-route" data-route="${escapeAttr(backRoute)}">Back</button><button class="secondary-button" type="button" data-desk-action="home">Advisor Workbench</button></div>
           </div>
           <section class="desk-panel" aria-label="${escapeAttr(title)}">${body}</section>
         </div>
       `;
+    }
+
+    function deskBackRoute(route) {
+      const parents = {
+        prepare: "home", existing: "home", "present-hub": "home", ask: "home",
+        "new-plan-setup": "prepare", "template-library": "prepare", "prior-plans": "prepare", drafts: "prepare",
+        "plan-list": "existing", "create-dated": "existing", compare: "existing", "dated-list": "existing",
+        "ready-list": "present-hub", "audience-preview-list": "present-hub", "launch-list": "present-hub", "resume-list": "present-hub", "find-briefing": "present-hub",
+        "briefing-type": "template-library", templates: "template-library", "template-preview": "template-library", "builder-start": "prepare",
+        "template-builder": "template-library", configure: "create-dated", review: state.deskReturnRoute || "dated-list",
+        "review-evidence": "review", "client-preview": "review", history: "dated-list"
+      };
+      if (state.deskReturnRoute === "ask" && ["plan-list", "create-dated", "compare", "find-briefing", "new-plan-setup", "template-library"].includes(route)) return "ask";
+      return parents[route] || "home";
     }
 
     function externalGovernanceHtml(type = selectedBriefingType()) {
@@ -2917,7 +3091,8 @@
         step_role: spec.step_role || "supporting",
         status: spec.catalog_status || "accepted",
         optional: Boolean(spec.optional),
-        gate_explanation: spec.catalog_status === "gated" ? friendlyGateForSpec(spec) : ""
+        gate_explanation: spec.catalog_status === "gated" ? friendlyGateForSpec(spec) : "",
+        configured_parameters: { ...(spec.configured_parameters || spec.parameters || {}) }
       }));
     }
 
@@ -2945,6 +3120,9 @@
       copy.briefing_purpose = source.briefing_purpose || source.conversation_goal || source.description || "";
       copy.audience_choice = source.audience_choice || source.audience || selectedBriefingType().audience;
       copy.briefing_notes = source.briefing_notes || (copy.payload || {}).briefing_notes || "";
+      copy.source_template_name = workflowDisplayName(source);
+      copy.source_template_id = workflowRecordId(source);
+      copy.draft_persistence_eligible = false;
       copy.editor_sections = mergedSpecs.map((spec) => ({
         ...spec,
         local_spec_id: spec.local_spec_id || newLocalId("section"),
@@ -2959,7 +3137,6 @@
       state.deskBuilderMode = source.is_builtin ? "customize" : "edit";
       state.deskBuilderStep = 1;
       state.deskEditingSectionIndex = null;
-      persistCurrentPlanDraft();
       navigateToRoute("template-builder");
     }
 
@@ -2988,12 +3165,15 @@
         workflow_id: id,
         is_builtin: false,
         template_kind: "custom",
-        display_name: uniqueWorkflowName(`Custom ${type.briefing_type_name || workflowDisplayName(type)}`),
+        display_name: "Untitled Briefing Workflow",
         briefing_type_id: typeId,
         briefing_type_name: type.briefing_type_name || workflowDisplayName(type),
         briefing_purpose: type.conversation_goal || "",
         audience_choice: type.audience || "Advisor audience",
         briefing_notes: "",
+        source_template_name: null,
+        source_template_id: null,
+        draft_persistence_eligible: false,
         editor_sections: [],
         payload: {
           schema_version: LOCAL_SPEC_SET_SCHEMA_VERSION,
@@ -3005,9 +3185,9 @@
         }
       };
       state.deskBuilderMode = "scratch";
+      state.deskDraftTemplate.display_name = meaningfulDraftName(state.deskDraftTemplate);
       state.deskBuilderStep = 1;
       state.deskEditingSectionIndex = null;
-      persistCurrentPlanDraft();
       navigateToRoute("template-builder");
     }
 
@@ -3044,7 +3224,7 @@
         </div>
         <label class="field"><span>Briefing purpose</span><textarea rows="3" data-desk-field="briefing_purpose">${escapeHtml(draft.briefing_purpose || "")}</textarea></label>
         <label class="field"><span>Material briefing notes or caveats</span><textarea rows="3" data-desk-field="briefing_notes">${escapeHtml(draft.briefing_notes || "")}</textarea></label>
-        <div class="button-row"><button class="primary-button" type="button" data-desk-action="builder-next">Choose Briefing Sections</button><button class="secondary-button" type="button" data-desk-action="back-templates">Discard draft</button></div></section>`;
+        <div class="button-row"><button class="primary-button" type="button" data-desk-action="builder-next">Choose Briefing Sections</button><button class="secondary-button" type="button" data-desk-action="discard-current-draft">Discard Draft</button></div></section>`;
     }
 
     function filteredBuilderCatalog() {
@@ -3114,12 +3294,23 @@
     function renderBuilderReportsStage(draft) {
       const catalog = filteredBuilderCatalog();
       const families = uniqueValues(builderCatalogEntries().map((entry) => entry.category));
-      return `<section><h2>Choose report and narrative sections</h2><p class="helper">Search the supported catalog by the business question this conversation needs to answer. Only currently supported report definitions can be added.</p>
+      const included = (draft.editor_sections || []).filter((section) => section.included !== false);
+      const available = catalog.filter((entry) => !catalogEntryIncluded(draft, entry));
+      const includedRows = included.map((spec, index) => `<article class="section-choice-row is-included" aria-label="Included Briefing Section ${index + 1}: ${escapeAttr(spec.element_title || spec.title || "Briefing Section")}"><span class="journey-index">${index + 1}</span><div class="journey-copy"><strong>${escapeHtml(spec.element_title || spec.title || "Briefing Section")}</strong><p class="meta">${escapeHtml(spec.client_visible ? "Audience-visible" : friendlyVisibility(spec.audience_visibility))}${spec.optional ? " · Optional" : " · Required"}</p><p class="meta">${escapeHtml(compactParameterText(spec.configured_parameters) || spec.visible_question_answered || "No choices needed")}</p></div><div class="section-choice-actions">${spec.optional ? `<button class="tiny-button" type="button" data-desk-action="remove-catalog-section" data-local-spec-id="${escapeAttr(spec.local_spec_id)}" aria-label="Remove ${escapeAttr(spec.element_title || spec.title || "Briefing Section")}">Remove</button>` : '<span class="badge">Included</span>'}</div></article>`).join("");
+      return `<section><h2>Choose Briefing Sections</h2><p class="helper">Included sections and additional approved sections are shown separately. Changes appear immediately in the Current Briefing Plan outline.</p>
         <div class="bounded-fields"><label class="field"><span>Search reports</span><input type="search" value="${escapeAttr(state.deskCatalogQuery)}" data-desk-catalog-query placeholder="Cash, scenario, manager, confidence"></label><label class="field"><span>Report family</span><select data-desk-catalog-family><option value="">All report families</option>${families.map((family) => `<option value="${escapeAttr(family)}"${family === state.deskCatalogFamily ? " selected" : ""}>${escapeHtml(categoryLabel(family))}</option>`).join("")}</select></label></div>
         <div class="button-row"><button class="secondary-button" type="button" data-desk-action="apply-catalog-filter">Apply filters</button><button class="secondary-button" type="button" data-desk-action="add-narrative-section">Add advisor note</button></div>
-        <p class="status">${catalog.length} supported ${catalog.length === 1 ? "report" : "reports"}; ${draft.editor_sections.length} ${draft.editor_sections.length === 1 ? "section" : "sections"} in this template.</p>
-        <div class="builder-catalog-grid">${catalog.map((entry) => `<article class="builder-catalog-card"><p class="eyebrow">${escapeHtml(categoryLabel(entry.category))} &middot; ${escapeHtml(entry.availability_status)}</p><h3>${escapeHtml(entry.title)}</h3><p>${escapeHtml(entry.short_description)}</p><p class="meta"><strong>Question answered:</strong> ${escapeHtml(entry.question)}</p><p class="meta"><strong>Purpose:</strong> ${escapeHtml(entry.purpose)}</p><p class="meta"><strong>Visibility:</strong> ${escapeHtml(entry.visibility)}</p>${entry.builder_kind === "configurable" ? `<p class="meta"><strong>Available configuration:</strong> ${escapeHtml(builderFieldSummary(entry.template))}</p>` : ""}${entry.gated ? '<button class="secondary-button tiny-button" type="button" disabled>Not available — prerequisite required</button>' : `<button class="primary-button tiny-button" type="button" data-desk-action="add-catalog-report" data-catalog-key="${escapeAttr(entry.catalog_key)}">Add report</button>`}</article>`).join("") || '<p class="empty">No supported reports match these filters.</p>'}</div>
+        <p class="status selection-confirmation" role="status" aria-live="polite"><strong>${included.length} selected ${included.length === 1 ? "section" : "sections"}.</strong> ${escapeHtml(state.builderSelectionMessage || "Add or remove a section to update this plan.")}</p>
+        <div class="selection-layout"><div><section aria-labelledby="included-sections-heading"><h3 id="included-sections-heading">Included in this Briefing Plan</h3><div class="journey-list">${includedRows || '<p class="empty">No Briefing Sections selected yet.</p>'}</div></section><section aria-labelledby="available-sections-heading"><h3 id="available-sections-heading">Available Briefing Sections</h3><div class="builder-catalog-grid">${available.map((entry) => `<article class="builder-catalog-card"><p class="eyebrow">${escapeHtml(categoryLabel(entry.category))} &middot; ${escapeHtml(entry.availability_status)}</p><h4>${escapeHtml(entry.title)}</h4><p>${escapeHtml(entry.short_description)}</p><p class="meta"><strong>Question answered:</strong> ${escapeHtml(entry.question)}</p><p class="meta"><strong>Purpose:</strong> ${escapeHtml(entry.purpose)}</p><p class="meta"><strong>Visibility:</strong> ${escapeHtml(entry.visibility)}</p><p class="meta"><strong>Availability:</strong> ${escapeHtml(entry.gated ? "Not available — prerequisite required" : "Available to add")}</p>${entry.gated ? '<button class="secondary-button tiny-button" type="button" disabled aria-disabled="true">Not available</button>' : `<button class="primary-button tiny-button" type="button" data-desk-action="add-catalog-report" data-catalog-key="${escapeAttr(entry.catalog_key)}" aria-pressed="false">Add</button>`}</article>`).join("") || '<p class="empty">No additional supported Briefing Sections match these filters.</p>'}</div></section></div><aside class="plan-outline" aria-label="Current Briefing Plan"><strong>Current Briefing Plan</strong><span>${included.length} selected</span><ol>${included.map((spec) => `<li>${escapeHtml(spec.element_title || spec.title || "Briefing Section")}</li>`).join("")}</ol></aside></div>
         <div class="button-row"><button class="secondary-button" type="button" data-desk-action="builder-previous">Back</button><button class="primary-button" type="button" data-desk-action="builder-next" ${draft.editor_sections.length ? "" : "disabled"}>Configure choices</button></div></section>`;
+    }
+
+    function catalogEntryIncluded(draft, entry) {
+      return (draft.editor_sections || []).some((spec) => {
+        if (spec.included === false) return false;
+        if (entry.builder_kind === "configurable") return spec.element_id === entry.element_id && spec.element_kind === "analytic";
+        return spec.element_id === entry.element_id && normalize(spec.element_title) === normalize(entry.title);
+      });
     }
 
     function defaultBuilderParameters(template) {
@@ -3154,10 +3345,16 @@
       const entry = builderCatalogEntries().find((candidate) => candidate.catalog_key === catalogKey);
       const draft = state.deskDraftTemplate;
       if (!entry || !draft || entry.gated) return;
+      if (catalogEntryIncluded(draft, entry)) {
+        state.builderSelectionMessage = `${entry.title} is already included; duplicate additions are prevented.`;
+        return renderAdvancedTemplateBuilder();
+      }
       const type = selectedBriefingType();
       if (entry.builder_kind === "workflow") {
         const spec = JSON.parse(JSON.stringify(entry.source_spec));
-        draft.editor_sections.push({ ...spec, local_spec_id: newLocalId("section"), included: true, client_visible: false });
+        draft.editor_sections.push({ ...spec, local_spec_id: newLocalId("section"), optional: true, included: true, client_visible: false });
+        draft.draft_persistence_eligible = true;
+        state.builderSelectionMessage = `${entry.title} added to Included in this Briefing Plan.`;
         persistCurrentPlanDraft();
         renderAdvancedTemplateBuilder();
         return;
@@ -3182,6 +3379,8 @@
         included: true,
         client_visible: false
       });
+      draft.draft_persistence_eligible = true;
+      state.builderSelectionMessage = `${entry.title} added to Included in this Briefing Plan.`;
       persistCurrentPlanDraft();
       renderAdvancedTemplateBuilder();
     }
@@ -3213,7 +3412,7 @@
 
     function renderBuilderConfigureStage(draft) {
       const active = Number.isInteger(state.deskEditingSectionIndex) ? state.deskEditingSectionIndex : null;
-      return `<section><h2>Configure supported choices</h2><p class="helper">Each report exposes only parameters already defined by its catalog contract and approved analytic choices.</p><div class="journey-list">${draft.editor_sections.map((spec, index) => renderBuilderConfigureRow(spec, index, active === index)).join("") || '<p class="empty">Return to Reports and add at least one section.</p>'}</div><div class="button-row"><button class="secondary-button" type="button" data-desk-action="builder-previous">Back to reports</button><button class="primary-button" type="button" data-desk-action="builder-next" ${draft.editor_sections.length ? "" : "disabled"}>Set order and visibility</button></div></section>`;
+      return `<section><h2>Configure supported choices</h2><p class="helper">Each Briefing Section shows its current selection and what those choices affect. Sections with fixed behavior need no action.</p><div class="journey-list">${draft.editor_sections.map((spec, index) => renderBuilderConfigureRow(spec, index, active === index)).join("") || '<p class="empty">Return to Briefing Sections and add at least one section.</p>'}</div><div class="button-row"><button class="secondary-button" type="button" data-desk-action="builder-previous">Back to selected sections</button><button class="primary-button" type="button" data-desk-action="builder-next" ${draft.editor_sections.length ? "" : "disabled"}>Set order and visibility</button></div></section>`;
     }
 
     function renderBuilderConfigureRow(spec, index, open) {
@@ -3221,8 +3420,10 @@
       const parameters = spec.configured_parameters || {};
       const editor = spec.element_kind === "narrative"
         ? `<label class="field"><span>Advisor note</span><textarea rows="3" data-desk-narrative-text data-section-index="${index}">${escapeHtml((spec.narrative_fields || {}).note_text || "")}</textarea></label>`
-        : template ? renderBuilderParameterEditor(template, spec, index) : '<p class="meta">This committed workflow section has no additional configuration choices.</p>';
-      return `<article class="journey-row"><div class="journey-copy"><strong>${escapeHtml(spec.element_title || spec.title || "Briefing section")}</strong><p class="meta">${escapeHtml(compactParameterText(parameters) || friendlyVisibility(spec.audience_visibility))}</p>${open ? `<div class="builder-parameter-grid">${editor}</div>` : ""}</div><button class="tiny-button" type="button" data-desk-action="configure-section" data-section-index="${index}">${open ? "Done" : "Configure"}</button></article>`;
+        : template ? renderBuilderParameterEditor(template, spec, index) : "";
+      const hasChoices = Boolean(editor);
+      const purpose = spec.visible_question_answered || spec.why_included || "This section uses its approved fixed presentation.";
+      return `<article class="journey-row"><div class="journey-copy"><span class="status-label">${hasChoices ? `Configure section ${index + 1}` : "No choices needed"}</span><strong>${escapeHtml(spec.element_title || spec.title || "Briefing section")}</strong><p>${escapeHtml(purpose)}</p><p class="meta"><strong>Current selection:</strong> ${escapeHtml(compactParameterText(parameters) || "Fixed approved choices")}</p>${hasChoices ? '<p class="meta">These choices affect the section scope, comparison, or presentation detail only.</p>' : ""}${open && hasChoices ? `<div class="builder-parameter-grid">${editor}</div>` : ""}</div>${hasChoices ? `<button class="tiny-button" type="button" data-desk-action="configure-section" data-section-index="${index}">${open ? "Done" : "Configure"}</button>` : '<span class="badge">Continue</span>'}</article>`;
     }
 
     function renderBuilderParameterEditor(template, spec, index) {
@@ -3237,7 +3438,7 @@
       builderOptionalParameters(template).forEach((key) => fields.push({ key, label: PARAMETER_UI[key].label, options: parameterOptionsForTemplate(template, key) }));
       const placementOptions = (template.supported_placements || {})["Advisor Review"] || [];
       if (placementOptions.length) fields.push({ key: "placement", label: "Advisor Review placement", options: placementOptions, property: true });
-      return fields.map((field) => `<label class="field"><span>${escapeHtml(field.label)}</span><select ${field.property ? "data-desk-section-property" : "data-desk-parameter"}="${escapeAttr(field.key)}" data-section-index="${index}">${field.options.map((option) => `<option value="${escapeAttr(option)}"${String(field.property ? spec[field.key] : parameters[field.key]) === String(option) ? " selected" : ""}>${escapeHtml(option)}</option>`).join("")}</select></label>`).join("") || '<p class="meta">This report uses its fixed approved measure and display.</p>';
+      return fields.map((field) => `<label class="field"><span>${escapeHtml(field.label)}</span><select ${field.property ? "data-desk-section-property" : "data-desk-parameter"}="${escapeAttr(field.key)}" data-section-index="${index}">${field.options.map((option) => `<option value="${escapeAttr(option)}"${String(field.property ? spec[field.key] : parameters[field.key]) === String(option) ? " selected" : ""}>${escapeHtml(option)}</option>`).join("")}</select></label>`).join("");
     }
 
     function renderBuilderOrderStage(draft) {
@@ -3258,7 +3459,7 @@
     }
 
     function audienceOptions(current) {
-      return uniqueValues([current, "Principal / family office member", "Engaged client / investment committee", "Advisor / internal investment team"].filter(Boolean));
+      return uniqueValues([current, "Client", "Manager discussion", "Principal / family office member", "Engaged client / investment committee", "Advisor / internal investment team"].filter(Boolean));
     }
 
     function renderBuilderSectionRow(spec, index, list) {
@@ -3369,6 +3570,7 @@
       if (!template || !type) return renderBriefingTypeDetail();
       const steps = templateJourneySteps(template);
       const gated = steps.filter((step) => step.status === "gated" || step.status === "deferred");
+      if (!state.datedBriefingTitleDraft) state.datedBriefingTitleDraft = suggestedDatedBriefingTitle(template, type);
       const body = `
         <div class="desk-intro"><p class="eyebrow">Dated Briefing configuration</p><h1>Confirm this Dated Briefing</h1><p>The reusable Briefing Plan remains separate from the new populated output.</p></div>
         <div class="summary-grid">
@@ -3376,6 +3578,7 @@
           <div class="summary-tile"><strong>Briefing Plan</strong>${escapeHtml(workflowDisplayName(template))}</div>
           <div class="summary-tile"><strong>Current data date</strong>${escapeHtml(formatBriefingDate(DEMO_DATA_AS_OF))}</div>
         </div>
+        <label class="field"><span>Dated Briefing title</span><input type="text" data-workbench-field="dated-briefing-title" value="${escapeAttr(state.datedBriefingTitleDraft)}" aria-describedby="dated-title-help"></label><p id="dated-title-help" class="helper">Use a meaningful title that distinguishes this immutable briefing in history and presentation lists.</p>
         ${externalGovernanceHtml(type)}
         <div class="summary-tile"><strong>Briefing Sections and visibility</strong>${escapeHtml(templateSectionSummary(template))}. ${type.advisor_internal_default ? "This Dated Briefing remains advisor/internal." : "Audience-visible Briefing Sections will be rehearsed separately in Client Preview."}</div>
         ${gated.length ? `<div class="governance-banner"><strong>${gated.length} intended ${gated.length === 1 ? "step is" : "steps are"} not yet available</strong><p>${gated.map((step) => escapeHtml(`${step.display_title}: ${step.gate_explanation || "approved prerequisite required"}`)).join(" ")}</p><p class="meta">No unavailable output will be generated or shown to the client.</p></div>` : ""}
@@ -3383,6 +3586,16 @@
         <div class="button-row"><button class="primary-button" type="button" data-desk-action="create-briefing" ${state.deskGenerating ? "disabled" : ""}>Create dated briefing</button><button class="secondary-button" type="button" data-desk-action="back-templates">Change Briefing Plan</button></div>
       `;
       els.briefingDeskRegion.innerHTML = deskShell("Briefing configuration", body);
+    }
+
+    function suggestedDatedBriefingTitle(template, type) {
+      const audience = template.audience_choice || template.audience || type.audience || "Audience";
+      const purpose = readableWorkflowName(template.briefing_purpose || type.conversation_goal || workflowDisplayName(template));
+      const compactPurpose = purpose.length > 58 ? workflowDisplayName(template) : purpose;
+      const dateLabel = new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(new Date());
+      const base = `${audience} — ${compactPurpose} — ${dateLabel}`;
+      const matches = state.briefings.filter((briefing) => normalize(briefing.title).startsWith(normalize(base))).length;
+      return matches ? `${base} (${matches + 1})` : base;
     }
 
     function recoverPlanFromBriefing(briefingId) {
@@ -3436,6 +3649,12 @@
       const template = selectedDeskTemplate();
       const type = selectedBriefingType();
       if (!template || !type) return;
+      const briefingTitle = readableWorkflowName(state.datedBriefingTitleDraft);
+      if (!briefingTitle) {
+        const titleInput = els.briefingDeskRegion.querySelector('[data-workbench-field="dated-briefing-title"]');
+        if (titleInput) titleInput.focus();
+        return;
+      }
       state.deskGenerating = true;
       renderBriefingConfiguration();
       const status = document.getElementById("desk-generation-status");
@@ -3450,7 +3669,7 @@
         const briefing = normalizeBriefingRecord({
           schema_version: LOCAL_BRIEFING_SCHEMA_VERSION,
           briefing_id: briefingId,
-          title: `${type.briefing_type_name || workflowDisplayName(type)} — ${formatBriefingDate(generatedAt)}`,
+          title: briefingTitle,
           briefing_type_id: workflowRecordId(type),
           briefing_type_name: type.briefing_type_name || workflowDisplayName(type),
           audience: template.audience_choice || template.audience || type.audience,
@@ -3458,6 +3677,7 @@
           template_name: workflowDisplayName(template),
           template_kind: template.is_builtin ? "built_in" : "custom",
           generated_at: generatedAt,
+          briefing_date: generatedAt,
           data_as_of: DEMO_DATA_AS_OF,
           data_snapshot_label: DEMO_DATA_SNAPSHOT_LABEL,
           advisor_internal_default: Boolean(type.advisor_internal_default),
@@ -3467,6 +3687,7 @@
           client_artifact: clientArtifact,
           immutable: true,
           review_status: "in_review",
+          section_count: templateJourneySteps(template).length,
           presentation_position: 0,
           last_activity_at: generatedAt
         });
@@ -3475,6 +3696,8 @@
         state.deskCurrentBriefingId = briefingId;
         state.deskSectionIndex = firstPopulatedSectionIndex(briefing, "advisor");
         state.deskEvidenceMode = null;
+        state.deskReturnRoute = "dated-list";
+        state.datedBriefingTitleDraft = "";
         state.deskGenerating = false;
         replaceRoute("review");
       } catch (error) {
@@ -3497,13 +3720,21 @@
 
     function normalizeBriefingRecord(briefing) {
       if (!briefing || typeof briefing !== "object" || !briefing.briefing_id || !briefing.advisor_artifact) return null;
+      const normalizedStatus = briefing.review_status === "ready_to_present" ? "ready_to_present"
+        : briefing.review_status === "reviewed" && briefing.status_model_version !== "v1" ? "ready_to_present"
+        : briefing.review_status === "reviewed" ? "reviewed"
+        : "in_review";
       return {
         ...briefing,
         schema_version: LOCAL_BRIEFING_SCHEMA_VERSION,
         title: readableWorkflowName(briefing.title || "Dated briefing"),
         journey_steps: Array.isArray(briefing.journey_steps) ? briefing.journey_steps : [],
         caveats: Array.isArray(briefing.caveats) ? briefing.caveats : [],
-        review_status: briefing.review_status === "reviewed" ? "reviewed" : "in_review",
+        review_status: normalizedStatus,
+        status_model_version: "v1",
+        briefing_date: briefing.briefing_date || briefing.generated_at,
+        section_count: Number(briefing.section_count || (Array.isArray(briefing.journey_steps) ? briefing.journey_steps.length : 0)),
+        blocking_condition: briefing.blocking_condition || null,
         presentation_position: Number.isFinite(Number(briefing.presentation_position)) ? Number(briefing.presentation_position) : 0,
         last_previewed_at: briefing.last_previewed_at || null,
         last_presented_at: briefing.last_presented_at || null,
@@ -3526,17 +3757,19 @@
       const section = sections[index];
       const step = steps[index] || {};
       const populated = canVerifySection(section);
+      const populatedCount = sections.filter(canVerifySection).length;
+      const previewEligible = isPreviewEligible(briefing);
       const current = populated
         ? `<div class="reader-section"><p class="eyebrow">Populated Briefing Section</p><h2>${escapeHtml(section.title || step.display_title || "Briefing Section")}</h2>${step.visible_question_answered ? `<p>${escapeHtml(step.visible_question_answered)}</p>` : ""}<div>${sanitizePreviewFragment(section.html || "")}</div></div><div class="button-row"><button class="tiny-button" type="button" data-desk-action="review-evidence" data-section-index="${index}" data-evidence="explain">Explain</button><button class="tiny-button" type="button" data-desk-action="review-evidence" data-section-index="${index}" data-evidence="verify">Verify</button></div>`
         : `<div class="governance-banner"><strong>${escapeHtml(step.display_title || "Briefing Section")} is not populated</strong><p>${escapeHtml(step.gate_explanation || "An approved prerequisite is missing.")} No output has been fabricated.</p></div>`;
       const navigation = `<div class="reader-navigation"><button class="secondary-button" type="button" data-desk-action="previous" ${index <= 0 ? "disabled" : ""}>Previous</button><span class="report-position">Briefing Section ${sections.length ? index + 1 : 0} of ${sections.length}</span><button class="primary-button" type="button" data-desk-action="next" ${index >= sections.length - 1 ? "disabled" : ""}>Next</button></div>`;
       const outline = steps.map((item, itemIndex) => `<li>${itemIndex + 1}. ${escapeHtml(item.display_title)} — ${escapeHtml(friendlyVisibility(item.audience_visibility))}${["gated", "deferred"].includes(item.status) ? " — Not ready" : ""}</li>`).join("");
       const body = `
-        <div class="desk-intro"><p class="eyebrow">Advisor Review &middot; ${briefing.review_status === "reviewed" ? "Ready to Present" : "In review"}</p><h1>${escapeHtml(briefing.title)}</h1><p>Review the actual populated Briefing Sections. The Dated Briefing is immutable.</p></div>
+        <div class="desk-intro"><p class="eyebrow">Advisor Review &middot; ${escapeHtml(briefingDisplayStatus(briefing))}</p><h1>${escapeHtml(briefing.title)}</h1><p>Review the actual populated Briefing Sections. The Dated Briefing is immutable.</p></div>
         <div class="summary-grid"><div class="summary-tile"><strong>Generated</strong>${escapeHtml(formatBriefingDate(briefing.generated_at))}</div><div class="summary-tile"><strong>Data date</strong>${escapeHtml(formatBriefingDate(briefing.data_as_of))}</div><div class="summary-tile"><strong>Audience</strong>${escapeHtml(briefing.audience || "Advisor audience")}</div></div>
         ${briefing.briefing_type_id === "external_manager_story_translation_v1" ? externalGovernanceHtml(state.builtInTemplates.find((type) => workflowRecordId(type) === briefing.briefing_type_id)) : ""}
         ${current}${navigation}<details><summary>Briefing Section sequence and status</summary><ol class="detail-list">${outline}</ol></details>
-        <div class="button-row">${briefing.review_status !== "reviewed" ? '<button class="primary-button" type="button" data-desk-action="complete-review">Mark ready to present</button>' : (briefing.client_artifact ? '<button class="primary-button" type="button" data-desk-action="client-preview">Preview what the audience will see</button>' : '<button class="primary-button" type="button" data-desk-action="present">Present advisor briefing</button>')}<button class="secondary-button" type="button" data-desk-action="modify-template">Return to Briefing Plan</button><button class="secondary-button" type="button" data-desk-action="view-dated-list">Dated Briefing history</button></div>
+        <div class="button-row">${briefing.review_status === "in_review" ? `<button class="primary-button" type="button" data-desk-action="complete-review" ${populatedCount ? "" : "disabled"}>Complete Advisor Review</button>` : ""}${previewEligible ? `<button class="secondary-button" type="button" data-desk-action="client-preview">${escapeHtml(audiencePreviewLabel(briefing))}</button>` : ""}${briefing.review_status === "reviewed" && previewEligible ? '<button class="primary-button" type="button" data-desk-action="mark-ready">Mark Ready to Present</button>' : ""}${briefing.review_status === "reviewed" && !previewEligible ? '<span class="meta">No Audience Preview Available — this Dated Briefing has no audience-visible Briefing Sections.</span>' : ""}${isPresentationEligible(briefing) ? '<button class="primary-button" type="button" data-desk-action="present">Present</button>' : ""}<button class="secondary-button" type="button" data-desk-action="modify-template">Return to Briefing Plan</button><button class="secondary-button" type="button" data-desk-action="return-to-source">Back</button></div>
       `;
       els.briefingDeskRegion.innerHTML = deskShell("Advisor Review", body);
     }
@@ -3583,8 +3816,9 @@
         els.briefingDeskRegion.innerHTML = deskShell("Presentation", `${header}${sectionBody}<div class="button-row">${evidenceButtons}</div>${navigation}<button class="secondary-button" type="button" data-desk-action="exit-presentation">Exit presentation</button>`, { presentation: true });
         return;
       }
-      const body = `<div class="briefing-reader"><p class="eyebrow">Client Preview &middot; exact client-visible sequence</p>${header}<p class="meta">Advisor-only preparation, diagnostics, internal controls, and gated steps are excluded.</p>${sectionBody}<div class="button-row">${evidenceButtons}</div>${navigation}<div class="button-row"><button class="primary-button" type="button" data-desk-action="present">Present briefing</button><button class="secondary-button" type="button" data-desk-action="advisor-review">Back to Advisor Review</button></div></div>`;
-      els.briefingDeskRegion.innerHTML = deskShell("Client Preview", body);
+      const previewLabel = audiencePreviewLabel(briefing);
+      const body = `<div class="briefing-reader"><p class="eyebrow">${escapeHtml(previewLabel)} &middot; exact audience-visible sequence</p>${header}<p class="meta">Advisor-only preparation, diagnostics, internal controls, and gated steps are excluded.</p>${sectionBody}<div class="button-row">${evidenceButtons}</div>${navigation}<div class="button-row">${isPresentationEligible(briefing) ? '<button class="primary-button" type="button" data-desk-action="present">Present briefing</button>' : '<span class="meta">Preview is available now. Mark this briefing Ready to Present in Advisor Review before presenting.</span>'}<button class="secondary-button" type="button" data-desk-action="advisor-review">Back to Advisor Review</button></div></div>`;
+      els.briefingDeskRegion.innerHTML = deskShell(previewLabel, body);
     }
 
     function reportPresentationPattern(title) {
@@ -3633,6 +3867,12 @@
       const date = new Date(/^\d{4}-\d{2}-\d{2}$/.test(text) ? `${text}T12:00:00` : text);
       if (Number.isNaN(date.getTime())) return text;
       return new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(date);
+    }
+
+    function formatBriefingDateTime(value) {
+      const date = new Date(String(value || ""));
+      if (Number.isNaN(date.getTime())) return String(value || "Unknown");
+      return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit" }).format(date);
     }
 
     function renderSavedWorkflowContainer(listEl, statusEl) {
@@ -6324,7 +6564,9 @@
       const button = event.target.closest("[data-desk-action]");
       if (!button) return;
       const action = button.dataset.deskAction;
-      if (action === "home") return navigateToRoute("home");
+      if (state.route === "ask" && ["find-briefing", "plan-list", "create-dated-list", "compare-list", "new-plan-setup", "template-library"].includes(action)) state.deskReturnRoute = "ask";
+      if (action === "navigate-route") return navigateToRoute(button.dataset.route || "home");
+      if (action === "home") { state.deskReturnRoute = "dated-list"; return navigateToRoute("home"); }
       if (action === "prepare-new-plan") return navigateToRoute("prepare");
       if (action === "work-existing") return navigateToRoute("existing");
       if (action === "present-hub") return navigateToRoute("present-hub");
@@ -6361,6 +6603,19 @@
         state.deskSelectedTemplateId = workflowRecordId(state.deskDraftTemplate);
         return navigateToRoute("template-builder");
       }
+      if (action === "rename-draft") return renamePlanDraft(button.dataset.draftId);
+      if (action === "discard-draft") return discardPlanDraft(button.dataset.draftId);
+      if (action === "discard-current-draft") {
+        const draftId = state.deskDraftTemplate && state.deskDraftTemplate.draft_id;
+        if (draftId) {
+          const draft = state.planDrafts.find((candidate) => candidate.draft_id === draftId);
+          if (draft && !window.confirm(`Discard the Briefing Plan Draft "${workflowDisplayName(draft.template)}"? This cannot be undone.`)) return;
+          state.planDrafts = state.planDrafts.filter((candidate) => candidate.draft_id !== draftId);
+          persistLocalPlanDrafts();
+        }
+        state.deskDraftTemplate = null;
+        return navigateToRoute("template-library");
+      }
       if (action === "open-plan") {
         const plan = allBriefingTemplates().find((candidate) => workflowRecordId(candidate) === button.dataset.templateId);
         if (!plan) return;
@@ -6382,6 +6637,13 @@
         }
         return;
       }
+      if (action === "archive-plan") {
+        const plan = state.savedWorkflows.find((candidate) => workflowRecordId(candidate) === button.dataset.templateId);
+        if (!plan || !window.confirm(`Archive the saved Briefing Plan "${workflowDisplayName(plan)}"?`)) return;
+        plan.archived_at = new Date().toISOString();
+        persistLocalNamedWorkflows();
+        return renderPlanList();
+      }
       if (action === "recover-prior-plan") return recoverPlanFromBriefing(button.dataset.briefingId);
       if (action === "select-type") return selectBriefingType(button.dataset.typeId);
       if (action === "open-template-type") {
@@ -6396,24 +6658,40 @@
         state.deskSelectedTemplateId = button.dataset.templateId;
         const template = selectedDeskTemplate();
         if (template) state.deskSelectedTypeId = templateTypeId(template) || state.deskSelectedTypeId;
-        if (action === "use-template") return navigateToRoute("configure");
+        if (action === "use-template") {
+          state.datedBriefingTitleDraft = "";
+          return navigateToRoute("configure");
+        }
         if (action === "preview-template") return navigateToRoute("template-preview");
         return beginTemplateEdit(button.dataset.templateId);
       }
       if (action === "builder-step") {
         state.deskBuilderStep = Number(button.dataset.step) || 1;
+        if (state.deskBuilderStep > 1 && state.deskDraftTemplate) state.deskDraftTemplate.draft_persistence_eligible = true;
         state.deskEditingSectionIndex = null;
         persistCurrentPlanDraft();
         return renderAdvancedTemplateBuilder();
       }
       if (action === "builder-next" || action === "builder-previous") {
         state.deskBuilderStep = Math.min(5, Math.max(1, state.deskBuilderStep + (action === "builder-next" ? 1 : -1)));
+        if (action === "builder-next" && state.deskDraftTemplate) state.deskDraftTemplate.draft_persistence_eligible = true;
         state.deskEditingSectionIndex = null;
         persistCurrentPlanDraft();
         return renderAdvancedTemplateBuilder();
       }
       if (action === "apply-catalog-filter") return renderAdvancedTemplateBuilder();
       if (action === "add-catalog-report") return addBuilderCatalogReport(button.dataset.catalogKey);
+      if (action === "remove-catalog-section") {
+        const draft = state.deskDraftTemplate;
+        if (!draft) return;
+        const index = draft.editor_sections.findIndex((section) => section.local_spec_id === button.dataset.localSpecId);
+        if (index < 0 || !draft.editor_sections[index].optional) return;
+        const removedTitle = draft.editor_sections[index].element_title || draft.editor_sections[index].title || "Briefing Section";
+        draft.editor_sections.splice(index, 1);
+        state.builderSelectionMessage = `${removedTitle} removed and returned to Available Briefing Sections.`;
+        persistCurrentPlanDraft();
+        return renderAdvancedTemplateBuilder();
+      }
       if (action === "add-narrative-section") return addBuilderNarrativeSection();
       if (action === "configure-section") {
         const index = Number(button.dataset.sectionIndex);
@@ -6450,9 +6728,20 @@
       if (action === "complete-review") {
         const briefing = currentDeskBriefing();
         if (!briefing) return;
+        const populated = (briefing.advisor_artifact.ordered_sections || []).filter(canVerifySection);
+        if (!populated.length || briefing.blocking_condition) return;
         briefing.review_status = "reviewed";
         briefing.reviewed_at = new Date().toISOString();
         briefing.last_activity_at = briefing.reviewed_at;
+        persistLocalBriefings();
+        return renderAdvisorReview();
+      }
+      if (action === "mark-ready") {
+        const briefing = currentDeskBriefing();
+        if (!briefing || briefing.review_status !== "reviewed" || !isPreviewEligible(briefing)) return;
+        briefing.review_status = "ready_to_present";
+        briefing.ready_at = new Date().toISOString();
+        briefing.last_activity_at = briefing.ready_at;
         persistLocalBriefings();
         return renderAdvisorReview();
       }
@@ -6474,17 +6763,23 @@
       if (action === "present") {
         state.deskEvidenceMode = null;
         const briefing = currentDeskBriefing();
-        if (briefing) {
+        if (briefing && isPresentationEligible(briefing)) {
+          state.presentationReturnContext = { source_route: "client-preview", briefing_id: briefing.briefing_id, section_index: state.deskSectionIndex, origin: state.route };
           briefing.last_presented_at = new Date().toISOString();
           briefing.presentation_position = state.deskSectionIndex;
           briefing.last_activity_at = briefing.last_presented_at;
           persistLocalBriefings();
-        }
+        } else return;
         return navigateToRoute("presentation");
       }
       if (action === "exit-presentation") {
         state.deskEvidenceMode = null;
-        return navigateToRoute(currentDeskBriefing() && currentDeskBriefing().client_artifact ? "client-preview" : "review");
+        const context = state.presentationReturnContext;
+        if (context) {
+          state.deskCurrentBriefingId = context.briefing_id;
+          state.deskSectionIndex = Number(context.section_index || 0);
+        }
+        return navigateToRoute(context && context.source_route || "client-preview");
       }
       if (action === "previous" || action === "next") {
         state.deskSectionIndex += action === "next" ? 1 : -1;
@@ -6493,6 +6788,7 @@
           const briefing = currentDeskBriefing();
           if (briefing) {
             briefing.presentation_position = state.deskSectionIndex;
+            if (state.presentationReturnContext) state.presentationReturnContext.section_index = state.deskSectionIndex;
             briefing.last_presented_at = new Date().toISOString();
             persistLocalBriefings();
           }
@@ -6521,12 +6817,20 @@
         const source = allBriefingTemplates().find((template) => workflowRecordId(template) === briefing.template_id);
         return source ? beginTemplateEdit(briefing.template_id) : recoverPlanFromBriefing(briefing.briefing_id);
       }
+      if (action === "return-to-source") return navigateToRoute(state.deskReturnRoute || "dated-list");
+      if (action === "compare-briefings") {
+        const left = state.briefings.find((item) => item.briefing_id === state.compareLeftId);
+        const right = state.briefings.find((item) => item.briefing_id === state.compareRightId);
+        state.compareRequested = Boolean(left && right && left.briefing_id !== right.briefing_id);
+        return renderDatedComparison();
+      }
       if (["open-briefing", "present-briefing", "preview-briefing", "resume-presentation"].includes(action)) {
         const briefing = state.briefings.find((candidate) => candidate.briefing_id === button.dataset.briefingId);
         if (!briefing) return;
         state.deskCurrentBriefingId = briefing.briefing_id;
         state.deskSelectedTypeId = briefing.briefing_type_id;
         state.deskSelectedTemplateId = briefing.template_id;
+        state.deskReturnRoute = state.route;
         const openingKind = action === "preview-briefing" || ((action === "present-briefing" || action === "resume-presentation") && briefing.client_artifact) ? "client" : "advisor";
         state.deskSectionIndex = action === "resume-presentation" ? Number(briefing.presentation_position || 0) : firstPopulatedSectionIndex(briefing, openingKind);
         state.deskEvidenceMode = null;
@@ -6537,6 +6841,8 @@
           return navigateToRoute("client-preview");
         }
         if (action === "present-briefing" || action === "resume-presentation") {
+          if (!isPresentationEligible(briefing)) return renderLaunchPresentationList();
+          state.presentationReturnContext = { source_route: "client-preview", briefing_id: briefing.briefing_id, section_index: state.deskSectionIndex, origin: action === "resume-presentation" ? "resume-list" : state.route };
           briefing.last_presented_at = new Date().toISOString();
           persistLocalBriefings();
           return navigateToRoute("presentation");
@@ -6552,8 +6858,9 @@
         if (workbenchField === "new-plan-audience") state.newPlanSetup.audience = event.target.value;
         if (workbenchField === "new-plan-purpose") state.newPlanSetup.purpose = event.target.value;
         if (workbenchField === "new-plan-detail") state.newPlanSetup.detail = event.target.value;
-        if (workbenchField === "compare-left") { state.compareLeftId = event.target.value; renderDatedComparison(); }
-        if (workbenchField === "compare-right") { state.compareRightId = event.target.value; renderDatedComparison(); }
+        if (workbenchField === "compare-left") { state.compareLeftId = event.target.value; state.compareRequested = false; renderDatedComparison(); }
+        if (workbenchField === "compare-right") { state.compareRightId = event.target.value; state.compareRequested = false; renderDatedComparison(); }
+        if (workbenchField === "dated-briefing-title") state.datedBriefingTitleDraft = event.target.value;
         if (workbenchField === "briefing-search") state.workbenchSearchQuery = event.target.value;
         return;
       }
@@ -6591,6 +6898,7 @@
       const field = event.target.dataset.deskField;
       if (field) {
         draft[field] = event.target.value;
+        draft.draft_persistence_eligible = true;
         persistCurrentPlanDraft();
         return;
       }
