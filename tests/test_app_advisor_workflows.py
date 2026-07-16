@@ -144,15 +144,16 @@ class BuiltinBriefingTemplateAppTests(unittest.TestCase):
         self.assertEqual(set(BUILTIN_TEMPLATE_COPY), {row["workflow_id"] for row in payload["templates"]})
         self.assertNotIn(str(ROOT), json.dumps(payload))
 
-    def test_home_is_conversation_first_and_keeps_history_and_templates_secondary(self) -> None:
+    def test_home_is_activity_first_and_keeps_history_and_templates_secondary(self) -> None:
         response = self.client.get("/app/")
         self.assertEqual(200, response.status_code)
         html = response.text
-        self.assertIn('<h1 id="advisor-home-title">What conversation are you preparing?</h1>', html)
-        self.assertIn("Conversation Briefing Desk", html)
-        self.assertIn("Recent briefings", html)
-        self.assertIn("Saved briefing templates", html)
-        self.assertIn("Create briefing with current data", html)
+        self.assertIn('<h1 id="advisor-home-title">What would you like to do?</h1>', html)
+        self.assertIn("Arangur Advisor Workbench", html)
+        self.assertIn("Recent Work", html)
+        self.assertIn("Recent Dated Briefings", html)
+        self.assertIn("Start from a briefing plan template", html)
+        self.assertIn("Create a dated briefing with current data", html)
         self.assertIn("Advisor Review", html)
         self.assertIn("Client Preview", html)
         self.assertIn("Presentation", html)

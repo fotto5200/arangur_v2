@@ -43,14 +43,21 @@ class AdvisorWorkflowUiWiringTests(unittest.TestCase):
             self.assertTrue(item["core_user_question"])
             self.assertTrue(item["ordered_journey"])
 
-    def test_ordinary_home_is_conversation_first_and_has_no_raw_catalog_leaks(self) -> None:
+    def test_ordinary_home_is_activity_first_and_has_no_raw_catalog_leaks(self) -> None:
         html = self.client.get("/app/").text
         start = html.index("<!-- first-screen-start -->")
         end = html.index("<!-- first-screen-end -->", start)
         first_screen = html[start:end]
-        self.assertIn("What conversation are you preparing?", first_screen)
-        self.assertIn("Recent briefings", first_screen)
-        self.assertIn("Saved briefing templates", first_screen)
+        self.assertIn("What would you like to do?", first_screen)
+        self.assertIn("Prepare a New Briefing Plan", first_screen)
+        self.assertIn("Work with Existing Plans or Briefings", first_screen)
+        self.assertIn("Present a Dated Briefing", first_screen)
+        self.assertIn("Ask Arangur", first_screen)
+        self.assertIn("Recent Work", first_screen)
+        self.assertIn("Ready to Present", first_screen)
+        self.assertIn("Recent Dated Briefings", first_screen)
+        for example in EXPECTED_TYPES:
+            self.assertNotIn(example, first_screen)
         for leak in ("workflow_id", "source_mockup_path", "source_view_path", "schema_version", ".json", "data/simulation/"):
             self.assertNotIn(leak, first_screen)
 
@@ -138,10 +145,10 @@ class AdvisorWorkflowUiWiringTests(unittest.TestCase):
     def test_advanced_builder_restores_three_paths_and_five_stages(self) -> None:
         html = self.client.get("/app/").text
         for token in (
-            "Build a custom briefing template",
-            "Customize this template",
-            "Use this template",
-            "Start with no sections",
+            "Build a new briefing plan",
+            "Customize",
+            "Use as is",
+            "Start with no Briefing Sections",
             'const steps = ["Purpose", "Reports", "Configure", "Order & visibility", "Preview"]',
             "renderAdvancedTemplateBuilder",
             "addBuilderCatalogReport",

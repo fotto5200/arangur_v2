@@ -58,7 +58,7 @@ class AppHealthTests(unittest.TestCase):
         self.assertEqual("private_demo", payload["runtime_mode"])
         self.assertFalse(payload["demo_admin_token_configured"])
 
-    def test_root_page_returns_conversation_briefing_desk_and_separate_developer_composer(self) -> None:
+    def test_root_page_returns_advisor_workbench_and_separate_developer_composer(self) -> None:
         client = TestClient(create_app(settings=AppSettings()))
         for path in ("/", "/app/", "/app/index.html"):
             with self.subTest(path=path):
@@ -67,11 +67,12 @@ class AppHealthTests(unittest.TestCase):
                 self.assertIn("text/html", response.headers["content-type"])
                 html = response.text
                 self.assertIn("Arangur", html)
-                self.assertIn("Conversation Briefing Desk", html)
-                self.assertIn('<h1 id="advisor-home-title">What conversation are you preparing?</h1>', html)
-                self.assertIn("Recent briefings", html)
-                self.assertIn("Saved briefing templates", html)
-                self.assertIn("Create briefing with current data", html)
+                self.assertIn("Arangur Advisor Workbench", html)
+                self.assertIn('<h1 id="advisor-home-title">What would you like to do?</h1>', html)
+                self.assertIn("Recent Work", html)
+                self.assertIn("Ready to Present", html)
+                self.assertIn("Recent Dated Briefings", html)
+                self.assertIn("Create dated briefing", html)
                 self.assertIn("Advisor Review", html)
                 self.assertIn("Client Preview", html)
                 self.assertIn("Presentation", html)
@@ -131,9 +132,14 @@ class AppHealthTests(unittest.TestCase):
                 self.assertIn("QA reference previews", html)
                 self.assertIn("Demo data. Not investment advice.", html)
                 first_screen = self._first_screen(html)
-                self.assertIn("What conversation are you preparing?", first_screen)
-                self.assertIn("Recent briefings", first_screen)
-                self.assertIn("Saved briefing templates", first_screen)
+                self.assertIn("What would you like to do?", first_screen)
+                self.assertIn("Prepare a New Briefing Plan", first_screen)
+                self.assertIn("Work with Existing Plans or Briefings", first_screen)
+                self.assertIn("Present a Dated Briefing", first_screen)
+                self.assertIn("Ask Arangur", first_screen)
+                self.assertIn("Recent Work", first_screen)
+                self.assertIn("Ready to Present", first_screen)
+                self.assertIn("Recent Dated Briefings", first_screen)
                 self.assertIn("Developer / QA", first_screen)
                 self.assertNotIn("Report element finder", first_screen)
                 self.assertNotIn(".json", first_screen)

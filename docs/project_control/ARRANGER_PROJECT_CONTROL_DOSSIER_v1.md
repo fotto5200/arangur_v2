@@ -188,3 +188,7 @@ Then proceed in order:
 # Advisor workflow builder restoration checkpoint — 2026-07-15
 
 The pre-`7bf158d` composer capability and current Conversation Briefing Desk were reconciled in one local implementation. The Desk stays conversation-first; catalog composition, parameter configuration, narrative notes, reorder/duplicate/remove, visibility, reusable save, and from-scratch creation now sit behind an explicit five-stage custom-template path. Existing `arangur.local_named_briefing_workflows.v1` records remain readable and normalize on edit. Dated briefings remain immutable under `arangur.local_briefings.v1`. The imported design lab is evidence, while the canonical implementation authority is now the builder restoration and parameter-contract pair under `docs/product/`.
+
+# Advisor Workbench information-architecture checkpoint — 2026-07-16
+
+The ordinary home now exposes four major advisor activities rather than four illustrative workflows. The four workflows are Arangur example Briefing Plan Templates inside the template library. Canonical vocabulary distinguishes Briefing Plans, Drafts, Templates, Dated Briefings, and populated Briefing Sections. The restored builder and Dated Briefing lifecycle remain intact. Ask Arangur is deterministic local guidance. Compatible earlier records normalize; incompatible records remain recoverable as Legacy in Developer / QA and are filtered from ordinary current lists. Authority: `docs/product/arangur_advisor_workbench_information_architecture_v1.md`.

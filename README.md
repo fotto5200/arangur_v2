@@ -4,6 +4,12 @@ Modern restart-oriented rebuild of Arangur.
 
 Start by reading docs/restart/00_READ_ME_FIRST.md.
 
+## Advisor Workbench
+
+The ordinary advisor home is organized around four activities: **Prepare a New Briefing Plan**, **Work with Existing Plans or Briefings**, **Present a Dated Briefing**, and **Ask Arangur**. The four illustrative workflows now appear as Arangur example Briefing Plan Templates inside the template library. Existing advanced plan building, immutable Dated Briefings, Advisor Review, Client Preview, Presentation, Explain/Verify, history, and Developer / QA remain available.
+
+Canonical contract: `docs/product/arangur_advisor_workbench_information_architecture_v1.md`. Local walkthrough: `docs/demo/arangur_advisor_workbench_information_architecture_demo_v1.md`.
+
 ## Run The Local Demo Pipeline
 
 The first synthetic vertical slice runs entirely from local JSON fixtures. It does not use Plaid, external APIs, credentials, or real client data.

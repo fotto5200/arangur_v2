@@ -1,5 +1,9 @@
 # Next Actions
 
+## Current checkpoint — 2026-07-16
+
+Arangur Advisor Workbench Information Architecture v1 is implemented locally. Preserve the four primary activities, canonical Briefing Plan/Dated Briefing vocabulary, status-aware actions, deterministic Ask Arangur routing, Legacy filtering, and the restored advanced builder/lifecycle. The recommended next tranche is **Arangur Dated Briefing Reader and Design-Lab Visual Integration v1**. That later tranche may redesign populated Briefing Section reading and visuals; it must not reopen the stabilized top-level information architecture or invent new analytics.
+
 ## Current checkpoint — 2026-07-15
 
 Advisor Workflow Builder Restoration and Design-Lab Integration v1 is complete locally. Do not reopen the builder architecture in the next tranche. The next bounded product work should be selected from observed local-demo polish or a separately authorized persistence/deployment scope. Preserve the three builder paths, current Briefing lifecycle, synthetic/private boundary, gated-report honesty, external-story governance, and Developer / QA separation.
