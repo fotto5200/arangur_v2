@@ -135,6 +135,75 @@ class AdvisorWorkflowUiWiringTests(unittest.TestCase):
         for hidden in ("Save template", "Create briefing with current data", "Developer / QA"):
             self.assertNotIn(hidden, presentation_fragment)
 
+    def test_advanced_builder_restores_three_paths_and_five_stages(self) -> None:
+        html = self.client.get("/app/").text
+        for token in (
+            "Build a custom briefing template",
+            "Customize this template",
+            "Use this template",
+            "Start with no sections",
+            'const steps = ["Purpose", "Reports", "Configure", "Order & visibility", "Preview"]',
+            "renderAdvancedTemplateBuilder",
+            "addBuilderCatalogReport",
+            "addBuilderNarrativeSection",
+            "duplicate-section",
+            "remove-section",
+            "save-template-create",
+        ):
+            self.assertIn(token, html)
+
+    def test_advanced_catalog_and_parameter_contract_are_business_bounded(self) -> None:
+        html = self.client.get("/app/").text
+        for token in (
+            "Question answered:",
+            "Purpose:",
+            "Visibility:",
+            "availability_status",
+            "Not available — prerequisite required",
+            "defaultBuilderParameters",
+            "supported_scopes",
+            "supported_placements",
+            "scenarioOptionsForTemplate",
+            "safeLensOptions",
+            "meaningfulOptionalParameters",
+            "builderOptionalParameters",
+            "selectedScopeConfigForScope",
+            "builderValidationIssue",
+        ):
+            self.assertIn(token, html)
+        for superseded in ("Policy-Level Attribution Summary", "Policy-Level Manager Effect Detail"):
+            self.assertNotIn(superseded, html)
+
+    def test_earlier_local_workflow_records_are_normalized_for_customization(self) -> None:
+        html = self.client.get("/app/").text
+        edit_fragment = html[html.index("function beginTemplateEdit") : html.index("function renderBuilderStart")]
+        for token in (
+            "clientSpecs",
+            "advisorSpecs",
+            "mergedSpecs",
+            "local_spec_id",
+            "configured_parameters",
+            "audience_visibility",
+        ):
+            self.assertIn(token, edit_fragment)
+        self.assertIn("Migration status: current and earlier", html)
+
+    def test_design_lab_patterns_are_integrated_without_prototype_architecture_leaks(self) -> None:
+        html = self.client.get("/app/").text
+        for token in (
+            "reportPresentationPattern",
+            'data-report-pattern=',
+            "cash-bridge",
+            "scenario-range",
+            "part-to-whole",
+            "exact-attribution",
+            "Explain",
+            "Verify",
+        ):
+            self.assertIn(token, html)
+        for prototype_only in ("Objective Horizon", "Capital Landscape", "Wealth Journey", "Stewardship Brief"):
+            self.assertNotIn(prototype_only, html)
+
 
 if __name__ == "__main__":
     unittest.main()

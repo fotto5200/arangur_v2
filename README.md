@@ -612,6 +612,8 @@ When `DB_ENGINE=postgres` and `DATABASE_URL` are set, the app creates minimal `w
 
 ## Design Roadmaps
 
+The current advisor experience uses the Conversation Briefing Desk with three template paths: use a built-in as-is, customize a built-in through a five-stage advanced builder, or start a reusable template from scratch. All paths create new immutable dated briefings through Advisor Review, Client Preview, Presentation, and local history. See `docs/product/advisor_workflow_builder_restoration_and_integration_v1.md`, `docs/product/advisor_workflow_builder_parameter_contract_v1.md`, and `docs/demo/advisor_workflow_builder_integrated_demo_v1.md`.
+
 Future scenario, data-coverage, and deployable private-demo work is captured in:
 
 - `docs/ui_reporting/ui_reporting_philosophy_v1.md`

@@ -1,5 +1,9 @@
 # Next Actions
 
+## Current checkpoint — 2026-07-15
+
+Advisor Workflow Builder Restoration and Design-Lab Integration v1 is complete locally. Do not reopen the builder architecture in the next tranche. The next bounded product work should be selected from observed local-demo polish or a separately authorized persistence/deployment scope. Preserve the three builder paths, current Briefing lifecycle, synthetic/private boundary, gated-report honesty, external-story governance, and Developer / QA separation.
+
 ## Advisor Workflow UI Wiring v1 — completed 2026-07-15
 
 - The approved Conversation Briefing Desk, canonical Briefing vocabulary, two-object lifecycle, bounded template builder, dated immutable Briefings, Advisor Review, Client Preview, Presentation, Explain/Verify, browser-local history, external-story governance, calm gating, and Developer / QA separation are locally wired.

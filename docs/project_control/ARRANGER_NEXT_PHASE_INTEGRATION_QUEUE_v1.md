@@ -1,5 +1,9 @@
 # Arranger Next-Phase Integration Queue v1
 
+## Queue update — 2026-07-15
+
+Advisor Workflow Builder Restoration and Design-Lab Integration v1 is complete locally. The earlier queue question about whether v1 supports bounded template edits or reusable custom creation is resolved: both are supported, plus use-as-is, inside the Conversation Briefing Desk. Further UI work should be driven by observed browser-demo defects or a newly approved bounded tranche; do not add analytics, real data, deployment, or durable production persistence under this checkpoint.
+
 Status: recommended action sequence after documentation/UI discovery, 2026-07-15
 
 Canonical naming note: the product name is **Arangur**. This historical `ARRANGER_...` filename is retained for path stability.

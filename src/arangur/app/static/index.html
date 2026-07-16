@@ -302,6 +302,56 @@
       gap: 18px;
     }
 
+    .builder-progress {
+      display: grid;
+      gap: 7px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .builder-progress button {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      padding: 9px;
+      text-align: left;
+    }
+
+    .builder-progress button.is-active {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--strong);
+      font-weight: 700;
+    }
+
+    .builder-catalog-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .builder-catalog-card {
+      align-content: start;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      display: grid;
+      gap: 7px;
+      padding: 13px;
+    }
+
+    .builder-parameter-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .template-choice-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .bounded-fields {
       display: grid;
       gap: 12px;
@@ -341,6 +391,14 @@
       display: grid;
       gap: 12px;
       min-height: 320px;
+    }
+
+    .report-pattern-note {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      color: var(--strong);
+      padding: 10px 12px;
     }
 
     .reader-section table {
@@ -1306,6 +1364,7 @@
         </div>
 
         <div class="button-row">
+          <button class="secondary-button" type="button" data-desk-action="start-custom-template">Build a custom briefing template</button>
           <button id="home-advanced-tools-button" class="tiny-button" type="button">Developer / QA</button>
           <button id="home-build-client-button" class="hidden" type="button" aria-hidden="true" tabindex="-1">Legacy client builder</button>
           <button id="home-build-advisor-button" class="hidden" type="button" aria-hidden="true" tabindex="-1">Legacy advisor builder</button>
@@ -1452,6 +1511,11 @@
         <summary>Developer / QA tools</summary>
         <p class="helper">Optional technical tools for handoff, backend draft checks, and reference previews.</p>
 
+        <div class="advanced-section" aria-labelledby="migration-status-title">
+          <h3 id="migration-status-title">Local template compatibility</h3>
+          <p class="helper">Migration status: current and earlier `arangur.local_named_briefing_workflows.v1` records are normalized on read. Internal IDs, storage keys, schema versions, and preview-match diagnostics remain visible only in these Developer / QA tools and exported JSON.</p>
+        </div>
+
         <div class="advanced-section" aria-labelledby="local-transfer-title">
           <h3 id="local-transfer-title">Local workflow JSON transfer</h3>
           <div class="button-row">
@@ -1571,6 +1635,7 @@
       "briefing-type": "#briefing-type",
       templates: "#templates",
       "template-preview": "#template-preview",
+      "builder-start": "#builder-start",
       "template-builder": "#template-builder",
       configure: "#configure",
       review: "#review",
@@ -1857,6 +1922,11 @@
       deskSelectedTypeId: null,
       deskSelectedTemplateId: null,
       deskDraftTemplate: null,
+      deskBuilderStep: 1,
+      deskBuilderMode: "customize",
+      deskCatalogQuery: "",
+      deskCatalogFamily: "",
+      deskEditingSectionIndex: null,
       deskCurrentBriefingId: null,
       deskSectionIndex: 0,
       deskEvidenceMode: null,
@@ -1966,7 +2036,7 @@
         els.homeSavedWorkflowStatus.textContent = "Built-in templates are temporarily unavailable. Custom templates remain usable.";
       }
       renderSavedWorkflows();
-      if (["briefing-type", "templates", "template-preview", "template-builder", "configure", "review", "review-evidence", "client-preview", "presentation"].includes(state.route)) {
+      if (["briefing-type", "templates", "template-preview", "builder-start", "template-builder", "configure", "review", "review-evidence", "client-preview", "presentation"].includes(state.route)) {
         renderDeskRoute(state.route);
       }
     }
@@ -2057,7 +2127,7 @@
         renderDeskRoute(normalized);
         return;
       }
-      if (["briefing-type", "templates", "template-preview", "template-builder", "configure", "review", "review-evidence", "client-preview", "history"].includes(normalized)) {
+      if (["briefing-type", "templates", "template-preview", "builder-start", "template-builder", "configure", "review", "review-evidence", "client-preview", "history"].includes(normalized)) {
         document.body.classList.add("app-route-desk");
         renderDeskRoute(normalized);
         return;
@@ -2350,7 +2420,8 @@
       }
       if (route === "briefing-type" || route === "templates") return renderBriefingTypeDetail();
       if (route === "template-preview") return renderTemplatePreview();
-      if (route === "template-builder") return renderBoundedTemplateBuilder();
+      if (route === "builder-start") return renderBuilderStart();
+      if (route === "template-builder") return renderAdvancedTemplateBuilder();
       if (route === "configure") return renderBriefingConfiguration();
       if (route === "review") return renderAdvisorReview();
       if (route === "review-evidence") return renderReviewEvidence();
@@ -2439,7 +2510,7 @@
           <div class="saved-workflow-actions">
             <button class="primary-button tiny-button" type="button" data-desk-action="use-template" data-template-id="${escapeAttr(templateId)}">Use this template</button>
             <button class="tiny-button" type="button" data-desk-action="preview-template" data-template-id="${escapeAttr(templateId)}">Preview template</button>
-            ${template.is_builtin ? `<button class="tiny-button" type="button" data-desk-action="duplicate-template" data-template-id="${escapeAttr(templateId)}">Duplicate</button>` : `<button class="tiny-button" type="button" data-desk-action="edit-template" data-template-id="${escapeAttr(templateId)}">Edit custom copy</button>`}
+            <button class="tiny-button" type="button" data-desk-action="customize-template" data-template-id="${escapeAttr(templateId)}">${template.is_builtin ? "Customize this template" : "Edit custom template"}</button>
           </div>
         </article>
       `;
@@ -2463,7 +2534,7 @@
         <div class="journey-list">${sections.map(renderJourneySummaryRow).join("")}</div>
         <div class="button-row">
           <button class="primary-button" type="button" data-desk-action="use-template" data-template-id="${escapeAttr(workflowRecordId(template))}">Use this template</button>
-          ${template.is_builtin ? `<button class="secondary-button" type="button" data-desk-action="duplicate-template" data-template-id="${escapeAttr(workflowRecordId(template))}">Duplicate</button>` : `<button class="secondary-button" type="button" data-desk-action="edit-template" data-template-id="${escapeAttr(workflowRecordId(template))}">Edit custom copy</button>`}
+          <button class="secondary-button" type="button" data-desk-action="customize-template" data-template-id="${escapeAttr(workflowRecordId(template))}">${template.is_builtin ? "Customize this template" : "Edit custom template"}</button>
           <button class="secondary-button" type="button" data-desk-action="back-templates">Back to templates</button>
         </div>
       `;
@@ -2490,7 +2561,15 @@
       if (!source) return;
       state.deskSelectedTemplateId = templateId;
       const copy = JSON.parse(JSON.stringify(source));
-      const clientIds = new Set(listForKindFromPayload("client", copy.payload || {}).map((spec) => spec.element_id));
+      const advisorSpecs = listForKindFromPayload("advisor", copy.payload || {});
+      const clientSpecs = listForKindFromPayload("client", copy.payload || {});
+      const specKey = (spec) => spec.local_spec_id || `${spec.element_id || "narrative"}:${spec.element_title || spec.title || "section"}`;
+      const clientIds = new Set(clientSpecs.map(specKey));
+      const mergedSpecs = advisorSpecs.slice();
+      const mergedKeys = new Set(mergedSpecs.map(specKey));
+      clientSpecs.forEach((spec) => {
+        if (!mergedKeys.has(specKey(spec))) mergedSpecs.push(spec);
+      });
       copy.id = source.is_builtin ? newLocalId("template") : workflowRecordId(source);
       copy.workflow_id = copy.id;
       copy.is_builtin = false;
@@ -2501,36 +2580,311 @@
       copy.briefing_purpose = source.briefing_purpose || source.conversation_goal || source.description || "";
       copy.audience_choice = source.audience_choice || source.audience || selectedBriefingType().audience;
       copy.briefing_notes = source.briefing_notes || (copy.payload || {}).briefing_notes || "";
-      copy.editor_sections = listForKindFromPayload("advisor", copy.payload || {}).map((spec) => ({
+      copy.editor_sections = mergedSpecs.map((spec) => ({
         ...spec,
+        local_spec_id: spec.local_spec_id || newLocalId("section"),
+        element_title: spec.element_title || spec.title || "Briefing section",
+        configured_parameters: { ...(spec.configured_parameters || spec.parameters || {}) },
+        catalog_status: spec.catalog_status || "available",
+        audience_visibility: spec.audience_visibility || (clientIds.has(specKey(spec)) ? "client_facing" : "advisor_review"),
         included: true,
-        client_visible: clientIds.has(spec.element_id)
+        client_visible: clientIds.has(specKey(spec))
       }));
       state.deskDraftTemplate = copy;
+      state.deskBuilderMode = source.is_builtin ? "customize" : "edit";
+      state.deskBuilderStep = 1;
+      state.deskEditingSectionIndex = null;
       navigateToRoute("template-builder");
     }
 
-    function renderBoundedTemplateBuilder() {
+    function renderBuilderStart() {
+      const body = `
+        <div class="desk-intro"><p class="eyebrow">Custom template &middot; start from scratch</p><h1>What kind of conversation will this template support?</h1><p>Choose a briefing type for its audience and governance boundaries. You will start with no report sections.</p></div>
+        <div class="template-choice-grid">${state.builtInTemplates.map((type) => `
+          <article class="builder-catalog-card">
+            <p class="eyebrow">${escapeHtml(type.audience || "Advisor conversation")}</p>
+            <h2>${escapeHtml(type.briefing_type_name || workflowDisplayName(type))}</h2>
+            <p>${escapeHtml(type.conversation_goal || type.description || "")}</p>
+            <button class="primary-button" type="button" data-desk-action="scratch-type" data-type-id="${escapeAttr(workflowRecordId(type))}">Start with no sections</button>
+          </article>`).join("")}</div>
+        <button class="secondary-button" type="button" data-desk-action="home">Return to the Desk</button>`;
+      els.briefingDeskRegion.innerHTML = deskShell("Start a custom template", body);
+    }
+
+    function startScratchTemplate(typeId) {
+      const type = state.builtInTemplates.find((candidate) => workflowRecordId(candidate) === typeId);
+      if (!type) return;
+      state.deskSelectedTypeId = typeId;
+      const id = newLocalId("template");
+      state.deskSelectedTemplateId = id;
+      state.deskDraftTemplate = {
+        id,
+        workflow_id: id,
+        is_builtin: false,
+        template_kind: "custom",
+        display_name: uniqueWorkflowName(`Custom ${type.briefing_type_name || workflowDisplayName(type)}`),
+        briefing_type_id: typeId,
+        briefing_type_name: type.briefing_type_name || workflowDisplayName(type),
+        briefing_purpose: type.conversation_goal || "",
+        audience_choice: type.audience || "Advisor audience",
+        briefing_notes: "",
+        editor_sections: [],
+        payload: {
+          schema_version: LOCAL_SPEC_SET_SCHEMA_VERSION,
+          synthetic_data: true,
+          workflow_name: "",
+          client_context: { ...CLIENT_CONTEXT },
+          client_briefing_set: [],
+          advisor_review_set: []
+        }
+      };
+      state.deskBuilderMode = "scratch";
+      state.deskBuilderStep = 1;
+      state.deskEditingSectionIndex = null;
+      navigateToRoute("template-builder");
+    }
+
+    function renderAdvancedTemplateBuilder() {
       const draft = state.deskDraftTemplate;
       if (!draft) return renderBriefingTypeDetail();
       const type = selectedBriefingType();
-      const sections = Array.isArray(draft.editor_sections) ? draft.editor_sections : [];
+      const steps = ["Purpose", "Reports", "Configure", "Order & visibility", "Preview"];
+      const step = Math.min(5, Math.max(1, Number(state.deskBuilderStep) || 1));
+      const progress = `<nav class="builder-progress" aria-label="Template builder stages">${steps.map((label, index) => `<button type="button" class="${step === index + 1 ? "is-active" : ""}" data-desk-action="builder-step" data-step="${index + 1}">${index + 1}. ${escapeHtml(label)}</button>`).join("")}</nav>`;
+      const stage = step === 1 ? renderBuilderPurposeStage(draft)
+        : step === 2 ? renderBuilderReportsStage(draft)
+        : step === 3 ? renderBuilderConfigureStage(draft)
+        : step === 4 ? renderBuilderOrderStage(draft)
+        : renderBuilderPreviewStage(draft);
       const body = `
-        <div class="desk-intro"><p class="eyebrow">Bounded briefing-template builder</p><h1>${escapeHtml(draft.display_name)}</h1><p>Adjust the reusable intent and approved sections. Changes affect future briefings only.</p></div>
+        <div class="desk-intro"><p class="eyebrow">Advanced briefing-template builder &middot; ${escapeHtml(state.deskBuilderMode === "scratch" ? "from scratch" : "customize illustrative")}</p><h1>${escapeHtml(draft.display_name)}</h1><p>This is a reusable definition. It does not create or alter a dated briefing until you explicitly create one with current data.</p></div>
         ${externalGovernanceHtml(type)}
-        <div class="bounded-builder">
-          <div class="bounded-fields">
-            <label class="field"><span>Template name</span><input type="text" value="${escapeAttr(draft.display_name)}" data-desk-field="display_name"></label>
-            <label class="field"><span>Audience / depth</span><select data-desk-field="audience_choice">${audienceOptions(draft.audience_choice).map((option) => `<option${option === draft.audience_choice ? " selected" : ""}>${escapeHtml(option)}</option>`).join("")}</select></label>
-          </div>
-          <label class="field"><span>Briefing purpose</span><textarea rows="3" data-desk-field="briefing_purpose">${escapeHtml(draft.briefing_purpose)}</textarea></label>
-          <label class="field"><span>Material briefing notes or caveats</span><textarea rows="3" data-desk-field="briefing_notes">${escapeHtml(draft.briefing_notes)}</textarea></label>
-          <section><h2>Approved sections and order</h2><p class="helper">Primary and gated journey steps stay in context. Optional supporting depth can be included or excluded. Client visibility is bounded by the approved audience rules.</p><div class="journey-list">${sections.map(renderBuilderSectionRow).join("")}</div></section>
-          <p id="desk-builder-status" class="status"></p>
-          <div class="button-row"><button class="primary-button" type="button" data-desk-action="save-template">Save template</button><button class="secondary-button" type="button" data-desk-action="back-templates">Discard changes</button></div>
-        </div>
+        ${progress}
+        <div class="bounded-builder">${stage}<p id="desk-builder-status" class="status"></p></div>
       `;
-      els.briefingDeskRegion.innerHTML = deskShell("Bounded template builder", body);
+      els.briefingDeskRegion.innerHTML = deskShell("Advanced template builder", body);
+    }
+
+    function renderBoundedTemplateBuilder() {
+      return renderAdvancedTemplateBuilder();
+    }
+
+    function renderBuilderPurposeStage(draft) {
+      return `<section><h2>Purpose and audience</h2><p class="helper">Name the conversation and its audience. These choices travel with future briefings.</p>
+        <div class="bounded-fields">
+          <label class="field"><span>Template name</span><input type="text" value="${escapeAttr(draft.display_name)}" data-desk-field="display_name"></label>
+          <label class="field"><span>Audience / depth</span><select data-desk-field="audience_choice">${audienceOptions(draft.audience_choice).map((option) => `<option${option === draft.audience_choice ? " selected" : ""}>${escapeHtml(option)}</option>`).join("")}</select></label>
+        </div>
+        <label class="field"><span>Briefing purpose</span><textarea rows="3" data-desk-field="briefing_purpose">${escapeHtml(draft.briefing_purpose || "")}</textarea></label>
+        <label class="field"><span>Material briefing notes or caveats</span><textarea rows="3" data-desk-field="briefing_notes">${escapeHtml(draft.briefing_notes || "")}</textarea></label>
+        <div class="button-row"><button class="primary-button" type="button" data-desk-action="builder-next">Choose reports</button><button class="secondary-button" type="button" data-desk-action="back-templates">Discard draft</button></div></section>`;
+    }
+
+    function filteredBuilderCatalog() {
+      const query = normalize(state.deskCatalogQuery);
+      const family = normalize(state.deskCatalogFamily);
+      return builderCatalogEntries().filter((entry) => {
+        if (family && normalize(entry.category) !== family) return false;
+        if (query && !normalize([entry.title, entry.short_description, entry.question, entry.purpose, entry.category].join(" ")).includes(query)) return false;
+        return true;
+      });
+    }
+
+    function reportFamilyForTitle(title) {
+      const text = normalize(title);
+      if (text.includes("cash") || text.includes("liquidity")) return "cash";
+      if (text.includes("scenario") || text.includes("downside") || text.includes("stress")) return "scenario";
+      if (text.includes("allocation") || text.includes("policy")) return "allocation";
+      if (text.includes("attribution")) return "attribution";
+      if (text.includes("manager") || text.includes("mandate")) return "manager";
+      if (text.includes("lens") || text.includes("exposure") || text.includes("concentration")) return "exposure";
+      if (text.includes("confidence") || text.includes("coverage")) return "data_readiness";
+      return "status";
+    }
+
+    function builderCatalogEntries() {
+      const configurable = state.templates.filter((template) => containsNormalized(template.supported_branches, "Advisor Review")).map((template) => ({
+        catalog_key: `configurable:${template.element_id}`,
+        builder_kind: "configurable",
+        element_id: template.element_id,
+        title: template.title,
+        category: template.category,
+        short_description: template.short_description,
+        question: firstValue(template.relevant_client_questions) || firstValue(template.relevant_advisor_review_intents),
+        purpose: firstValue(template.relevant_advisor_review_intents) || template.short_description,
+        availability_status: "Available",
+        visibility: "Client or Advisor Review, subject to briefing-type bounds",
+        template
+      }));
+      const type = selectedBriefingType();
+      const workflow = type && type.payload || {};
+      const workflowEntries = listForKindFromPayload("advisor", workflow).map((spec) => {
+        const gated = ["gated", "deferred"].includes(spec.catalog_status);
+        return {
+          catalog_key: `workflow:${spec.catalog_workflow_id || workflowRecordId(type)}:${spec.element_id}`,
+          builder_kind: "workflow",
+          element_id: spec.element_id,
+          title: spec.element_title,
+          category: reportFamilyForTitle(spec.element_title),
+          short_description: spec.why_included || spec.visible_question_answered || "Approved briefing journey section.",
+          question: spec.visible_question_answered || "What should the advisor understand?",
+          purpose: spec.why_included || "Support this approved conversation journey.",
+          availability_status: gated ? "Not yet available" : "Available",
+          visibility: friendlyVisibility(spec.audience_visibility),
+          source_spec: spec,
+          gated
+        };
+      });
+      const existingKeys = new Set();
+      return workflowEntries.concat(configurable).filter((entry) => {
+        const key = `${normalize(entry.title)}:${entry.builder_kind}`;
+        if (existingKeys.has(key)) return false;
+        existingKeys.add(key);
+        return true;
+      });
+    }
+
+    function renderBuilderReportsStage(draft) {
+      const catalog = filteredBuilderCatalog();
+      const families = uniqueValues(builderCatalogEntries().map((entry) => entry.category));
+      return `<section><h2>Choose report and narrative sections</h2><p class="helper">Search the supported catalog by the business question this conversation needs to answer. Only currently supported report definitions can be added.</p>
+        <div class="bounded-fields"><label class="field"><span>Search reports</span><input type="search" value="${escapeAttr(state.deskCatalogQuery)}" data-desk-catalog-query placeholder="Cash, scenario, manager, confidence"></label><label class="field"><span>Report family</span><select data-desk-catalog-family><option value="">All report families</option>${families.map((family) => `<option value="${escapeAttr(family)}"${family === state.deskCatalogFamily ? " selected" : ""}>${escapeHtml(categoryLabel(family))}</option>`).join("")}</select></label></div>
+        <div class="button-row"><button class="secondary-button" type="button" data-desk-action="apply-catalog-filter">Apply filters</button><button class="secondary-button" type="button" data-desk-action="add-narrative-section">Add advisor note</button></div>
+        <p class="status">${catalog.length} supported ${catalog.length === 1 ? "report" : "reports"}; ${draft.editor_sections.length} ${draft.editor_sections.length === 1 ? "section" : "sections"} in this template.</p>
+        <div class="builder-catalog-grid">${catalog.map((entry) => `<article class="builder-catalog-card"><p class="eyebrow">${escapeHtml(categoryLabel(entry.category))} &middot; ${escapeHtml(entry.availability_status)}</p><h3>${escapeHtml(entry.title)}</h3><p>${escapeHtml(entry.short_description)}</p><p class="meta"><strong>Question answered:</strong> ${escapeHtml(entry.question)}</p><p class="meta"><strong>Purpose:</strong> ${escapeHtml(entry.purpose)}</p><p class="meta"><strong>Visibility:</strong> ${escapeHtml(entry.visibility)}</p>${entry.builder_kind === "configurable" ? `<p class="meta"><strong>Available configuration:</strong> ${escapeHtml(builderFieldSummary(entry.template))}</p>` : ""}${entry.gated ? '<button class="secondary-button tiny-button" type="button" disabled>Not available — prerequisite required</button>' : `<button class="primary-button tiny-button" type="button" data-desk-action="add-catalog-report" data-catalog-key="${escapeAttr(entry.catalog_key)}">Add report</button>`}</article>`).join("") || '<p class="empty">No supported reports match these filters.</p>'}</div>
+        <div class="button-row"><button class="secondary-button" type="button" data-desk-action="builder-previous">Back</button><button class="primary-button" type="button" data-desk-action="builder-next" ${draft.editor_sections.length ? "" : "disabled"}>Configure choices</button></div></section>`;
+    }
+
+    function defaultBuilderParameters(template) {
+      const parameters = {};
+      if (shouldAsk(template, "scope")) parameters.scope = firstValue(template.supported_scopes);
+      if (shouldAsk(template, "lens")) parameters.lens = firstValue(safeLensOptions(template));
+      else if ((template.optional_parameters || []).includes("lens")) parameters.lens = firstValue(safeLensOptions(template));
+      if (shouldAskMetric(template)) parameters.metric = firstValue(template.supported_metrics);
+      if (template.scenario_requirement === "required") parameters.scenario_id = firstValue(scenarioOptionsForTemplate(template));
+      builderOptionalParameters(template).forEach((key) => { parameters[key] = firstValue(parameterOptionsForTemplate(template, key)); });
+      if (template.fixed_metric) parameters.fixed_metric = template.fixed_metric;
+      if (template.fixed_or_default_display) parameters.fixed_display = template.fixed_or_default_display;
+      return parameters;
+    }
+
+    function builderOptionalParameters(template) {
+      const excluded = new Set(["lens", "scenario_id", "audience_depth", "confidence_note"]);
+      return (template.optional_parameters || []).filter((key) => PARAMETER_UI[key] && !excluded.has(key));
+    }
+
+    function builderFieldSummary(template) {
+      const labels = ["Advisor Review placement"];
+      if (shouldAsk(template, "scope")) labels.push("scope and selected entity when applicable");
+      if (shouldAsk(template, "lens") || (template.optional_parameters || []).includes("lens")) labels.push(lensLabel(template));
+      if (shouldAskMetric(template)) labels.push(metricLabel(template));
+      if (template.scenario_requirement !== "not_applicable") labels.push("scenario");
+      builderOptionalParameters(template).forEach((key) => labels.push(PARAMETER_UI[key].label));
+      return uniqueValues(labels).join(", ");
+    }
+
+    function addBuilderCatalogReport(catalogKey) {
+      const entry = builderCatalogEntries().find((candidate) => candidate.catalog_key === catalogKey);
+      const draft = state.deskDraftTemplate;
+      if (!entry || !draft || entry.gated) return;
+      const type = selectedBriefingType();
+      if (entry.builder_kind === "workflow") {
+        const spec = JSON.parse(JSON.stringify(entry.source_spec));
+        draft.editor_sections.push({ ...spec, local_spec_id: newLocalId("section"), included: true, client_visible: false });
+        renderAdvancedTemplateBuilder();
+        return;
+      }
+      const template = entry.template;
+      draft.editor_sections.push({
+        order: draft.editor_sections.length + 1,
+        local_spec_id: newLocalId("section"),
+        element_kind: "analytic",
+        element_id: template.element_id,
+        element_title: template.title,
+        title: template.title,
+        configured_parameters: defaultBuilderParameters(template),
+        placement: firstValue((template.supported_placements || {})["Advisor Review"] || []),
+        advisor_internal_purpose: firstValue(template.advisor_internal_purposes || []),
+        catalog_status: "available",
+        audience_visibility: type && type.advisor_internal_default ? "advisor_only" : "advisor_review",
+        visible_question_answered: firstValue(template.relevant_client_questions) || template.short_description,
+        why_included: template.short_description,
+        caveat: (template.default_caveat_rules || []).join(" "),
+        optional: true,
+        included: true,
+        client_visible: false
+      });
+      renderAdvancedTemplateBuilder();
+    }
+
+    function addBuilderNarrativeSection() {
+      const draft = state.deskDraftTemplate;
+      if (!draft) return;
+      draft.editor_sections.push({
+        order: draft.editor_sections.length + 1,
+        local_spec_id: newLocalId("section"),
+        element_kind: "narrative",
+        element_id: null,
+        element_title: "Advisor note",
+        title: "Advisor note",
+        narrative_type: "working_note",
+        narrative_fields: { note_text: "Add the preparation note for this conversation." },
+        placement: "Advisor working notes",
+        catalog_status: "available",
+        audience_visibility: "advisor_only",
+        optional: true,
+        included: true,
+        client_visible: false
+      });
+      state.deskEditingSectionIndex = draft.editor_sections.length - 1;
+      state.deskBuilderStep = 3;
+      renderAdvancedTemplateBuilder();
+    }
+
+    function renderBuilderConfigureStage(draft) {
+      const active = Number.isInteger(state.deskEditingSectionIndex) ? state.deskEditingSectionIndex : null;
+      return `<section><h2>Configure supported choices</h2><p class="helper">Each report exposes only parameters already defined by its catalog contract and approved analytic choices.</p><div class="journey-list">${draft.editor_sections.map((spec, index) => renderBuilderConfigureRow(spec, index, active === index)).join("") || '<p class="empty">Return to Reports and add at least one section.</p>'}</div><div class="button-row"><button class="secondary-button" type="button" data-desk-action="builder-previous">Back to reports</button><button class="primary-button" type="button" data-desk-action="builder-next" ${draft.editor_sections.length ? "" : "disabled"}>Set order and visibility</button></div></section>`;
+    }
+
+    function renderBuilderConfigureRow(spec, index, open) {
+      const template = state.templates.find((candidate) => candidate.element_id === spec.element_id);
+      const parameters = spec.configured_parameters || {};
+      const editor = spec.element_kind === "narrative"
+        ? `<label class="field"><span>Advisor note</span><textarea rows="3" data-desk-narrative-text data-section-index="${index}">${escapeHtml((spec.narrative_fields || {}).note_text || "")}</textarea></label>`
+        : template ? renderBuilderParameterEditor(template, spec, index) : '<p class="meta">This committed workflow section has no additional configuration choices.</p>';
+      return `<article class="journey-row"><div class="journey-copy"><strong>${escapeHtml(spec.element_title || spec.title || "Briefing section")}</strong><p class="meta">${escapeHtml(compactParameterText(parameters) || friendlyVisibility(spec.audience_visibility))}</p>${open ? `<div class="builder-parameter-grid">${editor}</div>` : ""}</div><button class="tiny-button" type="button" data-desk-action="configure-section" data-section-index="${index}">${open ? "Done" : "Configure"}</button></article>`;
+    }
+
+    function renderBuilderParameterEditor(template, spec, index) {
+      const parameters = spec.configured_parameters || {};
+      const fields = [];
+      if (shouldAsk(template, "scope")) fields.push({ key: "scope", label: "Scope", options: template.supported_scopes || [] });
+      const selectedEntity = selectedScopeConfigForScope(parameters.scope);
+      if (selectedEntity) fields.push({ key: selectedEntity.key, label: selectedEntity.label, options: [`Choose ${selectedEntity.validationLabel}`].concat(selectedEntity.options) });
+      if (shouldAsk(template, "lens") || (template.optional_parameters || []).includes("lens")) fields.push({ key: "lens", label: lensLabel(template), options: safeLensOptions(template) });
+      if (shouldAskMetric(template)) fields.push({ key: "metric", label: metricLabel(template), options: template.supported_metrics || [] });
+      if (template.scenario_requirement === "required" || (template.scenario_requirement === "optional" && shouldShowScenarioOverlay(template))) fields.push({ key: "scenario_id", label: "Scenario", options: (template.scenario_requirement === "optional" ? ["None"] : []).concat(scenarioOptionsForTemplate(template)) });
+      builderOptionalParameters(template).forEach((key) => fields.push({ key, label: PARAMETER_UI[key].label, options: parameterOptionsForTemplate(template, key) }));
+      const placementOptions = (template.supported_placements || {})["Advisor Review"] || [];
+      if (placementOptions.length) fields.push({ key: "placement", label: "Advisor Review placement", options: placementOptions, property: true });
+      return fields.map((field) => `<label class="field"><span>${escapeHtml(field.label)}</span><select ${field.property ? "data-desk-section-property" : "data-desk-parameter"}="${escapeAttr(field.key)}" data-section-index="${index}">${field.options.map((option) => `<option value="${escapeAttr(option)}"${String(field.property ? spec[field.key] : parameters[field.key]) === String(option) ? " selected" : ""}>${escapeHtml(option)}</option>`).join("")}</select></label>`).join("") || '<p class="meta">This report uses its fixed approved measure and display.</p>';
+    }
+
+    function renderBuilderOrderStage(draft) {
+      return `<section><h2>Set order and visibility</h2><p class="helper">Order the conversation. Client visibility remains bounded by the chosen briefing type; advisor-only and gated content cannot be promoted.</p><div class="journey-list">${draft.editor_sections.map(renderAdvancedOrderRow).join("")}</div><div class="button-row"><button class="secondary-button" type="button" data-desk-action="builder-previous">Back to configuration</button><button class="primary-button" type="button" data-desk-action="builder-next">Preview template</button></div></section>`;
+    }
+
+    function renderAdvancedOrderRow(spec, index, list) {
+      const gated = ["gated", "deferred"].includes(spec.catalog_status);
+      const type = selectedBriefingType();
+      const clientPermitted = !type.advisor_internal_default && !gated && spec.audience_visibility !== "advisor_only";
+      return `<div class="section-choice-row ${gated ? "is-gated" : ""}"><span class="journey-index">${index + 1}</span><div class="journey-copy"><strong>${escapeHtml(spec.element_title || spec.title || "Briefing section")}</strong><p class="meta">${escapeHtml(spec.visible_question_answered || compactParameterText(spec.configured_parameters) || friendlyVisibility(spec.audience_visibility))}</p>${gated ? `<span class="badge">Not yet available</span>` : ""}</div><div class="section-choice-actions">${clientPermitted ? `<label><input type="checkbox" data-desk-section-field="client_visible" data-section-index="${index}" ${spec.client_visible ? "checked" : ""}> Client-visible</label>` : `<span class="meta">${type.advisor_internal_default ? "Advisor-only" : friendlyVisibility(spec.audience_visibility)}</span>`}<button class="tiny-button" type="button" data-desk-action="duplicate-section" data-section-index="${index}">Duplicate</button><button class="tiny-button" type="button" data-desk-action="move-section" data-section-index="${index}" data-direction="-1" ${index === 0 ? "disabled" : ""}>Up</button><button class="tiny-button" type="button" data-desk-action="move-section" data-section-index="${index}" data-direction="1" ${index === list.length - 1 ? "disabled" : ""}>Down</button><button class="tiny-button" type="button" data-desk-action="remove-section" data-section-index="${index}">Remove</button></div></div>`;
+    }
+
+    function renderBuilderPreviewStage(draft) {
+      const sections = draft.editor_sections || [];
+      const caveats = sections.map((spec) => spec.caveat).filter(Boolean);
+      return `<section><h2>Preview reusable template</h2><p>${escapeHtml(draft.briefing_purpose || "No purpose supplied.")}</p><div class="summary-grid"><div class="summary-tile"><strong>Audience</strong>${escapeHtml(draft.audience_choice || "Advisor audience")}</div><div class="summary-tile"><strong>Order</strong>${sections.length} ${sections.length === 1 ? "section" : "sections"}</div><div class="summary-tile"><strong>Visibility</strong>${sections.filter((spec) => spec.client_visible).length} client-visible</div></div><div class="journey-list">${sections.map((spec, index) => `<article class="journey-row ${["gated", "deferred"].includes(spec.catalog_status) ? "is-gated" : ""}"><div class="journey-copy"><span class="journey-index">${index + 1} &middot; ${spec.client_visible ? "Client-visible" : "Advisor Review"}</span><strong>${escapeHtml(spec.element_title || spec.title || "Briefing section")}</strong><p class="meta">${escapeHtml(compactParameterText(spec.configured_parameters) || spec.visible_question_answered || "No additional configuration")}</p>${spec.optional ? '<span class="badge">Optional</span>' : ""}</div></article>`).join("")}</div>${draft.briefing_notes ? `<aside class="governance-banner"><strong>Template notes and caveats</strong><p>${escapeHtml(draft.briefing_notes)}</p></aside>` : ""}${caveats.length ? `<details><summary>Report caveats</summary><ul class="detail-list">${uniqueValues(caveats).map((value) => `<li>${escapeHtml(value)}</li>`).join("")}</ul></details>` : ""}<div class="button-row"><button class="primary-button" type="button" data-desk-action="save-template-create">Save template and create briefing</button><button class="secondary-button" type="button" data-desk-action="save-template-only">Save template only</button><button class="secondary-button" type="button" data-desk-action="builder-previous">Back</button></div></section>`;
     }
 
     function audienceOptions(current) {
@@ -2555,13 +2909,22 @@
       `;
     }
 
-    function saveBoundedTemplate() {
+    function saveBoundedTemplate(options = {}) {
       const draft = state.deskDraftTemplate;
       if (!draft) return;
       const name = readableWorkflowName(draft.display_name);
       const status = document.getElementById("desk-builder-status");
       if (!name) {
         if (status) status.textContent = "Name this briefing template before saving.";
+        return;
+      }
+      if (!Array.isArray(draft.editor_sections) || !draft.editor_sections.some((spec) => spec.included !== false)) {
+        if (status) status.textContent = "Add at least one supported report or narrative section before saving.";
+        return;
+      }
+      const validationIssue = builderValidationIssue(draft);
+      if (validationIssue) {
+        if (status) status.textContent = validationIssue;
         return;
       }
       const now = new Date().toISOString();
@@ -2597,7 +2960,25 @@
       persistLocalNamedWorkflows();
       state.deskSelectedTemplateId = workflowRecordId(saved);
       state.deskDraftTemplate = null;
-      navigateToRoute("configure");
+      state.deskEditingSectionIndex = null;
+      navigateToRoute(options.nextRoute || "configure");
+    }
+
+    function builderValidationIssue(draft) {
+      for (const spec of draft.editor_sections || []) {
+        if (spec.included === false || spec.element_kind === "narrative") continue;
+        const template = state.templates.find((candidate) => candidate.element_id === spec.element_id);
+        if (!template) continue;
+        const parameters = spec.configured_parameters || {};
+        const selectedEntity = selectedScopeConfigForScope(parameters.scope);
+        if (selectedEntity && (!parameters[selectedEntity.key] || normalize(parameters[selectedEntity.key]).startsWith("choose "))) {
+          return `${spec.element_title || template.title}: choose a ${selectedEntity.validationLabel} for the selected scope before saving.`;
+        }
+        if (template.scenario_requirement === "required" && !parameters.scenario_id) {
+          return `${spec.element_title || template.title}: choose a scenario before saving.`;
+        }
+      }
+      return "";
     }
 
     function cleanEditorSpec(spec, branch) {
@@ -2762,7 +3143,8 @@
       const section = sections[index];
       const step = briefing.journey_steps.find((candidate) => candidate.display_title === (section && section.title)) || {};
       const evidence = renderEvidenceDepth(section, step, briefing);
-      const sectionBody = state.deskEvidenceMode ? evidence : `<div class="reader-section"><p class="eyebrow">Conclusion</p><h2>${escapeHtml(section && section.title || "Briefing section")}</h2>${step.visible_question_answered ? `<p>${escapeHtml(step.visible_question_answered)}</p>` : ""}<div>${sanitizePreviewFragment(section && section.html || "")}</div></div>`;
+      const pattern = reportPresentationPattern(section && section.title);
+      const sectionBody = state.deskEvidenceMode ? evidence : `<div class="reader-section" data-report-pattern="${escapeAttr(pattern.key)}"><p class="eyebrow">Conclusion</p><h2>${escapeHtml(section && section.title || "Briefing section")}</h2>${step.visible_question_answered ? `<p>${escapeHtml(step.visible_question_answered)}</p>` : ""}<p class="report-pattern-note"><strong>${escapeHtml(pattern.label)}:</strong> ${escapeHtml(pattern.guidance)}</p><div>${sanitizePreviewFragment(section && section.html || "")}</div></div>`;
       const evidenceButtons = `<button class="tiny-button" type="button" data-desk-action="evidence" data-evidence="explain">Explain</button>${canVerifySection(section) ? '<button class="tiny-button" type="button" data-desk-action="evidence" data-evidence="verify">Verify</button>' : ""}`;
       const header = `<header class="reader-header"><p class="brand">Arangur</p><h1>${escapeHtml(briefing.title)}</h1><p class="meta">${escapeHtml(formatBriefingDate(briefing.generated_at))} &middot; Data through ${escapeHtml(formatBriefingDate(briefing.data_as_of))}</p></header>`;
       const navigation = `<div class="reader-navigation"><button class="secondary-button" type="button" data-desk-action="previous" ${index <= 0 ? "disabled" : ""}>Previous</button><span class="report-position">Section ${sections.length ? index + 1 : 0} of ${sections.length}</span><button class="primary-button" type="button" data-desk-action="next" ${index >= sections.length - 1 ? "disabled" : ""}>Next</button></div>`;
@@ -2772,6 +3154,15 @@
       }
       const body = `<div class="briefing-reader"><p class="eyebrow">Client Preview &middot; exact client-visible sequence</p>${header}<p class="meta">Advisor-only preparation, diagnostics, internal controls, and gated steps are excluded.</p>${sectionBody}<div class="button-row">${evidenceButtons}</div>${navigation}<div class="button-row"><button class="primary-button" type="button" data-desk-action="present">Present briefing</button><button class="secondary-button" type="button" data-desk-action="advisor-review">Back to Advisor Review</button></div></div>`;
       els.briefingDeskRegion.innerHTML = deskShell("Client Preview", body);
+    }
+
+    function reportPresentationPattern(title) {
+      const text = normalize(title);
+      if (text.includes("cash") || text.includes("liquidity")) return { key: "cash-bridge", label: "Cash conclusion and bridge", guidance: "Lead with the cash answer, then show the existing sources-and-uses evidence." };
+      if (text.includes("scenario") || text.includes("downside") || text.includes("stress")) return { key: "scenario-range", label: "Scenario range", guidance: "Lead with the bounded outcome, then preserve the existing comparable scenario evidence." };
+      if (text.includes("lens") || text.includes("exposure") || text.includes("concentration")) return { key: "part-to-whole", label: "Part-to-whole lens", guidance: "Lead with the concentration conclusion, then retain the current composition detail." };
+      if (text.includes("attribution") || text.includes("allocation") || text.includes("manager")) return { key: "exact-attribution", label: "Exact attribution table", guidance: "Lead with the decision implication and keep exact reconciliable tables available in Verify." };
+      return { key: "conclusion-first", label: "Conclusion-first summary", guidance: "Answer the visible question first, then let Explain and Verify reveal the supporting depth." };
     }
 
     function renderEvidenceDepth(section, step, briefing) {
@@ -5505,6 +5896,8 @@
       const action = button.dataset.deskAction;
       if (action === "home") return navigateToRoute("home");
       if (action === "history") return navigateToRoute("history");
+      if (action === "start-custom-template") return navigateToRoute("builder-start");
+      if (action === "scratch-type") return startScratchTemplate(button.dataset.typeId);
       if (action === "select-type") return selectBriefingType(button.dataset.typeId);
       if (action === "open-template-type") {
         const template = allBriefingTemplates().find((candidate) => workflowRecordId(candidate) === button.dataset.templateId);
@@ -5514,13 +5907,44 @@
         return navigateToRoute("briefing-type");
       }
       if (action === "back-templates") return navigateToRoute("briefing-type");
-      if (["use-template", "preview-template", "duplicate-template", "edit-template"].includes(action)) {
+      if (["use-template", "preview-template", "duplicate-template", "edit-template", "customize-template"].includes(action)) {
         state.deskSelectedTemplateId = button.dataset.templateId;
         const template = selectedDeskTemplate();
         if (template) state.deskSelectedTypeId = templateTypeId(template) || state.deskSelectedTypeId;
         if (action === "use-template") return navigateToRoute("configure");
         if (action === "preview-template") return navigateToRoute("template-preview");
         return beginTemplateEdit(button.dataset.templateId);
+      }
+      if (action === "builder-step") {
+        state.deskBuilderStep = Number(button.dataset.step) || 1;
+        state.deskEditingSectionIndex = null;
+        return renderAdvancedTemplateBuilder();
+      }
+      if (action === "builder-next" || action === "builder-previous") {
+        state.deskBuilderStep = Math.min(5, Math.max(1, state.deskBuilderStep + (action === "builder-next" ? 1 : -1)));
+        state.deskEditingSectionIndex = null;
+        return renderAdvancedTemplateBuilder();
+      }
+      if (action === "apply-catalog-filter") return renderAdvancedTemplateBuilder();
+      if (action === "add-catalog-report") return addBuilderCatalogReport(button.dataset.catalogKey);
+      if (action === "add-narrative-section") return addBuilderNarrativeSection();
+      if (action === "configure-section") {
+        const index = Number(button.dataset.sectionIndex);
+        state.deskEditingSectionIndex = state.deskEditingSectionIndex === index ? null : index;
+        return renderAdvancedTemplateBuilder();
+      }
+      if (action === "duplicate-section" || action === "remove-section") {
+        const draft = state.deskDraftTemplate;
+        const index = Number(button.dataset.sectionIndex);
+        if (!draft || !draft.editor_sections[index]) return;
+        if (action === "remove-section") draft.editor_sections.splice(index, 1);
+        else {
+          const copy = JSON.parse(JSON.stringify(draft.editor_sections[index]));
+          copy.local_spec_id = newLocalId("section");
+          copy.element_title = `${copy.element_title || copy.title || "Briefing section"} Copy`;
+          draft.editor_sections.splice(index + 1, 0, copy);
+        }
+        return renderAdvancedTemplateBuilder();
       }
       if (action === "move-section") {
         const draft = state.deskDraftTemplate;
@@ -5531,7 +5955,8 @@
         draft.editor_sections.splice(target, 0, moved);
         return renderBoundedTemplateBuilder();
       }
-      if (action === "save-template") return saveBoundedTemplate();
+      if (action === "save-template" || action === "save-template-create") return saveBoundedTemplate({ nextRoute: "configure" });
+      if (action === "save-template-only") return saveBoundedTemplate({ nextRoute: "briefing-type" });
       if (action === "create-briefing") return createDatedBriefing();
       if (action === "client-preview") {
         state.deskSectionIndex = 0;
@@ -5592,6 +6017,34 @@
     function handleDeskFieldChange(event) {
       const draft = state.deskDraftTemplate;
       if (!draft) return;
+      if (event.target.hasAttribute("data-desk-catalog-query")) {
+        state.deskCatalogQuery = event.target.value;
+        return;
+      }
+      if (event.target.hasAttribute("data-desk-catalog-family")) {
+        state.deskCatalogFamily = event.target.value;
+        return;
+      }
+      const parameter = event.target.dataset.deskParameter;
+      const property = event.target.dataset.deskSectionProperty;
+      const narrativeText = event.target.hasAttribute("data-desk-narrative-text");
+      if (parameter || property || narrativeText) {
+        const index = Number(event.target.dataset.sectionIndex);
+        const spec = draft.editor_sections && draft.editor_sections[index];
+        if (!spec) return;
+        if (parameter) {
+          spec.configured_parameters = { ...(spec.configured_parameters || {}), [parameter]: event.target.value };
+          if (parameter === "scope") {
+            Object.values(SELECTED_SCOPE_CONFIG).forEach((config) => { delete spec.configured_parameters[config.key]; });
+            renderAdvancedTemplateBuilder();
+          }
+        } else if (property) {
+          spec[property] = event.target.value;
+        } else {
+          spec.narrative_fields = { ...(spec.narrative_fields || {}), note_text: event.target.value };
+        }
+        return;
+      }
       const field = event.target.dataset.deskField;
       if (field) {
         draft[field] = event.target.value;

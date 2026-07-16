@@ -185,3 +185,6 @@ Then proceed in order:
 - Raw artifact clutter: JSON paths, report package links, run IDs, mockup filenames, and internal statuses must remain in Developer / QA or evidence/admin layers.
 - Client objective gap: design-only return/growth/risk thresholds must never be mistaken for supplied client facts.
 - Historical integrity: generated briefings should become immutable dated objects; “use current data” must create a new briefing rather than mutate history.
+# Advisor workflow builder restoration checkpoint — 2026-07-15
+
+The pre-`7bf158d` composer capability and current Conversation Briefing Desk were reconciled in one local implementation. The Desk stays conversation-first; catalog composition, parameter configuration, narrative notes, reorder/duplicate/remove, visibility, reusable save, and from-scratch creation now sit behind an explicit five-stage custom-template path. Existing `arangur.local_named_briefing_workflows.v1` records remain readable and normalize on edit. Dated briefings remain immutable under `arangur.local_briefings.v1`. The imported design lab is evidence, while the canonical implementation authority is now the builder restoration and parameter-contract pair under `docs/product/`.

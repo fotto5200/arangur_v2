@@ -42,3 +42,12 @@ Status meanings:
 - One-report guided wizard as the target model: superseded by briefing/workflow composition.
 - A single mixed-category concentration table: superseded by one consistent category system per report.
 - Cash-Flow Support Readiness as a client report: replaced by separate Cash Flow Delivered and Cash-Flow Support Outlook reports when prerequisites exist.
+# 2026-07-15 — Advanced builder restored inside the Conversation Briefing Desk
+
+- **Decision:** Preserve the Conversation Briefing Desk as the primary application architecture and restore the earlier capable builder through progressive disclosure.
+- **Accepted paths:** use illustrative as-is; deeply customize illustrative; start a reusable template from scratch.
+- **Accepted stages:** Purpose; Reports; Configure; Order & visibility; Preview.
+- **Lifecycle:** every path continues through current-data briefing creation, Advisor Review, Client Preview where permitted, Presentation, and immutable local history.
+- **Catalog/parameter boundary:** existing workflow/report catalogs and approved analytic choices only; gated/deferred reports remain non-generating; design-lab sample values are not defaults.
+- **Design promotion:** one dominant action, conclusion first, Explain/Verify/exact return, and report-family framing are accepted. Plan Check and Objective Horizon are not promoted into a global app architecture.
+- **Authority:** `docs/product/advisor_workflow_builder_restoration_and_integration_v1.md` and `docs/product/advisor_workflow_builder_parameter_contract_v1.md`.
