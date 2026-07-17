@@ -14,6 +14,8 @@ Dated Briefing presentation-discovery update, 2026-07-16: `docs/product/arangur_
 
 Presentation section-selection update, 2026-07-16: `docs/product/arangur_presentation_section_selection_and_audience_flexibility_v1.md` makes intended audience a source of defaults and labels rather than a presentation prohibition. Prepare for Presentation lets the advisor include, exclude, and order any populated presentable Briefing Section. Advisor-only is normally selectable; protected internal and unavailable material is not. Preview, Presentation, readiness, discovery, Resume, migration, and Developer / QA consume the same saved selection. The reader/design-lab visual tranche remains next.
 
+Advisor workflow concept-simplification update, 2026-07-16: `docs/product/arangur_advisor_workflow_concept_simplification_v1.md` now controls the ordinary lifecycle. Prepare has Build from Scratch and Start from a Template; Existing is one contextual Draft/Plan/Dated Briefing library; Present is one searchable list; Ask Arangur is one prompt. All populated presentable sections default into the saved sequence. Mandatory Advisor Review, Preview, Prepare for Presentation, Ready-to-Present, and universal Explain/Verify actions are removed from ordinary UI while their compatible fields and diagnostics remain in Developer / QA. Reader/design-lab visual integration remains next.
+
 Primary audience: Frank, ChatGPT strategy/controller threads, and future Codex implementation tranches
 
 ## 1. Executive summary

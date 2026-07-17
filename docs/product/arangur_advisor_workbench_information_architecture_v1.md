@@ -4,6 +4,10 @@ Status: implemented local product contract
 Date: 2026-07-16
 Product: Arangur
 
+## 2026-07-16 workflow simplification
+
+`docs/product/arangur_advisor_workflow_concept_simplification_v1.md` supersedes the ordinary second-level menus and mandatory Advisor Review, Preview, Prepare-for-Presentation, and Ready-to-Present lifecycle described below. The four-activity home remains, but Prepare now has two choices, Existing is one contextual library, Present is one searchable list, and Ask Arangur is one prompt. Stored fields, advanced capabilities, and Developer / QA diagnostics remain for compatibility.
+
 ## Decision
 
 The ordinary advisor home is the Arangur Advisor Workbench. It organizes the product around four activities rather than four illustrative workflows:

@@ -122,14 +122,11 @@ console.log(JSON.stringify({{
     def test_prepare_for_presentation_surface_has_all_controls(self) -> None:
         surface = self.fragment("function renderPrepareForPresentation", "function renderReviewEvidence")
         for token in (
-            "Prepare for Presentation",
-            "Original audience recommendation",
-            "Included by default",
-            "Excluded by default",
-            "Select recommended defaults",
-            "Select all presentable sections",
-            "Reset to recommended selection",
-            "Save Presentation Selection",
+            "Choose Sections",
+            "All populated presentable Briefing Sections are selected by default",
+            "Use audience recommendations",
+            "Select all populated sections",
+            "Save Presentation Sequence",
             "Protected internal items excluded from selection",
             "Unavailable Briefing Sections",
         ):
@@ -156,10 +153,11 @@ console.log(JSON.stringify({{
     def test_preview_presentation_discovery_and_resume_share_saved_selection(self) -> None:
         reader = self.fragment("function renderBriefingReader", "function reportPresentationPattern")
         self.assertIn("getSavedPresentationSections(briefing)", reader)
-        self.assertIn("saved presentation sequence", reader)
+        self.assertIn("Present Briefing", reader)
         helpers = self.fragment("function populatedRenderedSections", "function selectedBriefingType")
         self.assertIn("hasSelectedPresentablePopulatedSections", helpers)
-        self.assertIn("return isReadyToPresent(briefing)", helpers)
+        presentation = helpers[helpers.index("function isPresentationEligible") : helpers.index("function hasSavedPresentationProgress")]
+        self.assertNotIn("isReadyToPresent", presentation)
         self.assertIn("briefing.presentation_progress.started", helpers)
         lists = self.fragment("function renderReadyBriefingList", "function renderAskArangur")
         self.assertIn("state.briefings.filter(isPreviewEligible)", lists)
@@ -167,11 +165,8 @@ console.log(JSON.stringify({{
 
     def test_plain_empty_states_and_developer_diagnostics_are_present(self) -> None:
         for token in (
-            "No Sections Selected",
-            "No Briefing Sections are currently selected for presentation.",
-            "No Presentable Sections",
-            "This Dated Briefing does not yet contain any populated Briefing Sections that can be presented.",
-            "No Dated Briefings have been reviewed, prepared for presentation, and marked Ready.",
+            "No populated presentable Briefing Sections",
+            "All populated presentable Briefing Sections are selected by default",
             "Recommended default selection",
             "Saved presentation selection",
             "Selection source",

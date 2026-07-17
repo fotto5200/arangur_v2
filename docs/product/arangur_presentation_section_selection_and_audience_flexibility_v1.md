@@ -4,6 +4,10 @@ Status: implemented local product contract
 Date: 2026-07-16
 Product: Arangur
 
+## 2026-07-16 default and lifecycle simplification
+
+`docs/product/arangur_advisor_workflow_concept_simplification_v1.md` keeps the advisor-controlled selection mechanism but changes the ordinary default to all populated presentable Briefing Sections. Protected internal and unavailable items remain excluded; explicit saved custom selections remain preserved. Choose Sections is optional, and Review, Preview, and Ready status no longer gate ordinary Presentation.
+
 ## Decision
 
 The advisor controls which populated, presentable Briefing Sections appear in Preview and Presentation. Intended audience supplies defaults, wording, suggested depth, sequence, and labels; it does not prohibit an advisor from selecting an otherwise presentable section.

@@ -1422,19 +1422,19 @@
           <article class="conversation-card primary-activity-card">
             <p class="eyebrow">Briefing Plans</p>
             <h2>Prepare a New Briefing Plan</h2>
-            <p>Design from scratch, a template, a prior plan, or an unfinished draft.</p>
+            <p>Build from scratch or start from a reusable Briefing Plan Template.</p>
             <button class="primary-button" type="button" data-desk-action="prepare-new-plan">Prepare a plan</button>
           </article>
           <article class="conversation-card primary-activity-card">
             <p class="eyebrow">Plans and Dated Briefings</p>
             <h2>Work with Existing Plans or Briefings</h2>
-            <p>Revise a plan, create or compare Dated Briefings, or view one.</p>
+            <p>Select a Draft, saved Plan, or Dated Briefing and see the actions that fit it.</p>
             <button class="primary-button" type="button" data-desk-action="work-existing">Open existing work</button>
           </article>
           <article class="conversation-card primary-activity-card">
             <p class="eyebrow">Presentation</p>
             <h2>Present a Dated Briefing</h2>
-            <p>Preview, open, or present a reviewed Dated Briefing.</p>
+            <p>Find a Dated Briefing, choose it, and present its populated sections.</p>
             <button class="primary-button" type="button" data-desk-action="present-hub">Choose a briefing</button>
           </article>
           <article class="conversation-card primary-activity-card">
@@ -1451,11 +1451,6 @@
             <div id="home-recent-work-list" class="history-list" aria-label="Recent Work"></div>
           </details>
           <details class="quiet-panel">
-            <summary>Ready to Present</summary>
-            <div id="home-present-workflow-list" class="history-list" aria-label="Ready to Present"></div>
-            <p id="home-present-workflow-status" class="status"></p>
-          </details>
-          <details class="quiet-panel">
             <summary>Recent Dated Briefings</summary>
             <div id="home-recent-briefings-list" class="history-list" aria-label="Recent Dated Briefings"></div>
             <button class="tiny-button" type="button" data-desk-action="view-dated-list">View all Dated Briefings</button>
@@ -1464,6 +1459,8 @@
 
         <footer class="button-row workbench-footer">
           <button id="home-advanced-tools-button" class="tiny-button" type="button">Developer / QA</button>
+          <div id="home-present-workflow-list" class="hidden" aria-hidden="true"></div>
+          <p id="home-present-workflow-status" class="hidden" aria-hidden="true"></p>
           <div id="home-saved-workflow-list" class="hidden" aria-hidden="true"></div>
           <p id="home-saved-workflow-status" class="hidden" aria-hidden="true"></p>
           <button id="home-build-client-button" class="hidden" type="button" aria-hidden="true" tabindex="-1">Legacy client builder</button>
@@ -2052,6 +2049,8 @@
       legacyRecords: [],
       newPlanSetup: { audience: "Client", purpose: "", detail: "Standard" },
       askMode: "",
+      askQuery: "",
+      askResponse: "",
       workbenchSearchQuery: "",
       compareLeftId: "",
       compareRightId: "",
@@ -2676,10 +2675,6 @@
         sort: plan.updated_at,
         html: `<div class="history-row"><div class="journey-copy"><span class="status-label">Saved Plan</span><strong>${escapeHtml(workflowDisplayName(plan))}</strong><p class="meta">${escapeHtml(plan.audience_choice || plan.briefing_type_name || "Advisor audience")}</p></div><button class="tiny-button" type="button" data-desk-action="open-plan" data-template-id="${escapeAttr(workflowRecordId(plan))}">Open plan</button></div>`
       }));
-      state.briefings.slice(0, 3).forEach((briefing) => recentItems.push({
-        sort: briefing.last_activity_at || briefing.generated_at,
-        html: `<div class="history-row"><div class="journey-copy"><span class="status-label">${escapeHtml(briefingDisplayStatus(briefing))}</span><strong>${escapeHtml(briefing.title)}</strong><p class="meta">Data through ${escapeHtml(formatBriefingDate(briefing.data_as_of))}</p></div><button class="tiny-button" type="button" data-desk-action="open-briefing" data-briefing-id="${escapeAttr(briefing.briefing_id)}">View briefing</button></div>`
-      }));
       recentItems.sort((a, b) => String(b.sort || "").localeCompare(String(a.sort || "")));
       els.homeRecentWorkList.innerHTML = recentItems.slice(0, 4).map((item) => item.html).join("") || '<p class="empty">No recent work in this browser.</p>';
 
@@ -2691,7 +2686,7 @@
 
       const recentBriefings = state.briefings.slice(0, 3);
       els.homeRecentBriefingsList.innerHTML = recentBriefings.length ? recentBriefings.map((briefing) => `
-        <div class="history-row"><div class="journey-copy"><span class="status-label">Dated Briefing</span><strong>${escapeHtml(briefing.title)}</strong><p class="meta">${escapeHtml(formatBriefingDate(briefing.generated_at))} &middot; Data through ${escapeHtml(formatBriefingDate(briefing.data_as_of))}</p></div><button class="tiny-button" type="button" data-desk-action="open-briefing" data-briefing-id="${escapeAttr(briefing.briefing_id)}">View briefing</button></div>
+        <div class="history-row"><div class="journey-copy"><span class="status-label">Dated Briefing</span><strong>${escapeHtml(briefing.title)}</strong><p class="meta">${escapeHtml(formatBriefingDate(briefing.generated_at))} &middot; Data through ${escapeHtml(formatBriefingDate(briefing.data_as_of))}</p></div><div class="saved-workflow-actions"><button class="tiny-button" type="button" data-desk-action="open-briefing" data-briefing-id="${escapeAttr(briefing.briefing_id)}">Open</button>${isPresentationEligible(briefing) ? `<button class="tiny-button" type="button" data-desk-action="present-briefing" data-briefing-id="${escapeAttr(briefing.briefing_id)}">Present</button>` : ""}</div></div>
       `).join("") : '<p class="empty">No Dated Briefings yet.</p>';
 
       const customPlans = savedBriefingPlans();
@@ -2793,6 +2788,10 @@
       return presentationSectionInventory(briefing).filter((item) => isRecommendedPresentationSection(briefing, item)).map((item) => item.id);
     }
 
+    function allPresentablePresentationSectionIds(briefing) {
+      return presentationSectionInventory(briefing).filter((item) => item.presentable).map((item) => item.id);
+    }
+
     function resolvePresentationEntryId(briefing, entry) {
       const inventory = presentationSectionInventory(briefing);
       const raw = entry && typeof entry === "object" ? (entry.section_id || entry.source_element_id || entry.title) : entry;
@@ -2855,7 +2854,7 @@
     }
 
     function isPresentationEligible(briefing) {
-      return isReadyToPresent(briefing);
+      return Boolean(briefing && hasSelectedPresentablePopulatedSections(briefing));
     }
 
     function hasSavedPresentationProgress(briefing) {
@@ -2863,8 +2862,6 @@
     }
 
     function briefingDisplayStatus(briefing) {
-      if (isReadyToPresent(briefing)) return "Ready to Present";
-      if (isReviewedDatedBriefing(briefing)) return "Reviewed";
       return "Dated Briefing";
     }
 
@@ -2956,30 +2953,42 @@
 
     function renderPreparePlanMenu() {
       workbenchMenu("Prepare a New Briefing Plan", [
-        workbenchChoice("Build a new briefing plan", "Choose the audience, purpose, detail, and Briefing Sections.", "new-plan-setup", "Set up a new plan"),
-        workbenchChoice("Start from a briefing plan template", "Use or customize an Arangur example or advisor-created Briefing Plan Template.", "template-library", "Browse templates"),
-        workbenchChoice("Start from a prior briefing plan", "Reuse the same plan or revise it before creating another Dated Briefing.", "prior-plans", "Browse prior plans"),
-        workbenchChoice("Continue an unfinished briefing plan draft", "Return to the exact unfinished builder stage.", "draft-list", "Continue a draft")
+        workbenchChoice("Build from Scratch", "Choose the audience, purpose, depth, and Briefing Sections in the full builder.", "new-plan-setup", "Build from scratch"),
+        workbenchChoice("Start from a Template", "Use or customize an Arangur example or advisor-created Briefing Plan Template.", "template-library", "Browse templates")
       ]);
     }
 
     function renderExistingWorkMenu() {
-      workbenchMenu("Work with Existing Plans or Briefings", [
-        workbenchChoice("Revise or continue a briefing plan", "Open a Briefing Plan Draft or saved Briefing Plan with status-aware actions.", "plan-list", "Open a plan"),
-        workbenchChoice("Create a dated briefing with current data", "Choose a Briefing Plan and create a new immutable Dated Briefing.", "create-dated-list", "Choose a plan"),
-        workbenchChoice("Compare dated briefings", "Compare two saved Dated Briefings using only stored, supported information.", "compare-list", "Choose briefings"),
-        workbenchChoice("View a dated briefing", "Open the first populated Briefing Section in reading and review mode.", "view-dated-list", "View briefings")
-      ]);
+      return renderUnifiedExistingLibrary();
     }
 
     function renderPresentMenu() {
-      workbenchMenu("Present a Dated Briefing", [
-        workbenchChoice("Choose a Briefing to Present", "Choose a Ready-to-Present Dated Briefing and confirm its dates, source Plan, and status.", "ready-list", "Choose a briefing"),
-        workbenchChoice("Preview a Briefing", "Rehearse the exact saved presentation-section sequence.", "audience-preview-list", "Preview a briefing"),
-        workbenchChoice("Start a Presentation", "Begin clean presentation mode with the first selected Briefing Section.", "launch-list", "Start a presentation"),
-        workbenchChoice("Resume a Presentation", "Continue an actual presentation from its last saved Briefing Section.", "resume-list", "Resume a presentation"),
-        workbenchChoice("Find a Briefing", "Filter current Dated Briefings by supported saved metadata.", "find-briefing", "Find a briefing")
-      ]);
+      const query = normalize(state.workbenchSearchQuery);
+      const matches = state.briefings.filter((briefing) => !query || normalize([
+        briefing.title,
+        briefing.client_name,
+        briefing.manager_name,
+        briefing.audience,
+        briefing.intended_audience,
+        briefing.template_name,
+        briefing.generated_at,
+        briefing.briefing_date,
+        briefing.data_as_of
+      ].join(" ")).includes(query));
+      const rows = matches.map((briefing) => {
+        const selectedCount = getSavedPresentationSections(briefing).length;
+        return `<article class="history-row"><div class="journey-copy"><span class="status-label">Dated Briefing</span><strong>${escapeHtml(briefing.title)}</strong><p class="meta"><strong>Client or audience:</strong> ${escapeHtml(briefing.client_name || briefing.audience || briefing.intended_audience || "Advisor/internal")} &middot; <strong>Briefing date:</strong> ${escapeHtml(formatBriefingDate(briefing.briefing_date || briefing.generated_at))} &middot; <strong>Data date:</strong> ${escapeHtml(formatBriefingDate(briefing.data_as_of))}</p><p class="meta"><strong>Source Briefing Plan:</strong> ${escapeHtml(briefing.template_name || "Earlier saved plan")} &middot; ${selectedCount} selected ${selectedCount === 1 ? "section" : "sections"}${briefing.last_presented_at ? ` &middot; Last presented ${escapeHtml(formatBriefingDateTime(briefing.last_presented_at))}` : ""}</p></div><button class="primary-button tiny-button" type="button" data-desk-action="open-briefing" data-briefing-id="${escapeAttr(briefing.briefing_id)}">Select</button></article>`;
+      }).join("");
+      const body = `<div class="desk-intro"><p class="eyebrow">Presentation list</p><h1>Present a Dated Briefing</h1><p>Choose a Dated Briefing from one searchable list. Selecting, inspecting, and presenting are one flow.</p></div><label class="field"><span>Search by client, manager, audience, date, or plan name</span><input type="search" data-workbench-field="presentation-search" value="${escapeAttr(state.workbenchSearchQuery)}" placeholder="Search Dated Briefings"></label><button class="primary-button" type="button" data-desk-action="apply-presentation-search">Search</button><div class="history-list">${rows || '<p class="empty">No matching Dated Briefings.</p>'}</div>`;
+      els.briefingDeskRegion.innerHTML = deskShell("Present a Dated Briefing", body);
+    }
+
+    function renderUnifiedExistingLibrary() {
+      const draftRows = state.planDrafts.map((draft) => `<article class="template-row"><div class="journey-copy"><span class="status-label">Draft</span><strong>${escapeHtml(workflowDisplayName(draft.template))}</strong><p class="meta">${escapeHtml(draft.current_stage)} &middot; ${draft.selected_section_count} sections &middot; ${escapeHtml(draft.save_status)}</p></div><div class="saved-workflow-actions"><button class="primary-button" type="button" data-desk-action="continue-draft" data-draft-id="${escapeAttr(draft.draft_id)}">Continue</button><button class="tiny-button" type="button" data-desk-action="rename-draft" data-draft-id="${escapeAttr(draft.draft_id)}">Rename</button><button class="tiny-button" type="button" data-desk-action="discard-draft" data-draft-id="${escapeAttr(draft.draft_id)}">Discard</button></div></article>`).join("");
+      const planRows = savedBriefingPlans().map((plan) => `<article class="template-row"><div class="journey-copy"><span class="status-label">My Saved Plan</span><strong>${escapeHtml(workflowDisplayName(plan))}</strong><p class="meta">${escapeHtml(plan.audience_choice || plan.audience || "Advisor/internal")} &middot; ${sectionCountForPlan(plan)} sections &middot; Last edited ${escapeHtml(formatBriefingDateTime(plan.updated_at))}</p></div><div class="saved-workflow-actions"><button class="primary-button" type="button" data-desk-action="customize-template" data-template-id="${escapeAttr(workflowRecordId(plan))}">Revise</button><button class="tiny-button" type="button" data-desk-action="duplicate-plan" data-template-id="${escapeAttr(workflowRecordId(plan))}">Duplicate</button><button class="tiny-button" type="button" data-desk-action="use-template" data-template-id="${escapeAttr(workflowRecordId(plan))}">Create Dated Briefing</button><button class="tiny-button" type="button" data-desk-action="archive-plan" data-template-id="${escapeAttr(workflowRecordId(plan))}">Archive</button></div></article>`).join("");
+      const briefingRows = state.briefings.map((briefing) => `<article class="template-row"><div class="journey-copy"><span class="status-label">Dated Briefing</span><strong>${escapeHtml(briefing.title)}</strong><p class="meta">${escapeHtml(briefing.audience || briefing.intended_audience || "Advisor/internal")} &middot; Briefing ${escapeHtml(formatBriefingDate(briefing.briefing_date || briefing.generated_at))} &middot; Data ${escapeHtml(formatBriefingDate(briefing.data_as_of))}</p><p class="meta">Source Plan: ${escapeHtml(briefing.template_name || "Earlier saved plan")} &middot; ${getSavedPresentationSections(briefing).length} selected sections</p></div><div class="saved-workflow-actions"><button class="primary-button" type="button" data-desk-action="open-briefing" data-briefing-id="${escapeAttr(briefing.briefing_id)}">Open</button><button class="tiny-button" type="button" data-desk-action="create-updated-briefing" data-briefing-id="${escapeAttr(briefing.briefing_id)}">Create Updated Dated Briefing</button>${isPresentationEligible(briefing) ? `<button class="tiny-button" type="button" data-desk-action="present-briefing" data-briefing-id="${escapeAttr(briefing.briefing_id)}">Present</button>` : ""}</div></article>`).join("");
+      const body = `<div class="desk-intro"><p class="eyebrow">Unified library</p><h1>Work with Existing Plans or Briefings</h1><p>Select the object first. Arangur shows only the actions that apply to that Draft, saved Plan, or Dated Briefing.</p></div><div class="template-list">${draftRows + planRows + briefingRows || '<p class="empty">No saved Plans, Drafts, or Dated Briefings are available in this browser.</p>'}</div>`;
+      els.briefingDeskRegion.innerHTML = deskShell("Existing Plans or Briefings", body);
     }
 
     function renderNewPlanSetup() {
@@ -3015,7 +3024,7 @@
     function renderPlanTemplateLibrary() {
       const examples = state.builtInTemplates;
       const advisor = savedBriefingPlans();
-      const row = (template, example) => `<article class="template-row"><div class="journey-copy"><div class="template-name-line"><strong>${escapeHtml(workflowDisplayName(template))}</strong><span class="badge">${example ? "Arangur example" : "Advisor-created"}</span></div><p class="meta"><strong>Intended audience:</strong> ${escapeHtml(template.audience_choice || template.audience || "Advisor audience")}</p><p class="meta"><strong>Main purpose:</strong> ${escapeHtml(template.briefing_purpose || template.conversation_goal || template.description || "Reusable briefing plan")}</p><p class="meta"><strong>Included Briefing Sections:</strong> ${escapeHtml(templateSectionSummary(template))}</p><p class="meta"><strong>Approximate detail:</strong> ${escapeHtml(approximateDetailLabel(template))}</p></div><div class="saved-workflow-actions"><button class="secondary-button" type="button" data-desk-action="use-template" data-template-id="${escapeAttr(workflowRecordId(template))}">Use as is</button><button class="primary-button" type="button" data-desk-action="customize-template" data-template-id="${escapeAttr(workflowRecordId(template))}">Customize</button></div></article>`;
+      const row = (template, example) => `<article class="template-row"><div class="journey-copy"><div class="template-name-line"><strong>${escapeHtml(workflowDisplayName(template))}</strong><span class="badge">${example ? "Arangur Example" : "My Saved Plan"}</span></div><p class="meta"><strong>Intended audience:</strong> ${escapeHtml(template.audience_choice || template.audience || "Advisor audience")}</p><p class="meta"><strong>Main purpose:</strong> ${escapeHtml(template.briefing_purpose || template.conversation_goal || template.description || "Reusable briefing plan")}</p><p class="meta"><strong>Included Briefing Sections:</strong> ${escapeHtml(templateSectionSummary(template))}</p><p class="meta"><strong>Approximate detail:</strong> ${escapeHtml(approximateDetailLabel(template))}</p></div><div class="saved-workflow-actions"><button class="secondary-button" type="button" data-desk-action="use-template" data-template-id="${escapeAttr(workflowRecordId(template))}">Use</button><button class="primary-button" type="button" data-desk-action="customize-template" data-template-id="${escapeAttr(workflowRecordId(template))}">Customize</button></div></article>`;
       const body = `<div class="desk-intro"><p class="eyebrow">Briefing Plan Template library</p><h1>Start from a briefing plan template</h1></div><section><h2>Arangur example templates</h2><p class="helper">Examples are starting points, not the limit of what Arangur supports.</p><div class="template-list">${examples.map((item) => row(item, true)).join("") || '<p class="empty">Examples are loading.</p>'}</div></section><section><h2>Advisor-created templates</h2><div class="template-list">${advisor.map((item) => row(item, false)).join("") || '<p class="empty">No advisor-created Briefing Plan Templates yet.</p>'}</div></section>`;
       els.briefingDeskRegion.innerHTML = deskShell("Briefing Plan Template library", body);
     }
@@ -3049,9 +3058,7 @@
     }
 
     function renderPlanList() {
-      const drafts = state.planDrafts.map((draft) => `<article class="template-row"><div class="journey-copy"><span class="status-label">Briefing Plan Draft</span><strong>${escapeHtml(workflowDisplayName(draft.template))}</strong><p class="meta">${escapeHtml(draft.current_stage)} &middot; ${draft.selected_section_count} sections &middot; ${escapeHtml(draft.save_status)}</p></div><button class="primary-button" type="button" data-desk-action="continue-draft" data-draft-id="${escapeAttr(draft.draft_id)}">Continue Plan</button></article>`).join("");
-      const saved = savedBriefingPlans().map((plan) => { const latest = latestBriefingForPlan(workflowRecordId(plan)); return `<article class="template-row"><div class="journey-copy"><span class="status-label">Saved Briefing Plan</span><strong>${escapeHtml(workflowDisplayName(plan))}</strong><p class="meta"><strong>Audience:</strong> ${escapeHtml(plan.audience_choice || plan.audience || "Advisor/internal")} &middot; ${sectionCountForPlan(plan)} sections</p><p class="meta">Saved ${escapeHtml(formatBriefingDateTime(plan.saved_at))} &middot; Last edited ${escapeHtml(formatBriefingDateTime(plan.updated_at))}</p><p class="meta"><strong>Lineage:</strong> ${escapeHtml(plan.source_template_name || "Created by advisor")}${latest ? ` &middot; <strong>Latest Dated Briefing:</strong> ${escapeHtml(latest.title)}` : ""}</p></div><div class="saved-workflow-actions"><button class="primary-button" type="button" data-desk-action="customize-template" data-template-id="${escapeAttr(workflowRecordId(plan))}">Revise</button><button class="tiny-button" type="button" data-desk-action="duplicate-plan" data-template-id="${escapeAttr(workflowRecordId(plan))}">Duplicate</button><button class="tiny-button" type="button" data-desk-action="use-template" data-template-id="${escapeAttr(workflowRecordId(plan))}">Create Dated Briefing</button><button class="tiny-button" type="button" data-desk-action="archive-plan" data-template-id="${escapeAttr(workflowRecordId(plan))}">Archive</button></div></article>`; }).join("");
-      els.briefingDeskRegion.innerHTML = deskShell("Existing Briefing Plans", `<div class="desk-intro"><p class="eyebrow">Status-aware Briefing Plan list</p><h1>Revise or continue a briefing plan</h1></div><div class="template-list">${drafts + saved || '<p class="empty">No Briefing Plans are available yet.</p>'}</div>`);
+      return renderUnifiedExistingLibrary();
     }
 
     function sectionCountForPlan(plan) {
@@ -3075,15 +3082,14 @@
     }
 
     function findDatedBriefingRow(briefing) {
-      const actions = [`<button class="secondary-button tiny-button" type="button" data-desk-action="open-briefing" data-briefing-id="${escapeAttr(briefing.briefing_id)}">Open briefing</button>`];
-      if (isPreviewEligible(briefing)) actions.push(`<button class="secondary-button tiny-button" type="button" data-desk-action="preview-briefing" data-briefing-id="${escapeAttr(briefing.briefing_id)}">${escapeHtml(audiencePreviewLabel(briefing))}</button>`);
+      const actions = [`<button class="secondary-button tiny-button" type="button" data-desk-action="open-briefing" data-briefing-id="${escapeAttr(briefing.briefing_id)}">Open</button>`];
       if (isPresentationEligible(briefing)) actions.push(`<button class="primary-button tiny-button" type="button" data-desk-action="present-briefing" data-briefing-id="${escapeAttr(briefing.briefing_id)}">Present</button>`);
       const base = datedBriefingRow(briefing).replace(/<button class="primary-button tiny-button"[\s\S]*?<\/button><\/article>$/, `<div class="saved-workflow-actions">${actions.join("")}</div></article>`);
       return base;
     }
 
     function renderDatedBriefingList() {
-      els.briefingDeskRegion.innerHTML = deskShell("Dated Briefings", `<div class="desk-intro"><p class="eyebrow">Dated Briefing list</p><h1>View a dated briefing</h1></div><div class="history-list">${state.briefings.map((item) => datedBriefingRow(item)).join("") || '<p class="empty">No Dated Briefings in this browser.</p>'}</div>`);
+      els.briefingDeskRegion.innerHTML = deskShell("Dated Briefings", `<div class="desk-intro"><p class="eyebrow">Recent Dated Briefings</p><h1>Dated Briefings</h1></div><div class="history-list">${state.briefings.map(findDatedBriefingRow).join("") || '<p class="empty">No Dated Briefings in this browser.</p>'}</div>`);
     }
 
     function renderDatedComparison() {
@@ -3147,19 +3153,38 @@
     }
 
     function renderAskArangur() {
-      const choices = [
-        ["Help me decide where to start", "ask-decide"], ["Help me find a briefing plan or dated briefing", "ask-find"], ["Guide me through preparing a briefing plan", "ask-plan"], ["Help me create an updated briefing", "ask-update"], ["Explain a briefing section or unfamiliar term", "ask-explain"], ["Help me prepare for an upcoming meeting", "ask-meeting"], ["Help me resolve a problem", "ask-problem"]
+      const examples = [
+        "Help me create a briefing.",
+        "Find last quarter’s briefing.",
+        "Use the same plan with current data.",
+        "Help me prepare for a manager meeting.",
+        "Explain what a Briefing Plan is."
       ];
-      let detail = '<p class="empty">Choose the kind of help you need. Guidance is deterministic and uses only current product knowledge and browser-local material.</p>';
-      if (state.askMode === "ask-decide") detail = `<section><h2>What do you want to accomplish?</h2><div class="button-row"><button class="primary-button" data-desk-action="prepare-new-plan">Design a new Briefing Plan</button><button class="secondary-button" data-desk-action="work-existing">Update, compare, or view</button><button class="secondary-button" data-desk-action="present-hub">Preview or present</button></div></section>`;
-      if (state.askMode === "ask-find") detail = `<section><h2>Find current work</h2><p>Search supported fields such as client, manager, audience, date, subject, Briefing Plan, and recent activity.</p><button class="primary-button" data-desk-action="find-briefing">Search Dated Briefings</button><button class="secondary-button" data-desk-action="plan-list">Browse Briefing Plans</button></section>`;
-      if (state.askMode === "ask-plan") detail = `<section><h2>Prepare a Briefing Plan</h2><p>Start with an Arangur example when the audience and purpose fit; otherwise begin a custom plan and choose approved Briefing Sections.</p><button class="primary-button" data-desk-action="template-library">Recommend a template</button><button class="secondary-button" data-desk-action="new-plan-setup">Begin a custom plan</button></section>`;
-      if (state.askMode === "ask-update") detail = `<section><h2>Create an updated Dated Briefing</h2><p>Choose a prior Briefing Plan, create a new Dated Briefing with the current synthetic snapshot, then compare it with the earlier saved briefing where supported.</p><button class="primary-button" data-desk-action="create-dated-list">Choose a Briefing Plan</button><button class="secondary-button" data-desk-action="compare-list">Compare saved briefings</button></section>`;
-      if (state.askMode === "ask-explain") detail = `<section><h2>Ordinary product terms</h2><dl><dt><strong>Briefing Plan</strong></dt><dd>Sections, parameters, order, audience, and visibility rules.</dd><dt><strong>Briefing Plan Draft</strong></dt><dd>An unfinished Briefing Plan.</dd><dt><strong>Briefing Plan Template</strong></dt><dd>A reusable plan supplied by Arangur or saved by an advisor.</dd><dt><strong>Dated Briefing</strong></dt><dd>Populated output created from a Briefing Plan and data as of a stated date.</dd><dt><strong>Briefing Section</strong></dt><dd>One populated component inside a Dated Briefing.</dd></dl><p><strong>Briefing Plan + Current Data = Dated Briefing.</strong> While viewing a Briefing Section, use its existing Explain or Verify action.</p></section>`;
-      if (state.askMode === "ask-meeting") detail = `<section><h2>Prepare for an upcoming meeting</h2><div class="bounded-fields"><label class="field"><span>Who is the meeting with?</span><input data-workbench-field="meeting-who"></label><label class="field"><span>What needs to be discussed?</span><input data-workbench-field="meeting-topic"></label><label class="field"><span>Is there a prior Dated Briefing?</span><select><option>Not sure</option><option>Yes</option><option>No</option></select></label><label class="field"><span>Is there an existing Briefing Plan?</span><select><option>Not sure</option><option>Yes</option><option>No</option></select></label><label class="field"><span>How much detail is appropriate?</span><select><option>Concise</option><option>Standard</option><option>Detailed</option></select></label></div><p class="meta">Recommended start: look for an existing Briefing Plan first; if none fits, prepare a new one.</p><button class="primary-button" data-desk-action="plan-list">Check existing plans</button><button class="secondary-button" data-desk-action="prepare-new-plan">Prepare a new plan</button></section>`;
-      if (state.askMode === "ask-problem") detail = `<section><h2>Resolve an ordinary product problem</h2><ul class="detail-list"><li>Missing Briefing Section: revise the Briefing Plan and create a new Dated Briefing.</li><li>Unavailable data: review the calm gate reason; Arangur does not fabricate the output.</li><li>Unclear configuration: reopen the Briefing Plan's Configure stage.</li><li>Not ready to present: complete Advisor Review first.</li><li>Trouble finding earlier work: use Find a briefing or the status-aware plan list.</li></ul><p>For technical failures, open the subordinate Developer / QA area or contact support.</p><button class="secondary-button" data-desk-action="developer-tools">Open Developer / QA</button></section>`;
-      const body = `<div class="desk-intro"><p class="eyebrow">Deterministic local guidance</p><h1>Ask Arangur</h1><p>Choose a goal and Arangur will route you to current product capabilities. It does not use an external AI service, provide investment recommendations, or invent data.</p></div><div class="workbench-choice-grid">${choices.map(([label, action]) => `<button class="secondary-button" type="button" data-desk-action="ask-topic" data-ask-topic="${action}">${label}</button>`).join("")}</div><div class="summary-tile">${detail}</div>`;
+      const response = state.askResponse ? `<div class="summary-tile" role="status"><strong>Arangur</strong><p>${escapeHtml(state.askResponse)}</p></div>` : "";
+      const body = `<div class="desk-intro"><p class="eyebrow">Deterministic local assistance</p><h1>Ask Arangur</h1><p>Describe what you need. Arangur uses local product rules and browser-local records to route you; it does not claim a live external AI connection, provide investment recommendations, or invent data.</p></div><label class="field"><span>How can Arangur help?</span><textarea rows="4" data-workbench-field="ask-query" placeholder="Ask about creating, finding, updating, or presenting a briefing">${escapeHtml(state.askQuery)}</textarea></label><div class="button-row"><button class="primary-button" type="button" data-desk-action="ask-submit">Continue</button></div><div class="button-row" aria-label="Example requests">${examples.map((example) => `<button class="tiny-button" type="button" data-desk-action="ask-example" data-ask-example="${escapeAttr(example)}">${escapeHtml(example)}</button>`).join("")}</div>${response}`;
       els.briefingDeskRegion.innerHTML = deskShell("Ask Arangur", body);
+    }
+
+    function routeAskArangurRequest(request) {
+      const query = normalize(request);
+      state.askResponse = "";
+      if (!query) {
+        state.askResponse = "Enter a request or choose an example.";
+        return renderAskArangur();
+      }
+      if ((query.includes("explain") || query.includes("what is")) && query.includes("briefing plan")) {
+        state.askResponse = "A Briefing Plan stores the audience, purpose, selected Briefing Sections, configuration, order, and visibility. Briefing Plan + Current Data = Dated Briefing. Applying current data creates a new immutable Dated Briefing.";
+        return renderAskArangur();
+      }
+      if (query.includes("find") || query.includes("last quarter") || query.includes("present")) {
+        state.workbenchSearchQuery = "";
+        return navigateToRoute("present-hub");
+      }
+      if (query.includes("same plan") || query.includes("current data") || query.includes("updated")) return navigateToRoute("existing");
+      if (query.includes("manager") || query.includes("meeting")) return navigateToRoute("template-library");
+      if (query.includes("create") || query.includes("prepare") || query.includes("new briefing")) return navigateToRoute("prepare");
+      state.askResponse = "I can help create a Briefing Plan, find or update existing work, present a Dated Briefing, or explain product terms.";
+      return renderAskArangur();
     }
 
     function deskShell(title, body, options = {}) {
@@ -3899,7 +3924,7 @@
           immutable: true,
           review_status: "in_review",
           status_model_version: LOCAL_BRIEFING_STATUS_MODEL_VERSION,
-          presentation_selection_source: "recommended_defaults",
+          presentation_selection_source: "all_presentable_defaults",
           section_count: templateJourneySteps(template).length,
           presentation_position: 0,
           last_activity_at: generatedAt
@@ -3907,7 +3932,7 @@
         state.briefings.unshift(briefing);
         persistLocalBriefings();
         state.deskCurrentBriefingId = briefingId;
-        state.deskSectionIndex = firstPopulatedSectionIndex(briefing, "advisor");
+        state.deskSectionIndex = 0;
         state.deskEvidenceMode = null;
         state.deskReturnRoute = "dated-list";
         state.datedBriefingTitleDraft = "";
@@ -3980,9 +4005,8 @@
       let selectedIds = [];
       if (hasSavedSelectionFields) selectedIds = sanitizePresentationSelection(canonical, briefing.presentation_section_order || briefing.presentation_section_ids);
       else if (legacyExplicitSequence.length) selectedIds = sanitizePresentationSelection(canonical, legacyExplicitSequence);
-      else if (legacyAudienceIds.length) selectedIds = legacyAudienceIds;
-      else selectedIds = recommendedPresentationSectionIds(canonical);
-      const allowedSources = new Set(["recommended_defaults", "advisor_customized", "legacy_migration"]);
+      else selectedIds = allPresentablePresentationSectionIds(canonical);
+      const allowedSources = new Set(["all_presentable_defaults", "recommended_defaults", "advisor_customized", "legacy_migration"]);
       canonical.presentation_section_ids = [...selectedIds];
       canonical.presentation_section_order = [...selectedIds];
       canonical.presentation_selection_source = hasSavedSelectionFields && allowedSources.has(briefing.presentation_selection_source)
@@ -3999,7 +4023,7 @@
         canonical.review_status = reviewedEvidence ? "reviewed" : "in_review";
         notes.push("Stored readiness was not retained because the record lacks a safe selected presentable section or has a blocking condition.");
       }
-      if (!hasSavedSelectionFields && incomingStatusVersion !== LOCAL_BRIEFING_STATUS_MODEL_VERSION) notes.push("Presentation selection derived during legacy migration; the advisor may revise it.");
+      if (!hasSavedSelectionFields && incomingStatusVersion !== LOCAL_BRIEFING_STATUS_MODEL_VERSION) notes.push("All populated presentable sections were selected by default during legacy migration; the advisor may revise the sequence.");
       if (!hasCurrentProgress && legacyProgressStarted) notes.push("Legacy presentation progress normalized to the current progress record.");
       if (briefing.dated_briefing_id && !briefing.briefing_id) notes.push("Legacy Dated Briefing identifier alias normalized.");
       if (briefing.advisor_review_artifact && !briefing.advisor_artifact) notes.push("Legacy Advisor Review artifact alias normalized.");
@@ -4031,51 +4055,52 @@
       return "";
     }
 
+    function datedBriefingViewItems(briefing) {
+      return presentationSectionInventory(briefing).filter((item) => item.presentable);
+    }
+
+    function isAttributionSection(section) {
+      return normalize([section && section.title, section && section.source_element_id].filter(Boolean).join(" ")).includes("attribution");
+    }
+
+    function genuineMoreDetailHtml(section) {
+      if (!section || isAttributionSection(section)) return "";
+      const nested = section.more_detail && typeof section.more_detail === "object" ? section.more_detail.html : "";
+      const candidate = String(section.more_detail_html || section.supporting_detail_html || section.detail_html || nested || "").trim();
+      if (!candidate) return "";
+      const text = normalize(candidate.replace(/<[^>]*>/g, " "));
+      if (!text || text.startsWith("{") || text.startsWith("[") || text.includes("raw json") || text.includes("schema field") || text.includes("report definition") || text.includes("evidence would mean") || text.includes("synthetic placeholder") || text.includes("unapproved mapping")) return "";
+      return candidate;
+    }
+
     function renderAdvisorReview() {
       const briefing = currentDeskBriefing();
       if (!briefing) return renderBriefingHistory();
-      const sections = Array.isArray(briefing.advisor_artifact.ordered_sections) ? briefing.advisor_artifact.ordered_sections : [];
-      const steps = briefing.journey_steps;
-      const inventory = presentationSectionInventory(briefing);
-      const populatedCount = inventory.filter((item) => item.populated).length;
-      const presentableCount = inventory.filter((item) => item.presentable).length;
-      const protectedCount = inventory.filter((item) => item.protected).length;
-      const unavailableCount = inventory.filter((item) => item.unavailable).length;
-      const selectedCount = getSavedPresentationSections(briefing).length;
-      state.deskSectionIndex = Math.min(Math.max(state.deskSectionIndex, 0), Math.max(sections.length - 1, 0));
+      const items = datedBriefingViewItems(briefing);
+      if (!items.length) {
+        const empty = `<div class="desk-intro"><p class="eyebrow">Dated Briefing</p><h1>${escapeHtml(briefing.title)}</h1></div><div class="empty"><strong>No populated presentable Briefing Sections</strong><p>This record is preserved, but there is no populated ordinary section to open.</p></div><button class="secondary-button" type="button" data-desk-action="return-to-source">Back</button>`;
+        els.briefingDeskRegion.innerHTML = deskShell("Dated Briefing", empty);
+        return;
+      }
+      state.deskSectionIndex = Math.min(Math.max(state.deskSectionIndex, 0), items.length - 1);
       const index = state.deskSectionIndex;
-      const section = sections[index];
-      const step = steps[index] || {};
-      const populated = canVerifySection(section);
-      const previewEligible = isPreviewEligible(briefing);
-      const reviewBlock = advisorReviewBlockingReason(briefing);
-      const readyBlock = readinessBlockingReason(briefing);
-      const current = populated
-        ? `<div class="reader-section"><p class="eyebrow">Populated Briefing Section</p><h2>${escapeHtml(section.title || step.display_title || "Briefing Section")}</h2>${step.visible_question_answered ? `<p>${escapeHtml(step.visible_question_answered)}</p>` : ""}<div>${sanitizePreviewFragment(section.html || "")}</div></div><div class="button-row"><button class="tiny-button" type="button" data-desk-action="review-evidence" data-section-index="${index}" data-evidence="explain">Explain</button><button class="tiny-button" type="button" data-desk-action="review-evidence" data-section-index="${index}" data-evidence="verify">Verify</button></div>`
-        : `<div class="governance-banner"><strong>${escapeHtml(step.display_title || "Briefing Section")} is not populated</strong><p>${escapeHtml(step.gate_explanation || "An approved prerequisite is missing.")} No output has been fabricated.</p></div>`;
-      const navigation = `<div class="reader-navigation"><button class="secondary-button" type="button" data-desk-action="previous" ${index <= 0 ? "disabled" : ""}>Previous</button><span class="report-position">Briefing Section ${sections.length ? index + 1 : 0} of ${sections.length}</span><button class="primary-button" type="button" data-desk-action="next" ${index >= sections.length - 1 ? "disabled" : ""}>Next</button></div>`;
-      const outline = steps.map((item, itemIndex) => `<li>${itemIndex + 1}. ${escapeHtml(item.display_title)} — ${escapeHtml(friendlyVisibility(item.audience_visibility))}${["gated", "deferred"].includes(item.status) ? " — Not ready" : ""}</li>`).join("");
-      const preparationState = presentableCount === 0
-        ? `<div class="governance-banner"><strong>No Presentable Sections</strong><p>This Dated Briefing does not yet contain any populated Briefing Sections that can be presented.</p><button class="secondary-button" type="button" data-desk-action="modify-template">Return to Briefing Plan</button></div>`
-        : selectedCount === 0
-          ? `<div class="governance-banner"><strong>No Sections Selected</strong><p>No Briefing Sections are currently selected for presentation.</p><button class="primary-button" type="button" data-desk-action="prepare-presentation">Choose Sections to Present</button></div>`
-          : `<div class="governance-banner"><strong>${selectedCount} ${selectedCount === 1 ? "section" : "sections"} selected for presentation</strong><p>${previewEligible ? `${audiencePreviewLabel(briefing)} is available and uses the saved order.` : "Complete Advisor Review to make Preview available."}</p></div>`;
-      const body = `
-        <div class="desk-intro"><p class="eyebrow">Advisor Review &middot; ${escapeHtml(briefingDisplayStatus(briefing))}</p><h1>${escapeHtml(briefing.title)}</h1><p>Review the actual populated Briefing Sections. The Dated Briefing is immutable.</p></div>
-        <div class="summary-grid"><div class="summary-tile"><strong>Generated</strong>${escapeHtml(formatBriefingDate(briefing.generated_at))}</div><div class="summary-tile"><strong>Data date</strong>${escapeHtml(formatBriefingDate(briefing.data_as_of))}</div><div class="summary-tile"><strong>Intended audience</strong>${escapeHtml(briefing.intended_audience || briefing.audience || "Advisor audience")}</div><div class="summary-tile"><strong>Populated sections</strong>${populatedCount}</div><div class="summary-tile"><strong>Selected to present</strong>${selectedCount}</div><div class="summary-tile"><strong>Unavailable</strong>${unavailableCount}</div><div class="summary-tile"><strong>Protected internal</strong>${protectedCount ? `${protectedCount} excluded` : "None"}</div><div class="summary-tile"><strong>Preview readiness</strong>${previewEligible ? "Available" : "Not yet available"}</div><div class="summary-tile"><strong>Presentation readiness</strong>${isPresentationEligible(briefing) ? "Ready to Present" : "Not yet ready"}</div></div>
-        ${briefing.briefing_type_id === "external_manager_story_translation_v1" ? externalGovernanceHtml(state.builtInTemplates.find((type) => workflowRecordId(type) === briefing.briefing_type_id)) : ""}
-        ${reviewBlock && briefing.review_status === "in_review" ? `<div class="governance-banner"><strong>Advisor Review cannot be completed yet</strong><p>${escapeHtml(reviewBlock)}</p><button class="secondary-button" type="button" data-desk-action="modify-template">Return to Briefing Plan</button></div>` : ""}
-        ${isReviewedDatedBriefing(briefing) ? preparationState : ""}
-        ${readyBlock && briefing.review_status === "reviewed" && selectedCount > 0 ? `<div class="governance-banner"><strong>This Dated Briefing is not ready for Preview</strong><p>${escapeHtml(readyBlock)}</p></div>` : ""}
-        ${current}${navigation}<details><summary>Briefing Section sequence and status</summary><ol class="detail-list">${outline}</ol></details>
-        <div class="button-row">${briefing.review_status === "in_review" ? `<button class="primary-button" type="button" data-desk-action="complete-review" ${reviewBlock ? "disabled" : ""}>Complete Advisor Review</button>` : ""}${isReviewedDatedBriefing(briefing) && presentableCount ? '<button class="secondary-button" type="button" data-desk-action="prepare-presentation">Prepare for Presentation</button>' : ""}${previewEligible ? `<button class="secondary-button" type="button" data-desk-action="client-preview">${escapeHtml(audiencePreviewLabel(briefing))}</button>` : ""}${briefing.review_status === "reviewed" && previewEligible ? '<button class="primary-button" type="button" data-desk-action="mark-ready">Mark Ready to Present</button>' : ""}${isPresentationEligible(briefing) ? '<button class="primary-button" type="button" data-desk-action="present">Present</button>' : ""}<button class="secondary-button" type="button" data-desk-action="modify-template">Return to Briefing Plan</button><button class="secondary-button" type="button" data-desk-action="return-to-source">Back</button></div>
-      `;
-      els.briefingDeskRegion.innerHTML = deskShell("Advisor Review", body);
+      const item = items[index];
+      const section = item.section;
+      const step = item.step || {};
+      const moreDetail = genuineMoreDetailHtml(section);
+      const detailPanel = state.deskEvidenceMode === "more-detail" && moreDetail
+        ? `<div class="evidence-panel"><p class="eyebrow">More Detail</p><div class="reader-section">${sanitizePreviewFragment(moreDetail)}</div><button class="secondary-button" type="button" data-desk-action="more-detail-back">Back to Briefing Section</button></div>`
+        : "";
+      const sectionBody = `<div class="reader-section"><p class="eyebrow">Briefing Section</p><h2>${escapeHtml(section.title || step.display_title || "Briefing Section")}</h2>${step.visible_question_answered ? `<p>${escapeHtml(step.visible_question_answered)}</p>` : ""}<div>${sanitizePreviewFragment(section.html || "")}</div></div>`;
+      const navigation = `<div class="reader-navigation"><button class="secondary-button" type="button" data-desk-action="previous" ${index <= 0 ? "disabled" : ""}>Previous</button><span class="report-position">Section ${index + 1} of ${items.length}</span><button class="primary-button" type="button" data-desk-action="next" ${index >= items.length - 1 ? "disabled" : ""}>Next</button></div>`;
+      const agenda = items.map((candidate, itemIndex) => `<li${itemIndex === index ? ' aria-current="true"' : ""}>${itemIndex + 1}. ${escapeHtml(candidate.section.title || candidate.step.display_title || "Briefing Section")}</li>`).join("");
+      const body = `<div class="desk-intro"><p class="eyebrow">Dated Briefing</p><h1>${escapeHtml(briefing.title)}</h1><p>${items.length} populated presentable ${items.length === 1 ? "section" : "sections"}</p></div>${detailPanel || sectionBody}${moreDetail && !detailPanel ? '<div class="button-row"><button class="tiny-button" type="button" data-desk-action="more-detail">More Detail</button></div>' : ""}${navigation}<details><summary>Sections</summary><ol class="detail-list">${agenda}</ol></details><div class="button-row"><button class="secondary-button" type="button" data-desk-action="prepare-presentation">Choose Sections</button>${isPresentationEligible(briefing) ? '<button class="primary-button" type="button" data-desk-action="present">Present Briefing</button>' : ""}<button class="secondary-button" type="button" data-desk-action="return-to-source">Back</button></div>`;
+      els.briefingDeskRegion.innerHTML = deskShell("Dated Briefing", body);
     }
 
     function renderPrepareForPresentation() {
       const briefing = currentDeskBriefing();
-      if (!briefing || !isReviewedDatedBriefing(briefing)) return renderAdvisorReview();
+      if (!briefing) return renderAdvisorReview();
       const inventory = presentationSectionInventory(briefing);
       const presentable = inventory.filter((item) => item.presentable);
       const unavailable = inventory.filter((item) => item.unavailable);
@@ -4091,22 +4116,20 @@
       const rows = orderedItems.map((item) => {
         const selectedIndex = selected.indexOf(item.id);
         const chosen = selectedIndex >= 0;
-        const recommended = isRecommendedPresentationSection(briefing, item);
         const purpose = item.step.why_included || item.step.visible_question_answered || "Supports the saved Dated Briefing conversation.";
-        const detail = item.step.step_role === "supporting" || item.step.step_role === "diagnostic" ? "Detailed" : "Core";
-        return `<article class="section-choice-row ${chosen ? "is-included" : ""}"><span class="journey-index">${chosen ? selectedIndex + 1 : "—"}</span><div class="journey-copy"><strong>${escapeHtml(item.section.title || item.step.display_title || "Briefing Section")}</strong><p class="meta">${escapeHtml(purpose)}</p><p class="meta"><strong>Original audience recommendation:</strong> ${escapeHtml(friendlyVisibility(item.step.audience_visibility))} &middot; ${escapeHtml(detail)} &middot; ${recommended ? "Included by default" : "Excluded by default"}</p></div><div class="section-choice-actions">${chosen ? `<button class="tiny-button" type="button" data-desk-action="move-presentation-section" data-section-id="${escapeAttr(item.id)}" data-direction="-1" ${selectedIndex === 0 ? "disabled" : ""}>Up</button><button class="tiny-button" type="button" data-desk-action="move-presentation-section" data-section-id="${escapeAttr(item.id)}" data-direction="1" ${selectedIndex === selected.length - 1 ? "disabled" : ""}>Down</button><button class="tiny-button" type="button" data-desk-action="exclude-presentation-section" data-section-id="${escapeAttr(item.id)}">Exclude</button>` : `<button class="tiny-button" type="button" data-desk-action="include-presentation-section" data-section-id="${escapeAttr(item.id)}">Include</button>`}</div></article>`;
+        return `<article class="section-choice-row ${chosen ? "is-included" : ""}"><span class="journey-index">${chosen ? selectedIndex + 1 : "—"}</span><div class="journey-copy"><strong>${escapeHtml(item.section.title || item.step.display_title || "Briefing Section")}</strong><p class="meta">${escapeHtml(purpose)}</p></div><div class="section-choice-actions">${chosen ? `<button class="tiny-button" type="button" data-desk-action="move-presentation-section" data-section-id="${escapeAttr(item.id)}" data-direction="-1" ${selectedIndex === 0 ? "disabled" : ""}>Up</button><button class="tiny-button" type="button" data-desk-action="move-presentation-section" data-section-id="${escapeAttr(item.id)}" data-direction="1" ${selectedIndex === selected.length - 1 ? "disabled" : ""}>Down</button><button class="tiny-button" type="button" data-desk-action="exclude-presentation-section" data-section-id="${escapeAttr(item.id)}">Exclude</button>` : `<button class="tiny-button" type="button" data-desk-action="include-presentation-section" data-section-id="${escapeAttr(item.id)}">Include</button>`}</div></article>`;
       }).join("");
       const unavailableRows = unavailable.map((item) => `<li><strong>${escapeHtml(item.section.title || item.step.display_title || "Briefing Section")}</strong> — ${escapeHtml(item.step.gate_explanation || item.reason)}</li>`).join("");
       const protectedRows = protectedItems.map((item) => `<li><strong>${escapeHtml(item.section.title || item.step.display_title || "Protected internal item")}</strong> — ${escapeHtml(item.reason)}</li>`).join("");
-      const body = `<div class="desk-intro"><p class="eyebrow">Prepare for Presentation</p><h1>${escapeHtml(briefing.title)}</h1><p>Choose and order the populated Briefing Sections you plan to present. The intended audience sets recommendations, not prohibitions.</p></div>
+      const body = `<div class="desk-intro"><p class="eyebrow">Optional presentation sequence</p><h1>Choose Sections</h1><p>All populated presentable Briefing Sections are selected by default. Include, exclude, or reorder them only when a different sequence is useful.</p></div>
         <div class="summary-grid"><div class="summary-tile"><strong>Intended audience</strong>${escapeHtml(briefing.intended_audience || briefing.audience || "Advisor/internal")}</div><div class="summary-tile"><strong>Selected sections</strong><span role="status" aria-live="polite">${selected.length}</span></div><div class="summary-tile"><strong>Presentable</strong>${presentable.length}</div><div class="summary-tile"><strong>Unavailable</strong>${unavailable.length}</div><div class="summary-tile"><strong>Protected internal</strong>${protectedItems.length}</div></div>
         ${briefing.briefing_type_id === "external_manager_story_translation_v1" ? externalGovernanceHtml(state.builtInTemplates.find((type) => workflowRecordId(type) === briefing.briefing_type_id)) : ""}
-        <div class="button-row"><button class="secondary-button" type="button" data-desk-action="select-recommended-presentation">Select recommended defaults</button><button class="secondary-button" type="button" data-desk-action="select-all-presentable">Select all presentable sections</button><button class="secondary-button" type="button" data-desk-action="reset-recommended-presentation">Reset to recommended selection</button></div>
+        <div class="button-row"><button class="secondary-button" type="button" data-desk-action="select-all-presentable">Select all populated sections</button><button class="secondary-button" type="button" data-desk-action="select-recommended-presentation">Use audience recommendations</button></div>
         <section><h2>Populated presentable Briefing Sections</h2><div class="journey-list">${rows || '<p class="empty">This Dated Briefing does not yet contain any populated Briefing Sections that can be presented.</p>'}</div></section>
         ${unavailable.length ? `<details><summary>Unavailable Briefing Sections (${unavailable.length})</summary><ul class="detail-list">${unavailableRows}</ul></details>` : ""}
         ${protectedItems.length ? `<details><summary>Protected internal items excluded from selection (${protectedItems.length})</summary><ul class="detail-list">${protectedRows}</ul></details>` : ""}
-        <div class="button-row"><button class="primary-button" type="button" data-desk-action="save-presentation-selection">Save Presentation Selection</button><button class="secondary-button" type="button" data-desk-action="cancel-presentation-selection">Back to Advisor Review</button></div>`;
-      els.briefingDeskRegion.innerHTML = deskShell("Prepare for Presentation", body);
+        <div class="button-row"><button class="primary-button" type="button" data-desk-action="save-presentation-selection">Save Presentation Sequence</button><button class="secondary-button" type="button" data-desk-action="cancel-presentation-selection">Back to Dated Briefing</button></div>`;
+      els.briefingDeskRegion.innerHTML = deskShell("Choose Sections", body);
     }
 
     function renderReviewEvidence() {
@@ -4124,24 +4147,25 @@
       const briefing = currentDeskBriefing();
       if (!briefing) return renderBriefingHistory();
       const sections = getSavedPresentationSections(briefing);
-      if (!sections.length || (mode === "presentation" && !isPresentationEligible(briefing)) || (mode === "client-preview" && !isPreviewEligible(briefing))) return renderAdvisorReview();
+      if (!sections.length || (mode === "presentation" && !isPresentationEligible(briefing))) return renderAdvisorReview();
       state.deskSectionIndex = Math.min(Math.max(state.deskSectionIndex, 0), Math.max(sections.length - 1, 0));
       const index = state.deskSectionIndex;
       const section = sections[index];
       const step = briefing.journey_steps.find((candidate) => candidate.display_title === (section && section.title)) || {};
-      const evidence = renderEvidenceDepth(section, step, briefing);
-      const pattern = reportPresentationPattern(section && section.title);
-      const sectionBody = state.deskEvidenceMode ? evidence : `<div class="reader-section" data-report-pattern="${escapeAttr(pattern.key)}"><p class="eyebrow">Conclusion</p><h2>${escapeHtml(section && section.title || "Briefing section")}</h2>${step.visible_question_answered ? `<p>${escapeHtml(step.visible_question_answered)}</p>` : ""}<p class="report-pattern-note"><strong>${escapeHtml(pattern.label)}:</strong> ${escapeHtml(pattern.guidance)}</p><div>${sanitizePreviewFragment(section && section.html || "")}</div></div>`;
-      const evidenceButtons = `<button class="tiny-button" type="button" data-desk-action="evidence" data-evidence="explain">Explain</button>${canVerifySection(section) ? '<button class="tiny-button" type="button" data-desk-action="evidence" data-evidence="verify">Verify</button>' : ""}`;
+      const moreDetail = genuineMoreDetailHtml(section);
+      const detailOpen = state.deskEvidenceMode === "more-detail" && moreDetail;
+      const sectionBody = detailOpen
+        ? `<div class="evidence-panel"><p class="eyebrow">More Detail</p><div class="reader-section">${sanitizePreviewFragment(moreDetail)}</div><button class="secondary-button" type="button" data-desk-action="more-detail-back">Back to Briefing Section</button></div>`
+        : `<div class="reader-section"><p class="eyebrow">Briefing Section</p><h2>${escapeHtml(section && section.title || "Briefing section")}</h2>${step.visible_question_answered ? `<p>${escapeHtml(step.visible_question_answered)}</p>` : ""}<div>${sanitizePreviewFragment(section && section.html || "")}</div></div>`;
+      const detailButton = moreDetail && !detailOpen ? '<div class="button-row"><button class="tiny-button" type="button" data-desk-action="more-detail">More Detail</button></div>' : "";
       const header = `<header class="reader-header"><p class="brand">Arangur</p><h1>${escapeHtml(briefing.title)}</h1><p class="meta">${escapeHtml(formatBriefingDate(briefing.generated_at))} &middot; Data through ${escapeHtml(formatBriefingDate(briefing.data_as_of))}</p></header>`;
       const navigation = `<div class="reader-navigation"><button class="secondary-button" type="button" data-desk-action="previous" ${index <= 0 ? "disabled" : ""}>Previous</button><span class="report-position">Section ${sections.length ? index + 1 : 0} of ${sections.length}</span><button class="primary-button" type="button" data-desk-action="next" ${index >= sections.length - 1 ? "disabled" : ""}>Next</button></div>`;
       if (mode === "presentation") {
-        els.briefingDeskRegion.innerHTML = deskShell("Presentation", `${header}${sectionBody}<div class="button-row">${evidenceButtons}</div>${navigation}<button class="secondary-button" type="button" data-desk-action="exit-presentation">Exit presentation</button>`, { presentation: true });
+        els.briefingDeskRegion.innerHTML = deskShell("Presentation", `${header}${sectionBody}${detailButton}${navigation}<button class="secondary-button" type="button" data-desk-action="exit-presentation">Exit</button>`, { presentation: true });
         return;
       }
-      const previewLabel = audiencePreviewLabel(briefing);
-      const body = `<div class="briefing-reader"><p class="eyebrow">${escapeHtml(previewLabel)} &middot; saved presentation sequence</p>${header}<p class="meta">This Preview shows exactly the selected populated Briefing Sections in the advisor's saved order. Unselected, unavailable, and protected internal material is excluded.</p>${sectionBody}<div class="button-row">${evidenceButtons}</div>${navigation}<div class="button-row">${isPresentationEligible(briefing) ? '<button class="primary-button" type="button" data-desk-action="present">Present briefing</button>' : '<span class="meta">Preview is available now. Mark this briefing Ready to Present in Advisor Review before presenting.</span>'}<button class="secondary-button" type="button" data-desk-action="advisor-review">Back to Advisor Review</button></div></div>`;
-      els.briefingDeskRegion.innerHTML = deskShell(previewLabel, body);
+      const body = `<div class="briefing-reader">${header}${sectionBody}${detailButton}${navigation}<div class="button-row"><button class="primary-button" type="button" data-desk-action="present">Present Briefing</button><button class="secondary-button" type="button" data-desk-action="advisor-review">Back to Dated Briefing</button></div></div>`;
+      els.briefingDeskRegion.innerHTML = deskShell("Dated Briefing", body);
     }
 
     function reportPresentationPattern(title) {
@@ -6908,8 +6932,14 @@
       if (action === "resume-list") return navigateToRoute("resume-list");
       if (action === "find-briefing") return navigateToRoute("find-briefing");
       if (action === "apply-briefing-search") return renderFindBriefing();
+      if (action === "apply-presentation-search") return renderPresentMenu();
       if (action === "developer-tools") return navigateToRoute("developer");
       if (action === "choose-briefing-sections") return startConfiguredNewPlan();
+      if (action === "ask-example") {
+        state.askQuery = button.dataset.askExample || "";
+        return routeAskArangurRequest(state.askQuery);
+      }
+      if (action === "ask-submit") return routeAskArangurRequest(state.askQuery);
       if (action === "ask-topic") {
         state.askMode = button.dataset.askTopic || "";
         return renderAskArangur();
@@ -6968,6 +6998,16 @@
         return renderPlanList();
       }
       if (action === "recover-prior-plan") return recoverPlanFromBriefing(button.dataset.briefingId);
+      if (action === "create-updated-briefing") {
+        const briefing = state.briefings.find((candidate) => candidate.briefing_id === button.dataset.briefingId);
+        if (!briefing) return;
+        const source = allBriefingTemplates().find((candidate) => workflowRecordId(candidate) === briefing.template_id);
+        if (!source) return recoverPlanFromBriefing(briefing.briefing_id);
+        state.deskSelectedTypeId = briefing.briefing_type_id || templateTypeId(source);
+        state.deskSelectedTemplateId = workflowRecordId(source);
+        state.datedBriefingTitleDraft = "";
+        return navigateToRoute("configure");
+      }
       if (action === "select-type") return selectBriefingType(button.dataset.typeId);
       if (action === "open-template-type") {
         const template = allBriefingTemplates().find((candidate) => workflowRecordId(candidate) === button.dataset.templateId);
@@ -7089,11 +7129,11 @@
         if (!briefing) return;
         const selected = sanitizePresentationSelection(briefing, state.presentationSelectionDraftIds || []);
         const previous = sanitizePresentationSelection(briefing, briefing.presentation_section_order || briefing.presentation_section_ids || []);
-        const recommended = recommendedPresentationSectionIds(briefing);
+        const defaultSelection = allPresentablePresentationSectionIds(briefing);
         const changed = JSON.stringify(selected) !== JSON.stringify(previous);
         briefing.presentation_section_ids = [...selected];
         briefing.presentation_section_order = [...selected];
-        briefing.presentation_selection_source = JSON.stringify(selected) === JSON.stringify(recommended) ? "recommended_defaults" : "advisor_customized";
+        briefing.presentation_selection_source = JSON.stringify(selected) === JSON.stringify(defaultSelection) ? "all_presentable_defaults" : "advisor_customized";
         briefing.presentation_selection_updated_at = new Date().toISOString();
         briefing.last_activity_at = briefing.presentation_selection_updated_at;
         if (changed) {
@@ -7147,7 +7187,9 @@
         state.deskEvidenceMode = null;
         const briefing = currentDeskBriefing();
         if (briefing && isPresentationEligible(briefing)) {
-          state.presentationReturnContext = { source_route: "client-preview", briefing_id: briefing.briefing_id, section_index: state.deskSectionIndex, origin: state.route };
+          state.deskSectionIndex = 0;
+          const firstSection = getSavedPresentationSections(briefing)[0];
+          state.presentationReturnContext = { source_route: "review", briefing_id: briefing.briefing_id, section_index: 0, section_id: presentationSectionIdentifier(firstSection, 0), origin: state.route };
           briefing.presentation_started_at = briefing.presentation_started_at || new Date().toISOString();
           briefing.last_presented_at = new Date().toISOString();
           briefing.presentation_position = state.deskSectionIndex;
@@ -7162,9 +7204,12 @@
         const context = state.presentationReturnContext;
         if (context) {
           state.deskCurrentBriefingId = context.briefing_id;
-          state.deskSectionIndex = Number(context.section_index || 0);
+          const briefing = currentDeskBriefing();
+          const viewItems = datedBriefingViewItems(briefing);
+          const matchingIndex = viewItems.findIndex((item) => item.id === context.section_id);
+          state.deskSectionIndex = matchingIndex >= 0 ? matchingIndex : 0;
         }
-        return navigateToRoute(context && context.source_route || "client-preview");
+        return navigateToRoute(context && context.source_route || "review");
       }
       if (action === "previous" || action === "next") {
         state.deskSectionIndex += action === "next" ? 1 : -1;
@@ -7174,7 +7219,11 @@
           if (briefing) {
             briefing.presentation_position = state.deskSectionIndex;
             briefing.presentation_progress = { started: true, position: state.deskSectionIndex, updated_at: new Date().toISOString() };
-            if (state.presentationReturnContext) state.presentationReturnContext.section_index = state.deskSectionIndex;
+            if (state.presentationReturnContext) {
+              state.presentationReturnContext.section_index = state.deskSectionIndex;
+              const section = getSavedPresentationSections(briefing)[state.deskSectionIndex];
+              state.presentationReturnContext.section_id = presentationSectionIdentifier(section, state.deskSectionIndex);
+            }
             briefing.last_presented_at = briefing.presentation_progress.updated_at;
             briefing.last_activity_at = briefing.last_presented_at;
             commitDatedBriefingUpdate(briefing);
@@ -7189,6 +7238,14 @@
       if (action === "evidence-back") {
         state.deskEvidenceMode = null;
         if (state.route === "review-evidence") return navigateToRoute("review");
+        return renderDeskRoute(state.route);
+      }
+      if (action === "more-detail") {
+        state.deskEvidenceMode = "more-detail";
+        return renderDeskRoute(state.route);
+      }
+      if (action === "more-detail-back") {
+        state.deskEvidenceMode = null;
         return renderDeskRoute(state.route);
       }
       if (action === "review-evidence") {
@@ -7229,9 +7286,11 @@
           return navigateToRoute("client-preview");
         }
         if (action === "present-briefing" || action === "resume-presentation") {
-          if (!isPresentationEligible(briefing)) return renderLaunchPresentationList();
+          if (!isPresentationEligible(briefing)) return renderPresentMenu();
           if (action === "resume-presentation" && !hasSavedPresentationProgress(briefing)) return renderResumePresentationList();
-          state.presentationReturnContext = { source_route: "client-preview", briefing_id: briefing.briefing_id, section_index: state.deskSectionIndex, origin: action === "resume-presentation" ? "resume-list" : state.route };
+          if (action !== "resume-presentation") state.deskSectionIndex = 0;
+          const section = getSavedPresentationSections(briefing)[state.deskSectionIndex];
+          state.presentationReturnContext = { source_route: "review", briefing_id: briefing.briefing_id, section_index: state.deskSectionIndex, section_id: presentationSectionIdentifier(section, state.deskSectionIndex), origin: action === "resume-presentation" ? "resume-list" : state.route };
           briefing.presentation_started_at = briefing.presentation_started_at || new Date().toISOString();
           briefing.last_presented_at = new Date().toISOString();
           briefing.presentation_position = state.deskSectionIndex;
@@ -7255,6 +7314,8 @@
         if (workbenchField === "compare-right") { state.compareRightId = event.target.value; state.compareRequested = false; renderDatedComparison(); }
         if (workbenchField === "dated-briefing-title") state.datedBriefingTitleDraft = event.target.value;
         if (workbenchField === "briefing-search") state.workbenchSearchQuery = event.target.value;
+        if (workbenchField === "presentation-search") state.workbenchSearchQuery = event.target.value;
+        if (workbenchField === "ask-query") state.askQuery = event.target.value;
         return;
       }
       const draft = state.deskDraftTemplate;

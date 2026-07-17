@@ -4,6 +4,10 @@ Status: implementation audit and corrected product contract
 Date: 2026-07-16
 Product: Arangur
 
+## 2026-07-16 simplified ordinary presentation
+
+The normalized-record, same-ID persistence, sequence, protected-material, progress, and diagnostic corrections remain. `docs/product/arangur_advisor_workflow_concept_simplification_v1.md` removes Review/Ready/Preview as ordinary presentation gates and replaces the five discovery choices with one searchable Dated Briefing list. Old eligibility fields and routes remain Developer / QA compatibility detail only.
+
 ## Scope
 
 This bounded correction makes Advisor Review, Ready to Present, Audience Preview, Presentation, Resume, Find, and home shortcuts read the same normalized browser-local Dated Briefing records and the same deterministic eligibility rules. It does not redesign Briefing Section visuals, add analytics, add dependencies, change deployment, or create production persistence.

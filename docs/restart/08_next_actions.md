@@ -1,5 +1,9 @@
 # Next Actions
 
+## Current checkpoint — Advisor workflow concept simplification — 2026-07-16
+
+Preserve the simplified ordinary lifecycle: **Briefing Plan → Create Dated Briefing → View Dated Briefing → Present Dated Briefing**. Do not reintroduce separate choose/preview/start/resume/find menus or mandatory Review/Ready gates. Prepare has two choices; Existing is one contextual library; Present is one searchable list; Ask Arangur is one prompt. Default selection is every populated presentable section, with protected/unavailable items excluded and explicit custom order preserved. Old statuses, Preview routes, comparison implementation, and diagnostics may remain in Developer / QA. The next tranche remains **Arangur Dated Briefing Reader and Design-Lab Visual Integration v1** and must not reopen this workflow simplification or add analytics.
+
 ## Current checkpoint — Presentation section selection and audience flexibility — 2026-07-16
 
 Preserve the advisor-controlled saved presentation selection. Intended audience determines recommended defaults and presentation wording, not a prohibition. Preview requires Reviewed, at least one selected populated presentable Briefing Section, and no true blocker. Ready remains explicit and implies Preview and Presentation eligibility; Resume additionally requires progress. Advisor-only sections normally remain selectable, while protected internal and unavailable material remain blocked by the shared classifier. Preserve safe legacy normalization, external-story governance, same-record persistence, and exact Preview/Presentation order. The next tranche remains **Arangur Dated Briefing Reader and Design-Lab Visual Integration v1** and must not reopen this selection contract or redesign analytics.

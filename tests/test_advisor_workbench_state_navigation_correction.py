@@ -69,8 +69,8 @@ class AdvisorWorkbenchStateNavigationCorrectionTests(unittest.TestCase):
         self.assertNotIn("persistCurrentPlanDraft();", scratch)
 
     def test_saved_plan_identity_and_actions_are_status_appropriate(self) -> None:
-        plan_list = self.fragment("function renderPlanList", "function sectionCountForPlan")
-        for token in ("Saved Briefing Plan", "Saved ", "Last edited", "Lineage:", "Revise", "Duplicate", "Create Dated Briefing", "Archive"):
+        plan_list = self.fragment("function renderUnifiedExistingLibrary", "function renderNewPlanSetup")
+        for token in ("My Saved Plan", "Last edited", "Revise", "Duplicate", "Create Dated Briefing", "Archive"):
             self.assertIn(token, plan_list)
 
     def test_dated_briefing_title_and_metadata_are_explicit(self) -> None:
@@ -85,23 +85,19 @@ class AdvisorWorkbenchStateNavigationCorrectionTests(unittest.TestCase):
         ):
             self.assertIn(token, self.html)
 
-    def test_status_model_has_separate_reviewed_and_ready_transitions(self) -> None:
-        for token in (
-            'review_status = "reviewed"',
-            'review_status = "ready_to_present"',
-            "Complete Advisor Review",
-            "Mark Ready to Present",
-            "briefingDisplayStatus",
-            "isPreviewEligible",
-            "isPresentationEligible",
-        ):
+    def test_legacy_status_fields_remain_internal_but_do_not_gate_ordinary_reader(self) -> None:
+        for token in ('review_status = "reviewed"', 'review_status = "ready_to_present"', "isPreviewEligible", "isPresentationEligible"):
             self.assertIn(token, self.html)
+        reader = self.fragment("function renderAdvisorReview", "function renderPrepareForPresentation")
+        for removed in ("Complete Advisor Review", "Mark Ready to Present", "Prepare for Presentation", "Preview readiness", "Presentation readiness"):
+            self.assertNotIn(removed, reader)
 
-    def test_presentable_is_a_subset_of_previewable(self) -> None:
+    def test_presentable_sections_do_not_require_review_or_ready_status(self) -> None:
         eligibility = self.fragment("function presentationSectionIdentifier", "function briefingDisplayStatus")
-        self.assertIn('briefing.review_status === "ready_to_present" && isPreviewEligible(briefing)', eligibility)
-        self.assertIn("hasSelectedPresentablePopulatedSections", eligibility)
-        self.assertIn("hasPresentationBlockingCondition", eligibility)
+        presentation = eligibility[eligibility.index("function isPresentationEligible") : eligibility.index("function hasSavedPresentationProgress")]
+        self.assertIn("hasSelectedPresentablePopulatedSections", presentation)
+        self.assertNotIn("review_status", presentation)
+        self.assertNotIn("hasPresentationBlockingCondition", presentation)
 
     def test_audience_wording_covers_client_manager_and_internal(self) -> None:
         labels = self.fragment("function audiencePreviewLabel", "function selectedBriefingType")
@@ -109,8 +105,8 @@ class AdvisorWorkbenchStateNavigationCorrectionTests(unittest.TestCase):
         self.assertIn("Client Preview", labels)
         self.assertIn("Audience Preview", labels)
         review = self.fragment("function renderAdvisorReview", "function renderReviewEvidence")
-        self.assertIn("No Sections Selected", review)
-        self.assertIn("Prepare for Presentation", review)
+        self.assertIn("Choose Sections", review)
+        self.assertIn("Present Briefing", review)
 
     def test_ready_preview_launch_and_resume_share_one_record_filter(self) -> None:
         self.assertIn("return state.briefings.filter(isPresentationEligible)", self.html)
@@ -124,7 +120,7 @@ class AdvisorWorkbenchStateNavigationCorrectionTests(unittest.TestCase):
             "briefing_id",
             "section_index",
             "presentation_position",
-            'source_route: "client-preview"',
+            'source_route: "review"',
         ):
             self.assertIn(token, self.html)
         exit_flow = self.fragment('if (action === "exit-presentation")', 'if (action === "previous"')

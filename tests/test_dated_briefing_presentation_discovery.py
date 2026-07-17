@@ -26,18 +26,13 @@ class DatedBriefingPresentationDiscoveryTests(unittest.TestCase):
         begin = self.html.index(start)
         return self.html[begin : self.html.index(end, begin)]
 
-    def test_presentation_menu_uses_approved_labels_in_order(self) -> None:
-        menu = self.fragment("function renderPresentMenu", "function renderNewPlanSetup")
-        labels = (
-            "Choose a Briefing to Present",
-            "Preview a Briefing",
-            "Start a Presentation",
-            "Resume a Presentation",
-            "Find a Briefing",
-        )
-        positions = [menu.index(label) for label in labels]
-        self.assertEqual(sorted(positions), positions)
-        self.assertNotIn("Open a briefing ready to present", menu)
+    def test_presentation_opens_one_searchable_dated_briefing_list(self) -> None:
+        menu = self.fragment("function renderPresentMenu", "function renderUnifiedExistingLibrary")
+        self.assertIn("Present a Dated Briefing", menu)
+        self.assertIn("one searchable list", menu)
+        self.assertIn("presentation-search", menu)
+        for removed in ("Choose a Briefing to Present", "Preview a Briefing", "Start a Presentation", "Resume a Presentation", "Find a Briefing"):
+            self.assertNotIn(removed, menu)
 
     def test_one_shared_eligibility_stack_controls_every_surface(self) -> None:
         eligibility = self.fragment("function populatedRenderedSections", "function selectedBriefingType")
@@ -56,8 +51,9 @@ class DatedBriefingPresentationDiscoveryTests(unittest.TestCase):
             "hasSavedPresentationProgress",
         ):
             self.assertIn(f"function {helper}", eligibility)
-        self.assertIn("return isReadyToPresent(briefing)", eligibility)
-        self.assertIn("isPreviewEligible(briefing)", eligibility)
+        presentation = eligibility[eligibility.index("function isPresentationEligible") : eligibility.index("function hasSavedPresentationProgress")]
+        self.assertIn("hasSelectedPresentablePopulatedSections", presentation)
+        self.assertNotIn("isReadyToPresent", presentation)
 
     def test_legacy_reviewed_promotion_requires_full_shared_rule(self) -> None:
         normalization = self.fragment("function normalizeBriefingRecord", "function currentDeskBriefing")
@@ -67,7 +63,7 @@ class DatedBriefingPresentationDiscoveryTests(unittest.TestCase):
         self.assertIn('canonical.review_status = reviewedEvidence ? "reviewed" : "in_review"', normalization)
         self.assertIn("Stored readiness was not retained", normalization)
         display = self.fragment("function briefingDisplayStatus", "function audiencePreviewLabel")
-        self.assertIn("isReadyToPresent(briefing)", display)
+        self.assertIn('return "Dated Briefing"', display)
 
     def test_unrecognizable_legacy_records_are_retained_outside_ordinary_lists(self) -> None:
         load = self.fragment("function loadLocalBriefings", "function persistLocalNamedWorkflows")
@@ -90,7 +86,7 @@ class DatedBriefingPresentationDiscoveryTests(unittest.TestCase):
         reader = self.fragment("function renderBriefingReader", "function reportPresentationPattern")
         self.assertIn("getSavedPresentationSections(briefing)", reader)
         self.assertIn("isPresentationEligible(briefing)", reader)
-        self.assertIn("isPreviewEligible(briefing)", reader)
+        self.assertNotIn("isPreviewEligible(briefing)", reader)
         self.assertNotIn("client_artifact || briefing.advisor_artifact", reader)
 
     def test_review_and_ready_transitions_commit_normalized_same_id_record(self) -> None:
@@ -103,13 +99,11 @@ class DatedBriefingPresentationDiscoveryTests(unittest.TestCase):
         self.assertIn("advisorReviewBlockingReason", actions)
         self.assertIn("readinessBlockingReason", actions)
 
-    def test_ready_cannot_be_marked_without_visible_sections_or_with_a_block(self) -> None:
+    def test_ordinary_reader_has_no_formal_ready_or_preview_gate(self) -> None:
         review = self.fragment("function renderAdvisorReview", "function renderReviewEvidence")
-        self.assertIn("not ready for Preview", review)
-        self.assertIn("Return to Briefing Plan", review)
-        actions = self.fragment('if (action === "mark-ready")', 'if (action === "client-preview")')
-        self.assertIn("isPreviewEligible(briefing)", actions)
-        self.assertIn("readinessBlockingReason(briefing)", actions)
+        for removed in ("Complete Advisor Review", "Mark Ready to Present", "not ready for Preview", "Preview readiness", "Presentation readiness"):
+            self.assertNotIn(removed, review)
+        self.assertIn("Present Briefing", review)
 
     def test_resume_requires_actual_saved_presentation_progress(self) -> None:
         progress = self.fragment("function hasSavedPresentationProgress", "function briefingDisplayStatus")
@@ -144,18 +138,11 @@ class DatedBriefingPresentationDiscoveryTests(unittest.TestCase):
             self.assertIn(token, self.html)
 
     def test_empty_states_and_find_actions_are_actionable(self) -> None:
-        for token in (
-            "No Briefings Ready to Present",
-            "No Dated Briefings have been reviewed, prepared for presentation, and marked Ready.",
-            "View Dated Briefings",
-            "No Briefings Available to Preview",
-            "Go to Advisor Review",
-            "Start a Presentation to create resumable progress.",
-        ):
+        for token in ("No matching Dated Briefings.", "No Dated Briefings in this browser.", "No populated presentable Briefing Sections"):
             self.assertIn(token, self.html)
         find_row = self.fragment("function findDatedBriefingRow", "function renderDatedBriefingList")
-        self.assertIn("Open briefing", find_row)
-        self.assertIn("preview-briefing", find_row)
+        self.assertIn("Open", find_row)
+        self.assertNotIn("preview-briefing", find_row)
         self.assertIn("present-briefing", find_row)
 
     def test_generation_fixture_has_real_audience_visible_content(self) -> None:

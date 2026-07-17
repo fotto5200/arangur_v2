@@ -45,8 +45,9 @@ class AdvisorWorkbenchInformationArchitectureTests(unittest.TestCase):
             self.assertNotIn(example, self.first_screen)
 
     def test_home_shortcuts_and_developer_boundary_are_secondary(self) -> None:
-        for label in ("Recent Work", "Ready to Present", "Recent Dated Briefings"):
+        for label in ("Recent Work", "Recent Dated Briefings"):
             self.assertIn(label, self.first_screen)
+        self.assertNotIn("<summary>Ready to Present</summary>", self.first_screen)
         self.assertIn("workbench-footer", self.first_screen)
         self.assertIn("Developer / QA", self.first_screen)
         self.assertGreater(
@@ -67,59 +68,53 @@ class AdvisorWorkbenchInformationArchitectureTests(unittest.TestCase):
 
     def test_prepare_menu_and_setup_contract_are_wired(self) -> None:
         for label in (
-            "Build a new briefing plan",
-            "Start from a briefing plan template",
-            "Start from a prior briefing plan",
-            "Continue an unfinished briefing plan draft",
+            "Build from Scratch",
+            "Start from a Template",
             "Advisor/internal",
             "Client",
             "Manager discussion",
             "Choose briefing sections",
         ):
             self.assertIn(label, self.html)
+        prepare = self.html[self.html.index("function renderPreparePlanMenu") : self.html.index("function renderExistingWorkMenu")]
+        self.assertNotIn("Start from a prior briefing plan", prepare)
+        self.assertNotIn("Continue an unfinished briefing plan draft", prepare)
         self.assertIn("persistCurrentPlanDraft", self.html)
         self.assertIn("builder_step", self.html)
 
     def test_template_library_contains_examples_below_top_level(self) -> None:
         self.assertIn("Arangur example templates", self.html)
         self.assertIn("Examples are starting points, not the limit", self.html)
-        self.assertIn("Use as is", self.html)
+        self.assertIn(">Use</button>", self.html)
         self.assertIn("Customize", self.html)
         self.assertIn("approximateDetailLabel", self.html)
 
-    def test_existing_work_menu_order_and_honest_comparison(self) -> None:
+    def test_existing_work_opens_one_contextual_library(self) -> None:
         start = self.html.index('function renderExistingWorkMenu()')
         end = self.html.index('function renderPresentMenu()', start)
         fragment = self.html[start:end]
-        labels = (
-            "Revise or continue a briefing plan",
-            "Create a dated briefing with current data",
-            "Compare dated briefings",
-            "View a dated briefing",
-        )
-        positions = [fragment.index(label) for label in labels]
-        self.assertEqual(sorted(positions), positions)
-        self.assertIn("Complete historical position reconstruction", self.html)
-        self.assertIn("are not available and are not inferred", self.html)
+        self.assertIn("renderUnifiedExistingLibrary", fragment)
+        library = self.html[self.html.index("function renderUnifiedExistingLibrary") : self.html.index("function renderNewPlanSetup")]
+        for label in ("Continue", "Rename", "Discard", "Revise", "Duplicate", "Create Dated Briefing", "Archive", "Open", "Create Updated Dated Briefing", "Present"):
+            self.assertIn(label, library)
+        self.assertNotIn("Compare dated briefings", library)
 
     def test_dated_briefing_opening_is_populated_content_first(self) -> None:
         self.assertIn("firstPopulatedSectionIndex", self.html)
         review_start = self.html.index("function renderAdvisorReview()")
-        review_end = self.html.index("function renderReviewEvidence()", review_start)
+        review_end = self.html.index("function renderPrepareForPresentation()", review_start)
         review = self.html[review_start:review_end]
-        self.assertIn("Populated Briefing Section", review)
+        self.assertIn("Briefing Section", review)
         self.assertIn("sanitizePreviewFragment(section.html", review)
-        self.assertNotIn("Read generated section", review)
+        self.assertIn("Choose Sections", review)
+        self.assertIn("Present Briefing", review)
 
     def test_present_paths_and_position_persistence_are_wired(self) -> None:
-        for label in (
-            "Choose a Briefing to Present",
-            "Preview a Briefing",
-            "Start a Presentation",
-            "Resume a Presentation",
-            "Find a Briefing",
-        ):
-            self.assertIn(label, self.html)
+        menu = self.html[self.html.index("function renderPresentMenu") : self.html.index("function renderUnifiedExistingLibrary")]
+        self.assertIn("one searchable list", menu)
+        self.assertIn("presentation-search", menu)
+        for label in ("Choose a Briefing to Present", "Preview a Briefing", "Start a Presentation", "Resume a Presentation", "Find a Briefing"):
+            self.assertNotIn(label, menu)
         for token in (
             "presentation_position",
             "last_presented_at",
@@ -130,16 +125,14 @@ class AdvisorWorkbenchInformationArchitectureTests(unittest.TestCase):
 
     def test_ask_arangur_is_deterministic_and_bounded(self) -> None:
         for label in (
-            "Help me decide where to start",
-            "Help me find a briefing plan or dated briefing",
-            "Guide me through preparing a briefing plan",
-            "Help me create an updated briefing",
-            "Explain a briefing section or unfamiliar term",
-            "Help me prepare for an upcoming meeting",
-            "Help me resolve a problem",
+            "Help me create a briefing.",
+            "Find last quarter’s briefing.",
+            "Use the same plan with current data.",
+            "Help me prepare for a manager meeting.",
+            "Explain what a Briefing Plan is.",
         ):
             self.assertIn(label, self.html)
-        self.assertIn("does not use an external AI service", self.html)
+        self.assertIn("does not claim a live external AI connection", self.html)
         self.assertIn("does not", self.html)
         self.assertIn("investment recommendations", self.html)
         self.assertIn("Object.entries(ROUTE_HASHES).find", self.html)

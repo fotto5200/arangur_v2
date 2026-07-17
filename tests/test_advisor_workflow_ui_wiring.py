@@ -54,8 +54,8 @@ class AdvisorWorkflowUiWiringTests(unittest.TestCase):
         self.assertIn("Present a Dated Briefing", first_screen)
         self.assertIn("Ask Arangur", first_screen)
         self.assertIn("Recent Work", first_screen)
-        self.assertIn("Ready to Present", first_screen)
         self.assertIn("Recent Dated Briefings", first_screen)
+        self.assertNotIn("<summary>Ready to Present</summary>", first_screen)
         for example in EXPECTED_TYPES:
             self.assertNotIn(example, first_screen)
         for leak in ("workflow_id", "source_mockup_path", "source_view_path", "schema_version", ".json", "data/simulation/"):
@@ -124,7 +124,7 @@ class AdvisorWorkflowUiWiringTests(unittest.TestCase):
         self.assertEqual("2026-06-30", artifact["data_as_of"])
         self.assertEqual("placeholder", artifact["ordered_sections"][-1]["status"])
 
-    def test_static_states_keep_review_preview_presentation_and_developer_distinct(self) -> None:
+    def test_static_states_keep_dated_reader_presentation_and_developer_distinct(self) -> None:
         html = self.client.get("/app/").text
         for token in (
             'review: "#review"',
@@ -142,12 +142,12 @@ class AdvisorWorkflowUiWiringTests(unittest.TestCase):
         for hidden in ("Save template", "Create briefing with current data", "Developer / QA"):
             self.assertNotIn(hidden, presentation_fragment)
 
-    def test_advanced_builder_restores_three_paths_and_five_stages(self) -> None:
+    def test_advanced_builder_restores_two_entry_paths_and_five_stages(self) -> None:
         html = self.client.get("/app/").text
         for token in (
-            "Build a new briefing plan",
+            "Build from Scratch",
             "Customize",
-            "Use as is",
+            ">Use</button>",
             "Start with no Briefing Sections",
             'const steps = ["Purpose", "Reports", "Configure", "Order & visibility", "Preview"]',
             "renderAdvancedTemplateBuilder",
@@ -195,19 +195,21 @@ class AdvisorWorkflowUiWiringTests(unittest.TestCase):
             self.assertIn(token, edit_fragment)
         self.assertIn("Current and earlier browser-local Plan and Dated Briefing records are normalized on read", html)
 
-    def test_design_lab_patterns_are_integrated_without_prototype_architecture_leaks(self) -> None:
+    def test_more_detail_is_contextual_without_prototype_architecture_leaks(self) -> None:
         html = self.client.get("/app/").text
         for token in (
             "reportPresentationPattern",
-            'data-report-pattern=',
             "cash-bridge",
             "scenario-range",
             "part-to-whole",
             "exact-attribution",
-            "Explain",
-            "Verify",
+            "genuineMoreDetailHtml",
+            "More Detail",
         ):
             self.assertIn(token, html)
+        reader = html[html.index("function renderAdvisorReview") : html.index("function renderPrepareForPresentation")]
+        self.assertNotIn(">Explain<", reader)
+        self.assertNotIn(">Verify<", reader)
         for prototype_only in ("Objective Horizon", "Capital Landscape", "Wealth Journey", "Stewardship Brief"):
             self.assertNotIn(prototype_only, html)
 

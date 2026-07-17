@@ -4,6 +4,10 @@ Status: implemented local product contract
 Date: 2026-07-16
 Product: Arangur
 
+## 2026-07-16 ordinary-lifecycle supersession
+
+The object identity, selection persistence, comparison implementation, and exact return-context corrections below remain authoritative internally. `docs/product/arangur_advisor_workflow_concept_simplification_v1.md` supersedes their ordinary Advisor Review, Preview, and Ready-to-Present gates: a Dated Briefing with at least one selected populated presentable section can be presented directly, comparison is hidden from ordinary navigation, and Presentation exits to the same Dated Briefing section.
+
 ## Decision
 
 The accepted Advisor Workbench information architecture remains unchanged. This correction makes object identity, selection feedback, lifecycle status, comparison, and return navigation coherent without redesigning populated Briefing Sections.
