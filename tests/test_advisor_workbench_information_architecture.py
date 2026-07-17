@@ -113,11 +113,11 @@ class AdvisorWorkbenchInformationArchitectureTests(unittest.TestCase):
 
     def test_present_paths_and_position_persistence_are_wired(self) -> None:
         for label in (
-            "Open a briefing ready to present",
-            "Preview what the audience will see",
-            "Launch a presentation",
-            "Resume a recent presentation",
-            "Find a briefing",
+            "Choose a Briefing to Present",
+            "Preview a Briefing",
+            "Start a Presentation",
+            "Resume a Presentation",
+            "Find a Briefing",
         ):
             self.assertIn(label, self.html)
         for token in (

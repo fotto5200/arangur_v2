@@ -98,9 +98,10 @@ class AdvisorWorkbenchStateNavigationCorrectionTests(unittest.TestCase):
             self.assertIn(token, self.html)
 
     def test_presentable_is_a_subset_of_previewable(self) -> None:
-        eligibility = self.fragment("function isPreviewEligible", "function briefingDisplayStatus")
+        eligibility = self.fragment("function getAudienceVisibleSections", "function briefingDisplayStatus")
         self.assertIn('briefing.review_status === "ready_to_present" && isPreviewEligible(briefing)', eligibility)
-        self.assertIn("audienceVisibleSections", eligibility)
+        self.assertIn("hasAudienceVisiblePopulatedSections", eligibility)
+        self.assertIn("hasPresentationBlockingCondition", eligibility)
 
     def test_audience_wording_covers_client_manager_and_internal(self) -> None:
         labels = self.fragment("function audiencePreviewLabel", "function selectedBriefingType")
@@ -113,7 +114,7 @@ class AdvisorWorkbenchStateNavigationCorrectionTests(unittest.TestCase):
     def test_ready_preview_launch_and_resume_share_one_record_filter(self) -> None:
         self.assertIn("return state.briefings.filter(isPresentationEligible)", self.html)
         self.assertIn("state.briefings.filter(isPreviewEligible)", self.html)
-        self.assertIn("item.last_presented_at && isPresentationEligible(item)", self.html)
+        self.assertIn("state.briefings.filter(hasSavedPresentationProgress)", self.html)
 
     def test_presentation_context_is_object_and_section_bound(self) -> None:
         for token in (
@@ -151,8 +152,8 @@ class AdvisorWorkbenchStateNavigationCorrectionTests(unittest.TestCase):
         for token in (
             "No Briefing Plan Drafts",
             "No Dated Briefings to Compare",
-            "No Ready-to-Present Briefings",
-            "No Audience Preview Available",
+            "No Briefings Ready to Present",
+            "No Briefings Available to Preview",
         ):
             self.assertIn(token, self.html)
 

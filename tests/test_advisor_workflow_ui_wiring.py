@@ -193,7 +193,7 @@ class AdvisorWorkflowUiWiringTests(unittest.TestCase):
             "audience_visibility",
         ):
             self.assertIn(token, edit_fragment)
-        self.assertIn("Migration status: current and earlier", html)
+        self.assertIn("Current and earlier browser-local Plan and Dated Briefing records are normalized on read", html)
 
     def test_design_lab_patterns_are_integrated_without_prototype_architecture_leaks(self) -> None:
         html = self.client.get("/app/").text

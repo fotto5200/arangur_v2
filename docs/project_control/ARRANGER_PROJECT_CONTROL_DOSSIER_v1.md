@@ -10,6 +10,8 @@ Blueprint update, 2026-07-15: `docs/product/advisor_workflow_ui_integration_blue
 
 Workbench state/navigation update, 2026-07-16: `docs/product/arangur_advisor_workbench_state_navigation_correction_v1.md` is the controlling correction for selection feedback, Draft/Saved Plan/Dated Briefing identity, Reviewed versus Ready-to-Present status, audience Preview eligibility, Presentation return context, explicit comparison, and predictable Back behavior. The accepted four-activity information architecture and advanced builder remain unchanged; populated Briefing Section visual integration remains the next separate visual tranche.
 
+Dated Briefing presentation-discovery update, 2026-07-16: `docs/product/arangur_dated_briefing_presentation_discovery_fix_v1.md` closes the status/persistence/discovery contradiction. Status-only legacy readiness is now requalified through one shared normalized audience-sequence and blocking rule. Choose, Preview, Start, Resume, Find, home shortcuts, and the reader use the same browser-local records; review/presentation progress is committed by same-ID normalized upsert. Developer / QA exposes focused eligibility and migration diagnostics. No Briefing Section visual redesign, analytics, dependency, Docker, deployment, or production-persistence change was made.
+
 Primary audience: Frank, ChatGPT strategy/controller threads, and future Codex implementation tranches
 
 ## 1. Executive summary

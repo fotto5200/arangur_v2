@@ -97,13 +97,15 @@ Second-level order is binding:
 
 | Choice | Target | Dominant action |
 | --- | --- | --- |
-| Open a briefing ready to present | `#ready-list` | Open briefing |
-| Preview what the audience will see | `#audience-preview-list` | Start preview |
-| Launch a presentation | `#launch-list` | Present briefing |
-| Resume a recent presentation | `#resume-list` | Resume presentation |
-| Find a briefing | `#find-briefing` | Open selected briefing |
+| Choose a Briefing to Present | `#ready-list` | Open briefing |
+| Preview a Briefing | `#audience-preview-list` | Client, Manager, or Audience Preview |
+| Start a Presentation | `#launch-list` | Start presentation |
+| Resume a Presentation | `#resume-list` | Resume presentation |
+| Find a Briefing | `#find-briefing` | Open, Preview, or Present according to eligibility |
 
 Ready means Advisor Review is complete. Client Preview preserves the exact audience-visible sequence and caveats. Presentation retains clean chrome, Previous/Next, Explain/Verify, and immutable content. Browser-local Dated Briefings add compatible `review_status`, `reviewed_at`, `last_previewed_at`, `last_presented_at`, and `presentation_position` fields.
+
+Presentation discovery is governed by `docs/product/arangur_dated_briefing_presentation_discovery_fix_v1.md`. Reviewed material with a populated audience-visible sequence and no record-level blocking condition is Preview eligible. Ready to Present is accepted only when that rule passes and is therefore eligible for both Preview and Presentation. Choose, Preview, Start, Resume, Find, home shortcuts, and the reader consume the same normalized record and shared sequence. Resume additionally requires saved presentation progress.
 
 ## Ask Arangur scope
 

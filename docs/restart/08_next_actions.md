@@ -1,5 +1,9 @@
 # Next Actions
 
+## Current checkpoint — Dated Briefing presentation discovery fix — 2026-07-16
+
+Preserve the newly consolidated rule: Reviewed plus at least one populated audience-visible Briefing Section plus no record-level blocking condition is Preview eligible; Ready to Present is both Preview and Presentation eligible; Resume additionally requires saved presentation progress. Choose, Preview, Start, Resume, Find, home shortcuts, and the reader must continue to consume the same normalized `arangur.local_briefings.v1` records and same-ID persistence path. Do not reintroduce status-only readiness or an advisor-artifact presentation fallback. The next tranche remains **Arangur Dated Briefing Reader and Design-Lab Visual Integration v1** and may integrate the reader/design-lab visuals without changing analytics or reopening this state rule.
+
 ## Current checkpoint — 2026-07-16
 
 Arangur Advisor Workbench Information Architecture v1 and the bounded State and Navigation Correction v1 are implemented locally. Preserve the four primary activities, canonical Briefing Plan/Dated Briefing vocabulary, immediate Included/Available feedback, meaningful Draft/Saved Plan/Dated Briefing identity, the Dated Briefing → Reviewed → Ready-to-Present transition, presentable-implies-previewable eligibility, object-bound Presentation exit/resume, explicit comparison, deterministic Ask Arangur routing, Legacy filtering, and the restored advanced builder/lifecycle. The recommended next tranche is **Arangur Dated Briefing Reader and Design-Lab Visual Integration v1**. That later tranche may redesign populated Briefing Section reading and visuals; it must not reopen stabilized state/navigation or invent new analytics.

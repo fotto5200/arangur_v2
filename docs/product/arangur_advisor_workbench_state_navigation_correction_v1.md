@@ -64,6 +64,8 @@ Presentation is clean audience delivery. A Dated Briefing is presentable only wh
 
 The Ready, Preview, Launch, Resume, Find, and home shortcuts all read the same browser-local Dated Briefing records and shared eligibility functions.
 
+The presentation-discovery correction makes that rule concrete in implementation. Legacy status-only readiness is not trusted unless the stored record also proves a populated audience-visible sequence and no blocking condition. Contradictory older readiness is normalized back to Reviewed with a Developer / QA migration note. Advisor/internal records require an explicitly saved presentation-visible sequence; an Advisor Review artifact alone is not an audience sequence. All lifecycle mutations normalize, upsert, and immediately persist the same Dated Briefing ID.
+
 ## Navigation return context
 
 Major workbench routes use an explicit parent route. Ask Arangur stores Ask as the return route when it sends the advisor to another workbench destination. Dated Briefing View and Advisor Review retain their source list or shortcut.
