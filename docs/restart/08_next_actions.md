@@ -1,5 +1,9 @@
 # Next Actions
 
+## Current checkpoint — Presentation section selection and audience flexibility — 2026-07-16
+
+Preserve the advisor-controlled saved presentation selection. Intended audience determines recommended defaults and presentation wording, not a prohibition. Preview requires Reviewed, at least one selected populated presentable Briefing Section, and no true blocker. Ready remains explicit and implies Preview and Presentation eligibility; Resume additionally requires progress. Advisor-only sections normally remain selectable, while protected internal and unavailable material remain blocked by the shared classifier. Preserve safe legacy normalization, external-story governance, same-record persistence, and exact Preview/Presentation order. The next tranche remains **Arangur Dated Briefing Reader and Design-Lab Visual Integration v1** and must not reopen this selection contract or redesign analytics.
+
 ## Current checkpoint — Dated Briefing presentation discovery fix — 2026-07-16
 
 Preserve the newly consolidated rule: Reviewed plus at least one populated audience-visible Briefing Section plus no record-level blocking condition is Preview eligible; Ready to Present is both Preview and Presentation eligible; Resume additionally requires saved presentation progress. Choose, Preview, Start, Resume, Find, home shortcuts, and the reader must continue to consume the same normalized `arangur.local_briefings.v1` records and same-ID persistence path. Do not reintroduce status-only readiness or an advisor-artifact presentation fallback. The next tranche remains **Arangur Dated Briefing Reader and Design-Lab Visual Integration v1** and may integrate the reader/design-lab visuals without changing analytics or reopening this state rule.

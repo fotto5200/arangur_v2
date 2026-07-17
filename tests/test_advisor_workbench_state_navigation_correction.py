@@ -98,9 +98,9 @@ class AdvisorWorkbenchStateNavigationCorrectionTests(unittest.TestCase):
             self.assertIn(token, self.html)
 
     def test_presentable_is_a_subset_of_previewable(self) -> None:
-        eligibility = self.fragment("function getAudienceVisibleSections", "function briefingDisplayStatus")
+        eligibility = self.fragment("function presentationSectionIdentifier", "function briefingDisplayStatus")
         self.assertIn('briefing.review_status === "ready_to_present" && isPreviewEligible(briefing)', eligibility)
-        self.assertIn("hasAudienceVisiblePopulatedSections", eligibility)
+        self.assertIn("hasSelectedPresentablePopulatedSections", eligibility)
         self.assertIn("hasPresentationBlockingCondition", eligibility)
 
     def test_audience_wording_covers_client_manager_and_internal(self) -> None:
@@ -109,7 +109,8 @@ class AdvisorWorkbenchStateNavigationCorrectionTests(unittest.TestCase):
         self.assertIn("Client Preview", labels)
         self.assertIn("Audience Preview", labels)
         review = self.fragment("function renderAdvisorReview", "function renderReviewEvidence")
-        self.assertIn("No Audience Preview Available", review)
+        self.assertIn("No Sections Selected", review)
+        self.assertIn("Prepare for Presentation", review)
 
     def test_ready_preview_launch_and_resume_share_one_record_filter(self) -> None:
         self.assertIn("return state.briefings.filter(isPresentationEligible)", self.html)

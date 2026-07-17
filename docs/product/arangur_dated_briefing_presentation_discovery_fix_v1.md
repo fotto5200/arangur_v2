@@ -8,6 +8,10 @@ Product: Arangur
 
 This bounded correction makes Advisor Review, Ready to Present, Audience Preview, Presentation, Resume, Find, and home shortcuts read the same normalized browser-local Dated Briefing records and the same deterministic eligibility rules. It does not redesign Briefing Section visuals, add analytics, add dependencies, change deployment, or create production persistence.
 
+## 2026-07-16 advisor-selection extension
+
+`docs/product/arangur_presentation_section_selection_and_audience_flexibility_v1.md` replaces the audience-restriction portion of this contract. The shared discovery architecture remains, but the shared sequence is now the advisor's saved presentation selection. Audience classification sets recommended defaults, not a prohibition. Reviewed plus at least one selected populated presentable section plus no true blocker is Preview eligible; Ready remains an explicit transition and implies Preview and Presentation eligibility. Protected internal and unavailable material cannot enter the saved sequence.
+
 ## Record and storage audit
 
 Current Dated Briefings are stored under `arangur.local_briefings.v1` in a payload containing `schema_version` and `briefings`. A current record contains:

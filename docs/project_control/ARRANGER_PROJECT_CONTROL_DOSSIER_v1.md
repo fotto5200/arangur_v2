@@ -12,6 +12,8 @@ Workbench state/navigation update, 2026-07-16: `docs/product/arangur_advisor_wor
 
 Dated Briefing presentation-discovery update, 2026-07-16: `docs/product/arangur_dated_briefing_presentation_discovery_fix_v1.md` closes the status/persistence/discovery contradiction. Status-only legacy readiness is now requalified through one shared normalized audience-sequence and blocking rule. Choose, Preview, Start, Resume, Find, home shortcuts, and the reader use the same browser-local records; review/presentation progress is committed by same-ID normalized upsert. Developer / QA exposes focused eligibility and migration diagnostics. No Briefing Section visual redesign, analytics, dependency, Docker, deployment, or production-persistence change was made.
 
+Presentation section-selection update, 2026-07-16: `docs/product/arangur_presentation_section_selection_and_audience_flexibility_v1.md` makes intended audience a source of defaults and labels rather than a presentation prohibition. Prepare for Presentation lets the advisor include, exclude, and order any populated presentable Briefing Section. Advisor-only is normally selectable; protected internal and unavailable material is not. Preview, Presentation, readiness, discovery, Resume, migration, and Developer / QA consume the same saved selection. The reader/design-lab visual tranche remains next.
+
 Primary audience: Frank, ChatGPT strategy/controller threads, and future Codex implementation tranches
 
 ## 1. Executive summary

@@ -48,19 +48,19 @@ One displayed lifecycle controls ordinary actions:
 2. **Saved Briefing Plan** — completed reusable intent; Revise or Create Dated Briefing.
 3. **Dated Briefing** — immutable populated output in Advisor Review; View or Complete Advisor Review.
 4. **Reviewed** — Advisor Review explicitly completed; Client, Manager, or Audience Preview is available when an audience-visible rendered sequence exists.
-5. **Ready to Present** — Reviewed, previewable, and free of a blocking condition; Preview and Present.
+5. **Ready to Present** — Reviewed, at least one populated presentable Briefing Section selected, previewable, and free of a blocking condition; Preview and Present.
 
 Earlier browser-local `reviewed` records from the prior two-state model normalize to Ready to Present so compatible history is not stranded.
 
 ## Advisor Review completion
 
-**Complete Advisor Review** is explicit. It requires at least one populated Advisor Review section and no stored blocking condition. Completion records `reviewed_at`. Optional advisor-only material does not need to become audience-visible. A separate **Mark Ready to Present** action is available only when Preview eligibility is true.
+**Complete Advisor Review** is explicit. It requires at least one populated Advisor Review section and no stored blocking condition. Completion records `reviewed_at`. Review may complete before any presentation selection is saved. **Prepare for Presentation** lets the advisor select and order populated presentable sections. A separate **Mark Ready to Present** action is available only when Preview eligibility is true.
 
 ## Audience Preview and Presentation
 
-Preview is advisor rehearsal of the exact audience-visible rendered sequence. Its label is Client Preview, Manager Preview, or Audience Preview according to the saved audience, and it retains **Back to Advisor Review**.
+Preview is advisor rehearsal of the exact saved presentation selection. Intended audience sets recommended defaults and the Client Preview, Manager Preview, or Audience Preview label; it does not prohibit otherwise presentable populated sections. Preview retains **Back to Advisor Review**.
 
-Presentation is clean audience delivery. A Dated Briefing is presentable only when its status is Ready to Present and the same record is previewable. Advisor/internal Briefings without an audience-visible sequence may become Reviewed but do not appear in Preview, Ready, Launch, or Resume lists.
+Presentation is clean audience delivery. A Dated Briefing is presentable only when its status is Ready to Present and the same record is previewable. Advisor/internal Briefings may become Previewable and Ready by selecting at least one advisor-oriented populated presentable section. Protected internal and unavailable material cannot be selected.
 
 The Ready, Preview, Launch, Resume, Find, and home shortcuts all read the same browser-local Dated Briefing records and shared eligibility functions.
 

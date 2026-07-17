@@ -42,8 +42,11 @@ class DatedBriefingPresentationDiscoveryTests(unittest.TestCase):
     def test_one_shared_eligibility_stack_controls_every_surface(self) -> None:
         eligibility = self.fragment("function populatedRenderedSections", "function selectedBriefingType")
         for helper in (
-            "getAudienceVisibleSections",
-            "hasAudienceVisiblePopulatedSections",
+            "presentationSectionInventory",
+            "protectedPresentationCategory",
+            "recommendedPresentationSectionIds",
+            "getSavedPresentationSections",
+            "hasSelectedPresentablePopulatedSections",
             "presentationBlockingReason",
             "hasPresentationBlockingCondition",
             "isReviewedDatedBriefing",
@@ -59,7 +62,7 @@ class DatedBriefingPresentationDiscoveryTests(unittest.TestCase):
     def test_legacy_reviewed_promotion_requires_full_shared_rule(self) -> None:
         normalization = self.fragment("function normalizeBriefingRecord", "function currentDeskBriefing")
         self.assertIn("legacyReviewedMeansReady", normalization)
-        self.assertIn("hasAudienceVisiblePopulatedSections(canonical)", normalization)
+        self.assertIn("hasSelectedPresentablePopulatedSections(canonical)", normalization)
         self.assertIn("!hasPresentationBlockingCondition(canonical)", normalization)
         self.assertIn('canonical.review_status = reviewedEvidence ? "reviewed" : "in_review"', normalization)
         self.assertIn("Stored readiness was not retained", normalization)
@@ -85,7 +88,7 @@ class DatedBriefingPresentationDiscoveryTests(unittest.TestCase):
 
     def test_reader_uses_same_audience_visible_sequence_as_eligibility(self) -> None:
         reader = self.fragment("function renderBriefingReader", "function reportPresentationPattern")
-        self.assertIn("getAudienceVisibleSections(briefing)", reader)
+        self.assertIn("getSavedPresentationSections(briefing)", reader)
         self.assertIn("isPresentationEligible(briefing)", reader)
         self.assertIn("isPreviewEligible(briefing)", reader)
         self.assertNotIn("client_artifact || briefing.advisor_artifact", reader)
@@ -102,7 +105,7 @@ class DatedBriefingPresentationDiscoveryTests(unittest.TestCase):
 
     def test_ready_cannot_be_marked_without_visible_sections_or_with_a_block(self) -> None:
         review = self.fragment("function renderAdvisorReview", "function renderReviewEvidence")
-        self.assertIn("cannot be marked Ready to Present", review)
+        self.assertIn("not ready for Preview", review)
         self.assertIn("Return to Briefing Plan", review)
         actions = self.fragment('if (action === "mark-ready")', 'if (action === "client-preview")')
         self.assertIn("isPreviewEligible(briefing)", actions)
@@ -110,7 +113,7 @@ class DatedBriefingPresentationDiscoveryTests(unittest.TestCase):
 
     def test_resume_requires_actual_saved_presentation_progress(self) -> None:
         progress = self.fragment("function hasSavedPresentationProgress", "function briefingDisplayStatus")
-        self.assertIn("presentation_started_at || briefing.last_presented_at", progress)
+        self.assertIn("briefing.presentation_progress.started", progress)
         actions = self.fragment('if (action === "present")', 'if (action === "exit-presentation")')
         self.assertIn("presentation_started_at", actions)
         resume = self.fragment("function renderResumePresentationList", "function renderFindBriefing")
@@ -121,14 +124,16 @@ class DatedBriefingPresentationDiscoveryTests(unittest.TestCase):
         for label in ("Client Preview", "Manager Preview", "Audience Preview"):
             self.assertIn(label, labels)
         readiness = self.fragment("function readinessBlockingReason", "function renderAdvisorReview")
-        self.assertIn("advisor/internal Dated Briefing", readiness)
-        self.assertIn("presentation-visible sequence", readiness)
+        self.assertIn("No Briefing Sections have been selected for presentation", readiness)
+        self.assertIn("populated Briefing Sections that can be presented", readiness)
 
     def test_developer_qa_has_focused_eligibility_diagnostics(self) -> None:
         for token in (
             "Dated Briefing presentation eligibility",
             "Normalized record ID",
-            "audience-visible populated",
+            "presentable:",
+            "protected:",
+            "Saved presentation selection",
             "Blocking reason",
             "Preview:",
             "Presentation:",
@@ -141,7 +146,7 @@ class DatedBriefingPresentationDiscoveryTests(unittest.TestCase):
     def test_empty_states_and_find_actions_are_actionable(self) -> None:
         for token in (
             "No Briefings Ready to Present",
-            "No reviewed Dated Briefings currently meet the presentation requirements.",
+            "No Dated Briefings have been reviewed, prepared for presentation, and marked Ready.",
             "View Dated Briefings",
             "No Briefings Available to Preview",
             "Go to Advisor Review",

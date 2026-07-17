@@ -1717,7 +1717,7 @@
     const LOCAL_GENERATED_REPORT_SCHEMA_VERSION = "arangur.local_generated_reports.v1";
     const LOCAL_BRIEFING_STORAGE_KEY = "arangur.local_briefings.v1";
     const LOCAL_BRIEFING_SCHEMA_VERSION = "arangur.local_briefings.v1";
-    const LOCAL_BRIEFING_STATUS_MODEL_VERSION = "v2";
+    const LOCAL_BRIEFING_STATUS_MODEL_VERSION = "v3";
     const LOCAL_PLAN_DRAFT_STORAGE_KEY = "arangur.local_briefing_plan_drafts.v1";
     const LOCAL_PLAN_DRAFT_SCHEMA_VERSION = "arangur.local_briefing_plan_drafts.v1";
     const CLIENT_CONTEXT = {
@@ -1766,6 +1766,7 @@
       "template-builder": "#template-builder",
       configure: "#configure",
       review: "#review",
+      "prepare-presentation": "#prepare-for-presentation",
       "review-evidence": "#review-evidence",
       "client-preview": "#client-preview",
       history: "#history",
@@ -2067,6 +2068,7 @@
       deskEditingSectionIndex: null,
       deskCurrentBriefingId: null,
       deskSectionIndex: 0,
+      presentationSelectionDraftIds: null,
       deskEvidenceMode: null,
       deskEvidenceReturnRoute: null,
       deskReturnRoute: "dated-list",
@@ -2272,7 +2274,7 @@
         renderDeskRoute(normalized);
         return;
       }
-      if (["prepare", "existing", "present-hub", "ask", "new-plan-setup", "template-library", "prior-plans", "drafts", "plan-list", "create-dated", "compare", "dated-list", "ready-list", "audience-preview-list", "launch-list", "resume-list", "find-briefing", "briefing-type", "templates", "template-preview", "builder-start", "template-builder", "configure", "review", "review-evidence", "client-preview", "history"].includes(normalized)) {
+      if (["prepare", "existing", "present-hub", "ask", "new-plan-setup", "template-library", "prior-plans", "drafts", "plan-list", "create-dated", "compare", "dated-list", "ready-list", "audience-preview-list", "launch-list", "resume-list", "find-briefing", "briefing-type", "templates", "template-preview", "builder-start", "template-builder", "configure", "review", "prepare-presentation", "review-evidence", "client-preview", "history"].includes(normalized)) {
         document.body.classList.add("app-route-desk");
         renderDeskRoute(normalized);
         return;
@@ -2340,11 +2342,17 @@
       const container = document.getElementById("dated-briefing-eligibility-status");
       if (!container) return;
       const rows = state.briefings.map((briefing) => {
-        const visibleCount = getAudienceVisibleSections(briefing).length;
+        const inventory = presentationSectionInventory(briefing);
+        const populatedCount = inventory.filter((item) => item.populated).length;
+        const presentableCount = inventory.filter((item) => item.presentable).length;
+        const protectedCount = inventory.filter((item) => item.protected).length;
+        const unavailableCount = inventory.filter((item) => item.unavailable).length;
+        const recommended = recommendedPresentationSectionIds(briefing);
+        const saved = sanitizePresentationSelection(briefing, briefing.presentation_section_order || briefing.presentation_section_ids || []);
         const notes = Array.isArray(briefing.normalization_notes) && briefing.normalization_notes.length
           ? briefing.normalization_notes.join("; ")
           : "Current record; no migration change.";
-        return `<details><summary>${escapeHtml(briefing.title)} — ${escapeHtml(briefingDisplayStatus(briefing))}</summary><dl class="detail-list"><dt>Normalized record ID</dt><dd>${escapeHtml(briefing.briefing_id)}</dd><dt>Audience</dt><dd>${escapeHtml(briefing.audience || "Advisor/internal")}</dd><dt>Sections</dt><dd>${Number(briefing.section_count || 0)} stored; ${visibleCount} audience-visible populated</dd><dt>Review</dt><dd>${isReviewedDatedBriefing(briefing) ? "Reviewed" : "Not reviewed"}${briefing.reviewed_at ? ` at ${escapeHtml(formatBriefingDateTime(briefing.reviewed_at))}` : ""}</dd><dt>Ready</dt><dd>${isReadyToPresent(briefing) ? "Ready" : "Not ready"}${briefing.ready_at ? ` at ${escapeHtml(formatBriefingDateTime(briefing.ready_at))}` : ""}</dd><dt>Blocking reason</dt><dd>${escapeHtml(presentationBlockingReason(briefing) || "None")}</dd><dt>Eligibility</dt><dd>Preview: ${isPreviewEligible(briefing) ? "yes" : "no"}; Presentation: ${isPresentationEligible(briefing) ? "yes" : "no"}; Resume: ${hasSavedPresentationProgress(briefing) ? "yes" : "no"}</dd><dt>Storage</dt><dd>${escapeHtml(briefing.storage_source || LOCAL_BRIEFING_STORAGE_KEY)}; ${escapeHtml(briefing.storage_version || briefing.schema_version || "unknown")}</dd><dt>Normalization</dt><dd>${escapeHtml(notes)}</dd></dl></details>`;
+        return `<details><summary>${escapeHtml(briefing.title)} — ${escapeHtml(briefingDisplayStatus(briefing))}</summary><dl class="detail-list"><dt>Normalized record ID</dt><dd>${escapeHtml(briefing.briefing_id)}</dd><dt>Intended audience</dt><dd>${escapeHtml(briefing.intended_audience || briefing.audience || "Advisor/internal")}</dd><dt>Section counts</dt><dd>Populated: ${populatedCount}; presentable: ${presentableCount}; protected: ${protectedCount}; unavailable: ${unavailableCount}</dd><dt>Recommended default selection</dt><dd>${recommended.length ? recommended.map(escapeHtml).join("; ") : "None"}</dd><dt>Saved presentation selection</dt><dd>${saved.length ? saved.map(escapeHtml).join("; ") : "None"}</dd><dt>Selection source</dt><dd>${escapeHtml(briefing.presentation_selection_source || "unknown")}${briefing.presentation_selection_updated_at ? `; updated ${escapeHtml(formatBriefingDateTime(briefing.presentation_selection_updated_at))}` : ""}</dd><dt>Review</dt><dd>${isReviewedDatedBriefing(briefing) ? "Reviewed" : "Not reviewed"}${briefing.reviewed_at ? ` at ${escapeHtml(formatBriefingDateTime(briefing.reviewed_at))}` : ""}</dd><dt>Ready status</dt><dd>${isReadyToPresent(briefing) ? "Ready" : "Not ready"}${briefing.ready_at ? ` at ${escapeHtml(formatBriefingDateTime(briefing.ready_at))}` : ""}</dd><dt>Blocking reason</dt><dd>${escapeHtml(presentationBlockingReason(briefing) || "None")}</dd><dt>Eligibility</dt><dd>Preview: ${isPreviewEligible(briefing) ? "yes" : "no"}; Presentation: ${isPresentationEligible(briefing) ? "yes" : "no"}; Resume: ${hasSavedPresentationProgress(briefing) ? "yes" : "no"}</dd><dt>Storage</dt><dd>${escapeHtml(briefing.storage_source || LOCAL_BRIEFING_STORAGE_KEY)}; ${escapeHtml(briefing.storage_version || briefing.schema_version || "unknown")}</dd><dt>Migration notes</dt><dd>${escapeHtml(notes)}</dd></dl></details>`;
       }).join("");
       const legacyRows = state.legacyBriefingRecords.map((record) => `<details><summary>${escapeHtml(record.title)} — Legacy incompatible</summary><dl class="detail-list"><dt>Normalized record ID</dt><dd>${escapeHtml(record.record_id)}</dd><dt>Eligibility</dt><dd>Preview: no; Presentation: no; Resume: no</dd><dt>Storage</dt><dd>${escapeHtml(LOCAL_BRIEFING_STORAGE_KEY)}; ${escapeHtml(record.storage_version)}</dd><dt>Normalization</dt><dd>${escapeHtml(record.reason)} Original material is retained.</dd></dl></details>`).join("");
       container.innerHTML = rows + legacyRows || '<p class="empty">No browser-local Dated Briefings are stored.</p>';
@@ -2700,25 +2708,123 @@
         : [];
     }
 
-    function getAudienceVisibleSections(briefing) {
-      if (!briefing) return [];
-      const audienceArtifact = briefing.client_artifact || briefing.audience_artifact;
-      const audienceSections = populatedRenderedSections(audienceArtifact);
-      if (audienceSections.length) return audienceSections;
-      const explicitSequence = Array.isArray(briefing.presentation_visible_sequence)
-        ? briefing.presentation_visible_sequence
-        : [];
-      if (!explicitSequence.length) return [];
-      const advisorSections = populatedRenderedSections(briefing.advisor_artifact);
-      return explicitSequence.map((entry) => {
-        if (entry && typeof entry === "object" && canVerifySection(entry)) return entry;
-        const key = typeof entry === "object" ? (entry.section_id || entry.title) : entry;
-        return advisorSections.find((section) => section.section_id === key || section.title === key) || null;
-      }).filter(canVerifySection);
+    function presentationSectionIdentifier(section, index = 0) {
+      return String(section && (section.section_id || section.source_element_id || section.title) || `briefing-section-${index + 1}`);
     }
 
-    function hasAudienceVisiblePopulatedSections(briefing) {
-      return getAudienceVisibleSections(briefing).length > 0;
+    function stepForPresentationSection(briefing, section, index) {
+      const steps = Array.isArray(briefing && briefing.journey_steps) ? briefing.journey_steps : [];
+      const sourceId = section && section.source_element_id;
+      return steps.find((step) => sourceId && (step.report_id === sourceId || step.element_id === sourceId))
+        || steps.find((step) => step.display_title === (section && section.title))
+        || steps[index]
+        || {};
+    }
+
+    function protectedPresentationCategory(briefing, section, step = {}) {
+      if (!canVerifySection(section)) return "unavailable_output";
+      const allowed = new Set(["developer_qa", "raw_metadata", "diagnostic_payload", "candidate_proxy_approval", "internal_control", "unapproved_method", "unapproved_mapping"]);
+      const explicit = normalize(section.presentation_protection_category || section.protected_internal_category || section.material_category || step.presentation_protection_category || step.protected_internal_category || step.material_category).replaceAll(" ", "_");
+      if (allowed.has(explicit)) return explicit;
+      const source = normalize([section.source_element_id, section.section_type, section.title, step.report_id, step.display_title].filter(Boolean).join(" "));
+      if (source.includes("candidate proxy") || source.includes("candidate benchmark") || source.includes("external story candidate proxies")) return "candidate_proxy_approval";
+      if (["internal control", "internal_control"].includes(normalize(step.audience_visibility))) return "internal_control";
+      if (briefing && briefing.briefing_type_id === "external_manager_story_translation_v1") {
+        if (source.includes("implied lenses") || source.includes("implied_lenses")) return "unapproved_mapping";
+        if (source.includes("key price scenario") || source.includes("key_price_scenario")) return "unapproved_method";
+      }
+      if (source.includes("developer qa") || source.includes("developer / qa")) return "developer_qa";
+      if (source.includes("raw json") || source.includes("raw metadata") || source.includes("schema fixture")) return "raw_metadata";
+      if (source.includes("diagnostic payload") || source.includes("migration diagnostic")) return "diagnostic_payload";
+      return "";
+    }
+
+    function presentationProtectionReason(category) {
+      const reasons = {
+        developer_qa: "Developer / QA material is not available for ordinary presentation.",
+        raw_metadata: "Raw technical metadata is not an ordinary Briefing Section.",
+        diagnostic_payload: "The raw diagnostic payload remains in Developer / QA.",
+        candidate_proxy_approval: "Candidate proxies require approval and cannot be presented.",
+        internal_control: "Internal-control material is not available for ordinary presentation.",
+        unapproved_method: "This method has not been approved for presentation.",
+        unapproved_mapping: "This mapping has not been approved for presentation.",
+        unavailable_output: "This Briefing Section has no populated output."
+      };
+      return reasons[category] || "Protected internal material is not available for ordinary presentation.";
+    }
+
+    function presentationSectionInventory(briefing) {
+      const sections = briefing && briefing.advisor_artifact && Array.isArray(briefing.advisor_artifact.ordered_sections)
+        ? briefing.advisor_artifact.ordered_sections
+        : [];
+      return sections.map((section, index) => {
+        const step = stepForPresentationSection(briefing, section, index);
+        const category = protectedPresentationCategory(briefing, section, step);
+        const unavailable = category === "unavailable_output";
+        return {
+          id: presentationSectionIdentifier(section, index),
+          section,
+          step,
+          index,
+          populated: canVerifySection(section),
+          presentable: !category,
+          unavailable,
+          protected: Boolean(category && !unavailable),
+          protection_category: category,
+          reason: category ? presentationProtectionReason(category) : ""
+        };
+      });
+    }
+
+    function isRecommendedPresentationSection(briefing, item) {
+      if (!item || !item.presentable) return false;
+      const audience = normalize(briefing && (briefing.intended_audience || briefing.audience));
+      const visibility = normalize(item.step.audience_visibility).replaceAll(" ", "_");
+      const source = normalize([item.section.source_element_id, item.section.title, item.step.report_id, item.step.display_title].filter(Boolean).join(" "));
+      if (briefing && briefing.briefing_type_id === "external_manager_story_translation_v1") {
+        return source.includes("manager story summary") || source.includes("external manager story summary") || source.includes("governance caveat") || source.includes("governance/caveat");
+      }
+      if (audience.includes("manager")) return ["manager_discussion", "manager_review", "advisor_review", "client_facing"].includes(visibility);
+      if (audience.includes("advisor") || audience.includes("internal")) return ["advisor_review", "advisor_only", "manager_review"].includes(visibility);
+      return visibility === "client_facing";
+    }
+
+    function recommendedPresentationSectionIds(briefing) {
+      return presentationSectionInventory(briefing).filter((item) => isRecommendedPresentationSection(briefing, item)).map((item) => item.id);
+    }
+
+    function resolvePresentationEntryId(briefing, entry) {
+      const inventory = presentationSectionInventory(briefing);
+      const raw = entry && typeof entry === "object" ? (entry.section_id || entry.source_element_id || entry.title) : entry;
+      const exact = inventory.find((item) => item.id === raw);
+      if (exact) return exact.id;
+      const source = entry && typeof entry === "object" ? entry.source_element_id : "";
+      const title = entry && typeof entry === "object" ? entry.title : raw;
+      const match = inventory.find((item) => (source && item.section.source_element_id === source) || (title && item.section.title === title));
+      return match ? match.id : "";
+    }
+
+    function sanitizePresentationSelection(briefing, entries) {
+      const selectable = new Set(presentationSectionInventory(briefing).filter((item) => item.presentable).map((item) => item.id));
+      const resolved = (Array.isArray(entries) ? entries : []).map((entry) => resolvePresentationEntryId(briefing, entry)).filter((id) => id && selectable.has(id));
+      return [...new Set(resolved)];
+    }
+
+    function legacyAudienceSelectionIds(briefing) {
+      const artifact = briefing && (briefing.client_artifact || briefing.audience_artifact);
+      return sanitizePresentationSelection(briefing, populatedRenderedSections(artifact));
+    }
+
+    function getSavedPresentationSections(briefing) {
+      if (!briefing) return [];
+      const inventory = presentationSectionInventory(briefing);
+      const byId = new Map(inventory.filter((item) => item.presentable).map((item) => [item.id, item.section]));
+      const ids = sanitizePresentationSelection(briefing, briefing.presentation_section_order || briefing.presentation_section_ids || []);
+      return ids.map((id) => byId.get(id)).filter(canVerifySection);
+    }
+
+    function hasSelectedPresentablePopulatedSections(briefing) {
+      return getSavedPresentationSections(briefing).length > 0;
     }
 
     function presentationBlockingReason(briefing) {
@@ -2741,7 +2847,7 @@
     }
 
     function isPreviewEligible(briefing) {
-      return Boolean(isReviewedDatedBriefing(briefing) && hasAudienceVisiblePopulatedSections(briefing) && !hasPresentationBlockingCondition(briefing));
+      return Boolean(isReviewedDatedBriefing(briefing) && hasSelectedPresentablePopulatedSections(briefing) && !hasPresentationBlockingCondition(briefing));
     }
 
     function isReadyToPresent(briefing) {
@@ -2753,7 +2859,7 @@
     }
 
     function hasSavedPresentationProgress(briefing) {
-      return Boolean(briefing && (briefing.presentation_started_at || briefing.last_presented_at) && isPresentationEligible(briefing));
+      return Boolean(briefing && briefing.presentation_progress && briefing.presentation_progress.started && isPresentationEligible(briefing));
     }
 
     function briefingDisplayStatus(briefing) {
@@ -2763,7 +2869,7 @@
     }
 
     function audiencePreviewLabel(briefing) {
-      const audience = normalize(briefing && briefing.audience);
+      const audience = normalize(briefing && (briefing.intended_audience || briefing.audience));
       if (audience.includes("manager")) return "Manager Preview";
       if (audience.includes("client") || audience.includes("family") || audience.includes("committee") || audience.includes("principal")) return "Client Preview";
       return "Audience Preview";
@@ -2831,6 +2937,7 @@
       if (route === "template-builder") return renderAdvancedTemplateBuilder();
       if (route === "configure") return renderBriefingConfiguration();
       if (route === "review") return renderAdvisorReview();
+      if (route === "prepare-presentation") return renderPrepareForPresentation();
       if (route === "review-evidence") return renderReviewEvidence();
       if (route === "client-preview") return renderBriefingReader("client-preview");
       if (route === "presentation") return renderBriefingReader("presentation");
@@ -2868,8 +2975,8 @@
     function renderPresentMenu() {
       workbenchMenu("Present a Dated Briefing", [
         workbenchChoice("Choose a Briefing to Present", "Choose a Ready-to-Present Dated Briefing and confirm its dates, source Plan, and status.", "ready-list", "Choose a briefing"),
-        workbenchChoice("Preview a Briefing", "Rehearse the exact audience-visible Briefing Section sequence.", "audience-preview-list", "Preview a briefing"),
-        workbenchChoice("Start a Presentation", "Begin clean presentation mode with the first audience-visible Briefing Section.", "launch-list", "Start a presentation"),
+        workbenchChoice("Preview a Briefing", "Rehearse the exact saved presentation-section sequence.", "audience-preview-list", "Preview a briefing"),
+        workbenchChoice("Start a Presentation", "Begin clean presentation mode with the first selected Briefing Section.", "launch-list", "Start a presentation"),
         workbenchChoice("Resume a Presentation", "Continue an actual presentation from its last saved Briefing Section.", "resume-list", "Resume a presentation"),
         workbenchChoice("Find a Briefing", "Filter current Dated Briefings by supported saved metadata.", "find-briefing", "Find a briefing")
       ]);
@@ -3013,17 +3120,17 @@
 
     function renderReadyBriefingList() {
       const ready = readyDatedBriefings();
-      els.briefingDeskRegion.innerHTML = deskShell("Choose a Briefing to Present", `<div class="desk-intro"><p class="eyebrow">Ready-to-present Dated Briefings</p><h1>Choose a Briefing to Present</h1></div><div class="history-list">${ready.map((item) => datedBriefingRow(item, "preview-briefing", "Open briefing")).join("") || '<div class="empty"><strong>No Briefings Ready to Present</strong><p>No reviewed Dated Briefings currently meet the presentation requirements.</p><button class="secondary-button" type="button" data-desk-action="view-dated-list">View Dated Briefings</button></div>'}</div>`);
+      els.briefingDeskRegion.innerHTML = deskShell("Choose a Briefing to Present", `<div class="desk-intro"><p class="eyebrow">Ready-to-present Dated Briefings</p><h1>Choose a Briefing to Present</h1></div><div class="history-list">${ready.map((item) => datedBriefingRow(item, "preview-briefing", "Open briefing")).join("") || '<div class="empty"><strong>No Briefings Ready to Present</strong><p>No Dated Briefings have been reviewed, prepared for presentation, and marked Ready.</p><div class="button-row"><button class="secondary-button" type="button" data-desk-action="view-dated-list">View Dated Briefings</button><button class="secondary-button" type="button" data-desk-action="view-dated-list">Go to Advisor Review</button></div></div>'}</div>`);
     }
 
     function renderAudiencePreviewList() {
       const previewable = state.briefings.filter(isPreviewEligible);
-      els.briefingDeskRegion.innerHTML = deskShell("Preview a Briefing", `<div class="desk-intro"><p class="eyebrow">Exact audience-visible sequence</p><h1>Preview a Briefing</h1></div><div class="history-list">${previewable.map((item) => datedBriefingRow(item, "preview-briefing", audiencePreviewLabel(item))).join("") || '<div class="empty"><strong>No Briefings Available to Preview</strong><p>Complete Advisor Review for a Dated Briefing with at least one audience-visible Briefing Section.</p><button class="secondary-button" type="button" data-desk-action="view-dated-list">Go to Advisor Review</button></div>'}</div>`);
+      els.briefingDeskRegion.innerHTML = deskShell("Preview a Briefing", `<div class="desk-intro"><p class="eyebrow">Saved presentation sequence</p><h1>Preview a Briefing</h1></div><div class="history-list">${previewable.map((item) => datedBriefingRow(item, "preview-briefing", audiencePreviewLabel(item))).join("") || '<div class="empty"><strong>No Briefings Available to Preview</strong><p>Complete Advisor Review and choose at least one populated, presentable Briefing Section.</p><button class="secondary-button" type="button" data-desk-action="view-dated-list">Go to Advisor Review</button></div>'}</div>`);
     }
 
     function renderLaunchPresentationList() {
       const ready = readyDatedBriefings();
-      els.briefingDeskRegion.innerHTML = deskShell("Start a Presentation", `<div class="desk-intro"><p class="eyebrow">Clean presentation mode</p><h1>Start a Presentation</h1></div><div class="history-list">${ready.map((item) => datedBriefingRow(item, "present-briefing", "Start presentation")).join("") || '<div class="empty"><strong>No Briefings Ready to Present</strong><p>No reviewed Dated Briefings currently meet the presentation requirements.</p><button class="secondary-button" type="button" data-desk-action="view-dated-list">View Dated Briefings</button></div>'}</div>`);
+      els.briefingDeskRegion.innerHTML = deskShell("Start a Presentation", `<div class="desk-intro"><p class="eyebrow">Clean presentation mode</p><h1>Start a Presentation</h1></div><div class="history-list">${ready.map((item) => datedBriefingRow(item, "present-briefing", "Start presentation")).join("") || '<div class="empty"><strong>No Briefings Ready to Present</strong><p>No Dated Briefings have been reviewed, prepared for presentation, and marked Ready.</p><div class="button-row"><button class="secondary-button" type="button" data-desk-action="view-dated-list">View Dated Briefings</button><button class="secondary-button" type="button" data-desk-action="view-dated-list">Go to Advisor Review</button></div></div>'}</div>`);
     }
 
     function renderResumePresentationList() {
@@ -3078,7 +3185,7 @@
         "ready-list": "present-hub", "audience-preview-list": "present-hub", "launch-list": "present-hub", "resume-list": "present-hub", "find-briefing": "present-hub",
         "briefing-type": "template-library", templates: "template-library", "template-preview": "template-library", "builder-start": "prepare",
         "template-builder": "template-library", configure: "create-dated", review: state.deskReturnRoute || "dated-list",
-        "review-evidence": "review", "client-preview": "review", history: "dated-list"
+        "prepare-presentation": "review", "review-evidence": "review", "client-preview": "review", history: "dated-list"
       };
       if (state.deskReturnRoute === "ask" && ["plan-list", "create-dated", "compare", "find-briefing", "new-plan-setup", "template-library"].includes(route)) return "ask";
       return parents[route] || "home";
@@ -3185,12 +3292,15 @@
       return specs.map((spec, index) => ({
         step_number: index + 1,
         display_title: spec.element_title || "Briefing section",
+        report_id: spec.element_id || spec.report_id || "",
+        element_id: spec.element_id || spec.report_id || "",
         visible_question_answered: spec.visible_question_answered || "",
         why_included: spec.why_included || "",
         audience_visibility: spec.client_visible || listForKindFromPayload("client", template.payload || {}).some((item) => item.element_id === spec.element_id) ? "client_facing" : (spec.audience_visibility || "advisor_review"),
         step_role: spec.step_role || "supporting",
         status: spec.catalog_status || "accepted",
         optional: Boolean(spec.optional),
+        presentation_protection_category: spec.presentation_protection_category || spec.protected_internal_category || "",
         gate_explanation: spec.catalog_status === "gated" ? friendlyGateForSpec(spec) : "",
         configured_parameters: { ...(spec.configured_parameters || spec.parameters || {}) }
       }));
@@ -3773,6 +3883,7 @@
           briefing_type_id: workflowRecordId(type),
           briefing_type_name: type.briefing_type_name || workflowDisplayName(type),
           audience: template.audience_choice || template.audience || type.audience,
+          intended_audience: template.audience_choice || template.audience || type.audience,
           template_id: workflowRecordId(template),
           template_name: workflowDisplayName(template),
           template_kind: template.is_builtin ? "built_in" : "custom",
@@ -3787,6 +3898,8 @@
           client_artifact: clientArtifact,
           immutable: true,
           review_status: "in_review",
+          status_model_version: LOCAL_BRIEFING_STATUS_MODEL_VERSION,
+          presentation_selection_source: "recommended_defaults",
           section_count: templateJourneySteps(template).length,
           presentation_position: 0,
           last_activity_at: generatedAt
@@ -3828,11 +3941,16 @@
       const explicitReady = ["ready_to_present", "ready", "presentation_ready"].includes(incomingStatus) || briefing.ready_to_present === true;
       const reviewedEvidence = Boolean(briefing.reviewed_at || briefing.review_complete === true || explicitReady || incomingStatus === "reviewed");
       const notes = Array.isArray(briefing.normalization_notes) ? [...briefing.normalization_notes] : [];
+      const hasSavedSelectionFields = Array.isArray(briefing.presentation_section_order) || Array.isArray(briefing.presentation_section_ids);
+      const legacyExplicitSequence = Array.isArray(briefing.presentation_visible_sequence) ? briefing.presentation_visible_sequence : [];
+      const hasCurrentProgress = briefing.presentation_progress && typeof briefing.presentation_progress === "object";
+      const legacyProgressStarted = Boolean(briefing.presentation_started_at || briefing.last_presented_at);
       const canonical = {
         ...briefing,
         briefing_id: briefingId,
         advisor_artifact: advisorArtifact,
         client_artifact: briefing.client_artifact || briefing.audience_artifact || null,
+        intended_audience: briefing.intended_audience || briefing.audience || "Advisor/internal",
         schema_version: LOCAL_BRIEFING_SCHEMA_VERSION,
         title: readableWorkflowName(briefing.title || "Dated briefing"),
         journey_steps: Array.isArray(briefing.journey_steps) ? briefing.journey_steps : [],
@@ -3842,9 +3960,14 @@
         briefing_date: briefing.briefing_date || briefing.generated_at,
         section_count: Number(briefing.section_count || (Array.isArray(briefing.journey_steps) ? briefing.journey_steps.length : 0)),
         blocking_condition: briefing.blocking_condition || briefing.blocking_reason || briefing.presentation_blocking_condition || null,
-        presentation_visible_sequence: Array.isArray(briefing.presentation_visible_sequence) ? briefing.presentation_visible_sequence : [],
+        presentation_visible_sequence: legacyExplicitSequence,
         presentation_position: Number.isFinite(Number(briefing.presentation_position)) ? Number(briefing.presentation_position) : 0,
         presentation_started_at: briefing.presentation_started_at || null,
+        presentation_progress: {
+          started: hasCurrentProgress ? Boolean(briefing.presentation_progress.started) : legacyProgressStarted,
+          position: Number.isFinite(Number(hasCurrentProgress ? briefing.presentation_progress.position : briefing.presentation_position)) ? Number(hasCurrentProgress ? briefing.presentation_progress.position : briefing.presentation_position) : 0,
+          updated_at: hasCurrentProgress ? (briefing.presentation_progress.updated_at || briefing.last_presented_at || null) : (briefing.last_presented_at || briefing.presentation_started_at || null)
+        },
         last_previewed_at: briefing.last_previewed_at || null,
         last_presented_at: briefing.last_presented_at || null,
         last_activity_at: briefing.last_activity_at || briefing.last_presented_at || briefing.last_previewed_at || briefing.generated_at,
@@ -3852,16 +3975,36 @@
         storage_version: briefing.schema_version || "legacy_unversioned",
         immutable: true
       };
-      const legacyReviewedMeansReady = incomingStatus === "reviewed" && !["v1", LOCAL_BRIEFING_STATUS_MODEL_VERSION].includes(incomingStatusVersion);
-      if ((explicitReady || legacyReviewedMeansReady) && reviewedEvidence && hasAudienceVisiblePopulatedSections(canonical) && !hasPresentationBlockingCondition(canonical)) {
+
+      const legacyAudienceIds = legacyAudienceSelectionIds(canonical);
+      let selectedIds = [];
+      if (hasSavedSelectionFields) selectedIds = sanitizePresentationSelection(canonical, briefing.presentation_section_order || briefing.presentation_section_ids);
+      else if (legacyExplicitSequence.length) selectedIds = sanitizePresentationSelection(canonical, legacyExplicitSequence);
+      else if (legacyAudienceIds.length) selectedIds = legacyAudienceIds;
+      else selectedIds = recommendedPresentationSectionIds(canonical);
+      const allowedSources = new Set(["recommended_defaults", "advisor_customized", "legacy_migration"]);
+      canonical.presentation_section_ids = [...selectedIds];
+      canonical.presentation_section_order = [...selectedIds];
+      canonical.presentation_selection_source = hasSavedSelectionFields && allowedSources.has(briefing.presentation_selection_source)
+        ? briefing.presentation_selection_source
+        : (incomingStatusVersion === LOCAL_BRIEFING_STATUS_MODEL_VERSION && allowedSources.has(briefing.presentation_selection_source) ? briefing.presentation_selection_source : "legacy_migration");
+      canonical.presentation_selection_updated_at = briefing.presentation_selection_updated_at || briefing.generated_at || null;
+
+      const legacyReviewedMeansReady = incomingStatus === "reviewed" && !["v1", "v2", LOCAL_BRIEFING_STATUS_MODEL_VERSION].includes(incomingStatusVersion);
+      const safeLegacyReadyEvidence = incomingStatusVersion === LOCAL_BRIEFING_STATUS_MODEL_VERSION || hasSavedSelectionFields || legacyExplicitSequence.length > 0 || legacyAudienceIds.length > 0;
+      if ((explicitReady || legacyReviewedMeansReady) && reviewedEvidence && safeLegacyReadyEvidence && hasSelectedPresentablePopulatedSections(canonical) && !hasPresentationBlockingCondition(canonical)) {
         canonical.review_status = "ready_to_present";
-        if (legacyReviewedMeansReady) notes.push("Compatible two-state Reviewed record promoted only after shared presentation eligibility was proven.");
+        if (legacyReviewedMeansReady) notes.push("Compatible two-state Reviewed record promoted only after a safe saved presentation selection was proven.");
       } else if (explicitReady || legacyReviewedMeansReady) {
         canonical.review_status = reviewedEvidence ? "reviewed" : "in_review";
-        notes.push("Stored readiness was not retained because the record lacks a populated audience-visible sequence or has a blocking condition.");
+        notes.push("Stored readiness was not retained because the record lacks a safe selected presentable section or has a blocking condition.");
       }
+      if (!hasSavedSelectionFields && incomingStatusVersion !== LOCAL_BRIEFING_STATUS_MODEL_VERSION) notes.push("Presentation selection derived during legacy migration; the advisor may revise it.");
+      if (!hasCurrentProgress && legacyProgressStarted) notes.push("Legacy presentation progress normalized to the current progress record.");
       if (briefing.dated_briefing_id && !briefing.briefing_id) notes.push("Legacy Dated Briefing identifier alias normalized.");
       if (briefing.advisor_review_artifact && !briefing.advisor_artifact) notes.push("Legacy Advisor Review artifact alias normalized.");
+      canonical.preview_eligible = isPreviewEligible(canonical);
+      canonical.presentation_status = canonical.presentation_progress.started ? "in_progress" : (canonical.review_status === "ready_to_present" ? "ready_to_present" : (canonical.presentation_section_ids.length ? "prepared" : "not_prepared"));
       canonical.normalization_notes = [...new Set(notes)];
       canonical.normalization_status = canonical.normalization_notes.length ? "compatible_normalized" : "current";
       return canonical;
@@ -3882,11 +4025,9 @@
     function readinessBlockingReason(briefing) {
       const storedReason = presentationBlockingReason(briefing);
       if (storedReason) return storedReason;
-      if (!hasAudienceVisiblePopulatedSections(briefing)) {
-        const audience = normalize(briefing && briefing.audience);
-        if (audience.includes("advisor") || audience.includes("internal")) return "This advisor/internal Dated Briefing has no explicitly presentation-visible sequence.";
-        return "This Dated Briefing has no populated Briefing Sections that are visible to its audience.";
-      }
+      const inventory = presentationSectionInventory(briefing);
+      if (!inventory.some((item) => item.presentable)) return "This Dated Briefing does not yet contain any populated Briefing Sections that can be presented.";
+      if (!hasSelectedPresentablePopulatedSections(briefing)) return "No Briefing Sections have been selected for presentation.";
       return "";
     }
 
@@ -3895,6 +4036,12 @@
       if (!briefing) return renderBriefingHistory();
       const sections = Array.isArray(briefing.advisor_artifact.ordered_sections) ? briefing.advisor_artifact.ordered_sections : [];
       const steps = briefing.journey_steps;
+      const inventory = presentationSectionInventory(briefing);
+      const populatedCount = inventory.filter((item) => item.populated).length;
+      const presentableCount = inventory.filter((item) => item.presentable).length;
+      const protectedCount = inventory.filter((item) => item.protected).length;
+      const unavailableCount = inventory.filter((item) => item.unavailable).length;
+      const selectedCount = getSavedPresentationSections(briefing).length;
       state.deskSectionIndex = Math.min(Math.max(state.deskSectionIndex, 0), Math.max(sections.length - 1, 0));
       const index = state.deskSectionIndex;
       const section = sections[index];
@@ -3908,16 +4055,58 @@
         : `<div class="governance-banner"><strong>${escapeHtml(step.display_title || "Briefing Section")} is not populated</strong><p>${escapeHtml(step.gate_explanation || "An approved prerequisite is missing.")} No output has been fabricated.</p></div>`;
       const navigation = `<div class="reader-navigation"><button class="secondary-button" type="button" data-desk-action="previous" ${index <= 0 ? "disabled" : ""}>Previous</button><span class="report-position">Briefing Section ${sections.length ? index + 1 : 0} of ${sections.length}</span><button class="primary-button" type="button" data-desk-action="next" ${index >= sections.length - 1 ? "disabled" : ""}>Next</button></div>`;
       const outline = steps.map((item, itemIndex) => `<li>${itemIndex + 1}. ${escapeHtml(item.display_title)} — ${escapeHtml(friendlyVisibility(item.audience_visibility))}${["gated", "deferred"].includes(item.status) ? " — Not ready" : ""}</li>`).join("");
+      const preparationState = presentableCount === 0
+        ? `<div class="governance-banner"><strong>No Presentable Sections</strong><p>This Dated Briefing does not yet contain any populated Briefing Sections that can be presented.</p><button class="secondary-button" type="button" data-desk-action="modify-template">Return to Briefing Plan</button></div>`
+        : selectedCount === 0
+          ? `<div class="governance-banner"><strong>No Sections Selected</strong><p>No Briefing Sections are currently selected for presentation.</p><button class="primary-button" type="button" data-desk-action="prepare-presentation">Choose Sections to Present</button></div>`
+          : `<div class="governance-banner"><strong>${selectedCount} ${selectedCount === 1 ? "section" : "sections"} selected for presentation</strong><p>${previewEligible ? `${audiencePreviewLabel(briefing)} is available and uses the saved order.` : "Complete Advisor Review to make Preview available."}</p></div>`;
       const body = `
         <div class="desk-intro"><p class="eyebrow">Advisor Review &middot; ${escapeHtml(briefingDisplayStatus(briefing))}</p><h1>${escapeHtml(briefing.title)}</h1><p>Review the actual populated Briefing Sections. The Dated Briefing is immutable.</p></div>
-        <div class="summary-grid"><div class="summary-tile"><strong>Generated</strong>${escapeHtml(formatBriefingDate(briefing.generated_at))}</div><div class="summary-tile"><strong>Data date</strong>${escapeHtml(formatBriefingDate(briefing.data_as_of))}</div><div class="summary-tile"><strong>Audience</strong>${escapeHtml(briefing.audience || "Advisor audience")}</div></div>
+        <div class="summary-grid"><div class="summary-tile"><strong>Generated</strong>${escapeHtml(formatBriefingDate(briefing.generated_at))}</div><div class="summary-tile"><strong>Data date</strong>${escapeHtml(formatBriefingDate(briefing.data_as_of))}</div><div class="summary-tile"><strong>Intended audience</strong>${escapeHtml(briefing.intended_audience || briefing.audience || "Advisor audience")}</div><div class="summary-tile"><strong>Populated sections</strong>${populatedCount}</div><div class="summary-tile"><strong>Selected to present</strong>${selectedCount}</div><div class="summary-tile"><strong>Unavailable</strong>${unavailableCount}</div><div class="summary-tile"><strong>Protected internal</strong>${protectedCount ? `${protectedCount} excluded` : "None"}</div><div class="summary-tile"><strong>Preview readiness</strong>${previewEligible ? "Available" : "Not yet available"}</div><div class="summary-tile"><strong>Presentation readiness</strong>${isPresentationEligible(briefing) ? "Ready to Present" : "Not yet ready"}</div></div>
         ${briefing.briefing_type_id === "external_manager_story_translation_v1" ? externalGovernanceHtml(state.builtInTemplates.find((type) => workflowRecordId(type) === briefing.briefing_type_id)) : ""}
         ${reviewBlock && briefing.review_status === "in_review" ? `<div class="governance-banner"><strong>Advisor Review cannot be completed yet</strong><p>${escapeHtml(reviewBlock)}</p><button class="secondary-button" type="button" data-desk-action="modify-template">Return to Briefing Plan</button></div>` : ""}
-        ${readyBlock && briefing.review_status === "reviewed" ? `<div class="governance-banner"><strong>This Dated Briefing cannot be marked Ready to Present</strong><p>${escapeHtml(readyBlock)}</p><button class="secondary-button" type="button" data-desk-action="modify-template">Return to Briefing Plan</button></div>` : ""}
+        ${isReviewedDatedBriefing(briefing) ? preparationState : ""}
+        ${readyBlock && briefing.review_status === "reviewed" && selectedCount > 0 ? `<div class="governance-banner"><strong>This Dated Briefing is not ready for Preview</strong><p>${escapeHtml(readyBlock)}</p></div>` : ""}
         ${current}${navigation}<details><summary>Briefing Section sequence and status</summary><ol class="detail-list">${outline}</ol></details>
-        <div class="button-row">${briefing.review_status === "in_review" ? `<button class="primary-button" type="button" data-desk-action="complete-review" ${reviewBlock ? "disabled" : ""}>Complete Advisor Review</button>` : ""}${previewEligible ? `<button class="secondary-button" type="button" data-desk-action="client-preview">${escapeHtml(audiencePreviewLabel(briefing))}</button>` : ""}${briefing.review_status === "reviewed" && previewEligible ? '<button class="primary-button" type="button" data-desk-action="mark-ready">Mark Ready to Present</button>' : ""}${briefing.review_status === "reviewed" && !previewEligible ? `<span class="meta">No Audience Preview Available — ${escapeHtml(readyBlock || "presentation requirements are not met.")}</span>` : ""}${isPresentationEligible(briefing) ? '<button class="primary-button" type="button" data-desk-action="present">Present</button>' : ""}<button class="secondary-button" type="button" data-desk-action="modify-template">Return to Briefing Plan</button><button class="secondary-button" type="button" data-desk-action="return-to-source">Back</button></div>
+        <div class="button-row">${briefing.review_status === "in_review" ? `<button class="primary-button" type="button" data-desk-action="complete-review" ${reviewBlock ? "disabled" : ""}>Complete Advisor Review</button>` : ""}${isReviewedDatedBriefing(briefing) && presentableCount ? '<button class="secondary-button" type="button" data-desk-action="prepare-presentation">Prepare for Presentation</button>' : ""}${previewEligible ? `<button class="secondary-button" type="button" data-desk-action="client-preview">${escapeHtml(audiencePreviewLabel(briefing))}</button>` : ""}${briefing.review_status === "reviewed" && previewEligible ? '<button class="primary-button" type="button" data-desk-action="mark-ready">Mark Ready to Present</button>' : ""}${isPresentationEligible(briefing) ? '<button class="primary-button" type="button" data-desk-action="present">Present</button>' : ""}<button class="secondary-button" type="button" data-desk-action="modify-template">Return to Briefing Plan</button><button class="secondary-button" type="button" data-desk-action="return-to-source">Back</button></div>
       `;
       els.briefingDeskRegion.innerHTML = deskShell("Advisor Review", body);
+    }
+
+    function renderPrepareForPresentation() {
+      const briefing = currentDeskBriefing();
+      if (!briefing || !isReviewedDatedBriefing(briefing)) return renderAdvisorReview();
+      const inventory = presentationSectionInventory(briefing);
+      const presentable = inventory.filter((item) => item.presentable);
+      const unavailable = inventory.filter((item) => item.unavailable);
+      const protectedItems = inventory.filter((item) => item.protected);
+      if (!Array.isArray(state.presentationSelectionDraftIds)) state.presentationSelectionDraftIds = sanitizePresentationSelection(briefing, briefing.presentation_section_order || briefing.presentation_section_ids || []);
+      state.presentationSelectionDraftIds = sanitizePresentationSelection(briefing, state.presentationSelectionDraftIds);
+      const selected = state.presentationSelectionDraftIds;
+      const selectedSet = new Set(selected);
+      const orderedItems = [
+        ...selected.map((id) => presentable.find((item) => item.id === id)).filter(Boolean),
+        ...presentable.filter((item) => !selectedSet.has(item.id))
+      ];
+      const rows = orderedItems.map((item) => {
+        const selectedIndex = selected.indexOf(item.id);
+        const chosen = selectedIndex >= 0;
+        const recommended = isRecommendedPresentationSection(briefing, item);
+        const purpose = item.step.why_included || item.step.visible_question_answered || "Supports the saved Dated Briefing conversation.";
+        const detail = item.step.step_role === "supporting" || item.step.step_role === "diagnostic" ? "Detailed" : "Core";
+        return `<article class="section-choice-row ${chosen ? "is-included" : ""}"><span class="journey-index">${chosen ? selectedIndex + 1 : "—"}</span><div class="journey-copy"><strong>${escapeHtml(item.section.title || item.step.display_title || "Briefing Section")}</strong><p class="meta">${escapeHtml(purpose)}</p><p class="meta"><strong>Original audience recommendation:</strong> ${escapeHtml(friendlyVisibility(item.step.audience_visibility))} &middot; ${escapeHtml(detail)} &middot; ${recommended ? "Included by default" : "Excluded by default"}</p></div><div class="section-choice-actions">${chosen ? `<button class="tiny-button" type="button" data-desk-action="move-presentation-section" data-section-id="${escapeAttr(item.id)}" data-direction="-1" ${selectedIndex === 0 ? "disabled" : ""}>Up</button><button class="tiny-button" type="button" data-desk-action="move-presentation-section" data-section-id="${escapeAttr(item.id)}" data-direction="1" ${selectedIndex === selected.length - 1 ? "disabled" : ""}>Down</button><button class="tiny-button" type="button" data-desk-action="exclude-presentation-section" data-section-id="${escapeAttr(item.id)}">Exclude</button>` : `<button class="tiny-button" type="button" data-desk-action="include-presentation-section" data-section-id="${escapeAttr(item.id)}">Include</button>`}</div></article>`;
+      }).join("");
+      const unavailableRows = unavailable.map((item) => `<li><strong>${escapeHtml(item.section.title || item.step.display_title || "Briefing Section")}</strong> — ${escapeHtml(item.step.gate_explanation || item.reason)}</li>`).join("");
+      const protectedRows = protectedItems.map((item) => `<li><strong>${escapeHtml(item.section.title || item.step.display_title || "Protected internal item")}</strong> — ${escapeHtml(item.reason)}</li>`).join("");
+      const body = `<div class="desk-intro"><p class="eyebrow">Prepare for Presentation</p><h1>${escapeHtml(briefing.title)}</h1><p>Choose and order the populated Briefing Sections you plan to present. The intended audience sets recommendations, not prohibitions.</p></div>
+        <div class="summary-grid"><div class="summary-tile"><strong>Intended audience</strong>${escapeHtml(briefing.intended_audience || briefing.audience || "Advisor/internal")}</div><div class="summary-tile"><strong>Selected sections</strong><span role="status" aria-live="polite">${selected.length}</span></div><div class="summary-tile"><strong>Presentable</strong>${presentable.length}</div><div class="summary-tile"><strong>Unavailable</strong>${unavailable.length}</div><div class="summary-tile"><strong>Protected internal</strong>${protectedItems.length}</div></div>
+        ${briefing.briefing_type_id === "external_manager_story_translation_v1" ? externalGovernanceHtml(state.builtInTemplates.find((type) => workflowRecordId(type) === briefing.briefing_type_id)) : ""}
+        <div class="button-row"><button class="secondary-button" type="button" data-desk-action="select-recommended-presentation">Select recommended defaults</button><button class="secondary-button" type="button" data-desk-action="select-all-presentable">Select all presentable sections</button><button class="secondary-button" type="button" data-desk-action="reset-recommended-presentation">Reset to recommended selection</button></div>
+        <section><h2>Populated presentable Briefing Sections</h2><div class="journey-list">${rows || '<p class="empty">This Dated Briefing does not yet contain any populated Briefing Sections that can be presented.</p>'}</div></section>
+        ${unavailable.length ? `<details><summary>Unavailable Briefing Sections (${unavailable.length})</summary><ul class="detail-list">${unavailableRows}</ul></details>` : ""}
+        ${protectedItems.length ? `<details><summary>Protected internal items excluded from selection (${protectedItems.length})</summary><ul class="detail-list">${protectedRows}</ul></details>` : ""}
+        <div class="button-row"><button class="primary-button" type="button" data-desk-action="save-presentation-selection">Save Presentation Selection</button><button class="secondary-button" type="button" data-desk-action="cancel-presentation-selection">Back to Advisor Review</button></div>`;
+      els.briefingDeskRegion.innerHTML = deskShell("Prepare for Presentation", body);
     }
 
     function renderReviewEvidence() {
@@ -3931,14 +4120,10 @@
       els.briefingDeskRegion.innerHTML = deskShell("Advisor Review evidence", body);
     }
 
-    function readerArtifactFor(briefing) {
-      return briefing.client_artifact || briefing.advisor_artifact;
-    }
-
     function renderBriefingReader(mode) {
       const briefing = currentDeskBriefing();
       if (!briefing) return renderBriefingHistory();
-      const sections = getAudienceVisibleSections(briefing);
+      const sections = getSavedPresentationSections(briefing);
       if (!sections.length || (mode === "presentation" && !isPresentationEligible(briefing)) || (mode === "client-preview" && !isPreviewEligible(briefing))) return renderAdvisorReview();
       state.deskSectionIndex = Math.min(Math.max(state.deskSectionIndex, 0), Math.max(sections.length - 1, 0));
       const index = state.deskSectionIndex;
@@ -3955,7 +4140,7 @@
         return;
       }
       const previewLabel = audiencePreviewLabel(briefing);
-      const body = `<div class="briefing-reader"><p class="eyebrow">${escapeHtml(previewLabel)} &middot; exact audience-visible sequence</p>${header}<p class="meta">Advisor-only preparation, diagnostics, internal controls, and gated steps are excluded.</p>${sectionBody}<div class="button-row">${evidenceButtons}</div>${navigation}<div class="button-row">${isPresentationEligible(briefing) ? '<button class="primary-button" type="button" data-desk-action="present">Present briefing</button>' : '<span class="meta">Preview is available now. Mark this briefing Ready to Present in Advisor Review before presenting.</span>'}<button class="secondary-button" type="button" data-desk-action="advisor-review">Back to Advisor Review</button></div></div>`;
+      const body = `<div class="briefing-reader"><p class="eyebrow">${escapeHtml(previewLabel)} &middot; saved presentation sequence</p>${header}<p class="meta">This Preview shows exactly the selected populated Briefing Sections in the advisor's saved order. Unselected, unavailable, and protected internal material is excluded.</p>${sectionBody}<div class="button-row">${evidenceButtons}</div>${navigation}<div class="button-row">${isPresentationEligible(briefing) ? '<button class="primary-button" type="button" data-desk-action="present">Present briefing</button>' : '<span class="meta">Preview is available now. Mark this briefing Ready to Present in Advisor Review before presenting.</span>'}<button class="secondary-button" type="button" data-desk-action="advisor-review">Back to Advisor Review</button></div></div>`;
       els.briefingDeskRegion.innerHTML = deskShell(previewLabel, body);
     }
 
@@ -6863,6 +7048,68 @@
       if (action === "save-template" || action === "save-template-create") return saveBoundedTemplate({ nextRoute: "configure" });
       if (action === "save-template-only") return saveBoundedTemplate({ nextRoute: "plan-list" });
       if (action === "create-briefing") return createDatedBriefing();
+      if (action === "prepare-presentation") {
+        state.presentationSelectionDraftIds = null;
+        return navigateToRoute("prepare-presentation");
+      }
+      if (["select-recommended-presentation", "reset-recommended-presentation"].includes(action)) {
+        const briefing = currentDeskBriefing();
+        if (!briefing) return;
+        state.presentationSelectionDraftIds = recommendedPresentationSectionIds(briefing);
+        return renderPrepareForPresentation();
+      }
+      if (action === "select-all-presentable") {
+        const briefing = currentDeskBriefing();
+        if (!briefing) return;
+        state.presentationSelectionDraftIds = presentationSectionInventory(briefing).filter((item) => item.presentable).map((item) => item.id);
+        return renderPrepareForPresentation();
+      }
+      if (["include-presentation-section", "exclude-presentation-section", "move-presentation-section"].includes(action)) {
+        const briefing = currentDeskBriefing();
+        if (!briefing) return;
+        const selectable = new Set(presentationSectionInventory(briefing).filter((item) => item.presentable).map((item) => item.id));
+        const sectionId = button.dataset.sectionId;
+        const draftIds = sanitizePresentationSelection(briefing, state.presentationSelectionDraftIds || []);
+        if (!selectable.has(sectionId)) return renderPrepareForPresentation();
+        const index = draftIds.indexOf(sectionId);
+        if (action === "include-presentation-section" && index < 0) draftIds.push(sectionId);
+        if (action === "exclude-presentation-section" && index >= 0) draftIds.splice(index, 1);
+        if (action === "move-presentation-section" && index >= 0) {
+          const target = index + Number(button.dataset.direction || 0);
+          if (target >= 0 && target < draftIds.length) {
+            const [moved] = draftIds.splice(index, 1);
+            draftIds.splice(target, 0, moved);
+          }
+        }
+        state.presentationSelectionDraftIds = draftIds;
+        return renderPrepareForPresentation();
+      }
+      if (action === "save-presentation-selection") {
+        const briefing = currentDeskBriefing();
+        if (!briefing) return;
+        const selected = sanitizePresentationSelection(briefing, state.presentationSelectionDraftIds || []);
+        const previous = sanitizePresentationSelection(briefing, briefing.presentation_section_order || briefing.presentation_section_ids || []);
+        const recommended = recommendedPresentationSectionIds(briefing);
+        const changed = JSON.stringify(selected) !== JSON.stringify(previous);
+        briefing.presentation_section_ids = [...selected];
+        briefing.presentation_section_order = [...selected];
+        briefing.presentation_selection_source = JSON.stringify(selected) === JSON.stringify(recommended) ? "recommended_defaults" : "advisor_customized";
+        briefing.presentation_selection_updated_at = new Date().toISOString();
+        briefing.last_activity_at = briefing.presentation_selection_updated_at;
+        if (changed) {
+          briefing.presentation_position = 0;
+          briefing.presentation_started_at = null;
+          briefing.presentation_progress = { started: false, position: 0, updated_at: briefing.presentation_selection_updated_at };
+        }
+        commitDatedBriefingUpdate(briefing);
+        state.presentationSelectionDraftIds = null;
+        state.deskSectionIndex = 0;
+        return navigateToRoute("review");
+      }
+      if (action === "cancel-presentation-selection") {
+        state.presentationSelectionDraftIds = null;
+        return navigateToRoute("review");
+      }
       if (action === "complete-review") {
         const briefing = currentDeskBriefing();
         if (!briefing) return;
@@ -6904,6 +7151,7 @@
           briefing.presentation_started_at = briefing.presentation_started_at || new Date().toISOString();
           briefing.last_presented_at = new Date().toISOString();
           briefing.presentation_position = state.deskSectionIndex;
+          briefing.presentation_progress = { started: true, position: state.deskSectionIndex, updated_at: briefing.last_presented_at };
           briefing.last_activity_at = briefing.last_presented_at;
           commitDatedBriefingUpdate(briefing);
         } else return;
@@ -6925,8 +7173,9 @@
           const briefing = currentDeskBriefing();
           if (briefing) {
             briefing.presentation_position = state.deskSectionIndex;
+            briefing.presentation_progress = { started: true, position: state.deskSectionIndex, updated_at: new Date().toISOString() };
             if (state.presentationReturnContext) state.presentationReturnContext.section_index = state.deskSectionIndex;
-            briefing.last_presented_at = new Date().toISOString();
+            briefing.last_presented_at = briefing.presentation_progress.updated_at;
             briefing.last_activity_at = briefing.last_presented_at;
             commitDatedBriefingUpdate(briefing);
           }
@@ -6969,8 +7218,7 @@
         state.deskSelectedTypeId = briefing.briefing_type_id;
         state.deskSelectedTemplateId = briefing.template_id;
         state.deskReturnRoute = state.route;
-        const openingKind = action === "preview-briefing" || ((action === "present-briefing" || action === "resume-presentation") && briefing.client_artifact) ? "client" : "advisor";
-        state.deskSectionIndex = action === "resume-presentation" ? Number(briefing.presentation_position || 0) : firstPopulatedSectionIndex(briefing, openingKind);
+        state.deskSectionIndex = action === "resume-presentation" ? Number(briefing.presentation_progress && briefing.presentation_progress.position || briefing.presentation_position || 0) : 0;
         state.deskEvidenceMode = null;
         if (action === "preview-briefing") {
           if (!isPreviewEligible(briefing)) return renderAudiencePreviewList();
@@ -6987,6 +7235,7 @@
           briefing.presentation_started_at = briefing.presentation_started_at || new Date().toISOString();
           briefing.last_presented_at = new Date().toISOString();
           briefing.presentation_position = state.deskSectionIndex;
+          briefing.presentation_progress = { started: true, position: state.deskSectionIndex, updated_at: briefing.last_presented_at };
           briefing.last_activity_at = briefing.last_presented_at;
           commitDatedBriefingUpdate(briefing);
           return navigateToRoute("presentation");

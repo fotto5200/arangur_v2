@@ -105,7 +105,7 @@ Second-level order is binding:
 
 Ready means Advisor Review is complete. Client Preview preserves the exact audience-visible sequence and caveats. Presentation retains clean chrome, Previous/Next, Explain/Verify, and immutable content. Browser-local Dated Briefings add compatible `review_status`, `reviewed_at`, `last_previewed_at`, `last_presented_at`, and `presentation_position` fields.
 
-Presentation discovery is governed by `docs/product/arangur_dated_briefing_presentation_discovery_fix_v1.md`. Reviewed material with a populated audience-visible sequence and no record-level blocking condition is Preview eligible. Ready to Present is accepted only when that rule passes and is therefore eligible for both Preview and Presentation. Choose, Preview, Start, Resume, Find, home shortcuts, and the reader consume the same normalized record and shared sequence. Resume additionally requires saved presentation progress.
+Presentation discovery is governed by `docs/product/arangur_dated_briefing_presentation_discovery_fix_v1.md` and superseded where necessary by `docs/product/arangur_presentation_section_selection_and_audience_flexibility_v1.md`. Intended audience supplies recommended defaults rather than a permanent section lock. Reviewed material with at least one selected populated presentable Briefing Section and no record-level blocking condition is Preview eligible. Ready to Present is accepted only when that rule passes and is therefore eligible for both Preview and Presentation. Choose, Preview, Start, Resume, Find, home shortcuts, and the reader consume the same normalized record and exact saved selection. Resume additionally requires saved presentation progress.
 
 ## Ask Arangur scope
 
@@ -138,10 +138,10 @@ The same underlying record and action wording are used when an item appears in m
 | Briefing Plan Draft | Continue plan |
 | Saved Briefing Plan | Open/revise, create a copy, or create a Dated Briefing |
 | Dated Briefing — in review | View populated Briefing Sections, Explain/Verify, Complete Advisor Review |
-| Reviewed Dated Briefing | Preview the audience-visible sequence; Mark Ready to Present when eligible |
+| Reviewed Dated Briefing | Prepare for Presentation; Preview the saved selection; Mark Ready to Present when eligible |
 | Ready to Present | Preview or present the same eligible Dated Briefing record |
 
-Status determines actions. The advisor is not required to infer technical completeness rules.
+Status determines actions. Audience recommendations set defaults but do not prohibit selection of advisor-oriented populated sections. Protected internal and unavailable material remains outside ordinary selection. The advisor is not required to infer technical completeness rules.
 
 Selection feedback, object identity, the Reviewed/Ready transition, Preview/Presentation eligibility, explicit comparison, and object-bound return navigation are governed by `docs/product/arangur_advisor_workbench_state_navigation_correction_v1.md`.
 
